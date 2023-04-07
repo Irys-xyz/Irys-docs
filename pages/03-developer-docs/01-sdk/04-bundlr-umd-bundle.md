@@ -1,0 +1,20 @@
+---
+sidebar_position: 4
+sidebar_label: Using UMD Bundles
+description: Installing the SDK via UMD Bundles
+slug: /sdk/umd-bundles
+---
+
+# Bundlr + UMD Bundle
+
+When using Bundlr in the browser, you can either install using npm / yarn if you’re using a framework or load via a CDN if you’re using VanillaJS / CommonJS. To load via a CDN, include the following URL
+
+```html
+https://unpkg.com/@bundlr-network/client/build/web/bundle.js
+```
+
+Include via a script tag, somewhere in the head section of your main html file
+
+```html
+<script src="https://unpkg.com/@bundlr-network/client/build/web/bundle.js"></script>
+```

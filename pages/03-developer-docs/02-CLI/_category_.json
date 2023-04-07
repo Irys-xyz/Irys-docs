@@ -1,0 +1,15 @@
+{
+	"position": 4.0,
+	"label": "CLI",
+	"collapsible": true,
+	"collapsed": true,
+	"className": "red",
+	"link": {
+		"type": "generated-index",
+		"title": "CLI",
+		"description": "Interact with Bundlr directly from your command prompt."
+	},
+	"customProps": {
+		"description": ""
+	}
+}

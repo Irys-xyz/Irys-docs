@@ -1,0 +1,15 @@
+{
+	"position": 4.0,
+	"label": "Recipes",
+	"collapsible": true,
+	"collapsed": true,
+	"className": "red",
+	"link": {
+		"type": "generated-index",
+		"title": "Recipes",
+		"description": "Learn how to quickly integrate Bundlr with your favorite tools and platforms."
+	},
+	"customProps": {
+		"description": ""
+	}
+}

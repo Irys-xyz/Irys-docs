@@ -1,0 +1,15 @@
+{
+	"position": 1.0,
+	"label": "Develop",
+	"collapsible": true,
+	"collapsed": false,
+	"className": "red",
+	"link": {
+		"type": "generated-index",
+		"title": "Develop",
+		"description": "Everything you need to get started with Bundlr."
+	},
+	"customProps": {
+		"description": "Where is this"
+	}
+}

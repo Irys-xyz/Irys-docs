@@ -1,0 +1,33 @@
+---
+sidebar_position: 4
+sidebar_label: Data Mode
+description: Automate transaction creation in data mode.
+---
+
+# Data Mode
+
+The chunked uploader has two modes of operation, data mode and transaction mode. When using data mode do not create a transaction, this will be done automatically for you.
+
+Within data mode, you can either upload using:
+
+A buffer containing the data you want to upload.
+A readable stream pointing to the data you want to upload.
+
+```js
+// The uploader has two modes of operation, data mode and transaction mode.
+// When using data mode, do not create a transaction, this will be done
+// automatically for you.
+const transactionOptions = { tags: [{ name: "Content-Type", value: "text/plain" }] };
+// Within data mode you have two options:
+// 1. Using a Buffer containing just the data you want to upload.
+const dataBuffer = Buffer.from("Hello, world!");
+const response = await uploader.uploadData(dataBuffer, transactionOptions);
+// The transaction id (used to query the network) is found in response.data.id
+console.log(`Data buffer uploaded ==> https://arweave.net/${response.data.id}`);
+
+// 2. Using a Readable (stream) pointing to the data
+uploader = bundlr.uploader.chunkedUploader; // recreate for each transaction
+const dataStream = fs.createReadStream("./data.txt");
+response = await uploader.uploadData(dataStream, transactionOptions);
+console.log(`Read Stream uploaded ==> https://arweave.net/${response.data.id}`);
+```

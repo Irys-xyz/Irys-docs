@@ -1,0 +1,11 @@
+---
+sidebar_position: 12
+sidebar_label: Supported Wallets
+description: Supported wallet types for all blockchains.
+---
+
+# Supported Wallets
+
+You can use Bundlr with any wallet on any of our supported blockchains. This includes MetaMask for Ethereum-based chains, Phantom for Solana, ARConnect for Arweave, and others. Our tutorials section provides a step-by-step guide for setting up an Arweave wallet.
+
+TODO: move this

@@ -1,0 +1,39 @@
+---
+sidebar_position: 2
+sidebar_label: Connecting To A Node
+description: Sample code for connecting to a node.
+---
+
+# Connecting To A Node
+
+When using the chunking uploader, first connect to a node using the same flow as with our default uploader and then follow that by requesting the chunked uploader using `bundlr.uploader.chunkedUploader`.
+
+You can use any of our [public and devnet node addresses.](/sdk/basic-features/connecting-node)
+
+:::tip
+The chunkedUploader object reference must be updated before each subsequent upload, it can not be reused.
+:::
+
+```js
+import Bundlr from "@bundlr-network/client";
+import fs from "fs";
+
+// Change this line to match the name of the wallet key file
+const privateKey = "";
+const jwk = JSON.parse(fs.readFileSync(privateKey).toString());
+
+// First create a Bundlr object
+// NOTE: Depending on the version of JavaScript / TypeScript you use, you may need to use
+// the commented out line below to create a new Bundlr object.
+// const bundlr = new Bundlr("http://node1.bundlr.network", "arweave", jwk);
+const bundlr = new Bundlr.default(
+	"http://node1.bundlr.network",
+	"arweave",
+	jwk,
+);
+
+// Now get a reference to the chunked uploader
+// If you're doing more than one upload, you will need to refresh this
+// object reference for each upload.
+let uploader = bundlr.uploader.chunkedUploader;
+```

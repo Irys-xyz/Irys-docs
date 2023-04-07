@@ -1,0 +1,15 @@
+{
+	"position": 7.0,
+	"label": "CLI",
+	"collapsible": true,
+	"collapsed": true,
+	"className": "red",
+	"link": {
+		"type": "generated-index",
+		"title": "Tutorials",
+		"description": "Go deep, learn more, enjoy our tutorials."
+	},
+	"customProps": {
+		"description": ""
+	}
+}

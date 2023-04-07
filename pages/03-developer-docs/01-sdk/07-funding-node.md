@@ -1,0 +1,51 @@
+---
+sidebar_position: 7
+sidebar_label: Funding A Node
+description: Funding a node before uploading.
+slug: /sdk/funding
+---
+
+# Funding A Node
+
+The function `bundlr.fund(amountInAtomicUnits)` funds the specified node using the wallet you linked when creating the Bundlr object. When working with WebBundlr in the browser, the end user’s private key is automatically linked using their wallet software using injected providers.
+
+Bundlr supports both upfront funding, sending over enough funds to cover all of a project’s uploads, and lazy funding where you fund per upload.
+
+Fund the node you intend to upload to, funded balances are not shared between nodes.
+
+:::note
+Not all calls to `bundlr.fund()` will post immediately to your account, some blockchains are faster than others. When funding with AR, it can take upwards of 40 minutes before the balance shows up. For MATIC, ETH and SOL, balances will usually post in <10s.
+:::
+
+```js
+// Fund the node, give it enough so you can upload a full MG
+try {
+	// response = {
+	//  id, // the txID of the fund transfer
+	//  quantity, // how much is being transferred
+	//  reward, // the amount taken by the network as a fee
+	//  target, // the address the funds were sent to
+	// };
+	const response = await bundlr.fund(price1MBAtomic);
+	console.log(`Funding successful txID=${response.id} amount funded=${response.quantity}`);
+} catch (e) {
+	console.log("Error funding node ", e);
+}
+```
+
+You can also lazy-fund a node where you check the cost to upload each file first and then transfer exact funds. This works best with currencies like MATIC, ETH and SOL whose balances post (almost) instantly.
+
+```js
+import Bundlr from "@bundlr-network/client";
+import * as fs from "fs";
+
+const bundlr = new Bundlr.default("https://node1.bundlr.network", "matic", myPrivateKey);
+
+const pathToFile = "./llama.png";
+const { size } = await fs.promises.stat(pathToFile);
+const price = await bundlr.getPrice(size);
+await bundlr.fund(price);
+
+const { id } = await bundlr.uploadFile(pathToFile);
+console.log(`${pathToFile} --> Uploaded to https://arweave.net/${id}`);
+```
