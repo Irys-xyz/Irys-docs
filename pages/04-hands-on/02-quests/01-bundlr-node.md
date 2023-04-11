@@ -77,10 +77,10 @@ A final version of the package.json is as follows
 
 ```json
 {
-	"type": "module",
-	"dependencies": {
-		"@bundlr-network/client": "^0.9.0"
-	}
+  "type": "module",
+  "dependencies": {
+    "@bundlr-network/client": "^0.9.0"
+  }
 }
 ```
 
@@ -112,7 +112,11 @@ const jwk = JSON.parse(fs.readFileSync(privateKey).toString());
 
 // NOTE: Use "new Bundlr.default" for JavaScript and "new Bundlr" for TypeScript
 // const bundlr = new Bundlr("http://node1.bundlr.network", "arweave", jwk);
-const bundlr = new Bundlr.default("http://node1.bundlr.network", "arweave", jwk);
+const bundlr = new Bundlr.default(
+  "http://node1.bundlr.network",
+  "arweave",
+  jwk
+);
 
 // To connect to our devnet, use any of these instead
 // const bundlr = new Bundlr.default("https://devnet.bundlr.network", "solana", "<solana private key>", {
@@ -180,7 +184,11 @@ A common use-case is to check the cost to upload a file based on its size.
 import Bundlr from "@bundlr-network/client";
 import { statSync } from "fs";
 
-const bundlr = new Bundlr("https://node1.bundlr.network", "solana", myPrivateKey);
+const bundlr = new Bundlr(
+  "https://node1.bundlr.network",
+  "solana",
+  myPrivateKey
+);
 await bundlr.ready();
 
 const pathToFile = "./llama.png";
@@ -201,16 +209,18 @@ You’ll know the balance has been posted when the code you wrote earlier in "Ge
 ```js
 // Fund the node, give it enough so you can upload a full MG
 try {
-	// response = {
-	//  id, // the txID of the fund transfer
-	//  quantity, // how much is being transferred
-	//  reward, // the amount taken by the network as a fee
-	//  target, // the address the funds were sent to
-	// };
-	const response = await bundlr.fund(price1MGAtomic);
-	console.log(`Funding successful txID=${response.id} amount funded=${response.quantity}`);
+  // response = {
+  //  id, // the txID of the fund transfer
+  //  quantity, // how much is being transferred
+  //  reward, // the amount taken by the network as a fee
+  //  target, // the address the funds were sent to
+  // };
+  const response = await bundlr.fund(price1MGAtomic);
+  console.log(
+    `Funding successful txID=${response.id} amount funded=${response.quantity}`
+  );
 } catch (e) {
-	console.log("Error funding node ", e);
+  console.log("Error funding node ", e);
 }
 ```
 
@@ -220,7 +230,11 @@ You can also lazy-fund a node where you check the cost to upload each file first
 import Bundlr from "@bundlr-network/client";
 import * as fs from "fs";
 
-const bundlr = new Bundlr.default("https://node1.bundlr.network", "matic", myPrivateKey);
+const bundlr = new Bundlr.default(
+  "https://node1.bundlr.network",
+  "matic",
+  myPrivateKey
+);
 
 const pathToFile = "./llama.png";
 const { size } = await fs.promises.stat(pathToFile);
@@ -239,24 +253,26 @@ In the code below, we check our funded balance and then withdraw it all.
 
 ```js
 try {
-	// 400 - something went wrong
-	// response.data  = "Not enough balance for requested withdrawal"
+  // 400 - something went wrong
+  // response.data  = "Not enough balance for requested withdrawal"
 
-	// 200 - Ok
-	// response.data = {
-	//     requested, // the requested amount,
-	//     fee,       // the reward required by the network (network fee)
-	//     final,     // total cost to your account (requested + fee)
-	//     tx_id,     // the ID of the withdrawal transaction
-	// }
-	// 1. Get current balance
-	const curBalance = await bundlr.getLoadedBalance();
-	// 2. Withdraw all
-	const response = await bundlr.withdrawBalance(curBalance);
+  // 200 - Ok
+  // response.data = {
+  //     requested, // the requested amount,
+  //     fee,       // the reward required by the network (network fee)
+  //     final,     // total cost to your account (requested + fee)
+  //     tx_id,     // the ID of the withdrawal transaction
+  // }
+  // 1. Get current balance
+  const curBalance = await bundlr.getLoadedBalance();
+  // 2. Withdraw all
+  const response = await bundlr.withdrawBalance(curBalance);
 
-	console.log(`Funds withdrawn txID=${response.data.tx_id} amount requested=${response.data.requested}`);
+  console.log(
+    `Funds withdrawn txID=${response.data.tx_id} amount requested=${response.data.requested}`
+  );
 } catch (e) {
-	console.log("Error funding node ", e);
+  console.log("Error funding node ", e);
 }
 ```
 
@@ -269,10 +285,10 @@ If it can be reduced to 1s and 0s, you can upload it via Bundlr to Arweave. The 
 // If it can be reduced to 1s and 0s, you can store it via Bundlr.
 const dataToUpload = "Hello world ... where the llamas at?";
 try {
-	const response = await bundlr.upload(dataToUpload); // Returns an axios response
-	console.log(`Data uploaded ==> https://arweave.net/${response.id}`);
+  const response = await bundlr.upload(dataToUpload); // Returns an axios response
+  console.log(`Data uploaded ==> https://arweave.net/${response.id}`);
 } catch (e) {
-	console.log("Error uploading file ", e);
+  console.log("Error uploading file ", e);
 }
 ```
 
@@ -291,10 +307,10 @@ You can check out my llama here https://arweave.net/CO9EpX0lekJEfXUOeXncUmMuG8eE
 // BUT ... REMEMBER ... You CAN'T DELETE THE FILE ONCE UPLOADED, SO BE CAREFUL! :)
 const fileToUpload = "large_llama.png";
 try {
-	const response = await bundlr.uploadFile("./" + fileToUpload); // Returns an axios response
-	console.log(`File uploaded ==> https://arweave.net/${response.id}`);
+  const response = await bundlr.uploadFile("./" + fileToUpload); // Returns an axios response
+  console.log(`File uploaded ==> https://arweave.net/${response.id}`);
 } catch (e) {
-	console.log("Error uploading file ", e);
+  console.log("Error uploading file ", e);
 }
 ```
 
@@ -316,15 +332,15 @@ It is NOT necessary to follow any specific naming convention for your files, fee
 // Upload some NFTs, your vacation photos or your band's latest album.
 const folderToUpload = "llama_folder";
 try {
-	const response = await bundlr.uploadFolder("./" + folderToUpload, {
-		indexFile: "", // optional index file (file the user will load when accessing the manifest)
-		batchSize: 50, //number of items to upload at once
-		keepDeleted: false, // whether to keep now deleted items from previous uploads
-	}); //returns the manifest ID
+  const response = await bundlr.uploadFolder("./" + folderToUpload, {
+    indexFile: "", // optional index file (file the user will load when accessing the manifest)
+    batchSize: 50, //number of items to upload at once
+    keepDeleted: false, // whether to keep now deleted items from previous uploads
+  }); //returns the manifest ID
 
-	console.log(`Files uploaded ==> Manifest Id = ${response.id}`);
+  console.log(`Files uploaded ==> Manifest Id = ${response.id}`);
 } catch (e) {
-	console.log("Error uploading file ", e);
+  console.log("Error uploading file ", e);
 }
 ```
 
@@ -340,7 +356,7 @@ To generate links to each of your images you have two options.
 2. Access the files using their direct URLs.
    After a successful folder upload, two files are written to your local project directory `llama_folder-manifest.csv` and `llama_folder-manifest.json`. Both files contain the same data, here’s my llama_folder-manifest.json.
 
-![llama-folder](../../../static/img/code-assets/llama-folder-manifest.png)
+![llama-folder](/img/code-assets/llama-folder-manifest.png)
 
 Both of these files contain a list of the files uploaded and their unique transaction ID. Again returning back to my first file `1.png`, it can be accessed directly via https://arweave.net/x9v9NpQCAacTadzLJJ6H1vNttoy03rcBgJwbLGitNzQ
 

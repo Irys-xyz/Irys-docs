@@ -21,15 +21,15 @@ The function takes one required parameter pointing to the folder to be uploaded 
 // Upload some NFTs, your vacation photos or your band's latest album.
 const folderToUpload = "llama_folder";
 try {
-	const response = await bundlr.uploadFolder("./" + folderToUpload, {
-		indexFile: "", // optional index file (file the user will load when accessing the manifest)
-		batchSize: 50, //number of items to upload at once
-		keepDeleted: false, // whether to keep now deleted items from previous uploads
-	}); //returns the manifest ID
+  const response = await bundlr.uploadFolder("./" + folderToUpload, {
+    indexFile: "", // optional index file (file the user will load when accessing the manifest)
+    batchSize: 50, //number of items to upload at once
+    keepDeleted: false, // whether to keep now deleted items from previous uploads
+  }); //returns the manifest ID
 
-	console.log(`Files uploaded. Manifest Id ${response.id}`);
+  console.log(`Files uploaded. Manifest Id ${response.id}`);
 } catch (e) {
-	console.log("Error uploading file ", e);
+  console.log("Error uploading file ", e);
 }
 ```
 
@@ -40,4 +40,4 @@ Files uploaded via `bundlr.uploadFolder(pathToFolder+folderName)` can be retriev
 
 After a successful folder upload, two files are written to your local project directory `[folder_name].csv` and `[folder_name].json`. The example below highlights a folder called “llama_folder” with a total of 5 files in it. The transaction id for each file can be used to retrieve the uploaded data by forming an URL with the format `https://arweave.net]/[transaction_id]`
 
-![llama-folder](./../../../static/img/code-assets/llama-folder-manifest.png)
+![llama-folder](/img/code-assets/llama-folder-manifest.png)

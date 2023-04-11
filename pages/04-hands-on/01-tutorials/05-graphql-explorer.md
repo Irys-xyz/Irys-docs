@@ -23,7 +23,7 @@ This tutorial assumes you have basic knowledge of React, HTML and Tailwind. The 
 
 ## Here's a peek at what we're going to build.
 
-![](../../../static/img/tutorials/graphql-explorer/graphql-project-overview.png)
+![](/img/tutorials/graphql-explorer/graphql-project-overview.png)
 
 ## What Is GraphQL
 
@@ -55,7 +55,7 @@ Let's break that down and look at the query we're going to build for this projec
 
 We start out by specifying that we're creating a query (not a subscription or a mutation), then we indicate that we only want the 10 most recent results. From there we filter (search) using the tag `Content-Type` = `image/png` and finally we say we only need the transaction id back. When working with GraphQL you can ask for any number of fields back, but to reduce overhead you should make your queries as lean as possible. When working with Arweave, the transaction id combines with `https://arweave.net` to form a URL that can be used to download the associated data. In our case, we're going to be displaying all the PNGs in an HTML page, which means all we need is the transaction id.
 
-![](../../../static/img/tutorials/graphql-explorer/anatomy-of-query.png)
+![](/img/tutorials/graphql-explorer/anatomy-of-query.png)
 
 When building and testing your own queries, you can test them [in the Arweave GraphQL playground.](https://arweave.dev/graphql)
 
@@ -89,11 +89,11 @@ Now finish up the Tailwind installation by changing your `tailwind.config.js` fi
 ```js showLineNumbers
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-	content: ["./src/**/*.{js,jsx,ts,tsx}"],
-	theme: {
-		extend: {},
-	},
-	plugins: [],
+  content: ["./src/**/*.{js,jsx,ts,tsx}"],
+  theme: {
+    extend: {},
+  },
+  plugins: [],
 };
 ```
 
@@ -105,9 +105,9 @@ And modify your `index.css` file as follows.
 @tailwind utilities;
 
 html {
-	width: 100%;
-	height: 100%;
-	background-color: #fef4ee;
+  width: 100%;
+  height: 100%;
+  background-color: #fef4ee;
 }
 ```
 
@@ -117,8 +117,8 @@ When working with the Apollo GraphQL libraries, one of the first things you do i
 
 ```js showLineNumbers
 const client = new ApolloClient({
-	uri: "https://arweave.dev/graphql",
-	cache: new InMemoryCache(),
+  uri: "https://arweave.dev/graphql",
+  cache: new InMemoryCache(),
 });
 ```
 
@@ -134,15 +134,15 @@ import App from "./App";
 import { ApolloClient, InMemoryCache, ApolloProvider } from "@apollo/client";
 
 const client = new ApolloClient({
-	uri: "https://arweave.dev/graphql",
-	cache: new InMemoryCache(),
+  uri: "https://arweave.dev/graphql",
+  cache: new InMemoryCache(),
 });
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
-	<ApolloProvider client={client}>
-		<App />
-	</ApolloProvider>,
+  <ApolloProvider client={client}>
+    <App />
+  </ApolloProvider>
 );
 ```
 
@@ -181,28 +181,34 @@ import { gql } from "apollo-boost";
 
 // query a variable number of pngs
 export const GET_PNG = gql`
-	query GetPNGs($numImages: Int) {
-		transactions(first: $numImages, tags: { name: "Content-Type", values: ["image/png"] }) {
-			edges {
-				node {
-					id
-				}
-			}
-		}
-	}
+  query GetPNGs($numImages: Int) {
+    transactions(
+      first: $numImages
+      tags: { name: "Content-Type", values: ["image/png"] }
+    ) {
+      edges {
+        node {
+          id
+        }
+      }
+    }
+  }
 `;
 
 // get exactly 10 pngs
 export const GET_PNG_10 = gql`
-	query GetPNGs {
-		transactions(first: 10, tags: { name: "Content-Type", values: ["image/png"] }) {
-			edges {
-				node {
-					id
-				}
-			}
-		}
-	}
+  query GetPNGs {
+    transactions(
+      first: 10
+      tags: { name: "Content-Type", values: ["image/png"] }
+    ) {
+      edges {
+        node {
+          id
+        }
+      }
+    }
+  }
 `;
 ```
 
@@ -219,20 +225,20 @@ import { GET_PNG } from "./queries/queries.js";
 import { GET_PNG_10 } from "./queries/queries.js";
 
 export default function App() {
-	const [message, setMessage] = useState("");
-	const [numImages, setNumImages] = useState(10);
-	const [images, setImages] = useState([]);
-	const client = useApolloClient();
+  const [message, setMessage] = useState("");
+  const [numImages, setNumImages] = useState(10);
+  const [images, setImages] = useState([]);
+  const client = useApolloClient();
 
-	// called on page load (component render)
-	const { loading, error, data } = useQuery(GET_PNG_10);
+  // called on page load (component render)
+  const { loading, error, data } = useQuery(GET_PNG_10);
 
-	// load the initial 10
-	useEffect(() => {}, data);
+  // load the initial 10
+  useEffect(() => {}, data);
 
-	// this query is used for display purposes only
-	// helps educate the viewer about GraphQl
-	let queryForDisplay = `query {
+  // this query is used for display purposes only
+  // helps educate the viewer about GraphQl
+  let queryForDisplay = `query {
 		transactions(first: ${numImages},
 			tags: {
 				name: "Content-Type",
@@ -247,88 +253,105 @@ export default function App() {
 		}
 	};`;
 
-	// called when the user clicks "query"
-	const doQuery = async () => {};
+  // called when the user clicks "query"
+  const doQuery = async () => {};
 
-	return (
-		<div className="bg-[#FEF4EE] h-screen">
-			<h1 className="pt-10 pl-10 text-3xl font-mono font-bold underline">
-				Arweave Blockweave Explorer
-			</h1>
-			<div>
-				<p className="pt-1 pl-10 w-2/3 font-mono">
-					Example app to teach using GraphQL to query the Arweave Blockweave. Queries for n most
-					recent pngs posted to Arweave and displays them below. Modify the query using the left
-					side of the screen, view the query results on the right. For more info:
-				</p>
-				<ul className="list-disc mt-2 ml-5 pl-10">
-					<li>
-						<a className="underline" href="https://gql-guide.vercel.app/" target="_blank">
-							Arweave GraphQL Documentation
-						</a>
-					</li>
-					<li>
-						<a className="underline" href="https://arweave.net/graphql" target="_blank">
-							Arweave GraphQL Playground
-						</a>
-					</li>
-					<li>
-						<a
-							className="underline"
-							href="https://docs.bundlr.network/tutorials/graphql-explorer"
-							target="_blank"
-						>
-							Tutorial For This Project
-						</a>
-					</li>
-				</ul>
-			</div>
-			<div className="flex flex-row pt-10 pl-10" id="title-area">
-				<div className="w-1/3" id="query-configurer">
-					<span className="flex flex-col">
-						<label className="font-bold">Number of images to retrieve: {numImages} </label>
-						<input
-							id="default-range"
-							type="range"
-							min="10"
-							max="100"
-							value={numImages}
-							onChange={(e) => setNumImages(e.target.value)}
-							className="mt-2 w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer dark:bg-gray-700"
-						/>
-					</span>
+  return (
+    <div className="bg-[#FEF4EE] h-screen">
+      <h1 className="pt-10 pl-10 text-3xl font-mono font-bold underline">
+        Arweave Blockweave Explorer
+      </h1>
+      <div>
+        <p className="pt-1 pl-10 w-2/3 font-mono">
+          Example app to teach using GraphQL to query the Arweave Blockweave.
+          Queries for n most recent pngs posted to Arweave and displays them
+          below. Modify the query using the left side of the screen, view the
+          query results on the right. For more info:
+        </p>
+        <ul className="list-disc mt-2 ml-5 pl-10">
+          <li>
+            <a
+              className="underline"
+              href="https://gql-guide.vercel.app/"
+              target="_blank"
+            >
+              Arweave GraphQL Documentation
+            </a>
+          </li>
+          <li>
+            <a
+              className="underline"
+              href="https://arweave.net/graphql"
+              target="_blank"
+            >
+              Arweave GraphQL Playground
+            </a>
+          </li>
+          <li>
+            <a
+              className="underline"
+              href="https://docs.bundlr.network/tutorials/graphql-explorer"
+              target="_blank"
+            >
+              Tutorial For This Project
+            </a>
+          </li>
+        </ul>
+      </div>
+      <div className="flex flex-row pt-10 pl-10" id="title-area">
+        <div className="w-1/3" id="query-configurer">
+          <span className="flex flex-col">
+            <label className="font-bold">
+              Number of images to retrieve: {numImages}{" "}
+            </label>
+            <input
+              id="default-range"
+              type="range"
+              min="10"
+              max="100"
+              value={numImages}
+              onChange={(e) => setNumImages(e.target.value)}
+              className="mt-2 w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer dark:bg-gray-700"
+            />
+          </span>
 
-					<textarea
-						id="queryForDisplay"
-						rows="14"
-						className="mt-5 p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-						readOnly
-						value={queryForDisplay}
-					></textarea>
-					<button
-						className="mt-5 bg-black hover:bg-blue-700 text-[#FEF4EE] rounded px-4 py-1 font-bold"
-						onClick={doQuery}
-					>
-						query
-					</button>
-					<p className="font-bold">{message}</p>
-				</div>
-				<div className="flex flex-col"></div>
-				<div
-					className="w-2/3 flex flex-wrap ml-2 mr-2 border border-3 border-black"
-					id="query-results"
-				>
-					{images.map((image, id) => {
-						return (
-							<a href={image} target="_blank" className="underline">
-								<img className="mx-1 my-1" width="200" height="200" src={image} key={id} />
-							</a>
-						);
-					})}
-				</div>
-			</div>
-		</div>
-	);
+          <textarea
+            id="queryForDisplay"
+            rows="14"
+            className="mt-5 p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+            readOnly
+            value={queryForDisplay}
+          ></textarea>
+          <button
+            className="mt-5 bg-black hover:bg-blue-700 text-[#FEF4EE] rounded px-4 py-1 font-bold"
+            onClick={doQuery}
+          >
+            query
+          </button>
+          <p className="font-bold">{message}</p>
+        </div>
+        <div className="flex flex-col"></div>
+        <div
+          className="w-2/3 flex flex-wrap ml-2 mr-2 border border-3 border-black"
+          id="query-results"
+        >
+          {images.map((image, id) => {
+            return (
+              <a href={image} target="_blank" className="underline">
+                <img
+                  className="mx-1 my-1"
+                  width="200"
+                  height="200"
+                  src={image}
+                  key={id}
+                />
+              </a>
+            );
+          })}
+        </div>
+      </div>
+    </div>
+  );
 }
 ```
 
@@ -352,15 +375,15 @@ const { loading, error, data } = useQuery(GET_PNG_10);
 
 // load the initial 10
 useEffect(() => {
-	// add an extra check, make sure loading is done
-	if (!loading) {
-		const edges = data.transactions.edges;
-		const allUrls = [];
-		for (let i = 0; i < edges.length; i++) {
-			allUrls.push("https://arweave.net/" + edges[i].node.id);
-		}
-		setImages(allUrls);
-	}
+  // add an extra check, make sure loading is done
+  if (!loading) {
+    const edges = data.transactions.edges;
+    const allUrls = [];
+    for (let i = 0; i < edges.length; i++) {
+      allUrls.push("https://arweave.net/" + edges[i].node.id);
+    }
+    setImages(allUrls);
+  }
 }, data);
 ```
 
@@ -372,29 +395,29 @@ As with earlier, I take the transaction ids returned and create URLs by concaten
 
 ```js {10-13} showLineNumbers
 const doQuery = async () => {
-	// clear existing images
-	setImages([]);
-	// get new ones
-	try {
-		setMessage("Starting query");
-		// Call parseInt on the numImages variable, otherwise JS thinks it's a string
-		console.log("Starting query numImages=", numImages);
-		const response = await client.query({
-			query: GET_PNG,
-			variables: { numImages: parseInt(numImages) },
-		});
-		setMessage("Query done");
+  // clear existing images
+  setImages([]);
+  // get new ones
+  try {
+    setMessage("Starting query");
+    // Call parseInt on the numImages variable, otherwise JS thinks it's a string
+    console.log("Starting query numImages=", numImages);
+    const response = await client.query({
+      query: GET_PNG,
+      variables: { numImages: parseInt(numImages) },
+    });
+    setMessage("Query done");
 
-		// pull out the transaction ids to use in img tags
-		const edges = response.data.transactions.edges;
-		const allUrls = [];
-		for (let i = 0; i < edges.length; i++) {
-			allUrls.push("https://arweave.net/" + edges[i].node.id);
-		}
-		setImages(allUrls);
-	} catch (e) {
-		setMessage("Query error ", e);
-	}
+    // pull out the transaction ids to use in img tags
+    const edges = response.data.transactions.edges;
+    const allUrls = [];
+    for (let i = 0; i < edges.length; i++) {
+      allUrls.push("https://arweave.net/" + edges[i].node.id);
+    }
+    setImages(allUrls);
+  } catch (e) {
+    setMessage("Query error ", e);
+  }
 };
 ```
 
@@ -409,29 +432,29 @@ import { GET_PNG } from "./queries/queries.js";
 import { GET_PNG_10 } from "./queries/queries.js";
 
 export default function App() {
-	const [message, setMessage] = useState("");
-	const [numImages, setNumImages] = useState(10);
-	const [images, setImages] = useState([]);
-	const client = useApolloClient();
+  const [message, setMessage] = useState("");
+  const [numImages, setNumImages] = useState(10);
+  const [images, setImages] = useState([]);
+  const client = useApolloClient();
 
-	// called on page load (component render)
-	const { loading, error, data } = useQuery(GET_PNG_10);
+  // called on page load (component render)
+  const { loading, error, data } = useQuery(GET_PNG_10);
 
-	// load the initial 10
-	useEffect(() => {
-		if (!loading) {
-			const edges = data.transactions.edges;
-			const allUrls = [];
-			for (let i = 0; i < edges.length; i++) {
-				allUrls.push("https://arweave.net/" + edges[i].node.id);
-			}
-			setImages(allUrls);
-		}
-	}, data);
+  // load the initial 10
+  useEffect(() => {
+    if (!loading) {
+      const edges = data.transactions.edges;
+      const allUrls = [];
+      for (let i = 0; i < edges.length; i++) {
+        allUrls.push("https://arweave.net/" + edges[i].node.id);
+      }
+      setImages(allUrls);
+    }
+  }, data);
 
-	// this query is used for display purposes only
-	// helps educate the viewer about GraphQl
-	let queryForDisplay = `query {
+  // this query is used for display purposes only
+  // helps educate the viewer about GraphQl
+  let queryForDisplay = `query {
 		transactions(first: ${numImages},
 			tags: {
 				name: "Content-Type",
@@ -446,112 +469,129 @@ export default function App() {
 		}
 	};`;
 
-	// called when the user clicks "query"
-	const doQuery = async () => {
-		// clear existing images
-		setImages([]);
-		// get new ones
-		try {
-			setMessage("Starting query");
-			// Call parseInt on the numImages variable, otherwise JS thinks it's a string
-			console.log("Starting query numImages=", numImages);
-			const response = await client.query({
-				query: GET_PNG,
-				variables: { numImages: parseInt(numImages) },
-			});
-			setMessage("Query done");
+  // called when the user clicks "query"
+  const doQuery = async () => {
+    // clear existing images
+    setImages([]);
+    // get new ones
+    try {
+      setMessage("Starting query");
+      // Call parseInt on the numImages variable, otherwise JS thinks it's a string
+      console.log("Starting query numImages=", numImages);
+      const response = await client.query({
+        query: GET_PNG,
+        variables: { numImages: parseInt(numImages) },
+      });
+      setMessage("Query done");
 
-			// pull out the transaction ids to use in img tags
-			const edges = response.data.transactions.edges;
-			const allUrls = [];
-			for (let i = 0; i < edges.length; i++) {
-				allUrls.push("https://arweave.net/" + edges[i].node.id);
-			}
-			setImages(allUrls);
-		} catch (e) {
-			setMessage("Query error ", e);
-		}
-	};
+      // pull out the transaction ids to use in img tags
+      const edges = response.data.transactions.edges;
+      const allUrls = [];
+      for (let i = 0; i < edges.length; i++) {
+        allUrls.push("https://arweave.net/" + edges[i].node.id);
+      }
+      setImages(allUrls);
+    } catch (e) {
+      setMessage("Query error ", e);
+    }
+  };
 
-	return (
-		<div className="bg-[#FEF4EE] h-screen">
-			<h1 className="pt-10 pl-10 text-3xl font-mono font-bold underline">
-				Arweave Blockweave Explorer
-			</h1>
-			<div>
-				<p className="pt-1 pl-10 w-2/3 font-mono">
-					Example app to teach using GraphQL to query the Arweave Blockweave. Queries for n most
-					recent pngs posted to Arweave and displays them below. Modify the query using the left
-					side of the screen, view the query results on the right. For more info:
-				</p>
-				<ul className="list-disc mt-2 ml-5 pl-10">
-					<li>
-						<a className="underline" href="https://gql-guide.vercel.app/" target="_blank">
-							Arweave GraphQL Documentation
-						</a>
-					</li>
-					<li>
-						<a className="underline" href="https://arweave.net/graphql" target="_blank">
-							Arweave GraphQL Playground
-						</a>
-					</li>
-					<li>
-						<a
-							className="underline"
-							href="https://docs.bundlr.network/tutorials/graphql-explorer"
-							target="_blank"
-						>
-							Tutorial For This Project
-						</a>
-					</li>
-				</ul>
-			</div>
-			<div className="flex flex-row pt-10 pl-10" id="title-area">
-				<div className="w-1/3" id="query-configurer">
-					<span className="flex flex-col">
-						<label className="font-bold">Number of images to retrieve: {numImages} </label>
-						<input
-							id="default-range"
-							type="range"
-							min="10"
-							max="100"
-							value={numImages}
-							onChange={(e) => setNumImages(e.target.value)}
-							className="mt-2 w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer dark:bg-gray-700"
-						/>
-					</span>
+  return (
+    <div className="bg-[#FEF4EE] h-screen">
+      <h1 className="pt-10 pl-10 text-3xl font-mono font-bold underline">
+        Arweave Blockweave Explorer
+      </h1>
+      <div>
+        <p className="pt-1 pl-10 w-2/3 font-mono">
+          Example app to teach using GraphQL to query the Arweave Blockweave.
+          Queries for n most recent pngs posted to Arweave and displays them
+          below. Modify the query using the left side of the screen, view the
+          query results on the right. For more info:
+        </p>
+        <ul className="list-disc mt-2 ml-5 pl-10">
+          <li>
+            <a
+              className="underline"
+              href="https://gql-guide.vercel.app/"
+              target="_blank"
+            >
+              Arweave GraphQL Documentation
+            </a>
+          </li>
+          <li>
+            <a
+              className="underline"
+              href="https://arweave.net/graphql"
+              target="_blank"
+            >
+              Arweave GraphQL Playground
+            </a>
+          </li>
+          <li>
+            <a
+              className="underline"
+              href="https://docs.bundlr.network/tutorials/graphql-explorer"
+              target="_blank"
+            >
+              Tutorial For This Project
+            </a>
+          </li>
+        </ul>
+      </div>
+      <div className="flex flex-row pt-10 pl-10" id="title-area">
+        <div className="w-1/3" id="query-configurer">
+          <span className="flex flex-col">
+            <label className="font-bold">
+              Number of images to retrieve: {numImages}{" "}
+            </label>
+            <input
+              id="default-range"
+              type="range"
+              min="10"
+              max="100"
+              value={numImages}
+              onChange={(e) => setNumImages(e.target.value)}
+              className="mt-2 w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer dark:bg-gray-700"
+            />
+          </span>
 
-					<textarea
-						id="queryForDisplay"
-						rows="14"
-						className="mt-5 p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-						readOnly
-						value={queryForDisplay}
-					></textarea>
-					<button
-						className="mt-5 bg-black hover:bg-blue-700 text-[#FEF4EE] rounded px-4 py-1 font-bold"
-						onClick={doQuery}
-					>
-						query
-					</button>
-					<p className="font-bold">{message}</p>
-				</div>
-				<div className="flex flex-col"></div>
-				<div
-					className="w-2/3 flex flex-wrap ml-2 mr-2 border border-3 border-black"
-					id="query-results"
-				>
-					{images.map((image, id) => {
-						return (
-							<a href={image} target="_blank" className="underline">
-								<img className="mx-1 my-1" width="200" height="200" src={image} key={id} />
-							</a>
-						);
-					})}
-				</div>
-			</div>
-		</div>
-	);
+          <textarea
+            id="queryForDisplay"
+            rows="14"
+            className="mt-5 p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+            readOnly
+            value={queryForDisplay}
+          ></textarea>
+          <button
+            className="mt-5 bg-black hover:bg-blue-700 text-[#FEF4EE] rounded px-4 py-1 font-bold"
+            onClick={doQuery}
+          >
+            query
+          </button>
+          <p className="font-bold">{message}</p>
+        </div>
+        <div className="flex flex-col"></div>
+        <div
+          className="w-2/3 flex flex-wrap ml-2 mr-2 border border-3 border-black"
+          id="query-results"
+        >
+          {images.map((image, id) => {
+            return (
+              <a href={image} target="_blank" className="underline">
+                <img
+                  className="mx-1 my-1"
+                  width="200"
+                  height="200"
+                  src={image}
+                  key={id}
+                />
+              </a>
+            );
+          })}
+        </div>
+      </div>
+    </div>
+  );
 }
 ```
 

@@ -17,7 +17,7 @@ This is where data provenance and Bundlr’s Proof of Provenance come into play.
 
 For example, an illustrator could upload an image, and the timestamp received on upload would provide irrefutable proof they were the first to upload it. The timestamp would establish provenance. The illustrator could then edit the piece and re-upload it using a custom tag tying it back to the original. Taking the example further, there might be another series of edits requested by the illustrator’s client, all of which would be tied back to the original using metadata. All of this would create a chain of provenance showing the original artwork and all revisions. Were someone to use the work without permission, our Proof of Provenance would be all the evidence needed to prove true ownership of the work.
 
-![](../../../static/img/learn/PoP2.png)
+![](/img/learn/pop2.png)
 
 ### Receipts / Timestamps
 
@@ -31,7 +31,7 @@ To upload a request with a signed timestamp, use the optional `uploadWithReceipt
 
 ```js
 const receipt = await bundlr.uploadWithReceipt("Hello, world!", {
-	tags: [{ name: "Content-type", value: "text/plain" }],
+  tags: [{ name: "Content-type", value: "text/plain" }],
 });
 ```
 
@@ -76,24 +76,27 @@ All blockchains offer some sort of timestamping; however, it is only as granular
 
 All metadata uploaded to Bundlr / Arweave is readily queryable using GraphQL and is **available forever**. You can query our nodes directly using either of these endpoints, you must query the endpoint associated with the node you uploaded to.
 
--   Node 1: https://node1.bundlr.network/graphql
--   Node 2: https://node2.bundlr.network/graphql
--   Devnet: https://devnet.bundlr.network/graphql
+- Node 1: https://node1.bundlr.network/graphql
+- Node 2: https://node2.bundlr.network/graphql
+- Devnet: https://devnet.bundlr.network/graphql
 
 To query for the timestamp associated with a given transaction id, use the following query.
 
 ```graphql
 query DataProvenanceQuery {
-	transactions(order: ASC, ids: ["Yaa-ZPQQub_66joUJZ-2BDRbmaPj-q3SHdiSiHb06hc"]) {
-		edges {
-			node {
-				id
-				address
-				timestamp
-			}
-			cursor
-		}
-	}
+  transactions(
+    order: ASC
+    ids: ["Yaa-ZPQQub_66joUJZ-2BDRbmaPj-q3SHdiSiHb06hc"]
+  ) {
+    edges {
+      node {
+        id
+        address
+        timestamp
+      }
+      cursor
+    }
+  }
 }
 ```
 
@@ -101,19 +104,24 @@ In our earlier example of an illustrator using Bundlr to create a provenance cha
 
 ```graphql
 query DataProvenanceQuery {
-	transactions(
-		order: ASC
-		tags: [{ name: "provenance-chain-id", values: ["Yaa-ZPQQub_66joUJZ-2BDRbmaPj-q3SHdiSiHb06hc"] }]
-	) {
-		edges {
-			node {
-				id
-				address
-				timestamp
-			}
-			cursor
-		}
-	}
+  transactions(
+    order: ASC
+    tags: [
+      {
+        name: "provenance-chain-id"
+        values: ["Yaa-ZPQQub_66joUJZ-2BDRbmaPj-q3SHdiSiHb06hc"]
+      }
+    ]
+  ) {
+    edges {
+      node {
+        id
+        address
+        timestamp
+      }
+      cursor
+    }
+  }
 }
 ```
 

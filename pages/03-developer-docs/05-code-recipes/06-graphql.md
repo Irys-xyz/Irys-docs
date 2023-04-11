@@ -17,20 +17,20 @@ If you're new to GraphQL, you may find it easier to start with [this step-by-ste
 
 Common use cases include, but are not limited to:
 
--   Tagging uploads with a custom app name and then querying for those uploads based on app name.
--   Searching for uploads of a particular MIME type.
--   Building decentralized social dApps where you need to build a relational model of posts and accompanying likes.
+- Tagging uploads with a custom app name and then querying for those uploads based on app name.
+- Searching for uploads of a particular MIME type.
+- Building decentralized social dApps where you need to build a relational model of posts and accompanying likes.
 
 ## Endpoints
 
 There are two Arweave official endpoints you can use for your GraphQl queries.
 
--   https://arweave.net/graphql
--   https://arweave.dev/graphql
+- https://arweave.net/graphql
+- https://arweave.dev/graphql
 
 There is also another endpoint from Goldsky which offers fast response times.
 
--   https://arweave-search.goldsky.com/graphql
+- https://arweave-search.goldsky.com/graphql
 
 Clicking either endpoint URL will take you to an interactive playground where you can test your queries. When using the playgrounds, pressing control-space opens a popup query builder to aid in rapidly building queries.
 
@@ -42,46 +42,46 @@ The following is the full GraphQL structure. In most scenarios, you won't need t
 
 ```graphql
 query {
-	transactions {
-		cursor
-		edges {
-			node {
-				id
-				anchor
-				signature
-				recipient
-				owner {
-					address
-					key
-				}
-				fee {
-					winston
-					ar
-				}
-				quantity {
-					winston
-					ar
-				}
-				data {
-					size
-					type
-				}
-				tags {
-					name
-					value
-				}
-				block {
-					id
-					timestamp
-					height
-					previous
-				}
-				parent {
-					id
-				}
-			}
-		}
-	}
+  transactions {
+    cursor
+    edges {
+      node {
+        id
+        anchor
+        signature
+        recipient
+        owner {
+          address
+          key
+        }
+        fee {
+          winston
+          ar
+        }
+        quantity {
+          winston
+          ar
+        }
+        data {
+          size
+          type
+        }
+        tags {
+          name
+          value
+        }
+        block {
+          id
+          timestamp
+          height
+          previous
+        }
+        parent {
+          id
+        }
+      }
+    }
+  }
 }
 ```
 
@@ -95,7 +95,7 @@ query {<schema type>( <what you're searching for> ) { <what you want out> }
 
 A real-world example showing how to query for the 10 most recent PNGs posted to Arweave is as follows.
 
-![](../../../static/img/tutorials/graphql-explorer/anatomy-of-query.png)
+![](/img/tutorials/graphql-explorer/anatomy-of-query.png)
 
 ## Max Results / Pagination
 
@@ -111,14 +111,14 @@ The following query searches for all transactions and returns the 100 results oc
 
 ```graphql
 query {
-	transactions(first: 100, after: "WyIyMDIwLTA5LTIzVDE2OjQ0OjE0LjY5MloiLDFd") {
-		edges {
-			cursor
-			node {
-				id
-			}
-		}
-	}
+  transactions(first: 100, after: "WyIyMDIwLTA5LTIzVDE2OjQ0OjE0LjY5MloiLDFd") {
+    edges {
+      cursor
+      node {
+        id
+      }
+    }
+  }
 }
 ```
 
@@ -138,13 +138,13 @@ You may retrieve one or more transactions by specifying their IDs in an array.
 
 ```graphql
 query {
-	transactions(ids: ["G-1t0Lqysin897HC3IV8xu_Mr884B-Mo5YEnlhUH54k"]) {
-		edges {
-			node {
-				id
-			}
-		}
-	}
+  transactions(ids: ["G-1t0Lqysin897HC3IV8xu_Mr884B-Mo5YEnlhUH54k"]) {
+    edges {
+      node {
+        id
+      }
+    }
+  }
 }
 ```
 
@@ -154,13 +154,13 @@ You may retrieve one or more recipients by specifying their addresses in an arra
 
 ```graphql
 query {
-	transactions(recipients: ["M6w588ZkR8SVFdPkNXdBy4sqbMN0Y3F8ZJUWm2WCm8M"]) {
-		edges {
-			node {
-				id
-			}
-		}
-	}
+  transactions(recipients: ["M6w588ZkR8SVFdPkNXdBy4sqbMN0Y3F8ZJUWm2WCm8M"]) {
+    edges {
+      node {
+        id
+      }
+    }
+  }
 }
 ```
 
@@ -170,13 +170,13 @@ You can retrieve one or more owners by specifying their addresses in an array.
 
 ```graphql
 query {
-	transactions(owners: ["M6w588ZkR8SVFdPkNXdBy4sqbMN0Y3F8ZJUWm2WCm8M"]) {
-		edges {
-			node {
-				id
-			}
-		}
-	}
+  transactions(owners: ["M6w588ZkR8SVFdPkNXdBy4sqbMN0Y3F8ZJUWm2WCm8M"]) {
+    edges {
+      node {
+        id
+      }
+    }
+  }
 }
 ```
 
@@ -186,13 +186,13 @@ You can search for transactions based on tag name / value pairs.
 
 ```graphql
 query {
-	transactions(tags: { name: "Content-Type", values: ["text/html"] }) {
-		edges {
-			node {
-				id
-			}
-		}
-	}
+  transactions(tags: { name: "Content-Type", values: ["text/html"] }) {
+    edges {
+      node {
+        id
+      }
+    }
+  }
 }
 ```
 
@@ -200,18 +200,18 @@ Use the following format when specifying multiple tags.
 
 ```graphql
 query {
-	transactions(
-		tags: [
-			{ name: "Content-Type", values: ["text/html"] }
-			{ name: "User-Agent", values: ["ArweaveAutoDPL/0.1"] }
-		]
-	) {
-		edges {
-			node {
-				id
-			}
-		}
-	}
+  transactions(
+    tags: [
+      { name: "Content-Type", values: ["text/html"] }
+      { name: "User-Agent", values: ["ArweaveAutoDPL/0.1"] }
+    ]
+  ) {
+    edges {
+      node {
+        id
+      }
+    }
+  }
 }
 ```
 

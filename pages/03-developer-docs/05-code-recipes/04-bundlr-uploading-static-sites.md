@@ -40,7 +40,7 @@ images/5.png
 
 The `index.html` file loads the styles in `styles.css` and then displays the images along with some example text. All links inside `index.html` are relative; there are no absolute links. Here's what it looks like:
 
-![](../../../static/img/code-assets/LlamaWebsite.png)
+![](/img/code-assets/llama-website.png)
 
 And here it is served from the permaweb: https://arweave.net/kG358dvaEJUTKqNkZPmP8276ObdnBZxLL4l27bk2Y9w
 
@@ -50,19 +50,23 @@ You can upload the entire website using the SDK's `bundlr.uploadFolder()` functi
 
 ```js
 // Connect to a Bundlr node
-const bundlr = new Bundlr.default("http://node1.bundlr.network", "arweave", privateKey);
+const bundlr = new Bundlr.default(
+  "http://node1.bundlr.network",
+  "arweave",
+  privateKey
+);
 
 try {
-	// Call upload folder.
-	// You MUST pass the name of your main index file as the indexFile parameter
-	const response = await bundlr.uploadFolder("../assets/example_spa/", {
-		indexFile: "index.html",
-	});
+  // Call upload folder.
+  // You MUST pass the name of your main index file as the indexFile parameter
+  const response = await bundlr.uploadFolder("../assets/example_spa/", {
+    indexFile: "index.html",
+  });
 
-	// This URL will now load your entire website from the permaweb
-	console.log(`SPA Uploaded https://arweave.net/${response.id}`);
+  // This URL will now load your entire website from the permaweb
+  console.log(`SPA Uploaded https://arweave.net/${response.id}`);
 } catch (e) {
-	console.log("Error uploading file ", e);
+  console.log("Error uploading file ", e);
 }
 ```
 

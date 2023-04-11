@@ -11,9 +11,9 @@ Use the `upload-dir` command followed by a file name to upload a directory. The 
 
 Required option flags:
 
--   -h: Node address (eg: https://node1.bundlr.network)
--   -w: Name of wallet file on your local system
--   -c: Currency (eg: arweave)
+- -h: Node address (eg: https://node1.bundlr.network)
+- -w: Name of wallet file on your local system
+- -c: Currency (eg: arweave)
 
 ```console
 bundlr upload-dir <directory_name> -h <node_address> -w <wallet_file> -c <currency>
@@ -28,4 +28,4 @@ Creating an URL using the transaction ID of each individual file uploaded with t
 
 After a successful folder upload, two files are written to your local project directory `[folder_name].csv` and `[folder_name].json`. Looking at the example below highlighting a folder called “llama_folder” with a total of 5 files in it. The transaction id for each file can be used to retrieve the uploaded data by forming an URL with the format `https://arweave.net]/[transaction_id]`
 
-![llama-folder](../../../static/img/code-assets/llama-folder-manifest.png)
+![llama-folder](/img/code-assets/llama-folder-manifest.png)
