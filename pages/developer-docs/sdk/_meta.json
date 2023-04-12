@@ -1,0 +1,18 @@
+{
+	"bundlr-server-side": "Bundlr Overview",
+	"bundlr-in-the-browser": "Bundlr In The Browser",
+	"installing-the-sdk": "Installing The SDK",
+	"umd-bundles": "UMD Bundles",
+	"connecting-node": "Conecting To A Node",
+	"using-devnet": "Using DevNet",
+	"getting-node-balance": "Getting Node Balance",
+	"funding-node": "Funding A Node",
+	"withdrawing-funds": "Withdrawing Funds",
+	"uploading-data": "Uploading Data",
+	"uploading-file": "Uploading A File",
+	"uploading-folder": "Uploading A Folder",
+	"downloading-data": "Downloading Data",
+	"supported-wallets": "Supported Wallets",
+	"utility-functions": "Utility Functions",
+	"chunked-uploader": "Chunked Uploader"
+}

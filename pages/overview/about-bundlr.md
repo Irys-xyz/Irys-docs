@@ -5,16 +5,12 @@ description: Unlock the full potential of Bundlr's technology with our developer
 slug: /overview
 ---
 
-# Overview
+# About Bundlr
 
-<br/>
 Bundlr is a data layer for the internet. We are a foundation upon which developers can solve complex data integrity issues, permissionlessly.
-<br/><br/>
+
 One of the prerequisites for solving data integrity challenges is to have an immutable data foundation that can accurately prove the origin of data with details on who created it when, where, and how. For this foundation to be accessible, data must be easy to search for. Bundlr is focused on building this foundation.
-<br/><br/>
+
 Anyone should be able to discover, read, and write public information, forever. There should be an option to securely store private information. And all of this should happen without sacrificing performance, scalability, and the ease of use that users expect.
-<br/><br/>
 
 Bundlr is infinitely scalable and has [been tested at 50,000 transactions per second.](https://www.youtube.com/watch?v=JKEivHKDXAo)
-
-This is how we do it.

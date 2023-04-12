@@ -5,7 +5,7 @@ description: How to upload a static website to the permaweb using Bundlr
 slug: /recipes/static-website-upload
 ---
 
-# Bundlr + Uploading Websites
+# Uploading Static Websites
 
 You can use Bundlr to upload entire static websites directly to the permaweb using only a few lines of code. You can use both the `uploadFolder()` function in the SDK and the `upload-dir` command with the CLI.
 
@@ -50,23 +50,19 @@ You can upload the entire website using the SDK's `bundlr.uploadFolder()` functi
 
 ```js
 // Connect to a Bundlr node
-const bundlr = new Bundlr.default(
-  "http://node1.bundlr.network",
-  "arweave",
-  privateKey
-);
+const bundlr = new Bundlr.default("http://node1.bundlr.network", "arweave", privateKey);
 
 try {
-  // Call upload folder.
-  // You MUST pass the name of your main index file as the indexFile parameter
-  const response = await bundlr.uploadFolder("../assets/example_spa/", {
-    indexFile: "index.html",
-  });
+	// Call upload folder.
+	// You MUST pass the name of your main index file as the indexFile parameter
+	const response = await bundlr.uploadFolder("../assets/example_spa/", {
+		indexFile: "index.html",
+	});
 
-  // This URL will now load your entire website from the permaweb
-  console.log(`SPA Uploaded https://arweave.net/${response.id}`);
+	// This URL will now load your entire website from the permaweb
+	console.log(`SPA Uploaded https://arweave.net/${response.id}`);
 } catch (e) {
-  console.log("Error uploading file ", e);
+	console.log("Error uploading file ", e);
 }
 ```
 

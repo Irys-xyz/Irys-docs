@@ -5,4 +5,4 @@ description: By separating read and write components into separate components, B
 slug: /learn/scaling
 ---
 
-In progress by Luke
+In progress by Luke TODO

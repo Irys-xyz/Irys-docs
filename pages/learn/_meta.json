@@ -1,0 +1,11 @@
+{
+	"bundler": "Bundlers",
+	"bundles": "Bundles",
+	"bundlr-arweave": "Bundlr And Arweave",
+	"gateways": "Gateways",
+	"receipts": "Receipts",
+	"transaction-lifecycle": "Transaction Lifecycle",
+	"scaling": "Scaling",
+	"optimistic-caching": "Optimistic Caching",
+	"funding-withdrawing": "Funding And Withdrawing"
+}
