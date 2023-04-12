@@ -18,6 +18,11 @@ const withNextra = require("nextra")({
       ],
     });
 
+    config.module.rules.push({
+      test: /\.css$/,
+      use: ["style-loader", "css-loader", "postcss-loader"],
+    });
+
     config.resolve.extensions.push(".ts", ".tsx");
 
     return config;
