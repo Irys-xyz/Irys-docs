@@ -22,11 +22,25 @@ export default {
     </svg>
   ),
   project: {
-    link: "https://github.com/shuding/nextra",
+    link: "https://github.com/Bundlr-Network",
   },
   footer: {
     component: Footer,
   },
+  banner: {
+    key: '2.0-release',
+    text: <a href="https://medium.com/bundlr-network" target="_blank">
+      🎉 New docs released. Read more →
+    </a>,
+  },
+  useNextSeoProps() {
+    const { asPath } = useRouter()
+    if (asPath !== '/') {
+      return {
+        titleTemplate: '%s | Bundlr Docs'
+      }
+    }
+  }
   // head: () => {
   //   const { asPath, defaultLocale, locale } = useRouter();
   //   const { frontMatter } = useConfig();

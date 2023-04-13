@@ -5,5 +5,23 @@
 	"hands-on": "Hands On",
 	"learn": "Comprehensive Resources",
 	"terminology": "Terminology",
-	"faqs": "FAQs"
+	"faqs": "FAQs",
+	"twitter": {
+		"title": "Twitter",
+		"href": "https://twitter.com/BundlrNetwork",
+		"newWindow": true,
+		"type": "page"
+	},
+	"Discord": {
+		"title": "Discord",
+		"href": "https://discord.gg/bundlr",
+		"newWindow": true,
+		"type": "page"
+	},
+	"Youtube": {
+		"title": "Youtube",
+		"href": "https://www.youtube.com/@bundlr-network",
+		"newWindow": true,
+		"type": "page"
+	}
 }

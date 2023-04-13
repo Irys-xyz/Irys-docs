@@ -2,7 +2,7 @@
 description: Funding a node before uploading.
 ---
 
-import { Callout } from 'nextra-theme-docs'
+import { Callout } from "nextra-theme-docs";
 
 # Funding A Node
 
@@ -13,22 +13,27 @@ Bundlr supports both upfront funding, sending over enough funds to cover all of 
 Fund the node you intend to upload to, funded balances are not shared between nodes.
 
 <Callout type="info" emoji="ℹ️">
- Not all calls to `bundlr.fund()` will post immediately to your account, some blockchains are faster than others. When funding with AR, it can take upwards of 40 minutes before the balance shows up. For MATIC, ETH and SOL, balances will usually post in <10s.
+  Not all calls to `bundlr.fund()` will post immediately to your account, some
+  blockchains are faster than others. When funding with AR, it can take upwards
+  of 40 minutes before the balance shows up. For MATIC, ETH and SOL, balances
+  will usually post in &lt;10s.
 </Callout>
 
 ```js
 // Fund the node, give it enough so you can upload a full MG
 try {
-	// response = {
-	//  id, // the txID of the fund transfer
-	//  quantity, // how much is being transferred
-	//  reward, // the amount taken by the network as a fee
-	//  target, // the address the funds were sent to
-	// };
-	const response = await bundlr.fund(price1MBAtomic);
-	console.log(`Funding successful txID=${response.id} amount funded=${response.quantity}`);
+  // response = {
+  //  id, // the txID of the fund transfer
+  //  quantity, // how much is being transferred
+  //  reward, // the amount taken by the network as a fee
+  //  target, // the address the funds were sent to
+  // };
+  const response = await bundlr.fund(price1MBAtomic);
+  console.log(
+    `Funding successful txID=${response.id} amount funded=${response.quantity}`
+  );
 } catch (e) {
-	console.log("Error funding node ", e);
+  console.log("Error funding node ", e);
 }
 ```
 
@@ -38,7 +43,11 @@ You can also lazy-fund a node where you check the cost to upload each file first
 import Bundlr from "@bundlr-network/client";
 import * as fs from "fs";
 
-const bundlr = new Bundlr.default("https://node1.bundlr.network", "matic", myPrivateKey);
+const bundlr = new Bundlr.default(
+  "https://node1.bundlr.network",
+  "matic",
+  myPrivateKey
+);
 
 const pathToFile = "./llama.png";
 const { size } = await fs.promises.stat(pathToFile);
