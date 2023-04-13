@@ -1,9 +1,8 @@
 ---
-sidebar_position: 7
-sidebar_label: Funding A Node
 description: Funding a node before uploading.
-slug: /sdk/funding
 ---
+
+import { Callout } from 'nextra-theme-docs'
 
 # Funding A Node
 
@@ -13,9 +12,9 @@ Bundlr supports both upfront funding, sending over enough funds to cover all of 
 
 Fund the node you intend to upload to, funded balances are not shared between nodes.
 
-:::note
-Not all calls to `bundlr.fund()` will post immediately to your account, some blockchains are faster than others. When funding with AR, it can take upwards of 40 minutes before the balance shows up. For MATIC, ETH and SOL, balances will usually post in <10s.
-:::
+<Callout type="info" emoji="ℹ️">
+ Not all calls to `bundlr.fund()` will post immediately to your account, some blockchains are faster than others. When funding with AR, it can take upwards of 40 minutes before the balance shows up. For MATIC, ETH and SOL, balances will usually post in <10s.
+</Callout>
 
 ```js
 // Fund the node, give it enough so you can upload a full MG

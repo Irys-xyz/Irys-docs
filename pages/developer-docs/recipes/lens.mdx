@@ -1,9 +1,8 @@
 ---
-sidebar_position: 3
-sidebar_label: Storing Lens Metadata on Bundlr
 description: Uploading Lens metadata using Bundlr (GraphQL and Lens React Hooks)
-slug: /recipes/bundlr-lens
 ---
+
+import { Callout } from "nextra-theme-docs";
 
 # Storing Lens Metadata on Bundlr
 
@@ -76,9 +75,9 @@ export const upload = async (data) => {
 };
 ```
 
-:::caution
-If you incorrectly set the `Content-Type` attribute, Lens will not read your data.
-:::
+<Callout type="warning" emoji="⚠️">
+	If you incorrectly set the `Content-Type` attribute, Lens will not read your data.
+</Callout>
 
 ## Using `post()` and `postWithSig()`
 
@@ -110,9 +109,9 @@ The full Lens Protocol [metadata specification](https://docs.lens.xyz/docs/metad
 }
 ```
 
-:::note
-The function `uuid()` generates a unique post id using the [UUID npm package](https://www.npmjs.com/package/uuid).
-:::
+<Callout type="info" emoji="ℹ️">
+	The function `uuid()` generates a unique post id using the [UUID npm package](https://www.npmjs.com/package/uuid).
+</Callout>
 
 To upload to Bundlr, first stringify the data, then pass it to `bundlr.upload()`, tagging it with the `Content-Type` of `application/json`.
 
@@ -133,9 +132,9 @@ const tx = await bundlr.upload(data, {
 console.log(`Upload success content URI= https://arweave.net/${tx.id}`);
 ```
 
-:::caution
-If you incorrectly set the `Content-Type` attribute, Lens will not read your data.
-:::
+<Callout type="warning" emoji="⚠️">
+	If you incorrectly set the `Content-Type` attribute, Lens will not read your data.
+</Callout>
 
 ### Creating A Post
 
@@ -160,6 +159,7 @@ const tx = await lensHub.postWithSig({
 });
 ```
 
-:::caution
-While `http://arweave.net/[transaction-id]` and `https://arweave.net/[transaction-id]` will both work in your browser, only the `https` version will work when creating your Lens post.
-:::
+<Callout type="warning" emoji="⚠️">
+	While `http://arweave.net/[transaction-id]` and `https://arweave.net/[transaction-id]` will both work in your
+	browser, only the `https` version will work when creating your Lens post.
+</Callout>

@@ -1,8 +1,8 @@
 ---
-sidebar_position: 1
-sidebar_label: About
 description: A fault-tolerant, resumable, signer & uploader.
 ---
+
+import { Callout } from "nextra-theme-docs";
 
 # About
 
@@ -17,6 +17,8 @@ Key Terminology:
 
 If you prefer to dive into the code, this information exists in (heavily commented form) in our [GitHub](https://github.com/Bundlr-Network/bundlr-basics/blob/master/scripts/chunked-uploader.js).
 
-:::note
-The default uploder (accessed via `bundlr.upload()`) does chunking automatically. You only need to use the Chunked Uploader to access advanced features like pausing and resuming uploads, changing batch size, and changing chunk size.
-:::
+<Callout type="info" emoji="ℹ️">
+	The default uploder (accessed via `bundlr.upload()`) does chunking automatically. You only need to use the Chunked
+	Uploader to access advanced features like pausing and resuming uploads, changing batch size, and changing chunk
+	size.
+</Callout>
