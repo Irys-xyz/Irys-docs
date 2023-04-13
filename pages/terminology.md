@@ -1,11 +1,11 @@
 ---
-sidebar_position: 6
 title: Terminology
 description: Technical terms you'll need to know to understand Bundlr
-slug: /learn/terminology
 ---
 
 # Terminology
+
+[Bundle](/terminology#bundle) | [Bundlr](/terminology#bundler) | [Client](/terminology#client) | [Deep Hash](/terminology#deep-hash) | [Gateways](/terminology#gateways) | [Transaction](/terminology#transaction) | [Transaction Receipt](/terminology#transaction-receipt) | [Validator](/terminology#validator)
 
 ## Bundle
 
@@ -19,11 +19,9 @@ A bundler is a node on Bundlr that receives Bundlr transactions, handles payment
 
 The client is a lightweight API layer that supports Bundlr transaction creation and allows applications to communicate with Bundlr via simple HTTP APIs.
 
-## Deep hash
+## Deep Hash
 
 A hash algorithm which takes a nested list of values as input and produces a 384 bit hash, where a change of any value or the structure will affect the hash.
-
-## DA
 
 ## Gateways
 
