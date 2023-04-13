@@ -1,17 +1,17 @@
 ---
-sidebar_position: 2
-sidebar_label: Bundlr In The Browser
 description: Using the WebBundlr class to interact with Bundlr from the browser
-slug: /sdk/bundlr-in-the-browser
 ---
+
+import { Callout } from "nextra-theme-docs";
 
 # Bundlr In The Browser (WebBundlr)
 
 In order to use Bundlr with browser wallets like MetaMask and Phantom, use the `WebBundlr` class. Usage is very similar to the Bundlr class used with server-side development, however you don’t need to provide a private key as that will be linked via the user’s wallet. Whenever any functions that require signing are called (upload, fund, withdraw etc.) the linked wallet will prompt the user to confirm the required actions.
 
-:::note
-We recommend using ethers version 5 which our SDK fully supports. Ethers version 6 is not yet fully supported, however if your project does require it there are code options below which will work.
-:::
+<Callout type="warning" emoji="⚠️">
+	We recommend using ethers version 5 which our SDK fully supports. Ethers version 6 is not yet fully supported,
+	however if your project does require it there are code options below which will work.
+</Callout>
 
 If you’d prefer to learn using a long-form tutorial, [we have this one on creating a web-based uploader with progress bars](/tutorials/file-uploader).
 
