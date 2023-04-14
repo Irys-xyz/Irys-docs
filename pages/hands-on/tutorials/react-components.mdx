@@ -1,9 +1,7 @@
 ---
-sidebar_position: 3
-title: Bundlr React Components
 description: You'll Learn - How to build React components for common Bundlr functions
-slug: /tutorials/file-uploader
 ---
+import { Callout } from 'nextra-theme-docs'
 
 # Bundlr React Components
 
@@ -293,11 +291,12 @@ export default LargeFileUploaderPage;
 
 Ok, cool, cool, cool. You should be good to go at this point. Run `npm run start` from your command line, and marvel at the blank page that shows in your browser.
 
-:::note
+
+<Callout type="warning" emoji="⚠️">
 Remember, if you get lost, or your code's just not working, you can always check out [the full version in GitHub.](https://github.com/Bundlr-Network/webbundlr-basics)
 
 If you're still stuck, just [Tweet at us](https://twitter.com/BundlrNetwork) or [jump into our Discord](https://discord.gg/bundlr), and we'll give you a hand.
-:::
+</Callout>
 
 ## Wallet Connect
 
@@ -403,9 +402,9 @@ const rainbowKitProvider = useProvider();
 const { data: rainbowKitSigner, isError, isLoading } = useSigner();
 ```
 
-:::note
+<Callout type="warning" emoji="⚠️">
 The signer object reference will return null if the user has yet to connect their wallet.
-:::
+</Callout>
 
 ### Funding Step By Step
 
@@ -452,10 +451,10 @@ const fundAmountParsed = new BigNumber(fundAmount).multipliedBy(
 );
 ```
 
-:::note
-Atomic units are a way to represent a floating point (decimal) number using non-decimal notation.
-They are commonly used to help ensure accuracy when performing mathematical operations on fractional numbers in JavaScript,
-:::
+
+<Callout type="warning" emoji="⚠️">
+Atomic units refer to the smallest possible unit of a given currency. In Ethereum, atomic units are called Wei, and they represent the smallest unit of Ether. Similar to how 1 dollar can be broken down into 100 cents, 1 Ether can be broken down into 10^18 Wei. In Solana, atomic units are called Lamports, 1 SOL can be broken down into 10^9 Lamports.
+</Callout>
 
 5. Finally, fund the node, and display either a success or failure message.
 
