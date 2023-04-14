@@ -1,8 +1,5 @@
 ---
-sidebar_position: 10
-sidebar_label: Uploading A File
 description: Uploading files to Bundlr / Arweave.
-slug: /sdk/upload-file
 ---
 
 # Uploading A File
@@ -10,6 +7,8 @@ slug: /sdk/upload-file
 The function `bundlr.uploadFile(pathToFile + fileName)` facilitates uploading a file directly from your local file system.
 
 The transaction id returned as part of the response is used to download the data, simply create a URL with the following format `https://arweave.net/[transaction_id].`
+
+## `bundlr.uploadFile()`
 
 ```js
 // Upload a file

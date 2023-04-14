@@ -13,8 +13,12 @@ Bundlr supports both upfront funding, sending over enough funds to cover all of 
 Fund the node you intend to upload to, funded balances are not shared between nodes.
 
 <Callout type="info" emoji="ℹ️">
-Not all calls to `bundlr.fund()` will post immediately to your account, some blockchains are faster than others. When funding with AR, it can take upwards of 40 minutes before the balance shows up. For MATIC, ETH and SOL, balances will usually post in <10s.
+Not all calls to `bundlr.fund()` will post immediately to your account, some blockchains are faster than others. When funding with AR, it can take upwards of 40 minutes before the balance shows up. For MATIC, ETH and SOL, balances will usually post in < 10s.
 </Callout>
+
+## `bundlr.fund()`
+
+### Upfront Funding
 
 ```js
 // Fund the node, give it enough so you can upload a full MG
@@ -31,6 +35,8 @@ try {
 	console.log("Error funding node ", e);
 }
 ```
+
+### Lazy-Funding
 
 You can also lazy-fund a node where you check the cost to upload each file first and then transfer exact funds. This works best with currencies like MATIC, ETH and SOL whose balances post (almost) instantly.
 

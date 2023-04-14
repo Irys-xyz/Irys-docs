@@ -6,7 +6,20 @@ import { Callout } from "nextra-theme-docs";
 
 # Utility Functions
 
-The Bundlr SDK includes utility functions that assist in converting between atomic units standard denominations.
+The Bundlr SDK includes utility functions.
+
+## `bundlr.utils.getReceipt()`
+
+Returns the receipt associated with the supplied transaction id, or an error if no receipt is found.
+
+```js
+const txId = ""; // Your transaction Id
+const receipt = bundlr.utils.getReceipt(txId);
+```
+
+## Currency Conversion
+
+Functions that assist in converting between atomic units standard denominations.
 
 <Callout type="info" emoji="ℹ️">
 	Atomic units refer to the smallest possible unit of a given cryptocurrency. In Ethereum, atomic units are called
@@ -15,7 +28,7 @@ The Bundlr SDK includes utility functions that assist in converting between atom
 	10^9 Lamports.
 </Callout>
 
-## `bundlr.utils.toAtomic()`
+### `bundlr.utils.toAtomic()`
 
 Converts from standard to atomic units.
 
@@ -25,7 +38,7 @@ Example code:
 const fundAmountAtomic = bundlr.utils.toAtomic(fundAmountStandard);
 ```
 
-## `bundlr.utils.fromAtomic()`
+### `bundlr.utils.fromAtomic()`
 
 Converts from atomic to standard units.
 
@@ -35,3 +48,5 @@ Example code:
 const atomicBalance = await bundlr.getLoadedBalance();
 const convertedBalance = bundlr.utils.fromAtomic(atomicBalance).toString();
 ```
+
+##

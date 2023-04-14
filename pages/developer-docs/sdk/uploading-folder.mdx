@@ -12,11 +12,11 @@ The function takes one required parameter pointing to the folder to be uploaded 
 2. batchSize: The number of files to upload at once.
 3. keepDeleted: Whether to keep now deleted items from previous uploads. When you upload a folder, the file names are indexed and saved. If you then re-upload that same folder, Bundlr will only upload new files added since the previous upload. In the case where you delete files from your source directory, this flag tells Bundlr whether to keep those deleted files in the index or remove them.
 
+## `bundlr.uploadFolder()`
+
 ```js
 // Upload an entire folder
-// More llamas for you to upload ... or change to your own files
-// Upload some NFTs, your vacation photos or your band's latest album.
-const folderToUpload = "llama_folder";
+const folderToUpload = ""; // PATH TO FOLDER
 try {
 	const response = await bundlr.uploadFolder("./" + folderToUpload, {
 		indexFile: "", // optional index file (file the user will load when accessing the manifest)
