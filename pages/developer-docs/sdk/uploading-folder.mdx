@@ -1,8 +1,5 @@
 ---
-sidebar_position: 11
-sidebar_label: Uploading A Folder
 description: Uploading entire folders to Bundlr / Arweave.
-slug: /slug/upload-folder
 ---
 
 # Uploading A Folder
@@ -21,15 +18,15 @@ The function takes one required parameter pointing to the folder to be uploaded 
 // Upload some NFTs, your vacation photos or your band's latest album.
 const folderToUpload = "llama_folder";
 try {
-  const response = await bundlr.uploadFolder("./" + folderToUpload, {
-    indexFile: "", // optional index file (file the user will load when accessing the manifest)
-    batchSize: 50, //number of items to upload at once
-    keepDeleted: false, // whether to keep now deleted items from previous uploads
-  }); //returns the manifest ID
+	const response = await bundlr.uploadFolder("./" + folderToUpload, {
+		indexFile: "", // optional index file (file the user will load when accessing the manifest)
+		batchSize: 50, //number of items to upload at once
+		keepDeleted: false, // whether to keep now deleted items from previous uploads
+	}); //returns the manifest ID
 
-  console.log(`Files uploaded. Manifest Id ${response.id}`);
+	console.log(`Files uploaded. Manifest Id ${response.id}`);
 } catch (e) {
-  console.log("Error uploading file ", e);
+	console.log("Error uploading file ", e);
 }
 ```
 

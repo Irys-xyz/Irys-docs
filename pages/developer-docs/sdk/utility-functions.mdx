@@ -1,16 +1,19 @@
 ---
-sidebar_position: 12
-sidebar_label: Utility Functions
 description: Bundlr utility functions
 ---
+
+import { Callout } from "nextra-theme-docs";
 
 # Utility Functions
 
 The Bundlr SDK includes utility functions that assist in converting between atomic units standard denominations.
 
-:::note
-Atomic units refer to the smallest possible unit of a given cryptocurrency. In Ethereum, atomic units are called Wei, and they represent the smallest unit of Ether. Similar to how 1 dollar can be broken down into 100 cents, 1 Ether can be broken down into 10^18 Wei. In Solana, atomic units are called Lamports, 1 SOL can be broken down into 10^9 Lamports.
-:::
+<Callout type="info" emoji="ℹ️">
+	Atomic units refer to the smallest possible unit of a given cryptocurrency. In Ethereum, atomic units are called
+	Wei, and they represent the smallest unit of Ether. Similar to how 1 dollar can be broken down into 100 cents, 1
+	Ether can be broken down into 10^18 Wei. In Solana, atomic units are called Lamports, 1 SOL can be broken down into
+	10^9 Lamports.
+</Callout>
 
 ## `bundlr.utils.toAtomic()`
 
