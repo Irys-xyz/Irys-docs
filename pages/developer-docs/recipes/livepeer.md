@@ -27,17 +27,12 @@ npm @livepeer/react
 
 ## Transcoding A Video Stored On Arweave
 
-Video files can be uploaded to Arweave via Bundlr using our [CLI,](/CLI/installation-setup) [SDK](/sdk/basic-features/) or any of our [web-based uploaders.](https://webbundlr-basics.vercel.app/)
+Video files can be uploaded to Arweave via Bundlr using our [CLI,](/developer-docs/cli/installation) [SDK](/developer-docs/sdk) or any of our [web-based uploaders.](https://demo.bundlr.network/)
 
 Using the `<Player>` tag from the Livepeer SDK you can embed an Arweave URL, the URL format can be either `ar://aqvPK_xi-EDcmAHPAPpDcaYyGekp-06T16ElvNTnJNk` or `https://arweave.net/aqvPK_xi-EDcmAHPAPpDcaYyGekp-06T16ElvNTnJNk`. The first time Livepeer encounters the URL it will transcode the file, the transcoded versions are then stored in an account tied to your API key. Transcoded files are kept for as long as your account is active.
 
 ```js
-<Player
-	title="Bundlr SDK For NodeJs"
-	src="ar://aqvPK_xi-EDcmAHPAPpDcaYyGekp-06T16ElvNTnJNk"
-	autoPlay
-	muted
-/>
+<Player title="Bundlr SDK For NodeJs" src="ar://aqvPK_xi-EDcmAHPAPpDcaYyGekp-06T16ElvNTnJNk" autoPlay muted />
 ```
 
 In order to properly transcode your video, the `<Player>` component must have access to a Livepeer client that contains a valid API key. Best practice is to use the provider pattern and the `<LivepeerConfig>` component.

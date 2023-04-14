@@ -6,7 +6,25 @@ description: Using the Bundlr class to interact with Bundlr from the server
 
 The Bundlr class is your point of entry for connecting to a Bundlr node when doing server-side development using NodeJS.
 
-To use
+To use the `Bundlr` class server-side:
+
+<ol className="list-decimal">
+	<li>1. [Connect to a node](./sdk/connecting-node)</li>
+	<li>2. [Fund the node](./sdk/funding-node)</li>
+	<li>3. [Upload data](./sdk/uploading-data)</li>
+</ol>
+
+```js
+import Bundlr from "@bundlr-network/client";
+const myPrivateKey = ""; // Change to match your private key
+const bundlr = new Bundlr("http://node1.bundlr.network", "matic", myPrivateKey);
+
+const response = await bundlr.fund(amountInAtomicUnits);
+
+const dataToUpload = "Hello world.";
+const response = await bundlr.upload(dataToUpload);
+console.log(`Data uploaded ==> https://arweave.net/${response.id}`);
+```
 
 ## Video Tutorial
 

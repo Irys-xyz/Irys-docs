@@ -11,9 +11,11 @@ Use the `upload` command followed by a file name to upload a file. The CLI will 
 
 Required option flags:
 
--   -h: Node address (eg: https://node1.bundlr.network)
+-   -h: Node address (eg: `https://node1.bundlr.network`)
 -   -w: Name of wallet file on your local system
 -   -c: Currency (eg: arweave)
+
+## `bundlr upload`
 
 ```console
 bundlr upload <file_name> -h <node_address> -w <wallet_file> -c <currency>

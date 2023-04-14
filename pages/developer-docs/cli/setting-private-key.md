@@ -13,6 +13,8 @@ When specifying a non-Arweave private key, you must also specify the currency us
 
 The -w and -c option flags are used in conjunction with the other commands outlined below. They have no utility when used alone and have no effect on global state.
 
+## `bundlr -w`
+
 ```console
 bundlr -w <wallet_file_name> -c <currency>
 bundlr -w myKeyPair.json

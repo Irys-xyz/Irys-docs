@@ -1,7 +1,8 @@
 ---
 description: You'll Learn - How to build React components for common Bundlr functions
 ---
-import { Callout } from 'nextra-theme-docs'
+
+import { Callout } from "nextra-theme-docs";
 
 # Bundlr React Components
 
@@ -49,12 +50,12 @@ Add the paths to all of your template files in your `tailwind.config.js` file.
 /** @type {import('tailwindcss').Config} */
 
 module.exports = {
-  content: ["./src/**/*.{js,jsx,ts,tsx}"],
-  theme: {
-    extend: {},
-  },
+	content: ["./src/**/*.{js,jsx,ts,tsx}"],
+	theme: {
+		extend: {},
+	},
 
-  plugins: [],
+	plugins: [],
 };
 ```
 
@@ -76,17 +77,17 @@ Color is really important to me. One of the first things I do when starting a ne
 
 ```css
 :root {
-  --background: #181818;
-  --primary: #67d4dd;
-  --secondary: #c9fd5c;
-  --text: #ffffff;
-  --errorText: #ff0000;
+	--background: #181818;
+	--primary: #67d4dd;
+	--secondary: #c9fd5c;
+	--text: #ffffff;
+	--errorText: #ff0000;
 }
 
 html {
-  width: 100%;
-  height: 100%;
-  background-color: #181818;
+	width: 100%;
+	height: 100%;
+	background-color: #181818;
 }
 ```
 
@@ -96,20 +97,20 @@ And then modify my `tailwind.config.js` to use those CSS variables.
 /** @type {import('tailwindcss').Config} */
 
 module.exports = {
-  content: ["./src/**/*.{js,jsx,ts,tsx}"],
-  theme: {
-    extend: {
-      colors: {
-        background: "var(--background)",
-        primary: "var(--primary)",
-        secondary: "var(--secondary)",
-        text: "var(--text)",
-        messageText: "var(--errorText)",
-      },
-    },
-  },
+	content: ["./src/**/*.{js,jsx,ts,tsx}"],
+	theme: {
+		extend: {
+			colors: {
+				background: "var(--background)",
+				primary: "var(--primary)",
+				secondary: "var(--secondary)",
+				text: "var(--text)",
+				messageText: "var(--errorText)",
+			},
+		},
+	},
 
-  plugins: [],
+	plugins: [],
 };
 ```
 
@@ -134,53 +135,49 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 import "@rainbow-me/rainbowkit/styles.css";
 
-import {
-  getDefaultWallets,
-  RainbowKitProvider,
-  darkTheme,
-} from "@rainbow-me/rainbowkit";
+import { getDefaultWallets, RainbowKitProvider, darkTheme } from "@rainbow-me/rainbowkit";
 import { chain, configureChains, createClient, WagmiConfig } from "wagmi";
 import { alchemyProvider } from "wagmi/providers/alchemy";
 import { publicProvider } from "wagmi/providers/public";
 
 const { chains, provider } = configureChains(
-  [chain.polygonMumbai],
-  [alchemyProvider({ apiKey: process.env.ALCHEMY_ID }), publicProvider()]
+	[chain.polygonMumbai],
+	[alchemyProvider({ apiKey: process.env.ALCHEMY_ID }), publicProvider()],
 );
 
 const { connectors } = getDefaultWallets({
-  appName: "Bundlr Tools",
-  chains,
+	appName: "Bundlr Tools",
+	chains,
 });
 
 const wagmiClient = createClient({
-  autoConnect: true,
-  connectors,
-  provider,
+	autoConnect: true,
+	connectors,
+	provider,
 });
 
 function App() {
-  return (
-    <WagmiConfig client={wagmiClient}>
-      <RainbowKitProvider
-        chains={chains}
-        theme={darkTheme({
-          accentColor: "var(--primary)",
-          accentColorForeground: "var(--background)",
-          borderRadius: "small",
-          fontStack: "system",
-          overlayBlur: "small",
-        })}
-      >
-        <BrowserRouter>
-          <Routes>
-            <Route path="/" element={<ProgressBarPage />} />
-            <Route path="/progress-bar" element={<ProgressBarPage />} />
-          </Routes>
-        </BrowserRouter>
-      </RainbowKitProvider>
-    </WagmiConfig>
-  );
+	return (
+		<WagmiConfig client={wagmiClient}>
+			<RainbowKitProvider
+				chains={chains}
+				theme={darkTheme({
+					accentColor: "var(--primary)",
+					accentColorForeground: "var(--background)",
+					borderRadius: "small",
+					fontStack: "system",
+					overlayBlur: "small",
+				})}
+			>
+				<BrowserRouter>
+					<Routes>
+						<Route path="/" element={<ProgressBarPage />} />
+						<Route path="/progress-bar" element={<ProgressBarPage />} />
+					</Routes>
+				</BrowserRouter>
+			</RainbowKitProvider>
+		</WagmiConfig>
+	);
 }
 
 export default App;
@@ -192,8 +189,8 @@ This block of code configures the blockchains our application can connect to. Si
 
 ```js
 const { chains, provider } = configureChains(
-  [chain.polygonMumbai],
-  [alchemyProvider({ apiKey: process.env.ALCHEMY_ID }), publicProvider()]
+	[chain.polygonMumbai],
+	[alchemyProvider({ apiKey: process.env.ALCHEMY_ID }), publicProvider()],
 );
 ```
 
@@ -201,13 +198,13 @@ Your entire application needs to be wrapped with `RainbowKitProvider` and `Wagmi
 
 ```js
 const App = () => {
-  return (
-    <WagmiConfig client={wagmiClient}>
-      <RainbowKitProvider chains={chains}>
-        <YourApp />
-      </RainbowKitProvider>
-    </WagmiConfig>
-  );
+	return (
+		<WagmiConfig client={wagmiClient}>
+			<RainbowKitProvider chains={chains}>
+				<YourApp />
+			</RainbowKitProvider>
+		</WagmiConfig>
+	);
 };
 ```
 
@@ -221,7 +218,7 @@ First the components:
 import React from "react";
 
 const FundNode = () => {
-  return <div>FundNode</div>;
+	return <div>FundNode</div>;
 };
 
 export default FundNode;
@@ -233,7 +230,7 @@ export default FundNode;
 import React from "react";
 
 const NodeBalance = () => {
-  return <div>NodeBalance</div>;
+	return <div>NodeBalance</div>;
 };
 
 export default NodeBalance;
@@ -245,7 +242,7 @@ export default NodeBalance;
 import React from "react";
 
 const NormalUploader = () => {
-  return <div>NormalUploader</div>;
+	return <div>NormalUploader</div>;
 };
 
 export default NormalUploader;
@@ -257,7 +254,7 @@ export default NormalUploader;
 import React from "react";
 
 const ProgressBarUploader = () => {
-  return <div>ProgressBarUploader</div>;
+	return <div>ProgressBarUploader</div>;
 };
 
 export default ProgressBarUploader;
@@ -271,7 +268,7 @@ And then the pages
 import React from "react";
 
 const NormalUploaderPage = () => {
-  return <div>NormalUploaderPage</div>;
+	return <div>NormalUploaderPage</div>;
 };
 
 export default NormalUploaderPage;
@@ -283,7 +280,7 @@ export default NormalUploaderPage;
 import React from "react";
 
 const LargeFileUploaderPage = () => {
-  return <div>LargeFileUploaderPage</div>;
+	return <div>LargeFileUploaderPage</div>;
 };
 
 export default LargeFileUploaderPage;
@@ -291,11 +288,11 @@ export default LargeFileUploaderPage;
 
 Ok, cool, cool, cool. You should be good to go at this point. Run `npm run start` from your command line, and marvel at the blank page that shows in your browser.
 
-
 <Callout type="warning" emoji="⚠️">
 Remember, if you get lost, or your code's just not working, you can always check out [the full version in GitHub.](https://github.com/Bundlr-Network/webbundlr-basics)
 
 If you're still stuck, just [Tweet at us](https://twitter.com/BundlrNetwork) or [jump into our Discord](https://discord.gg/bundlr), and we'll give you a hand.
+
 </Callout>
 
 ## Wallet Connect
@@ -317,70 +314,57 @@ import { useProvider, useSigner } from "wagmi";
 import { WebBundlr } from "@bundlr-network/client";
 
 const FundNode = () => {
-  const [fundAmount, setFundAmount] = useState(1);
-  const [fundMessage, setFundMessage] = useState("");
-  const rainbowKitProvider = useProvider();
-  const { data: rainbowKitSigner, isError, isLoading } = useSigner();
+	const [fundAmount, setFundAmount] = useState(1);
+	const [fundMessage, setFundMessage] = useState("");
+	const rainbowKitProvider = useProvider();
+	const { data: rainbowKitSigner, isError, isLoading } = useSigner();
 
-  const fundNode = async () => {
-    if (!rainbowKitSigner) {
-      setFundMessage("Please connect your wallet first.");
-      return;
-    }
-    // use method injection to add the missing function
-    rainbowKitProvider.getSigner = () => rainbowKitSigner;
-    // create a WebBundlr object
-    const bundlr = new WebBundlr(
-      "https://devnet.bundlr.network",
-      "matic",
-      rainbowKitProvider,
-      {
-        providerUrl: "https://rpc-mumbai.matic.today",
-      }
-    );
+	const fundNode = async () => {
+		if (!rainbowKitSigner) {
+			setFundMessage("Please connect your wallet first.");
+			return;
+		}
+		// use method injection to add the missing function
+		rainbowKitProvider.getSigner = () => rainbowKitSigner;
+		// create a WebBundlr object
+		const bundlr = new WebBundlr("https://devnet.bundlr.network", "matic", rainbowKitProvider, {
+			providerUrl: "https://rpc-mumbai.matic.today",
+		});
 
-    await bundlr.ready();
+		await bundlr.ready();
 
-    const fundAmountParsed = new BigNumber(fundAmount).multipliedBy(
-      bundlr.currencyConfig.base[1]
-    );
+		const fundAmountParsed = new BigNumber(fundAmount).multipliedBy(bundlr.currencyConfig.base[1]);
 
-    await bundlr
-      .fund(fundAmountParsed.toString())
-      .then((res) => {
-        setFundMessage("Wallet Funded");
-      })
-      .catch((e) => {
-        console.log(e);
-        setFundMessage("Error While Funding ", e.message);
-      });
-  };
+		await bundlr
+			.fund(fundAmountParsed.toString())
+			.then((res) => {
+				setFundMessage("Wallet Funded");
+			})
+			.catch((e) => {
+				console.log(e);
+				setFundMessage("Error While Funding ", e.message);
+			});
+	};
 
-  return (
-    <div className="px-10 py-5 flex flex-col" id="fund_container">
-      <label
-        className="pr-5block mb-2 text-sm font-medium text-text"
-        for="file_input"
-      >
-        Fund Node
-      </label>
-      <div className="flex flex-row">
-        <input
-          className="rounded w-1/3 pl-3 focus:outline-none text-black"
-          type="number"
-          value={fundAmount}
-          onChange={(e) => setFundAmount(e.target.value)}
-        />
-        <button
-          class="ml-5 bg-primary text-background font-bold py-1 px-3 rounded-lg"
-          onClick={fundNode}
-        >
-          Fund
-        </button>
-      </div>
-      <p className="text-messageText text-sm">{fundMessage}</p>
-    </div>
-  );
+	return (
+		<div className="px-10 py-5 flex flex-col" id="fund_container">
+			<label className="pr-5block mb-2 text-sm font-medium text-text" for="file_input">
+				Fund Node
+			</label>
+			<div className="flex flex-row">
+				<input
+					className="rounded w-1/3 pl-3 focus:outline-none text-black"
+					type="number"
+					value={fundAmount}
+					onChange={(e) => setFundAmount(e.target.value)}
+				/>
+				<button class="ml-5 bg-primary text-background font-bold py-1 px-3 rounded-lg" onClick={fundNode}>
+					Fund
+				</button>
+			</div>
+			<p className="text-messageText text-sm">{fundMessage}</p>
+		</div>
+	);
 };
 export default FundNode;
 ```
@@ -403,7 +387,7 @@ const { data: rainbowKitSigner, isError, isLoading } = useSigner();
 ```
 
 <Callout type="warning" emoji="⚠️">
-The signer object reference will return null if the user has yet to connect their wallet.
+	The signer object reference will return null if the user has yet to connect their wallet.
 </Callout>
 
 ### Funding Step By Step
@@ -418,8 +402,8 @@ Here's what happens:
 
 ```js
 if (!rainbowKitSigner) {
-  setFundMessage("Please connect your wallet first.");
-  return;
+	setFundMessage("Please connect your wallet first.");
+	return;
 }
 ```
 
@@ -432,42 +416,37 @@ rainbowKitProvider.getSigner = () => rainbowKitSigner;
 3. Connect to the Bundlr devnet, specifying that we will be funding using (Mumbai) MATIC.
 
 ```js
-const bundlr = new WebBundlr(
-  "https://devnet.bundlr.network",
-  "matic",
-  rainbowKitProvider,
-  {
-    providerUrl: "https://rpc-mumbai.matic.today",
-  }
-);
+const bundlr = new WebBundlr("https://devnet.bundlr.network", "matic", rainbowKitProvider, {
+	providerUrl: "https://rpc-mumbai.matic.today",
+});
 await bundlr.ready();
 ```
 
 4. Convert our funding amount to atomic units.
 
 ```js
-const fundAmountParsed = new BigNumber(fundAmount).multipliedBy(
-  bundlr.currencyConfig.base[1]
-);
+const fundAmountParsed = new BigNumber(fundAmount).multipliedBy(bundlr.currencyConfig.base[1]);
 ```
 
-
 <Callout type="warning" emoji="⚠️">
-Atomic units refer to the smallest possible unit of a given currency. In Ethereum, atomic units are called Wei, and they represent the smallest unit of Ether. Similar to how 1 dollar can be broken down into 100 cents, 1 Ether can be broken down into 10^18 Wei. In Solana, atomic units are called Lamports, 1 SOL can be broken down into 10^9 Lamports.
+	Atomic units refer to the smallest possible unit of a given currency. In Ethereum, atomic units are called Wei, and
+	they represent the smallest unit of Ether. Similar to how 1 dollar can be broken down into 100 cents, 1 Ether can be
+	broken down into 10^18 Wei. In Solana, atomic units are called Lamports, 1 SOL can be broken down into 10^9
+	Lamports.
 </Callout>
 
 5. Finally, fund the node, and display either a success or failure message.
 
 ```js
 await bundlr
-  .fund(fundAmountParsed.toString())
-  .then((res) => {
-    setFundMessage("Wallet Funded");
-  })
-  .catch((e) => {
-    console.log(e);
-    setFundMessage("Error While Funding ", e.message);
-  });
+	.fund(fundAmountParsed.toString())
+	.then((res) => {
+		setFundMessage("Wallet Funded");
+	})
+	.catch((e) => {
+		console.log(e);
+		setFundMessage("Error While Funding ", e.message);
+	});
 ```
 
 As you can see, the actual funding of the node is just one line of code; the rest is just setup and error checking. Make sure you understand each of the steps. As we dig into the subsequent components, I'll skip over the setup and just dive into the part we're focusing on.
@@ -484,63 +463,53 @@ import { useProvider, useSigner } from "wagmi";
 import { WebBundlr } from "@bundlr-network/client";
 
 const NodeBalance = () => {
-  const [nodeBalance, setNodeBalance] = useState(0);
-  const [balanceMessage, setBalanceMessage] = useState("");
-  const rainbowKitProvider = useProvider();
-  const { data: rainbowKitSigner, isError, isLoading } = useSigner();
+	const [nodeBalance, setNodeBalance] = useState(0);
+	const [balanceMessage, setBalanceMessage] = useState("");
+	const rainbowKitProvider = useProvider();
+	const { data: rainbowKitSigner, isError, isLoading } = useSigner();
 
-  const updateNodeBalance = async () => {
-    if (!rainbowKitSigner) {
-      setBalanceMessage("Please connect your wallet first.");
-      return;
-    }
-    // use method injection to add the missing function
-    rainbowKitProvider.getSigner = () => rainbowKitSigner;
-    const bundlr = new WebBundlr(
-      "https://devnet.bundlr.network",
-      "matic",
-      rainbowKitProvider,
-      {
-        providerUrl: "https://rpc-mumbai.matic.today",
-      }
-    );
+	const updateNodeBalance = async () => {
+		if (!rainbowKitSigner) {
+			setBalanceMessage("Please connect your wallet first.");
+			return;
+		}
+		// use method injection to add the missing function
+		rainbowKitProvider.getSigner = () => rainbowKitSigner;
+		const bundlr = new WebBundlr("https://devnet.bundlr.network", "matic", rainbowKitProvider, {
+			providerUrl: "https://rpc-mumbai.matic.today",
+		});
 
-    const curBalance = await bundlr.getBalance(rainbowKitSigner._address);
-    setNodeBalance(
-      bundlr.utils.unitConverter(curBalance).toFixed(7, 2).toString()
-    );
-    setBalanceMessage("Node balance updated.");
-  };
+		const curBalance = await bundlr.getBalance(rainbowKitSigner._address);
+		setNodeBalance(bundlr.utils.fromAtomic(curBalance).toFixed(7, 2).toString());
+		setBalanceMessage("Node balance updated.");
+	};
 
-  useEffect(() => {
-    updateNodeBalance();
-  }, [rainbowKitSigner]);
+	useEffect(() => {
+		updateNodeBalance();
+	}, [rainbowKitSigner]);
 
-  return (
-    <div className="px-10 py-5 flex flex-col" id="balance_container">
-      <label
-        className="pr-5block mb-2 text-sm font-medium text-text"
-        for="file_input"
-      >
-        Node Balance
-      </label>
-      <div className="flex flex-row">
-        <input
-          className="rounded w-1/3 pl-3 focus:outline-none text-black"
-          type="number"
-          readonly
-          value={nodeBalance}
-        />
-        <button
-          class="ml-5 bg-primary text-background font-bold py-1 px-3 rounded-lg"
-          onClick={updateNodeBalance}
-        >
-          Refresh
-        </button>
-      </div>
-      <p className="text-messageText text-sm">{balanceMessage}</p>
-    </div>
-  );
+	return (
+		<div className="px-10 py-5 flex flex-col" id="balance_container">
+			<label className="pr-5block mb-2 text-sm font-medium text-text" for="file_input">
+				Node Balance
+			</label>
+			<div className="flex flex-row">
+				<input
+					className="rounded w-1/3 pl-3 focus:outline-none text-black"
+					type="number"
+					readonly
+					value={nodeBalance}
+				/>
+				<button
+					class="ml-5 bg-primary text-background font-bold py-1 px-3 rounded-lg"
+					onClick={updateNodeBalance}
+				>
+					Refresh
+				</button>
+			</div>
+			<p className="text-messageText text-sm">{balanceMessage}</p>
+		</div>
+	);
 };
 export default NodeBalance;
 ```
@@ -551,7 +520,7 @@ In line 22, I pass the address of the logged-in wallet (`rainbowKitSigner._addre
 
 ```js
 const curBalance = await bundlr.getBalance(rainbowKitSigner._address);
-setNodeBalance(bundlr.utils.unitConverter(curBalance).toFixed(7, 2).toString());
+setNodeBalance(bundlr.utils.fromAtomic(curBalance).toFixed(7, 2).toString());
 ```
 
 ## Uploading A Normal-Sized File
@@ -569,93 +538,86 @@ import { WebBundlr } from "@bundlr-network/client";
 import fileReaderStream from "filereader-stream";
 
 const NormalUploader = () => {
-  const [message, setMessage] = useState("");
-  const [uploadedURL, setUploadedURL] = useState("");
-  const [fileToUpload, setFileToUpload] = useState();
-  const [fileType, setFileType] = useState();
-  const totalChunks = useRef(0);
+	const [message, setMessage] = useState("");
+	const [uploadedURL, setUploadedURL] = useState("");
+	const [fileToUpload, setFileToUpload] = useState();
+	const [fileType, setFileType] = useState();
+	const totalChunks = useRef(0);
 
-  const rainbowKitProvider = useProvider();
-  const { data: rainbowKitSigner, isError, isLoading } = useSigner();
+	const rainbowKitProvider = useProvider();
+	const { data: rainbowKitSigner, isError, isLoading } = useSigner();
 
-  const handleFile = async (e) => {
-    setMessage("");
-    const newFiles = e.target.files;
-    if (newFiles.length === 0) return;
+	const handleFile = async (e) => {
+		setMessage("");
+		const newFiles = e.target.files;
+		if (newFiles.length === 0) return;
 
-    setFileToUpload(newFiles[0]);
-    setFileType(newFiles[0]["type"]);
-  };
+		setFileToUpload(newFiles[0]);
+		setFileType(newFiles[0]["type"]);
+	};
 
-  const upload = async () => {
-    if (!rainbowKitSigner) {
-      setMessage("Please connect your wallet first.");
-      return;
-    }
-    if (!fileToUpload) {
-      setMessage("Please select a file first.");
-      return;
-    }
-    // use method injection to add the missing function
-    rainbowKitProvider.getSigner = () => rainbowKitSigner;
-    // create a WebBundlr object
-    const bundlr = new WebBundlr(
-      "https://devnet.bundlr.network",
-      "matic",
-      rainbowKitProvider,
-      {
-        providerUrl: "https://matic-mumbai.chainstacklabs.com",
-      }
-    );
+	const upload = async () => {
+		if (!rainbowKitSigner) {
+			setMessage("Please connect your wallet first.");
+			return;
+		}
+		if (!fileToUpload) {
+			setMessage("Please select a file first.");
+			return;
+		}
+		// use method injection to add the missing function
+		rainbowKitProvider.getSigner = () => rainbowKitSigner;
+		// create a WebBundlr object
+		const bundlr = new WebBundlr("https://devnet.bundlr.network", "matic", rainbowKitProvider, {
+			providerUrl: "https://matic-mumbai.chainstacklabs.com",
+		});
 
-    await bundlr.ready();
+		await bundlr.ready();
 
-    try {
-      const dataStream = fileReaderStream(fileToUpload);
-      const tx = await bundlr.upload(dataStream, {
-        tags: [{ name: "Content-Type", value: fileType }],
-      });
+		try {
+			const dataStream = fileReaderStream(fileToUpload);
+			const tx = await bundlr.upload(dataStream, {
+				tags: [{ name: "Content-Type", value: fileType }],
+			});
 
-      console.log(`File uploaded ==> https://arweave.net/${tx.id}`);
-      setMessage(`Upload Success:`);
-      setUploadedURL("https://arweave.net/" + tx.id);
-    } catch (e) {
-      setMessage("Upload error " + e.message);
-      console.log("error on upload, ", e);
-    }
-  };
+			console.log(`File uploaded ==> https://arweave.net/${tx.id}`);
+			setMessage(`Upload Success:`);
+			setUploadedURL("https://arweave.net/" + tx.id);
+		} catch (e) {
+			setMessage("Upload error " + e.message);
+			console.log("error on upload, ", e);
+		}
+	};
 
-  return (
-    <div className="flex flex-col py-5 ml-10">
-      <label className="pr-5 block mb-2 font-bold text-text underline decoration-secondary">
-        Upload file
-      </label>
-      <div className="flex flex-row">
-        <input
-          type="file"
-          onChange={handleFile}
-          className="w-1/3 px-1 py-1 block text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
-          multiple="single"
-          name="files[]"
-        />
-        <button
-          className="ml-5 bg-primary hover:bg-blue-700 text-background font-bold py-1 px-3 rounded-lg"
-          onClick={upload}
-        >
-          Upload
-        </button>
-      </div>
+	return (
+		<div className="flex flex-col py-5 ml-10">
+			<label className="pr-5 block mb-2 font-bold text-text underline decoration-secondary">Upload file</label>
+			<div className="flex flex-row">
+				<input
+					type="file"
+					onChange={handleFile}
+					className="w-1/3 px-1 py-1 block text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
+					multiple="single"
+					name="files[]"
+				/>
+				<button
+					className="ml-5 bg-primary hover:bg-blue-700 text-background font-bold py-1 px-3 rounded-lg"
+					onClick={upload}
+				>
+					Upload
+				</button>
+			</div>
 
-      <p className="text-messageText text-sm">{message}</p>
-      <p className="text-text text-sm">
-        {uploadedURL && (
-          <a className="underline" href={uploadedURL} target="_blank">
-            {uploadedURL}
-          </a>
-        )}
-      </p>
-    </div>
-  );
+			<p className="text-messageText text-sm">{message}</p>
+			<p className="text-text text-sm">
+				{uploadedURL && (
+					<a className="underline" href={uploadedURL} target="_blank">
+						{uploadedURL}
+					</a>
+				)}
+			</p>
+		</div>
+	);
 };
 
 export default NormalUploader;
@@ -674,7 +636,7 @@ Moving down to lines 44-47, this is where the meat of the upload happens. First 
 ```js
 const dataStream = fileReaderStream(fileToUpload);
 const tx = await bundlr.upload(dataStream, {
-  tags: [{ name: "Content-Type", value: fileType }],
+	tags: [{ name: "Content-Type", value: fileType }],
 });
 ```
 
@@ -695,153 +657,140 @@ import { WebBundlr } from "@bundlr-network/client";
 import fileReaderStream from "filereader-stream";
 
 const ProgressBarUploader = () => {
-  const [message, setMessage] = useState("");
-  const [uploadedURL, setUploadedURL] = useState("");
-  const [progress, setProgress] = useState(0);
-  const [fileToUpload, setFileToUpload] = useState();
-  const [fileType, setFileType] = useState();
-  const [fileSize, setFileSize] = useState(0);
-  const totalChunks = useRef(0);
+	const [message, setMessage] = useState("");
+	const [uploadedURL, setUploadedURL] = useState("");
+	const [progress, setProgress] = useState(0);
+	const [fileToUpload, setFileToUpload] = useState();
+	const [fileType, setFileType] = useState();
+	const [fileSize, setFileSize] = useState(0);
+	const totalChunks = useRef(0);
 
-  const rainbowKitProvider = useProvider();
-  const { data: rainbowKitSigner, isError, isLoading } = useSigner();
+	const rainbowKitProvider = useProvider();
+	const { data: rainbowKitSigner, isError, isLoading } = useSigner();
 
-  const handleFile = async (e) => {
-    setMessage("");
-    const newFiles = e.target.files;
-    if (newFiles.length === 0) return;
+	const handleFile = async (e) => {
+		setMessage("");
+		const newFiles = e.target.files;
+		if (newFiles.length === 0) return;
 
-    setFileToUpload(newFiles[0]);
-    setFileType(newFiles[0]["type"]);
-  };
+		setFileToUpload(newFiles[0]);
+		setFileType(newFiles[0]["type"]);
+	};
 
-  const upload = async () => {
-    if (!rainbowKitSigner) {
-      setMessage("Please connect your wallet first.");
-      return;
-    }
-    if (!fileToUpload) {
-      setMessage("Please select a file first.");
-      return;
-    }
-    // Reset the progress bar
-    setProgress(0);
-    // use method injection to add the missing function
-    rainbowKitProvider.getSigner = () => rainbowKitSigner;
-    // create a WebBundlr object
-    const bundlr = new WebBundlr(
-      "https://devnet.bundlr.network",
-      "matic",
-      rainbowKitProvider,
-      {
-        providerUrl: "https://rpc-mumbai.matic.today",
-      }
-    );
+	const upload = async () => {
+		if (!rainbowKitSigner) {
+			setMessage("Please connect your wallet first.");
+			return;
+		}
+		if (!fileToUpload) {
+			setMessage("Please select a file first.");
+			return;
+		}
+		// Reset the progress bar
+		setProgress(0);
+		// use method injection to add the missing function
+		rainbowKitProvider.getSigner = () => rainbowKitSigner;
+		// create a WebBundlr object
+		const bundlr = new WebBundlr("https://devnet.bundlr.network", "matic", rainbowKitProvider, {
+			providerUrl: "https://rpc-mumbai.matic.today",
+		});
 
-    await bundlr.ready();
+		await bundlr.ready();
 
-    const uploader = bundlr.uploader.chunkedUploader;
-    // Change the batch size to 1 to make testing easier (default is 5)
-    uploader.setBatchSize(1);
-    // Change the chunk size to something small to make testing easier (default is 25MB)
-    const chunkSize = 2000000;
-    uploader.setChunkSize(chunkSize);
-    // get a create a streamed reader
-    const dataStream = fileReaderStream(fileToUpload);
-    // save a reference to the file size
-    setFileSize(dataStream.size);
-    // divide the total file size by the size of each chunk we'll upload
-    if (dataStream.size < chunkSize) totalChunks.current = 1;
-    else {
-      totalChunks.current = Math.floor(dataStream.size / chunkSize);
-    }
+		const uploader = bundlr.uploader.chunkedUploader;
+		// Change the batch size to 1 to make testing easier (default is 5)
+		uploader.setBatchSize(1);
+		// Change the chunk size to something small to make testing easier (default is 25MB)
+		const chunkSize = 2000000;
+		uploader.setChunkSize(chunkSize);
+		// get a create a streamed reader
+		const dataStream = fileReaderStream(fileToUpload);
+		// save a reference to the file size
+		setFileSize(dataStream.size);
+		// divide the total file size by the size of each chunk we'll upload
+		if (dataStream.size < chunkSize) totalChunks.current = 1;
+		else {
+			totalChunks.current = Math.floor(dataStream.size / chunkSize);
+		}
 
-    /** Register Event Callbacks */
-    // event callback: called for every chunk uploaded
-    uploader.on("chunkUpload", (chunkInfo) => {
-      console.log(chunkInfo);
-      console.log(
-        `Uploaded Chunk number ${chunkInfo.id}, offset of ${chunkInfo.offset}, size ${chunkInfo.size} Bytes, with a total of ${chunkInfo.totalUploaded} bytes uploaded.`
-      );
+		/** Register Event Callbacks */
+		// event callback: called for every chunk uploaded
+		uploader.on("chunkUpload", (chunkInfo) => {
+			console.log(chunkInfo);
+			console.log(
+				`Uploaded Chunk number ${chunkInfo.id}, offset of ${chunkInfo.offset}, size ${chunkInfo.size} Bytes, with a total of ${chunkInfo.totalUploaded} bytes uploaded.`,
+			);
 
-      const chunkNumber = chunkInfo.id + 1;
-      // update the progress bar based on how much has been uploaded
-      if (chunkNumber >= totalChunks) setProgress(100);
-      else setProgress((chunkNumber / totalChunks.current) * 100);
-    });
+			const chunkNumber = chunkInfo.id + 1;
+			// update the progress bar based on how much has been uploaded
+			if (chunkNumber >= totalChunks) setProgress(100);
+			else setProgress((chunkNumber / totalChunks.current) * 100);
+		});
 
-    // event callback: called if an error happens
-    uploader.on("chunkError", (e) => {
-      console.error(
-        `Error uploading chunk number ${e.id} - ${e.res.statusText}`
-      );
-    });
+		// event callback: called if an error happens
+		uploader.on("chunkError", (e) => {
+			console.error(`Error uploading chunk number ${e.id} - ${e.res.statusText}`);
+		});
 
-    // event callback: called when file is fully uploaded
-    uploader.on("done", (finishRes) => {
-      console.log(`Upload completed with ID ${finishRes.id}`);
-      // set the progress bar to 100
-      setProgress(100);
-    });
+		// event callback: called when file is fully uploaded
+		uploader.on("done", (finishRes) => {
+			console.log(`Upload completed with ID ${finishRes.id}`);
+			// set the progress bar to 100
+			setProgress(100);
+		});
 
-    // upload the file
-    await uploader
-      .uploadData(dataStream, {
-        tags: [{ name: "Content-Type", value: fileType }],
-      })
-      .then((res) => {
-        setMessage(`Upload Success:`);
-        setUploadedURL("https://arweave.net/" + res.data.id);
-      })
-      .catch((e) => {
-        setMessage("Upload error ", e.message);
-        console.log("error on upload, ", e);
-      });
-  };
+		// upload the file
+		await uploader
+			.uploadData(dataStream, {
+				tags: [{ name: "Content-Type", value: fileType }],
+			})
+			.then((res) => {
+				setMessage(`Upload Success:`);
+				setUploadedURL("https://arweave.net/" + res.data.id);
+			})
+			.catch((e) => {
+				setMessage("Upload error ", e.message);
+				console.log("error on upload, ", e);
+			});
+	};
 
-  return (
-    <div className="flex flex-col py-5 ml-10">
-      <label
-        className="block mb-2 text-sm font-medium text-text"
-        for="file_input"
-      >
-        Upload file
-      </label>
-      <div className="flex flex-row">
-        <input
-          type="file"
-          onChange={handleFile}
-          className="w-1/3 px-1 py-1 block text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
-          multiple="single"
-          name="files[]"
-        />
-        <button
-          class="ml-5 bg-primary hover:bg-blue-700 text-background font-bold py-1 px-3 rounded-lg"
-          onClick={upload}
-        >
-          Upload
-        </button>
-      </div>
-      <div
-        class="mt-2 w-2/3 h-6 bg-gray-200 rounded-full dark:bg-gray-700"
-        id="progress_bar_container"
-      >
-        <div
-          class="h-6  bg-blue-600 rounded-full dark:bg-blue-500"
-          style={{ width: progress + "%" }}
-          id="progress_bar"
-        ></div>
-      </div>
-      <p className="text-messageText text-sm">{message}</p>
-      <p className="text-text text-sm">
-        {uploadedURL && (
-          <a className="underline" href={uploadedURL} target="_blank">
-            {uploadedURL}
-          </a>
-        )}
-      </p>
-    </div>
-  );
+	return (
+		<div className="flex flex-col py-5 ml-10">
+			<label className="block mb-2 text-sm font-medium text-text" for="file_input">
+				Upload file
+			</label>
+			<div className="flex flex-row">
+				<input
+					type="file"
+					onChange={handleFile}
+					className="w-1/3 px-1 py-1 block text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
+					multiple="single"
+					name="files[]"
+				/>
+				<button
+					class="ml-5 bg-primary hover:bg-blue-700 text-background font-bold py-1 px-3 rounded-lg"
+					onClick={upload}
+				>
+					Upload
+				</button>
+			</div>
+			<div class="mt-2 w-2/3 h-6 bg-gray-200 rounded-full dark:bg-gray-700" id="progress_bar_container">
+				<div
+					class="h-6  bg-blue-600 rounded-full dark:bg-blue-500"
+					style={{ width: progress + "%" }}
+					id="progress_bar"
+				></div>
+			</div>
+			<p className="text-messageText text-sm">{message}</p>
+			<p className="text-text text-sm">
+				{uploadedURL && (
+					<a className="underline" href={uploadedURL} target="_blank">
+						{uploadedURL}
+					</a>
+				)}
+			</p>
+		</div>
+	);
 };
 
 export default ProgressBarUploader;
@@ -875,29 +824,29 @@ setFileSize(dataStream.size);
 // divide the total file size by the size of each chunk we'll upload
 if (dataStream.size < chunkSize) totalChunks.current = 1;
 else {
-  totalChunks.current = Math.floor(dataStream.size / chunkSize);
+	totalChunks.current = Math.floor(dataStream.size / chunkSize);
 }
 ```
 
 3. Setup event callbacks. Event callbacks are pieces of code that are invoked by the Bundlr node during our upload. There are three event types:
 
-- chunkUpload: Emitted whenever a chunk is uploaded.
-- chunkError: Emitted whenever a chunk upload fails. Due to internal retry logic, these errors can most likely be ignored as long as the upload doesn't error overall.
-- done: Emitted when the upload completes.
+-   chunkUpload: Emitted whenever a chunk is uploaded.
+-   chunkError: Emitted whenever a chunk upload fails. Due to internal retry logic, these errors can most likely be ignored as long as the upload doesn't error overall.
+-   done: Emitted when the upload completes.
 
 The `chunkUpload` event callback is where we track how many chunks have been uploaded and then update our progress bar.
 
 ```js
 uploader.on("chunkUpload", (chunkInfo) => {
-  console.log(chunkInfo);
-  console.log(
-    `Uploaded Chunk number ${chunkInfo.id}, offset of ${chunkInfo.offset}, size ${chunkInfo.size} Bytes, with a total of ${chunkInfo.totalUploaded} bytes uploaded.`
-  );
+	console.log(chunkInfo);
+	console.log(
+		`Uploaded Chunk number ${chunkInfo.id}, offset of ${chunkInfo.offset}, size ${chunkInfo.size} Bytes, with a total of ${chunkInfo.totalUploaded} bytes uploaded.`,
+	);
 
-  const chunkNumber = chunkInfo.id + 1;
-  // update the progress bar based on how much has been uploaded
-  if (chunkNumber >= totalChunks) setProgress(100);
-  else setProgress((chunkNumber / totalChunks.current) * 100);
+	const chunkNumber = chunkInfo.id + 1;
+	// update the progress bar based on how much has been uploaded
+	if (chunkNumber >= totalChunks) setProgress(100);
+	else setProgress((chunkNumber / totalChunks.current) * 100);
 });
 ```
 
@@ -906,9 +855,9 @@ The `done` event callback sets the progress bar to 100%. This is probably a bit 
 ```js
 // event callback: called when file is fully uploaded
 uploader.on("done", (finishRes) => {
-  console.log(`Upload completed with ID ${finishRes.id}`);
-  // set the progress bar to 100
-  setProgress(100);
+	console.log(`Upload completed with ID ${finishRes.id}`);
+	// set the progress bar to 100
+	setProgress(100);
 });
 ```
 
@@ -926,49 +875,46 @@ import NodeBalance from "../components/NodeBalance";
 import { ConnectButton } from "@rainbow-me/rainbowkit";
 
 const NormalUploaderPage = () => {
-  return (
-    <div name="about" className="w-full h-screen bg-background text-text pt-20">
-      <div className="flex flex-col items-start w-full h-full pt-10">
-        <div className="pl-5 w-full">
-          <div className="text-left pb-8">
-            <p className="text-4xl font-bold inline border-b-4 border-secondary">
-              Normal Uploader ...
-            </p>
-            <p className="text-base mt-3 ml-5">
-              Demo of uploading files from the browser using the WebBundlr
-              class. Designed for smaller files, the uploder will block until
-              complete.
-              <br />
-            </p>
-            <ol className="ml-5 mt-5 list-decimal list-inside ">
-              <li>
-                Head on over to the{" "}
-                <a
-                  className="underline decoration-primary"
-                  href="https://mumbaifaucet.com/"
-                  target="_blank"
-                >
-                  Mumbai Faucet.
-                </a>
-              </li>
-              <li>Grab a full (free) Mumbai Matic.</li>
-              <li>Fund a node.</li>
-              <li>Upload a file.</li>
-            </ol>
-          </div>
-        </div>
+	return (
+		<div name="about" className="w-full h-screen bg-background text-text pt-20">
+			<div className="flex flex-col items-start w-full h-full pt-10">
+				<div className="pl-5 w-full">
+					<div className="text-left pb-8">
+						<p className="text-4xl font-bold inline border-b-4 border-secondary">Normal Uploader ...</p>
+						<p className="text-base mt-3 ml-5">
+							Demo of uploading files from the browser using the WebBundlr class. Designed for smaller
+							files, the uploder will block until complete.
+							<br />
+						</p>
+						<ol className="ml-5 mt-5 list-decimal list-inside ">
+							<li>
+								Head on over to the{" "}
+								<a
+									className="underline decoration-primary"
+									href="https://mumbaifaucet.com/"
+									target="_blank"
+								>
+									Mumbai Faucet.
+								</a>
+							</li>
+							<li>Grab a full (free) Mumbai Matic.</li>
+							<li>Fund a node.</li>
+							<li>Upload a file.</li>
+						</ol>
+					</div>
+				</div>
 
-        <div className="pl-5 pr-5 w-full ">
-          <div className="px-10 py-5" id="connect_container">
-            <ConnectButton showBalance={true} />
-          </div>
-          <FundNode />
-          <NodeBalance />
-          <NormalUploader />
-        </div>
-      </div>
-    </div>
-  );
+				<div className="pl-5 pr-5 w-full ">
+					<div className="px-10 py-5" id="connect_container">
+						<ConnectButton showBalance={true} />
+					</div>
+					<FundNode />
+					<NodeBalance />
+					<NormalUploader />
+				</div>
+			</div>
+		</div>
+	);
 };
 export default NormalUploaderPage;
 ```
@@ -983,52 +929,50 @@ import NodeBalance from "../components/NodeBalance";
 import { ConnectButton } from "@rainbow-me/rainbowkit";
 
 const LargeFileUploaderPage = () => {
-  return (
-    <div name="about" className="w-full h-screen bg-background text-text pt-20">
-      <div className="flex flex-col items-start w-full h-full pt-10">
-        <div className="pl-5 w-full">
-          <div className="text-left pb-8">
-            <p className="text-4xl font-bold inline border-b-4 border-secondary">
-              Lage File Uploader ...
-            </p>
-            <p className="text-base mt-3 ml-5">
-              Demo of using the chunked uploader to upload a large file. <br />
-              We also have <a
-                className="underline decoration-primary"
-                href="https://docs.bundlr.network/tutorials/WebBundlr-ProgressBars"
-              >
-                a tutorial
-              </a> teaching how to create these components.
-            </p>
-            <ol className="ml-5 mt-5 list-decimal list-inside ">
-              <li>
-                Head on over to the{" "}
-                <a
-                  className="underline decoration-primary"
-                  href="https://mumbaifaucet.com/"
-                  target="_blank"
-                >
-                  Mumbai Faucet.
-                </a>
-              </li>
-              <li>Grab a full (free) Mumbai Matic.</li>
-              <li>Fund a node.</li>
-              <li>Upload a large file.</li>
-            </ol>
-          </div>
-        </div>
+	return (
+		<div name="about" className="w-full h-screen bg-background text-text pt-20">
+			<div className="flex flex-col items-start w-full h-full pt-10">
+				<div className="pl-5 w-full">
+					<div className="text-left pb-8">
+						<p className="text-4xl font-bold inline border-b-4 border-secondary">Lage File Uploader ...</p>
+						<p className="text-base mt-3 ml-5">
+							Demo of using the chunked uploader to upload a large file. <br />
+							We also have <a
+								className="underline decoration-primary"
+								href="https://docs.bundlr.network/tutorials/WebBundlr-ProgressBars"
+							>
+								a tutorial
+							</a> teaching how to create these components.
+						</p>
+						<ol className="ml-5 mt-5 list-decimal list-inside ">
+							<li>
+								Head on over to the{" "}
+								<a
+									className="underline decoration-primary"
+									href="https://mumbaifaucet.com/"
+									target="_blank"
+								>
+									Mumbai Faucet.
+								</a>
+							</li>
+							<li>Grab a full (free) Mumbai Matic.</li>
+							<li>Fund a node.</li>
+							<li>Upload a large file.</li>
+						</ol>
+					</div>
+				</div>
 
-        <div className="pl-5 pr-5 w-full ">
-          <div className="px-10 py-5" id="connect_container">
-            <ConnectButton showBalance={true} />
-          </div>
-          <FundNode />
-          <NodeBalance />
-          <ProgressBarUploader />
-        </div>
-      </div>
-    </div>
-  );
+				<div className="pl-5 pr-5 w-full ">
+					<div className="px-10 py-5" id="connect_container">
+						<ConnectButton showBalance={true} />
+					</div>
+					<FundNode />
+					<NodeBalance />
+					<ProgressBarUploader />
+				</div>
+			</div>
+		</div>
+	);
 };
 export default LargeFileUploaderPage;
 ```

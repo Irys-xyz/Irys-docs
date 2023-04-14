@@ -6,9 +6,11 @@ import { Callout } from "nextra-theme-docs";
 
 # Funding A Node
 
-The function `bundlr.fund(amountInAtomicUnits)` funds the specified node using the wallet you linked when creating the Bundlr object. When working with WebBundlr in the browser, the end user’s private key is automatically linked using their wallet software using injected providers.
+## `bundlr.fund()`
 
-Bundlr supports both upfront funding, sending over enough funds to cover all of a project’s uploads, and lazy funding where you fund per upload.
+Funds the node with the specified amount of tokens.
+
+Funds the node using the wallet linked when creating the Bundlr object. When working with WebBundlr in the browser, the end user’s private key is automatically linked using their wallet software using injected providers.
 
 Fund the node you intend to upload to, funded balances are not shared between nodes.
 
@@ -16,9 +18,9 @@ Fund the node you intend to upload to, funded balances are not shared between no
 Not all calls to `bundlr.fund()` will post immediately to your account, some blockchains are faster than others. When funding with AR, it can take upwards of 40 minutes before the balance shows up. For MATIC, ETH and SOL, balances will usually post in < 10s.
 </Callout>
 
-## `bundlr.fund()`
-
 ### Upfront Funding
+
+You can up-front fund a node, where you send over enough funds to cover all of a project’s uploads.
 
 ```js
 // Fund the node, give it enough so you can upload a full MG

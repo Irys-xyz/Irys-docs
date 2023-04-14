@@ -11,9 +11,11 @@ Use the `upload-dir` command followed by a file name to upload a directory. The 
 
 Required option flags:
 
-- -h: Node address (eg: https://node1.bundlr.network)
-- -w: Name of wallet file on your local system
-- -c: Currency (eg: arweave)
+-   -h: Node address (eg: `https://node1.bundlr.network`)
+-   -w: Name of wallet file on your local system
+-   -c: Currency (eg: arweave)
+
+## `bundlr upload-dir`
 
 ```console
 bundlr upload-dir <directory_name> -h <node_address> -w <wallet_file> -c <currency>

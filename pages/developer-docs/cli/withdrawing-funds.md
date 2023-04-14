@@ -11,9 +11,11 @@ Use the `withdraw` command followed by a withdrawal amount in atomic units to wi
 
 Required option flags:
 
--   -h: Node address (eg: https://node1.bundlr.network)
+-   -h: Node address (eg: `https://node1.bundlr.network`)
 -   -w: Name of wallet file on your local system
 -   -c: Currency (eg: arweave)
+
+## `bundlr withdraw`
 
 ```console
 bundlr withdraw <amount_in_atomic_units> -h <node_address> -w <wallet_file> -c <currency>

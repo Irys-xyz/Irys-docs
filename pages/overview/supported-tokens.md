@@ -40,4 +40,4 @@ const bundlr = new Bundlr(“https://node2.bundlr.network”, “matic”, “<m
 await bundlr.upload(“Hello world”);
 ```
 
-You can also use our [devnet](/sdk/using-devnet) with free devnet currencies available from public faucets.
+You can also use our [devnet](/developer-docs/using-devnet) with free devnet currencies available from public faucets.

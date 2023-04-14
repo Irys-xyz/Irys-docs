@@ -4,9 +4,11 @@ description: Withdrawing excess funded balance.
 
 # Withdrawing Funds
 
-Funds deposited into a node can be easily withdrawn at any time. The function `bundlr.withdrawBalance(amountInAtomicUnits)` accepts an amount (in atomic units) to withdraw and returns a response object that includes transaction id, requested amount, network fees, and final cost.
+Funds deposited into a node can be easily withdrawn at any time.
 
 ## `bundlr.withdrawBalance()`
+
+Withdraws the supplied amount and returns a response object that includes transaction id, requested amount, network fees, and final cost. The parameter value must in atomic units.
 
 The code below checks the funded balance and then withdraws it all.
 
