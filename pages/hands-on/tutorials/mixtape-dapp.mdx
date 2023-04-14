@@ -2,7 +2,7 @@
 description: You'll Learn - How to build a full dApp using React, Bundlr, Alchemy NFT API
 ---
 
-import { Callout } from 'nextra-theme-docs'
+import { Callout } from "nextra-theme-docs";
 
 # Build A 90s Style Mixtape dApp
 
@@ -54,7 +54,7 @@ Install the Bundlr library, ethers verison 5, the Audius SDK and react-router-do
 npm install @bundlr-network/client ethers@5 @audius/sdk react-router-dom
 ```
 
-From here, you'll need to further configure your project to make `create-react-app` work with the Bundlr SDK, since we do this with most of our tutorials, [I've abstracted out the steps here](/recipes/bundlr-react). Go follow those steps, then come back here.
+From here, you'll need to further configure your project to make `create-react-app` work with the Bundlr SDK, since we do this with most of our tutorials, [I've abstracted out the steps here](/developer-docs/recipes/react). Go follow those steps, then come back here.
 
 ### Tailwind
 
@@ -281,7 +281,9 @@ For the mixtape image, I took the cassette tape graphic on that page of 90s vect
 Here's the full html for the template, I'm not going to dig into it line by line as the focus of this tutorial is on using Bundlr and not on HTML and CSS. As you do look at the code though, pay attention to lines 158, 197 and 204 where we set the template up.
 
 <Callout type="info" emoji="ℹ️">
-I'll be the first to admit that I'm no CSS guru. I had an idea for what I wanted the mixtape to look like, but had to Google around to figure out the right CSS. I've credited original authors in the comments in case you want to dig in a bit deeper.
+	I'll be the first to admit that I'm no CSS guru. I had an idea for what I wanted the mixtape to look like, but had
+	to Google around to figure out the right CSS. I've credited original authors in the comments in case you want to dig
+	in a bit deeper.
 </Callout>
 
 ```html {158,197,204} showLineNumbers
@@ -537,7 +539,7 @@ npm i -g @bundlr-network/client
 sudo npm i -g @bundlr-network/client
 ```
 
-Create a file in the same parent directory called `privateKey.json` containing a private key for a wallet you've funded with a small amount of cryptocurrency. You can use [any of the currencies](/sdk/using-other-currencies) we support, in my example I'll be using Arweave.
+Create a file in the same parent directory called `privateKey.json` containing a private key for a wallet you've funded with a small amount of cryptocurrency. You can use [any of the currencies](/overview/supported-tokens) we support, in my example I'll be using Arweave.
 
 Then (again from the parent directory) run the following command.
 
@@ -1493,7 +1495,7 @@ let templateDataText = await templateDataFull.text();
 
 And inject our mixtape title, track data and image (replacing the tags `||TITLE||`, `||TRACKS||`, `||IMAGE||`).
 
-Next up, use function injection to [modity the RainbowKit Provider](/recipes/bundlr-rainbowkit) to work with Bundlr and connect to a Bundlr node. For our app we're connecting to the Bundlr Devnet, I left in a commented out line showing how to connect to the production node though.
+Next up, use function injection to [modify the RainbowKit Provider](/developer-docs/recipes/rainbowkit) to work with Bundlr and connect to a Bundlr node. For our app we're connecting to the Bundlr Devnet, I left in a commented out line showing how to connect to the production node though.
 
 ```js
 // use function injection to make the RainbowKit provider work with Bundlr
@@ -1505,7 +1507,7 @@ const bundlr = new WebBundlr("https://devnet.bundlr.network", "matic", rainbowKi
 await bundlr.ready();
 ```
 
-When uploading using the `WebBundlr` class, you can either [call `bundlr.upload()` directly](../03-sdk/05-bundlr-in-the-browser.md) and do the upload in a single step, or break down the transaction into smaller pieces for more fine-grained control. For this example, I've decided to break things down into separate steps as it helps with the lazy-funding process.
+When uploading using the `WebBundlr` class, you can either call `bundlr.upload()` directly and do the upload in a single step, or break down the transaction into smaller pieces for more fine-grained control. For this example, I've decided to break things down into separate steps as it helps with the lazy-funding process.
 
 When funding a node with Bundlr, you have two funding options:
 

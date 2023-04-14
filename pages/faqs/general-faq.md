@@ -25,7 +25,7 @@ Bundlr is solving the data integrity challenge by making permanent decentralized
 
 ## How does Bundlr work?
 
-Please check out [the Bundlr docs](https://docs.bundlr.network/docs/overview) to get a deeper understanding of how Bundlr works.
+Please check out [the Bundlr docs](https://docs.bundlr.network/) to get a deeper understanding of how Bundlr works.
 
 ## What is a bundle?
 
@@ -45,7 +45,7 @@ Bundles do not have a size limit.
 
 ## How can I use Bundlr?
 
-You can use [Bundlr via Nodejs on the server](https://docs.bundlr.network/tutorials/bundlr-nodejs) or [directly in the browser.](https://docs.bundlr.network/tutorials/file-uploader) View more on how to use Bundlr [in the CLI section.](https://docs.bundlr.network/CLI/installation-setup)
+You can use [Bundlr via Nodejs on the server](/developer-docs/sdk/bundlr-server-side) or [directly in the browser.](/developer-docs/sdk/bundlr-in-the-browser) View more on how to use Bundlr [in the CLI section.](/developer-docs/cli/installation)
 
 ## How long does it take to upload data on Bundlr?
 
@@ -80,7 +80,7 @@ We do not have a public token yet. Anyone claiming a presale, token airdrop, etc
 
 ## What currencies does Bundlr support?
 
-Please [view all supported currencies here.](https://docs.bundlr.network/sdk/using-other-currencies)
+Please [view all supported currencies here.](/overview/supported-tokens)
 
 ## Does Bundlr offer free uploads?
 
@@ -111,7 +111,7 @@ Example: Funding with Arweave takes ~20 minutes to show up, whereas funding with
 
 ## How does the fee function work on Bundlr?
 
-Please check out [the fee function here.](https://docs.bundlr.network/learn/fees)
+Please check out [the fee function here.](/overview/fees)
 
 ## Is there a calculator for Arweave fees?
 
