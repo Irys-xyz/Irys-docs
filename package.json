@@ -6,7 +6,7 @@
   "license": "MIT",
   "scripts": {
     "dev": "next dev",
-    "build": "next build"
+    "build": "next build && next export"
   },
   "dependencies": {
     "@fontsource/roboto-mono": "^4.5.10",
