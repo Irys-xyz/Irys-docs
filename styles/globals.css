@@ -3,17 +3,29 @@
 @tailwind utilities;
 
 body {
-    font-family: 'FKDisplay', sans-serif;
-    line-height: 1.5;
+  font-family: "FKDisplay", sans-serif;
+  line-height: 1.5;
 }
 
 p {
-    @apply font-robotoMono !leading-loose;
+  @apply font-robotoMono !leading-loose;
+}
+
+ol > li {
+  @apply font-robotoMono !leading-loose;
+}
+
+nav > a > span {
+  @apply font-bold;
+}
+
+.nx-flex.nx-flex-col.nx-gap-1.max-md:nx-hidden{
+    display: none;
 }
 
 @font-face {
-    font-family: 'FKDisplay';
-    src: url('/fonts/fkd.ttf') format('truetype');
-    font-weight: 400;
-    font-style: normal;
-  }
+  font-family: "FKDisplay";
+  src: url("/fonts/fkd.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+}

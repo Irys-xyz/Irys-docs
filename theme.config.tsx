@@ -30,7 +30,7 @@ export default {
   banner: {
     key: '2.0-release',
     text: <a href="https://medium.com/bundlr-network" target="_blank">
-      🎉 New docs released. Read more →
+      🎉 Bundlr 0.11.0 SDK Released. Read more →
     </a>,
   },
   useNextSeoProps() {
