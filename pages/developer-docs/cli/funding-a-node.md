@@ -11,9 +11,11 @@ Use the `fund` command followed by a funding amount in atomic units to transfer 
 
 Required option flags:
 
--   -h: Node address (eg: https://node1.bundlr.network)
+-   -h: Node address (eg: `https://node1.bundlr.network`)
 -   -w: Name of wallet file on your local system
 -   -c: Currency (eg: arweave)
+
+## `bundlr fund`
 
 ```console
 bundlr fund <amount_in_atomic_units> -h <node_address> -w <wallet_file> -c <currency>

@@ -6,11 +6,9 @@ import { Callout } from "nextra-theme-docs";
 
 # Uploading Data
 
-The function `bundlr.upload(data)` uploads any arbitrary data passed to it. The transaction id returned as part of the response is used to download the data, create a URL the format `https://arweave.net/[transaction_id]`.
+## `bundlr.upload()`
 
-<Callout type="info" emoji="ℹ️">
-	For more information on how uploads are timestamped, please see [Proof Of Provenance](/learn/proof-of-provenance).
-</Callout>
+Uploads any data passed to it. The transaction id returned as part of the response is used to download the data using an URL with the format `https://arweave.net/[transaction_id]`
 
 ```js
 // Upload data
@@ -22,3 +20,7 @@ try {
 	console.log("Error uploading file ", e);
 }
 ```
+
+<Callout type="info" emoji="ℹ️">
+	For more information on how uploads are timestamped, please see [Proof Of Provenance](/learn/proof-of-provenance).
+</Callout>

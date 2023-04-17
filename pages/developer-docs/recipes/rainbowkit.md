@@ -9,7 +9,7 @@ slug: /recipes/rainbow-kit
 
 There is a small bit of massaging needed to get Bundlr and RainbowKit to work together properly.
 
-If you prefer to learn with a tutorial, we have [this one](/tutorials/file-uploader) on building a web app using React, RainbowKit and Bundlr.
+If you prefer to learn with a tutorial, we have [this one](/hands-on/tutorials/react-components) on building a web app using React, RainbowKit and Bundlr.
 
 When using WebBundlr without RainbowKit, the following code is used
 

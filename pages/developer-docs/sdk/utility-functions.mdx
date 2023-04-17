@@ -1,1 +1,52 @@
-TODO
+---
+description: Bundlr utility functions
+---
+
+import { Callout } from "nextra-theme-docs";
+
+# Utility Functions
+
+The Bundlr SDK includes utility functions.
+
+## `bundlr.utils.getReceipt()`
+
+Returns the receipt associated with the supplied transaction id, or an error if no receipt is found.
+
+```js
+const txId = ""; // Your transaction Id
+const receipt = bundlr.utils.getReceipt(txId);
+```
+
+## Currency Conversion
+
+Functions that assist in converting between atomic units standard denominations.
+
+<Callout type="info" emoji="ℹ️">
+	Atomic units refer to the smallest possible unit of a given cryptocurrency. In Ethereum, atomic units are called
+	Wei, and they represent the smallest unit of Ether. Similar to how 1 dollar can be broken down into 100 cents, 1
+	Ether can be broken down into 10^18 Wei. In Solana, atomic units are called Lamports, 1 SOL can be broken down into
+	10^9 Lamports.
+</Callout>
+
+### `bundlr.utils.toAtomic()`
+
+Converts from standard to atomic units.
+
+Example code:
+
+```js
+const fundAmountAtomic = bundlr.utils.toAtomic(fundAmountStandard);
+```
+
+### `bundlr.utils.fromAtomic()`
+
+Converts from atomic to standard units.
+
+Example code:
+
+```js
+const atomicBalance = await bundlr.getLoadedBalance();
+const convertedBalance = bundlr.utils.fromAtomic(atomicBalance).toString();
+```
+
+##

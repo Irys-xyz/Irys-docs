@@ -1,10 +1,10 @@
 {
-	"overview": "Overview",
-	"use-cases": "Use Cases",
-	"developer-docs": "Developer Docs",
-	"hands-on": "Hands On",
-	"learn": "Comprehensive Resources",
-	"terminology": "Terminology",
+	"overview": "OVERVIEW",
+	"use-cases": "USE CASES",
+	"developer-docs": "DEVELOPER DOCS",
+	"hands-on": "HANDS ON",
+	"learn": "COMPREHENSIVE RESOURCES",
+	"terminology": "TERMINOLOGY",
 	"faqs": "FAQs",
 	"twitter": {
 		"title": "Twitter",
@@ -19,7 +19,7 @@
 		"type": "page"
 	},
 	"Youtube": {
-		"title": "Youtube",
+		"title": "YouTube",
 		"href": "https://www.youtube.com/@bundlr-network",
 		"newWindow": true,
 		"type": "page"

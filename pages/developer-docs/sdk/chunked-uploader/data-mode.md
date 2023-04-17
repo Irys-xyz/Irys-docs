@@ -13,6 +13,8 @@ Within data mode, you can either upload using:
 A buffer containing the data you want to upload.
 A readable stream pointing to the data you want to upload.
 
+## `uploader.uploadData()`
+
 ```js
 // The uploader has two modes of operation, data mode and transaction mode.
 // When using data mode, do not create a transaction, this will be done

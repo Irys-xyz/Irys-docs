@@ -15,6 +15,8 @@ To resume an upload from a new uploader instance, you must use the same:
 -   Input data.
 -   Configured chunk size.
 
+## `uploader.pause()` and `uploader.resume()`
+
 ```js
 // When uploading smaller files, it's common to use they await keyword before
 // uploadData() or uploadTransaction(). This causes execution to pause until the file

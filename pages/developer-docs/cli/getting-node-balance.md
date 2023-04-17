@@ -11,8 +11,10 @@ Use the `balance` command followed by a wallet address to get the amount funded 
 
 Required option flags:
 
--   -h: Node address (eg: https://node1.bundlr.network)
+-   -h: Node address (eg: `https://node1.bundlr.network`)
 -   -c: Currency (eg: arweave, ethereum, matic, solana)
+
+## `bundlr balance`
 
 ```console
 bundlr balance <address> -h <node_address> -c <currency>

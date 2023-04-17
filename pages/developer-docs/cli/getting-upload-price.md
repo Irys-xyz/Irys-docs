@@ -11,8 +11,10 @@ Use the `price` command to query the price to upload a n bytes to a given node.
 
 Required option flags:
 
--   -h: Node address (eg: https://node1.bundlr.network)
+-   -h: Node address (eg: `https://node1.bundlr.network`)
 -   -c: Currency (eg: arweave)
+
+## `bundlr price`
 
 ```console
 bundlr price <num_bytes> -h <node_address> -c <currency>

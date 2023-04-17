@@ -6,6 +6,8 @@ description: Changing batch and chunk size.
 
 # Setting Upload Parameters
 
+## `setBatchSize()` and `uploader.setUploadSize()`
+
 The default batch size (number of chunks to upload at once) is 5, the default chunk size (maximum chunk size) is 25MB. These values can be changed using the functions `uploader.setBatchSize(size)` and `uploader.setUploadSize(size)`.
 
 ```js

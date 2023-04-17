@@ -21,7 +21,7 @@ Memory: 8GB RAM
 ## Which wallet should I use for participating in the testnet?
 
 Arweave.app
-Here is [a tutorial on how to get an Arweave wallet](/tutorials/get-arweave-wallet)
+Here is [a tutorial on how to get an Arweave wallet](/hands-on/tutorials/arweave-wallet)
 
 ## I have generated a wallet via cargo, how can I see the address?
 
