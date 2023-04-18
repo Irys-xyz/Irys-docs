@@ -54,18 +54,21 @@ const NotFound = (props: Props) => {
                 </header>
                 <div className="grid grid-cols-4 gap-4">
                     {Object.keys(MainCategories).map((category) => {
+                        // @ts-ignore
                         if (typeof MainCategories[category] !== "string") return;
                         return (
                             <div>
+                                {/* @ts-ignore */}
                                 <div>{MainCategories[category]}</div>
-                                {metaData[category] &&
-                                    Object.keys(metaData[category]).map((subCategory) => {
-                                        return (
-                                            <Link href={`/${category}/${subCategory}`}>
-                                                <p>{metaData[category][subCategory]}</p>
-                                            </Link>
-                                        );
-                                    })}
+                                {/* @ts-ignore */}
+                                {metaData[category] && Object.keys(metaData[category]).map((subCategory) => {
+                                    return (
+                                        <Link href={`/${category}/${subCategory}`}>
+                                            {/* @ts-ignore */}
+                                            <p>{metaData[category][subCategory]}</p>
+                                        </Link>
+                                    );
+                                })}
                             </div>
                         );
                     })}
