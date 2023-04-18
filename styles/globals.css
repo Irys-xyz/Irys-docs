@@ -29,3 +29,39 @@ nav > a > span {
   font-weight: 400;
   font-style: normal;
 }
+
+.communityShadow {
+  box-shadow: 1px 1px 0px rgba(255, 255, 255, 0.5);
+  transition: box-shadow 0.2s ease;
+}
+
+.communityShadow:hover {
+  box-shadow: -1px -1px 0px rgba(255, 255, 255, 0.5);
+}
+
+
+details > summary {
+  list-style: none;
+}
+
+details > summary::marker, /* Latest Chrome, Edge, Firefox */ 
+details > summary::-webkit-details-marker /* Safari */ {
+  display: none;
+}
+
+details summary svg:nth-child(2) {
+  display: none;
+}
+
+details[open] summary svg:nth-child(2) {
+  display: block;
+}
+
+details[open] summary svg:nth-child(1) {
+  display: none;
+}
+
+
+details[open] summary ~ * {
+  animation: ease-opacity-t-b 0.5s ease;
+}
