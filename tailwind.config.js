@@ -8,6 +8,7 @@ module.exports = {
     extend: {
       fontFamily: {
         robotoMono: ["Roboto Mono", "monospace"],
+        fkDisplay: ["FKDisplay", "sans-serif"],
       },
       colors: {
         timberwolf: "#D8CFCA",
