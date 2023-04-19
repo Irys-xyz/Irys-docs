@@ -1,6 +1,7 @@
 # Developer Quests
 
-Welcome to Bundlr Developer Quests, where you can join a global community of over 40,000 developers who are building on Bundlr. As you complete each quest, you'll earn a unique NFT and gain valuable skills to level up your development game.
+Join a global community of over 40,000 developers building on Bundlr.
+Earn unique NFTs for each quest you complete!
 
 ## >\_ Quest 1:
 

@@ -5,7 +5,7 @@ description: Technical terms you'll need to know to understand Bundlr
 
 # Terminology
 
-[Bundle](/terminology#bundle) | [Bundlr](/terminology#bundler) | [Client](/terminology#client) | [Deep Hash](/terminology#deep-hash) | [Gateways](/terminology#gateways) | [Transaction](/terminology#transaction) | [Transaction Receipt](/terminology#transaction-receipt) | [Validator](/terminology#validator)
+[Bundle](/terminology#bundle) | [Bundlr](/terminology#bundler) | [Deep Hash](/terminology#deep-hash) | [Gateways](/terminology#gateways) | [Transaction](/terminology#transaction) | [Transaction Receipt](/terminology#transaction-receipt) | [Validator](/terminology#validator)
 
 ## Bundle
 
@@ -14,10 +14,6 @@ A set of Bundlr transactions joined into a single Arweave transaction.
 ## Bundler
 
 A bundler is a node on Bundlr that receives Bundlr transactions, handles payment channels and produces bundles.
-
-## Client
-
-The client is a lightweight API layer that supports Bundlr transaction creation and allows applications to communicate with Bundlr via simple HTTP APIs.
 
 ## Deep Hash
 
