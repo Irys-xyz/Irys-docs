@@ -1,8 +1,5 @@
 ---
-sidebar_position: 6
-title: Bundlr Transaction Lifecycle
 description: Understand each step of the process as a transaction is processed by Bundlr.
-slug: /learn/transaction-lifecycle
 ---
 
 # Bundlr Transaction Lifecycle / Permanent Storage
@@ -17,9 +14,10 @@ Arweave currently uses its 2.0 transactions format, which includes an id, a sign
 
 In the current 2.6 Arweave version, miners submit the smaller header information first, and then they seed the actual data to their peers afterward. To incentivize miners to store as much data as possible, Arweave operates under a protocol called [Succinct Proof of Random Access (SPoRA)](https://www.youtube.com/watch?v=sIccEJTVHXg) where miners need to prove they have access to a random piece of historical data. The more data a miner stores, the greater the number of mining rewards they can earn. Miners have the option of how much data to store, and while there are storage costs associated with storing the full dataset, storing data is also the path to earning more mining rewards.
 
-![](/img/learn/ar26.png)
+<img src="/img/learn/ar26.png" width="60%" />
 
-After submitting your transaction header to Arweave, Bundlr continually monitors the submission, if finality is not achieved, the transaction is automatically resubmitted.
+After submitting your transaction header to Arweave, Bundlr continually monitors the submission, if finality is not achieved,
+the transaction is automatically resubmitted.
 
 In addition to submitting the transaction header, Bundlr also submits your data to a network of miners. In general, your data is submitted to a minimum of 10 miners and is guaranteed to be seeded to a minimum of 3 miners.
 
@@ -27,4 +25,4 @@ Bundlr decides which miners to seed your data to based on our internal reliabili
 
 Our **praise and punish** reputation system has an additional added benefit of helping responsible miners earn greater rewards. Responsible behavior leads to a higher reputation score, a higher score means we seed data directly to them, which means they’re able to supply the recall block quicker, which in turn means they’re able to complete the block quicker and earn greater rewards.
 
-![](/img/learn/praise-punish.png)
+<img src="/img/learn/praise-punish.png" width="60%" />
