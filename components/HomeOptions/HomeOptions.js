@@ -51,13 +51,13 @@ const DocsMenu = () => {
       icon: <MdTimeline size={35} />,
       title: "Proof Of Provenance",
       description: "Build irrefutable provenance chains.",
-      link: "/learn/proof-of-provenance",
+      link: "/overview/solutions/proof-of-provenance",
     },
     {
       icon: <FaQuestion size={35} />,
       title: "FAQs",
       description: "Get all your questions answered with our FAQs.",
-      link: "/FAQs/general-faq",
+      link: "/faqs/general-faq",
     },
   ];
 
@@ -67,20 +67,20 @@ const DocsMenu = () => {
       title: "SDK",
       description:
         "Start storing data permanently on Arweave with our SDK for JavaScript and TypeScript.",
-      link: "/sdk/basic-features",
+      link: "/developer-docs/sdk",
     },
     {
       icon: <BsCode size={35} />,
       title: "WebBundlr",
       description:
         "Build web-based dApps that store data on Arweave using our WebBundlr object.",
-      link: "/sdk/bundlr-in-the-browser",
+      link: "/developer-docs/sdk/bundlr-in-the-browser",
     },
     {
       icon: <HiOutlineCommandLine size={35} />,
       title: "CLI",
       description: "Start uploading data permanently directly from your CLI.",
-      link: "/CLI/installation-setup",
+      link: "/developer-docs/cli/installation",
     },
   ];
 
@@ -89,13 +89,13 @@ const DocsMenu = () => {
       title: "Recipes",
       description:
         "Learn how to quickly integrate Bundlr with your favorite tools and platforms.",
-      link: "/recipes/bundlr-react",
+      link: "/hands-on/tutorials",
     },
     {
       title: "Tutorials",
       description:
         "Build fun projects as you learn how to use Bundlr on the server and in the browser.",
-      link: "/recipes/bundlr-react",
+      link: "/hands-on/tutorials",
     },
   ];
 
