@@ -1,8 +1,27 @@
-import Footer from "./components/Footer/Footer.js";
+import Footer from "./components/Footer";
 import { useConfig } from "nextra-theme-docs";
 import { useRouter } from "next/router";
 
 export default {
+  nextThemes: {
+    defaultTheme: 'dark'
+  },
+  themeSwitch: {
+    useOptions() {
+      return {
+        dark: 'Dark',
+      }
+    }
+  },
+  editLink: {
+    component: () => null
+  },
+  feedback: {
+    content: () => null
+  },
+  sidebar: {
+    toggleButton: true,
+  },
   logo: (
     <svg
       xmlns="http://www.w3.org/2000/svg"

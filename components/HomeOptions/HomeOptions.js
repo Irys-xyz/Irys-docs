@@ -24,7 +24,7 @@ const SquareItem = (item) => {
   return (
     <a
       href={item.link}
-      className="w-full flex flex-col items-center justify-center gap-4 rounded-3xl bg-smoky py-11 text-2xl font-light text-white communityShadow bg-[#0f0f0f] hover:no-underline hover:text-white"
+      className="w-full flex flex-col items-center justify-center gap-4 rounded-3xl py-11 text-2xl font-light text-white communityShadow hover:no-underline hover:text-white"
     >
       <div className="font-bold text-center">{item.title}</div>
       <p className="text-base text-center max-w-sm">{item.description}</p>
@@ -39,7 +39,7 @@ const DocsMenu = () => {
       title: "What Is Bundlr",
       description:
         "Learn the problems we solve, where we came from, and where we're going.",
-      link: "/overview",
+      link: "/overview/about-bundlr",
     },
     {
       icon: <GrCycle size={35} />,
@@ -141,7 +141,7 @@ const DocsMenu = () => {
                 <h4 class="text-2xl lg:text-4xl pt-4">{section.title}</h4>
               </div>
             </div>
-            <div class="grid grid-cols-1 lg:grid-cols-2 2xl:grid-cols-4 gap-4 gap-y-4">
+            <div class="grid grid-cols-1 lg:grid-cols-2 2xl:grid-cols-2 gap-4 gap-y-4">
               {section.items.map((item) => (
                 <SquareItem
                   {...item}

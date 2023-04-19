@@ -1,4 +1,18 @@
 {
+	"index": {
+		"display": "hidden",
+		"type": "page",
+		"theme": {
+			"layout": "raw"
+		}
+	},
+	"404": {
+		"display": "hidden",
+		"type": "page",
+		"theme": {
+			"layout": "raw"
+		}
+	},
 	"overview": "OVERVIEW",
 	"use-cases": "USE CASES",
 	"developer-docs": "DEVELOPER DOCS",

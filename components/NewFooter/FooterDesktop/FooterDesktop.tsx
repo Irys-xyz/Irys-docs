@@ -18,7 +18,7 @@ const FooterDesktop = ({
 }) => {
   return (
     <>
-      <footer className="hidden items-start border-t border-timberwolf bg-seashell px-[50px] font-robotoMono antialiased lg:flex">
+      <footer className="hidden items-start border-t border-timberwolf bg-seashell px-[50px] font-robotoMono antialiased lg:flex !text-black mt-10">
         <section className="flex w-auto max-w-[513px] flex-col pt-[36px] leading-none">
           <Link legacyBehavior href="/">
             <FooterLogo className="cursor-pointer" />

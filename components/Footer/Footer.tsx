@@ -5,10 +5,10 @@ import {
   MirrorIcon,
   TelegramIcon,
   TwitterIcon
-} from '../../svg'
+} from '../svg'
 
-import FooterDesktop from '../FooterDesktop'
-import FooterMobile from '../FooterMobile'
+import FooterDesktop from '../NewFooter/FooterDesktop'
+import FooterMobile from '../NewFooter/FooterMobile'
 
 const Footer = () => {
 
