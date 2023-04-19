@@ -1,3 +1,7 @@
+---
+description: Pay and sign for uploads with multiple tokens.
+---
+
 # Supported Tokens
 
 You can pay for transactions in any of the 14 cryptocurrencies we support.

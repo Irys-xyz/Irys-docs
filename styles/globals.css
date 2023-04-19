@@ -3,118 +3,118 @@
 @tailwind utilities;
 
 body {
-  font-family: "FKDisplay", sans-serif;
-  line-height: 1.5;
+	font-family: "FKDisplay", sans-serif;
+	line-height: 1.5;
 }
 
 p {
-  @apply font-robotoMono !leading-loose;
+	@apply font-robotoMono !leading-loose;
 }
 
 ol > li {
-  @apply font-robotoMono !leading-loose;
+	@apply font-robotoMono !leading-loose;
 }
 
 nav > a > span {
-  @apply font-bold;
+	@apply font-bold;
 }
 
 .nx-flex.nx-flex-col.nx-gap-1.max-md:nx-hidden {
-  display: none;
+	display: none;
 }
 
 @font-face {
-  font-family: "FKDisplay";
-  src: url("/fonts/fkd.ttf") format("truetype");
-  font-weight: 400;
-  font-style: normal;
+	font-family: "FKDisplay";
+	src: url("/fonts/fkd.ttf") format("truetype");
+	font-weight: 400;
+	font-style: normal;
 }
 
 .communityShadow {
-  box-shadow: 1px 1px 0px rgba(255, 255, 255, 0.5);
-  transition: box-shadow 0.2s ease;
+	box-shadow: 1px 1px 0px rgba(255, 255, 255, 0.5);
+	transition: box-shadow 0.2s ease;
 }
 
 .communityShadow:hover {
-  box-shadow: -1px -1px 0px rgba(255, 255, 255, 0.5);
+	box-shadow: -1px -1px 0px rgba(255, 255, 255, 0.5);
 }
 
 details > summary {
-  list-style: none;
+	list-style: none;
 }
 
 details > summary::marker, /* Latest Chrome, Edge, Firefox */ 
 details > summary::-webkit-details-marker /* Safari */ {
-  display: none;
+	display: none;
 }
 
 details summary svg:nth-child(2) {
-  display: none;
+	display: none;
 }
 
 details[open] summary svg:nth-child(2) {
-  display: block;
+	display: block;
 }
 
 details[open] summary svg:nth-child(1) {
-  display: none;
+	display: none;
 }
 
 details[open] summary ~ * {
-  animation: ease-opacity-t-b 0.5s ease;
+	animation: ease-opacity-t-b 0.5s ease;
 }
 
 #__next
-  > div
-  > div.nx-mx-auto.nx-flex.nx-max-w-\[90rem\]
-  > aside
-  > div.nx-overflow-y-auto.nx-overflow-x-hidden.nx-p-4.nx-grow.md\:nx-h-\[calc\(100vh-var\(--nextra-navbar-height\)-var\(--nextra-menu-height\)\)\].nextra-scrollbar
-  > div
-  > div
-  > ul
-  > li
-  > a {
-  @apply text-white uppercase;
+	> div
+	> div.nx-mx-auto.nx-flex.nx-max-w-\[90rem\]
+	> aside
+	> div.nx-overflow-y-auto.nx-overflow-x-hidden.nx-p-4.nx-grow.md\:nx-h-\[calc\(100vh-var\(--nextra-navbar-height\)-var\(--nextra-menu-height\)\)\].nextra-scrollbar
+	> div
+	> div
+	> ul
+	> li
+	> a {
+	@apply text-white uppercase;
 }
 
 #__next
-  > div
-  > div.nx-mx-auto.nx-flex.nx-max-w-\[90rem\]
-  > aside
-  > div.nx-overflow-y-auto.nx-overflow-x-hidden.nx-p-4.nx-grow.md\:nx-h-\[calc\(100vh-var\(--nextra-navbar-height\)-var\(--nextra-menu-height\)\)\].nextra-scrollbar
-  > div
-  > div
-  > ul
-  > li
-  > div
-  > div
-  > ul
-  > li
-  > a {
-  @apply text-white/80;
+	> div
+	> div.nx-mx-auto.nx-flex.nx-max-w-\[90rem\]
+	> aside
+	> div.nx-overflow-y-auto.nx-overflow-x-hidden.nx-p-4.nx-grow.md\:nx-h-\[calc\(100vh-var\(--nextra-navbar-height\)-var\(--nextra-menu-height\)\)\].nextra-scrollbar
+	> div
+	> div
+	> ul
+	> li
+	> div
+	> div
+	> ul
+	> li
+	> a {
+	@apply text-white/80;
 }
 
 #__next
-  > div
-  > div.nx-mx-auto.nx-flex.nx-max-w-\[90rem\]
-  > aside
-  > div.nx-overflow-y-auto.nx-overflow-x-hidden.nx-p-4.nx-grow.md\:nx-h-\[calc\(100vh-var\(--nextra-navbar-height\)-var\(--nextra-menu-height\)\)\].nextra-scrollbar
-  > div
-  > div
-  > ul
-  > li
-  > div
-  > div
-  > ul
-  > li.open
-  > div
-  > div
-  > ul
-  > li
-  > a {
-  @apply text-white/70;
+	> div
+	> div.nx-mx-auto.nx-flex.nx-max-w-\[90rem\]
+	> aside
+	> div.nx-overflow-y-auto.nx-overflow-x-hidden.nx-p-4.nx-grow.md\:nx-h-\[calc\(100vh-var\(--nextra-navbar-height\)-var\(--nextra-menu-height\)\)\].nextra-scrollbar
+	> div
+	> div
+	> ul
+	> li
+	> div
+	> div
+	> ul
+	> li.open
+	> div
+	> div
+	> ul
+	> li
+	> a {
+	@apply text-white/70;
 }
 
 :root {
-  --nextra-navbar-height: 5rem;
+	--nextra-navbar-height: 5rem;
 }

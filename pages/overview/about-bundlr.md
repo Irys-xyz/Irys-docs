@@ -1,8 +1,5 @@
 ---
-sidebar_label: About Bundlr
-sidebar_position: 1
-description: Unlock the full potential of Bundlr's technology with our developer resources. Use our SDK and start storing data permanently with 3-4 lines of code.
-slug: /overview
+description: Unlock the full potential of Bundlr's technology with our developer resources. Use our SDK and start storing data permanently with 3 lines of code.
 ---
 
 # About Bundlr
