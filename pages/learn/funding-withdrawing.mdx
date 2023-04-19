@@ -1,0 +1,97 @@
+---
+description: Understand what happens each step of the way when transferring tokens to or from a node.
+---
+
+import { Callout } from "nextra-theme-docs";
+
+# Funding / Withdrawing
+
+Users fund nodes to pay for uploads. Funds can be withdrawn at any time.
+
+<Callout type="info" emoji="ℹ️">
+	For implementation and usage details, see the SDK documentation for
+	[`bundlr.fund()`](/developer-docs/sdk/funding-node) and
+	[`bundlr.withdrawBalance()`](/developer-docs/sdk/withdrawing-funds).
+</Callout>
+
+## Tracking Deposits
+
+<img src="/img/learn/tracking-deposits.png" width="70%" />
+
+Each Bundlr node has a collection of per-currency wallets and an internal ledger system.
+
+The **per-currency wallets** collect user deposits. All deposits for a given currency are consolidated into a single designated wallet address.
+
+An **internal ledger** maintains a list of user wallet addresses, and records the amount deposited by each user into the node's corresponding wallet. This enables the system to accurately track each user's deposit history.
+
+In this system, every node has its own collection of wallets that records all deposits that take place on that node. Balances are not shared between nodes, each node is independent and self-contained.
+
+One of the benefits of not sharing balances between nodes is that it simplifies the process of [scaling the system.](TODO) By avoiding the need for shared state, each node can operate independently and be easily scaled up as needed.
+
+To see the list of wallets for a given node, append `/info` to the node address. The list for `https://node2.bundlr.network/info` is:
+
+```json
+{
+	"version": "0.2.0",
+	"addresses": {
+		"arweave": "ZE0N-8P9gXkhtK-07PQu9d8me5tGDxa_i4Mee5RzVYg",
+		"ethereum": "0x474E7A206bd6186B0C51ad9b1D406c12c4fed9c1",
+		"matic": "0x474E7A206bd6186B0C51ad9b1D406c12c4fed9c1",
+		"bnb": "0x474E7A206bd6186B0C51ad9b1D406c12c4fed9c1",
+		"avalanche": "0x474E7A206bd6186B0C51ad9b1D406c12c4fed9c1",
+		"solana": "AFxXJjdXd4i4pvdFbYAd2TmJqQFu9aYCysAFRmPZ4jTo",
+		"arbitrum": "0x474E7A206bd6186B0C51ad9b1D406c12c4fed9c1",
+		"boba-eth": "0x474E7A206bd6186B0C51ad9b1D406c12c4fed9c1",
+		"boba": "0x474E7A206bd6186B0C51ad9b1D406c12c4fed9c1",
+		"chainlink": "0x474E7A206bd6186B0C51ad9b1D406c12c4fed9c1",
+		"near": "bundlr2.near",
+		"aptos": "0xed50b11ce7f4402bee43f357e593ca46515f530ecca991d1460dc0557617d033"
+	},
+	"gateway": "arweave.net"
+}
+```
+
+## How Funding Works
+
+![](/img/learn/depositing.png)
+
+The funding process is as follows:
+
+1. Tokens are transferred from the user's wallet to the node's wallet address associated with the relevant currency.
+2. The transaction ID from the first step is forwarded to the selected Bundlr node.
+3. The Bundlr node verifies that the transaction was directed to one of its designated wallets.
+4. Once verified, the node proceeds to update an internal ledger that tracks the sender's wallet and the number of tokens transferred.
+
+## How Withdrawing Works
+
+![](/img/learn/withdrawing.png)
+
+The withdrawing process is as follows:
+
+1. The node performs a validation of the request's field order and format, creates a [deep hash](/terminology#deep-hash) of the supplied data, and subsequently verifies it using the provided signature.
+2. The node checks if the request comes from a wallet listed on its internal ledger.
+3. The node confirms if the requested withdrawal amount does not exceed the user's balance.
+4. The requested funds are transferred back to the user from the node's wallet, with the user responsible for paying the associated gas fees for the transfer.
+5. The internal ledger is updated with the user's new balance.
+
+The request for withdrawal is sent as a JSON object with the following fields:
+
+```json
+const data = {
+	nonce,
+	publicKey,
+	currency,
+	amount,
+	signature,
+	sigType,
+};
+```
+
+| Field     | Description                                                                                                                                                                       |
+| --------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| nonce     | A counter tracking the total number of withdrawals performed by this wallet (used to prevent [man-in-the-middle attacks](https://en.wikipedia.org/wiki/Man-in-the-middle_attack)) |
+| publicKey | The user's public key                                                                                                                                                             |
+| currency  | The currency being withdrawn                                                                                                                                                      |
+| amount    | The amount being withdrawn                                                                                                                                                        |
+| signature | Signature generated by hashing and then signing the currency, amount, and nonce                                                                                                   |
+| sigType   | Used internally                                                                                                                                                                   |
