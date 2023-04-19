@@ -46,7 +46,7 @@ By leveraging Bundlr and Lens’ highly-scalable and permissionless infrastructu
 
 ## OnlyBundlr
 
-![OnlyBundlr](https://github.com/lukecd/onlybundlr/blob/main/quest-images/OnlyBundlrOverview.gif?raw=true)
+<img src="/img/quests/onlybundlr/OnlyBundlrOverview.gif" width="80%" />
 
 ### Goals
 
@@ -68,7 +68,7 @@ We prepared this quest in both written and video forms to make sure there's some
 
 ### Mainnet vs Testnet
 
-![](https://i.imgur.com/UHahmKx.png)
+<img src="/img/quests/onlybundlr/LensHandles.png" width="80%" />
 
 When working with Lens, you need to have a handle, each wallet address can have multiple handles. However, only one handle will be active at a given time. Handle names are immutable, once you pick one you can't change it.
 
@@ -103,7 +103,7 @@ Take a moment and look at the code, you'll see multiple places where a function 
 
 ## Utils, Components, Pages
 
-![](https://i.imgur.com/y8bKNxv.png)
+<img src="/img/quests/onlybundlr/VSCode.png" width="80%" />
 
 If you look at the layout of files in our framework project, you'll notice three folders `utils`, `components`, and `pages`. We'll start by building out the `utils` section by building a reusable library of Bundlr utility functions. Then we'll build out a library of reusable `components,`. The `pages` section contains code to combine your components together, there's only one file in here you'll need to complete there.
 
@@ -488,7 +488,7 @@ React Hooks Used
 -   `useActiveProfileSwitch` (Not currently documented)
 -   [`useCreateProfile`](https://docs.lens.xyz/docs/use-create-profile)
 
-![](https://i.imgur.com/uwC8K0P.png)
+<img src="/img/quests/onlybundlr/ProfileSwitcher.png" width="60%" />
 
 The profile switcher serves two roles. First, in a drop-down menu, it lists all active profiles, allowing you to switch between profiles by changing which is currently active. Second, given a "handle name" it lets you create a new handle. A status message is updated to show each step of the process.
 
@@ -650,7 +650,7 @@ React hooks used:
 -   `useUpdateFollowPolicy` (Not currently documented)
 -   [`useCurrencies`](https://docs.lens.xyz/docs/use-currencies)
 
-![](https://i.imgur.com/dc1yW05.png)
+<img src="/img/quests/onlybundlr/EditProfileDetails.png" width="60%" />
 
 In the `EditProfileDetails` component, we set a profile's name, bio, subscription fee, and cover picture. The profile picture is not set here, that will be done in the next component. The reason we separate out the logic like this is due to the way the Lens React hooks are designed, `useUpdateProfileDetails` accepts those parameters, with the profile picture being handled by a different hook.
 
@@ -984,7 +984,7 @@ React hooks used:
 
 -   [`useUpdateProfileImage`](https://docs.lens.xyz/docs/use-update-profile-image)
 
-![](https://i.imgur.com/a2z0FSl.png)
+<img src="/img/quests/onlybundlr/ProfilePicUpload.png" width="60%" />
 
 <Callout type="info" emoji="ℹ️">
 	At this point in the quest, you should understand how to use our utility functions to save data to Bundlr, how to
@@ -1099,7 +1099,7 @@ export default EditProfilePicture;
 
 ### Component: BundlrBalance
 
-![](https://i.imgur.com/c6YFeyL.png)
+<img src="/img/quests/onlybundlr/BundlrBalance.png" width="60%" />
 
 When working with Bundlr, you pay once, and your uploads are available forever. You can either lazy-fund uploads, where you pay per upload, or up-front fund, where you fund in advance and then slowly use that balance. Funding involves transferring tokens from your wallet to the Bundlr node, which means your wallet (MetaMask) will pop up and have you sign and confirm the transaction. To streamline interactions with OnlyBundlr and reduce the number of wallet popups, [it's recommended you up-front fund around ~0.5 MUMBAI MATIC.](https://mumbaifaucet.com/)
 
@@ -1194,7 +1194,7 @@ React hooks used
 
 -   [`useProfile`](https://docs.lens.xyz/docs/use-profile)
 
-![](https://i.imgur.com/YQ0CqjS.jpg)
+<img src="/img/quests/onlybundlr/RightNav.png" width="60%" />
 
 You probably noticed the right side of OnlyBundlr has four suggested profiles for you to follow. This right side is built using first a component called `RightNav` that acts as a parent, it creates a series of `SuggestedProfile` components, one for each profile shown.
 
@@ -1322,7 +1322,7 @@ Rock-n-roll! You made it! Congratulations are in order. You now understand how t
 
 ### Component: Publication
 
-![](https://i.imgur.com/Eaf4V1c.jpg)
+<img src="/img/quests/onlybundlr/Publication.png" width="60%" />
 
 The `Publication` component renders a single publication (post) to the screen. We'll use it in two places: our main feed showing posts from everyone we subscribe to and in a profile-specific feed showing posts from a given profile. This component is pure React, no Bundlr or Lens integration. The data shown is passed in as variables.
 
@@ -1522,13 +1522,13 @@ React hooks used
 
 -[`useCreatePost`](https://docs.lens.xyz/docs/use-create-post)
 
-![](https://i.imgur.com/IZydfxO.png)
+<img src="/img/quests/onlybundlr/PublicationComposer.png" width="60%" />
 
 Ok, we can render publications on the screen, how about writing some code so you can create one?
 
 Our OnlyBundlr UI allows for creating text Publications and image publications:
 
-![](https://i.imgur.com/u3JLD5E.png)
+<img src="/img/quests/onlybundlr/PostTypes.png" width="60%" />
 
 As you can probably guess by now, the workflow is very similar to what you did when creating a new profile. First, you upload the image to Bundlr (using the handy utility function we wrote), then you pass that image's URL to the `execute` function exposed by the `useCreatePost` Lens React hook. That's it. Easy, huh?
 
@@ -1701,7 +1701,7 @@ export default PublicationComposer;
 
 Rock-n-roll! You did it, congratulations!
 
-In about a 90 minutes, you build an entire social dApp similar to OnlyFans or Patreon. You learned how to save data permanently using Bundlr, and you learned how to build social dApps using the Lens React hooks.
+In about 90 minutes, you build an entire social dApp similar to OnlyFans or Patreon. You learned how to save data permanently using Bundlr, and you learned how to build social dApps using the Lens React hooks.
 
 Pat yourself on the back. You did something impressive.
 
