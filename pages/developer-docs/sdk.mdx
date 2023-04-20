@@ -2,27 +2,46 @@ import { Tab, Tabs } from "nextra-theme-docs";
 
 # SDK
 
-The Bundlr SDK empowers developers to implement permanent decentralized storage and Proof of Provenance with just a few lines of code.
+Implement [permanent decentralized storage](/overview/solutions/permanent-storage) and [Proof of Provenance](/overview/solutions/proof-of-provenance) with just a few lines of code.
 
 ## Bundlr & WebBundlr
 
 To get started with the SDK, choose the [Bundlr class](/developer-docs/sdk/bundlr-server-side) for server-side projects and the [WebBundlr class](/developer-docs/sdk/bundlr-in-the-browser) for browser-based projects.
 
-Then follow the steps below, or dive into the detailed SDK documentation in the side nav.
+#### Step 1: [Install the SDK](/developer-docs/sdk/installing-the-sdk)
 
-<Tabs items={["Permanent Decentralized Storage", "Proof Of Provenance"]}>
-	<Tab>
-		<ol className="list-decimal">
-			<li>[Connect to a node](./sdk/connecting-node)</li>
-			<li>[Fund the node](./sdk/funding-node)</li>
-			<li>[Upload data](./sdk/uploading-data)</li>
-		</ol>
-	</Tab>
-	<Tab>
-		<ol className="list-decimal">
-			<li>[Connect to a node](/developer-docs/sdk/connecting-node)</li>
-			<li>[Fund the node](/developer-docs/sdk/funding-node)</li>
-			<li>Upload data using uploadWithReceipt</li>
-		</ol>
-	</Tab>
-</Tabs>
+```js
+npm install @bundlr-network/client
+```
+
+#### Step 2: [Connect To A Bundlr Node](/developer-docs/sdk/connecting-node)
+
+```js
+const bundlr = new Bundlr("http://node2.bundlr.network", "matic", “<polygon_private_key>”);
+```
+
+#### Step 3: [Fund Your Node](/developer-docs/sdk/funding-node) (To Pay For Uploads)
+
+```js
+const response = await bundlr.fund(fundAmount);
+```
+
+#### Step 4: [Upload Data](/developer-docs/sdk/uploading-data)
+
+```js
+const dataToUpload = "GM world.";
+const response = await bundlr.upload(dataToUpload);
+```
+
+Or upload and [request a cryptographically signed receipt.](/developer-docs/sdk/uploading-data#bundlrutilsuploadwithreceipt)
+
+```js
+const dataToUpload = "GM world.";
+const receipt = await bundlr.uploadWithReceipt(dataToUpload);
+```
+
+#### Step 5: [Download Your Data](/developer-docs/sdk/downloading-data)
+
+```js
+console.log(`Data Available at => https://arweave.net/${response.id}`);
+```

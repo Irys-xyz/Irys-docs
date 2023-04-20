@@ -2,4 +2,34 @@ import { Tab, Tabs } from "nextra-theme-docs";
 
 # CLI
 
-TODO
+Permanently store files on Arweave using Bundlr's Command Line Interface (CLI).
+
+### Prerequisites
+
+To install our CLI, make sure you have a [current version of node](https://nodejs.org/en) installed first.
+
+#### Step 1: [Install the CLI](/developer-docs/cli/installation)
+
+```console
+npm i -g @bundlr-network/client
+sudo npm i -g @bundlr-network/client
+```
+
+#### Step 2: [Set Your Private Key](/developer-docs/cli/setting-private-key)
+
+```console
+bundlr -w myEthKeyPair.json -c ethereum
+```
+
+#### Step 3: [Fund Your Node](/developer-docs/cli/funding-a-node) (To Pay For Uploads)
+
+```console
+bundlr fund 1479016 -h https://node1.bundlr.network -w wallet.json -c ethereum
+```
+
+#### Step 4: [Upload A File](/developer-docs/cli/uploading-a-file)
+
+```console
+bundlr upload image.png -h https://node1.bundlr.network -w wallet.json -c arweave
+> Uploaded to https://arweave.net/zt3-t8SHDSck0TLcSuC-hdQb2E0civ0DVMRgwf6sCz0
+```

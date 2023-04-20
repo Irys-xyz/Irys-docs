@@ -1,11 +1,8 @@
 ---
-title: Permanent Storage
 description: Overview of permanent storage
-sidebar_position: 2
-slug: /solutions/permanent-storage
 ---
 
-## What is web3 data storage on Arweave?
+## What Is Web3 Data Storage On Arweave?
 
 Web3 data storage on Arweave is decentralized and permanent. It is the only data chain that offers this solution.
 
