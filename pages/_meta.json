@@ -13,6 +13,12 @@
 			"layout": "raw"
 		}
 	},
+	"test": {
+		"display": "hidden"
+	},
+	"test2": {
+		"display": "hidden"
+	},
 	"overview": "OVERVIEW",
 	"use-cases": "USE CASES",
 	"developer-docs": "DEVELOPER DOCS",
