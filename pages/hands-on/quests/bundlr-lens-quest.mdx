@@ -126,7 +126,7 @@ In this next section, we'll build utility functions for each.
 
 The WebBundlr class is the point of entry used when interacting with Bundlr. It connects your code to a Bundlr node, and exposes functions used for funding, and uploading.
 
-All of the interactions with Bundlr will be via a set of utility functions accessed by our React components. The first utility function, `getBundlr()` sets up a reference to a `WebBundlr` object and returns it. By abstracting away all of this setup code into a common utility function, we create a single place to store details like the node address and currency used to pay. This way, if you want to switch your dApp from the devnet to the mainnet, you only have to adjust parameters in a single place.
+All of the interactions with Bundlr will be via a set of utility functions accessed by our React components. The first utility function, `getBundlr()` sets up a reference to a `WebBundlr` object and returns it. By abstracting away all of this setup code into a common utility function, we create a single place to store details like the node address and currency used to pay. This way, if you want to switch your dApp from the Devnet to the mainnet, you only have to adjust parameters in a single place.
 
 File name: `utils/get-bundlr.js`
 

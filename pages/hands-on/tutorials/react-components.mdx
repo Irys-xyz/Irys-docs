@@ -21,7 +21,7 @@ The components are designed to be completely modular, you can easily use them as
 
 The full code for this tutorial can be found [in our GitHub](https://github.com/Bundlr-Network/webbundlr-basics) ... but ... if you want a hack for learning this material quickly, try working through it without using copy and paste. I know it can be tempting to just grab the code from GitHub or copy and paste from here, but that doesn't help with memorization. If you want to memorize this, type it in line by line. When you get errors or make mistakes, first try to fix them yourself. If you're still stuck, then go back and compare against the source.
 
-With Bundlr, you pay once to upload, and your data is stored on Arweave forever. Since this is a tutorial, you shouldn't have to spend any money. We'll use the Bundlr devnet and fund it with [free Mumbai MATIC](https://faucet.polygon.technology/). Files uploaded to the devnet are available for approximately 60 days.
+With Bundlr, you pay once to upload, and your data is stored on Arweave forever. Since this is a tutorial, you shouldn't have to spend any money. We'll use the Bundlr Devnet and fund it with [free Mumbai MATIC](https://faucet.polygon.technology/). Files uploaded to the Devnet are available for approximately 60 days.
 
 ## Setup
 
@@ -392,7 +392,7 @@ const { data: rainbowKitSigner, isError, isLoading } = useSigner();
 
 ### Funding Step By Step
 
-When working with Bundlr, you fund a node, and your balance exists on that node only. You'll need to upload your data to the node you funded, not a different one. Regardless of the node you fund, your data always ends up on the same Arweave blockchain. As this is a tutorial, we will be funding the devnet and not a public node.
+When working with Bundlr, you fund a node, and your balance exists on that node only. You'll need to upload your data to the node you funded, not a different one. Regardless of the node you fund, your data always ends up on the same Arweave blockchain. As this is a tutorial, we will be funding the Devnet and not a public node.
 
 Look again at the code for `components/FundNode.js`, explicitly focusing on the `fundNode()` function on lines 12-37.
 
