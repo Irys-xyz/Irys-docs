@@ -16,22 +16,14 @@ const bundlr = new Bundlr("http://node2.bundlr.network", "matic", “<polygon_pr
 
 The Bundlr constructor accepts three arguments:
 
+## Node
+
 1. Node address: Address of the node you’ll connect to, current options are:
-    1. https://node1.bundlr.network
-    2. https://node2.bundlr.network
-    3. https://devnet.bundlr.network
+    - `https://node1.bundlr.network`
+    - `https://node2.bundlr.network`
+    - `https://devnet.bundlr.network`
 2. Currency: [Name of the currency used to pay.](/overview/supported-tokens)
 3. Key: Your private key.
-
-You can optionally specify a custom RPC:
-
-```js
-const bundlr = new Bundlr("https://devnet.bundlr.network", "solana", "<solana_private key>", {
-	providerUrl: "https://api.devnet.solana.com",
-});
-```
-
-Code example:
 
 ```js
 import Bundlr from "@bundlr-network/client";
@@ -40,6 +32,16 @@ const bundlr = new Bundlr("http://node1.bundlr.network", "matic", myPrivateKey);
 
 // Print your wallet address
 console.log(`wallet address = ${bundlr.address}`);
+```
+
+## Custom RPC
+
+You can optionally specify a custom RPC:
+
+```js
+const bundlr = new Bundlr("https://devnet.bundlr.network", "solana", "<solana_private key>", {
+	providerUrl: "https://api.devnet.solana.com",
+});
 ```
 
 <Callout type="info" emoji="ℹ️">
