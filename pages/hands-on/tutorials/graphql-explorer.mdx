@@ -10,7 +10,7 @@ When uploading data to Arweave using Bundlr, you have an option to [tag that dat
 
 What's really cool though, is you can use GraphQL to query Arweave using those tags.
 
-In this tutorial, we're going to build a tool to show n most recent PNGs uploaded to Arweave. You'll learn about GraphQL, what it is, and how to use with JavaScript / TypeScript. While we're going to focus specifically on querying for the `Content-Type` tag, you could also do things like [query based on block id, ower, recipient, or transaction id. ](https://gql-guide.vercel.app/).
+In this tutorial, we're going to build a tool to show n most recent PNGs uploaded to Arweave. You'll learn about GraphQL, what it is, and how to use with JavaScript / TypeScript. While we're going to focus specifically on querying for the `Content-Type` tag, you could also do things like [query based on block id, owner, recipient, or transaction id](https://gql-guide.vercel.app/).
 
 While this is a pretty simple tutorial meant to teach the basics of GraphQL and how to use it to query Arweave, the concepts you learn are applicable to lots of other projects. This will be of special interest to people who want to build on [Lens Protocol](https://www.lens.xyz/) as [they use GraphQL when reading and writing post data.](https://docs.lens.xyz/docs/why-graphql)
 
@@ -19,9 +19,9 @@ While this is a pretty simple tutorial meant to teach the basics of GraphQL and 
 	that basic knowledge and teach you how to get up and running with GraphQL.
 </Callout>
 
-[**All the code for this project can be found on GitHub.**](https://github.com/Bundlr-Network/tutorial-graphql-tag-explorer)
+All the code for this project can be [found on GitHub](https://github.com/Bundlr-Network/tutorial-graphql-tag-explorer).
 
-## Here's a peek at what we're going to build.
+## Here's A Peek At What We're Going To Build.
 
 ![](/img/tutorials/graphql-explorer/graphql-project-overview.png)
 
@@ -41,9 +41,9 @@ If you're going to grok GraphQL, you'll need to start with the basics: **queries
 
 3. Mutation: A mutation is used to create, update, or delete data on the server. It allows the client to send data to the server and make changes to the data stored there. Mutations are write operations, and they return the updated data once the operation is completed.
 
-So ... to put that in simple langauge. Queries get data out, subscriptions are like queries that update automatically, and muations put data in. This tutorial focuses specifically on queries.
+To put that in simple language. Queries get data out, subscriptions are like queries that update automatically, and muations put data in. This tutorial focuses specifically on queries.
 
-## Anatomy Of Query
+## Anatomy Of A Query
 
 When creating a query using GraphQL, you have two main tasks. First specify your filter criteria, the data points you want to search for. Then you specify the structure of the result, the data you want out.
 
