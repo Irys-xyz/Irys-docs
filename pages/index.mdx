@@ -10,20 +10,20 @@ import SectionTitle from "../components/SectionTitle";
 import Link from "next/link";
 
 <Head>
-  <title>Bundlr Docs</title>
+	<title>Bundlr Docs</title>
 </Head>
 
 <div>
 
 <div
-  className="absolute top-0 left-0 w-full h-full"
-  style={{
-    backgroundImage: "url('./img/dots-cloud.png')",
-    backgroundSize: "140%",
-    backgroundRepeat: "no-repeat",
-    filter: "blur(20px)",
-    opacity: ".3",
-  }}
+	className="absolute top-0 left-0 w-full h-full"
+	style={{
+		backgroundImage: "url('./img/dots-cloud.png')",
+		backgroundSize: "140%",
+		backgroundRepeat: "no-repeat",
+		filter: "blur(20px)",
+		opacity: ".3",
+	}}
 />
 
 <header className="px-4 lg:px-[79px] py-20">
@@ -92,11 +92,8 @@ import Link from "next/link";
 
 <div className="px-4 lg:px-[79px] py-20">
 
-<Heading
-  level={6}
-  className="!font-fkDisplay leading-none text-center md:text-left mt-10"
->
-  Use our SDK and start storing data permanently with 3-4 lines of code.
+<Heading level={6} className="!font-fkDisplay leading-none text-center md:text-left mt-10">
+	Use our SDK and start storing data permanently with 3 lines of code.
 </Heading>
 
   <ExpandableSection
@@ -121,106 +118,106 @@ import Link from "next/link";
 </div>
 
 <HomeProduct
-  title={"Overview"}
-  items={[
-    {
-      id: 0,
-      title: "About",
-      description: "Unlock the potential of Bundlr's technology",
-      href: "/overview/about-bundlr",
-    },
-    {
-      id: 1,
-      title: "Network",
-      description: "Discover Bundlr's network.",
-      href: "/overview/network",
-    },
-    {
-      id: 2,
-      title: "Solutions",
-      description: "Explore Bundlr's solutions.",
-      href: "/overview/solutions",
-    },
-    {
-      id: 3,
-      title: "Services",
-      description: "See the services Bundlr offers.",
-      href: "/overview/services",
-    },
-  ]}
+	title={"Overview"}
+	items={[
+		{
+			id: 0,
+			title: "About",
+			description: "Unlock the potential of Bundlr's technology",
+			href: "/overview/about-bundlr",
+		},
+		{
+			id: 1,
+			title: "Network",
+			description: "Discover Bundlr's network.",
+			href: "/overview/network",
+		},
+		{
+			id: 2,
+			title: "Solutions",
+			description: "Explore Bundlr's solutions.",
+			href: "/overview/solutions",
+		},
+		{
+			id: 3,
+			title: "Services",
+			description: "See the services Bundlr offers.",
+			href: "/overview/services",
+		},
+	]}
 />
 
 <section className="px-4 lg:px-[79px] py-2 text-white pt-20 pb-20 relative bg-black">
 
 <div
-  className="absolute top-0 left-0 w-full h-full"
-  style={{
-    backgroundImage: "url('./img/data-donuts.webp')",
-    backgroundRepeat: "no-repeat",
-    backgroundPosition: "160% 10%",
-    filter: "blur(7px)",
-    opacity: ".3",
-  }}
+	className="absolute top-0 left-0 w-full h-full"
+	style={{
+		backgroundImage: "url('./img/data-donuts.webp')",
+		backgroundRepeat: "no-repeat",
+		backgroundPosition: "160% 10%",
+		filter: "blur(7px)",
+		opacity: ".3",
+	}}
 />
 
 <SectionTitle title="Developer Docs" />
 
 <div class="flex flex-col md:flex-row py-20 gap-6 items-stretch">
-  <div className="w-full md:w-2/3 rounded-2xl overflow-hidden z-10">
-    <iframe
-      width="100%"
-      height="515px"
-      src="https://www.youtube.com/embed/aDDmMt2hacg"
-      title="YouTube video player"
-      frameborder="0"
-      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-      allowfullscreen
-    ></iframe>
-  </div>
-  <div className="w-full md:w-1/2 xl:w-1/3 flex flex-col gap-6">
-    <Link href="/developer-docs/sdk">
-      <div
-        className="bg-seashell text-black h-[156px] rounded-2xl overflow-hidden bannerHover pt-10 pl-10 text-2xl hover:scale-[99%] cursor-pointer transition-all"
-        style={{
-          backgroundImage: "url('./img/dots-cloud.png')",
-          backgroundSize: "140%",
-          backgroundRepeat: "no-repeat",
-          backgroundPosition: "0% 0%",
-          backdropFilter: "blur(10px)",
-        }}
-      >
-        SDK
-      </div>
-    </Link>
-    <Link href="/developer-docs/cli">
-      <div
-        className="bg-seashell text-black h-[156px] rounded-2xl overflow-hidden bannerHover pt-10 pl-10 text-2xl hover:scale-[99%] cursor-pointer transition-all"
-        style={{
-          backgroundImage: "url('./img/data-donuts.webp')",
-          backgroundSize: "140%",
-          backgroundRepeat: "no-repeat",
-          backgroundPosition: "-80% 0%",
-          backdropFilter: "blur(10px)",
-        }}
-      >
-        CLI
-      </div>
-    </Link>
-    <Link href="/developer-docs/recipes">
-      <div
-        className="bg-seashell text-black h-[156px] rounded-2xl overflow-hidden bannerHover pt-10 pl-10 text-2xl hover:scale-[99%] cursor-pointer transition-all"
-        style={{
-          backgroundImage: "url('./img/cloud.webp')",
-          backgroundSize: "140%",
-          backgroundRepeat: "no-repeat",
-          backgroundPosition: "-80% 0%",
-          backdropFilter: "blur(10px)",
-        }}
-      >
-        Cut & Paste Recipes
-      </div>
-    </Link>
-  </div>
+	<div className="w-full md:w-2/3 rounded-2xl overflow-hidden z-10">
+		<iframe
+			width="100%"
+			height="515px"
+			src="https://www.youtube.com/embed/aDDmMt2hacg"
+			title="YouTube video player"
+			frameborder="0"
+			allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+			allowfullscreen
+		></iframe>
+	</div>
+	<div className="w-full md:w-1/2 xl:w-1/3 flex flex-col gap-6">
+		<Link href="/developer-docs/sdk">
+			<div
+				className="bg-seashell text-black h-[156px] rounded-2xl overflow-hidden bannerHover pt-10 pl-10 text-2xl hover:scale-[99%] cursor-pointer transition-all"
+				style={{
+					backgroundImage: "url('./img/dots-cloud.png')",
+					backgroundSize: "140%",
+					backgroundRepeat: "no-repeat",
+					backgroundPosition: "0% 0%",
+					backdropFilter: "blur(10px)",
+				}}
+			>
+				SDK
+			</div>
+		</Link>
+		<Link href="/developer-docs/cli">
+			<div
+				className="bg-seashell text-black h-[156px] rounded-2xl overflow-hidden bannerHover pt-10 pl-10 text-2xl hover:scale-[99%] cursor-pointer transition-all"
+				style={{
+					backgroundImage: "url('./img/data-donuts.webp')",
+					backgroundSize: "140%",
+					backgroundRepeat: "no-repeat",
+					backgroundPosition: "-80% 0%",
+					backdropFilter: "blur(10px)",
+				}}
+			>
+				CLI
+			</div>
+		</Link>
+		<Link href="/developer-docs/recipes">
+			<div
+				className="bg-seashell text-black h-[156px] rounded-2xl overflow-hidden bannerHover pt-10 pl-10 text-2xl hover:scale-[99%] cursor-pointer transition-all"
+				style={{
+					backgroundImage: "url('./img/cloud.webp')",
+					backgroundSize: "140%",
+					backgroundRepeat: "no-repeat",
+					backgroundPosition: "-80% 0%",
+					backdropFilter: "blur(10px)",
+				}}
+			>
+				Cut & Paste Code Recipes
+			</div>
+		</Link>
+	</div>
 </div>
 
 </section>
@@ -240,20 +237,20 @@ import Link from "next/link";
         Title: "Tutorials",
         FirstParagraph:
           "Learn the Bundlr SDK with tutorials for all skill levels.",
-        URL: "https://bundlr.network",
+        URL: "/hands-on/tutorials",
       },
       {
         Title: "Quests",
         FirstParagraph:
-          "Learn more about Bundlr and earn unique NFTs for every quest you complete.",
-        URL: "https://bundlr.network",
+          "Complete quests and earn unique NFTs as you do.",
+        URL: "/hands-on/quests",
       },
     ].map((item, index) => (
       <li
         key={`solutions-${index}`}
         className="w-full rounded-lg bg-gradient-to-b from-[#968982] to-transparent p-[1px] lg:w-1/2 text-black"
       >
-        <a href={item.URL || ""} target={"_blank"} rel="noreferrer">
+        <a href={item.URL || ""}  rel="noreferrer">
           <div className="flex flex-col gap-8 overflow-hidden rounded-lg bg-seashell px-2 py-8 lg:p-11">
             {/* make image as background of rectangle box */}
             <div className="flex flex-col gap-4 px-5 pb-10">
@@ -270,48 +267,47 @@ import Link from "next/link";
 </section>
 
 <HomeWhyUseBundlr
-  content={[
-    {
-      title: "Bundlers",
-      href: "#",
-      description:
-        "Bundlers bundlr transactions together before sending to Arweave.",
-    },
-    {
-      title: "Bundlr And Arweave",
-      href: "#",
-      description:
-        "Bundlers bundlr transactions together before sending to Arweave.",
-    },
-    {
-      title: "Gateways",
-      href: "#",
-      description:
-        "Bundlers bundlr transactions together before sending to Arweave.",
-    },
-    {
-      title: "Receipts",
-      href: "#",
-      description:
-        "Bundlers bundlr transactions together before sending to Arweave.",
-    },
-    {
-      title: "Transaction Lifecycle",
-      href: "#",
-      description:
-        "Understand each step of the process as a transaction is processed by Bundlr.",
-    },
-    {
-      title: "Scaling",
-      href: "#",
-      description:
-        "By separating read and write components into separate components, Bundlr is able to separately optimize each",
-    },
-    {
-      title: "Optimistic Caching",
-      href: "#",
-      description:
-        " Optimistic caching makes your uploads instantly available, no need to wait for finalization.",
-    },
-  ]}
+	content={[
+		{
+			title: "Bundles",
+			href: "/learn/bundles",
+			description: "A bundle is a group of transactions",
+		},
+		{
+			title: "Bundlers",
+			href: "/learn/bundler",
+			description: "Bundlers bundle transactions together before sending to Arweave",
+		},
+		{
+			title: "Bundlr And Arweave",
+			href: "/learn/bundlr-arweave",
+			description: "Bundlr makes Arweave easier to use",
+		},
+		{
+			title: "Gateways",
+			href: "/learn/gateways",
+			description: "Gateways index transactions and make them available for querying",
+		},
+		{
+			title: "Receipts",
+			href: "/learn/receipts",
+			description: "Receipts give you cryptographic proof of the exact time a transaction occurred",
+		},
+		{
+			title: "Transaction Lifecycle",
+			href: "/learn/transaction-lifecycle",
+			description: "Understand each step of the process as a transaction is processed by Bundlr.",
+		},
+		{
+			title: "Scaling",
+			href: "/learn/scaling",
+			description:
+				"By separating read and write components into separate components, Bundlr is able to separately optimize each",
+		},
+		{
+			title: "Optimistic Caching",
+			href: "/learn/optimistic-caching",
+			description: "Optimistic caching makes your uploads instantly available, no need to wait for finalization",
+		},
+	]}
 />
