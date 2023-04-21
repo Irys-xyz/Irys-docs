@@ -2,32 +2,316 @@ import Footer from "../components/Footer";
 import Head from "next/head";
 import Heading from "../components/Heading";
 import HomeOptions from "../components/HomeOptions";
-import React from "react";
+import HomeWhyUseBundlr from "../components/HomeWhyUseBundlr";
+import HomeProduct from "../components/HomeProduct";
+import Button from "../components/Button";
+import ExpandableSection from "../components/ExpandableSection";
+import SectionTitle from "../components/SectionTitle";
+import Link from "next/link";
 
 <Head>
   <title>Bundlr Docs</title>
 </Head>
 
-<main className="text-white px-4 lg:px-[79px]">
-  <div className="pt-32">
-    <Heading level={1} className="text-white">
-      GM BUNDLOOOORS!
-    </Heading>
-    <p>Start saving your data permanently with 3-4 lines of code</p>
-    <main className="text-white bg-black pt-10 pb-10 mt-10 w-full overflow-scroll">
-    ```js 
-    const bundlr = new Bundlr( "http://node1.bundlr.network", "ethereum", myPrivateKey ); 
-    await bundlr.fund(1e18); const tx = await bundlr.uploadFile(myFile); 
-    console.log(`File uploaded ==> https://arweave.net/${tx.id};`); 
-    ```
+<div>
 
-    </main>
+<div
+  className="absolute top-0 left-0 w-full h-full"
+  style={{
+    backgroundImage: "url('./img/dots-cloud.png')",
+    backgroundSize: "140%",
+    backgroundRepeat: "no-repeat",
+    filter: "blur(20px)",
+    opacity: ".3",
+  }}
+/>
 
+<header className="px-4 lg:px-[79px] py-20">
+  <Heading level={1} className="text-white font-fkDisplay">
+    Bundlr Docs
+  </Heading>
+
+  <p>
+    Unlock the full potential of Bundlr's technology with our developer
+    resources.
+  </p>
+</header>
+
+<div className="flex flex-col md:flex-row w-full gap-4 items-stretch px-4 lg:px-[79px]">
+  <div className="flex flex-col w-full md:w-1/2 gap-4">
+    <Link href="/developer-docs/quickstart">
+      <div
+        className="bg-black h-[244px] rounded-2xl overflow-hidden bannerHover pt-10 pl-10 text-2xl hover:scale-[99%] cursor-pointer transition-all"
+        style={{
+          backgroundImage: "url('./img/data-donuts.webp')",
+          backgroundSize: "140%",
+          backgroundRepeat: "no-repeat",
+          backgroundPosition: "-40% -20%",
+          backdropFilter: "blur(10px)",
+        }}
+      >
+        Quick Start
+      </div>
+    </Link>
+    <Link href="/developer-docs/sdk">
+      <div
+        className="bg-black h-[244px] rounded-2xl overflow-hidden bannerHover pt-10 pl-10 text-2xl hover:scale-[99%] cursor-pointer transition-all"
+        style={{
+          backgroundImage: "url('./img/dots-cloud.png')",
+          backgroundSize: "140%",
+          backgroundRepeat: "no-repeat",
+          backgroundPosition: "40% -20%",
+          backdropFilter: "blur(10px)",
+        }}
+      >
+        SDK
+      </div>
+    </Link>
   </div>
-</main>
 
-<div className="text-white px-4 lg:px-[79px]">
+      <div className="flex flex-col bg-black  h-[244px] md:h-auto w-full md:w-1/2 pt-10 pl-10 text-2xl rounded-2xl hover:scale-[99%] cursor-pointer transition-all"
+        onClick={() => {
+          window.open("https://demo.bundlr.network", "_blank");
+        }}
+        style={{
+          backgroundImage: "url('./img/vortex.png')",
+          backgroundSize: "140%",
+          backgroundRepeat: "no-repeat",
+          backgroundPosition: "-40% -40%",
+          backdropFilter: "blur(10px)",
+        }}
+      >
 
-<HomeOptions />
+      Demo
+
+      </div>
 
 </div>
+
+</div>
+
+<div className="px-4 lg:px-[79px] py-20">
+
+<Heading
+  level={6}
+  className="!font-fkDisplay leading-none text-center md:text-left mt-10"
+>
+  Use our SDK and start storing data permanently with 3-4 lines of code.
+</Heading>
+
+  <ExpandableSection
+    items={[
+      {
+        id: 1,
+        title: "Connect to a Node",
+        snippet: `const bundlr = new Bundlr("https://node1.bundlr.network", "matic", "<eth-private-key");`,
+      },
+      {
+        id: 2,
+        title: "Fund a Node",
+        snippet: `await bundlr.fund(1e18); // 1 matic`,
+      },
+      {
+        id: 3,
+        title: "Upload your Data, Forever",
+        snippet: `await bundlr.upload("GM Bundloooors!");`,
+      },
+    ]}
+  />
+</div>
+
+<HomeProduct
+  title={"Overview"}
+  items={[
+    {
+      id: 0,
+      title: "About",
+      description: "Unlock the potential of Bundlr's technology",
+      href: "/overview/about-bundlr",
+    },
+    {
+      id: 1,
+      title: "Network",
+      description: "Discover Bundlr's network.",
+      href: "/overview/network",
+    },
+    {
+      id: 2,
+      title: "Solutions",
+      description: "Explore Bundlr's solutions.",
+      href: "/overview/solutions",
+    },
+    {
+      id: 3,
+      title: "Services",
+      description: "See the services Bundlr offers.",
+      href: "/overview/services",
+    },
+  ]}
+/>
+
+<section className="px-4 lg:px-[79px] py-2 text-white pt-20 pb-20 relative bg-black">
+
+<div
+  className="absolute top-0 left-0 w-full h-full"
+  style={{
+    backgroundImage: "url('./img/data-donuts.webp')",
+    backgroundRepeat: "no-repeat",
+    backgroundPosition: "160% 10%",
+    filter: "blur(7px)",
+    opacity: ".3",
+  }}
+/>
+
+<SectionTitle title="Developer Docs" />
+
+<div class="flex flex-col md:flex-row py-20 gap-6 items-stretch">
+  <div className="w-full md:w-2/3 rounded-2xl overflow-hidden z-10">
+    <iframe
+      width="100%"
+      height="515px"
+      src="https://www.youtube.com/embed/aDDmMt2hacg"
+      title="YouTube video player"
+      frameborder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+      allowfullscreen
+    ></iframe>
+  </div>
+  <div className="w-full md:w-1/2 xl:w-1/3 flex flex-col gap-6">
+    <Link href="/developer-docs/sdk">
+      <div
+        className="bg-seashell text-black h-[156px] rounded-2xl overflow-hidden bannerHover pt-10 pl-10 text-2xl hover:scale-[99%] cursor-pointer transition-all"
+        style={{
+          backgroundImage: "url('./img/dots-cloud.png')",
+          backgroundSize: "140%",
+          backgroundRepeat: "no-repeat",
+          backgroundPosition: "0% 0%",
+          backdropFilter: "blur(10px)",
+        }}
+      >
+        SDK
+      </div>
+    </Link>
+    <Link href="/developer-docs/cli">
+      <div
+        className="bg-seashell text-black h-[156px] rounded-2xl overflow-hidden bannerHover pt-10 pl-10 text-2xl hover:scale-[99%] cursor-pointer transition-all"
+        style={{
+          backgroundImage: "url('./img/data-donuts.webp')",
+          backgroundSize: "140%",
+          backgroundRepeat: "no-repeat",
+          backgroundPosition: "-80% 0%",
+          backdropFilter: "blur(10px)",
+        }}
+      >
+        CLI
+      </div>
+    </Link>
+    <Link href="/developer-docs/recipes">
+      <div
+        className="bg-seashell text-black h-[156px] rounded-2xl overflow-hidden bannerHover pt-10 pl-10 text-2xl hover:scale-[99%] cursor-pointer transition-all"
+        style={{
+          backgroundImage: "url('./img/cloud.webp')",
+          backgroundSize: "140%",
+          backgroundRepeat: "no-repeat",
+          backgroundPosition: "-80% 0%",
+          backdropFilter: "blur(10px)",
+        }}
+      >
+        Cut & Paste Recipes
+      </div>
+    </Link>
+  </div>
+</div>
+
+</section>
+
+<section className="bg-seashell px-4 lg:px-[79px] py-2 text-black py-28">
+
+<SectionTitle title="Hands On" />
+
+    <p className="pt-8">
+      Start with tutorials and then join a global community of over 40,000 developers in our Quests program.
+      Earn unique NFTs for every quest you complete.
+    </p>
+
+  <ul className="flex flex-col gap-10 lg:flex-row mt-16">
+    {[
+      {
+        Title: "Tutorials",
+        FirstParagraph:
+          "Learn the Bundlr SDK with tutorials for all skill levels.",
+        URL: "https://bundlr.network",
+      },
+      {
+        Title: "Quests",
+        FirstParagraph:
+          "Learn more about Bundlr and earn unique NFTs for every quest you complete.",
+        URL: "https://bundlr.network",
+      },
+    ].map((item, index) => (
+      <li
+        key={`solutions-${index}`}
+        className="w-full rounded-lg bg-gradient-to-b from-[#968982] to-transparent p-[1px] lg:w-1/2 text-black"
+      >
+        <a href={item.URL || ""} target={"_blank"} rel="noreferrer">
+          <div className="flex flex-col gap-8 overflow-hidden rounded-lg bg-seashell px-2 py-8 lg:p-11">
+            {/* make image as background of rectangle box */}
+            <div className="flex flex-col gap-4 px-5 pb-10">
+              <Heading level={3}>{item.Title}</Heading>
+              <p className="font-robotoMono text-lg leading-loose">
+                {item.FirstParagraph}
+              </p>
+            </div>
+          </div>
+        </a>
+      </li>
+    ))}
+  </ul>
+</section>
+
+<HomeWhyUseBundlr
+  content={[
+    {
+      title: "Bundlers",
+      href: "#",
+      description:
+        "Bundlers bundlr transactions together before sending to Arweave.",
+    },
+    {
+      title: "Bundlr And Arweave",
+      href: "#",
+      description:
+        "Bundlers bundlr transactions together before sending to Arweave.",
+    },
+    {
+      title: "Gateways",
+      href: "#",
+      description:
+        "Bundlers bundlr transactions together before sending to Arweave.",
+    },
+    {
+      title: "Receipts",
+      href: "#",
+      description:
+        "Bundlers bundlr transactions together before sending to Arweave.",
+    },
+    {
+      title: "Transaction Lifecycle",
+      href: "#",
+      description:
+        "Understand each step of the process as a transaction is processed by Bundlr.",
+    },
+    {
+      title: "Scaling",
+      href: "#",
+      description:
+        "By separating read and write components into separate components, Bundlr is able to separately optimize each",
+    },
+    {
+      title: "Optimistic Caching",
+      href: "#",
+      description:
+        " Optimistic caching makes your uploads instantly available, no need to wait for finalization.",
+    },
+  ]}
+/>
