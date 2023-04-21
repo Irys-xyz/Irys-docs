@@ -6,12 +6,12 @@ import { Callout } from "nextra-theme-docs";
 
 # Bundlr In The Browser (WebBundlr)
 
-In order to use Bundlr with browser wallets like MetaMask and Phantom, use the `WebBundlr` class. Usage is very similar to the Bundlr class used with server-side development, however you don’t need to provide a private key as that will be linked via the user’s wallet. Whenever any functions that require signing are called (upload, fund, withdraw etc.) the linked wallet will prompt the user to confirm the required actions.
-
 <Callout type="warning" emoji="⚠️">
-	We recommend using ethers version 5 which our SDK fully supports. Ethers version 6 is not yet fully supported,
-	however if your project does require it there are code options below which will work.
+	If you're using Bundlr with React and `npx create-react-app`, you will need to follow [some extra setup
+	steps](/developer-docs/recipes/react).
 </Callout>
+
+In order to use Bundlr with browser wallets like MetaMask and Phantom, use the `WebBundlr` class. Usage is very similar to the Bundlr class used with server-side development, however you don’t need to provide a private key as that will be linked via the user’s wallet. Whenever any functions that require signing are called (upload, fund, withdraw etc.) the linked wallet will prompt the user to confirm the required actions.
 
 If you’d prefer to learn using a long-form tutorial, [we have this one on creating a web-based uploader with progress bars](/tutorials/file-uploader).
 
@@ -26,6 +26,11 @@ const provider = new providers.Web3Provider(window.ethereum);
 const bundlr = new WebBundlr("https://node2.bundlr.network", "matic", provider);
 await bundlr.ready();
 ```
+
+<Callout type="warning" emoji="⚠️">
+	We recommend using ethers version 5 which our SDK fully supports. Ethers version 6 is not yet fully supported,
+	however if your project does require it there are code options below which will work.
+</Callout>
 
 Import our SDK and connect to a Bundlr node using injected providers and ethers version 6.
 
