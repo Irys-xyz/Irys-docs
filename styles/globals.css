@@ -149,16 +149,3 @@ details[open] summary ~ * {
 .nx-text-primary-600 {
   @apply text-white;
 }
-
-nav {
-  @apply min-w-full;
-  padding-right: 79px !important;
-  padding-left: 79px !important;
-}
-
-@media (max-width: 768px) {
-  nav {
-    padding-right: 16px !important;
-    padding-left: 16px !important;
-  }
-}

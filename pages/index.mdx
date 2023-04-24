@@ -13,6 +13,23 @@ import Link from "next/link";
   <title>Bundlr Docs</title>
 </Head>
 
+<style jsx>
+  {`
+    :global(nav) {
+      min-width: 100% !important;
+      padding-right: 79px !important;
+      padding-left: 79px !important;
+    }
+
+    @media (max-width: 768px) {
+      :global(nav) {
+        padding-right: 16px !important;
+        padding-left: 16px !important;
+      }
+    }
+  `}
+</style>
+
 <div>
 
 <div
