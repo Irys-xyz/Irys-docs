@@ -2,6 +2,11 @@ import Footer from "./components/Footer";
 import { useConfig } from "nextra-theme-docs";
 import { useRouter } from "next/router";
 
+const FooterWrapper = () => {
+	const router = useRouter();
+	return <Footer noPadding={router.asPath !== "/"} />;
+};
+
 export default {
 	nextThemes: {
 		defaultTheme: "dark",
@@ -23,7 +28,13 @@ export default {
 		toggleButton: true,
 	},
 	logo: (
-		<svg xmlns="http://www.w3.org/2000/svg" width="37" height="42" fill="none" viewBox="0 0 37 42">
+		<svg
+			xmlns="http://www.w3.org/2000/svg"
+			width="37"
+			height="42"
+			fill="none"
+			viewBox="0 0 37 42"
+		>
 			<path
 				fill="currentColor"
 				d="M33.873 6.625a6.234 6.234 0 00-3.196-.895h-.551a6.541 6.541 0 00-2.391.718l-3.31 1.799-1.56.837-11.26 6.032a6.206 6.206 0 00-3.29 5.49v5.445l4.157-2.225v-3.22a2.08 2.08 0 011.091-1.824l9.303-4.982 1.559-.832 4.157-2.225 1.117-.598c.14-.078.288-.137.442-.177.169-.052.344-.078.52-.078.377.004.747.108 1.07.302a2.04 2.04 0 011.003 1.773v11.71a2.08 2.08 0 01-1.09 1.825L12.471 35.77v-3.687l-4.157 2.205v4.731a2.2 2.2 0 002.146 2.2c.38.01.756-.08 1.091-.26l22.056-11.814a6.2 6.2 0 003.289-5.47v-11.71a6.18 6.18 0 00-3.024-5.34z"
@@ -38,12 +49,15 @@ export default {
 		link: "https://github.com/Bundlr-Network",
 	},
 	footer: {
-		component: Footer,
+		component: FooterWrapper,
 	},
 	banner: {
 		key: "2.0-release",
 		text: (
-			<a href="https://bundlr.mirror.xyz/lSZAJcGSt0wopJcYjDTwjG7V8Zy7-kWcTvoan-KNzQI" target="_blank">
+			<a
+				href="https://bundlr.mirror.xyz/lSZAJcGSt0wopJcYjDTwjG7V8Zy7-kWcTvoan-KNzQI"
+				target="_blank"
+			>
 				🎉 Bundlr 0.11.0 SDK Released. Read more →
 			</a>
 		),

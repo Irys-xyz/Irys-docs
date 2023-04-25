@@ -3,7 +3,11 @@ import { DiscordIcon, GitIcon, MediumIcon, MirrorIcon, TelegramIcon, TwitterIcon
 import FooterDesktop from "../NewFooter/FooterDesktop";
 import FooterMobile from "../NewFooter/FooterMobile";
 
-const Footer = () => {
+const Footer = ({
+	noPadding
+}: {
+	noPadding?: boolean
+}) => {
 	const DEFINITIONS = [
 		{
 			title: "OVERVIEW",
@@ -125,7 +129,7 @@ const Footer = () => {
 	return (
 		<>
 			<FooterMobile data={DEFINITIONS} />
-			<FooterDesktop data={DEFINITIONS} />
+			<FooterDesktop data={DEFINITIONS} noPadding={noPadding} />
 		</>
 	);
 };
