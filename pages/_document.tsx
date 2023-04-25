@@ -15,7 +15,7 @@ const Document = () => {
                 <meta property="og:title" content="Bundlr" />
                 <meta
                     property="og:description"
-                    content="Bundlr is the world’s data layer. We solve data integrity issues through permanent storage and proof of provenance."
+                    content="Unlock the full potential of Bundlr's technology with our developer resources. Use our SDK and start storing data permanently with 3-4 lines of code."
                 />
                 <meta property="og:image" content="https://bundlr.network/new/assets/shared/open-graph.png" />
 
@@ -25,7 +25,7 @@ const Document = () => {
                 <meta name="twitter:title" content="Bundlr | Home" />
                 <meta
                     name="twitter:description"
-                    content="Bundlr is the world’s data layer. We solve data integrity issues through permanent storage and proof of provenance."
+                    content="Unlock the full potential of Bundlr's technology with our developer resources. Use our SDK and start storing data permanently with 3-4 lines of code."
                 />
                 <meta
                     name="twitter:image"
