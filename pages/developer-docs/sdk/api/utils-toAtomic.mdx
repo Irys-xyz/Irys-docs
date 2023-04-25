@@ -1,0 +1,27 @@
+---
+description: Bundlr utility functions
+---
+
+import { Callout } from "nextra-theme-docs";
+
+# `bundlr.utils.toAtomic(value)`
+
+**Parameters**
+
+-   `value`: The value to be converted
+
+**Returns**
+
+-   `atomicValue`: The value in atomic units
+
+```js
+const fundAmountAtomic = bundlr.utils.toAtomic(fundAmountStandard);
+```
+
+<Callout type="info" emoji="ℹ️">
+	Atomic units refer to the smallest possible unit of a given cryptocurrency. In
+	Ethereum, atomic units are called Wei, and they represent the smallest unit of Ether.
+	Similar to how 1 dollar can be broken down into 100 cents, 1 Ether can be broken down
+	into 10^18 Wei. In Solana, atomic units are called Lamports, 1 SOL can be broken down
+	into 10^9 Lamports.
+</Callout>

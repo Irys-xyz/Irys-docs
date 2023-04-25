@@ -28,6 +28,6 @@ Files uploaded via `upload-dir` can be retrieved in one of two ways.
 Creating an URL with the format `https://arweave.net/[manifed_id]/[original_file_name]`.
 Creating an URL using the transaction ID of each individual file uploaded with the format `https://arweave.net/[transacton_id]`
 
-After a successful folder upload, two files are written to your local project directory `[folder_name].csv` and `[folder_name].json`. Looking at the example below highlighting a folder called “llama_folder” with a total of 5 files in it. The transaction id for each file can be used to retrieve the uploaded data by forming an URL with the format `https://arweave.net]/[transaction_id]`
+After a successful folder upload, two files are written to your local project directory `[folder_name].csv` and `[folder_name].json`. Looking at the example below highlighting a folder called “llama_folder” with a total of 5 files in it. The transaction id for each file can be used to retrieve the uploaded data by forming an URL with the format `https://arweave.net]/[transaction-id]`
 
 ![llama-folder](/img/code-assets/llama-folder-manifest.png)

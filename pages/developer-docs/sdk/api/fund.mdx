@@ -1,0 +1,64 @@
+---
+description: Funding a node before uploading.
+---
+
+import { Callout } from "nextra-theme-docs";
+
+# `bundlr.fund(amount)`
+
+Funds the node with the specified amount of tokens. Fund the node you intend to upload to, funded balances are not shared between nodes.
+
+**Parameters**
+
+-   `amount`: The amount to fund. Value should be in atomic units.
+
+**Returns**
+
+-   `response`: A JSON object with the following values
+
+```json
+response = {
+	id, // The transaction id of the fund transfer
+	quantity, // How much is being transferred
+	reward, // The amount taken by the network as a fee
+	target, // The address the funds were sent to
+};
+```
+
+## Upfront Funding
+
+You can up-front fund a node, where you send over enough funds to cover all of a project’s uploads.
+
+```js
+try {
+	const response = await bundlr.fund(amountInAtomicUnits);
+	console.log(
+		`Funding successful txID=${response.id} amount funded=${response.quantity}`,
+	);
+} catch (e) {
+	console.log("Error funding node ", e);
+}
+```
+
+# Lazy-Funding
+
+You can also lazy-fund a node where you check the cost to upload each file first and then transfer exact funds. This works best with currencies like MATIC, ETH and SOL whose balances post (almost) instantly.
+
+```js
+import Bundlr from "@bundlr-network/client";
+import * as fs from "fs";
+
+const bundlr = new Bundlr("https://node1.bundlr.network", "matic", myPrivateKey);
+
+const pathToFile = "./llama.png";
+const { size } = await fs.promises.stat(pathToFile);
+const price = await bundlr.getPrice(size);
+await bundlr.fund(price);
+
+const { id } = await bundlr.uploadFile(pathToFile);
+console.log(`${pathToFile} --> Uploaded to https://arweave.net/${id}`);
+```
+
+<Callout type="info" emoji="ℹ️">
+Not all calls to `bundlr.fund()` will post immediately to your account, some blockchains are faster than others. When funding with AR, it can take upwards of 40 minutes before the balance shows up. For MATIC, ETH and SOL, balances will usually post in < 10s.
+</Callout>

@@ -1,0 +1,36 @@
+---
+description: Bundlr utility functions
+---
+
+import { Callout } from "nextra-theme-docs";
+
+# `bundlr.utils.getReceipt(trasnactionId)`
+
+Returns the receipt associated with the supplied transaction id, or an error if no receipt is found.
+
+**Parameters**
+
+-   `transactionId`: The transaction Id associated with the receipt
+
+**Returns**
+
+-   `response`: A JSON object with the following values
+
+```json
+response = {
+  id, // Transaction id (used to download the data)
+  timestamp, // Timestamp (UNIX milliseconds) of when the transaction was created and verified
+  version, // The version of this JSON file, currently 1.0.0
+  public, // Public key of the bundler node used
+  signature, // A signed deep hash of the JSON receipt
+  deadlineHeight, // The block number by which the transaction must be finalized on Arweave
+  block, // Deprecated
+  validatorSignatures, // Reserved for future use once we're decentralized
+  verify, // An async function used to verify the receipt at any time
+}
+```
+
+```js
+const transactionId = ""; // Your transaction Id
+const receipt = bundlr.utils.getReceipt(transactionId);
+```

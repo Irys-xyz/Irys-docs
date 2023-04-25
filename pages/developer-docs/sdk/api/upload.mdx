@@ -1,0 +1,38 @@
+---
+description: Uploading data to Bundlr / Arweave.
+---
+
+import { Callout } from "nextra-theme-docs";
+
+# `bundlr.upload(data, tags)`
+
+**Parameters**
+
+-   `data`: The data to upload
+-   `tags`: Optional [metatags](/developer-docs/tags)
+
+**Returns**
+
+-   `response`: A JSON object with the following values
+
+```json
+response = {
+  id, // the transaction id of the upload
+  timestamp: // The timestamp of when the transaction was uploaded and verified
+}
+```
+
+```js
+const dataToUpload = "GM world."; // String to upload
+try {
+	const response = await bundlr.upload(dataToUpload);
+	console.log(`Data uploaded ==> https://arweave.net/${response.id}`);
+} catch (e) {
+	console.log("Error uploading file ", e);
+}
+```
+
+<Callout type="info" emoji="ℹ️">
+	The transaction id returned as part of the response is used to download the data,
+	simply create a URL with the format `https://arweave.net/[transaction-id].`
+</Callout>

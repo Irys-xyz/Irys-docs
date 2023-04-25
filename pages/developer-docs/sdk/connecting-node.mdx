@@ -8,15 +8,7 @@ import { Callout } from "nextra-theme-docs";
 
 To connect to a Bundlr node, provide your private key to allow for access to stored funds and for signing transactions.
 
-```js
-const bundlr = new Bundlr("http://node1.bundlr.network", "arweave", “<arweave_private_key>”);
-
-const bundlr = new Bundlr("http://node2.bundlr.network", "matic", “<polygon_private_key>”);
-```
-
 The Bundlr constructor accepts three arguments:
-
-## Node
 
 1. Node address: Address of the node you’ll connect to, current options are:
     - `https://node1.bundlr.network`
@@ -39,7 +31,7 @@ console.log(`wallet address = ${bundlr.address}`);
 You can optionally specify a custom RPC:
 
 ```js
-const bundlr = new Bundlr("https://devnet.bundlr.network", "solana", "<solana_private key>", {
+const bundlr = new Bundlr("https://devnet.bundlr.network", "solana", "<solana-private-key>", {
 	providerUrl: "https://api.devnet.solana.com",
 });
 ```
