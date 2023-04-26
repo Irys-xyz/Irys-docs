@@ -4,9 +4,13 @@ description: Tagging uploads with custom metadata.
 
 # Metadata Tagging
 
-Bundlr supports attaching metadata tags to each transaction. Tags can be used to categorize transactions, making it easier to search for and retrieve relevant information. Tags also play a role in Proof Of Provenance
+Bundlr supports attaching metadata tags to each transaction.
 
-Tags are available for querying via [GraphQL](/developer-docs/querying-data).
+Tags can be used to:
+
+-   Categorize transactions, making it easier to search for and retrieve relevant information using [GraphQL](/developer-docs/querying-data)
+-   Build provenance chains for [Proof Of Provenance](/overview/solutions/proof-of-provenance) applications
+-   Inform web browsers how to render image files
 
 ## Content-Type
 
@@ -16,7 +20,7 @@ When uploading a file that will be rendered by the browser, you must specify the
 // Your file
 const fileToUpload = "./myImage.png";
 
-// Add a custom tag that tells the gateway how to serve this file to a browser
+// Add a custom tag that tells the browser how to properly render the file
 const tags = [{ name: "Content-Type", value: "image/png" }];
 
 try {
@@ -49,4 +53,4 @@ try {
 
 ## Custom
 
-Additionally, you can use any tags your specific use case requires.
+You can use any custom tags your use case requires.
