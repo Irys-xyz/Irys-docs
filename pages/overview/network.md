@@ -4,6 +4,8 @@
 
 Bundlr has three nodes. Uploads to node 1 and node 2 are permanent. Uploads of less than 100 KiB are currently free on node 2.
 
+Node 1 and Devnet support [bundling](/overview/services/bundling) and [Proof of Provenance](/overview/solutions/proof-of-provenance), Node 2 supports [bundling](/overview/services/bundling) only.
+
 -   `https://node1.bundlr.network`
 -   `https://node2.bundlr.network`
 -   `https://devnet.bundlr.network`
