@@ -1,8 +1,5 @@
 ---
-sidebar_position: 3
-sidebar_label: Metadata Tagging
 description: Tagging uploads with custom metadata.
-slug: /metadata-tagging
 ---
 
 # Metadata Tagging

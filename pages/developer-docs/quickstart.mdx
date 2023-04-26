@@ -19,14 +19,21 @@ We also have a [detailed step-by-step tutorial](/hands-on/tutorials/bundlr-sdk) 
 
 #### Step 1: [Install the SDK](/developer-docs/sdk/installing-the-sdk)
 
-```js
+```console
 npm install @bundlr-network/client
+```
+
+or
+
+```console
+yarn add @bundlr-network/client
 ```
 
 #### Step 2: [Connect To A Bundlr Node](/developer-docs/sdk/connecting-node)
 
 ```js
-const bundlr = new Bundlr("http://node2.bundlr.network", "matic", “<polygon_private_key>”);
+const polygonPrivateKey = "6d779d4..."; // your private key
+const bundlr = new Bundlr("http://node2.bundlr.network", "matic", polygonPrivateKey);
 ```
 
 #### Step 3: [Fund Your Node](/developer-docs/sdk/funding-node) (To Pay For Uploads)

@@ -1,6 +1,4 @@
 ---
-sidebar_position: 6
-sidebar_label: Controlling The Upload
 description: Pausing and resuming uploads.
 ---
 

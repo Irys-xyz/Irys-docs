@@ -1,6 +1,4 @@
 ---
-sidebar_position: 8
-sidebar_label: Upload Events
 description: Track upload progress with event callbacks.
 ---
 

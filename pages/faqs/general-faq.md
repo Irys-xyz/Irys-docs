@@ -1,6 +1,4 @@
 ---
-sidebar_position: 1
-sidebar_label: General FAQ
 description: Frequently asked questions about Bundlr.
 ---
 

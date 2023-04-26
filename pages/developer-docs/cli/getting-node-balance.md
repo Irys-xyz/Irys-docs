@@ -1,8 +1,5 @@
 ---
-sidebar_position: 4
-sidebar_label: Getting Node Balance
 description: Obtaining balance funded on a given node.
-slug: /cli/balance
 ---
 
 # Getting Node Balance
@@ -17,6 +14,6 @@ Required option flags:
 ## `bundlr balance`
 
 ```console
-bundlr balance <address> -h <node_address> -c <currency>
+bundlr balance <address> -h <node-address> -c <currency>
 bundlr balance Ry2bDGfBIvYtvDPYnf0eg_ijH4A1EDKaaEEecyjbUQ4 -h https://node1.bundlr.network -c arweave
 ```

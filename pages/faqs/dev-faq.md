@@ -1,6 +1,4 @@
 ---
-sidebar_position: 2
-sidebar_label: Developer FAQ
 description: Frequently asked questions from our developer community.
 ---
 

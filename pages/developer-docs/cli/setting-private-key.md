@@ -1,8 +1,5 @@
 ---
-sidebar_position: 3
-sidebar_label: Specifying A Private Key
 description: Linking your wallet's private key.
-slug: /cli/private-key
 ---
 
 # Setting A Private Key
@@ -16,7 +13,7 @@ The -w and -c option flags are used in conjunction with the other commands outli
 ## `bundlr -w`
 
 ```console
-bundlr -w <wallet_file_name> -c <currency>
+bundlr -w <wallet-file-name> -c <currency>
 bundlr -w myKeyPair.json
 bundlr -w myEthKeyPair.json -c ethereum
 ```

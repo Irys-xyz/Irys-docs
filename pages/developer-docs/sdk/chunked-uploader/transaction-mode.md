@@ -1,6 +1,4 @@
 ---
-sidebar_position: 5
-sidebar_label: Transaction Mode
 description: Access fine-grained control over transactions.
 ---
 

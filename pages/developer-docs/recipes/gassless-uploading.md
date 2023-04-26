@@ -1,8 +1,5 @@
 ---
-sidebar_position: 5
-sidebar_label: Gassless Uploading
-description: Using Server-Side signing implement gassless transactions.
-slug: /recipes/gassless-uploading
+description: Using Server-Side signing to implement gassless transactions.
 ---
 
 # Gassless Uploading With Server-Side Signing

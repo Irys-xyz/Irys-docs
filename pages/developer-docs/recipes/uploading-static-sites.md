@@ -1,8 +1,5 @@
 ---
-sidebar_position: 4
-sidebar_label: Bundlr + Uploading Websites
 description: How to upload a static website to the permaweb using Bundlr
-slug: /recipes/static-website-upload
 ---
 
 # Uploading Static Websites

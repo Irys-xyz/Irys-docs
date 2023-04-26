@@ -1,6 +1,4 @@
 ---
-sidebar_position: 7
-sidebar_label: Expired Uploads
 description: Recovering expired uploads.
 ---
 
