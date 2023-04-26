@@ -20,4 +20,4 @@ Uploads to Bundlr's [Devnet](/developer-docs/using-devnet) are kept for roughly 
 
 ## Chain Integrations
 
-Bundlr is multichain, supporting both paying for uploads with [14 tokens](/overview/supported-tokens) and signing that upload using the token’s cryptography. The signature type used to sign a transaction is tracked at the [bundle-level](/learn/bundles).
+Bundlr is multichain, supporting both paying for uploads with [14 tokens](/overview/supported-tokens) and signing that upload using the token’s cryptography. The signature type used to sign a transaction is tracked at the [transaction-level](/learn/bundles).

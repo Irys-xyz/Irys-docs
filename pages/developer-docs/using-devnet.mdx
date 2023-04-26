@@ -6,32 +6,47 @@ description: Build and prototype your application on Bundlr's Devnet
 
 Bundlr's Devnet is for developers who are building projects or learning how to use our SDK. Uploads to Devnet are kept for approximately 60 days. When using Devnet, developers pay using tokens that are available from free public faucets.
 
-To connect to Devnet, supply the address of our Devnet node when instantiating either a `Bundlr` or `WebBundlr` object
+To connect to Devnet, supply the address of our Devnet node when instantiating either a `Bundlr` or `WebBundlr` object.
 
 It's important to note that when using Devnet with the `Bundlr` class, you must specify an RPC address. When using the `WebBundlr` class, the RPC address is only required when using non-EVM chains.
 
-#### Always Specify An RPC When Using `Bundlr` Class
+#### `Bundlr` Class
 
 ```js
-const bundlr = new Bundlr("https://devnet.bundlr.network", "solana", "<solana private key>", {
-	providerUrl: "https://api.devnet.solana.com",
-});
+const bundlr = new Bundlr(
+	"https://devnet.bundlr.network",
+	"solana",
+	"<solana-private-key>",
+	{
+		providerUrl: "https://api.devnet.solana.com",
+	},
+);
 
-const bundlr = new Bundlr("https://devnet.bundlr.network", "matic", "<polygon private key>", {
-	providerUrl: "https://rpc-mumbai.maticvigil.com",
-});
+const bundlr = new Bundlr(
+	"https://devnet.bundlr.network",
+	"matic",
+	"<polygon-private-key>",
+	{
+		providerUrl: "https://rpc-mumbai.maticvigil.com",
+	},
+);
 ```
 
-#### RPC Is Not Needed When Using `WebBundlr` Class And EVM Chains
+#### `WebBundlr` Class And EVM Chains
 
 ```js
 const bundlr = new WebBundlr("https://devnet.bundlr.network", "matic", provider);
 ```
 
-#### RPC Is Needed When Using `WebBundlr` Class And Non-EVM Chains
+#### `WebBundlr` Class And Non-EVM Chains
 
 ```js
-const bundlr = new WebBundlr("https://devnet.bundlr.network", "solana", "<solana private key>", {
-	providerUrl: "https://api.devnet.solana.com",
-});
+const bundlr = new WebBundlr(
+	"https://devnet.bundlr.network",
+	"solana",
+	provider
+	{
+		providerUrl: "https://api.devnet.solana.com",
+	},
+);
 ```
