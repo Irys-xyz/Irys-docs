@@ -47,7 +47,7 @@ The route `publicKey.ts` returns the public key for the server's wallet. This is
 
 #### Solana-Based Wallets
 
-```ts
+```ts filename="publicKey.ts"
 import Bundlr from "@bundlr-network/client/build/node";
 import { NextApiRequest, NextApiResponse } from "next";
 
@@ -80,30 +80,18 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
 #### ETH-Based Wallets
 
-```ts
-import Bundlr from "@bundlr-network/client/build/node";
+```ts filename="publicKey.ts"
+import { TypedEthereumSigner } from "arbundles";
 import { NextApiRequest, NextApiResponse } from "next";
 
 /**
- *
  * @returns The server's private key.
  */
 export async function serverInit(): Promise<Buffer> {
-	const key = process.env.PAYMENT_PRIVATE_KEY; // your private key
-	const bundlrNodeAddress = process.env.BUNDLR_NODE_ADDRESS;
-	const rpcUrl = process.env.RPC;
-
-	const serverBundlr = new Bundlr(
-		//@ts-ignore
-		bundlrNodeAddress,
-		"matic",
-		key,
-		{
-			providerUrl: rpcUrl,
-		},
-	);
-	const publicKey = serverBundlr.currencyConfig.getSigner().publicKey;
-	return publicKey;
+	const key = process.env.PAYMENT_PRIVATE_KEY; // your private key;
+	if (!key) throw new Error("Private key is undefined!");
+	const signer = new TypedEthereumSigner(key);
+	return signer.publicKey;
 }
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
@@ -117,7 +105,7 @@ The route `signData.ts` signs the data provided using the server's private key. 
 
 #### Solana-Based Wallets
 
-```ts
+```ts filename="signData.ts"
 import Bundlr from "@bundlr-network/client/build/node";
 import type { NextApiRequest, NextApiResponse } from "next";
 import HexInjectedSolanaSigner from "arbundles/src/signing/chains/HexInjectedSolanaSigner";
@@ -165,10 +153,9 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
 #### Eth-Based Wallets
 
-```ts
-import Bundlr from "@bundlr-network/client/build/node";
+```ts filename="signData.ts"
 import type { NextApiRequest, NextApiResponse } from "next";
-import EthereumSigner from "arbundles/src/signing/chains/ethereumSigner";
+import { TypedEthereumSigner } from "arbundles";
 
 /**
  *
@@ -176,24 +163,9 @@ import EthereumSigner from "arbundles/src/signing/chains/ethereumSigner";
  */
 export async function signDataOnServer(signatureData: Buffer): Promise<Buffer> {
 	const key = process.env.PAYMENT_PRIVATE_KEY; // your private key
-	const bundlrNodeAddress = process.env.BUNDLR_NODE_ADDRESS;
-	const rpcUrl = process.env.RPC;
-
-	const serverBundlr = new Bundlr(
-		//@ts-ignore
-		bundlrNodeAddress,
-		"matic",
-		key,
-		{
-			providerUrl: rpcUrl,
-		},
-	);
-
-	const encodedMessage = Buffer.from(signatureData);
-
-	const signature = await serverBundlr.currencyConfig.sign(encodedMessage);
-
-	return Buffer.from(signature);
+	if (!key) throw new Error("Private key is undefined!");
+	const signer = new TypedEthereumSigner(key);
+	return Buffer.from(await signer.sign(signatureData));
 }
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
@@ -212,7 +184,7 @@ To perform lazy-funding of uploads, pass the exact number of bytes you want to f
 
 #### Solana-Based Wallets
 
-```ts
+```ts filename="lazyFund.ts"
 import Bundlr from "@bundlr-network/client/build/node";
 import type { NextApiRequest, NextApiResponse } from "next";
 
@@ -256,7 +228,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 #### Eth-Based Wallets
 
 ```ts
-import Bundlr from "@bundlr-network/client/build/node";
+import Bundlr from "@bundlr-network/client";
 import type { NextApiRequest, NextApiResponse } from "next";
 
 /**
@@ -279,9 +251,16 @@ export async function lazyFund(filesize: string): Promise<string> {
 			providerUrl: rpcUrl,
 		},
 	);
+	console.log(
+		"serverBundlrPubKey",
+		//@ts-ignore
+		serverBundlr.currencyConfig.getPublicKey().toJSON(),
+	);
 
 	const price = await serverBundlr.getPrice(parseInt(filesize));
+	console.log("price=", price.toString());
 	const fundTx = await serverBundlr.fund(price);
+	console.log("successfully funded fundTx=", fundTx);
 
 	// return the transaction id
 	return fundTx.id;
@@ -290,6 +269,7 @@ export async function lazyFund(filesize: string): Promise<string> {
 // res: NextApiResponse,
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
 	const body = JSON.parse(req.body);
+	console.log("lazyFund body=", body);
 	const fundTx = await lazyFund(body);
 
 	res.status(200).json({ txResult: fundTx });
@@ -342,27 +322,37 @@ const provider = {
 
 ```ts
 const provider = {
+	// for ETH wallets
 	getPublicKey: async () => {
 		return pubKey;
 	},
 	getSigner: () => {
-		return provider;
+		return {
+			getAddress: () => pubKey, // pubkey is address for TypedEthereumSigner
+			_signTypedData: async (
+				_domain: never,
+				_types: never,
+				message: { address: string; "Transaction hash": Uint8Array },
+			) => {
+				let convertedMsg = Buffer.from(message["Transaction hash"]).toString(
+					"hex",
+				);
+				const res = await fetch("/api/signData", {
+					method: "POST",
+					body: JSON.stringify({ signatureData: convertedMsg }),
+				});
+				const { signature } = await res.json();
+				const bSig = Buffer.from(signature, "hex");
+				// pad & convert so it's in the format the signer expects to have to convert from.
+				const pad = Buffer.concat([Buffer.from([0]), Buffer.from(bSig)]).toString(
+					"hex",
+				);
+				return pad;
+			},
+		};
 	},
-	signMessage: async (message: any) => {
-		let convertedMsg = Buffer.from(message).toString("hex");
-		const res = await fetch("/api/signData", {
-			method: "POST",
-			body: JSON.stringify({
-				signatureData: convertedMsg,
-			}),
-		});
-		const { signature } = await res.json();
-		const bSig = Buffer.from(signature, "hex");
-		if (message === "sign this message to connect to Bundlr.Network") return bSig;
-		// pad & convert so it's in the format the signer expects to have to convert from.
-		const pad = Buffer.concat([Buffer.from([0]), Buffer.from(bSig)]).toString("hex");
-		return pad;
-	},
+
+	_ready: () => {},
 };
 ```
 
