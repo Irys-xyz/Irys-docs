@@ -4,7 +4,7 @@ description: Tagging uploads with custom metadata.
 
 # Metadata Tagging
 
-Bundlr supports attaching metadata tags to each transaction. This leads to specific categorization of data, making it easier to search and retrieve relevant information.
+Bundlr supports attaching metadata tags to each transaction. Tags can be used to categorize transactions, making it easier to search for and retrieve relevant information. Tags also play a role in Proof Of Provenance
 
 Tags are available for querying via [GraphQL](/developer-docs/querying-data).
 
