@@ -4,20 +4,27 @@ description: Tagging uploads with custom metadata.
 
 # Metadata Tagging
 
-Bundlr supports adding tags or metadata to each transaction.
+Bundlr supports attaching metadata tags to each transaction. This leads to specific categorization of data, making it easier to search and retrieve relevant information.
+
+Tags are available for querying via [GraphQL](/developer-docs/querying-data).
 
 ## Content-Type
 
 When uploading a file that will be rendered by the browser, you must specify the [content-type (MIME type)](https://developer.mozilla.org/en-US/Web/HTTP/Basics_of_HTTP/MIME_types/Common_types).
 
 ```js
-const nft = fs.readFileSync("/path/to/nft.png");
+// Your file
+const fileToUpload = "./myImage.png";
+
+// Add a custom tag that tells the gateway how to serve this file to a browser
 const tags = [{ name: "Content-Type", value: "image/png" }];
-const tx = await bundlr.upload(nft, {
-	tags: [{ tags }],
-});
-console.log(tx);
-console.log(`File uploaded ==> https://arweave.net/${tx.id}`);
+
+try {
+	const response = await bundlr.uploadFile(fileToUpload, tags);
+	console.log(`File uploaded ==> https://arweave.net/${response.id}`);
+} catch (e) {
+	console.log("Error uploading file ", e);
+}
 ```
 
 ## Application
@@ -25,16 +32,19 @@ console.log(`File uploaded ==> https://arweave.net/${tx.id}`);
 You can label your application name, which is helpful if you need to filter transactions by application.
 
 ```js
-const nft = fs.readFileSync("/path/to/nft.png");
+// Your file
+const fileToUpload = "./myNFT.png";
+
 const tags = [
 	{ name: "Content-Type", value: "image/png" },
 	{ name: "appName", value: "NFTs To The Moon" },
 ];
-const tx = await bundlr.upload(nft, {
-	tags: [{ tags }],
-});
-console.log(tx);
-console;
+try {
+	const response = await bundlr.uploadFile(fileToUpload, tags);
+	console.log(`File uploaded ==> https://arweave.net/${response.id}`);
+} catch (e) {
+	console.log("Error uploading file ", e);
+}
 ```
 
 ## Custom
