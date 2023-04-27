@@ -7,32 +7,8 @@ body {
   line-height: 1.5;
 }
 
-main > * > a {
-  @apply font-robotoMono !text-white;
-}
-
-main > ul > li {
-  @apply font-robotoMono !text-white;
-}
-
-p > a {
-  @apply font-robotoMono !text-white;
-}
-
-main > * > ul > li > a {
-  @apply font-robotoMono !text-white;
-}
-
 #headlessui-listbox-button-\:R2njcm\: > div {
   display: none;
-}
-
-p {
-  @apply font-robotoMono !leading-loose;
-}
-
-ol > li {
-  @apply font-robotoMono !leading-loose;
 }
 
 nav > a > span {
