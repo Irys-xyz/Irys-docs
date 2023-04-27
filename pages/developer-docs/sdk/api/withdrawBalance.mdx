@@ -8,11 +8,13 @@ Withdraws the supplied amount. The parameter value must in atomic units.
 
 **Parameters**
 
--   `amount`: The amount to withdraw. Value should be in atomic units.
+<div className="-mt-5" />- `amount`: The amount to withdraw. Value should be in atomic
+units.
 
 **Returns**
 
--   `response`: Either a 400 or 200 code, combined with the following values:
+<div className="-mt-5" />- `response`: Either a 400 or 200 code, combined with the
+following values:
 
 ```json
 400 - something went wrong
@@ -29,15 +31,15 @@ response.data = {
 
 ```js
 try {
-	// 1. Get current balance
-	const curBalance = await bundlr.getLoadedBalance();
-	// 2. Withdraw all
-	const response = await bundlr.withdrawBalance(curBalance);
+  // 1. Get current balance
+  const curBalance = await bundlr.getLoadedBalance();
+  // 2. Withdraw all
+  const response = await bundlr.withdrawBalance(curBalance);
 
-	console.log(
-		`Funds withdrawn txID=${response.data.tx_id} amount requested=${response.data.requested}`,
-	);
+  console.log(
+    `Funds withdrawn txID=${response.data.tx_id} amount requested=${response.data.requested}`
+  );
 } catch (e) {
-	console.log("Error funding node ", e);
+  console.log("Error funding node ", e);
 }
 ```

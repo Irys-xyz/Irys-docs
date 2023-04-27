@@ -149,3 +149,19 @@ details[open] summary ~ * {
 .nx-text-primary-600 {
   @apply text-white;
 }
+
+ul > li > div > div > * {
+@apply whitespace-nowrap;
+}
+
+#__next > div > div.nx-mx-auto.nx-flex.nx-max-w-\[90rem\] > aside > div.nx-overflow-y-auto.nx-overflow-x-hidden.nx-p-4.nx-grow.md\:nx-h-\[calc\(100vh-var\(--nextra-navbar-height\)-var\(--nextra-menu-height\)\)\].nextra-scrollbar {
+  @apply min-w-[282px];
+}
+
+.nextra-callout {
+  @apply px-5 py-3 flex items-start gap-6;
+}
+
+.nextra-callout > div:nth-child(1) {
+  @apply text-3xl mt-2;
+}

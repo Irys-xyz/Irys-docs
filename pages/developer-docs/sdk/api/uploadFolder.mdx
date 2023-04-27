@@ -8,14 +8,19 @@ Uploads a folder of files to Bundlr.
 
 **Parameters**
 
--   `folderToUpload`: Path to the folder being uploaded
--   `indexFile`: (optional) The name of an index file also included in the folder you upload. If provided, this index file will load when a user requests `https://arweave.net/[manifest_id]`
--   `batchSize`: (optional) The number of files to upload at once.
--   `keepDeleted`: (optional) Whether to keep now deleted items from previous uploads. When you upload a folder, the file names are indexed and saved. If you then re-upload that same folder, Bundlr will only upload new files added since the previous upload. In the case where you delete files from your source directory, this flag tells Bundlr whether to keep those deleted files in the index or remove them.
+<div className="-mt-5" />- `folderToUpload`: Path to the folder being uploaded -
+`indexFile`: (optional) The name of an index file also included in the folder you
+upload. If provided, this index file will load when a user requests `https://arweave.net/[manifest_id]`
+- `batchSize`: (optional) The number of files to upload at once. - `keepDeleted`:
+(optional) Whether to keep now deleted items from previous uploads. When you upload
+a folder, the file names are indexed and saved. If you then re-upload that same folder,
+Bundlr will only upload new files added since the previous upload. In the case where
+you delete files from your source directory, this flag tells Bundlr whether to keep
+those deleted files in the index or remove them.
 
 **Returns**
 
--   `response`: A JSON object with the following values
+<div className="-mt-5" />- `response`: A JSON object with the following values
 
 ```json
 response = {
@@ -27,15 +32,15 @@ response = {
 ```js
 const folderToUpload = "./myNFTs/"; // Path to folder
 try {
-	const response = await bundlr.uploadFolder(folderToUpload, {
-		indexFile: "index.html",
-		batchSize: 50,
-		keepDeleted: false,
-	});
+  const response = await bundlr.uploadFolder(folderToUpload, {
+    indexFile: "index.html",
+    batchSize: 50,
+    keepDeleted: false,
+  });
 
-	console.log(`Files uploaded. Manifest Id ${response.id}`);
+  console.log(`Files uploaded. Manifest Id ${response.id}`);
 } catch (e) {
-	console.log("Error uploading file ", e);
+  console.log("Error uploading file ", e);
 }
 ```
 

@@ -10,11 +10,12 @@ Funds the node with the specified amount of tokens. Fund the node you intend to 
 
 **Parameters**
 
--   `amount`: The amount to fund. Value should be in atomic units.
+<div className="-mt-5" />- `amount`: The amount to fund. Value should be in atomic
+units.
 
 **Returns**
 
--   `response`: A JSON object with the following values
+<div className="-mt-5" />- `response`: A JSON object with the following values
 
 ```json
 response = {
@@ -31,12 +32,12 @@ You can up-front fund a node, where you send over enough funds to cover all of a
 
 ```js
 try {
-	const response = await bundlr.fund(amountInAtomicUnits);
-	console.log(
-		`Funding successful txID=${response.id} amount funded=${response.quantity}`,
-	);
+  const response = await bundlr.fund(amountInAtomicUnits);
+  console.log(
+    `Funding successful txID=${response.id} amount funded=${response.quantity}`
+  );
 } catch (e) {
-	console.log("Error funding node ", e);
+  console.log("Error funding node ", e);
 }
 ```
 
@@ -48,7 +49,11 @@ You can also lazy-fund a node where you check the cost to upload each file first
 import Bundlr from "@bundlr-network/client";
 import * as fs from "fs";
 
-const bundlr = new Bundlr("https://node1.bundlr.network", "matic", myPrivateKey);
+const bundlr = new Bundlr(
+  "https://node1.bundlr.network",
+  "matic",
+  myPrivateKey
+);
 
 const pathToFile = "./llama.png";
 const { size } = await fs.promises.stat(pathToFile);

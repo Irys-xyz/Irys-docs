@@ -10,12 +10,12 @@ Uploads any data passed to it, returns a [signed receipt](/learn/receipts). This
 
 **Parameters**
 
--   `data`: The data to upload
--   `tags`: Optional [metatags](/developer-docs/tags)
+<div className="-mt-5" />- `data`: The data to upload - `tags`: Optional
+[metatags](/developer-docs/tags)
 
 **Returns**
 
--   `response`: A JSON object with the following values
+<div className="-mt-5" />- `response`: A JSON object with the following values
 
 ```json
 response = {
@@ -35,19 +35,20 @@ response = {
 // Data to upload
 const dataToUpload = "GM world.";
 try {
-	const receipt = await bundlr.upload(dataToUpload);
-	console.log(`Data uploaded ==> https://arweave.net/${receipt.id}`);
+  const receipt = await bundlr.upload(dataToUpload);
+  console.log(`Data uploaded ==> https://arweave.net/${receipt.id}`);
 } catch (e) {
-	console.log("Error uploading file ", e);
+  console.log("Error uploading file ", e);
 }
 ```
 
 <Callout type="info" emoji="ℹ️">
-	[More information on cryptographically signed receipts,] can be found in our
-	comprehensive resources section.
+  [More information on cryptographically signed receipts,] can be found in our
+  comprehensive resources section.
 </Callout>
 
 <Callout type="info" emoji="ℹ️">
-	The transaction id returned as part of the response is used to download the data,
-	simply create a URL with the format `https://arweave.net/[transaction-id].`
+  The transaction id returned as part of the response is used to download the
+  data, simply create a URL with the format
+  `https://arweave.net/[transaction-id].`
 </Callout>

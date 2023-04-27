@@ -10,7 +10,8 @@ Returns the connected wallet's balance on the connected node.
 
 **Returns**
 
--   `loadedBalance`: Wallet balance on the connected node in atomic units. You can convert it into standard units using [`bundlr.utils.fromAtomic(atomicUnits)`](/developer-docs/sdk/api/utils-fromAtomic).
+<div className="-mt-5" />- `loadedBalance`: Wallet balance on the connected node
+in atomic units. You can convert it into standard units using [`bundlr.utils.fromAtomic(atomicUnits)`](/developer-docs/sdk/api/utils-fromAtomic).
 
 ```js
 // Get loaded balance in atomic units
@@ -23,6 +24,6 @@ console.log(`Node balance (converted) = ${convertedBalance}`);
 ```
 
 <Callout type="info" emoji="ℹ️">
-	Balances are not shared between nodes, each node maintains its own ledger of user
-	balances.
+  Balances are not shared between nodes, each node maintains its own ledger of
+  user balances.
 </Callout>
