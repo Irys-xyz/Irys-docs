@@ -1,8 +1,5 @@
 ---
-sidebar_position: 4
-sidebar_label: Querying Data
 description: Querying data using REST APIs and GraphQL.
-slug: /querying
 ---
 
 LUKE TODO

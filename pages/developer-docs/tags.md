@@ -1,26 +1,34 @@
 ---
-sidebar_position: 3
-sidebar_label: Metadata Tagging
 description: Tagging uploads with custom metadata.
-slug: /metadata-tagging
 ---
 
 # Metadata Tagging
 
-Bundlr supports adding tags or metadata to each transaction.
+Bundlr supports attaching metadata tags to each transaction.
+
+Tags can be used to:
+
+-   Categorize transactions, making it easier to search for and retrieve relevant information using [GraphQL](/developer-docs/querying-data)
+-   Build provenance chains for [Proof Of Provenance](/overview/solutions/proof-of-provenance) applications
+-   Inform web browsers how to render image files
 
 ## Content-Type
 
 When uploading a file that will be rendered by the browser, you must specify the [content-type (MIME type)](https://developer.mozilla.org/en-US/Web/HTTP/Basics_of_HTTP/MIME_types/Common_types).
 
 ```js
-const nft = fs.readFileSync("/path/to/nft.png");
+// Your file
+const fileToUpload = "./myImage.png";
+
+// Add a custom tag that tells the browser how to properly render the file
 const tags = [{ name: "Content-Type", value: "image/png" }];
-const tx = await bundlr.upload(nft, {
-	tags: [{ tags }],
-});
-console.log(tx);
-console.log(`File uploaded ==> https://arweave.net/${tx.id}`);
+
+try {
+	const response = await bundlr.uploadFile(fileToUpload, tags);
+	console.log(`File uploaded ==> https://arweave.net/${response.id}`);
+} catch (e) {
+	console.log("Error uploading file ", e);
+}
 ```
 
 ## Application
@@ -28,18 +36,21 @@ console.log(`File uploaded ==> https://arweave.net/${tx.id}`);
 You can label your application name, which is helpful if you need to filter transactions by application.
 
 ```js
-const nft = fs.readFileSync("/path/to/nft.png");
+// Your file
+const fileToUpload = "./myNFT.png";
+
 const tags = [
 	{ name: "Content-Type", value: "image/png" },
 	{ name: "appName", value: "NFTs To The Moon" },
 ];
-const tx = await bundlr.upload(nft, {
-	tags: [{ tags }],
-});
-console.log(tx);
-console;
+try {
+	const response = await bundlr.uploadFile(fileToUpload, tags);
+	console.log(`File uploaded ==> https://arweave.net/${response.id}`);
+} catch (e) {
+	console.log("Error uploading file ", e);
+}
 ```
 
 ## Custom
 
-Additionally, you can use any tags your specific use case requires.
+You can use any custom tags your use case requires.

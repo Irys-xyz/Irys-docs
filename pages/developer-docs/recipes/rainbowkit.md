@@ -1,8 +1,5 @@
 ---
-sidebar_position: 2
-sidebar_label: Using Bundlr With RainbowKit / WAGMI Hooks
 description: Making RainbowKit providers work with the Bundlr SDK.
-slug: /recipes/rainbow-kit
 ---
 
 # Using Bundlr With RainbowKit / WAGMI Hooks
@@ -29,7 +26,12 @@ const rainbowKitProvider = useProvider();
 const { data: rainbowKitSigner, isError, isLoading } = useSigner();
 // use method injection to add the missing function
 rainbowKitProvider.getSigner = () => rainbowKitSigner;
-const bundlr = new WebBundlr("https://devnet.bundlr.network", "matic", rainbowKitProvider, {
-	providerUrl: "https://rpc-mumbai.matic.today",
-});
+const bundlr = new WebBundlr(
+	"https://devnet.bundlr.network",
+	"matic",
+	rainbowKitProvider,
+	{
+		providerUrl: "https://rpc-mumbai.matic.today",
+	},
+);
 ```

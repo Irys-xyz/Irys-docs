@@ -1,8 +1,5 @@
 ---
-sidebar_position: 5
-sidebar_label: Getting Upload Price
 description: Checking the price to upload n bytes.
-slug: /cli/upload-price
 ---
 
 # Getting Upload Price
@@ -17,7 +14,7 @@ Required option flags:
 ## `bundlr price`
 
 ```console
-bundlr price <num_bytes> -h <node_address> -c <currency>
+bundlr price <num-bytes> -h <node-address> -c <currency>
 bundlr price 1048576 -h https://node1.bundlr.network -c arweave
 bundlr price 1048576 -h https://node1.bundlr.network -c ethereum
 ```

@@ -4,6 +4,8 @@
 
 Bundlr has three nodes. Uploads to node 1 and node 2 are permanent. Uploads of less than 100 KiB are currently free on node 2.
 
+Node 1 and Devnet support [bundling](/overview/services/bundling) and [Proof of Provenance](/overview/solutions/proof-of-provenance), Node 2 supports [bundling](/overview/services/bundling) only.
+
 -   `https://node1.bundlr.network`
 -   `https://node2.bundlr.network`
 -   `https://devnet.bundlr.network`
@@ -20,4 +22,4 @@ Uploads to Bundlr's [Devnet](/developer-docs/using-devnet) are kept for roughly 
 
 ## Chain Integrations
 
-Bundlr is multichain, supporting both paying for uploads with [14 tokens](/overview/supported-tokens) and signing that upload using the token’s cryptography. The signature type used to sign a transaction is tracked at the [bundle-level](/learn/bundles).
+Bundlr is multichain, supporting both paying for uploads with [14 tokens](/overview/supported-tokens) and signing that upload using the token’s cryptography. The signature type used to sign a transaction is tracked at the [transaction-level](/learn/bundles).

@@ -1,6 +1,4 @@
 ---
-sidebar_position: 4
-sidebar_label: Data Mode
 description: Automate transaction creation in data mode.
 ---
 

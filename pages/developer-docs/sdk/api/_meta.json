@@ -1,0 +1,13 @@
+{
+	"fund": "fund()",
+	"withdrawBalance": "withdrawBalance()",
+	"getLoadedBalance": "getLoadedBalance()",
+	"getPrice": "getPrice()",
+	"upload": "upload()",
+	"uploadWithReceipt": "uploadWithReceipt()",
+	"uploadFile": "uploadFile()",
+	"uploadFolder": "uploadFolder()",
+	"utils-toAtomic": "utils.toAtomic()",
+	"utils-fromAtomic": "utils.fromAtomic()",
+	"utils-getReceipt": "utils.getReceipt()"
+}

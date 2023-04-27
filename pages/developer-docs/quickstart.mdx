@@ -17,25 +17,34 @@ We also have a [detailed step-by-step tutorial](/hands-on/tutorials/bundlr-sdk) 
 
 </Callout>
 
-#### Step 1: [Install the SDK](/developer-docs/sdk/installing-the-sdk)
+#### 1: [Install the SDK](/developer-docs/sdk/installing-the-sdk)
 
-```js
+via npm
+
+```console
 npm install @bundlr-network/client
 ```
 
-#### Step 2: [Connect To A Bundlr Node](/developer-docs/sdk/connecting-node)
+or yarn
 
-```js
-const bundlr = new Bundlr("http://node2.bundlr.network", "matic", “<polygon_private_key>”);
+```console
+yarn add @bundlr-network/client
 ```
 
-#### Step 3: [Fund Your Node](/developer-docs/sdk/funding-node) (To Pay For Uploads)
+#### 2: [Connect To A Bundlr Node](/developer-docs/sdk/connecting-node)
+
+```js
+const polygonPrivateKey = "6d779d4..."; // your private key
+const bundlr = new Bundlr("http://node2.bundlr.network", "matic", polygonPrivateKey);
+```
+
+#### 3: [Fund Your Node](/developer-docs/sdk/funding-node) (To Pay For Uploads)
 
 ```js
 const response = await bundlr.fund(fundAmount);
 ```
 
-#### Step 4: [Upload Data](/developer-docs/sdk/uploading-data)
+#### 4: [Upload Data](/developer-docs/sdk/uploading-data)
 
 ```js
 const dataToUpload = "GM world.";

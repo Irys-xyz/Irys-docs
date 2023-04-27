@@ -1,8 +1,5 @@
 ---
-sidebar_position: 1
-sidebar_label: Using Bundlr With npx create-react-app
 description: Using the Bundlr SDK with create-react-app.
-slug: /receipes/bundlr-react
 ---
 
 # Using Bundlr With npx create-react-app

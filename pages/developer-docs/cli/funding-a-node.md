@@ -1,8 +1,5 @@
 ---
-sidebar_position: 6
-sidebar_label: Funding A Node
 description: Transferring funds from your wallet to a node.
-slug: /cli/funding-node
 ---
 
 # Funding A Node
@@ -18,6 +15,6 @@ Required option flags:
 ## `bundlr fund`
 
 ```console
-bundlr fund <amount_in_atomic_units> -h <node_address> -w <wallet_file> -c <currency>
+bundlr fund <amount-in-atomic-units> -h <node-address> -w <wallet-file> -c <currency>
 bundlr fund 1479016 -h https://node1.bundlr.network -w wallet.json -c arweave
 ```

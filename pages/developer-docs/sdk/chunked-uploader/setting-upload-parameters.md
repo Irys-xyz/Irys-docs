@@ -1,6 +1,4 @@
 ---
-sidebar_position: 3
-sidebar_label: Setting Upload Parameters
 description: Changing batch and chunk size.
 ---
 

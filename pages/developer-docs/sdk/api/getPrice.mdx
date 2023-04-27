@@ -1,0 +1,24 @@
+---
+description: Returns the cost to upload the specified number of bytes.
+---
+
+# `bundlr.getPrice(numBytes)`
+
+Returns the cost to upload the specified number of bytes.
+
+**Parameters**
+
+-   `numBytes`: The number of bytes to check the price for
+
+**Returns**
+
+-   `price`: Cost to upload `numBytes`. Currency is the token specified when connecting to the node.Return value is in atomic units, to convert to standard units use [`bundlr.utils.fromAtomic()`](./utils-fromAtomic)
+
+```js
+const numBytes = 1048576; // Number of bytes to check
+const priceAtomic = await bundlr.getPrice(numBytes);
+
+// Convert from atomic units to standard units
+const priceConverted = bundlr.utils.fromAtomic(numBytes);
+console.log(`Uploading ${numBytes} bytes costs ${price1MBConverted}`);
+```

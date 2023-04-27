@@ -1,6 +1,4 @@
 ---
-sidebar_position: 2
-sidebar_label: Developer FAQ
 description: Frequently asked questions from our developer community.
 ---
 
@@ -15,8 +13,8 @@ Higher Competition = Higher user value for money (to a point). Nodes do not shar
 
 `<uploadFile>` is one by one.
 `<uploadFolder>` uploads all + a manifest. A manifest is a way to describe a directory accessible via `https://arweave.net/<tx-id>/<filename>`
-After a successful folder upload, two files are written to your local project directory [folder_name].csv and [folder_name].json, each contains the transaction id for each file uploaded. That transaction id can be used to retrieve the uploaded data by forming an URL with this format: `[https://arweave.net]/[transaction_id]`. You can also retrieve the uploaded data using the manifest id combined with the original relative file URL.
-We have [a detailed guide here](/sdk/basic-features/uploading-folder)
+After a successful folder upload, two files are written to your local project directory [folder_name].csv and [folder_name].json, each contains the transaction id for each file uploaded. That transaction id can be used to retrieve the uploaded data by forming an URL with this format: `[https://arweave.net]/[transaction-id]`. You can also retrieve the uploaded data using the manifest id combined with the original relative file URL.
+We have [a detailed guide here](/developer-docs/sdk/api/uploadFolder)
 
 ## What is the difference between Bundlr class and WebBundlr class?
 

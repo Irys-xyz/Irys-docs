@@ -1,8 +1,5 @@
 ---
-sidebar_position: 3
-sidebar_label: Usage
 description: All command line options and flags.
-slug: /cli/usage
 ---
 
 # Usage

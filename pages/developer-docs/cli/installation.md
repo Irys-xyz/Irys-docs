@@ -1,8 +1,5 @@
 ---
-sidebar_position: 1
-sidebar_label: Installation & Setup
 description: Install using npm, optionally sudo.
-slug: /cli/installing
 ---
 
 # Installation & Setup

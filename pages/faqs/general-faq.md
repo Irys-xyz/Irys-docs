@@ -1,6 +1,4 @@
 ---
-sidebar_position: 1
-sidebar_label: General FAQ
 description: Frequently asked questions about Bundlr.
 ---
 
@@ -45,7 +43,7 @@ Bundles do not have a size limit.
 
 ## How can I use Bundlr?
 
-You can use [Bundlr via Nodejs on the server](/developer-docs/sdk/bundlr-server-side) or [directly in the browser.](/developer-docs/sdk/bundlr-in-the-browser) View more on how to use Bundlr [in the CLI section.](/developer-docs/cli/installation)
+You can use [Bundlr via Nodejs on the server](/developer-docs/sdk) or [directly in the browser.](/developer-docs/sdk/bundlr-in-the-browser) View more on how to use Bundlr [in the CLI section.](/developer-docs/cli)
 
 ## How long does it take to upload data on Bundlr?
 

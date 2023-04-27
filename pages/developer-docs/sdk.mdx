@@ -1,47 +1,132 @@
 import { Tab, Tabs } from "nextra-theme-docs";
+import Heading from "../../components/Heading";
+import SectionTitle from "../../components/SectionTitle";
 
-# SDK
+<div class="">
+	<Heading level={1} className="">
+		SDK
+	</Heading>
+	Implement [permanent decentralized storage](/overview/solutions/permanent-storage) and
+	[Proof of Provenance](/overview/solutions/proof-of-provenance) with just a few lines of
+	code.
+</div>
 
-Implement [permanent decentralized storage](/overview/solutions/permanent-storage) and [Proof of Provenance](/overview/solutions/proof-of-provenance) with just a few lines of code.
+## Install The SDK
 
-## Bundlr & WebBundlr
+Install using npm
 
-To get started with the SDK, choose the [Bundlr class](/developer-docs/sdk/bundlr-server-side) for server-side projects and the [WebBundlr class](/developer-docs/sdk/bundlr-in-the-browser) for browser-based projects.
-
-#### Step 1: [Install the SDK](/developer-docs/sdk/installing-the-sdk)
-
-```js
+```console
 npm install @bundlr-network/client
 ```
 
-#### Step 2: [Connect To A Bundlr Node](/developer-docs/sdk/connecting-node)
+or yarn
 
-```js
-const bundlr = new Bundlr("http://node2.bundlr.network", "matic", "<polygon_private_key>");
+```console
+yarn add @bundlr-network/client
 ```
 
-#### Step 3: [Fund Your Node](/developer-docs/sdk/funding-node) (To Pay For Uploads)
+## Connect To And Fund A node
+
+Connect [to any of our three nodes](/developer-docs/sdk/connecting-node), using a serialized JWK file when using an Arweave wallet
 
 ```js
-const response = await bundlr.fund(fundAmount);
+import Bundlr from "@bundlr-network/client";
+import fs from "fs";
+
+// Load the JWK wallet key file from disk
+const privateKey = JSON.parse(fs.readFileSync("walletFile.txt").toString());
+
+// Initailze the bundlr SDK
+const bundlr = new Bundlr("http://node1.bundlr.network", "arweave", key);
+
+// Fund 1 AR
+const amountToFund = 1;
+// Convert to atomic units
+const fundAmountAtomic = bundlr.utils.toAtomic(amountToFund);
+// Fund the node
+const fundTx = await bundlr.fund(fundAmountAtomic);
 ```
 
-#### Step 4: [Upload Data](/developer-docs/sdk/uploading-data)
+Or a private key when using an EVM or Solana wallet
 
 ```js
+import Bundlr from "@bundlr-network/client";
+
+// Your EVM or Solana wallet private key
+const privateKey = "6d779d4...";
+
+// Initailze the bundlr SDK
+const bundlr = new Bundlr("http://node1.bundlr.network", "matic", key);
+
+// Fund 0.5 MATIC
+const amountToFund = 0.5;
+// Convert to atomic units
+const fundAmountAtomic = bundlr.utils.toAtomic(amountToFund);
+// Fund the node
+const fundTx = await bundlr.fund(fundAmountAtomic);
+```
+
+## Upload A String
+
+You can opt to either receive a transaction id and timestamp
+
+```js
+// Upload data
 const dataToUpload = "GM world.";
-const response = await bundlr.upload(dataToUpload);
+try {
+	const response = await bundlr.upload(dataToUpload);
+	console.log(`Data uploaded ==> https://arweave.net/${response.id}`);
+} catch (e) {
+	console.log("Error uploading file ", e);
+}
 ```
 
-Or upload and [request a cryptographically signed receipt.](/developer-docs/sdk/uploading-data#bundlrutilsuploadwithreceipt)
+or [a cryptographically signed receipt](/learn/receipts).
 
 ```js
+// Upload data
 const dataToUpload = "GM world.";
-const receipt = await bundlr.uploadWithReceipt(dataToUpload);
+try {
+	const receipt = await bundlr.upload(dataToUpload);
+	console.log(`Data uploaded ==> https://arweave.net/${receipt.id}`);
+} catch (e) {
+	console.log("Error uploading file ", e);
+}
 ```
 
-#### Step 5: [Download Your Data](/developer-docs/sdk/downloading-data)
+## Upload A File
 
 ```js
-console.log(`Data Available at => https://arweave.net/${response.id}`);
+// Your file
+const fileToUpload = "./myImage.png";
+
+// Add a custom tag that tells the gateway how to serve this file to a browser
+const tags = [{ name: "Content-Type", value: "image/png" }];
+
+try {
+	const response = await bundlr.uploadFile(fileToUpload, tags);
+	console.log(`File uploaded ==> https://arweave.net/${response.id}`);
+} catch (e) {
+	console.log("Error uploading file ", e);
+}
+```
+
+## Upload A Folder
+
+When [uploading a folder](/sdk/api/uploadFolder), files can be accessed either directly at `https://arweave.net/[transaction-id]` or `https://arweave.net/[manifest-id]/[file-name]`
+
+```js
+// Upload an entire folder
+const folderToUpload = "./myFolder/"; // PATH TO FOLDER
+try {
+	const response = await bundlr.uploadFolder("./" + folderToUpload, {
+		indexFile: "", // optional index file (file the user will load when accessing the manifest)
+		batchSize: 50, //number of items to upload at once
+		keepDeleted: false, // whether to keep now deleted items from previous uploads
+	}); //returns the manifest ID
+
+	console.log(`Files uploaded. Manifest Id ${response.id}`);
+} catch (e) {
+	console.log("Error uploading file ", e);
+}
 ```
