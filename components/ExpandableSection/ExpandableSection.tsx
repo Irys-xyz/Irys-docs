@@ -63,7 +63,7 @@ const CODE_SECTIONS: CodeSections = {
 };
 
 const ExpandableSection = ({ subtitle, items }: ExpandableSectionProps) => {
-  const [currentlyOpen, setCurrentlyOpen] = useState<number | null>(null);
+  const [currentlyOpen, setCurrentlyOpen] = useState<number | null>(1);
 
   const handleSectionClick = (id: number) => {
     setCurrentlyOpen((prev) => (prev === id ? null : id));
