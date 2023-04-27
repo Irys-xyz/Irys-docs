@@ -165,7 +165,7 @@ ul > li > div > div > * {
 
 .nextra-callout > div:nth-child(2) > * {
   line-height: 23px !important;
-  @apply text-xs;
+  @apply text-sm;
 
 }
 
