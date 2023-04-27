@@ -48,6 +48,29 @@ const ExpandableSection = ({
   const { currentlyOpen, handleSectionClick, CODE_EXAMPLE } =
     useExpandableSection()
 
+  const CODE_SECTIONS = {
+    1: <code className='font-robotoMono bg-[#1f282f] bg-primary-700/5 mb-4 px-4 overflow-x-auto rounded-xl font-medium subpixel-antialiased dark:bg-primary-300/10 text-[.9em] contrast-more:border contrast-more:border-primary-900/20 contrast-more:contrast-150 contrast-more:dark:border-primary-100/40 py-4 ' style={{
+      fontSize: '.9em',
+      lineHeight: '1.25rem',
+    }}>
+      <span className="text-[#eb707d]">const</span> <span className="text-[#79b8ff]">bundlr</span> <span className="text-[#eb707d]"> = new</span> <span className="text-[#b392f0]">Bundlr</span>(<span className="text-[#44a447]">"https://node1.bundlr.network"</span>, <span className="text-[#44a447]">"matic"</span>, <span className="text-[#44a447]">"polygon-private-key"</span>);
+    </code>,
+    2: <code className='font-robotoMono bg-[#1f282f] bg-primary-700/5 mb-4 px-4 overflow-x-auto rounded-xl font-medium subpixel-antialiased dark:bg-primary-300/10 text-[.9em] contrast-more:border contrast-more:border-primary-900/20 contrast-more:contrast-150 contrast-more:dark:border-primary-100/40 py-4 ' style={{
+      fontSize: '.9em',
+      lineHeight: '1.25rem',
+    }}>
+      <span className="text-[#eb707d]">const</span> <span className="text-[#79b8ff]">response</span> <span className="text-[#eb707d]"> = await</span> <span className="text-[#79b8ff]">bundlr</span>.<span className="text-[#b392f0]">fund</span>(fundAmount);
+    </code>,
+    3: <div className='inline-block font-robotoMono bg-[#1f282f] bg-primary-700/5 mb-4 px-4 overflow-x-auto rounded-xl font-medium subpixel-antialiased dark:bg-primary-300/10 text-[.9em] contrast-more:border contrast-more:border-primary-900/20 contrast-more:contrast-150 contrast-more:dark:border-primary-100/40 py-4 ' style={{
+      fontSize: '.9em',
+      lineHeight: '1.25rem',
+    }}>
+      <span className="text-[#eb707d]">const</span> <span className="text-[#79b8ff]">dataToUpload</span> <span className="text-[#eb707d]">=</span> <span className="text-[#44a447]">"GM world."</span>;<br />
+      <span className="text-[#eb707d]">const</span> <span className="text-[#79b8ff]">response</span> <span className="text-[#eb707d]"> = await</span> <span className="text-[#79b8ff]">bundlr</span>.<span className="text-[#b392f0]">upload</span>(dataToUpload);
+
+    </div>,
+  }
+
   return (
     <>
       <section className="flex flex-col gap-10 ">
@@ -77,12 +100,7 @@ const ExpandableSection = ({
               {currentlyOpen === section.id && (
                 <>
                   <div className="w-full">
-                    <CodeBlock
-                      text={section.snippet}
-                      language={'javascript'}
-                      theme={dracula}
-                      showLineNumbers={false}
-                    />
+                    {CODE_SECTIONS[section.id]}
                   </div>
                 </>
               )}
@@ -90,6 +108,7 @@ const ExpandableSection = ({
           ))}
         </ul>
       </section>
+
     </>
   )
 }
