@@ -159,7 +159,14 @@ ul > li > div > div > * {
 }
 
 .nextra-callout {
-  @apply px-5 py-3 flex items-start gap-6;
+  @apply px-5 py-3 flex items-start gap-6 max-w-full md:max-w-[80%];
+
+}
+
+.nextra-callout > div:nth-child(2) > * {
+  line-height: 23px !important;
+  @apply text-xs;
+
 }
 
 .nextra-callout > div:nth-child(1) {
