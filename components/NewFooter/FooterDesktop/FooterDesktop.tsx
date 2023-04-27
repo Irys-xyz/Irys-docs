@@ -1,24 +1,29 @@
-import { FooterLogo } from '../../svg'
-import Link from 'next/link'
-import { ReactNode } from 'react'
+import { FooterLogo } from "../../svg";
+import Link from "next/link";
+import { ReactNode } from "react";
 
 const FooterDesktop = ({
-  data
+  data,
+  noPadding,
 }: {
   data: {
-    title: string
+    title: string;
     options: {
-      name: string
-      href: string
-      label?: string
-      newTab?: boolean
-    }[]
-    footer?: ReactNode
-  }[]
+      name: string;
+      href: string;
+      label?: string;
+      newTab?: boolean;
+    }[];
+    footer?: ReactNode;
+  }[];
+  noPadding?: boolean;
 }) => {
   return (
     <>
-      <footer className="hidden items-start border-t border-timberwolf bg-seashell px-[50px] font-robotoMono antialiased lg:flex !text-black mt-10">
+      <footer
+        className={`hidden items-start border-t border-timberwolf bg-seashell  font-robotoMono antialiased lg:flex !text-black mt-10 ${noPadding ? "px-[24px]" : "px-[79px]"
+          }`}
+      >
         <section className="flex w-auto max-w-[513px] flex-col pt-[36px] leading-none">
           <Link legacyBehavior href="/">
             <FooterLogo className="cursor-pointer" />
@@ -47,12 +52,13 @@ const FooterDesktop = ({
                         className="self-start hover:font-bold"
                       >
                         <Link
-                          legacyBehavior href={option.href}
+                          legacyBehavior
+                          href={option.href}
                           className="whitespace-nowrap text-base"
                           rel="noreferrer"
                           passHref
                         >
-                          <a target={option.newTab ? '_blank' : '_self'}>
+                          <a target={option.newTab ? "_blank" : "_self"}>
                             {option.name}
                             {option.label && (
                               <span className="ml-[10px] rounded-full bg-black px-[10px] py-[5px] text-xs font-bold text-white">
@@ -62,19 +68,19 @@ const FooterDesktop = ({
                           </a>
                         </Link>
                       </li>
-                    )
+                    );
                   })}
                 </ul>
                 {definition.footer}
               </div>
-            )
+            );
           })}
         </section>
 
         <section className="border-l border-timberwolf"></section>
       </footer>
     </>
-  )
-}
+  );
+};
 
-export default FooterDesktop
+export default FooterDesktop;

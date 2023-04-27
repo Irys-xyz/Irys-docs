@@ -6,7 +6,6 @@ import SectionTitle from '../SectionTitle'
 const HomeProduct = ({
   items,
   title,
-  children
 }: {
   items: {
     id: number
@@ -15,9 +14,7 @@ const HomeProduct = ({
     href: string
   }[]
   title: string
-  children?: React.ReactNode
 }) => {
-  console.log("🚀 ~ file: HomeProduct.tsx:20 ~ items:", items)
   return (
     <>
       <section className="flex bg-black flex-col items-center justify-center px-5 pb-10 md:items-center lg:items-start lg:px-[79px] lg:pb-[120px]">
@@ -48,7 +45,7 @@ const HomeProduct = ({
                   dangerouslySetInnerHTML={{
                     __html: info.title
                   }}
-                ></Heading>
+                />
                 <p
                   className={`mt-auto font-robotoMono text-lg font-normal leading-loose ${items.length === 1 ? 'text-center' : ''
                     }`}
@@ -57,7 +54,7 @@ const HomeProduct = ({
                 </p>
                 <a
                   href={info.href}
-                  className="mt-auto whitespace-nowrap font-robotoMono text-base uppercase tracking-widest text-white hover:font-bold hover:font-bold"
+                  className="mt-auto whitespace-nowrap font-robotoMono text-base uppercase tracking-widest text-white hover:font-bold"
                 >
                   [ Find out more ]
                 </a>
@@ -65,8 +62,6 @@ const HomeProduct = ({
             )
           })}
         </div>
-        <div className="w-full self-start">{children}</div>
-        {!children && <div className="h-10" />}
       </section>
     </>
   )
