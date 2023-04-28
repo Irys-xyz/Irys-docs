@@ -148,3 +148,11 @@ ul > li > div > div > * {
 .nextra-callout > div:nth-child(1) {
   @apply text-3xl mt-2;
 }
+
+#__next > div > div.nx-mx-auto.nx-flex.nx-max-w-\[90rem\] > nav > div > ul  {
+  @apply flex-col flex;
+}
+
+#__next > div > div.nextra-nav-container.nx-sticky.nx-top-0.nx-z-20.nx-w-full.nx-bg-transparent.print\:nx-hidden > nav {
+  @apply max-w-full px-4 lg:px-[79px];
+}
