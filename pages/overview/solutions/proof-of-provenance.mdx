@@ -1,0 +1,84 @@
+---
+description: Our instantly accessible immutable data layer with custom metadata tagging and verifiable timestamping helps you build irrefutable provenance chains.
+---
+
+# Proof Of Provenance
+
+Data provenance is a critical aspect of trustworthy and reliable data. It enables us to trace the origin and movement of data throughout its lifecycle, providing valuable insights into how it was created, who has interacted with it, and how it has evolved over time.
+
+Bundlr's Proof of Provenance leverages cryptographic techniques to establish an unmutable record of data provenance. Through the use of cryptographically signed receipts and timestamps, Bundlr facilitates building provenance chains that offer a transparent and tamper-proof record of the data's evolution.
+
+## Terminology
+
+-   **Data provenance** refers to the history of data. It can describe where data came from, how it was created, and who has handled it. Data provenance provides transparency into the lifecycle of data and is critical for building trust in the data.
+
+-   **Proof Of Provenance** refers to the issuing of cryptographically signed receipts, including a timestamp accurate to the millisecond, that provides irrefutable proof of data provenance.
+
+-   **Provenance chains** refer to the chain of custody or the history and evolution of data stored on a blockchain.
+
+## Why Use Proof Of Provenance?
+
+An illustrator could create and upload an image, and the receipt received on upload would provide proof they were the first to upload it. The receipt would establish provenance.
+
+The illustrator could then edit the piece and re-upload it using a custom tag tying it back to the original.
+
+Taking the example further, there might be another series of edits requested by the illustrator’s client, all of which would be tied back to the original using metadata.
+
+All of this would create a chain of provenance showing the original artwork and all revisions. Were someone to use the work without permission, Bundlr's Proof of Provenance would be all the on chain evidence needed to prove true ownership of the work.
+
+<img className="mt-5" src="/img/learn/provenance-chain.png" width="80%" />
+
+## Receipts / Timestamps
+
+With Bundlr, users have the option to receive a receipt containing a [signed timestamp proof](/learn/receipts). For Proof of Provenance, a receipt is essential as it provides a verifiable record of transaction sequencing, ensuring no malicious activity has taken place.
+
+## Querying Data
+
+All metadata uploaded to Bundlr is readily queryable using GraphQL. Proof of Provenance is supported on Node 1 and on Devnet.
+
+You can
+
+-   Node 1: https://node1.bundlr.network/graphql
+-   Devnet: https://devnet.bundlr.network/graphql
+
+To query for the timestamp associated with a given transaction id, use the following query:
+
+```graphql
+query DataProvenanceQuery {
+	transactions(order: ASC, ids: ["Yaa-ZPQQub_66joUJZ-2BDRbmaPj-q3SHdiSiHb06hc"]) {
+		edges {
+			node {
+				id
+				address
+				timestamp
+			}
+		}
+	}
+}
+```
+
+To query metadata associated with the upload, use the following query:
+
+```graphql
+query DataProvenanceQuery {
+	transactions(
+		order: ASC
+		tags: [
+			{
+				name: "provenance-chain-id"
+				values: ["Yaa-ZPQQub_66joUJZ-2BDRbmaPj-q3SHdiSiHb06hc"]
+			}
+		]
+	) {
+		edges {
+			node {
+				id
+				address
+				timestamp
+			}
+		}
+	}
+}
+```
+
+Adding custom metadata to your uploads allows you to create **provenance chains** by building real-time relational links between uploads.
