@@ -4,8 +4,5 @@
 	"cli": "CLI",
 	"using-devnet": "Using Devnet",
 	"tags": "Tags",
-	"querying-data": {
-		"display": "hidden"
-	},
 	"recipes": "Cut & Paste Code Recipes"
 }
