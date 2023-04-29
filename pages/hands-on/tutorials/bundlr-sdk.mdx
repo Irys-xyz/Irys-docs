@@ -93,7 +93,7 @@ touch bundlr-basics.js
 
 First up is importing your private key and using it to securely connect to a Bundlr node.
 
-If you followed along with the [previous tutorial](/hands-on/tutorials/arweave-wallet) and created an Arweave wallet, take the json file you downloaded and drag it to this project directory. If you’re using a wallet from another blockchain, you will need that wallet’s private key. Regardless of the wallet you use, be very careful with the private key. Make sure not to show it to anyone, and not to upload it to GitHub.
+If you followed along with the [previous tutorial](./01-get-an-arweave-wallet.md) and created an Arweave wallet, take the json file you downloaded and drag it to this project directory. If you’re using a wallet from another blockchain, you will need that wallet’s private key. Regardless of the wallet you use, be very careful with the private key. Make sure not to show it to anyone, and not to upload it to GitHub.
 
 The following code imports the Bundlr SDK, loads your private key, connects to a Bundlr node, and then prints your wallet’s address.
 
@@ -126,10 +126,9 @@ Regardless of which node you use, your data will still be stored on the same Arw
 The function `bundlr.getLoadedBalance()` returns your wallet’s balance on that node in atomic units. You can convert that into an easy to read format using `bundlr.utils.fromAtomic(atomicBalance)`.
 
 <Callout type="info" emoji="ℹ️">
-	Atomic units refer to the smallest possible unit of a given currency. In Ethereum,
-	atomic units are called Wei, and they represent the smallest unit of Ether. Similar to
-	how 1 dollar can be broken down into 100 cents, 1 Ether can be broken down into 10^18
-	Wei. In Solana, atomic units are called Lamports, 1 SOL can be broken down into 10^9
+	Atomic units refer to the smallest possible unit of a given currency. In Ethereum, atomic units are called Wei, and
+	they represent the smallest unit of Ether. Similar to how 1 dollar can be broken down into 100 cents, 1 Ether can be
+	broken down into 10^18 Wei. In Solana, atomic units are called Lamports, 1 SOL can be broken down into 10^9
 	Lamports.
 </Callout>
 
@@ -200,9 +199,7 @@ try {
 	//  target, // the address the funds were sent to
 	// };
 	const response = await bundlr.fund(price1MGAtomic);
-	console.log(
-		`Funding successful txID=${response.id} amount funded=${response.quantity}`,
-	);
+	console.log(`Funding successful txID=${response.id} amount funded=${response.quantity}`);
 } catch (e) {
 	console.log("Error funding node ", e);
 }
@@ -248,9 +245,7 @@ try {
 	// 2. Withdraw all
 	const response = await bundlr.withdrawBalance(curBalance);
 
-	console.log(
-		`Funds withdrawn txID=${response.data.tx_id} amount requested=${response.data.requested}`,
-	);
+	console.log(`Funds withdrawn txID=${response.data.tx_id} amount requested=${response.data.requested}`);
 } catch (e) {
 	console.log("Error funding node ", e);
 }
