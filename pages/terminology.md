@@ -5,7 +5,19 @@ description: Technical terms you'll need to know to understand Bundlr
 
 # Terminology
 
-[Bundle](/terminology#bundle) | [Bundlr](/terminology#bundler) | [Deep Hash](/terminology#deep-hash) | [Gateways](/terminology#gateways) | [Transaction](/terminology#transaction) | [Transaction Receipt](/terminology#transaction-receipt) | [Validator](/terminology#validator)
+[Bundle](/terminology#bundle) | [Bundlr](/terminology#bundler) | [Data Provenance](/terminology#data-provenance) | [Deep Hash](/terminology#deep-hash) | [Gateways](/terminology#gateways) | [Proof Of Provenance](/terminology#proof-of-provenance) | [Provenance Chain](/terminology#provenance-chain) | [Transaction](/terminology#transaction) | [Transaction Receipt](/terminology#transaction-receipt) | [Validator](/terminology#validator)
+
+## Data Provenance
+
+The history of data. It can describe where data came from, how it was created, and who has handled it. Data provenance provides transparency into the lifecycle of data and is critical for building trust in the data.
+
+## Proof Of Provenance
+
+The issuing of cryptographically signed receipts, including a timestamp accurate to the millisecond, that provide irrefutable proof of data provenance.
+
+## Provenance Chain
+
+The chain of custody or the history and evolution of data.
 
 ## Bundle
 
