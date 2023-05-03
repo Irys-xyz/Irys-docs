@@ -1,19 +1,19 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState } from "react";
 
-import Heading from '../Heading'
-import SectionTitle from '../SectionTitle'
+import Heading from "../Heading";
+import SectionTitle from "../SectionTitle";
 
 const HomeProduct = ({
   items,
   title,
 }: {
   items: {
-    id: number
-    title: string
-    description: string
-    href: string
-  }[]
-  title: string
+    id: number;
+    title: string;
+    description: string;
+    href: string;
+  }[];
+  title: string;
 }) => {
   return (
     <>
@@ -43,11 +43,11 @@ const HomeProduct = ({
                   level={3}
                   className="text-white"
                   dangerouslySetInnerHTML={{
-                    __html: info.title
+                    __html: info.title,
                   }}
                 />
                 <p
-                  className={`mt-auto font-robotoMono text-lg font-normal leading-loose ${items.length === 1 ? 'text-center' : ''
+                  className={`mt-auto font-robotoMono text-lg font-normal leading-loose ${items.length === 1 ? "text-center" : ""
                     }`}
                 >
                   {info.description}
@@ -59,12 +59,12 @@ const HomeProduct = ({
                   [ Find out more ]
                 </a>
               </div>
-            )
+            );
           })}
         </div>
       </section>
     </>
-  )
-}
+  );
+};
 
-export default HomeProduct
+export default HomeProduct;
