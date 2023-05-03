@@ -23,7 +23,7 @@ const HomeProduct = ({
         </div>
         <div
           style={{}}
-          className={`mt-16 flex w-full flex-col items-center gap-20 md:flex-row md:justify-evenly lg:mt-28 lg:gap-0`}
+          className={`mt-16 flex w-full flex-col items-center md:items-start gap-20 md:flex-row md:justify-evenly lg:mt-28 lg:gap-0`}
         >
           {/* 1st column title, text, and find out more button */}
           {items.map((info, index) => {
