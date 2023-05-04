@@ -70,11 +70,8 @@ const ExpandableSection = ({ subtitle, items }: ExpandableSectionProps) => {
     };
 
     return (
-        <section className="flex flex-col gap-10">
-            <p className="text-center font-robotoMono text-lg md:text-left">
-                {subtitle}
-            </p>
-            <ul className="flex flex-col gap-10 lg:gap-16">
+        <section className="flex flex-col gap-4 mt-10">
+            <ul className="flex flex-col gap-10 lg:gap-8">
                 {items.map(({ id, title }) => (
                     <li
                         key={id}
@@ -95,7 +92,7 @@ const ExpandableSection = ({ subtitle, items }: ExpandableSectionProps) => {
                         </h2>
                         <details open={currentlyOpen === id}>
                             <summary className="sr-only !cursor-pointer">{title}</summary>
-                            <div>{CODE_SECTIONS[id] as JSX.Element}</div>
+                            <div className="mb-6">{CODE_SECTIONS[id] as JSX.Element}</div>
                         </details>
                     </li>
                 ))}

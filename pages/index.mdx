@@ -117,26 +117,28 @@ import Link from "next/link";
   Use our SDK and start storing data permanently with 3 lines of code.
 </Heading>
 
-  <ExpandableSection
-    items={[
-      {
-        id: 1,
-        title: "Connect to a Node",
-        snippet: `const polygonPrivateKey = "6d779d4..."; // your private key
+<Rewrite
+  subtitle={"Overview"}
+  items={[
+    {
+      id: 1,
+      title: "Connect to a Node",
+      snippet: `const polygonPrivateKey = "6d779d4..."; // your private key
 const bundlr = new Bundlr("https://node1.bundlr.network", "matic", polygonPrivateKey);`,
-      },
-      {
-        id: 2,
-        title: "Fund a Node",
-        snippet: `await bundlr.fund(1e18); // 1 matic`,
-      },
-      {
-        id: 3,
-        title: "Upload your Data, Forever",
-        snippet: `await bundlr.upload("GM Bundloooors!");`,
-      },
-    ]}
-  />
+    },
+    {
+      id: 2,
+      title: "Fund a Node",
+      snippet: `await bundlr.fund(1e18); // 1 matic`,
+    },
+    {
+      id: 3,
+      title: "Upload your Data, Forever",
+      snippet: `await bundlr.upload("GM Bundloooors!");`,
+    },
+  ]}
+/>
+
 </div>
 
 <HomeProduct
@@ -316,26 +318,4 @@ const bundlr = new Bundlr("https://node1.bundlr.network", "matic", polygonPrivat
     	},
     ]}
 
-/>
-
-<Rewrite
-  subtitle={"Overview"}
-  items={[
-    {
-      id: 1,
-      title: "Connect to a Node",
-      snippet: `const polygonPrivateKey = "6d779d4..."; // your private key
-const bundlr = new Bundlr("https://node1.bundlr.network", "matic", polygonPrivateKey);`,
-    },
-    {
-      id: 2,
-      title: "Fund a Node",
-      snippet: `await bundlr.fund(1e18); // 1 matic`,
-    },
-    {
-      id: 3,
-      title: "Upload your Data, Forever",
-      snippet: `await bundlr.upload("GM Bundloooors!");`,
-    },
-  ]}
 />
