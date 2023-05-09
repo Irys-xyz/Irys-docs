@@ -146,7 +146,11 @@ ul > li > div > div > * {
 }
 
 .nextra-callout > div:nth-child(1) {
-  @apply text-3xl mt-2;
+  @apply text-3xl;
+}
+
+.nextra-callout {
+  @apply flex items-center justify-center
 }
 
 #__next > div > div.nx-mx-auto.nx-flex.nx-max-w-\[90rem\] > nav > div > ul  {
