@@ -1,16 +1,12 @@
 {
 	"bundles": "Bundles",
 	"bundlr-arweave": "Bundlr & Arweave",
-	"gateways": {
-		"display": "hidden"
-	},
+	"gateways": "Gateways",
 	"receipts": "Receipts",
 	"transaction-lifecycle": "Transaction Lifecycle",
 	"scaling": {
 		"display": "hidden"
 	},
-	"optimistic-caching": {
-		"display": "hidden"
-	},
+	"optimistic-cache": "Optimistic Cache",
 	"funding-withdrawing": "Funding & Withdrawing"
 }
