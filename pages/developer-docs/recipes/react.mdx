@@ -147,3 +147,21 @@ and replace it with this block:
 ```
 
 Quit out of the React server and restart it with `npm run start` you should be good to go.
+
+## Working With Aptos
+
+Aptos's export structure occasionally breaks webpack's ESM loader. If you're working with Aptos, you may need the following extra steps:
+
+Modify your `config-overrides.js` file to include:
+
+```js
+externals: {
+	aptos: "aptos"
+},
+```
+
+Change:
+`import Bundlr from '@bundlr-network/client';`
+
+To:
+`import Bundlr from '@bundlr-network/client/build/cjs/web/bundlr';
