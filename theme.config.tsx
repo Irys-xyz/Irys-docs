@@ -52,13 +52,13 @@ export default {
 		component: FooterWrapper,
 	},
 	banner: {
-		key: "2.0-release",
+		key: "dev-quest2",
 		text: (
 			<a
-				href="https://bundlr.mirror.xyz/lSZAJcGSt0wopJcYjDTwjG7V8Zy7-kWcTvoan-KNzQI"
+				href="https://docs.bundlr.network/hands-on/quests/bundlr-lens-quest"
 				target="_blank"
 			>
-				🎉 Bundlr 0.11.0 SDK Released. Read more →
+				🎉 Bundlr Developer Quest #2 Released. Read More →
 			</a>
 		),
 	},
