@@ -37,7 +37,7 @@ import fs from "fs";
 const privateKey = JSON.parse(fs.readFileSync("walletFile.txt").toString());
 
 // Initailze the bundlr SDK
-const bundlr = new Bundlr("http://node1.bundlr.network", "arweave", key);
+const bundlr = new Bundlr("http://node1.bundlr.network", "arweave", privateKey);
 
 // Fund 1 AR
 const amountToFund = 1;
@@ -56,7 +56,7 @@ import Bundlr from "@bundlr-network/client";
 const privateKey = "6d779d4...";
 
 // Initailze the bundlr SDK
-const bundlr = new Bundlr("http://node1.bundlr.network", "matic", key);
+const bundlr = new Bundlr("http://node1.bundlr.network", "matic", privateKey);
 
 // Fund 0.5 MATIC
 const amountToFund = 0.5;
