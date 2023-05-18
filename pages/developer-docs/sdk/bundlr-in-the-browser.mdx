@@ -11,11 +11,27 @@ import { Callout } from "nextra-theme-docs";
 	[some extra setup steps](/developer-docs/recipes/react).
 </Callout>
 
-In order to use Bundlr with browser wallets like MetaMask and Phantom, use the `WebBundlr` class. Usage is very similar to the Bundlr class used with server-side development, however you don’t need to provide a private key as that will be linked via the user’s wallet. Whenever any functions that require signing are called (upload, fund, withdraw etc.) the linked wallet will prompt the user to confirm the required actions.
+To use Bundlr with browser wallets like MetaMask and Phantom, use the `WebBundlr` class. Usage is similar to the Bundlr class used with server-side development, however you don’t need to provide a private key as that will be linked via the user’s wallet. When functions that require signing are called (upload, fund, withdraw etc.) the linked wallet will prompt the user to confirm the required actions.
 
 If you’d prefer to learn using a long-form tutorial, [we have this one on creating a web-based uploader with progress bars](/tutorials/file-uploader).
 
-Import our SDK and connect to a Bundlr node using injected providers and ethers version 5.
+Provider setup varies based on wallet type / version:
+
+[Ethers 4](/developer-docs/sdk/bundlr-in-the-browser#ethers-4) | [Ethers 5](/developer-docs/sdk/bundlr-in-the-browser#ethers-5) | [Ethers 6](/developer-docs/sdk/bundlr-in-the-browser#ethers-6) | [RainbowKit / WAGMI](/developer-docs/sdk/bundlr-in-the-browser#rainbowkit--wagmi-hooks) | [viem](/developer-docs/sdk/bundlr-in-the-browser#viem) | [WalletConnect](/developer-docs/sdk/bundlr-in-the-browser#walletconnect) | [Phantom](/developer-docs/sdk/bundlr-in-the-browser#phantom) | [Near](/developer-docs/sdk/bundlr-in-the-browser#near)
+
+## Ethers 4
+
+```js
+import { providers } from “ethers”;
+import { WebBundlr } from "@bundlr-network/client";
+
+const connector = await new WalletConnectProvider({}).enable();
+const provider = providers.Web3Provider(connector);
+const bundlr = new WebBundlr("https://node2.bundlr.network", "matic", provider);
+await bundlr.ready();
+```
+
+## Ethers 5
 
 ```js
 import { providers } from “ethers”;
@@ -27,11 +43,7 @@ const bundlr = new WebBundlr("https://node2.bundlr.network", "matic", provider);
 await bundlr.ready();
 ```
 
-<Callout type="warning" emoji="⚠️">
-	We recommend using ethers version 5 which our SDK fully supports. Ethers version 6 is
-	not yet fully supported, however if your project does require it there are code
-	options below which will work.
-</Callout>
+## Ethers 6
 
 Import our SDK and connect to a Bundlr node using injected providers and ethers version 6.
 
@@ -48,13 +60,85 @@ const bundlr = new WebBundlr("https://node1.bundlr.network", "matic", provider);
 await bundlr.ready();
 ```
 
-And to upload a file
+## RainbowKit / WAGMI Hooks
 
 ```js
-const dataStream = fileReaderStream(fileToUpload);
-const tx = await bundlr.upload(dataStream, {
-	tags: [{ name: "Content-Type", value: fileType }],
+import { WebBundlr } from "@bundlr-network/client";
+
+const provider = useProvider();
+const { data: rainbowKitSigner, isError, isLoading } = useSigner();
+// use method injection to add the missing function
+provider.getSigner = () => rainbowKitSigner;
+const bundlr = new WebBundlr("https://node1.bundlr.network", "matic", provider);
+await bundlr.ready();
+```
+
+## viem
+
+```js
+import { createWalletClient, custom } from "viem";
+import { mainnet } from "viem/chains";
+import { WebBundlr } from "@bundlr-network/client";
+
+const client = createWalletClient({
+	chain: mainnet,
+	transport: custom(window.ethereum),
 });
-console.log(tx);
-console.log(`File uploaded ==> https://arweave.net/${tx.id}`);
+client.getSigner = () => client;
+client.getAddress = async () => client.getAddresses()[0];
+
+const bundlr = new WebBundlr("https://node1.bundlr.network", "matic", client);
+await bundlr.ready();
+```
+
+## WalletConnect
+
+```js
+import WalletConnectProvider from "@walletconnect/web3-provider";
+import { WebBundlr } from "@bundlr-network/client";
+
+const connector = await new WalletConnectProvider({}).enable();
+const provider = await ethersV4(connector);
+rconst bundlr = new WebBundlr("https://node1.bundlr.network", "matic", provider);
+await bundlr.ready();
+```
+
+## Phantom
+
+```js
+const PhantomWalletAdapter =
+	require("@solana/wallet-adapter-phantom/lib/cjs/index").PhantomWalletAdapter;
+import { WebBundlr } from "@bundlr-network/client";
+
+await window.solana.connect();
+const provider = new PhantomWalletAdapter();
+await provider.connect();
+const bundlr = new WebBundlr("https://node1.bundlr.network", "matic", provider);
+await bundlr.ready();
+```
+
+## Near
+
+```js
+import { WebBundlr } from "@bundlr-network/client";
+
+const config = {
+	networkId: "mainnet",
+	keyStore: new keyStores.BrowserLocalStorageKeyStore(),
+	nodeUrl: "https://rpc.mainnet.near.org",
+	walletUrl: "https://wallet.mainnet.near.org",
+	helperUrl: "https://helper.mainnet.near.org",
+	explorerUrl: "https://explorer.mainnet.near.org",
+	headers: {},
+};
+const near = await connect(config);
+const wallet = new WalletConnection(near, "bundlr");
+if (!wallet.isSignedIn()) {
+	window.setTimeout(() => {
+		wallet.requestSignIn();
+	}, 4000);
+}
+
+const bundlr = new WebBundlr("https://node1.bundlr.network", "matic", wallet);
+await bundlr.ready();
 ```

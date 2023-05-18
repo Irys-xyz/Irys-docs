@@ -17,6 +17,8 @@ The Bundlr constructor accepts three arguments:
 2. Currency: [Name of the currency used to pay.](/overview/supported-tokens)
 3. Key: Your private key.
 
+Uploads to nodes 1 and 2 are permanent. Uploads to Devnet are kept for approximately 60 days.
+
 ```js
 import Bundlr from "@bundlr-network/client";
 const myPrivateKey = ""; // Change to match your private key
@@ -31,14 +33,19 @@ console.log(`wallet address = ${bundlr.address}`);
 You can optionally specify a custom RPC:
 
 ```js
-const bundlr = new Bundlr("https://devnet.bundlr.network", "solana", "<solana-private-key>", {
-	providerUrl: "https://api.devnet.solana.com",
-});
+const bundlr = new Bundlr(
+	"https://devnet.bundlr.network",
+	"solana",
+	"<solana-private-key>",
+	{
+		providerUrl: "https://api.devnet.solana.com",
+	},
+);
 ```
 
 <Callout type="info" emoji="ℹ️">
 As of the 0.11.0 SDK release, it is no longer required to use the following format when instantiating a Bundlr object via JavaScript. If your code still uses the .default() format, you will need to update it when upgrading your SDK.
 
-`const bundlr = new Bundlr.default("http://node1.bundlr.network", "matic", “<polygon_private_key>”);`
+`const bundlr = new Bundlr.default("http://node1.bundlr.network", "matic", “<polygon-private-key>”);`
 
 </Callout>
