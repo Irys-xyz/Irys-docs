@@ -19,7 +19,7 @@ type CodeSections = {
 const CODE_SECTIONS: CodeSections = {
   1: (
     <code
-      className="font-robotoMono bg-[#1f282f] bg-primary-700/5 mb-4 px-4 overflow-x-auto rounded-xl font-medium subpixel-antialiased dark:bg-primary-300/10 text-[.9em] contrast-more:border contrast-more:border-primary-900/20 contrast-more:contrast-150 contrast-more:dark:border-primary-100/40 py-4"
+      className="font-robotoMono bg-[#1f282f] bg-primary-700/5 mb-4 px-4 overflow-x-auto rounded-xl font-medium subpixel-antialiased dark:bg-primary-300/10 text-[.9em] contrast-more:border contrast-more:border-primary-900/20 contrast-more:contrast-150 contrast-more:dark:border-primary-100/40 py-1 lg:py-4"
       style={{ fontSize: ".9em", lineHeight: "1.25rem" }}
     >
       <span className="text-[#eb707d]">const</span>{" "}
@@ -33,7 +33,7 @@ const CODE_SECTIONS: CodeSections = {
   ),
   2: (
     <code
-      className="font-robotoMono bg-[#1f282f] bg-primary-700/5 mb-4 px-4 overflow-x-auto rounded-xl font-medium subpixel-antialiased dark:bg-primary-300/10 text-[.9em] contrast-more:border contrast-more:border-primary-900/20 contrast-more:contrast-150 contrast-more:dark:border-primary-100/40 py-4"
+      className="font-robotoMono bg-[#1f282f] bg-primary-700/5 mb-4 px-4 overflow-x-auto rounded-xl font-medium subpixel-antialiased dark:bg-primary-300/10 text-[.9em] contrast-more:border contrast-more:border-primary-900/20 contrast-more:contrast-150 contrast-more:dark:border-primary-100/40 py-1 lg:py-4"
       style={{ fontSize: ".9em", lineHeight: "1.25rem" }}
     >
       <span className="text-[#eb707d]">const</span>{" "}
@@ -45,7 +45,7 @@ const CODE_SECTIONS: CodeSections = {
   ),
   3: (
     <div
-      className="inline-block font-robotoMono bg-[#1f282f] bg-primary-700/5 mb-4 px-4 overflow-x-auto rounded-xl font-medium subpixel-antialiased dark:bg-primary-300/10 text-[.9em] contrast-more:border contrast-more:border-primary-900/20 contrast-more:contrast-150 contrast-more:dark:border-primary-100/40 py-4"
+      className="inline-block font-robotoMono bg-[#1f282f] bg-primary-700/5 mb-4 px-4 overflow-x-auto rounded-xl font-medium subpixel-antialiased dark:bg-primary-300/10 text-[.9em] contrast-more:border contrast-more:border-primary-900/20 contrast-more:contrast-150 contrast-more:dark:border-primary-100/40 py-1 lg:py-4"
       style={{ fontSize: ".9em", lineHeight: "1.25rem" }}
     >
       <span className="text-[#eb707d]">const</span>{" "}
