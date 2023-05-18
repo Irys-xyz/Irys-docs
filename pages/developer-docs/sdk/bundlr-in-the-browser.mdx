@@ -22,8 +22,9 @@ Provider setup varies based on wallet type / version:
 ## Ethers 4
 
 ```js
-import { providers } from “ethers”;
+import { providers } from "ethers";
 import { WebBundlr } from "@bundlr-network/client";
+import WalletConnectProvider from "@walletconnect/web3-provider";
 
 const connector = await new WalletConnectProvider({}).enable();
 const provider = providers.Web3Provider(connector);
@@ -34,7 +35,7 @@ await bundlr.ready();
 ## Ethers 5
 
 ```js
-import { providers } from “ethers”;
+import { providers } from "ethers";
 import { WebBundlr } from "@bundlr-network/client";
 
 await window.ethereum.enable();
