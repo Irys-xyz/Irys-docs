@@ -114,8 +114,3 @@ Please check out [the fee function here.](/overview/fees)
 ## Is there a calculator for Arweave fees?
 
 [Arweave Fees](https://ar-fees.arweave.dev/)
-
-## What is the difference between Devnet and Testnet?
-
-Bundlr has a Devnet that allows you to use Testnet/Devnet cryptocurrency networks to pay for storage. On Devnet, data is never moved to Arweave and will be cleared from Bundlr after a week.
-Whereas, Bundlr’s testnet is an isolated test network of bundlers and validators.
