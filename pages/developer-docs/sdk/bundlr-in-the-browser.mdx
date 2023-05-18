@@ -107,9 +107,9 @@ await bundlr.ready();
 ## Phantom
 
 ```js
+import { WebBundlr } from "@bundlr-network/client";
 const PhantomWalletAdapter =
 	require("@solana/wallet-adapter-phantom/lib/cjs/index").PhantomWalletAdapter;
-import { WebBundlr } from "@bundlr-network/client";
 
 await window.solana.connect();
 const provider = new PhantomWalletAdapter();
