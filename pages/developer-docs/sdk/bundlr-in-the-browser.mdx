@@ -17,20 +17,7 @@ If you’d prefer to learn using a long-form tutorial, [we have this one on crea
 
 Provider setup varies based on wallet type / version:
 
-[Ethers 4](/developer-docs/sdk/bundlr-in-the-browser#ethers-4) | [Ethers 5](/developer-docs/sdk/bundlr-in-the-browser#ethers-5) | [Ethers 6](/developer-docs/sdk/bundlr-in-the-browser#ethers-6) | [RainbowKit / WAGMI](/developer-docs/sdk/bundlr-in-the-browser#rainbowkit--wagmi-hooks) | [viem](/developer-docs/sdk/bundlr-in-the-browser#viem) | [WalletConnect](/developer-docs/sdk/bundlr-in-the-browser#walletconnect) | [Phantom](/developer-docs/sdk/bundlr-in-the-browser#phantom) | [Near](/developer-docs/sdk/bundlr-in-the-browser#near)
-
-## Ethers 4
-
-```js
-import { ethers } from "ethers";
-import { WebBundlr } from "@bundlr-network/client";
-import WalletConnectProvider from "@walletconnect/web3-provider";
-
-const connector = await new WalletConnectProvider({}).enable();
-const provider = providers.Web3Provider(connector);
-const bundlr = new WebBundlr("https://node2.bundlr.network", "matic", provider);
-await bundlr.ready();
-```
+[Ethers 5](/developer-docs/sdk/bundlr-in-the-browser#ethers-5) | [Ethers 6](/developer-docs/sdk/bundlr-in-the-browser#ethers-6) | [RainbowKit / WAGMI](/developer-docs/sdk/bundlr-in-the-browser#rainbowkit--wagmi-hooks) | [viem](/developer-docs/sdk/bundlr-in-the-browser#viem) | [WalletConnect](/developer-docs/sdk/bundlr-in-the-browser#walletconnect) | [Phantom](/developer-docs/sdk/bundlr-in-the-browser#phantom) | [Near](/developer-docs/sdk/bundlr-in-the-browser#near)
 
 ## Ethers 5
 
@@ -100,7 +87,7 @@ import { WebBundlr } from "@bundlr-network/client";
 
 const connector = await new WalletConnectProvider({}).enable();
 const provider = await ethersV4(connector);
-rconst bundlr = new WebBundlr("https://node1.bundlr.network", "matic", provider);
+const bundlr = new WebBundlr("https://node1.bundlr.network", "matic", provider);
 await bundlr.ready();
 ```
 
@@ -108,13 +95,12 @@ await bundlr.ready();
 
 ```js
 import { WebBundlr } from "@bundlr-network/client";
-const PhantomWalletAdapter =
-	require("@solana/wallet-adapter-phantom/lib/cjs/index").PhantomWalletAdapter;
-
+import { PhantomWalletAdapter } from "@solana/wallet-adapter-phantom";
 await window.solana.connect();
 const provider = new PhantomWalletAdapter();
 await provider.connect();
-const bundlr = new WebBundlr("https://node1.bundlr.network", "matic", provider);
+
+const bundlr = new WebBundlr("https://node1.bundlr.network", "solana", provider);
 await bundlr.ready();
 ```
 
@@ -122,6 +108,7 @@ await bundlr.ready();
 
 ```js
 import { WebBundlr } from "@bundlr-network/client";
+import { connect, keyStores, WalletConnection } from "near-api-js";
 
 const config = {
 	networkId: "mainnet",
@@ -134,12 +121,12 @@ const config = {
 };
 const near = await connect(config);
 const wallet = new WalletConnection(near, "bundlr");
-if (!wallet.isSignedIn()) {
-	window.setTimeout(() => {
-		wallet.requestSignIn();
-	}, 4000);
-}
+wallet.requestSignIn({
+	contractId: "",
+});
 
-const bundlr = new WebBundlr("https://node1.bundlr.network", "matic", wallet);
+const bundlr = new WebBundlr("https://node1.bundlr.network", "near", wallet);
 await bundlr.ready();
+
+setMessage("Connected to: " + bundlr.address);
 ```
