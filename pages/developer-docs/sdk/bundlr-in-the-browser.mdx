@@ -75,7 +75,6 @@ const client = createWalletClient({
 client.getSigner = () => client;
 client.getAddress = async () => client.getAddresses();
 
-console.log("client=", client);
 const bundlr = new WebBundlr("https://node1.bundlr.network", "matic", client);
 await bundlr.ready();
 ```
@@ -91,7 +90,6 @@ const connector = await new WalletConnectProvider({
 	rpc: "https://cloudflare-eth.com/",
 }).enable();
 const provider = new ethers.BrowserProvider(connector);
-console.log("provider=", provider);
 
 const bundlr = new WebBundlr("https://node1.bundlr.network", "matic", provider);
 await bundlr.ready();
