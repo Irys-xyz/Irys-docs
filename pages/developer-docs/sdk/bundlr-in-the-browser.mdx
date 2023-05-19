@@ -73,8 +73,9 @@ const client = createWalletClient({
 	transport: custom(window.ethereum),
 });
 client.getSigner = () => client;
-client.getAddress = async () => client.getAddresses()[0];
+client.getAddress = async () => client.getAddresses();
 
+console.log("client=", client);
 const bundlr = new WebBundlr("https://node1.bundlr.network", "matic", client);
 await bundlr.ready();
 ```
@@ -82,11 +83,16 @@ await bundlr.ready();
 ## WalletConnect
 
 ```js
+import { ethers } from "ethers";
 import WalletConnectProvider from "@walletconnect/web3-provider";
 import { WebBundlr } from "@bundlr-network/client";
 
-const connector = await new WalletConnectProvider({}).enable();
-const provider = await ethersV4(connector);
+const connector = await new WalletConnectProvider({
+	rpc: "https://cloudflare-eth.com/",
+}).enable();
+const provider = new ethers.BrowserProvider(connector);
+console.log("provider=", provider);
+
 const bundlr = new WebBundlr("https://node1.bundlr.network", "matic", provider);
 await bundlr.ready();
 ```
