@@ -19,20 +19,20 @@ We have [a detailed guide here](/developer-docs/sdk/api/uploadFolder)
 ## What is the difference between Bundlr class and WebBundlr class?
 
 The Bundlr class is used for NodeJS applications on the server.
-Whereas WebBundlr is used in the browser. To learn more, we have tutorials on working with [Bundlr+NodeJS.](/tutorials/bundlr-nodejs)
-and [WebBundlr+React](/tutorials/file-uploader)
+Whereas WebBundlr is used in the browser. To learn more, we have tutorials on working with [Bundlr+NodeJS.](/hands-on/tutorials/bundlr-sdk)
+and [WebBundlr+React](/hands-on/tutorials/react-components)
 
 ## How do I use WebBundlr in a create-react-app project?
 
-Bundlr and WebBundlr are fully compatible with React. However, if you are using npx create-react-app, you will need to do a few extra steps when setting up your project. We have [a fully detailed recipe here.](/recipes/bundlr-react)
+Bundlr and WebBundlr are fully compatible with React. However, if you are using npx create-react-app, you will need to do a few extra steps when setting up your project. We have [a fully detailed recipe here.](/developer-docs/recipes/react)
 
-## How do I use WebBundlr when working with RainbowKit?
+## How do I use WebBundlr when working with ethers5, ethers6, RainbowKit, viem, WalletConnect?
 
-Internally, WebBundlr and RainbowKit use a slightly different Provider class with different function signatures. It is possible to make the classes compatible, however it takes one extra step. We have [a detailed recipe here.](/recipes/bundlr-rainbowkit)
+We support a wide variety of providers and [have code ready for you to copy and paste](/developer-docs/sdk/bundlr-in-the-browser) into your project.
 
 ## Can I host a website using Bundlr?
 
-Yes. You can host static websites. We have [a detailed recipe on how to do it here.](/recipes/bundlr-uploading-static-sites)
+Yes. You can host static websites. We have [a detailed recipe on how to do it here.](/developer-docs/recipes/uploading-static-sites)
 
 ## What is the difference between two npm packages - arbundles and bundlr/js-client?
 
@@ -60,8 +60,7 @@ No, but it is possible to pay for your client's uploads using Server-Side Signin
 
 ## What is Server-Side Signing?
 
-Server-Side Signing is a method that allows you to sign and pay for your user’s data securely without exposing your private key.
-You can [learn more about Server-Side Signing here.](/recipes/server-side-signing)
+[Server-Side Signing](/developer-docs/recipes/gassless-uploading) is a method that allows you to sign and pay for your user’s data securely without exposing your private key. It allows you to add gassless transactions to your dApp.
 
 ## Which Ethereum Testnet is supported on Devnet?
 
