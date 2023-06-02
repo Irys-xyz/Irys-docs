@@ -4,6 +4,7 @@
 	"cli": "CLI",
 	"using-devnet": "Using Devnet",
 	"tags": "Tags",
-	"querying-downlading": "Querying & Downloading",
+	"querying-downloading": "Querying & Downloading",
+	"graphql": "GraphQL",
 	"recipes": "Cut & Paste Code Recipes"
 }
