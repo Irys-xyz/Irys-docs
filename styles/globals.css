@@ -159,10 +159,7 @@ ul > li > div > div > * {
 	@apply flex-col flex;
 }
 
-#__next
-	> div
-	> div.nextra-nav-container.nx-sticky.nx-top-0.nx-z-20.nx-w-full.nx-bg-transparent.print\:nx-hidden
-	> nav {
+#__next > div > div.nextra-nav-container.nx-sticky.nx-top-0.nx-z-20.nx-w-full.nx-bg-transparent.print\:nx-hidden > nav {
 	@apply max-w-full px-4 lg:px-[79px];
 }
 
@@ -179,6 +176,9 @@ ul > li > div > div > * {
 	background-color: #000 !important; /* bg-black */
 	color: #fff !important; /* text-white */
 	border: 1px solid #fff !important; /* white border */
+}
+.bundlr-web3-button circle {
+	stroke: white;
 }
 
 .bundlr-web3-button:hover {
