@@ -8,18 +8,21 @@ import Analytics from "../components/Analytics";
 import type { AppProps } from "next/app";
 import { useEffect } from "react";
 import useGoogleTagManager from "../hooks/useGoogleTagManager";
+import { ThirdwebProvider } from "@thirdweb-dev/react";
 
 export default function App({ Component, pageProps }: AppProps) {
-    useEffect(() => {
-        localStorage.setItem("theme", "dark");
-    }, []);
+	useEffect(() => {
+		localStorage.setItem("theme", "dark");
+	}, []);
 
-    useGoogleTagManager();
+	useGoogleTagManager();
 
-    return (
-        <>
-            <Component {...pageProps} />
-            <Analytics />
-        </>
-    );
+	return (
+		<>
+			<ThirdwebProvider activeChain="mumbai">
+				<Component {...pageProps} />
+				<Analytics />
+			</ThirdwebProvider>
+		</>
+	);
 }
