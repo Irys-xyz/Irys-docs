@@ -11,7 +11,7 @@ interface ButtonBarProps {
 const ButtonBar: React.FC<ButtonBarProps> = ({ submitUrl, contractAddress, tokenId }) => {
 	const successMessage = `Congratulations on finishing the quest! Your NFT has been claimed, you can view it on <a class="underline decoration-white" href="https://testnets.opensea.io/assets/mumbai/0x6a954b537ebd8477320246d47b9d6eee51b49f0b/107" target="_blank">Opensea</a>`;
 
-	const [message, setMessage] = useState<string>("This is a test");
+	const [message, setMessage] = useState<string>("");
 	const [claimButtonText, setClaimButtonText] = useState<string>("Claim NFT!");
 	return (
 		<div className="flex flex-col">
