@@ -52,7 +52,7 @@ Any of the following query arguments can be used as search parameters:
 | `ids`      | An array of transaction IDs passed as strings. Values are ORed together, matching results will include transactions that have any of the supplied IDs.                                                     |
 | `owner`    | The address used when posting the transaction. Can be a native address from [any of the chains supported by Bundlr](/overview/supported-tokens). Note in results fields, this is referred to as `address`. |
 | `currency` | The [currency](/overview/supported-tokens) used to pay for the transaction.                                                                                                                                |
-| `tags`     | An array of tag name / value pairs passed as JSON objects. Values are ANDed together, matching results will include transactions matching all of the supplied tags.                                        |
+| `tags`     | An array of tag name / value pairs passed as JSON objects. Values are ORed together, matching results will include transactions matching any of the supplied tags.                                         |
 
 ### Results Fields
 
@@ -237,7 +237,7 @@ Any of the following query arguments can be used as search parameters:
 | `recipients` | The [currency](/overview/supported-tokens) used to pay for the transaction.                                                                                                                                                                                                                           |
 | `bundledIn`  | Transaction ID of the parent bundle for this transaction. Transaction ID can be of a nested bundle or a regular bundle.                                                                                                                                                                               |
 | `block`      | Details specific to a transaction's block.                                                                                                                                                                                                                                                            |
-| `tags`       | An array of tag name / value pairs passed as JSON objects. Values are ANDed together, matching results will include transactions matching all of the supplied tags.                                                                                                                                   |
+| `tags`       | An array of tag name / value pairs passed as JSON objects. Values are ORed together, matching results will include transactions matching any of the supplied tags.                                                                                                                                    |
 
 ### Results Fields
 
