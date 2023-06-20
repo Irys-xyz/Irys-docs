@@ -8,7 +8,7 @@ Bundlr supports attaching metadata tags to each transaction.
 
 Tags can be used to:
 
--   Categorize transactions, making it easier to search for and retrieve relevant information using [GraphQL](/developer-docs/querying-data)
+-   Categorize transactions, making it easier to search for and retrieve relevant information using [GraphQL](/developer-docs/graphql)
 -   Build provenance chains for [Proof Of Provenance](/overview/solutions/proof-of-provenance) applications
 -   Inform web browsers how to render image files
 
