@@ -14,7 +14,7 @@ Tags can be used to:
 
 ## Content-Type
 
-When uploading a file that will be rendered by the browser, you must specify the [content-type (MIME type)](https://developer.mozilla.org/en-US/Web/HTTP/Basics_of_HTTP/MIME_types/Common_types).
+When uploading a file that will be rendered by the browser, you must specify the [content-type (MIME type).](https://developer.mozilla.org/en-US/Web/HTTP/Basics_of_HTTP/MIME_types/Common_types)
 
 ```js
 // Your file
