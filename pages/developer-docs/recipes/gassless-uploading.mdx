@@ -334,9 +334,7 @@ const provider = {
 				_types: never,
 				message: { address: string; "Transaction hash": Uint8Array },
 			) => {
-				let convertedMsg = Buffer.from(message["Transaction hash"]).toString(
-					"hex",
-				);
+				let convertedMsg = Buffer.from(message["Transaction hash"]).toString("hex");
 				const res = await fetch("/api/signData", {
 					method: "POST",
 					body: JSON.stringify({ signatureData: convertedMsg }),
@@ -344,9 +342,7 @@ const provider = {
 				const { signature } = await res.json();
 				const bSig = Buffer.from(signature, "hex");
 				// pad & convert so it's in the format the signer expects to have to convert from.
-				const pad = Buffer.concat([Buffer.from([0]), Buffer.from(bSig)]).toString(
-					"hex",
-				);
+				const pad = Buffer.concat([Buffer.from([0]), Buffer.from(bSig)]).toString("hex");
 				return pad;
 			},
 		};
