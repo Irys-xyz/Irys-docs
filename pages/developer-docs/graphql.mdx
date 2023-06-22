@@ -52,7 +52,7 @@ Any of the following query arguments can be used as search parameters:
 | `ids`      | An array of transaction IDs passed as strings. Values are ORed together, matching results will include transactions that have any of the supplied IDs.                                                     |
 | `owner`    | The address used when posting the transaction. Can be a native address from [any of the chains supported by Bundlr](/overview/supported-tokens). Note in results fields, this is referred to as `address`. |
 | `currency` | The [currency](/overview/supported-tokens) used to pay for the transaction.                                                                                                                                |
-| `tags`     | An array of tag name / value pairs passed as JSON objects. Values are ORed together, matching results will include transactions matching any of the supplied tags.                                         |
+| `tags`     | An array of tag name / value pairs passed as JSON objects.                                                                                                                                                 |
 
 ### Results Fields
 
@@ -134,6 +134,42 @@ query getAllPNGs {
 			node {
 				id
 				address
+			}
+		}
+	}
+}
+```
+
+Search for transactions matching the tag with name **Content-Type** and the values of **image/png** OR **image/jpg**.
+
+```graphql
+query getTagsWithOR {
+	transactions(tags: [{ name: "Content-Type", values: ["image/png", "image/jpg"] }]) {
+		edges {
+			node {
+				tags {
+					name
+					value
+				}
+			}
+		}
+	}
+}
+```
+
+Search for transactions matching the tag with name **Content-Type** and the values of **image/png** AND **image/jpg**.
+
+```graphql
+query getTagsWithAnd {
+	transactions(
+		tags: [{ name: "Content-Type", values: ["image/jpg"] }, { name: "Content-Type", values: ["image/png"] }]
+	) {
+		edges {
+			node {
+				tags {
+					name
+					value
+				}
 			}
 		}
 	}
