@@ -1,0 +1,30 @@
+---
+description: Installing the SDK with Npm and Yarn
+---
+
+import { Tab, Tabs } from "nextra-theme-docs";
+
+# Query Type
+
+When using the Irys Query SDK, set the query location using the [`search()`](/developer-docs/query-sdk/api/search) function.
+
+The Query class serves as a unified interface for querying Irys transactions, Arweave transactions, and Arweave blocks. Define the query type using the [`search()`](/developer-docs/query-sdk/api/search) function.
+
+The selected search type influences the [returned fields](/developer-docs/query-sdk/api/fields) and the availability of specific query functions.
+
+Refer to the following table for available functions, including their availability with each query type.
+
+| Function Name                    | irys:transactions | arweave:transactions | arweave:blocks |
+| -------------------------------- | ----------------- | -------------------- | -------------- |
+| [`search()`](./api/search)       | Yes               | Yes                  | Yes            |
+| [`tags()`](./api/tags)           | Yes               | Yes                  | No             |
+| [`ids()`](./api/ids)             | Yes               | Yes                  | Yes            |
+| [`from()`](./api/from)           | Yes               | Yes                  | No             |
+| [`to()`](./api/to)               | No                | Yes                  | No             |
+| [`currency()`](./api/currency)   | Yes               | No                   | No             |
+| [`minHeight()`](./api/minHeight) | No                | No                   | Yes            |
+| [`maxHeight()`](./api/maxHeight) | No                | No                   | Yes            |
+| [`sort()`](./api/sort)           | Yes               | Yes                  | Yes            |
+| [`limit()`](./api/limit)         | Yes               | Yes                  | Yes            |
+| [`stream()`](./api/stream)       | Yes               | Yes                  | Yes            |
+| [`fields()`](./api/fields)       | Yes               | Yes                  | Yes            |

@@ -4,7 +4,7 @@ description: Tagging uploads with custom metadata.
 
 # Metadata Tagging
 
-Bundlr supports attaching metadata tags to each transaction.
+Irys supports attaching metadata tags to each transaction.
 
 Tags can be used to:
 
@@ -24,7 +24,7 @@ const fileToUpload = "./myImage.png";
 const tags = [{ name: "Content-Type", value: "image/png" }];
 
 try {
-	const response = await bundlr.uploadFile(fileToUpload, tags);
+	const response = await irys.uploadFile(fileToUpload, tags);
 	console.log(`File uploaded ==> https://arweave.net/${response.id}`);
 } catch (e) {
 	console.log("Error uploading file ", e);
@@ -44,7 +44,7 @@ const tags = [
 	{ name: "appName", value: "NFTs To The Moon" },
 ];
 try {
-	const response = await bundlr.uploadFile(fileToUpload, tags);
+	const response = await irys.uploadFile(fileToUpload, tags);
 	console.log(`File uploaded ==> https://arweave.net/${response.id}`);
 } catch (e) {
 	console.log("Error uploading file ", e);

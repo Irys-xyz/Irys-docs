@@ -4,36 +4,56 @@ description: Build and prototype your application on Bundlr's Devnet
 
 # Using Devnet
 
-Irys's Devnet is for developers who are building projects or learning how to use our SDK. Uploads to Devnet are kept for approximately 60 days. When using Devnet, developers pay using tokens that are available from free public faucets.
+Irys' Devnet is for developers who are building projects or learning how to use our SDK. Uploads to Devnet are kept for approximately 60 days. When using Devnet, developers pay using tokens that are available from free public faucets.
 
-To connect to Devnet, supply the address of our Devnet node when instantiating either a `Irys` or `WebIrys` object.
+To connect to Devnet, supply the address of our Devnet node when instantiating either an `Irys` or `WebIrys` object.
 
 When using Devnet with the `Bundlr` class, you must specify an RPC address. When using the `WebIrys` class, the RPC address is only required when using non-EVM chains.
 
 #### `Bundlr` Class
 
-```js
-// For Solana
-const bundlr = new Bundlr("https://devnet.bundlr.network", "solana", "<solana-private-key>", {
-	providerUrl: "https://api.devnet.solana.com",
-});
+For Solana:
 
-// For Polygon / Matic
-const bundlr = new Bundlr("https://devnet.bundlr.network", "matic", "<polygon-private-key>", {
-	providerUrl: "https://rpc-mumbai.maticvigil.com",
+```js
+const url = "https://devnet.irys.xyz";
+const providerUrl = "https://api.devnet.solana.com";
+const currency = "matic";
+
+const irys = new Irys({
+	url, // URL of the node you want to connect to
+	currency, // Currency used for payment and signing
+	key: process.env.ETH_PRIVATE_KEY, // SOL private key
+	config: { providerUrl }, // Optional provider URL, only required when using Devnet
+});
+```
+
+For Polygon / Matic:
+
+```js
+const url = "https://devnet.irys.xyz";
+const providerUrl = "https://rpc-mumbai.maticvigil.com;
+const currency = "matic";
+
+const irys = new Irys({
+	url, // URL of the node you want to connect to
+	currency, // Currency used for payment and signing
+	key: process.env.ETH_PRIVATE_KEY, // SOL private key
+	config: { providerUrl }, // Optional provider URL, only required when using Devnet
 });
 ```
 
 #### `WebIrys` Class And EVM Chains
 
 ```js
-const bundlr = new WebBundlr("https://devnet.bundlr.network", "matic", provider);
+const bundlr = new WebIrys("https://devnet.bundlr.network", "matic", provider);
 ```
+
+TODO
 
 #### `WebIrys` Class And Non-EVM Chains
 
 ```js
-const bundlr = new WebBundlr(
+const bundlr = new WebIrys(
 	"https://devnet.bundlr.network",
 	"solana",
 	provider
@@ -42,3 +62,5 @@ const bundlr = new WebBundlr(
 	},
 );
 ```
+
+TODO
