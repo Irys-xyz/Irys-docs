@@ -65,9 +65,9 @@ const results = await myQuery
 
 ## Changing Default Query Endpoints
 
-The `Query` class is an abstraction built on top of Irys' and Arweave's GraphQL endpoints. For the most part, you don't need to know much about these endpoints, the class abstracts out the complexities of GraphQL and saves you from having to understand it. When executing queries, the `Query` class defaults to searching `https://node1.bundlr.network/graphql` for Irys queries and `https://arweave.net/graphql` to Arweave queries.
+The `Query` class simplifies querying Irys and Arweave by abstracting GraphQL complexities. Internally, it links to a GraphQL endpoint for query execution. Typically, the default endpoint suffices, but sometimes you might need a different query location, for example, when connecting Irys' Node 2, Devnet, or an alternative Arweave endpoint.
 
-There are certain use cases where changing the query location is necessary. For example, if you need to search Irys' Node 2 or Devnet, or if you want to utilize a more performant Arweave endpoint. Do this by providing the URL of the desired endpoint to the constructor of the `Query` class.
+To change the endpoint, pass the desired URL to the Query class constructor.
 
 When connecting to Irys, any of these values may be used:
 
@@ -89,7 +89,7 @@ const myQuery = new Query({ url: "https://node2.bundlr.network/graphql" });
 
 Use the `search()` function to change between searching Irys and Arweave.
 
--   `irys:transactions`: Searches transactions uploaded to any of Irys' nodes
+-   `irys:transactions`: Searches transactions uploaded to Arweave via to any of Irys' nodes
 -   `arweave:transactions`: Searches all transactions posted to Arweave
 -   `arweave:blocks`: Searches all of Arweave for a specific block
 
@@ -188,18 +188,23 @@ const results = await myQuery
 
 ## Search By Block ID
 
-Use the `ids()` function to search for Arweave blocks with the specified ID.
-
-TODO, id / ids
-
-## Searching By Block Height
-
-Use the `height()` 
+Use the `ids()` function to search for Arweave blocks with the specified IDs.
 
 ```js
 const results = await myQuery
 	.search("arweave:blocks")
-	.height({min: 1188272, max: 1188279});
+	.ids(["R0ZLe4RvHxLJLzI1Z9ppyYVWFyHW4D1YrxXKuA9PGrwkk2QAuXCnD1xOJe-QOz4l"])
+
+```
+
+## Searching By Block Height
+
+Use the `mixHeight()` and `maxHeight()` to search for blocks within the specified range.
+
+```js
+const results = await myQuery
+	.search("arweave:blocks")
+	.minHeight(1188272).maxHeight(1188279);
 ```
 
 ## Sorting
@@ -207,7 +212,10 @@ const results = await myQuery
 Use the `sort()` function to sort results by timestamp in ascending order (`ASC`)
 
 ```js
-const results = await myQuery.search("irys:transactions").currency("ethereum").sort("ASC");
+const results = await myQuery
+	.search("irys:transactions")
+	.currency("ethereum")
+	.sort("ASC");
 ```
 
 or descending (`DESC`) order.
@@ -229,7 +237,7 @@ const results = await myQuery
 
 ## Limiting Search Results
 
-Use the `.limit()` function to limit the maximum number of results returned. This overrides the default value of 1000 results when searching Irys and 100 when searching Arweave directly.
+Use the `limit()` function to limit the maximum number of results returned. This overrides the default value of 1000 results when searching Irys and 100 when searching Arweave directly.
 
 ```js
 const results = await myQuery
@@ -245,7 +253,10 @@ Use the `stream()` function to manage large results sets. This function returns 
 
 ```js
 // Create the stream
-const stream = await myQuery.search("irys:transactions").currency("solana").stream();
+const stream = await myQuery
+	.search("irys:transactions")
+	.currency("solana")
+	.stream();
 
 // Iterate over the results
 for await (const result of stream) {
@@ -255,7 +266,7 @@ for await (const result of stream) {
 
 ## Limiting Fields Returned
 
-Use the `.fields()` function to limit the fields returned. To limit the results, set a field's value to `false` or omit it entirely.\*\*\*\*
+Use the `fields()` function to limit the fields returned. To limit the results, set a field's value to `false` or omit it entirely.
 
 The fields available for retrieval depend on the search type, when searching `irys:transactions`, the following fields are available:
 
@@ -319,17 +330,6 @@ TODO: I need to sync with JB or Jesse on these, not sure what they all are
 	},
 	recipient: true,
 	signature: true,
-})
-```
-
-When searching by `arweave:block` the following fields are available:
-
-```js
-.fields({
-	height: true,
-	id: true,
-	previous: true,
-	timestamp: true,
 })
 ```
 
