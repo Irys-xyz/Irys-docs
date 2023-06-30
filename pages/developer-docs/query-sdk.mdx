@@ -204,7 +204,8 @@ Use the `mixHeight()` and `maxHeight()` to search for blocks within the specifie
 ```js
 const results = await myQuery
 	.search("arweave:blocks")
-	.minHeight(1188272).maxHeight(1188279);
+	.minHeight(1188272)
+	.maxHeight(1188279);
 ```
 
 ## Sorting
@@ -221,7 +222,10 @@ const results = await myQuery
 or descending (`DESC`) order.
 
 ```js
-const results = await myQuery.search("irys:transactions").currency("matic").sort("DESC");
+const results = await myQuery
+	.search("irys:transactions")
+	.currency("matic")
+	.sort("DESC");
 ```
 
 ## Obtaining Only The First Result
