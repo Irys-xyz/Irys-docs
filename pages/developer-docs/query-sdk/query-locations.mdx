@@ -1,0 +1,23 @@
+---
+description: Installing the SDK with Npm and Yarn
+---
+
+import { Tab, Tabs } from "nextra-theme-docs";
+
+# Query Locations
+
+Irys streamlines the process of uploading to Arweave and incorporates additional features not present in direct Arweave uploads. Consequently, some data points can be accessed through Irys, while others are retrievable via Arweave.
+
+When using the Irys Query SDK, set the query location using the [`search()`](/developer-docs/query-sdk/api/search) function.
+
+Irys requires you to connect Irys the node-specific endpoint where you posted your transaction, while Arweave uses a universal endpoint for all queries. Irys is cross-chain, it includes the address (regardless of chain) that posted the transaction, while Arweave only includes Arweave addresses. Irys also includes the [currency](/overview/supported-tokens) used for payment, [a receipt](/learn/receipts) ([if requested when uploading](/developer-docs/sdk/api/uploadWithReceipt)), and a true timestamp accurate to the millisecond of when the transaction was posted.
+
+Arweave allows for querying by [block structure](https://gql-guide.vercel.app/#block-query-structures), including block ID, block range, and block height, which Irys GraphQL does not support.
+
+|                                                         | Irys                                                                                                                                                               | Arweave                                                                                                                     |
+| ------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------ | --------------------------------------------------------------------------------------------------------------------------- |
+| Endpoint                                                | Node-specific. Connect to the endpoint associated with the node where you posted your transaction.                                                                 | Universal endpoint for all queries.                                                                                         |
+| Cross-chain                                             | Yes. Includes the address (regardless of chain) that posted the transaction.                                                                                       | No. Includes Arweave addresses only.                                                                                        |
+| Original payment [currency](/overview/supported-tokens) | Included.                                                                                                                                                          | Not included.                                                                                                               |
+| Timestamp                                               | Includes a timestamp accurate to the millisecond of when the transaction was posted, along with an (optional) cryptographically signed [receipt](/learn/receipts). | Timestamp is based on block time, accurate to ~2 minutes.                                                                   |
+| Blocks                                                  | Not included.                                                                                                                                                      | [Included](https://gql-guide.vercel.app/#block-query-structures). You can query by block ID, block range, and block height. |

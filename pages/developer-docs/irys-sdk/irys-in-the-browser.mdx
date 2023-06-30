@@ -1,0 +1,134 @@
+---
+description: Using the WebIrys class to interact with Irys from the browser
+---
+
+import { Callout } from "nextra-theme-docs";
+
+# Irys In The Browser (WebIrys)
+
+<Callout emoji="🚀">
+	If you're using Irys with React and `npx create-react-app`, you will need to follow [some extra setup
+	steps](/developer-docs/recipes/react).
+</Callout>
+
+To use Irys with browser wallets like MetaMask and Phantom, use the `WebIrys` class. Usage is similar to the Irys class used with server-side development, however you don’t need to provide a private key as that will be linked via the user’s wallet. When functions that require signing are called (upload, fund, withdraw etc.) the linked wallet will prompt the user to confirm the required actions.
+
+If you’d prefer to learn using a long-form tutorial, [we have this one on creating a web-based uploader with progress bars](/tutorials/file-uploader).
+
+Provider setup varies based on wallet type / version:
+
+[Ethers 5](/developer-docs/sdk/irys-in-the-browser#ethers-5) | [Ethers 6](/developer-docs/sdk/irys-in-the-browser#ethers-6) | [RainbowKit / WAGMI](/developer-docs/sdk/irys-in-the-browser#rainbowkit--wagmi-hooks) | [viem](/developer-docs/sdk/irys-in-the-browser#viem) | [WalletConnect](/developer-docs/sdk/irys-in-the-browser#walletconnect) | [Phantom](/developer-docs/sdk/irys-in-the-browser#phantom) | [Near](/developer-docs/sdk/irys-in-the-browser#near)
+
+## Ethers 5
+
+```js
+import { providers } from "ethers";
+import { WebIrys } from "@irys/client";
+
+await window.ethereum.enable();
+const provider = new providers.Web3Provider(window.ethereum);
+const irys = new WebIrys("https://node2.irys.xyz", "matic", provider);
+await irys.ready();
+```
+
+## Ethers 6
+
+Import our SDK and connect to a Bundlr node using injected providers and ethers version 6.
+
+```js
+import { ethers } from "ethers";
+import { WebIrys } from "@irys/client";
+
+const provider = new ethers.BrowserProvider(window.ethereum);
+const signer = await provider.getSigner();
+
+provider.getSigner = () => signer;
+
+const irys = new WebIrys("https://node1.irys.xyz", "matic", provider);
+await irys.ready();
+```
+
+## RainbowKit / WAGMI Hooks
+
+```js
+import { WebIrys } from "@irys/client";
+
+const provider = useProvider();
+const { data: rainbowKitSigner, isError, isLoading } = useSigner();
+// use method injection to add the missing function
+provider.getSigner = () => rainbowKitSigner;
+const irys = new WebIrys("https://node1.irys.xyz", "matic", provider);
+await irys.ready();
+```
+
+## viem
+
+```js
+import { createWalletClient, custom } from "viem";
+import { mainnet } from "viem/chains";
+import { WebIrys } from "@irys/client";
+
+const client = createWalletClient({
+	chain: mainnet,
+	transport: custom(window.ethereum),
+});
+client.getSigner = () => client;
+client.getAddress = async () => client.getAddresses().then((a) => a[0]);
+
+const irys = new WebIrys("https://node1.irys.xyz", "matic", client);
+await irys.ready();
+```
+
+## WalletConnect
+
+```js
+import { ethers } from "ethers";
+import WalletConnectProvider from "@walletconnect/web3-provider";
+import { WebIrys } from "@irys/client";
+
+const connector = await new WalletConnectProvider({
+	rpc: "https://cloudflare-eth.com/",
+}).enable();
+const provider = new ethers.BrowserProvider(connector);
+
+const irys = new WebIrys("https://node1.irys.xyz", "matic", provider);
+await irys.ready();
+```
+
+## Phantom
+
+```js
+import { WebIrys } from "@irys/client";
+import { PhantomWalletAdapter } from "@solana/wallet-adapter-phantom";
+await window.solana.connect();
+const provider = new PhantomWalletAdapter();
+await provider.connect();
+
+const irys = new WebIrys("https://node1.irys.xyz", "solana", provider);
+await irys.ready();
+```
+
+## Near
+
+```js
+import { WebIrys } from "@irys/client";
+import { connect, keyStores, WalletConnection } from "near-api-js";
+
+const config = {
+	networkId: "mainnet",
+	keyStore: new keyStores.BrowserLocalStorageKeyStore(),
+	nodeUrl: "https://rpc.mainnet.near.org",
+	walletUrl: "https://wallet.mainnet.near.org",
+	helperUrl: "https://helper.mainnet.near.org",
+	explorerUrl: "https://explorer.mainnet.near.org",
+	headers: {},
+};
+const near = await connect(config);
+const wallet = new WalletConnection(near, "bundlr");
+wallet.requestSignIn({
+	contractId: "",
+});
+
+const irys = new WebIrys("https://node1.irys.xyz", "near", wallet);
+await irys.ready();
+```

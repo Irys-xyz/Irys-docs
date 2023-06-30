@@ -3,18 +3,14 @@ import { DiscordIcon, GitIcon, MediumIcon, MirrorIcon, TelegramIcon, TwitterIcon
 import FooterDesktop from "../NewFooter/FooterDesktop";
 import FooterMobile from "../NewFooter/FooterMobile";
 
-const Footer = ({
-	noPadding
-}: {
-	noPadding?: boolean
-}) => {
+const Footer = ({ noPadding }: { noPadding?: boolean }) => {
 	const DEFINITIONS = [
 		{
 			title: "OVERVIEW",
 			options: [
 				{
-					name: "About Bundlr",
-					href: "/overview/about-bundlr",
+					name: "About Irys",
+					href: "/overview/about-irys",
 					newTab: false,
 				},
 				{

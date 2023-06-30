@@ -1,12 +1,12 @@
 {
+	"permanent-storage": "Permanent Storage",
+	"strong-provenance": "Strong Provenance",
+	"volumetric-scaling": "Volumetric Scaling",
+	"irys-arweave": "Irys & Arweave",
+	"transaction-lifecycle": "Transaction Lifecycle",
 	"bundles": "Bundles",
-	"bundlr-arweave": "Bundlr & Arweave",
 	"gateways": "Gateways",
 	"receipts": "Receipts",
-	"transaction-lifecycle": "Transaction Lifecycle",
-	"scaling": {
-		"display": "hidden"
-	},
 	"optimistic-cache": "Optimistic Cache",
 	"funding-withdrawing": "Funding & Withdrawing"
 }

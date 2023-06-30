@@ -4,11 +4,11 @@ description: Build and prototype your application on Bundlr's Devnet
 
 # Using Devnet
 
-Bundlr's Devnet is for developers who are building projects or learning how to use our SDK. Uploads to Devnet are kept for approximately 60 days. When using Devnet, developers pay using tokens that are available from free public faucets.
+Irys's Devnet is for developers who are building projects or learning how to use our SDK. Uploads to Devnet are kept for approximately 60 days. When using Devnet, developers pay using tokens that are available from free public faucets.
 
-To connect to Devnet, supply the address of our Devnet node when instantiating either a `Bundlr` or `WebBundlr` object.
+To connect to Devnet, supply the address of our Devnet node when instantiating either a `Irys` or `WebIrys` object.
 
-It's important to note that when using Devnet with the `Bundlr` class, you must specify an RPC address. When using the `WebBundlr` class, the RPC address is only required when using non-EVM chains.
+When using Devnet with the `Bundlr` class, you must specify an RPC address. When using the `WebIrys` class, the RPC address is only required when using non-EVM chains.
 
 #### `Bundlr` Class
 
@@ -24,13 +24,13 @@ const bundlr = new Bundlr("https://devnet.bundlr.network", "matic", "<polygon-pr
 });
 ```
 
-#### `WebBundlr` Class And EVM Chains
+#### `WebIrys` Class And EVM Chains
 
 ```js
 const bundlr = new WebBundlr("https://devnet.bundlr.network", "matic", provider);
 ```
 
-#### `WebBundlr` Class And Non-EVM Chains
+#### `WebIrys` Class And Non-EVM Chains
 
 ```js
 const bundlr = new WebBundlr(

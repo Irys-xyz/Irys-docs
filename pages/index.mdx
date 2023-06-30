@@ -2,7 +2,7 @@ import Footer from "../components/Footer";
 import Head from "next/head";
 import Heading from "../components/Heading";
 import HomeOptions from "../components/HomeOptions";
-import HomeWhyUseBundlr from "../components/HomeWhyUseBundlr";
+import HomeWhyUseIrys from "../components/HomeWhyUseIrys";
 import HomeProduct from "../components/HomeProduct";
 import Button from "../components/Button";
 import ExpandableSection from "../components/ExpandableSection";
@@ -10,7 +10,7 @@ import SectionTitle from "../components/SectionTitle";
 import Link from "next/link";
 
 <Head>
-	<title>Bundlr Docs</title>
+	<title>Irys Docs</title>
 </Head>
 
 <style jsx>
@@ -45,18 +45,18 @@ import Link from "next/link";
 
 <header className="px-4 lg:px-[79px] py-14">
   <Heading level={1} className="text-white font-fkDisplay">
-    Bundlr Docs
+    Irys Docs
   </Heading>
 
   <p className="font-robotoMono leading-loose mt-6">
-    Unlock the full potential of Bundlr's technology with our developer
+    Unlock the full potential of Irys' technology with our developer
     resources
   </p>
 </header>
 
 <div className="flex flex-col md:flex-row w-full gap-4 items-stretch px-4 lg:px-[79px]">
   <div className="flex flex-col w-full md:w-1/2 gap-4">
-    <Link href="/developer-docs/quickstart">
+    <Link href="/developer-docs/irys-sdk">
       <div
         className="bg-black h-[244px] rounded-2xl overflow-hidden bannerHover pt-10 pl-10 text-2xl hover:scale-[99%] cursor-pointer transition-all"
         style={{
@@ -67,10 +67,10 @@ import Link from "next/link";
           backdropFilter: "blur(10px)",
         }}
       >
-        Quickstart
+        Irys SDK
       </div>
     </Link>
-    <Link href="/developer-docs/sdk">
+    <Link href="/developer-docs/query-sdk">
       <div
         className="bg-black h-[244px] rounded-2xl overflow-hidden bannerHover pt-10 pl-10 text-2xl hover:scale-[99%] cursor-pointer transition-all"
         style={{
@@ -81,7 +81,7 @@ import Link from "next/link";
           backdropFilter: "blur(10px)",
         }}
       >
-        SDK
+        Irys Query SDK
       </div>
     </Link>
   </div>
@@ -109,10 +109,7 @@ import Link from "next/link";
 
 <div className="px-4 lg:px-[79px] py-20">
 
-<Heading
-	level={6}
-	className="!font-fkDisplay leading-none text-center md:text-left mt-10"
->
+<Heading level={6} className="!font-fkDisplay leading-none text-center md:text-left mt-10">
 	Use our SDK and start storing data permanently with 3 lines of code.
 </Heading>
 
@@ -121,18 +118,17 @@ import Link from "next/link";
       {
         id: 1,
         title: "Connect to a Node",
-        snippet: `const polygonPrivateKey = "6d779d4..."; // your private key
-const bundlr = new Bundlr("https://node1.bundlr.network", "matic", polygonPrivateKey);`,
+        snippet: ``,
       },
       {
         id: 2,
         title: "Fund a Node",
-        snippet: `await bundlr.fund(1e18); // 1 matic`,
+        snippet: ``,
       },
       {
         id: 3,
         title: "Upload your Data, Forever",
-        snippet: `await bundlr.upload("GM Bundloooors!");`,
+        snippet: ``,
       },
     ]}
   />
@@ -144,25 +140,25 @@ const bundlr = new Bundlr("https://node1.bundlr.network", "matic", polygonPrivat
 		{
 			id: 0,
 			title: "About",
-			description: "Unlock the potential of Bundlr's technology",
-			href: "/overview/about-bundlr",
+			description: "Unlock the potential of Irys' technology",
+			href: "/overview/about-irys",
 		},
 		{
 			id: 1,
 			title: "Network",
-			description: "Discover Bundlr's network",
+			description: "Discover Irys' network",
 			href: "/overview/network",
 		},
 		{
 			id: 2,
-			title: "Solutions",
-			description: "How Bundlr solves leading data challenges",
+			title: "Use Cases",
+			description: "How Irys solves leading data challenges",
 			href: "/overview/solutions",
 		},
     	{
     		id: 3,
     		title: "Services",
-    		description: "Bundlr's core capabilities",
+    		description: "Irys' core capabilities",
     		href: "/overview/services",
     	},
     ]}
@@ -208,7 +204,21 @@ const bundlr = new Bundlr("https://node1.bundlr.network", "matic", polygonPrivat
 					backdropFilter: "blur(10px)",
 				}}
 			>
-				SDK
+				Irys SDK
+			</div>
+		</Link>
+				<Link href="/developer-docs/recipes">
+			<div
+				className="bg-seashell text-black h-[156px] rounded-2xl overflow-hidden bannerHover pt-10 pl-10 text-2xl hover:scale-[99%] cursor-pointer transition-all"
+				style={{
+					backgroundImage: "url('./img/cloud.webp')",
+					backgroundSize: "140%",
+					backgroundRepeat: "no-repeat",
+					backgroundPosition: "-80% 0%",
+					backdropFilter: "blur(10px)",
+				}}
+			>
+				Irys Query SDK
 			</div>
 		</Link>
 		<Link href="/developer-docs/cli">
@@ -225,21 +235,8 @@ const bundlr = new Bundlr("https://node1.bundlr.network", "matic", polygonPrivat
 				CLI
 			</div>
 		</Link>
-		<Link href="/developer-docs/recipes">
-			<div
-				className="bg-seashell text-black h-[156px] rounded-2xl overflow-hidden bannerHover pt-10 pl-10 text-2xl hover:scale-[99%] cursor-pointer transition-all"
-				style={{
-					backgroundImage: "url('./img/cloud.webp')",
-					backgroundSize: "140%",
-					backgroundRepeat: "no-repeat",
-					backgroundPosition: "-80% 0%",
-					backdropFilter: "blur(10px)",
-				}}
-			>
-				Cut & Paste Code Recipes
-			</div>
-		</Link>
-	</div>
+    </div>
+
 </div>
 
 </section>
@@ -248,8 +245,8 @@ const bundlr = new Bundlr("https://node1.bundlr.network", "matic", polygonPrivat
 
 <SectionTitle title="Hands On" />
 <p className="pt-8 font-robotoMono leading-loose">
-	Start with tutorials and then join a global community of over 40,000 developers in our
-	Quests program. Earn unique NFTs for every quest you complete.
+	Start with tutorials and then join a global community of over 40,000 developers in our Quests program. Earn unique
+	NFTs for every quest you complete.
 </p>
 
   <ul className="flex flex-col gap-10 lg:flex-row mt-16">
@@ -257,7 +254,7 @@ const bundlr = new Bundlr("https://node1.bundlr.network", "matic", polygonPrivat
       {
         Title: "Tutorials",
         FirstParagraph:
-          "Learn the Bundlr SDK with tutorials for all skill levels.",
+          "Learn Irys' SDK with tutorials for all skill levels.",
         URL: "/hands-on/tutorials",
       },
       {
@@ -287,17 +284,27 @@ const bundlr = new Bundlr("https://node1.bundlr.network", "matic", polygonPrivat
   </ul>
 </section>
 
-<HomeWhyUseBundlr
+<HomeWhyUseIrys
 	content={[
+		{
+			title: "Permanent Storage",
+			href: "/learn/permanent-storage",
+			description: "Permanent and immutable storage on Arweave via Irys",
+		},
+				{
+			title: "Strong Provenance",
+			href: "/learn/strong-provenance",
+			description: "Cryptographically guaranteed provenance, millisecond accurate timestamps",
+		},
 		{
 			title: "Bundles",
 			href: "/learn/bundles",
 			description: "A bundle is a group of transactions",
 		},
     	{
-    		title: "Bundlr And Arweave",
-    		href: "/learn/bundlr-arweave",
-    		description: "Bundlr makes Arweave easier to use",
+    		title: "Irys And Arweave",
+    		href: "/learn/irys-arweave",
+    		description: "Irys makes Arweave easier to use",
     	},
 		{
     		title: "Gateways",
@@ -319,7 +326,7 @@ const bundlr = new Bundlr("https://node1.bundlr.network", "matic", polygonPrivat
     		title: "Transaction Lifecycle",
     		href: "/learn/transaction-lifecycle",
     		description:
-    			"Understand each step of the process as a transaction is processed by Bundlr",
+    			"Understand each step of the process as a transaction is processed by Irys",
     	},
     ]}
 
