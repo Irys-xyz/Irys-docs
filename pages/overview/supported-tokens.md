@@ -4,7 +4,9 @@ description: Pay and sign for uploads with multiple tokens.
 
 # Supported Tokens
 
-You can pay for transactions in any of the 14 cryptocurrencies we support.
+## Mainnet Supported Tokens
+
+On Nodes 1 and 2 can pay for uploads in any of these tokens:
 
 | Currency / Blockchain | Currency | Parameter Value | Bundlr Support | WebBundlr Support |
 | --------------------- | -------- | --------------- | -------------- | ----------------- |
@@ -22,7 +24,24 @@ You can pay for transactions in any of the 14 cryptocurrencies we support.
 | Polygon               | MATIC    | matic           | yes            | yes               |
 | Solana                | SOL      | solana          | yes            | yes               |
 
-To use a different currency, simply link your private key and supply the currency name when creating a new Bundlr object. The accepted values for "currency-name" are listed in the third column of the table above.
+## Devnet Supported Tokens
+
+On [Devnet](/developer-docs/using-devnet), you can pay for uploads in any of these tokens:
+
+| Currency / Blockchain | Currency | Parameter Value | Bundlr Support | WebBundlr Support |
+| --------------------- | -------- | --------------- | -------------- | ----------------- |
+| Aptos                 | APT      | aptos           | yes            | yes               |
+| Algorand              | ALGO     | algorand        | yes            | no                |
+| Arbitrum              | ETH      | arbitrum        | yes            | yes               |
+| Avalanche C-Chain     | AVAX     | avalanche       | yes            | yes               |
+| Ethereum (Sepolia)    | ETH      | ethereum        | yes            | yes               |
+| Near                  | NEAR     | near            | yes            | yes               |
+| Polygon (Mumbai)      | MATIC    | matic           | yes            | yes               |
+| Solana                | SOL      | solana          | yes            | yes               |
+
+## Specifying Currency
+
+To use a different currency, simply link your private key and supply the currency name when creating a new Bundlr object. The accepted values for "currency-name" are listed in the third column of the tables above.
 
 General Format:
 
@@ -39,5 +58,3 @@ import Bundlr from "@bundlr-network/client";
 const bundlr = new Bundlr("https://node2.bundlr.network", "matic", "<matic-private-key>");
 await bundlr.upload("GM world");
 ```
-
-You can also use our [Devnet](/developer-docs/using-devnet) with free Devnet currencies available from public faucets.
