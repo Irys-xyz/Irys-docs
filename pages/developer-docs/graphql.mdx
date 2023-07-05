@@ -92,19 +92,40 @@ Search by transaction IDs.
 
 ```graphql
 query getByIds {
-	transactions(ids: ["--52WQHJIJod_rni8pkl1Vxt9MFGoXZAm8SC7ex6C1o", "--52THRWpX_RJzGcNXmtQ2DSP37d1e1VQ4YmvbY5ZXo"]) {
-		edges {
-			node {
-				id
-				tags {
-					name
-					value
-				}
-			}
-		}
-	}
+  transactions(
+    ids: ["--52WQHJIJod_rni8pkl1Vxt9MFGoXZAm8SC7ex6C1o", "--52THRWpX_RJzGcNXmtQ2DSP37d1e1VQ4YmvbY5ZXo"]) {
+    edges {
+      node {
+        id
+        tags {
+          name
+          value
+        }
+      }
+    }
+  }
 }
 ```
+
+#### Timestamps
+
+Search by timestamps. 
+
+```graphql
+query getByTimestamp {
+  transactions(timestamp: { from: 1688144401000, to: 1688317201000 }) {
+    edges {
+      node {
+        id
+      }
+    }
+  }
+}
+```
+
+<Callout type="info" emoji="ℹ️">
+Bundlr timestamps are accurate to the millisecond, so you need to provide a timestamp in millisecond format. You can convert from human-readable time to UNIX timestamp using websites like [Epoch101](https://www.epoch101.com/), be sure to convert in **millisecond** format not **second**.
+</Callout>
 
 #### Owners
 
@@ -112,15 +133,17 @@ Search for transactions matching the wallet address used when posting the transa
 
 ```graphql
 query getByOwner {
-	transactions(owners: ["0xBcb812C6e26F4F0F78Bd7B6222461FF24F2942AE", "0xaC568a981B1370B2e1bAA8cE30BD5AC9E28C572D"]) {
-		edges {
-			node {
-				id
-				address
-			}
-		}
-	}
+  transactions(
+    owners: ["0xBcb812C6e26F4F0F78Bd7B6222461FF24F2942AE", "0xaC568a981B1370B2e1bAA8cE30BD5AC9E28C572D"]) {
+    edges {
+      node {
+        id
+        address
+      }
+    }
+  }
 }
+
 ```
 
 #### Tags
@@ -129,14 +152,14 @@ Search for transactions matching [tag](/developer-docs/tags) name / value pairs.
 
 ```graphql
 query getAllPNGs {
-	transactions(tags: [{ name: "Content-Type", values: ["image/png"] }]) {
-		edges {
-			node {
-				id
-				address
-			}
-		}
-	}
+  transactions(tags: [{ name: "Content-Type", values: ["image/png"] }]) {
+    edges {
+      node {
+        id
+        address
+      }
+    }
+  }
 }
 ```
 
@@ -144,35 +167,39 @@ Search for transactions matching the tag with name **Content-Type** and the valu
 
 ```graphql
 query getTagsWithOR {
-	transactions(tags: [{ name: "Content-Type", values: ["image/png", "image/jpg"] }]) {
-		edges {
-			node {
-				tags {
-					name
-					value
-				}
-			}
-		}
-	}
+  transactions(tags: [{ name: "Content-Type", values: ["image/png", "image/jpg"] }]) {
+    edges {
+      node {
+        tags {
+          name
+          value
+        }
+      }
+    }
+  }
 }
+
 ```
 
 Search for transactions matching the tag with name **Content-Type** and the values of **image/png** AND **image/jpg**.
 
 ```graphql
 query getTagsWithAnd {
-	transactions(
-		tags: [{ name: "Content-Type", values: ["image/jpg"] }, { name: "Content-Type", values: ["image/png"] }]
-	) {
-		edges {
-			node {
-				tags {
-					name
-					value
-				}
-			}
-		}
-	}
+  transactions(
+    tags: [
+      { name: "Content-Type", values: ["image/jpg"] }
+      { name: "Content-Type", values: ["image/png"] }
+    ]
+  ) {
+    edges {
+      node {
+        tags {
+          name
+          value
+        }
+      }
+    }
+  }
 }
 ```
 
@@ -182,14 +209,17 @@ Limit the number of results returned by including the `limit` parameter.
 
 ```graphql
 query getAllPNGs {
-	transactions(limit: 10, tags: [{ name: "Content-Type", values: ["image/png"] }]) {
-		edges {
-			node {
-				id
-				address
-			}
-		}
-	}
+  transactions(
+    limit: 10
+    tags: [{ name: "Content-Type", values: ["image/png"] }]
+  ) {
+    edges {
+      node {
+        id
+        address
+      }
+    }
+  }
 }
 ```
 
@@ -206,18 +236,18 @@ The following query returns 10 transactions tagged `image/png` occurring after t
 
 ```graphql
 query getPNGs {
-	transactions(
-		limit: 10
-		tags: [{ name: "Content-Type", values: ["image/png"] }]
-		after: "LS02d1NsM3R6aUprd3dKUzVjN1FXaWg5aUxsbXh5dVJJbGlydHJtNlpPbw"
-	) {
-		edges {
-			node {
-				id
-			}
-			cursor
-		}
-	}
+  transactions(
+    limit: 10
+    tags: [{ name: "Content-Type", values: ["image/png"] }]
+    after: "LS02d1NsM3R6aUprd3dKUzVjN1FXaWg5aUxsbXh5dVJJbGlydHJtNlpPbw"
+  ) {
+    edges {
+      node {
+        id
+      }
+      cursor
+    }
+  }
 }
 ```
 
@@ -227,27 +257,33 @@ You can sort results by timestamp in either ascending or descending order using 
 
 ```graphql
 query getAllByOwnerAsc {
-	transactions(owners: ["0xBcb812C6e26F4F0F78Bd7B6222461FF24F2942AE"], order: ASC) {
-		edges {
-			node {
-				id
-				address
-			}
-		}
-	}
+  transactions(
+    owners: ["0xBcb812C6e26F4F0F78Bd7B6222461FF24F2942AE"]
+    order: ASC
+  ) {
+    edges {
+      node {
+        id
+        address
+      }
+    }
+  }
 }
 ```
 
 ```graphql
 query getAllByOwnerDesc {
-	transactions(owners: ["0xBcb812C6e26F4F0F78Bd7B6222461FF24F2942AE"], order: DESC) {
-		edges {
-			node {
-				id
-				address
-			}
-		}
-	}
+  transactions(
+    owners: ["0xBcb812C6e26F4F0F78Bd7B6222461FF24F2942AE"]
+    order: DESC
+  ) {
+    edges {
+      node {
+        id
+        address
+      }
+    }
+  }
 }
 ```
 
@@ -316,17 +352,17 @@ Search by transaction IDs.
 
 ```graphql
 query getByIds {
-	transactions(ids: ["1t-Z0oDxQLvACpLXUwwfbplw7vHialWH8mkNAvzTkDw", "1w6PBHQ5e0hMJWsfRCJr66JvQAcyws0k4D97kG4GVm8"]) {
-		edges {
-			node {
-				id
-				tags {
-					name
-					value
-				}
-			}
-		}
-	}
+  transactions(ids: ["1t-Z0oDxQLvACpLXUwwfbplw7vHialWH8mkNAvzTkDw", "1w6PBHQ5e0hMJWsfRCJr66JvQAcyws0k4D97kG4GVm8"]) {
+    edges {
+      node {
+        id
+        tags {
+          name
+          value
+        }
+      }
+    }
+  }
 }
 ```
 
@@ -336,13 +372,14 @@ Search for transactions matching the Arweave wallet address used when posting th
 
 ```graphql
 query getByOwners {
-    transactions(owners:["M6w588ZkR8SVFdPkNXdBy4sqbMN0Y3F8ZJUWm2WCm8M"]) {
-        edges {
-            node {
-                id
-            }
-        }
+  transactions(owners: ["M6w588ZkR8SVFdPkNXdBy4sqbMN0Y3F8ZJUWm2WCm8M"]) {
+    edges {
+      node {
+        id
+      }
     }
+  }
+}
 ```
 
 #### Tags
@@ -351,13 +388,13 @@ Search for transactions matching [tag](/developer-docs/tags) name / value pairs.
 
 ```graphql
 query getAllPNGs {
-	transactions(tags: { name: "Content-Type", values: ["image/png"] }) {
-		edges {
-			node {
-				id
-			}
-		}
-	}
+  transactions(tags: { name: "Content-Type", values: ["image/png"] }) {
+    edges {
+      node {
+        id
+      }
+    }
+  }
 }
 ```
 
@@ -367,13 +404,16 @@ Limit the number of results returned by including the `first` parameter.
 
 ```graphql
 query get10Pngs {
-	transactions(first: 10, tags: { name: "Content-Type", values: ["image/png"] }) {
-		edges {
-			node {
-				id
-			}
-		}
-	}
+  transactions(
+    first: 10
+    tags: { name: "Content-Type", values: ["image/png"] }
+  ) {
+    edges {
+      node {
+        id
+      }
+    }
+  }
 }
 ```
 
@@ -390,18 +430,18 @@ The following query returns 10 transactions tagged `image/png` occurring after t
 
 ```graphql
 query getPNGs {
-	transactions(
-		first: 10
-		tags: [{ name: "Content-Type", values: ["image/png"] }]
-		after: "LS02d1NsM3R6aUprd3dKUzVjN1FXaWg5aUxsbXh5dVJJbGlydHJtNlpPbw"
-	) {
-		edges {
-			node {
-				id
-			}
-			cursor
-		}
-	}
+  transactions(
+    first: 10
+    tags: [{ name: "Content-Type", values: ["image/png"] }]
+    after: "LS02d1NsM3R6aUprd3dKUzVjN1FXaWg5aUxsbXh5dVJJbGlydHJtNlpPbw"
+  ) {
+    edges {
+      node {
+        id
+      }
+      cursor
+    }
+  }
 }
 ```
 
@@ -411,25 +451,31 @@ You can sort results by block height in either ascending or descending order usi
 
 ```graphql
 query getByOwnersAsc {
-	transactions(owners: ["M6w588ZkR8SVFdPkNXdBy4sqbMN0Y3F8ZJUWm2WCm8M"], sort: HEIGHT_ASC) {
-		edges {
-			node {
-				id
-			}
-		}
-	}
+  transactions(
+    owners: ["M6w588ZkR8SVFdPkNXdBy4sqbMN0Y3F8ZJUWm2WCm8M"]
+    sort: HEIGHT_ASC
+  ) {
+    edges {
+      node {
+        id
+      }
+    }
+  }
 }
 ```
 
 ```graphql
 query getByOwnersDesc {
-	transactions(owners: ["M6w588ZkR8SVFdPkNXdBy4sqbMN0Y3F8ZJUWm2WCm8M"], sort: HEIGHT_DESC) {
-		edges {
-			node {
-				id
-			}
-		}
-	}
+  transactions(
+    owners: ["M6w588ZkR8SVFdPkNXdBy4sqbMN0Y3F8ZJUWm2WCm8M"]
+    sort: HEIGHT_DESC
+  ) {
+    edges {
+      node {
+        id
+      }
+    }
+  }
 }
 ```
 
