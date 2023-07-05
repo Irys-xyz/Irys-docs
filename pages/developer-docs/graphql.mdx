@@ -14,13 +14,13 @@ Transaction metadata can be queried using GraphQL. This includes both metadata a
 	GraphQL libraries and then build a tool to search Arweave for recently uploaded image files.
 </Callout>
 
-## Irys vs Arweave GraphQL
+## Bundlr vs Arweave GraphQL
 
-Irys GraphQL and [Arweave GraphQL](https://gql-guide.vercel.app/) both offer ways to query transaction metadata, however, they differ in several ways. Irys GraphQL requires you to connect to the node-specific endpoint where you posted your transaction, while Arweave GraphQL uses a universal endpoint for all queries. Irys GraphQL is cross-chain, it includes the address (regardless of chain) that posted the transaction, while Arweave GraphQL only includes Arweave addresses. Irys GraphQL also includes the [currency](/overview/supported-tokens) used for payment, [a receipt](/learn/receipts) ([if requested when uploading](/developer-docs/sdk/api/uploadWithReceipt)), and a true timestamp accurate to the millisecond of when the transaction was posted. Arweave GraphQL allows for querying by [block structure](https://gql-guide.vercel.app/#block-query-structures), including block ID, block range, and block height, which Irys GraphQL does not support.
+Bundlr GraphQL and [Arweave GraphQL](https://gql-guide.vercel.app/) both offer ways to query transaction metadata, however, they differ in several ways. Bundlr GraphQL requires you to connect to the node-specific endpoint where you posted your transaction, while Arweave GraphQL uses a universal endpoint for all queries. Bundlr GraphQL is cross-chain, it includes the address (regardless of chain) that posted the transaction, while Arweave GraphQL only includes Arweave addresses. Bundlr GraphQL also includes the [currency](/overview/supported-tokens) used for payment, [a receipt](/learn/receipts) ([if requested when uploading](/developer-docs/sdk/api/uploadWithReceipt)), and a true timestamp accurate to the millisecond of when the transaction was posted. Arweave GraphQL allows for querying by [block structure](https://gql-guide.vercel.app/#block-query-structures), including block ID, block range, and block height, which Bundlr GraphQL does not support.
 
-|                                                         | Irys GraphQL                                                                                                                                                       | Arweave GraphQL                                                                                                             |
+|                                                         | Bundlr GraphQL                                                                                                                                                     | Arweave GraphQL                                                                                                             |
 | ------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------ | --------------------------------------------------------------------------------------------------------------------------- |
-| Endpoint                                                | Node-specific. Connect to the endpoint associated with the node where you posted your transaction.                                                                 | Universal endpoint for all queries.                                                                                         |
+| Endpoint                                                | Node-specefic. Connect to the endpoint associated with the node where you posted your transaction.                                                                 | Universal endpoint for all queries.                                                                                         |
 | Cross-chain                                             | Yes. Includes the address (regardless of chain) that posted the transaction.                                                                                       | No. Includes Arweave addresses only.                                                                                        |
 | Original payment [currency](/overview/supported-tokens) | Included.                                                                                                                                                          | Not included.                                                                                                               |
 | Timestamp                                               | Includes a timestamp accurate to the millisecond of when the transaction was posted, along with an (optional) cryptographically signed [receipt](/learn/receipts). | Timestamp is based on block time, accurate to ~2 minutes.                                                                   |
@@ -30,9 +30,9 @@ Irys GraphQL and [Arweave GraphQL](https://gql-guide.vercel.app/) both offer way
 
 You can query using an HTTP library like fetch or axios. You can also use specialized clients like [Apollo Client](https://www.apollographql.com/) or [urql](https://formidable.com/open-source/urql/).
 
-The next two sections detail first [Irys GraphQL](/developer-docs/graphql#Irys-graphql) followed by [Arweave GraphQL](/developer-docs/graphql#arweave-graphql). While the two schemas are similar, there are differences you’ll need to be aware of when developing your projects. There is no one schema that is “better” than the other, the decision on which to use will depend on your own project and your specific needs.
+The next two sections detail first [Bundlr GraphQL](/developer-docs/graphql#bundlr-graphql) followed by [Arweave GraphQL](/developer-docs/graphql#arweave-graphql). While the two schemas are similar, there are differences you’ll need to be aware of when developing your projects. There is no one schema that is “better” than the other, the decision on which to use will depend on your own project and your specific needs.
 
-## Irys GraphQL
+## Bundlr GraphQL
 
 ### Anatomy Of A Query
 
@@ -41,18 +41,18 @@ A GraphQL query is made up of:
 -   Query Arguments: Arguments that specify search parameters, limit the number of results returned, or enable pagination.
 -   Results Fields: Fields that define the data you want to retrieve.
 
-<img className="border border-[#FEF4EE] rounded mt-5 w-5/6" src="/img/graphql/IrysGQL-Anatomy.png" />
+<img className="border border-[#FEF4EE] rounded mt-5 w-5/6" src="/img/graphql/BundlrGQL-Anatomy.png" />
 
 ### Query Arguments
 
 Any of the following query arguments can be used as search parameters:
 
-| Field      | Description                                                                                                                                                                                              |
-| ---------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `ids`      | An array of transaction IDs passed as strings. Values are ORed together, matching results will include transactions that have any of the supplied IDs.                                                   |
-| `owner`    | The address used when posting the transaction. Can be a native address from [any of the chains supported by Irys](/overview/supported-tokens). Note in results fields, this is referred to as `address`. |
-| `currency` | The [currency](/overview/supported-tokens) used to pay for the transaction.                                                                                                                              |
-| `tags`     | An array of tag name / value pairs passed as JSON objects.                                                                                                                                               |
+| Field      | Description                                                                                                                                                                                                |
+| ---------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `ids`      | An array of transaction IDs passed as strings. Values are ORed together, matching results will include transactions that have any of the supplied IDs.                                                     |
+| `owner`    | The address used when posting the transaction. Can be a native address from [any of the chains supported by Bundlr](/overview/supported-tokens). Note in results fields, this is referred to as `address`. |
+| `currency` | The [currency](/overview/supported-tokens) used to pay for the transaction.                                                                                                                                |
+| `tags`     | An array of tag name / value pairs passed as JSON objects.                                                                                                                                                 |
 
 ### Results Fields
 
@@ -60,7 +60,7 @@ When building a query, any of the following values be included in your results:
 | Field | Description |
 |---|---|
 | `id` | The transaction ID. |
-| `address` | The address used when posting the transaction. Can be a native address from any of the chains supported by Irys. Note in query arguements, this is referred to as `owner`. |
+| `address` | The address used when posting the transaction. Can be a native address from any of the chains supported by Bundlr. Note in query arguements, this is referred to as `owner`. |
 | `currency` | The currency used to pay for the transaction. |
 | `receipt { `<br/>&nbsp;&nbsp;`deadlineHeight `<br/>&nbsp;&nbsp;`signature  `<br/>&nbsp;&nbsp;`version `<br/>`}` | An optional receipt, only exists if a user requested one at upload.<br/> `deadlineHeight`: The block number by which the transaction must be finalized on Arweave. <br/>`signature`: A signed deep hash of the JSON receipt. |
 | `tags {    `<br/>&nbsp;&nbsp;`name     `<br/>&nbsp;&nbsp;`value`<br/>`}` | An array of tags supplied as name / value pairs. Exists if the user added them at upload. |
@@ -70,17 +70,17 @@ When building a query, any of the following values be included in your results:
 
 Connect to the GraphQL endpoint associated with the node you uploaded your transaction to.
 
-| Node   | Endpoint                        |
-| ------ | ------------------------------- |
-| Node 1 | https://node1.irys.xyz/graphql  |
-| Node 2 | https://node2.irys.xyz/graphql  |
-| Devnet | https://devnet.irys.xyz/graphql |
+| Node   | Endpoint                              |
+| ------ | ------------------------------------- |
+| Node 1 | https://node1.bundlr.network/graphql  |
+| Node 2 | https://node2.bundlr.network/graphql  |
+| Devnet | https://devnet.bundlr.network/graphql |
 
 ### GraphQL Sandbox
 
 Clicking on any of the endpoint URLs above will direct you to the GraphQL Sandbox used for building and testing queries. Press Control+Space at any time to see an interactive popup window of either query arguments or results fields.
 
-<img className="border border-[#FEF4EE] rounded mt-5 w-5/6" src="/img/graphql/IrysGQL-Sandbox.png" />
+<img className="border border-[#FEF4EE] rounded mt-5 w-5/6" src="/img/graphql/BundlrGQL-Sandbox.png" />
 
 ### Sample Queries
 
@@ -105,6 +105,28 @@ query getByIds {
 	}
 }
 ```
+
+#### Timestamps
+
+Search by timestamps.
+
+```graphql
+query getByTimestamp {
+	transactions(timestamp: { from: 1688144401000, to: 1688317201000 }) {
+		edges {
+			node {
+				id
+			}
+		}
+	}
+}
+```
+
+<Callout type="info" emoji="ℹ️">
+	Bundlr timestamps are accurate to the millisecond, so you need to provide a timestamp in millisecond format. You can
+	convert from human-readable time to UNIX timestamp using websites like [Epoch101](https://www.epoch101.com/), be
+	sure to convert in **millisecond** format not **second**.
+</Callout>
 
 #### Owners
 
@@ -266,14 +288,14 @@ A GraphQL query is made up of:
 
 Any of the following query arguments can be used as search parameters:
 
-| Field        | Description                                                                                                                                                                                                                                                                                       |
-| ------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `ids`        | An array of transaction IDs passed as strings. Values are ORed together, matching results will include transactions that have any of the supplied IDs.                                                                                                                                            |
-| `owner`      | The Arweave address used when posting the transaction. Note if you post to Irys using a non-Arweave wallet address, it will be converted into an Arweave-like address and stored in this field. There is no way to retrieve eth or sol addresses from Arweave GraphQL, you must use Irys GraphQL. |
-| `recipients` | The [currency](/overview/supported-tokens) used to pay for the transaction.                                                                                                                                                                                                                       |
-| `bundledIn`  | Transaction ID of the parent bundle for this transaction. Transaction ID can be of a nested bundle or a regular bundle.                                                                                                                                                                           |
-| `block`      | Details specific to a transaction's block.                                                                                                                                                                                                                                                        |
-| `tags`       | An array of tag name / value pairs passed as JSON objects. Values are ORed together, matching results will include transactions matching any of the supplied tags.                                                                                                                                |
+| Field        | Description                                                                                                                                                                                                                                                                                           |
+| ------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `ids`        | An array of transaction IDs passed as strings. Values are ORed together, matching results will include transactions that have any of the supplied IDs.                                                                                                                                                |
+| `owner`      | The Arweave address used when posting the transaction. Note if you post to Bundlr using a non-Arweave wallet address, it will be converted into an Arweave-like address and stored in this field. There is no way to retrieve eth or sol addresses from Arweave GraphQL, you must use Bundlr GraphQL. |
+| `recipients` | The [currency](/overview/supported-tokens) used to pay for the transaction.                                                                                                                                                                                                                           |
+| `bundledIn`  | Transaction ID of the parent bundle for this transaction. Transaction ID can be of a nested bundle or a regular bundle.                                                                                                                                                                               |
+| `block`      | Details specific to a transaction's block.                                                                                                                                                                                                                                                            |
+| `tags`       | An array of tag name / value pairs passed as JSON objects. Values are ORed together, matching results will include transactions matching any of the supplied tags.                                                                                                                                    |
 
 ### Results Fields
 
@@ -284,7 +306,7 @@ When building a query, you can request any of the following values be included i
 | `anchor` | A value used to prevent against double spends. |
 | `signature` | The signature used to sign the transaction. |
 | `recipient` | Address of the account the tx was sent to (use for fund transfers). |
-| `owner` | The Arweave address used when posting the transaction. Note if you post to Irys using a non-Arweave wallet address, it will be converted into an Arweave-like address and stored in this field. There is no way to retrieve eth or sol addresses from Arweave GraphQL, you must use Irys GraphQL. |
+| `owner` | The Arweave address used when posting the transaction. Note if you post to Bundlr using a non-Arweave wallet address, it will be converted into an Arweave-like address and stored in this field. There is no way to retrieve eth or sol addresses from Arweave GraphQL, you must use Bundlr GraphQL. |
 | `fee {     `<br/>&nbsp;&nbsp;`winston      `<br/>&nbsp;&nbsp;`ar `<br/>`}` | The transaction mining fee. |
 | `quantity {      `<br/>&nbsp;&nbsp;`winston      `<br/>&nbsp;&nbsp;`ar `<br/>`}` | The amount paid for the transaction. |
 | `data {      `<br/>&nbsp;&nbsp;`size      `<br/>&nbsp;&nbsp;`type `<br/>`}` | The size and type of the data payload. |
@@ -336,13 +358,14 @@ Search for transactions matching the Arweave wallet address used when posting th
 
 ```graphql
 query getByOwners {
-    transactions(owners:["M6w588ZkR8SVFdPkNXdBy4sqbMN0Y3F8ZJUWm2WCm8M"]) {
-        edges {
-            node {
-                id
-            }
-        }
-    }
+	transactions(owners: ["M6w588ZkR8SVFdPkNXdBy4sqbMN0Y3F8ZJUWm2WCm8M"]) {
+		edges {
+			node {
+				id
+			}
+		}
+	}
+}
 ```
 
 #### Tags
