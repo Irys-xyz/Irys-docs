@@ -96,6 +96,18 @@ Use the `search()` function to change between searching Irys and Arweave.
 ```js
 const results = await myQuery.search("irys:transactions");
 ```
+## Searching By Timestamp
+
+Use the `fromTimestamp()` and `toTimestamp()` functions to search for transactions by timestamp. Results returned are `>= fromTimestamp` and `< toTimestamp`.
+
+Irys timestamps are accurate to the millisecond, so you need to provide a timestamp in millisecond format. You can convert from human readable time to UNIX timestamp using websites like [Epoch101](https://www.epoch101.com/ ), be sure to convert in “millisecond” format not “second”.
+
+```js
+const results = await myQuery
+	.search("irys:transactions")
+	.fromTimestamp(1688144401000)
+	.toTimestamp(1688317201000);
+```
 
 ## Searching By **Tags**
 
@@ -174,7 +186,11 @@ const results = await myQuery
 
 Use the `to()` function to search the wallet address of the transaction recipient. This search works on Arweave only and is used when there's a fund transfer.
 
-TODO
+```js
+const results = await myQuery
+	.search("arweave:transactions")
+	.to("TrnCnIGq1tx8TV8NA7L2ejJJmrywtwRfq9Q7yNV6g2A");
+```
 
 ## Search By Currency
 
