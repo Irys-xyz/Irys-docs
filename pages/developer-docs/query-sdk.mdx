@@ -6,6 +6,7 @@ description: Copy & Paste Code To Get You Started With Bundlr SDK
 import { Tab, Tabs } from "nextra-theme-docs";
 import Heading from "../../components/Heading";
 import SectionTitle from "../../components/SectionTitle";
+import { Callout } from "nextra-theme-docs";
 
 <div className="mt-7">
 	<Heading level={1} className="">
@@ -100,7 +101,16 @@ const results = await myQuery.search("irys:transactions");
 
 Use the `fromTimestamp()` and `toTimestamp()` functions to search for transactions by timestamp. Results returned are `>= fromTimestamp` and `< toTimestamp`.
 
-Irys timestamps are accurate to the millisecond, so you need to provide a timestamp in millisecond format. You can convert from human readable time to UNIX timestamp using websites like [Epoch101](https://www.epoch101.com/ ), be sure to convert in “millisecond” format not “second”.
+You can search by passing `Date` objects to the functions.
+
+```js
+const results = await myQuery
+	.search("irys:transactions")
+	.fromTimestamp(new Date("2023-07-01"))
+	.toTimestamp(new Date("2023-07-03"));
+```
+
+Or by using UNIX timestamps in millisecond format.
 
 ```js
 const results = await myQuery
@@ -108,6 +118,12 @@ const results = await myQuery
 	.fromTimestamp(1688144401000)
 	.toTimestamp(1688317201000);
 ```
+
+<Callout type="info" emoji="ℹ️">
+	Irys timestamps are accurate to the millisecond, so you need to provide a timestamp in millisecond format. You can
+	convert from human-readable time to UNIX timestamp using websites like [Epoch101](https://www.epoch101.com/), be
+	sure to convert in **millisecond** format not **second**.
+</Callout>
 
 ## Searching By **Tags**
 
@@ -220,6 +236,15 @@ Use the `mixHeight()` and `maxHeight()` to search for blocks within the specifie
 ```js
 const results = await myQuery
 	.search("arweave:blocks")
+	.minHeight(1188272)
+	.maxHeight(1188279);
+```
+
+Or for transactions within the specified range.
+
+```js
+const results = await myQuery
+	.search("arweave:transactions")
 	.minHeight(1188272)
 	.maxHeight(1188279);
 ```
