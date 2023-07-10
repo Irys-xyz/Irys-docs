@@ -22,11 +22,11 @@ If your use case necessitates manual Content-Type tag setting, you can specify i
 // Your file
 const fileToUpload = "./myImage.png";
 
-// Add a custom tag that tells the browser how to properly render the file
+// Add a custom Content-Type tag
 const tags = [{ name: "Content-Type", value: "image/png" }];
 
 try {
-	const response = await irys.uploadFile(fileToUpload, tags);
+	const response = await irys.uploadFile(fileToUpload, { tags });
 	console.log(`File uploaded ==> https://arweave.net/${response.id}`);
 } catch (e) {
 	console.log("Error uploading file ", e);
@@ -52,7 +52,7 @@ const fileToUpload = "./myNFT.png";
 const tags = [{ name: "application-id", value: "NFTs To The Moon" }];
 
 try {
-	const response = await irys.uploadFile(fileToUpload, tags);
+	const response = await irys.uploadFile(fileToUpload, { tags });
 	console.log(`File uploaded ==> https://arweave.net/${response.id}`);
 } catch (e) {
 	console.log("Error uploading file ", e);
