@@ -2,34 +2,125 @@ import { Tab, Tabs } from "nextra-theme-docs";
 
 # CLI
 
-Permanently store files on Arweave using Bundlr's Command Line Interface (CLI).
+Permanently store files on Arweave using Irys' Command Line Interface (CLI).
+
+TODO: I tested everything using “https://devnet.bundlr.network" and then changed to “https://devnet.irys.xyz" after. Once the domain is properly configured, I need to do one more test of everything.
 
 ## Prerequisites
 
-To install our CLI, make sure you have a [current version of node](https://nodejs.org/en) installed first.
+To install our CLI, you will need to install a [current version of node](https://nodejs.org/en) first.
 
-## [Install the CLI](/developer-docs/cli/installation)
+## Installing the CLI
+
+Install our CLI globally using the `-g` flag. Depending on your local setup, you may or may not need to use `sudo`.
 
 ```console
-npm i -g @bundlr-network/client
-sudo npm i -g @bundlr-network/client
+npm i -g @irys/client
+sudo npm i -g @irys/client
 ```
 
-## [Set Your Private Key](/developer-docs/cli/setting-private-key)
+TODO: Confirm these once I can.
+
+## Private Keys for Funding and Signing
+
+When executing CLI commands involving funding nodes or signing transactions, you must provide a private key.
+
+Use the `-w` flag to specify a private key along with the `-c` flag to indicate the token you'll use.
 
 ```console
-bundlr -w myEthKeyPair.json -c ethereum
+bundlr -w <wallet-file-name> -c <currency>
 ```
 
-## [Fund Your Node](/developer-docs/cli/funding-a-node) (To Pay For Uploads)
+The methods for supplying private keys differ for Ethereum and Solana compared to Arweave.
+
+### Using Private Keys with Ethereum and Solana
+
+For Ethereum and Solana, specify the private key directly in the command line every time you execute a CLI command. Note that the CLI does not store the private key in memory or any other location, so it needs to be included with each command.
 
 ```console
-bundlr fund 1479016 -h https://node1.bundlr.network -w wallet.json -c ethereum
+irys fund 1000000000000000 -c matic -w bf20......c9885307 -h https://node1.irys.xyz
 ```
 
-## [Upload A File](/developer-docs/cli/uploading-a-file)
+### Using Private Keys with Arweave
+
+When using Arweave, the private key is typically stored in a file (commonly named `wallet.json`). This file is then referenced in the CLI command, instead of specifying the private key directly.
 
 ```console
-bundlr upload image.png -h https://node1.bundlr.network -w wallet.json -c arweave
-> Uploaded to https://arweave.net/zt3-t8SHDSck0TLcSuC-hdQb2E0civ0DVMRgwf6sCz0
+irys fund 1000000000000000 -c arweave -w wallet.json -h https://node1.irys.xyz
+```
+
+## Connecting To A Node
+
+Fund the node you plan to upload to, balances are not shared between nodes. You can connect to Nodes 1 and 2 directly.
+
+```console
+irys -h https://node1.irys.xyz
+```
+
+When connecting to Devnet, you must supply the additional `--provider-url` paramter.
+
+```console
+irys -h https://devnet.irys.xyz --provider-url https://matic-mumbai.chainstacklabs.com
+```
+
+## Funding A Node
+
+Use the `fund` command to fund a node.
+
+```console
+irys fund 1000000000000000 -h https://node1.irys.xyz -c matic -w bf20......c9885307
+```
+
+## Withdrawing Funds
+
+Use the `withdraw` command to withdraw funds from a node.
+
+```console
+irys withdraw 1000000000000000 -h https://node1.irys.xyz -c matic -w bf20......c9885307
+```
+
+## Uploading A File
+
+Use the `upload` command to upload a file.
+
+```console
+irys upload myImage.png -h https://node1.irys.xyz -c matic -w bf20......c9885307
+```
+
+Append the optional `--provenance` flag for a [strong provenance](/learn/strong-provenance) upload.
+
+```console
+irys upload myImage.png --provenance -h https://node1.irys.xyz -c matic -w bf20......c9885307
+```
+
+## Uploading A Folder
+
+Use the `upload-dir` command to upload a file.
+
+```console
+irys upload-dir ./myImages -h https://node1.irys.xyz -c matic -w bf20......c9885307
+```
+
+Append the optional `--provenance` flag for a [strong provenance](/learn/strong-provenance) upload.
+
+```console
+irys upload-dir ./myImages --provenance -h https://node1.irys.xyz -c matic -w bf20......c9885307
+```
+
+## Using Tags
+
+Use the `-t` option, followed by a series of name / value pairs to append metadata tags to your upload.
+
+Irys supports adding any optional [metadata tags](/developer-docs/tags) to each upload. When uploading files with a filename extension, the related [`Content-Type`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Type) (MIME type) tag is automatically added.
+
+```console
+irys upload myImage.png -t tagName1 tagValue1 tagName2 tagValue2 -h https://node1.irys.xyz -c matic -w bf20......c9885307
+```
+
+## Understanding Pricing
+
+Use the `price` command, followed by a number of bytes to get the cost to upload that number of bytes. You must also provide a currency (`-c`) and a node URL (`-h`)
+
+```console
+irys price 1000000 -c matic -h https://node1.irys.xyz
 ```

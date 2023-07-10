@@ -1,0 +1,40 @@
+---
+description: Funds the node with the specified amount of tokens.
+---
+
+import { Callout } from "nextra-theme-docs";
+
+# `upload`
+
+Uploads a single file.
+
+**Required Parameters**
+
+<div className="-mt-6" />
+
+-   `-h`: The you'll node upload to
+-   `-c`: The [currency](/overview/supported-tokens) to use when uploading.
+-   `-w`: Your [private key](/developer-docs/cli#private-keys-for-funding-and-signing).
+
+## Example
+
+```console
+irys upload myImage.png -h https://node1.irys.xyz -c matic -w bf20......c9885307
+```
+
+Append the optional `--provenance` flag for a [strong provenance](/learn/strong-provenance) upload.
+
+```console
+irys upload myImage.png --provenance -h https://node1.irys.xyz -c matic -w bf20......c9885307
+```
+
+## Downloading Files
+
+Files uploaded via `irys upload` can be downloaded using the transaction ID provided after a successful upload.
+
+```console
+irys upload myImage.png -t tagName1 tagValue1 tagName2 tagValue2 -h https://node1.irys.xys -c matic -w bf20......c9885307
+
+Loaded address: 0xac568a981b1370b2e1baa8ce30bd5ac9e28c572d
+Uploaded to https://arweave.net/yPX6_rwxfJ_2gTvXSHGoumIvlFR-EwuRlUMmHpeLHUM
+```

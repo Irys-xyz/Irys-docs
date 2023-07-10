@@ -231,7 +231,7 @@ const results = await myQuery
 
 ## Searching By Block Height
 
-Use the `mixHeight()` and `maxHeight()` to search for blocks within the specified range.
+Use the `mixHeight()` and `maxHeight()` functions to search for blocks within the specified block height range. Results are `>= minHeight and < maxHeight`.
 
 ```js
 const results = await myQuery
@@ -240,7 +240,7 @@ const results = await myQuery
 	.maxHeight(1188279);
 ```
 
-Or for transactions within the specified range.
+Or for transactions within the specified block height range. Results are `>= minHeight and < maxHeight`.
 
 ```js
 const results = await myQuery

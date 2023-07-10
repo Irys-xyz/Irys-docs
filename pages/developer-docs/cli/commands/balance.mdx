@@ -1,0 +1,26 @@
+---
+description: Funds the node with the specified amount of tokens.
+---
+
+import { Callout } from "nextra-theme-docs";
+
+# `balance`
+
+Returns the amount of funds available on the specified node. Provide your public wallet address as an argument, along with the following required paramters.
+
+**Required Parameters**
+
+<div className="-mt-6" />
+
+-   `-h`: The node to check
+-   `-c`: The [currency](/overview/supported-tokens) to use when funding.
+
+## Example
+
+```console
+irys balance 0xac568a981b1370b2e1baa8ce30bd5ac9e28c572d -c matic -h https://node1.bundlr.network
+```
+
+<Callout type="info" emoji="ℹ️">
+Not all calls to `fund` will post immediately to your account, some blockchains are faster than others. When funding with AR, it can take upwards of 40 minutes before the balance post. For MATIC, ETH and SOL, balances will usually post in < 10s.
+</Callout>
