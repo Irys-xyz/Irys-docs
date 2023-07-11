@@ -4,18 +4,19 @@ description: Use Tagging And GraphQL To Build A Provenance Chain
 
 # Build A Provenance Chain
 
-This recipe guides you through building a provenance chain. If the topics of [provenance](/terminology#data-provenance) and [provenance chain](/terminology#provenance-chain) are new to you, start with [Proof of Provenance](/overview/solutions/proof-of-provenance).
+This recipe guides you through building a provenance chain. If the topics of [provenance](/terminology#data-provenance) and [provenance chain](/terminology#provenance-chain) are new to you, start with [Strong Provenance](/learn/strong-provenance).
 
-In this recipe, you will:
+In this tutorial, you will:
 
 1. Construct a provenance chain that models “updates” to a text string
-2. Use GraphQL to extract the complete provenance chain
+2. Use the Irys Query SDK to extract the complete provenance chain
+3. Use GraphQL to extract the complete provenance chain
 
 <img className="border border-[#FEF4EE] rounded mt-5 w-5/6" src="/img/recipes/provenance-chain-recipe.png" />
 
 ## Setup
 
-Start by [installing our SDK](/developer-docs/sdk/installing-the-sdk), setting up your imports, and creating a helper function that returns a reference to a configured Bundlr object.
+Start by [installing our SDK](/developer-docs/sdk/installing-the-sdk), setting up your imports, and creating a helper function that returns a reference to a configured Irys object.
 
 ```js
 import Bundlr from "@bundlr-network/client";
