@@ -19,7 +19,7 @@ export default function App({ Component, pageProps }: AppProps) {
 
 	return (
 		<>
-			<ThirdwebProvider activeChain="mumbai">
+			<ThirdwebProvider activeChain="polygon">
 				<Component {...pageProps} />
 				<Analytics />
 			</ThirdwebProvider>

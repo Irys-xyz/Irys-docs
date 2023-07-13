@@ -10,12 +10,9 @@ interface ButtonBarProps {
 	tokenId: number;
 }
 
-const ButtonBar: React.FC<ButtonBarProps> = ({
-	submitUrl,
-	contractAddress,
-	tokenId,
-}) => {
-	const successMessage = `Congratulations on finishing the quest! Your NFT has been claimed, you can view it on <a class="underline decoration-white" href="https://testnets.opensea.io/assets/mumbai/0x6a954b537ebd8477320246d47b9d6eee51b49f0b/107" target="_blank">Opensea</a>`;
+const ButtonBar: React.FC<ButtonBarProps> = ({ submitUrl, contractAddress, tokenId }) => {
+	const successMessage = `Congratulations on finishing the quest! Your NFT has been claimed, you can view it on <a class="underline decoration-white" href="https://opensea.io/assets/matic/0x1c8f5f29d1498474844d6a5160b640c674276dba/1" target="_blank">Opensea</a>`;
+	const errorMessage = `Your address is not currently whitelisted, if you believe this is an error, please reach out to us on <a class="underline decoration-white" href="https://discord.gg/bundlr" target="_blank">Discord.</a>`;
 
 	const [message, setMessage] = useState<string>("");
 	const [claimButtonText, setClaimButtonText] = useState<string>("Claim NFT!");
@@ -36,16 +33,13 @@ const ButtonBar: React.FC<ButtonBarProps> = ({
 						setIsExploding(true);
 					}}
 					onError={(error) => {
-						setMessage(error.message);
+						setMessage(errorMessage);
 					}}
 				>
 					{claimButtonText}
 				</Web3Button>
 			</div>
-			<div
-				className="mt-5 text-left"
-				dangerouslySetInnerHTML={{ __html: message }}
-			/>
+			<div className="mt-5 text-left" dangerouslySetInnerHTML={{ __html: message }} />
 		</div>
 	);
 };

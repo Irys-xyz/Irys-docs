@@ -16,12 +16,7 @@ interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
 	children: ReactNode;
 }
 
-const Button = ({
-	scheme = ButtonScheme.black,
-	children,
-	className,
-	...props
-}: ButtonProps) => {
+const Button = ({ scheme = ButtonScheme.black, children, className, ...props }: ButtonProps) => {
 	const {} = useButton();
 
 	return (
