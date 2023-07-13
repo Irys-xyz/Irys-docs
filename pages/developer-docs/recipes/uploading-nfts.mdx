@@ -55,9 +55,7 @@ const tags = [{ name: "Content-Type", value: "image/png" }];
 const { size } = await fs.promises.stat(fileToUpload);
 // Get cost to upload "size" bytes
 const price = await bundlr.getPrice(size);
-console.log(
-	`Uploading ${size} bytes costs ${bundlr.utils.fromAtomic(price)} ${currency}`,
-);
+console.log(`Uploading ${size} bytes costs ${bundlr.utils.fromAtomic(price)} ${currency}`);
 // Fund the node
 await bundlr.fund(price);
 
@@ -113,9 +111,7 @@ const tags = [{ name: "Content-Type", value: "application/json" }];
 const { size } = await fs.promises.stat(fileToUpload);
 // Get cost to upload "size" bytes
 const price = await bundlr.getPrice(size);
-console.log(
-	`Uploading ${size} bytes costs ${bundlr.utils.fromAtomic(price)} ${currency}`,
-);
+console.log(`Uploading ${size} bytes costs ${bundlr.utils.fromAtomic(price)} ${currency}`);
 // Fund the node
 await bundlr.fund(price);
 

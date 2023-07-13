@@ -5,13 +5,12 @@ description: Collates transactions together into a bundle and submit to Arweave
 # Bundling
 
 <h2 className="text-xl mt-2">
-	Bundlr’s bundling service collates transactions together into a bundle and submits to
-	Arweave.
+	Bundlr’s bundling service collates transactions together into a bundle and submits to Arweave.
 </h2>
 
 <img className="mt-5" src="/img/learn/bundling.png" />
 
-Uploading large numbers of files to Arweave can be technically challenging due to Arweave's limit of 1000 transactions per block. When demand spikes, that drives up storage fees, and spikes in network traffic can cause fees to increase by 10,000,000,000,000,000x, making permanent storage unaffordable for many users. To address these challenges, bundlers are used to collate transactions into a single bundle and submit them to Arweave.
+Uploading large numbers of files to Arweave can be technically challenging due to Arweave's limit of 1000 transactions per block. When demand spikes, that drives up storage fees, making permanent storage unaffordable for many users. To address these challenges, bundlers are used to collate transactions into a single bundle and submit them to Arweave.
 
 These transactions are instantly retrievable and available to be queried via GraphQL, further detailed in the gateway section. It is not necessary to wait for uploads to be confirmed and seeded on Arweave before they appear in query results.
 

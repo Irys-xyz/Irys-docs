@@ -13,23 +13,15 @@ It's important to note that when using Devnet with the `Bundlr` class, you must 
 #### `Bundlr` Class
 
 ```js
-const bundlr = new Bundlr(
-	"https://devnet.bundlr.network",
-	"solana",
-	"<solana-private-key>",
-	{
-		providerUrl: "https://api.devnet.solana.com",
-	},
-);
+// For Solana
+const bundlr = new Bundlr("https://devnet.bundlr.network", "solana", "<solana-private-key>", {
+	providerUrl: "https://api.devnet.solana.com",
+});
 
-const bundlr = new Bundlr(
-	"https://devnet.bundlr.network",
-	"matic",
-	"<polygon-private-key>",
-	{
-		providerUrl: "https://rpc-mumbai.maticvigil.com",
-	},
-);
+// For Polygon / Matic
+const bundlr = new Bundlr("https://devnet.bundlr.network", "matic", "<polygon-private-key>", {
+	providerUrl: "https://rpc-mumbai.maticvigil.com",
+});
 ```
 
 #### `WebBundlr` Class And EVM Chains

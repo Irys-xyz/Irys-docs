@@ -73,12 +73,12 @@ Add the paths to all of your template files in your `tailwind.config.js` file.
 /** @type {import('tailwindcss').Config} */
 
 module.exports = {
-  content: ["./src/**/*.{js,jsx,ts,tsx}"],
-  theme: {
-    extend: {},
-  },
+	content: ["./src/**/*.{js,jsx,ts,tsx}"],
+	theme: {
+		extend: {},
+	},
 
-  plugins: [],
+	plugins: [],
 };
 ```
 
@@ -115,43 +115,36 @@ import "./index.css";
 import App from "./App";
 
 import "@rainbow-me/rainbowkit/styles.css";
-import {
-  getDefaultWallets,
-  RainbowKitProvider,
-  darkTheme,
-} from "@rainbow-me/rainbowkit";
+import { getDefaultWallets, RainbowKitProvider, darkTheme } from "@rainbow-me/rainbowkit";
 import { chain, configureChains, createClient, WagmiConfig } from "wagmi";
 import { publicProvider } from "wagmi/providers/public";
 
-const { provider, chains } = configureChains(
-  [chain.polygonMumbai],
-  [publicProvider()]
-);
+const { provider, chains } = configureChains([chain.polygonMumbai], [publicProvider()]);
 
 const { connectors } = getDefaultWallets({
-  appName: "Blockmix",
-  chains,
+	appName: "Blockmix",
+	chains,
 });
 const wagmiClient = createClient({
-  autoConnect: true,
-  connectors,
-  provider,
+	autoConnect: true,
+	connectors,
+	provider,
 });
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
-  <React.StrictMode>
-    <WagmiConfig client={wagmiClient}>
-      <RainbowKitProvider
-        chains={chains}
-        theme={darkTheme({
-          accentColor: "#82A8A1",
-          accentColorForeground: "#2F8A97",
-        })}
-      >
-        <App />
-      </RainbowKitProvider>
-    </WagmiConfig>
-  </React.StrictMode>
+	<React.StrictMode>
+		<WagmiConfig client={wagmiClient}>
+			<RainbowKitProvider
+				chains={chains}
+				theme={darkTheme({
+					accentColor: "#82A8A1",
+					accentColorForeground: "#2F8A97",
+				})}
+			>
+				<App />
+			</RainbowKitProvider>
+		</WagmiConfig>
+	</React.StrictMode>,
 );
 ```
 
@@ -160,23 +153,20 @@ Most of `index.js` will look familiar if you've done any React coding, but there
 This block of code configures the blockchains our application can connect to. Since we're only connecting to the Bundlr devnet, we'll offer Polygon Mumbai as an option. If you expand on this tutorial and want to work with different blockchains, this is where you'd [add support for them](https://www.rainbowkit.com/docs/chains).
 
 ```js
-const { provider, chains } = configureChains(
-  [chain.polygonMumbai],
-  [publicProvider()]
-);
+const { provider, chains } = configureChains([chain.polygonMumbai], [publicProvider()]);
 ```
 
 Your entire application needs to be wrapped with `RainbowKitProvider` and `WagmiConfig`. In my code, I further configure the colors used in the connect button. Here's a version of the code with just the bare necessities so you can focus on what's happening.
 
 ```js
 const App = () => {
-  return (
-    <WagmiConfig client={wagmiClient}>
-      <RainbowKitProvider chains={chains}>
-        <App />
-      </RainbowKitProvider>
-    </WagmiConfig>
-  );
+	return (
+		<WagmiConfig client={wagmiClient}>
+			<RainbowKitProvider chains={chains}>
+				<App />
+			</RainbowKitProvider>
+		</WagmiConfig>
+	);
 };
 ```
 
@@ -192,10 +182,7 @@ Also, [this pixelated font](https://fonts.google.com/specimen/Press+Start+2P) wi
 Start by opening up `public/index.html` and adding the following anywhere in the `<head>` section.
 
 ```html
-<link
-  href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap"
-  rel="stylesheet"
-/>
+<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet" />
 ```
 
 I've added a few other things to index.html, including some imports and page title. You can copy and paste this full text into `public/index.html`.
@@ -203,30 +190,27 @@ I've added a few other things to index.html, including some imports and page tit
 ```html
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <!-- Required to add web3 this way instead of via npm per:
+	<head>
+		<!-- Required to add web3 this way instead of via npm per:
 		https://www.npmjs.com/package/@audius/sdk -->
-    <script src="https://cdn.jsdelivr.net/npm/web3@latest/dist/web3.min.js"></script>
+		<script src="https://cdn.jsdelivr.net/npm/web3@latest/dist/web3.min.js"></script>
 
-    <meta charset="utf-8" />
-    <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="theme-color" content="#000000" />
-    <meta name="description" content="Mixing beats for your dancing feets..." />
+		<meta charset="utf-8" />
+		<link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<meta name="theme-color" content="#000000" />
+		<meta name="description" content="Mixing beats for your dancing feets..." />
 
-    <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
+		<link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
 
-    <title>Blockmix</title>
-    <link rel="preconnect" href="https://fonts.gstatic.com" />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap"
-      rel="stylesheet"
-    />
-  </head>
-  <body>
-    <noscript>You need to enable JavaScript to run this app.</noscript>
-    <div id="root"></div>
-  </body>
+		<title>Blockmix</title>
+		<link rel="preconnect" href="https://fonts.gstatic.com" />
+		<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet" />
+	</head>
+	<body>
+		<noscript>You need to enable JavaScript to run this app.</noscript>
+		<div id="root"></div>
+	</body>
 </html>
 ```
 
@@ -273,14 +257,14 @@ In the actual template, we'll mark the location where this data should be inject
 
 ```json
 [
-  {
-    "artwork": "",
-    "artist": "",
-    "track": "",
-    "id": "",
-    "playUrl": "",
-    "previewURL": ""
-  }
+	{
+		"artwork": "",
+		"artist": "",
+		"track": "",
+		"id": "",
+		"playUrl": "",
+		"previewURL": ""
+	}
 ]
 ```
 
@@ -297,253 +281,246 @@ For the mixtape image, I took the cassette tape graphic on that page of 90s vect
 Here's the full html for the template, I'm not going to dig into it line by line as the focus of this tutorial is on using Bundlr and not on HTML and CSS. As you do look at the code though, pay attention to lines 158, 197 and 204 where we set the template up.
 
 <Callout type="info" emoji="ℹ️">
-  I'll be the first to admit that I'm no CSS guru. I had an idea for what I
-  wanted the mixtape to look like, but had to Google around to figure out the
-  right CSS. I've credited original authors in the comments in case you want to
-  dig in a bit deeper.
+	I'll be the first to admit that I'm no CSS guru. I had an idea for what I wanted the mixtape to look like, but had
+	to Google around to figure out the right CSS. I've credited original authors in the comments in case you want to dig
+	in a bit deeper.
 </Callout>
 
 ```html {158,197,204} showLineNumbers
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>NFT MixTape</title>
-    <meta name="description" content="Flashback track smack" />
-    <meta name="keywords" content="living like it's 1995" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap"
-      rel="stylesheet"
-    />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Roboto&display=swap"
-      rel="stylesheet"
-    />
-    <link
-      rel="stylesheet"
-      href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"
-      integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr"
-      crossorigin="anonymous"
-    />
+	<head>
+		<title>NFT MixTape</title>
+		<meta name="description" content="Flashback track smack" />
+		<meta name="keywords" content="living like it's 1995" />
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet" />
+		<link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet" />
+		<link
+			rel="stylesheet"
+			href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"
+			integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr"
+			crossorigin="anonymous"
+		/>
 
-    <style>
-      * {
-        margin: 0;
-        padding: 0;
-        border: 0;
-      }
-      body {
-        background-color: #f461c2;
-      }
-      h1 {
-        background-color: #35c3ff;
-        font-family: "Press Start 2P", cursive;
-        font-size: 35px;
-      }
-      h2 {
-        background-color: #ffef33;
-        font-family: "Press Start 2P", cursive;
-        font-size: 18px;
-      }
-      h3 {
-        background-color: #00fdd6;
-        font-family: "Roboto";
-        font-size: 15px;
-      }
-      h4 {
-        font-family: "Roboto";
-        font-size: 9px;
-        padding-right: 5px;
-      }
-      img {
-        margin-bottom: 2px;
-      }
-      #branding {
-        width: 300px;
-        text-align: right;
-        background-color: #35c3ff;
-      }
-      #wrapper {
-        width: 300px;
-        margin: auto;
-        display: flex;
-        flex-direction: row;
-        justify-content: center;
-      }
-      #innerWrapper {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-      }
-      #playList {
-        display: none;
-        flex-wrap: wrap;
-        gap: 2px;
-        padding-top: 5px;
-        margin-left: 5px;
-      }
-      #title {
-        text-align: center;
-        display: flex;
-        flex-direction: column;
-        padding-top: 10px;
-        padding-right: 2px;
-        max-width: 300px;
-      }
-      #action {
-        text-align: center;
-      }
-      /* VIDEO OVERLAY FROM: https://douglasgreen.com/create-a-responsive-video-play-button-overlay/ */
-      /* Just a parent container for the videos */
-      #videos {
-        margin: 10px auto;
-      }
-      /* Individual video container */
-      #video-wrap {
-        --play-icon: "\f04b";
-        --pause-icon: "\f04c";
-        --playPause-icon: "\f04b";
-      }
-      #video-wrap {
-        position: relative;
-        max-width: 300px;
-        width: 100%;
-        margin-bottom: 10px;
-      }
-      #video-wrap #placeholder {
-        max-width: 700px;
-        width: 100%;
-      }
-      #video-wrap #play-btn {
-        position: absolute;
-        max-width: 300px;
-        width: 60px;
-        height: 60px;
-        left: 50%;
-        top: 50%;
-        transform: translate(-50%, -80%);
-        line-height: 1; /* needed if using Bootstrap */
-        text-align: center;
-        color: #35c3ff;
-        transition: color, background-color 0.2s ease;
-      }
-      #video-wrap #play-btn:hover,
-      #video-wrap #play-btn:focus {
-        color: #ff3f3f;
-        cursor: pointer;
-      }
-      #play-btn::after {
-        /*
+		<style>
+			* {
+				margin: 0;
+				padding: 0;
+				border: 0;
+			}
+			body {
+				background-color: #f461c2;
+			}
+			h1 {
+				background-color: #35c3ff;
+				font-family: "Press Start 2P", cursive;
+				font-size: 35px;
+			}
+			h2 {
+				background-color: #ffef33;
+				font-family: "Press Start 2P", cursive;
+				font-size: 18px;
+			}
+			h3 {
+				background-color: #00fdd6;
+				font-family: "Roboto";
+				font-size: 15px;
+			}
+			h4 {
+				font-family: "Roboto";
+				font-size: 9px;
+				padding-right: 5px;
+			}
+			img {
+				margin-bottom: 2px;
+			}
+			#branding {
+				width: 300px;
+				text-align: right;
+				background-color: #35c3ff;
+			}
+			#wrapper {
+				width: 300px;
+				margin: auto;
+				display: flex;
+				flex-direction: row;
+				justify-content: center;
+			}
+			#innerWrapper {
+				display: flex;
+				flex-direction: column;
+				justify-content: center;
+			}
+			#playList {
+				display: none;
+				flex-wrap: wrap;
+				gap: 2px;
+				padding-top: 5px;
+				margin-left: 5px;
+			}
+			#title {
+				text-align: center;
+				display: flex;
+				flex-direction: column;
+				padding-top: 10px;
+				padding-right: 2px;
+				max-width: 300px;
+			}
+			#action {
+				text-align: center;
+			}
+			/* VIDEO OVERLAY FROM: https://douglasgreen.com/create-a-responsive-video-play-button-overlay/ */
+			/* Just a parent container for the videos */
+			#videos {
+				margin: 10px auto;
+			}
+			/* Individual video container */
+			#video-wrap {
+				--play-icon: "\f04b";
+				--pause-icon: "\f04c";
+				--playPause-icon: "\f04b";
+			}
+			#video-wrap {
+				position: relative;
+				max-width: 300px;
+				width: 100%;
+				margin-bottom: 10px;
+			}
+			#video-wrap #placeholder {
+				max-width: 700px;
+				width: 100%;
+			}
+			#video-wrap #play-btn {
+				position: absolute;
+				max-width: 300px;
+				width: 60px;
+				height: 60px;
+				left: 50%;
+				top: 50%;
+				transform: translate(-50%, -80%);
+				line-height: 1; /* needed if using Bootstrap */
+				text-align: center;
+				color: #35c3ff;
+				transition: color, background-color 0.2s ease;
+			}
+			#video-wrap #play-btn:hover,
+			#video-wrap #play-btn:focus {
+				color: #ff3f3f;
+				cursor: pointer;
+			}
+			#play-btn::after {
+				/*
 				Font Awesome recommends these styles
 				https://fontawesome.com/how-to-use/on-the-web/advanced/css-pseudo-elements
 				*/
-        display: inline-block;
-        font-style: normal;
-        font-variant: normal;
-        text-rendering: auto;
-        -webkit-font-smoothing: antialiased;
-        /*
+				display: inline-block;
+				font-style: normal;
+				font-variant: normal;
+				text-rendering: auto;
+				-webkit-font-smoothing: antialiased;
+				/*
 				Define the font family, weight, and icon
 				*/
-        font-family: "Font Awesome 5 Free";
-        font-weight: 900;
-        font-size: 40px;
-        content: var(--playPause-icon);
-        /* positioning tweaks */
-        padding-top: 20px;
-        padding-left: 10px;
-      }
-    </style>
-    <script src="https://cdn.jsdelivr.net/npm/web3@latest/dist/web3.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@audius/sdk@latest/dist/sdk.min.js"></script>
-    <script>
-      let playing = false;
-      let showTracks = false;
-      const queryString = window.location.search;
-      const urlParams = new URLSearchParams(queryString);
-      const showTracksQueryParam = urlParams.get("showTracks");
-      if (showTracksQueryParam && showTracksQueryParam.indexOf("true") != -1) showTracks = true;
-      const tracks = ||TRACKS||
+				font-family: "Font Awesome 5 Free";
+				font-weight: 900;
+				font-size: 40px;
+				content: var(--playPause-icon);
+				/* positioning tweaks */
+				padding-top: 20px;
+				padding-left: 10px;
+			}
+		</style>
+		<script src="https://cdn.jsdelivr.net/npm/web3@latest/dist/web3.min.js"></script>
+		<script src="https://cdn.jsdelivr.net/npm/@audius/sdk@latest/dist/sdk.min.js"></script>
+		<script>
+			let playing = false;
+			let showTracks = false;
+			const queryString = window.location.search;
+			const urlParams = new URLSearchParams(queryString);
+			const showTracksQueryParam = urlParams.get("showTracks");
+			if (showTracksQueryParam && showTracksQueryParam.indexOf("true") != -1) showTracks = true;
+			const tracks = ||TRACKS||
 
-      const audioObjects = [];
+			const audioObjects = [];
 
-      const playAll = async () => {
-      	if (playing) {
-      		// currently playing, so let's pause
-      		for (let i = 0; i < audioObjects.length; i++) {
-      			audioObjects[i].pause();
-      		}
-      		const playIcon = getComputedStyle(
-      			document.getElementById("video-wrap"),
-      		).getPropertyValue("--play-icon");
-      		document.getElementById("video-wrap").style.setProperty("--playPause-icon", playIcon);
-      		playing = false;
-      		return;
-      	}
-      	// we're not playing, so change icon to pause and start playing
-      	const pauseIcon = getComputedStyle(document.getElementById("video-wrap")).getPropertyValue(
-      		"--pause-icon",
-      	);
-      	document.getElementById("video-wrap").style.setProperty("--playPause-icon", pauseIcon);
-      	//document.getElementById("playPause").innerHTML = "Pause";
-      	playing = true;
+			const playAll = async () => {
+				if (playing) {
+					// currently playing, so let's pause
+					for (let i = 0; i < audioObjects.length; i++) {
+						audioObjects[i].pause();
+					}
+					const playIcon = getComputedStyle(
+						document.getElementById("video-wrap"),
+					).getPropertyValue("--play-icon");
+					document.getElementById("video-wrap").style.setProperty("--playPause-icon", playIcon);
+					playing = false;
+					return;
+				}
+				// we're not playing, so change icon to pause and start playing
+				const pauseIcon = getComputedStyle(document.getElementById("video-wrap")).getPropertyValue(
+					"--pause-icon",
+				);
+				document.getElementById("video-wrap").style.setProperty("--playPause-icon", pauseIcon);
+				//document.getElementById("playPause").innerHTML = "Pause";
+				playing = true;
 
-      	for (let i = 0; i < audioObjects.length; i++) {
-      		audioObjects[i].play();
-      		while (!audioObjects[i].ended) {
-      			await new Promise((resolve) => setTimeout(resolve, 1000));
-      		}
-      	}
-      	playing = false;
-      };
-    </script>
-  </head>
-  <body>
-    <div id="wrapper">
-      <div id="innerWrapper">
-        <div id="title">
-          <h2>||TITLE||</h2>
-          <div id="branding"><h4>Blockmix</h4></div>
-        </div>
-        <div id="videos">
-          <div id="video-wrap">
-            <a href="#" id="playPause" onClick="playAll()">
-              <div id="play-btn"></div>
-              <img src="||IMAGE||" />
-            </a>
-          </div>
-        </div>
-      </div>
-      <div id="playList"></div>
-    </div>
+				for (let i = 0; i < audioObjects.length; i++) {
+					audioObjects[i].play();
+					while (!audioObjects[i].ended) {
+						await new Promise((resolve) => setTimeout(resolve, 1000));
+					}
+				}
+				playing = false;
+			};
+		</script>
+	</head>
+	<body>
+		<div id="wrapper">
+			<div id="innerWrapper">
+				<div id="title">
+					<h2>||TITLE||</h2>
+					<div id="branding"><h4>Blockmix</h4></div>
+				</div>
+				<div id="videos">
+					<div id="video-wrap">
+						<a href="#" id="playPause" onClick="playAll()">
+							<div id="play-btn"></div>
+							<img src="||IMAGE||" />
+						</a>
+					</div>
+				</div>
+			</div>
+			<div id="playList"></div>
+		</div>
 
-    <script>
-      for (let i = 0; i < tracks.length; i++) {
-        const audio = new Audio(tracks[i].playUrl);
-        audioObjects.push(audio);
+		<script>
+			for (let i = 0; i < tracks.length; i++) {
+				const audio = new Audio(tracks[i].playUrl);
+				audioObjects.push(audio);
 
-        var img = document.createElement("img");
-        img.setAttribute("id", "playlistItem");
-        img.setAttribute("src", tracks[i].artwork);
-        img.setAttribute("height", "100");
-        img.setAttribute("width", "100");
-        img.setAttribute("alt", tracks[i].track);
-        var link = document.createElement("a");
-        link.setAttribute("href", tracks[i].previewURL);
-        link.target = "_blank";
-        link.appendChild(img);
-        document.getElementById("playList").appendChild(link);
-      }
-      if (showTracks) {
-        document.getElementById("playList").style.display = "block";
-        document.getElementById("wrapper").style.width = "900px";
-      } else {
-        document.getElementById("playList").style.display = "none";
-        document.getElementById("wrapper").style.width = "300px";
-      }
-    </script>
-  </body>
+				var img = document.createElement("img");
+				img.setAttribute("id", "playlistItem");
+				img.setAttribute("src", tracks[i].artwork);
+				img.setAttribute("height", "100");
+				img.setAttribute("width", "100");
+				img.setAttribute("alt", tracks[i].track);
+				var link = document.createElement("a");
+				link.setAttribute("href", tracks[i].previewURL);
+				link.target = "_blank";
+				link.appendChild(img);
+				document.getElementById("playList").appendChild(link);
+			}
+			if (showTracks) {
+				document.getElementById("playList").style.display = "block";
+				document.getElementById("wrapper").style.width = "900px";
+			} else {
+				document.getElementById("playList").style.display = "none";
+				document.getElementById("wrapper").style.width = "300px";
+			}
+		</script>
+	</body>
 </html>
 ```
 
@@ -586,7 +563,7 @@ Our app will have three main pages, one for mixing mixtapes, one for playing exi
 import React from "react";
 
 const Mix = () => {
-  return <div>Mix</div>;
+	return <div>Mix</div>;
 };
 
 export default Mix;
@@ -598,7 +575,7 @@ export default Mix;
 import React from "react";
 
 const Play = () => {
-  return <div>Play</div>;
+	return <div>Play</div>;
 };
 
 export default Play;
@@ -610,7 +587,7 @@ export default Play;
 import React from "react";
 
 const How = () => {
-  return <div>How</div>;
+	return <div>How</div>;
 };
 
 export default How;
@@ -628,19 +605,19 @@ import How from "./pages/How";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 function App() {
-  return (
-    <div className="App" id="app">
-      <NavBar />
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Mix />} />
-          <Route path="/mix" element={<Mix />} />
-          <Route path="/play" element={<Play />} />
-          <Route path="/how" element={<How />} />
-        </Routes>
-      </BrowserRouter>
-    </div>
-  );
+	return (
+		<div className="App" id="app">
+			<NavBar />
+			<BrowserRouter>
+				<Routes>
+					<Route path="/" element={<Mix />} />
+					<Route path="/mix" element={<Mix />} />
+					<Route path="/play" element={<Play />} />
+					<Route path="/how" element={<How />} />
+				</Routes>
+			</BrowserRouter>
+		</div>
+	);
 }
 
 export default App;
@@ -658,98 +635,84 @@ import logo from "../assets/images/cassette-tape-256.png";
 import { ConnectButton } from "@rainbow-me/rainbowkit";
 
 export default function NavBar() {
-  return (
-    <div className="fixed w-full z-10">
-      <Popover className=" bg-primary">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6">
-          <div className="flex items-center py-6 justify-start space-x-10">
-            <div className="flex justify-start lg:w-0 lg:flex-1">
-              <a href="/">
-                <img className="h-8 w-auto sm:h-10" src={logo} alt="" />
-              </a>
-              <span className="text-2xl font-press-start pl-5 pt-1">
-                blockmix
-              </span>
-            </div>
-            <div className="-my-2 -mr-2 md:hidden">
-              <Popover.Button className="inline-flex items-center justify-center rounded-md bg-white p-2 text-gray-400 hover:bg-gray-100 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500">
-                <span className="sr-only">Open menu</span>
-                <Bars3Icon className="h-6 w-6" aria-hidden="true" />
-              </Popover.Button>
-            </div>
-            <Popover.Group as="nav" className="hidden space-x-10 md:flex">
-              <a
-                href="/mix"
-                className="font-mono text-base font-medium text-gray-500 hover:bg-highlight"
-              >
-                mix
-              </a>
-              <a
-                href="/play"
-                className="font-mono text-base font-medium text-gray-500 hover:bg-highlight"
-              >
-                play
-              </a>
-              <a
-                href="/how"
-                className="font-mono text-base font-medium text-gray-500 hover:bg-highlight"
-              >
-                how's this work?
-              </a>
-            </Popover.Group>
+	return (
+		<div className="fixed w-full z-10">
+			<Popover className=" bg-primary">
+				<div className="mx-auto max-w-7xl px-4 sm:px-6">
+					<div className="flex items-center py-6 justify-start space-x-10">
+						<div className="flex justify-start lg:w-0 lg:flex-1">
+							<a href="/">
+								<img className="h-8 w-auto sm:h-10" src={logo} alt="" />
+							</a>
+							<span className="text-2xl font-press-start pl-5 pt-1">blockmix</span>
+						</div>
+						<div className="-my-2 -mr-2 md:hidden">
+							<Popover.Button className="inline-flex items-center justify-center rounded-md bg-white p-2 text-gray-400 hover:bg-gray-100 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500">
+								<span className="sr-only">Open menu</span>
+								<Bars3Icon className="h-6 w-6" aria-hidden="true" />
+							</Popover.Button>
+						</div>
+						<Popover.Group as="nav" className="hidden space-x-10 md:flex">
+							<a href="/mix" className="font-mono text-base font-medium text-gray-500 hover:bg-highlight">
+								mix
+							</a>
+							<a
+								href="/play"
+								className="font-mono text-base font-medium text-gray-500 hover:bg-highlight"
+							>
+								play
+							</a>
+							<a href="/how" className="font-mono text-base font-medium text-gray-500 hover:bg-highlight">
+								how's this work?
+							</a>
+						</Popover.Group>
 
-            <div className="hidden items-center justify-end md:flex md:flex-1 lg:w-0">
-              <ConnectButton />
-            </div>
-          </div>
-        </div>
+						<div className="hidden items-center justify-end md:flex md:flex-1 lg:w-0">
+							<ConnectButton />
+						</div>
+					</div>
+				</div>
 
-        <Transition
-          as={Fragment}
-          enter="duration-200 ease-out"
-          enterFrom="opacity-0 scale-95"
-          enterTo="opacity-100 scale-100"
-          leave="duration-100 ease-in"
-          leaveFrom="opacity-100 scale-100"
-          leaveTo="opacity-0 scale-95"
-        >
-          <Popover.Panel
-            focus
-            className="absolute inset-x-0 top-0 origin-top-right transform p-2 transition md:hidden"
-          >
-            <div className="divide-y-2 divide-gray-50 rounded-lg bg-white shadow-lg ring-1 ring-black ring-opacity-5">
-              <div className="space-y-6 py-6 px-5">
-                <div className="grid grid-cols-2 gap-y-4 gap-x-8">
-                  <a
-                    href="/mix"
-                    className="text-base font-medium text-gray-900 hover:bg-highlight"
-                  >
-                    mix
-                  </a>
+				<Transition
+					as={Fragment}
+					enter="duration-200 ease-out"
+					enterFrom="opacity-0 scale-95"
+					enterTo="opacity-100 scale-100"
+					leave="duration-100 ease-in"
+					leaveFrom="opacity-100 scale-100"
+					leaveTo="opacity-0 scale-95"
+				>
+					<Popover.Panel
+						focus
+						className="absolute inset-x-0 top-0 origin-top-right transform p-2 transition md:hidden"
+					>
+						<div className="divide-y-2 divide-gray-50 rounded-lg bg-white shadow-lg ring-1 ring-black ring-opacity-5">
+							<div className="space-y-6 py-6 px-5">
+								<div className="grid grid-cols-2 gap-y-4 gap-x-8">
+									<a href="/mix" className="text-base font-medium text-gray-900 hover:bg-highlight">
+										mix
+									</a>
 
-                  <a
-                    href="/play"
-                    className="text-base font-medium text-gray-900 hover:bg-highlight"
-                  >
-                    play
-                  </a>
-                  <a
-                    href="/how"
-                    className="font-mono text-base font-medium text-gray-500 hover:bg-highlight"
-                  >
-                    how's this work?
-                  </a>
-                </div>
-                <div>
-                  <ConnectButton />
-                </div>
-              </div>
-            </div>
-          </Popover.Panel>
-        </Transition>
-      </Popover>
-    </div>
-  );
+									<a href="/play" className="text-base font-medium text-gray-900 hover:bg-highlight">
+										play
+									</a>
+									<a
+										href="/how"
+										className="font-mono text-base font-medium text-gray-500 hover:bg-highlight"
+									>
+										how's this work?
+									</a>
+								</div>
+								<div>
+									<ConnectButton />
+								</div>
+							</div>
+						</div>
+					</Popover.Panel>
+				</Transition>
+			</Popover>
+		</div>
+	);
 }
 ```
 
@@ -789,168 +752,160 @@ import SearchQueries from "../components/SearchQueries";
 import { sdk } from "@audius/sdk";
 
 const Mix = () => {
-  const [tracks, setTracks] = useState([]);
-  const [playlistTracks, setPlaylistTracks] = useState([]);
+	const [tracks, setTracks] = useState([]);
+	const [playlistTracks, setPlaylistTracks] = useState([]);
 
-  const ASYNC_MUSIC_CONTRACT = "0xbc402bed62c90afd0e104be32bdee9447b5ccd0d";
+	const ASYNC_MUSIC_CONTRACT = "0xbc402bed62c90afd0e104be32bdee9447b5ccd0d";
 
-  const alchemySettings = {
-    apiKey: "", // Replace with your Alchemy API Key.
-    network: Network.ETH_MAINNET,
-  };
-  const alchemy = new Alchemy(alchemySettings);
+	const alchemySettings = {
+		apiKey: "", // Replace with your Alchemy API Key.
+		network: Network.ETH_MAINNET,
+	};
+	const alchemy = new Alchemy(alchemySettings);
 
-  /**
-   * Helper function to search NFT traits
-   * @param {*} traits The list of traits to search
-   * @param {*} searchKey The search term to look for
-   * @returns
-   */
-  const getValueForTraitType = (traits, searchKey) => {
-    for (let i = 0; i < traits.length; i++) {
-      if (traits[i].trait_type === searchKey) return traits[i].value;
-    }
+	/**
+	 * Helper function to search NFT traits
+	 * @param {*} traits The list of traits to search
+	 * @param {*} searchKey The search term to look for
+	 * @returns
+	 */
+	const getValueForTraitType = (traits, searchKey) => {
+		for (let i = 0; i < traits.length; i++) {
+			if (traits[i].trait_type === searchKey) return traits[i].value;
+		}
 
-    return "";
-  };
+		return "";
+	};
 
-  /**
-   * Searches Audius using Audius API and returns maxTracks.
-   * There is no guarantee that subsequent calls will return the same dataset
-   * I've intentionally coded in a bunch of randomness.
-   * @param {*} tracks Array to hold the found tracks
-   * @param {*} maxTracks Max number of tracks to return
-   */
-  const doSearchAudius = async (searchType, maxTracks) => {
-    let tracks = [];
-    let audiusTracks;
+	/**
+	 * Searches Audius using Audius API and returns maxTracks.
+	 * There is no guarantee that subsequent calls will return the same dataset
+	 * I've intentionally coded in a bunch of randomness.
+	 * @param {*} tracks Array to hold the found tracks
+	 * @param {*} maxTracks Max number of tracks to return
+	 */
+	const doSearchAudius = async (searchType, maxTracks) => {
+		let tracks = [];
+		let audiusTracks;
 
-    const audiusSdk = sdk({ appName: "Blockmix" });
-    if (searchType == "trending") {
-      audiusTracks = await audiusSdk.tracks.getTrendingTracks();
-    } else {
-      audiusTracks = await audiusSdk.tracks.searchTracks({
-        query: searchType,
-      });
-    }
-    // then convert the audius data into our cross platform data
-    for (let i = 0; i < audiusTracks.length; i++) {
-      const newTrack = {
-        artwork: audiusTracks[i].artwork["150x150"],
-        artist: audiusTracks[i].user.name,
-        track: audiusTracks[i].title,
-        id: audiusTracks[i].id,
-        playUrl: await audiusSdk.tracks.streamTrack({
-          trackId: audiusTracks[i].id,
-        }),
-        previewURL: "https://audius.co" + audiusTracks[i].permalink,
-      };
-      tracks.push(newTrack);
-    }
+		const audiusSdk = sdk({ appName: "Blockmix" });
+		if (searchType == "trending") {
+			audiusTracks = await audiusSdk.tracks.getTrendingTracks();
+		} else {
+			audiusTracks = await audiusSdk.tracks.searchTracks({
+				query: searchType,
+			});
+		}
+		// then convert the audius data into our cross platform data
+		for (let i = 0; i < audiusTracks.length; i++) {
+			const newTrack = {
+				artwork: audiusTracks[i].artwork["150x150"],
+				artist: audiusTracks[i].user.name,
+				track: audiusTracks[i].title,
+				id: audiusTracks[i].id,
+				playUrl: await audiusSdk.tracks.streamTrack({
+					trackId: audiusTracks[i].id,
+				}),
+				previewURL: "https://audius.co" + audiusTracks[i].permalink,
+			};
+			tracks.push(newTrack);
+		}
 
-    // now randomally delete items from the array until the length is maxTracks
-    while (tracks.length > maxTracks) {
-      const randIndex = Math.floor(Math.random() * tracks.length);
-      tracks.splice(randIndex, 1);
-    }
-    return tracks;
-  };
+		// now randomally delete items from the array until the length is maxTracks
+		while (tracks.length > maxTracks) {
+			const randIndex = Math.floor(Math.random() * tracks.length);
+			tracks.splice(randIndex, 1);
+		}
+		return tracks;
+	};
 
-  /**
-   * Searches ASYNC_MUSIC_CONTRACT using Alchmey NFT API and returns maxTracks.
-   * There is no guarantee that subsequent calls will return the same dataset
-   * I've intentionally coded in a bunch of randomness.
-   * @param {*} tracks Array to hold the found tracks
-   * @param {*} maxTracks Max number of tracks to return
-   */
-  const doSearchAsyncMusic = async (maxTracks) => {
-    let tracks = [];
+	/**
+	 * Searches ASYNC_MUSIC_CONTRACT using Alchmey NFT API and returns maxTracks.
+	 * There is no guarantee that subsequent calls will return the same dataset
+	 * I've intentionally coded in a bunch of randomness.
+	 * @param {*} tracks Array to hold the found tracks
+	 * @param {*} maxTracks Max number of tracks to return
+	 */
+	const doSearchAsyncMusic = async (maxTracks) => {
+		let tracks = [];
 
-    // query the contract for the first 100 NFTs
-    const nftsForContract = await alchemy.nft.getNftsForContract(
-      ASYNC_MUSIC_CONTRACT
-    );
+		// query the contract for the first 100 NFTs
+		const nftsForContract = await alchemy.nft.getNftsForContract(ASYNC_MUSIC_CONTRACT);
 
-    // iterate over the list and put data into our JSON format
-    for (let i = 0; i < nftsForContract.nfts.length; i++) {
-      const newTrack = {
-        artwork: nftsForContract.nfts[i].rawMetadata.image,
-        artist: getValueForTraitType(
-          nftsForContract.nfts[i].rawMetadata.attributes,
-          "Artist"
-        ),
-        track: nftsForContract.nfts[i].title,
-        id: nftsForContract.nfts[i].tokenId,
-        playUrl: nftsForContract.nfts[i].rawMetadata.animation_url,
-        previewURL: nftsForContract.nfts[i].rawMetadata.external_url,
-      };
-      tracks.push(newTrack);
-    }
+		// iterate over the list and put data into our JSON format
+		for (let i = 0; i < nftsForContract.nfts.length; i++) {
+			const newTrack = {
+				artwork: nftsForContract.nfts[i].rawMetadata.image,
+				artist: getValueForTraitType(nftsForContract.nfts[i].rawMetadata.attributes, "Artist"),
+				track: nftsForContract.nfts[i].title,
+				id: nftsForContract.nfts[i].tokenId,
+				playUrl: nftsForContract.nfts[i].rawMetadata.animation_url,
+				previewURL: nftsForContract.nfts[i].rawMetadata.external_url,
+			};
+			tracks.push(newTrack);
+		}
 
-    // now randomally delete items from the array until the length is maxTracks
-    while (tracks.length > maxTracks) {
-      const randIndex = Math.floor(Math.random() * tracks.length);
-      tracks.splice(randIndex, 1);
-    }
-    return tracks;
-  };
+		// now randomally delete items from the array until the length is maxTracks
+		while (tracks.length > maxTracks) {
+			const randIndex = Math.floor(Math.random() * tracks.length);
+			tracks.splice(randIndex, 1);
+		}
+		return tracks;
+	};
 
-  /**
-   * Called when the user clicks a search term.
-   * @param {*} searchType The search option (genre selection)
-   */
-  const doSearch = async (searchType) => {
-    setTracks([]);
-    let tracks = [];
-    const maxTracks = 15; // limit number of tracks per data source
-    const audiusTracks = await doSearchAudius(searchType, maxTracks);
-    const asyncTracks = await doSearchAsyncMusic(maxTracks);
-    tracks = audiusTracks.concat(asyncTracks);
+	/**
+	 * Called when the user clicks a search term.
+	 * @param {*} searchType The search option (genre selection)
+	 */
+	const doSearch = async (searchType) => {
+		setTracks([]);
+		let tracks = [];
+		const maxTracks = 15; // limit number of tracks per data source
+		const audiusTracks = await doSearchAudius(searchType, maxTracks);
+		const asyncTracks = await doSearchAsyncMusic(maxTracks);
+		tracks = audiusTracks.concat(asyncTracks);
 
-    // now randomize the track list
-    for (var i = tracks.length - 1; i > 0; i--) {
-      var j = Math.floor(Math.random() * (i + 1));
-      var temp = tracks[i];
-      tracks[i] = tracks[j];
-      tracks[j] = temp;
-    }
+		// now randomize the track list
+		for (var i = tracks.length - 1; i > 0; i--) {
+			var j = Math.floor(Math.random() * (i + 1));
+			var temp = tracks[i];
+			tracks[i] = tracks[j];
+			tracks[j] = temp;
+		}
 
-    setTracks(tracks);
-  };
+		setTracks(tracks);
+	};
 
-  return (
-    <div className="w-full h-full min-h-full pt-20">
-      <div className="flex flex-col">
-        <div className="">
-          <span className="text-4xl font-press-start"></span>
-        </div>
-        {tracks.length === 0 && (
-          <div className="mt-5">
-            <SplashScreen />
-          </div>
-        )}
+	return (
+		<div className="w-full h-full min-h-full pt-20">
+			<div className="flex flex-col">
+				<div className="">
+					<span className="text-4xl font-press-start"></span>
+				</div>
+				{tracks.length === 0 && (
+					<div className="mt-5">
+						<SplashScreen />
+					</div>
+				)}
 
-        <SearchQueries doSearch={doSearch} />
+				<SearchQueries doSearch={doSearch} />
 
-        {playlistTracks.length > 0 && (
-          <Mixtape
-            playlistTracks={playlistTracks}
-            setPlaylistTracks={setPlaylistTracks}
-          />
-        )}
+				{playlistTracks.length > 0 && (
+					<Mixtape playlistTracks={playlistTracks} setPlaylistTracks={setPlaylistTracks} />
+				)}
 
-        <div className="px-4 max-w-full">
-          {tracks.length > 0 && (
-            <TrackList
-              tracks={tracks}
-              playlistTracks={playlistTracks}
-              setPlaylistTracks={setPlaylistTracks}
-            />
-          )}
-        </div>
-      </div>
-    </div>
-  );
+				<div className="px-4 max-w-full">
+					{tracks.length > 0 && (
+						<TrackList
+							tracks={tracks}
+							playlistTracks={playlistTracks}
+							setPlaylistTracks={setPlaylistTracks}
+						/>
+					)}
+				</div>
+			</div>
+		</div>
+	);
 };
 
 export default Mix;
@@ -974,11 +929,11 @@ const audiusSdk = sdk({ appName: "Blockmix" });
 
 ```js
 if (searchType == "trending") {
-  audiusTracks = await audiusSdk.tracks.getTrendingTracks();
+	audiusTracks = await audiusSdk.tracks.getTrendingTracks();
 } else {
-  audiusTracks = await audiusSdk.tracks.searchTracks({
-    query: searchType,
-  });
+	audiusTracks = await audiusSdk.tracks.searchTracks({
+		query: searchType,
+	});
 }
 ```
 
@@ -986,17 +941,17 @@ if (searchType == "trending") {
 
 ```js
 for (let i = 0; i < audiusTracks.length; i++) {
-  const newTrack = {
-    artwork: audiusTracks[i].artwork["150x150"],
-    artist: audiusTracks[i].user.name,
-    track: audiusTracks[i].title,
-    id: audiusTracks[i].id,
-    playUrl: await audiusSdk.tracks.streamTrack({
-      trackId: audiusTracks[i].id,
-    }),
-    previewURL: "https://audius.co" + audiusTracks[i].permalink,
-  };
-  tracks.push(newTrack);
+	const newTrack = {
+		artwork: audiusTracks[i].artwork["150x150"],
+		artist: audiusTracks[i].user.name,
+		track: audiusTracks[i].title,
+		id: audiusTracks[i].id,
+		playUrl: await audiusSdk.tracks.streamTrack({
+			trackId: audiusTracks[i].id,
+		}),
+		previewURL: "https://audius.co" + audiusTracks[i].permalink,
+	};
+	tracks.push(newTrack);
 }
 ```
 
@@ -1013,27 +968,22 @@ Working with the Alchemy SDK we
 1. Call `getNftsForContract()` which returns the NFTs associated with the Async Music Blueprints contract. This call returns the first 100, of which we'll pick 15 random ones.
 
 ```js
-const nftsForContract = await alchemy.nft.getNftsForContract(
-  ASYNC_MUSIC_CONTRACT
-);
+const nftsForContract = await alchemy.nft.getNftsForContract(ASYNC_MUSIC_CONTRACT);
 ```
 
 2. Iterate over the dataset, massaging the data into our cross-contract format.
 
 ```js
 for (let i = 0; i < nftsForContract.nfts.length; i++) {
-  const newTrack = {
-    artwork: nftsForContract.nfts[i].rawMetadata.image,
-    artist: getValueForTraitType(
-      nftsForContract.nfts[i].rawMetadata.attributes,
-      "Artist"
-    ),
-    track: nftsForContract.nfts[i].title,
-    id: nftsForContract.nfts[i].tokenId,
-    playUrl: nftsForContract.nfts[i].rawMetadata.animation_url,
-    previewURL: nftsForContract.nfts[i].rawMetadata.external_url,
-  };
-  tracks.push(newTrack);
+	const newTrack = {
+		artwork: nftsForContract.nfts[i].rawMetadata.image,
+		artist: getValueForTraitType(nftsForContract.nfts[i].rawMetadata.attributes, "Artist"),
+		track: nftsForContract.nfts[i].title,
+		id: nftsForContract.nfts[i].tokenId,
+		playUrl: nftsForContract.nfts[i].rawMetadata.animation_url,
+		previewURL: nftsForContract.nfts[i].rawMetadata.external_url,
+	};
+	tracks.push(newTrack);
 }
 ```
 
@@ -1053,69 +1003,69 @@ This is the bulk of our search logic, but to make things really work we'll need 
 import React, { useState, useEffect } from "react";
 
 const SearchQueries = ({ doSearch }) => {
-  const [searchQueries, setSearchQueries] = useState([]);
+	const [searchQueries, setSearchQueries] = useState([]);
 
-  const shuffleQueries = () => {
-    const baseQueries = [
-      "house",
-      "ambient",
-      "pop",
-      "folk",
-      "disco",
-      "jazz",
-      "hip hop",
-      "trap",
-      "experimental",
-      "lofi",
-      "metal",
-      "electronic",
-      "punk",
-      "world",
-      "classical",
-      "country",
-      "latin",
-      "hyperpop",
-      "house",
-      "tropical house",
-      "moombahton",
-      "trending",
-    ];
-    // randomize the list and then only show the first 12
-    for (var i = baseQueries.length - 1; i > 0; i--) {
-      var j = Math.floor(Math.random() * (i + 1));
-      var temp = baseQueries[i];
-      baseQueries[i] = baseQueries[j];
-      baseQueries[j] = temp;
-    }
-    setSearchQueries(baseQueries.slice(0, 12));
-  };
+	const shuffleQueries = () => {
+		const baseQueries = [
+			"house",
+			"ambient",
+			"pop",
+			"folk",
+			"disco",
+			"jazz",
+			"hip hop",
+			"trap",
+			"experimental",
+			"lofi",
+			"metal",
+			"electronic",
+			"punk",
+			"world",
+			"classical",
+			"country",
+			"latin",
+			"hyperpop",
+			"house",
+			"tropical house",
+			"moombahton",
+			"trending",
+		];
+		// randomize the list and then only show the first 12
+		for (var i = baseQueries.length - 1; i > 0; i--) {
+			var j = Math.floor(Math.random() * (i + 1));
+			var temp = baseQueries[i];
+			baseQueries[i] = baseQueries[j];
+			baseQueries[j] = temp;
+		}
+		setSearchQueries(baseQueries.slice(0, 12));
+	};
 
-  useEffect(() => {
-    // shuffle the queries to give our UI some randomness
-    shuffleQueries();
-  }, []);
+	useEffect(() => {
+		// shuffle the queries to give our UI some randomness
+		shuffleQueries();
+	}, []);
 
-  return (
-    <div className="border bg-secondary border-primary border-8 mx-20 mt-5">
-      <div>
-        <div className="flex flex-row items-center pr-10">
-          {searchQueries.map((query, id) => (
-            <div className="px-1" key={id}>
-              <button
-                type="button"
-                className="font-mono mt-3 mb-3 rounded border border-gray-300 bg-white px-2.5 py-1.5 text-xs font-medium text-text shadow-sm hover:bg-highlight focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
-                onClick={(e) => {
-                  doSearch(query);
-                }}
-              >
-                {query}
-              </button>
-            </div>
-          ))}
-        </div>
-      </div>
-    </div>
-  );
+	return (
+		<div className="border bg-secondary border-primary border-8 mx-20 mt-5">
+			<div>
+				<div className="flex flex-row items-center pr-10">
+					{searchQueries.map((query, id) => (
+						<div className="px-1" key={id}>
+							<button
+								type="button"
+								className="font-mono mt-3 mb-3 rounded border border-gray-300 bg-white px-2.5 py-1.5 text-xs font-medium text-text shadow-sm hover:bg-highlight focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+								onClick={(e) => {
+									doSearch(query);
+								}}
+							>
+								{query}
+							</button>
+						</div>
+					))}
+				</div>
+			</div>
+		</div>
+	);
 };
 
 export default SearchQueries;
@@ -1129,127 +1079,122 @@ And then type this into `components/TrackList.js` where we actually list out the
 import React, { useState } from "react";
 
 const TrackList = ({ tracks, playlistTracks, setPlaylistTracks }) => {
-  const [activeAudio, setActiveAudio] = useState();
-  const [activeAudioURL, setActiveAudioURL] = useState();
+	const [activeAudio, setActiveAudio] = useState();
+	const [activeAudioURL, setActiveAudioURL] = useState();
 
-  // called when the user clicks "Add"
-  const doAdd = (track) => {
-    setPlaylistTracks([...playlistTracks, track]);
-  };
+	// called when the user clicks "Add"
+	const doAdd = (track) => {
+		setPlaylistTracks([...playlistTracks, track]);
+	};
 
-  // called when the user clicks "Play"
-  const doPlay = async (url) => {
-    if (activeAudio) {
-      activeAudio.pause();
-      setActiveAudio(null);
-      return;
-    }
+	// called when the user clicks "Play"
+	const doPlay = async (url) => {
+		if (activeAudio) {
+			activeAudio.pause();
+			setActiveAudio(null);
+			return;
+		}
 
-    const audio = new Audio(url);
-    audio.play();
-    setActiveAudio(audio);
-    setActiveAudioURL(url);
-  };
+		const audio = new Audio(url);
+		audio.play();
+		setActiveAudio(audio);
+		setActiveAudioURL(url);
+	};
 
-  return (
-    <div className="mt-8 flex flex-col mx-20">
-      <div className="-my-2 -mx-4 overflow-x-auto sm:-mx-6 lg:-mx-8">
-        <div className="inline-block min-w-full py-2 align-middle">
-          <div className="overflow-hidden shadow ring-1 ring-black ring-opacity-5">
-            <table className="min-w-full divide-y divide-secondary">
-              <thead className="bg-secondary">
-                <tr>
-                  <th
-                    scope="col"
-                    className="font-mono py-3.5 pl-4 pr-3 text-left font-semibold text-gray-900 sm:pl-6"
-                  ></th>
-                  <th
-                    scope="col"
-                    className="font-mono px-3 py-3.5 text-left font-semibold text-gray-900"
-                  >
-                    Artist
-                  </th>
-                  <th
-                    scope="col"
-                    className="font-mono px-3 py-3.5 text-left font-semibold text-gray-900"
-                  >
-                    Title
-                  </th>
+	return (
+		<div className="mt-8 flex flex-col mx-20">
+			<div className="-my-2 -mx-4 overflow-x-auto sm:-mx-6 lg:-mx-8">
+				<div className="inline-block min-w-full py-2 align-middle">
+					<div className="overflow-hidden shadow ring-1 ring-black ring-opacity-5">
+						<table className="min-w-full divide-y divide-secondary">
+							<thead className="bg-secondary">
+								<tr>
+									<th
+										scope="col"
+										className="font-mono py-3.5 pl-4 pr-3 text-left font-semibold text-gray-900 sm:pl-6"
+									></th>
+									<th
+										scope="col"
+										className="font-mono px-3 py-3.5 text-left font-semibold text-gray-900"
+									>
+										Artist
+									</th>
+									<th
+										scope="col"
+										className="font-mono px-3 py-3.5 text-left font-semibold text-gray-900"
+									>
+										Title
+									</th>
 
-                  <th
-                    scope="col"
-                    className="relative py-3.5 pl-3 pr-4 sm:pr-6"
-                  ></th>
-                </tr>
-              </thead>
-              <tbody className="divide-y divide-secondary bg-primary ">
-                {tracks.map((track) => (
-                  <tr key={track.id}>
-                    <td className="whitespace-wrap py-4 pl-4 pr-3 sm:pl-6">
-                      <div className="flex items-center">
-                        <div className="h-10 w-10 flex-shrink-0">
-                          <img
-                            className="h-10 w-10 rounded-full"
-                            src={track.artwork}
-                            alt=""
-                          />
-                        </div>
-                      </div>
-                    </td>
-                    <td className="whitespace-wrap px-3 py-4 text-gray-500">
-                      <div className="font-mono text-sm text-gray-900">
-                        {track.artist}
-                      </div>
-                    </td>
-                    <td className="whitespace-wrap px-3 py-4 text-gray-500">
-                      <span className="font-mono text-sm whitespace-wrap px-3 py-4 text-white">
-                        {track.track}
-                      </span>
-                    </td>
+									<th scope="col" className="relative py-3.5 pl-3 pr-4 sm:pr-6"></th>
+								</tr>
+							</thead>
+							<tbody className="divide-y divide-secondary bg-primary ">
+								{tracks.map((track) => (
+									<tr key={track.id}>
+										<td className="whitespace-wrap py-4 pl-4 pr-3 sm:pl-6">
+											<div className="flex items-center">
+												<div className="h-10 w-10 flex-shrink-0">
+													<img
+														className="h-10 w-10 rounded-full"
+														src={track.artwork}
+														alt=""
+													/>
+												</div>
+											</div>
+										</td>
+										<td className="whitespace-wrap px-3 py-4 text-gray-500">
+											<div className="font-mono text-sm text-gray-900">{track.artist}</div>
+										</td>
+										<td className="whitespace-wrap px-3 py-4 text-gray-500">
+											<span className="font-mono text-sm whitespace-wrap px-3 py-4 text-white">
+												{track.track}
+											</span>
+										</td>
 
-                    <td className="relative whitespace-wrap py-4 pl-3 pr-4 text-right font-medium sm:pr-6">
-                      {activeAudio && activeAudioURL == track.playUrl && (
-                        <a
-                          href="#"
-                          className="font-mono text-xs mt-3 mb-3 mr-3 rounded border border-gray-300 bg-white px-2.5 py-1.5 text-xs font-medium text-gray-700 shadow-sm hover:bg-highlight focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
-                          onClick={(e) => {
-                            doPlay(track.playUrl);
-                          }}
-                        >
-                          Pause
-                        </a>
-                      )}
-                      {!activeAudio && (
-                        <a
-                          href="#"
-                          className="font-mono text-sm mt-3 mb-3 mr-3 rounded border border-gray-300 bg-white px-2.5 py-1.5 text-xs font-medium text-gray-700 shadow-sm hover:bg-highlight focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
-                          onClick={(e) => {
-                            doPlay(track.playUrl);
-                          }}
-                        >
-                          Play
-                        </a>
-                      )}
+										<td className="relative whitespace-wrap py-4 pl-3 pr-4 text-right font-medium sm:pr-6">
+											{activeAudio && activeAudioURL == track.playUrl && (
+												<a
+													href="#"
+													className="font-mono text-xs mt-3 mb-3 mr-3 rounded border border-gray-300 bg-white px-2.5 py-1.5 text-xs font-medium text-gray-700 shadow-sm hover:bg-highlight focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+													onClick={(e) => {
+														doPlay(track.playUrl);
+													}}
+												>
+													Pause
+												</a>
+											)}
+											{!activeAudio && (
+												<a
+													href="#"
+													className="font-mono text-sm mt-3 mb-3 mr-3 rounded border border-gray-300 bg-white px-2.5 py-1.5 text-xs font-medium text-gray-700 shadow-sm hover:bg-highlight focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+													onClick={(e) => {
+														doPlay(track.playUrl);
+													}}
+												>
+													Play
+												</a>
+											)}
 
-                      <a
-                        href="#"
-                        className="font-mono text-sm mt-3 mb-3 rounded border border-gray-300 bg-white px-2.5 py-1.5 text-xs font-medium text-gray-700 shadow-sm hover:bg-highlight focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
-                        onClick={(e) => {
-                          doAdd(track);
-                        }}
-                      >
-                        Add
-                      </a>
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-        </div>
-      </div>
-    </div>
-  );
+											<a
+												href="#"
+												className="font-mono text-sm mt-3 mb-3 rounded border border-gray-300 bg-white px-2.5 py-1.5 text-xs font-medium text-gray-700 shadow-sm hover:bg-highlight focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+												onClick={(e) => {
+													doAdd(track);
+												}}
+											>
+												Add
+											</a>
+										</td>
+									</tr>
+								))}
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+	);
 };
 export default TrackList;
 ```
@@ -1263,11 +1208,11 @@ import React from "react";
 import boomBox from "../assets/images/blue-pink-boom-box.png";
 // using assets from https://www.vecteezy.com/vector-art/11739286-90s-80s-memphis-nostalgic-colorful-retro-objects-toys
 const SplashScreen = () => {
-  return (
-    <div className="w-full flex flex-row justify-center">
-      <img src={boomBox} alt="90s boom box" />
-    </div>
-  );
+	return (
+		<div className="w-full flex flex-row justify-center">
+			<img src={boomBox} alt="90s boom box" />
+		</div>
+	);
 };
 
 export default SplashScreen;
@@ -1283,263 +1228,255 @@ import { WebBundlr } from "@bundlr-network/client";
 import { useProvider, useSigner } from "wagmi";
 
 const Mixtape = ({ playlistTracks, setPlaylistTracks }) => {
-  const [arweaveURL, setArweaveURL] = useState(null);
-  const [playing, setPlaying] = useState(false);
-  const [activeAudioObjects, setActiveAudioObjects] = useState([]);
-  const [playlistTitle, setPlaylistTitle] = useState("");
-  const rainbowKitProvider = useProvider();
-  const { data: signer } = useSigner();
-  const [message, setMessage] = useState("");
-  const [mixtapeURLs, setMixtapeURLs] = useState([]);
+	const [arweaveURL, setArweaveURL] = useState(null);
+	const [playing, setPlaying] = useState(false);
+	const [activeAudioObjects, setActiveAudioObjects] = useState([]);
+	const [playlistTitle, setPlaylistTitle] = useState("");
+	const rainbowKitProvider = useProvider();
+	const { data: signer } = useSigner();
+	const [message, setMessage] = useState("");
+	const [mixtapeURLs, setMixtapeURLs] = useState([]);
 
-  useEffect(() => {
-    // read out a local copy of our mixtape urls store in state
-    const localStorageURLs = localStorage.getItem("mixtape-urls");
-    if (localStorageURLs) {
-      console.log(localStorageURLs.split(","));
-      setMixtapeURLs(localStorageURLs.split(","));
-    } else {
-      console.log("No stored mixtapes");
-      setMixtapeURLs([]);
-    }
-  }, []);
+	useEffect(() => {
+		// read out a local copy of our mixtape urls store in state
+		const localStorageURLs = localStorage.getItem("mixtape-urls");
+		if (localStorageURLs) {
+			console.log(localStorageURLs.split(","));
+			setMixtapeURLs(localStorageURLs.split(","));
+		} else {
+			console.log("No stored mixtapes");
+			setMixtapeURLs([]);
+		}
+	}, []);
 
-  /**
-   * Adds the latest playlist URL to the browser's local storage
-   * @param {*} newURL
-   */
-  const storePlaylistURL = (newURL) => {
-    setMixtapeURLs([...mixtapeURLs, newURL]);
-    // a new URL has been added. store the whole array in local storage.
-    localStorage.setItem("mixtape-urls", [...mixtapeURLs, newURL]);
-  };
+	/**
+	 * Adds the latest playlist URL to the browser's local storage
+	 * @param {*} newURL
+	 */
+	const storePlaylistURL = (newURL) => {
+		setMixtapeURLs([...mixtapeURLs, newURL]);
+		// a new URL has been added. store the whole array in local storage.
+		localStorage.setItem("mixtape-urls", [...mixtapeURLs, newURL]);
+	};
 
-  // On saving to Bundlr, we take the mixtape template and inject the following values
-  // 1. Mixtape title
-  // 2. JSON object showing audio data
-  // 3. Random tape image
-  const doSave = async () => {
-    if (!playlistTitle) {
-      setMessage("How about a name first?");
-      return;
-    }
-    // Template URL for the file stored on Arweave
-    // If you uploaded your own template, change this URL.
-    const templateURL =
-      "https://arweave.net/lsjOqRmeBq0nP62WlJt3I6K_yD0CiM9-N8TB1Hfh31g";
+	// On saving to Bundlr, we take the mixtape template and inject the following values
+	// 1. Mixtape title
+	// 2. JSON object showing audio data
+	// 3. Random tape image
+	const doSave = async () => {
+		if (!playlistTitle) {
+			setMessage("How about a name first?");
+			return;
+		}
+		// Template URL for the file stored on Arweave
+		// If you uploaded your own template, change this URL.
+		const templateURL = "https://arweave.net/lsjOqRmeBq0nP62WlJt3I6K_yD0CiM9-N8TB1Hfh31g";
 
-    // 20 different images to show at the top of the playlist
-    // If you uploaded your own images to Bundlr, change these IDs
-    const tapeImages = [
-      "Gbg6ST1ntBfYXUhIsjkqlrKDd8PEh7rwh3Y45VGE5Zw",
-      "Z1QxcVwk-mqQiphuA3O0en6sAbk5zrCUny4nniOZujU",
-      "ZRTbKEuUfV7IUy9mZCuMXjsuJ0kwnvqeEFtE_AOr5j0",
-      "mgHl_zr0POZ9dsmzhP75-tU-VTOZavCLywYaHiDv3xw",
-      "yPL1WRjU1jWRIi-jMVthn9LBE9JYT6xzVKl4s6PLYNo",
-      "r1YeNoi5edRbUdw5r4y7EfJcJhctjrxEGBFZOjO8Yts",
-      "UuSavdxKkQd_yzfoaUETvRULGKAGulmwykvxUK9oXAM",
-      "N1hNZi5acUPV4luRzIhtnrLSpjOTO_fewPD2WoSkibs",
-      "UEJMXYmBEkpiM7VLq71dGcIk1hEhSBKmBjYmOzE6PXA",
-      "X1oyZpsslvGjKLjWb5HWU6JIGu3g7cnFiZxr6eCY9Go",
-      "2BRqnvme7rskRh1hh8SE5cxV7skW_WbazyvNI4MUqjI",
-      "2ALajE7LbvLy5VoxRpxDrEOlzyJd97zuEAl_DWfFOWQ",
-      "zgsaseaxqN7UdKcujjQY4f1-9ml2iM0MBYcQLt4FHGU",
-      "SnFB_aZNpSa6_hmsLYCxpL9wFdaKl3qkt4JJTHQng-k",
-      "Gm3oWzFxiVtB2Ls2noT6q_TbgQQx_PwYNBjUJV0tJXg",
-      "kxX9_3P5jokehNSDrGuB5btLPMKt_vB_yUijeYQL-Ro",
-      "45X6FpmwsSVG_ul4TsPBnIkQh7aM2y1CuTNdF0aiaRE",
-      "UVUvrWtxtcjjX4NnbjWvnL7sz06ar3y3aquqDpYxBG4",
-      "bRsly1adnoqj9-5bPznXIfF_M7QcatuuKPCdl9zScq4",
-      "vxyIsS8VWVwWlhKpOx3EBhvT04bAftC_-GmNtsihSkI",
-    ];
+		// 20 different images to show at the top of the playlist
+		// If you uploaded your own images to Bundlr, change these IDs
+		const tapeImages = [
+			"Gbg6ST1ntBfYXUhIsjkqlrKDd8PEh7rwh3Y45VGE5Zw",
+			"Z1QxcVwk-mqQiphuA3O0en6sAbk5zrCUny4nniOZujU",
+			"ZRTbKEuUfV7IUy9mZCuMXjsuJ0kwnvqeEFtE_AOr5j0",
+			"mgHl_zr0POZ9dsmzhP75-tU-VTOZavCLywYaHiDv3xw",
+			"yPL1WRjU1jWRIi-jMVthn9LBE9JYT6xzVKl4s6PLYNo",
+			"r1YeNoi5edRbUdw5r4y7EfJcJhctjrxEGBFZOjO8Yts",
+			"UuSavdxKkQd_yzfoaUETvRULGKAGulmwykvxUK9oXAM",
+			"N1hNZi5acUPV4luRzIhtnrLSpjOTO_fewPD2WoSkibs",
+			"UEJMXYmBEkpiM7VLq71dGcIk1hEhSBKmBjYmOzE6PXA",
+			"X1oyZpsslvGjKLjWb5HWU6JIGu3g7cnFiZxr6eCY9Go",
+			"2BRqnvme7rskRh1hh8SE5cxV7skW_WbazyvNI4MUqjI",
+			"2ALajE7LbvLy5VoxRpxDrEOlzyJd97zuEAl_DWfFOWQ",
+			"zgsaseaxqN7UdKcujjQY4f1-9ml2iM0MBYcQLt4FHGU",
+			"SnFB_aZNpSa6_hmsLYCxpL9wFdaKl3qkt4JJTHQng-k",
+			"Gm3oWzFxiVtB2Ls2noT6q_TbgQQx_PwYNBjUJV0tJXg",
+			"kxX9_3P5jokehNSDrGuB5btLPMKt_vB_yUijeYQL-Ro",
+			"45X6FpmwsSVG_ul4TsPBnIkQh7aM2y1CuTNdF0aiaRE",
+			"UVUvrWtxtcjjX4NnbjWvnL7sz06ar3y3aquqDpYxBG4",
+			"bRsly1adnoqj9-5bPznXIfF_M7QcatuuKPCdl9zScq4",
+			"vxyIsS8VWVwWlhKpOx3EBhvT04bAftC_-GmNtsihSkI",
+		];
 
-    // pick a random image
-    const tapeURL =
-      "https://arweave.net/" +
-      tapeImages[Math.floor(Math.random() * tapeImages.length)];
+		// pick a random image
+		const tapeURL = "https://arweave.net/" + tapeImages[Math.floor(Math.random() * tapeImages.length)];
 
-    // grab the template data
-    const templateDataFull = await fetch(templateURL);
-    let templateDataText = await templateDataFull.text();
-    let templateDataMerged = "";
-    // 1. Change ||TITLE|| to playlistTitle
-    templateDataText =
-      templateDataText.substring(0, templateDataText.indexOf("||TITLE||")) +
-      playlistTitle +
-      templateDataText.substring(templateDataText.indexOf("||TITLE||") + 9);
+		// grab the template data
+		const templateDataFull = await fetch(templateURL);
+		let templateDataText = await templateDataFull.text();
+		let templateDataMerged = "";
+		// 1. Change ||TITLE|| to playlistTitle
+		templateDataText =
+			templateDataText.substring(0, templateDataText.indexOf("||TITLE||")) +
+			playlistTitle +
+			templateDataText.substring(templateDataText.indexOf("||TITLE||") + 9);
 
-    // 1. Change ||IMAGE|| to tapeURL
-    templateDataText =
-      templateDataText.substring(0, templateDataText.indexOf("||IMAGE||")) +
-      tapeURL +
-      templateDataText.substring(templateDataText.indexOf("||IMAGE||") + 9);
+		// 1. Change ||IMAGE|| to tapeURL
+		templateDataText =
+			templateDataText.substring(0, templateDataText.indexOf("||IMAGE||")) +
+			tapeURL +
+			templateDataText.substring(templateDataText.indexOf("||IMAGE||") + 9);
 
-    // 3. Change ||TRACKS|| to the stringified value of our JSON array
-    templateDataText =
-      templateDataText.substring(0, templateDataText.indexOf("||TRACKS||")) +
-      JSON.stringify(playlistTracks) +
-      templateDataText.substring(templateDataText.indexOf("||TRACKS||") + 10);
+		// 3. Change ||TRACKS|| to the stringified value of our JSON array
+		templateDataText =
+			templateDataText.substring(0, templateDataText.indexOf("||TRACKS||")) +
+			JSON.stringify(playlistTracks) +
+			templateDataText.substring(templateDataText.indexOf("||TRACKS||") + 10);
 
-    // use function injection to make the RainbowKit provider work with Bundlr
-    rainbowKitProvider.getSigner = () => signer;
-    // const bundlr = new WebBundlr("https://node1.bundlr.network", "matic", rainbowKitProvider);
-    const bundlr = new WebBundlr(
-      "https://devnet.bundlr.network",
-      "matic",
-      rainbowKitProvider,
-      {
-        providerUrl: "https://matic-mumbai.chainstacklabs.com",
-      }
-    );
+		// use function injection to make the RainbowKit provider work with Bundlr
+		rainbowKitProvider.getSigner = () => signer;
+		// const bundlr = new WebBundlr("https://node1.bundlr.network", "matic", rainbowKitProvider);
+		const bundlr = new WebBundlr("https://devnet.bundlr.network", "matic", rainbowKitProvider, {
+			providerUrl: "https://matic-mumbai.chainstacklabs.com",
+		});
 
-    await bundlr.ready();
+		await bundlr.ready();
 
-    // create a transaction with the merged template data
-    // also set the Content-type value so the browser knows how to render the page
-    const tx = bundlr.createTransaction(templateDataText, {
-      tags: [{ name: "Content-type", value: "text/html" }],
-    });
+		// create a transaction with the merged template data
+		// also set the Content-type value so the browser knows how to render the page
+		const tx = bundlr.createTransaction(templateDataText, {
+			tags: [{ name: "Content-type", value: "text/html" }],
+		});
 
-    // lazy fund the upload, only paying for the amount of data we need
-    const cost = await bundlr.getPrice(tx.size);
-    const balance = await bundlr.getLoadedBalance();
+		// lazy fund the upload, only paying for the amount of data we need
+		const cost = await bundlr.getPrice(tx.size);
+		const balance = await bundlr.getLoadedBalance();
 
-    // if necessary, fund the upload
-    if (cost.isGreaterThan(balance)) {
-      const fundAmountConverted = cost.minus(balance);
-      console.log("funding ", fundAmountConverted.toString());
-      await bundlr.fund(fundAmountConverted);
-    }
-    await tx.sign();
+		// if necessary, fund the upload
+		if (cost.isGreaterThan(balance)) {
+			const fundAmountConverted = cost.minus(balance);
+			console.log("funding ", fundAmountConverted.toString());
+			await bundlr.fund(fundAmountConverted);
+		}
+		await tx.sign();
 
-    const response = await tx.upload();
+		const response = await tx.upload();
 
-    // print the playlist URL to console for reference
-    console.log(`Data uploaded ==> https://arweave.net/${response.id}`);
+		// print the playlist URL to console for reference
+		console.log(`Data uploaded ==> https://arweave.net/${response.id}`);
 
-    // store the playlist url locally
-    storePlaylistURL("https://arweave.net/" + response.id);
+		// store the playlist url locally
+		storePlaylistURL("https://arweave.net/" + response.id);
 
-    // redirect to play page
-    window.location.href = "/play";
-  };
+		// redirect to play page
+		window.location.href = "/play";
+	};
 
-  /**
-   * Called when the user clicks Play at the mixtape level.
-   * Iterates though the array of tracks, playing each one.
-   * If already playing, pauses play.
-   */
-  const doPlay = async () => {
-    // if we're already playing, just pause and return
-    if (playing) {
-      for (let i = 0; i < activeAudioObjects.length; i++) {
-        activeAudioObjects[i].pause();
-      }
-      // set playing to false
-      setPlaying(false);
-      // clear state
-      setActiveAudioObjects([]);
-      return;
-    }
+	/**
+	 * Called when the user clicks Play at the mixtape level.
+	 * Iterates though the array of tracks, playing each one.
+	 * If already playing, pauses play.
+	 */
+	const doPlay = async () => {
+		// if we're already playing, just pause and return
+		if (playing) {
+			for (let i = 0; i < activeAudioObjects.length; i++) {
+				activeAudioObjects[i].pause();
+			}
+			// set playing to false
+			setPlaying(false);
+			// clear state
+			setActiveAudioObjects([]);
+			return;
+		}
 
-    setPlaying(true);
+		setPlaying(true);
 
-    // create an array of Audio objects we can play
-    const audioObjects = [];
-    for (let i = 0; i < playlistTracks.length; i++) {
-      console.log("creatnig audio object=", playlistTracks[i].playUrl);
-      const audio = new Audio(playlistTracks[i].playUrl);
-      audioObjects.push(audio);
-    }
-    // store in state to make pausing easy
-    setActiveAudioObjects(audioObjects);
-    // iterate over the tracks, playing each one as you go
-    for (let i = 0; i < audioObjects.length; i++) {
-      console.log("playing track ", i);
-      // start the track
-      audioObjects[i].play();
+		// create an array of Audio objects we can play
+		const audioObjects = [];
+		for (let i = 0; i < playlistTracks.length; i++) {
+			console.log("creatnig audio object=", playlistTracks[i].playUrl);
+			const audio = new Audio(playlistTracks[i].playUrl);
+			audioObjects.push(audio);
+		}
+		// store in state to make pausing easy
+		setActiveAudioObjects(audioObjects);
+		// iterate over the tracks, playing each one as you go
+		for (let i = 0; i < audioObjects.length; i++) {
+			console.log("playing track ", i);
+			// start the track
+			audioObjects[i].play();
 
-      // check if the song has finished playing
-      while (!audioObjects[i].ended) {
-        // pause 1 second
-        await new Promise((resolve) => setTimeout(resolve, 1000));
-      }
-    }
-    // done
-    setPlaying(false);
-  };
+			// check if the song has finished playing
+			while (!audioObjects[i].ended) {
+				// pause 1 second
+				await new Promise((resolve) => setTimeout(resolve, 1000));
+			}
+		}
+		// done
+		setPlaying(false);
+	};
 
-  // removes the specified track from the list
-  const removeFromPlaylist = (id) => {
-    for (let i = 0; i < playlistTracks.length; i++) {
-      if (id === playlistTracks[i].id) {
-        playlistTracks.splice(i, 1);
-        setPlaylistTracks([...playlistTracks]);
-      }
-    }
-  };
+	// removes the specified track from the list
+	const removeFromPlaylist = (id) => {
+		for (let i = 0; i < playlistTracks.length; i++) {
+			if (id === playlistTracks[i].id) {
+				playlistTracks.splice(i, 1);
+				setPlaylistTracks([...playlistTracks]);
+			}
+		}
+	};
 
-  return (
-    <div className="flex flex-col items-end bg-primary mx-20 ">
-      <div className="flex border border-primary border-8 ">
-        {playlistTracks.map((track) => (
-          <div className="flex flex-col px-1">
-            <img src={track.artwork} width="150" height="150" />
-            <span className="text-right text-xs font-mono">
-              <a href="#" onClick={(e) => removeFromPlaylist(track.id)}>
-                x
-              </a>
-            </span>
-          </div>
-        ))}
-      </div>
-      <div className="flex flex-row w-full items-end justify-end py-1 px-1">
-        <input
-          type="text"
-          name="mixtapeName"
-          id="mixtapeName"
-          value={playlistTitle}
-          className="self-start mt-3 mr-3 px-1.5 py-0.5 border-highlight focus:border-highlight focus:ring-highlight"
-          placeholder="what's my name?"
-          onChange={(e) => setPlaylistTitle(e.target.value)}
-        />
-        {playing && (
-          <button
-            type="button"
-            className="font-mono text-sm  bg-secondary mt-3 mr-3 px-2.5 py-1.5 text-xs font-medium text-gray-700 shadow-sm hover:bg-highlight focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
-            onClick={(e) => {
-              doPlay();
-            }}
-          >
-            pause
-          </button>
-        )}
-        {!playing && (
-          <button
-            type="button"
-            className="font-mono text-sm mt-3 mr-3 bg-secondary px-2.5 py-1.5 text-xs font-medium text-gray-700 shadow-sm hover:bg-highlight focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
-            onClick={(e) => {
-              doPlay();
-            }}
-          >
-            play
-          </button>
-        )}
-        {!arweaveURL && (
-          <button
-            type="button"
-            className="font-mono text-sm mt-3 bg-secondary px-2.5 py-1.5 text-xs font-medium text-gray-700 shadow-sm hover:bg-highlight focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
-            onClick={(e) => {
-              doSave();
-            }}
-          >
-            save to bundlr
-          </button>
-        )}
-      </div>
-      <p className="font-bold text-white mr-1">{message}</p>
-    </div>
-  );
+	return (
+		<div className="flex flex-col items-end bg-primary mx-20 ">
+			<div className="flex border border-primary border-8 ">
+				{playlistTracks.map((track) => (
+					<div className="flex flex-col px-1">
+						<img src={track.artwork} width="150" height="150" />
+						<span className="text-right text-xs font-mono">
+							<a href="#" onClick={(e) => removeFromPlaylist(track.id)}>
+								x
+							</a>
+						</span>
+					</div>
+				))}
+			</div>
+			<div className="flex flex-row w-full items-end justify-end py-1 px-1">
+				<input
+					type="text"
+					name="mixtapeName"
+					id="mixtapeName"
+					value={playlistTitle}
+					className="self-start mt-3 mr-3 px-1.5 py-0.5 border-highlight focus:border-highlight focus:ring-highlight"
+					placeholder="what's my name?"
+					onChange={(e) => setPlaylistTitle(e.target.value)}
+				/>
+				{playing && (
+					<button
+						type="button"
+						className="font-mono text-sm  bg-secondary mt-3 mr-3 px-2.5 py-1.5 text-xs font-medium text-gray-700 shadow-sm hover:bg-highlight focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+						onClick={(e) => {
+							doPlay();
+						}}
+					>
+						pause
+					</button>
+				)}
+				{!playing && (
+					<button
+						type="button"
+						className="font-mono text-sm mt-3 mr-3 bg-secondary px-2.5 py-1.5 text-xs font-medium text-gray-700 shadow-sm hover:bg-highlight focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+						onClick={(e) => {
+							doPlay();
+						}}
+					>
+						play
+					</button>
+				)}
+				{!arweaveURL && (
+					<button
+						type="button"
+						className="font-mono text-sm mt-3 bg-secondary px-2.5 py-1.5 text-xs font-medium text-gray-700 shadow-sm hover:bg-highlight focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+						onClick={(e) => {
+							doSave();
+						}}
+					>
+						save to bundlr
+					</button>
+				)}
+			</div>
+			<p className="font-bold text-white mr-1">{message}</p>
+		</div>
+	);
 };
 
 export default Mixtape;
@@ -1564,14 +1501,9 @@ Next up, use function injection to [modify the RainbowKit Provider](/developer-d
 // use function injection to make the RainbowKit provider work with Bundlr
 rainbowKitProvider.getSigner = () => signer;
 // const bundlr = new WebBundlr("https://node1.bundlr.network", "matic", rainbowKitProvider);
-const bundlr = new WebBundlr(
-  "https://devnet.bundlr.network",
-  "matic",
-  rainbowKitProvider,
-  {
-    providerUrl: "https://matic-mumbai.chainstacklabs.com",
-  }
-);
+const bundlr = new WebBundlr("https://devnet.bundlr.network", "matic", rainbowKitProvider, {
+	providerUrl: "https://matic-mumbai.chainstacklabs.com",
+});
 await bundlr.ready();
 ```
 
@@ -1588,7 +1520,7 @@ Let's dig in. First create a transaction and set its Content-type to `"text/html
 
 ```js
 const tx = bundlr.createTransaction(templateDataText, {
-  tags: [{ name: "Content-type", value: "text/html" }],
+	tags: [{ name: "Content-type", value: "text/html" }],
 });
 ```
 
@@ -1603,9 +1535,9 @@ const balance = await bundlr.getLoadedBalance();
 
 // if necessary, fund the upload
 if (cost.isGreaterThan(balance)) {
-  const fundAmountConverted = cost.minus(balance);
-  console.log("funding ", fundAmountConverted.toString());
-  await bundlr.fund(fundAmountConverted);
+	const fundAmountConverted = cost.minus(balance);
+	console.log("funding ", fundAmountConverted.toString());
+	await bundlr.fund(fundAmountConverted);
 }
 await tx.sign();
 
@@ -1622,63 +1554,52 @@ The page `Play.js` reads in the URLs to all the mixtapes you've stored in the br
 import React, { useState, useEffect } from "react";
 
 const Play = () => {
-  const [showTracksId, setShowTracksId] = useState("");
-  const [mixtapeURLs, setMixtapeURLs] = useState([]);
+	const [showTracksId, setShowTracksId] = useState("");
+	const [mixtapeURLs, setMixtapeURLs] = useState([]);
 
-  const showTracks = (id) => {
-    setShowTracksId(id);
-  };
+	const showTracks = (id) => {
+		setShowTracksId(id);
+	};
 
-  useEffect(() => {
-    // read out a local copy of our mixtape urls store in state
-    const localStorageURLs = localStorage.getItem("mixtape-urls");
-    if (localStorageURLs) {
-      console.log(localStorageURLs.split(","));
-      setMixtapeURLs(localStorageURLs.split(","));
-    } else {
-      console.log("No stored mixtapes");
-      setMixtapeURLs([]);
-    }
-  }, []);
+	useEffect(() => {
+		// read out a local copy of our mixtape urls store in state
+		const localStorageURLs = localStorage.getItem("mixtape-urls");
+		if (localStorageURLs) {
+			console.log(localStorageURLs.split(","));
+			setMixtapeURLs(localStorageURLs.split(","));
+		} else {
+			console.log("No stored mixtapes");
+			setMixtapeURLs([]);
+		}
+	}, []);
 
-  return (
-    <div className="w-full h-full min-h-full pt-20 bg-background">
-      <div className="flex flex-col">
-        {showTracksId && (
-          <div
-            className="h-full flex flex-row flex-wrap justify-items-center border bg-primary border-primary border-8 mx-20 mt-5"
-            id="expandedTapeFrame"
-          >
-            <iframe
-              src={showTracksId + "?showTracks=true"}
-              width={910}
-              height={220}
-            ></iframe>
-          </div>
-        )}
+	return (
+		<div className="w-full h-full min-h-full pt-20 bg-background">
+			<div className="flex flex-col">
+				{showTracksId && (
+					<div
+						className="h-full flex flex-row flex-wrap justify-items-center border bg-primary border-primary border-8 mx-20 mt-5"
+						id="expandedTapeFrame"
+					>
+						<iframe src={showTracksId + "?showTracks=true"} width={910} height={220}></iframe>
+					</div>
+				)}
 
-        <div className="h-full flex flex-row justify-items-start items-start flex-wrap border bg-primary border-primary border-8 mx-20 mt-5">
-          {mixtapeURLs.map((mixtape, id) => (
-            <div
-              id="showShareFrame"
-              className="flex flex-col bg-secondary mr-1"
-            >
-              <span className="text-center text-sm ">
-                <a
-                  href="#"
-                  className="underline"
-                  onClick={() => showTracks(mixtape)}
-                >
-                  Show Tracks
-                </a>
-              </span>
-              <iframe src={mixtape} width={310} height={220}></iframe>
-            </div>
-          ))}
-        </div>
-      </div>
-    </div>
-  );
+				<div className="h-full flex flex-row justify-items-start items-start flex-wrap border bg-primary border-primary border-8 mx-20 mt-5">
+					{mixtapeURLs.map((mixtape, id) => (
+						<div id="showShareFrame" className="flex flex-col bg-secondary mr-1">
+							<span className="text-center text-sm ">
+								<a href="#" className="underline" onClick={() => showTracks(mixtape)}>
+									Show Tracks
+								</a>
+							</span>
+							<iframe src={mixtape} width={310} height={220}></iframe>
+						</div>
+					))}
+				</div>
+			</div>
+		</div>
+	);
 };
 
 export default Play;
@@ -1697,131 +1618,116 @@ import vhs from "../assets/images/vhs.png";
 import skate from "../assets/images/skate.png";
 
 const How = () => {
-  return (
-    <div className="w-full h-full min-h-full pt-20">
-      <div className="px-10 py-10">
-        <div className="flex flex-row items-end bg-primary text-header px-5 py-5">
-          <img src={sneakers} width="20%" />
-          <h2 className="text-4xl font-press-start ml-2">
-            Remember Record Bins?
-          </h2>
-        </div>
-        <div className="flex flex-row items-end bg-secondary text-text px-5 py-5">
-          <h2 className="font-mono ml-2">
-            This project all started with a trip down memory lane, an afternoon
-            reminiscing about the joys of searching through record bins. In the
-            age of streaming and fine-grained search tools, it's easy to find
-            the exact song you want ... but you also miss out on those random
-            happy accidents that come from searching though record bins. I
-            designed Blockmix to be the anti-search engine. You can search only
-            by pre-defined categories, and that category list is dynamic and
-            changes with each refresh. Then you can combine your picks from that
-            cross-contract / cross-chain search into a single mixtape playlist
-            and listen to it start to finish.
-            <br />
-          </h2>
-          <img src={vhs} width="20%" />
-        </div>
-        <div className="flex flex-row items-end bg-background text-text px-5 py-5">
-          <img src={glasses} width="20%" />
+	return (
+		<div className="w-full h-full min-h-full pt-20">
+			<div className="px-10 py-10">
+				<div className="flex flex-row items-end bg-primary text-header px-5 py-5">
+					<img src={sneakers} width="20%" />
+					<h2 className="text-4xl font-press-start ml-2">Remember Record Bins?</h2>
+				</div>
+				<div className="flex flex-row items-end bg-secondary text-text px-5 py-5">
+					<h2 className="font-mono ml-2">
+						This project all started with a trip down memory lane, an afternoon reminiscing about the joys
+						of searching through record bins. In the age of streaming and fine-grained search tools, it's
+						easy to find the exact song you want ... but you also miss out on those random happy accidents
+						that come from searching though record bins. I designed Blockmix to be the anti-search engine.
+						You can search only by pre-defined categories, and that category list is dynamic and changes
+						with each refresh. Then you can combine your picks from that cross-contract / cross-chain search
+						into a single mixtape playlist and listen to it start to finish.
+						<br />
+					</h2>
+					<img src={vhs} width="20%" />
+				</div>
+				<div className="flex flex-row items-end bg-background text-text px-5 py-5">
+					<img src={glasses} width="20%" />
 
-          <h2 className="font-mono ml-2">
-            Then I decided to lean into the whole "happy accidents" feature, and
-            just mix stuff up. With every search, I use the{" "}
-            <a
-              href="https://audius.org/en/api"
-              target="_blank"
-              className="underline decoration-primary"
-            >
-              Audius API
-            </a>{" "}
-            to do a genre search, then I use the{" "}
-            <a
-              href="https://www.alchemy.com/nft-api"
-              target="_blank"
-              className="underline decoration-primary"
-            >
-              Alchemy NFT API
-            </a>{" "}
-            to query the{" "}
-            <a
-              href="https://opensea.io/collection/async-music-blueprints"
-              target="_blank"
-              className="underline decoration-primary"
-            >
-              Async Music Blueprints
-            </a>{" "}
-            contract, and I just mix everything together.
-          </h2>
-        </div>
-        <div className="flex flex-row items-end bg-primary text-text px-5 py-5">
-          <h2 className="font-mono ml-2">
-            Mixtapes are saved to the Arweave blockchain via{" "}
-            <a
-              href="https://bundlr.network/"
-              target="_blank"
-              className="underline decoration-secondary"
-            >
-              Bundlr
-            </a>
-            . They're immutable, once made you can't change them, you can't delete
-            them, you can only listen to them. And because they're stored on Arweave,
-            they're guaranteed to be there forever (well at least 200 years).
-          </h2>
-          <img src={skate} width="20%" />
-        </div>
-        <div className="flex flex-row items-end bg-secondary text-text px-5 py-5">
-          <img src={tv} width="15%" />
+					<h2 className="font-mono ml-2">
+						Then I decided to lean into the whole "happy accidents" feature, and just mix stuff up. With
+						every search, I use the{" "}
+						<a href="https://audius.org/en/api" target="_blank" className="underline decoration-primary">
+							Audius API
+						</a>{" "}
+						to do a genre search, then I use the{" "}
+						<a
+							href="https://www.alchemy.com/nft-api"
+							target="_blank"
+							className="underline decoration-primary"
+						>
+							Alchemy NFT API
+						</a>{" "}
+						to query the{" "}
+						<a
+							href="https://opensea.io/collection/async-music-blueprints"
+							target="_blank"
+							className="underline decoration-primary"
+						>
+							Async Music Blueprints
+						</a>{" "}
+						contract, and I just mix everything together.
+					</h2>
+				</div>
+				<div className="flex flex-row items-end bg-primary text-text px-5 py-5">
+					<h2 className="font-mono ml-2">
+						Mixtapes are saved to the Arweave blockchain via{" "}
+						<a href="https://bundlr.network/" target="_blank" className="underline decoration-secondary">
+							Bundlr
+						</a>
+						. They're immutable, once made you can't change them, you can't delete them, you can only listen
+						to them. And because they're stored on Arweave, they're guaranteed to be there forever (well at least
+						200 years).
+					</h2>
+					<img src={skate} width="20%" />
+				</div>
+				<div className="flex flex-row items-end bg-secondary text-text px-5 py-5">
+					<img src={tv} width="15%" />
 
-          <h2 className="font-mono ml-2">
-            In allowing you to create mixtapes using multiple audio sources, I'm
-            also addressing another problem with the music NFT space. It's
-            currently very easy to build a lovely collection of songs, but not
-            to easy to listen to them. Nobody wants to have to click play over
-            and over as you listen to songs from different contracts. This app
-            is an example of how easy it is to mix songs from different
-            contracts, I'd be curious to see someone expand on it and pull in
-            data from hundreds of contracts.
-            <ul className="list-disc ml-5 mt-2">
-              <li>
-                A tutorial on how I built this can be found{" "}
-                <a
-                  href="https://docs.bundlr.network/tutorials/mix-tape-dapp#mixtapejs"
-                  target="_blank"
-                  className="underline decoration-primary"
-                >
-                  here
-                </a>
-                .{" "}
-              </li>
-              <li>
-                The source code can be found here{" "}
-                <a
-                  href="https://github.com/lukecd/blockmix"
-                  target="_blank"
-                  className="underline decoration-primary"
-                >
-                  here
-                </a>
-                .{" "}
-              </li>
-              <li>
-                The cool 90s graphics are from{" "}
-                <a
-                  href="https://www.vecteezy.com/vector-art/11739286-90s-80s-memphis-nostalgic-colorful-retro-objects-toys"
-                  target="_blank"
-                  className="underline decoration-primary"
-                >
-                  here
-                </a>
-                .{" "}
-              </li>
-            </ul>
-          </h2>
-        </div>
-      </div>
-    </div>
-  );
+					<h2 className="font-mono ml-2">
+						In allowing you to create mixtapes using multiple audio sources, I'm also addressing another
+						problem with the music NFT space. It's currently very easy to build a lovely collection of
+						songs, but not to easy to listen to them. Nobody wants to have to click play over and over as
+						you listen to songs from different contracts. This app is an example of how easy it is to mix
+						songs from different contracts, I'd be curious to see someone expand on it and pull in data from
+						hundreds of contracts.
+						<ul className="list-disc ml-5 mt-2">
+							<li>
+								A tutorial on how I built this can be found{" "}
+								<a
+									href="https://docs.bundlr.network/tutorials/mix-tape-dapp#mixtapejs"
+									target="_blank"
+									className="underline decoration-primary"
+								>
+									here
+								</a>
+								.{" "}
+							</li>
+							<li>
+								The source code can be found here{" "}
+								<a
+									href="https://github.com/lukecd/blockmix"
+									target="_blank"
+									className="underline decoration-primary"
+								>
+									here
+								</a>
+								.{" "}
+							</li>
+							<li>
+								The cool 90s graphics are from{" "}
+								<a
+									href="https://www.vecteezy.com/vector-art/11739286-90s-80s-memphis-nostalgic-colorful-retro-objects-toys"
+									target="_blank"
+									className="underline decoration-primary"
+								>
+									here
+								</a>
+								.{" "}
+							</li>
+						</ul>
+					</h2>
+				</div>
+			</div>
+		</div>
+	);
 };
 
 export default How;

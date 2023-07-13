@@ -175,9 +175,8 @@ export const getBundlr = async () => {
 Our Edit Profile UI has an option to fund a Bundlr node to pay for uploads, the utility function `bundlr.getLoadedBalance()` will be called to get the current funded balance. Note that node balances are recorded in atomic units, a number format that increases accuracy when doing floating point math in JavaScript. To make things easier to understand, this function converts the atomic balance into an easy-to-read format before returning it.
 
 <Callout type="info" emoji="ℹ️">
-	Since Lens runs on the Polygon blockchain, we'll pay Bundlr upload fees in MUMBAI
-	MATIC during this tutorial. However, you are welcome to pay in any of the [14
-	supported tokens.](/overview/supported-tokens)
+	Since Lens runs on the Polygon blockchain, we'll pay Bundlr upload fees in MUMBAI MATIC during this tutorial.
+	However, you are welcome to pay in any of the [14 supported tokens.](/overview/supported-tokens)
 </Callout>
 
 ```js showLineNumbers copy filename="utils/get-balance-matic.js"
@@ -342,10 +341,9 @@ Lens works in conjunction with the [WAGMI](https://wagmi.sh/) hooks for React wh
 Let's first take a look at how we're setting up Lens. Pretty much everything here is boilerplate, two things to pay attention to are the environment and sources parameters. The first, `environment`, is where we specify we're on the testnet, not the mainnet, and then `sources` is where we specify our unique application id. By setting a unique application id here, we make sure that feed posts are limited to ones created by OnlyBundlr. If we left it out, we would end up showing a feed that pulled data from other apps too.
 
 <Callout type="info" emoji="ℹ️">
-	The use of the application id is a great example of how data is portable in Lens. You
-	could easily change that application id to that of an existing commercial Lens
-	application and build a new UI for it. This opens up new ways to compete and innovate,
-	anyone with an idea for a UI can build that and leverage existing data.
+	The use of the application id is a great example of how data is portable in Lens. You could easily change that
+	application id to that of an existing commercial Lens application and build a new UI for it. This opens up new ways
+	to compete and innovate, anyone with an idea for a UI can build that and leverage existing data.
 </Callout>
 
 ```js showLineNumbers copy
@@ -377,10 +375,7 @@ import ProfileFeedPage from "./pages/ProfileFeedPage";
 import EditProfilePage from "./pages/EditProfilePage";
 import CreatePublicationPage from "./pages/CreatePublicationPage";
 
-const { chains, provider, webSocketProvider } = configureChains(
-	[polygonMumbai],
-	[publicProvider()],
-);
+const { chains, provider, webSocketProvider } = configureChains([polygonMumbai], [publicProvider()]);
 const client = createClient({
 	autoConnect: true,
 	provider,
@@ -405,10 +400,7 @@ function App() {
 							<Route path="/home" element={<ContentFeedPage />} />
 							<Route path="/*" element={<ProfileFeedPage />} />
 							<Route path="/edit-profile" element={<EditProfilePage />} />
-							<Route
-								path="/create-publication"
-								element={<CreatePublicationPage />}
-							/>
+							<Route path="/create-publication" element={<CreatePublicationPage />} />
 						</Routes>
 					</BrowserRouter>
 					<RightNav />
@@ -434,8 +426,7 @@ React Hooks Used
 The first step in using a dApp built on Lens is to login to Lens using an EVM wallet. This involves a simple wallet interaction where MetaMask will pop up and ask you to sign a message. There's no cost or gas fees to execute. In this component, we'll build that login functionality.
 
 <Callout type="info" emoji="ℹ️">
-	Lens supports all EVM-based wallets, in this tutorial we'll be using MetaMask, the
-	most popular.
+	Lens supports all EVM-based wallets, in this tutorial we'll be using MetaMask, the most popular.
 </Callout>
 
 We will wrap various components of our app with a check to see if the user is logged in and then show the login button if not. By abstracting much of the login logic into this component, we make it easy to put the button anywhere.
@@ -448,11 +439,7 @@ import { useAccount, useConnect, useDisconnect } from "wagmi";
 import { InjectedConnector } from "wagmi/connectors/injected";
 
 const LoginButton = () => {
-	const {
-		execute: login,
-		error: loginError,
-		isPending: isLoginPending,
-	} = useWalletLogin();
+	const { execute: login, error: loginError, isPending: isLoginPending } = useWalletLogin();
 
 	const { isConnected } = useAccount();
 	const { disconnectAsync } = useDisconnect();
@@ -505,12 +492,11 @@ React Hooks Used
 The profile switcher serves two roles. First, in a drop-down menu, it lists all active profiles, allowing you to switch between profiles by changing which is currently active. Second, given a "handle name" it lets you create a new handle. A status message is updated to show each step of the process.
 
 <Callout type="info" emoji="ℹ️">
-	As the main goal of this project is to teach about Bundlr and Lens, I've used very
-	verbose status messages throughout. Each step of backend interaction is documented in
-	the UI. This would probably be too verbose for a production release, but it helps you,
-	as a student, really understand each step. Components that need to show status
-	messages do so by setting a React state variable called `message`, which is then shown
-	in the UI. (`const [message, setMessage] = useState("");`)
+	As the main goal of this project is to teach about Bundlr and Lens, I've used very verbose status messages
+	throughout. Each step of backend interaction is documented in the UI. This would probably be too verbose for a
+	production release, but it helps you, as a student, really understand each step. Components that need to show status
+	messages do so by setting a React state variable called `message`, which is then shown in the UI. (`const [message,
+	setMessage] = useState("");`)
 </Callout>
 
 The Lens React hooks follow a pattern where hooks focused on reading data return a variable called `data` containing the data read. The hooks also return a boolean value `loading` used to track if the data has loaded yet. All data is loaded asynchronously, which means it's possible some page elements will load before the data has been returned. To avoid errors, our UI will check the value of the `loading` variable before trying to access the data.
@@ -524,12 +510,7 @@ Let's look at how we manage existing profiles first. The first hook, `useProfile
 To swap between existing profiles, we pass the `id` of the desired profile to the `execute` function pointer returned by `useActiveProfileSwitch`.
 
 ```js showLineNumbers copy
-const {
-	data: profiles,
-	loading: profilesLoading,
-	hasMore,
-	next,
-} = useProfilesOwnedByMe();
+const { data: profiles, loading: profilesLoading, hasMore, next } = useProfilesOwnedByMe();
 const { data: activeProfile, loading: activeProfileLoading } = useActiveProfile();
 const { execute: switchProfile, isPending } = useActiveProfileSwitch();
 ```
@@ -560,24 +541,14 @@ Here's the full code for the component:
 ```js showLineNumbers copy filename="components/ProfileSwitcher.js"
 import React, { useState, useEffect } from "react";
 
-import {
-	useActiveProfile,
-	useCreateProfile,
-	useProfilesOwnedByMe,
-	useActiveProfileSwitch,
-} from "@lens-protocol/react";
+import { useActiveProfile, useCreateProfile, useProfilesOwnedByMe, useActiveProfileSwitch } from "@lens-protocol/react";
 
 const ProfileSwitcher = ({ showCreateNew }) => {
 	const [message, setMessage] = useState("");
 	const [txActive, setTxActive] = useState(false);
 	const [createProfileMode, setCreateProfileMode] = useState(false);
 	const [newProfileHandle, setNewProfileHandle] = useState("");
-	const {
-		data: profiles,
-		loading: profilesLoading,
-		hasMore,
-		next,
-	} = useProfilesOwnedByMe();
+	const { data: profiles, loading: profilesLoading, hasMore, next } = useProfilesOwnedByMe();
 	const { data: activeProfile, loading: activeProfileLoading } = useActiveProfile();
 	const { execute: switchProfile, isPending } = useActiveProfileSwitch();
 
@@ -624,12 +595,7 @@ const ProfileSwitcher = ({ showCreateNew }) => {
 							>
 								{profiles &&
 									profiles
-										?.filter(
-											(a, i) =>
-												profiles?.findIndex(
-													(s) => a.id === s.id,
-												) === i,
-										)
+										?.filter((a, i) => profiles?.findIndex((s) => a.id === s.id) === i)
 										.map((profile) => (
 											<option key={profile.id} value={profile.id}>
 												{profile.handle}
@@ -893,11 +859,7 @@ const EditProfileDetails = ({ profile }) => {
 	const [chargeCurrency, setChargeCurrency] = useState(0);
 	const [fileToUpload, setFileToUpload] = useState();
 	const [fileType, setFileType] = useState();
-	const {
-		data: currencies,
-		error: currenciesError,
-		loading: currenciesLoading,
-	} = useCurrencies();
+	const { data: currencies, error: currenciesError, loading: currenciesLoading } = useCurrencies();
 
 	const {
 		execute: update,
@@ -1007,9 +969,7 @@ const EditProfileDetails = ({ profile }) => {
 	return (
 		<div className="w-[600px] mt-2 flex flex-col bg-primary px-1 py-1 rounded-lg">
 			<div className="ml-2">
-				<label className="font-main block uppercase text-xs font-bold mb-2">
-					Personal Information
-				</label>
+				<label className="font-main block uppercase text-xs font-bold mb-2">Personal Information</label>
 				<label className="font-main block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
 					Name
 				</label>
@@ -1073,19 +1033,11 @@ const EditProfileDetails = ({ profile }) => {
 				</div>
 			</div>
 			<div className="w-full mt-10 flex flex-col  bg-primary px-1 py-1 rounded-lg">
-				<label className="font-main block uppercase text-xs font-bold mb-2">
-					Cover Picture
-				</label>
+				<label className="font-main block uppercase text-xs font-bold mb-2">Cover Picture</label>
 				{profile?.coverPicture && !fileToUpload && (
-					<img
-						width="600"
-						src={profile.coverPicture?.original?.url}
-						alt="profile-pic"
-					/>
+					<img width="600" src={profile.coverPicture?.original?.url} alt="profile-pic" />
 				)}
-				{fileToUpload && (
-					<img src={URL.createObjectURL(fileToUpload)} alt="profile_pic" />
-				)}
+				{fileToUpload && <img src={URL.createObjectURL(fileToUpload)} alt="profile_pic" />}
 				<div className="flex flex-row justify-start px-2 py-1 ">
 					<input
 						type="file"
@@ -1123,12 +1075,11 @@ React hooks used:
 <img src="/img/quests/onlybundlr/ProfilePicUpload.png" width="60%" />
 
 <Callout type="info" emoji="ℹ️">
-	At this point in the quest, you should understand how to use our utility functions to
-	save data to Bundlr, how to read and write Lens data using the Lens React hooks and
-	how to wire our `upload` function pointer into different React hooks. As we're
-	repeating similar actions with different hooks, we'll assume you know the basics and
-	skip over some of the explanations given earlier. If you are struggling to understand
-	anything so far, I recommend you go back and re-read everything before continuing.
+	At this point in the quest, you should understand how to use our utility functions to save data to Bundlr, how to
+	read and write Lens data using the Lens React hooks and how to wire our `upload` function pointer into different
+	React hooks. As we're repeating similar actions with different hooks, we'll assume you know the basics and skip over
+	some of the explanations given earlier. If you are struggling to understand anything so far, I recommend you go back
+	and re-read everything before continuing.
 </Callout>
 
 In `EditProfilePicture` we use the `useUpdateProfileImage` Lens React hook. At setup, we pass in a reference to the active profile and then we're returned a pointer to a function we can call to update the profile image.
@@ -1201,15 +1152,11 @@ const EditProfilePicture = ({ profile }) => {
 
 	return (
 		<div className="w-[600px] mt-10 flex flex-col  bg-primary px-1 py-1 rounded-lg mb-10">
-			<label className="font-main block uppercase text-xs font-bold mb-2">
-				Profile Picture
-			</label>
+			<label className="font-main block uppercase text-xs font-bold mb-2">Profile Picture</label>
 			{profile?.picture && !fileToUpload && (
 				<img width="600" src={profile.picture?.original.url} alt="profile_pic" />
 			)}
-			{fileToUpload && (
-				<img src={URL.createObjectURL(fileToUpload)} alt="profile_pic" />
-			)}
+			{fileToUpload && <img src={URL.createObjectURL(fileToUpload)} alt="profile_pic" />}
 			<div className="flex flex-row justify-start px-2 py-1 ">
 				<input
 					type="file"
@@ -1292,10 +1239,7 @@ const SuggestedProfile = ({ handle }) => {
 					)}
 
 					<h2 className="ml-2 self-center">
-						<a
-							className="font-main underline decoration-contast"
-							href={"/" + handle}
-						>
+						<a className="font-main underline decoration-contast" href={"/" + handle}>
 							{handle}
 						</a>
 					</h2>
@@ -1351,17 +1295,10 @@ const RightNav = () => {
 						<SiSpringCreators /> OnlyBundlr
 					</div>
 
-					<h1 className="font-main bg-primary rounded-xl pl-1">
-						Suggested Profiles
-					</h1>
+					<h1 className="font-main bg-primary rounded-xl pl-1">Suggested Profiles</h1>
 					<div className="flex flex-col">
 						{suggestedProfileHandles.map((suggestedProfileHandle, id) => {
-							return (
-								<SuggestedProfile
-									key={id}
-									handle={suggestedProfileHandle}
-								/>
-							);
+							return <SuggestedProfile key={id} handle={suggestedProfileHandle} />;
 						})}
 					</div>
 				</>
@@ -1401,23 +1338,14 @@ const Publication = ({ id, content, description, media, publisher }) => {
 					alt={publisher.handle}
 				/>
 				<h2 className="ml-2 self-center font-main text-bold">
-					<a
-						className="underline decoration-contast"
-						href={"/" + publisher.handle}
-					>
+					<a className="underline decoration-contast" href={"/" + publisher.handle}>
 						{publisher.handle}
 					</a>
 				</h2>
 			</div>
 			{media &&
 				media.map((picture, id) => {
-					return (
-						<img
-							width="600"
-							className="bg-primary px-1 py-1 rounded-xl"
-							src={picture.original?.url}
-						/>
-					);
+					return <img width="600" className="bg-primary px-1 py-1 rounded-xl" src={picture.original?.url} />;
 				})}
 			<h2 className="ml-2 font-main">{content}</h2>
 			<p className="ml-2 font-main">{description}</p>
@@ -1437,20 +1365,14 @@ React hooks used:
 The `PublicationFeed` component loads all publications for a given profile and then renders each one as a unique `Publication` component. You'll notice when calling the `usePublications` hook, we pass in a profile id and not a full profile object. This is something to watch out for when using the Lens React hooks as some hooks expect an id, and some expect the full object.
 
 ```js showLineNumbers copy filename="components/PublicationFeed.js"
-const {
-	data: publications,
-	error,
-	loading,
-	hasMore,
-} = usePublications({ profileId: profile.id });
+const { data: publications, error, loading, hasMore } = usePublications({ profileId: profile.id });
 ```
 
 <Callout type="info" emoji="ℹ️">
-	To help simplify this quest, I haven't implemented pagination of posts. I just load
-	all of a profile's posts and render them to the screen. Obviously, this would get
-	unwieldy if a profile has hundreds of posts, when you're coding it yourself, try
-	[looking at the documentation](https://docs.lens.xyz/docs/use-publications) and adding
-	pagination in as a bonus feature.
+	To help simplify this quest, I haven't implemented pagination of posts. I just load all of a profile's posts and
+	render them to the screen. Obviously, this would get unwieldy if a profile has hundreds of posts, when you're coding
+	it yourself, try [looking at the documentation](https://docs.lens.xyz/docs/use-publications) and adding pagination
+	in as a bonus feature.
 </Callout>
 
 Here's the full code for the component:
@@ -1461,12 +1383,7 @@ import Publication from "../components/Publication";
 import { usePublications } from "@lens-protocol/react";
 
 const PublicationFeed = ({ profile }) => {
-	const {
-		data: publications,
-		error,
-		loading,
-		hasMore,
-	} = usePublications({ profileId: profile.id });
+	const { data: publications, error, loading, hasMore } = usePublications({ profileId: profile.id });
 
 	return (
 		<div className="flex flex-col">
@@ -1507,12 +1424,10 @@ In this section, we'll build a main feed showing posts from ALL profiles you sub
 This page uses the [`useFeed`](https://docs.lens.xyz/docs/use-feed) Lens React hook which is new to us so far. Remember how a single Lens profile can interact with multiple dApps built on Lens, right? All publications made by a profile are tied back to that profile, which means your OnlyBundlr publications, Lenster publications, and LensTube publications all tie back to the same account. When we set up Lens in our `App.js`, we set an application id in the configuration of "onlybundlr". What's really cool here is the `useFeed` hook automatically picks up that value and generates a feed of only that application id.
 
 <Callout type="info" emoji="ℹ️">
-	This, again is where you see the magic of Lens. You could modify this project's code
-	to pull publications from a totally different application. Maybe you want to build a
-	Lens app that pulls data from multiple publications. Or you could redo the UI of an
-	existing Lens dApp to have a new feature only you imagined. Or you could create a UI
-	for an existing Lens dApp with support for your country's spoken language. You're only
-	limited by your creativity!
+	This, again is where you see the magic of Lens. You could modify this project's code to pull publications from a
+	totally different application. Maybe you want to build a Lens app that pulls data from multiple publications. Or you
+	could redo the UI of an existing Lens dApp to have a new feature only you imagined. Or you could create a UI for an
+	existing Lens dApp with support for your country's spoken language. You're only limited by your creativity!
 </Callout>
 
 Once the feed is loaded, we pull out the data and pass to the `Publication` component we built previously and render the page.
@@ -1545,9 +1460,7 @@ const ContentFeedPage = () => {
 		<div className="flex flex-col w-3/6 bg-background px-5">
 			{!isConnected && (
 				<div className="object-center self-center mt-5">
-					<span className="flex flex-row justify-start font-logo text-2xl mb-3">
-						Welcome to:
-					</span>
+					<span className="flex flex-row justify-start font-logo text-2xl mb-3">Welcome to:</span>
 					<div className="flex flex-row justify-center font-logo text-6xl mb-3">
 						<SiSpringCreators /> OnlyBundlr
 					</div>
@@ -1648,12 +1561,7 @@ Here's the full code for the component:
 import React, { useState, useEffect } from "react";
 import { upload } from "../utils/upload";
 import { uploadImage } from "../utils/upload-image";
-import {
-	ContentFocus,
-	CollectPolicyType,
-	ReferencePolicyType,
-	useCreatePost,
-} from "@lens-protocol/react";
+import { ContentFocus, CollectPolicyType, ReferencePolicyType, useCreatePost } from "@lens-protocol/react";
 import ProfileSwitcher from "./ProfileSwitcher";
 
 const PublicationComposer = ({ publisher }) => {
@@ -1739,12 +1647,7 @@ const PublicationComposer = ({ publisher }) => {
 					Choose a photo and click post.
 				</label>
 				<div className="px-2 py-2 text-sm text-white rounded-lg bg-secondary">
-					{fileToUpload && (
-						<img
-							src={URL.createObjectURL(fileToUpload)}
-							alt="preview of publication image"
-						/>
-					)}
+					{fileToUpload && <img src={URL.createObjectURL(fileToUpload)} alt="preview of publication image" />}
 					<input
 						className={fileToUpload ? "mt-2" : ""}
 						type="file"

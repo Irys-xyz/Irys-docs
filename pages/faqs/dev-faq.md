@@ -64,11 +64,11 @@ No, but it is possible to pay for your client's uploads using Server-Side Signin
 
 ## Which Ethereum Testnet is supported on Devnet?
 
-Goerli.
+[Sepolia](https://sepoliafaucet.com/).
 
 ## Which other Testnets does Bundlr support in other chains on Devnet?
 
-Solana (devnet), GoerliEth, Matic, Fantom, BNB, Chainlink, Avalanche, Near, Algorand, arbEth, Aptos.
+Solana (devnet), Sepolia ETH, Matic, Fantom, BNB, Chainlink, Avalanche, Near, Algorand, arbEth, Aptos.
 
 ## Is it possible to use Bundlr to interact with contracts?
 
