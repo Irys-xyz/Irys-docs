@@ -1,0 +1,27 @@
+---
+description: Funds the node with the specified amount of tokens.
+---
+
+import { Callout } from "nextra-theme-docs";
+
+# `fund`
+
+Funds the [Irys node](/developer-docs/nodes) you connected to with the specified amount of tokens. Fund the node you intend to upload to, funded balances are not shared between nodes.
+
+**Required Parameters**
+
+<div className="-mt-6" />
+
+-   `-h`: The node to fund
+-   `-c`: The [currency](/overview/supported-tokens) to use when funding.
+-   `-w`: Your [private key](/developer-docs/cli#private-keys-for-funding-and-signing).
+
+## Example
+
+```console
+irys fund 1000000000000000 -h https://node1.bundlr.network -c matic -w bf20......c9885307
+```
+
+<Callout type="info" emoji="ℹ️">
+Not all calls to `fund` will post immediately to your account, some blockchains are faster than others. When funding with AR, it can take upwards of 40 minutes before the balance post. For MATIC, ETH and SOL, balances will usually post in < 10s.
+</Callout>

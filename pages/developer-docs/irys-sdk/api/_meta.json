@@ -1,0 +1,16 @@
+{
+	"fund": "fund()",
+	"withdrawBalance": "withdrawBalance()",
+	"getLoadedBalance": "getLoadedBalance()",
+	"getPrice": "getPrice()",
+	"provenance-upload": "provenance.upload()",
+	"provenance-uploadFile": "provenance.uploadFile()",
+	"provenance-uploadFolder": "provenance.uploadFolder()",
+	"upload": "upload()",
+	"uploadFile": "uploadFile()",
+	"uploadFolder": "uploadFolder()",
+	"utils-toAtomic": "utils.toAtomic()",
+	"utils-fromAtomic": "utils.fromAtomic()",
+	"utils-getReceipt": "utils.getReceipt()",
+	"utils-verifyReceipt": "utils.verifyReceipt()"
+}

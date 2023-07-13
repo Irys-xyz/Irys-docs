@@ -123,8 +123,26 @@ query getByTimestamp {
 }
 ```
 
+#### Timestamps
+
+Search by timestamps.
+
+```graphql
+query getByTimestamp {
+	transactions(timestamp: { from: 1688144401000, to: 1688317201000 }) {
+		edges {
+			node {
+				id
+			}
+		}
+	}
+}
+```
+
 <Callout type="info" emoji="ℹ️">
-Bundlr timestamps are accurate to the millisecond, so you need to provide a timestamp in millisecond format. You can convert from human-readable time to UNIX timestamp using websites like [Epoch101](https://www.epoch101.com/), be sure to convert in **millisecond** format not **second**.
+	Irys timestamps are accurate to the millisecond, so you need to provide a timestamp in millisecond format. You can
+	convert from human-readable time to UNIX timestamp using websites like [Epoch101](https://www.epoch101.com/), be
+	sure to convert in **millisecond** format not **second**.
 </Callout>
 
 #### Owners
@@ -372,13 +390,14 @@ Search for transactions matching the Arweave wallet address used when posting th
 
 ```graphql
 query getByOwners {
-  transactions(owners: ["M6w588ZkR8SVFdPkNXdBy4sqbMN0Y3F8ZJUWm2WCm8M"]) {
-    edges {
-      node {
-        id
-      }
-    }
-  }
+	transactions(owners: ["M6w588ZkR8SVFdPkNXdBy4sqbMN0Y3F8ZJUWm2WCm8M"]) {
+		edges {
+			node {
+				id
+			}
+		}
+	}
+
 }
 ```
 

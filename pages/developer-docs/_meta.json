@@ -1,10 +1,10 @@
 {
-	"quickstart": "Quickstart",
-	"sdk": "SDK",
+	"irys-sdk": "Irys SDK",
+	"query-sdk": "Query SDK",
 	"cli": "CLI",
+	"nodes": "Nodes",
 	"using-devnet": "Using Devnet",
 	"tags": "Tags",
 	"querying-downloading": "Querying & Downloading",
-	"graphql": "GraphQL",
-	"recipes": "Cut & Paste Code Recipes"
+	"graphql": "GraphQL"
 }

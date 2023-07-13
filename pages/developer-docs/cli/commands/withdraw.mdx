@@ -1,0 +1,27 @@
+---
+description: Funds the node with the specified amount of tokens.
+---
+
+import { Callout } from "nextra-theme-docs";
+
+# `withdraw`
+
+Withdraws funds from specified [Irys node](/developer-docs/nodes).
+
+**Required Parameters**
+
+<div className="-mt-6" />
+
+-   `-h`: The node to withdraw funds from
+-   `-c`: The [currency](/overview/supported-tokens) to withdraw.
+-   `-w`: Your [private key](/developer-docs/cli#private-keys-for-funding-and-signing).
+
+**Example**
+
+```console
+irys withdraw 1000000000000000 -h https://node1.bundlr.network -c matic -w bf20......c9885307
+```
+
+<Callout type="info" emoji="ℹ️">
+Not all calls to `withdraw` will post immediately to your account, some blockchains are faster than others. When funding with AR, it can take upwards of 40 minutes before the balance post. For MATIC, ETH and SOL, balances will usually post in < 10s.
+</Callout>

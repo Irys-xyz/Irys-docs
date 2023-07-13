@@ -4,5 +4,12 @@
 	"bundlr-sdk": "Learn The Bundlr SDK",
 	"react-components": "Build Bundlr React Components",
 	"mixtape-dapp": "Build a 90s-Style Mixtape dApp",
-	"graphql-explorer": "Build A GraphQL Explorer"
+	"graphql-explorer": "Build A GraphQL Explorer",
+	"react": "Using Bundlr With npx create-react-app",
+	"rainbowkit": "Using Bundlr With RainbowKit",
+	"lens": "Uploading Lens Metadata",
+	"uploading-static-sites": "Uploading Static Websites",
+	"uploading-nfts": "Uploading NFTs",
+	"gassless-uploading": "Gassless Uploading",
+	"livepeer": "Transcoding With Livepeer"
 }

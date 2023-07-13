@@ -1,11 +1,4 @@
 {
 	"installation": "Installation",
-	"usage": "Usage",
-	"setting-private-key": "Setting A Private Key",
-	"getting-node-balance": "Getting Node Balance",
-	"getting-upload-price": "Getting Upload Price",
-	"funding-a-node": "Funding A Node",
-	"withdrawing-funds": "Withdrawing Funds",
-	"uploading-a-file": "Uploading A File",
-	"uploading-a-folder": "Uploading A Folder"
+	"commands": "Commands"
 }

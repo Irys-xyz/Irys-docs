@@ -4,53 +4,57 @@ description: Tagging uploads with custom metadata.
 
 # Metadata Tagging
 
-Bundlr supports attaching metadata tags to each transaction.
+Irys supports attaching metadata tags to each transaction.
 
 Tags can be used to:
 
 -   Categorize transactions, making it easier to search for and retrieve relevant information using [GraphQL](/developer-docs/graphql)
--   Build provenance chains for [Proof Of Provenance](/overview/solutions/proof-of-provenance) applications
+-   Build provenance chains for [Strong Provenance](/learn/strong-provenance) applications
 -   Inform web browsers how to render image files
 
 ## Content-Type
 
-When uploading a file that will be rendered by the browser, you must specify the [content-type (MIME type).](https://developer.mozilla.org/en-US/Web/HTTP/Basics_of_HTTP/MIME_types/Common_types)
+The Irys CLI automatically infers and sets the appropriate [`Content-Type`](https://developer.mozilla.org/en-US/Web/HTTP/Basics_of_HTTP/MIME_types/Common_types) tag based on the file extension when uploading files and folders.
+
+If your use case necessitates manual Content-Type tag setting, you can specify it during the upload process. Doing so will override the default behavior and apply the `Content-Type` you provided.
 
 ```js
 // Your file
 const fileToUpload = "./myImage.png";
 
-// Add a custom tag that tells the browser how to properly render the file
+// Add a custom Content-Type tag
 const tags = [{ name: "Content-Type", value: "image/png" }];
 
 try {
-	const response = await bundlr.uploadFile(fileToUpload, tags);
+	const response = await irys.uploadFile(fileToUpload, { tags });
 	console.log(`File uploaded ==> https://arweave.net/${response.id}`);
 } catch (e) {
 	console.log("Error uploading file ", e);
 }
 ```
 
-## Application
+You can also add tags via the [CLI's](/developer-docs/cli) `-t` option, followed by a series of name / value pairs
 
-You can label your application name, which is helpful if you need to filter transactions by application.
+```console
+irys upload myImage.png -t tagName1 tagValue1 tagName2 tagValue2 -h https://node1.irys.xyz -c matic -w bf20......c9885307
+```
+
+## Additional Uses
+
+There are no limits on the number of tags you can append to your files or folders. You're free to add as many tags as you wish, enabling the construction of semi-relational models within your data.
+
+A popular practice involves creating an `application-id tag`, this tag helps segregate your uploads from others.
 
 ```js
 // Your file
 const fileToUpload = "./myNFT.png";
 
-const tags = [
-	{ name: "Content-Type", value: "image/png" },
-	{ name: "appName", value: "NFTs To The Moon" },
-];
+const tags = [{ name: "application-id", value: "NFTs To The Moon" }];
+
 try {
-	const response = await bundlr.uploadFile(fileToUpload, tags);
+	const response = await irys.uploadFile(fileToUpload, { tags });
 	console.log(`File uploaded ==> https://arweave.net/${response.id}`);
 } catch (e) {
 	console.log("Error uploading file ", e);
 }
 ```
-
-## Custom
-
-You can use any custom tags your use case requires.

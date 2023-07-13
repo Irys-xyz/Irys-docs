@@ -1,0 +1,427 @@
+---
+description: Use Tagging And GraphQL To Build A Provenance Chain
+---
+
+# Build A Provenance Chain
+
+This recipe guides you through building a provenance chain. If the topics of [provenance](/terminology#data-provenance) and [provenance chain](/terminology#provenance-chain) are new to you, start with [Strong Provenance](/learn/strong-provenance).
+
+In this tutorial, you will:
+
+1. Construct a provenance chain that models “updates” to a text string
+2. Use the Irys Query SDK to extract the complete provenance chain
+3. Use GraphQL to extract the complete provenance chain
+
+<img className="border border-[#FEF4EE] rounded mt-5 w-5/6" src="/img/recipes/provenance-chain-recipe.png" />
+
+## Setup
+
+Start by [installing our SDK](/developer-docs/sdk/installing-the-sdk), setting up your imports, and creating a helper function that returns a reference to a configured Irys object.
+
+```js
+import Bundlr from "@bundlr-network/client";
+import fetch from "node-fetch";
+import dotenv from "dotenv";
+dotenv.config();
+
+// Returns a reference to a Bundlr node
+const getBundlr = async () => {
+	const privateKey = process.env.PRIVATE_KEY;
+	const bundlr = new Bundlr("http://devnet.bundlr.network", "matic", privateKey, {
+		providerUrl: "https://rpc-mumbai.maticvigil.com",
+	});
+	return bundlr;
+};
+```
+
+## Storing The Root Asset
+
+Create a function that stores your root transaction. In the interest of simplicity, we will use text strings in this recipe. We upload with the function [`bundlr.uploadWithReceipt()`](/developer-docs/sdk/api/uploadWithReceipt) which returns a cryptographically signed receipt containing a timestamp accurate to the millisecond of when the upload happened.
+
+```js
+// Stores the root transaction and returns the transaction id
+const storeRoot = async (myData) => {
+	const bundlr = await getBundlr();
+	const tags = [{ name: "Content-Type", value: "text/plain" }];
+
+	const tx = await bundlr.uploadWithReceipt(myData, { tags });
+	return tx.id;
+};
+```
+
+## Storing Updates
+
+Next, create a function that stores “updates”. This is similar to the above function, the only difference is it adds a new tag called `root-tx` that ties back each update to the root transaction.
+
+```js
+// Stores an "update" to the root transaction by creating
+// a new transaction and tying it back to the original using
+// the "root-id" metatag.
+const storeUpdate = async (rootTxId, myData) => {
+	const bundlr = await getBundlr();
+
+	const tags = [
+		{ name: "Content-Type", value: "text/plain" },
+		{ name: "root-tx", value: rootTxId },
+	];
+
+	const tx = await bundlr.uploadWithReceipt(myData, { tags });
+	return tx.id;
+};
+```
+
+## GraphQL Queries
+
+We'll employ two GraphQL queries to identify the transaction IDs and timestamps for each component in our provenance chain. The initial query fetches the timestamp for the root transaction, while the subsequent query retrieves all transaction IDs and timestamps for the updates.
+
+We'll examine the GraphQL queries first and then look at how to call them from JavaScript. You can experiment with these queries [by accessing our GraphQL sandbox](/developer-docs/graphql#endpoints).
+
+### Root Transaction Timestamp
+
+For the root transaction, we'll retrieve the timestamp from when it was uploaded. This provides a baseline for our provenance chain, as all subsequent updates will possess timestamps that follow this initial one.
+
+```graphql
+query getByIds {
+	transactions(ids: ["bVIWFJNYmw8cg9GkiPsP4VBI3eG9nok7kON1MOdMEt0"]) {
+		edges {
+			node {
+				timestamp
+			}
+		}
+	}
+}
+```
+
+### Update Transaction IDs and Timestamps
+
+The second query retrieves all following transactions and arranges them chronologically according to their timestamps, thus establishing the correct time sequence.
+
+```graphql
+query getProvenanceChain {
+	transactions(tags: [{ name: "root-tx", values: ["bVIWFJNYmw8cg9GkiPsP4VBI3eG9nok7kON1MOdMEt0"] }], order: ASC) {
+		edges {
+			node {
+				id
+				timestamp
+			}
+		}
+	}
+}
+```
+
+## Query Functions
+
+This recipe uses the HTTP fetch library to interact with our GraphQL endpoint due to its simplicity. However, if your application demands a more robust solution, consider replacing it with a comprehensive GraphQL client like [Apollo.](https://www.apollographql.com/)
+
+### Root Timestamp And Data
+
+Use GraphQL to query for the timestamp of the root transaction, then fetch the data payload. Create a JavaScript object holding both and return it embedded in an array.
+
+```js
+// Gets the timestamp of the root transaction
+const getRootTx = async (rootTxId) => {
+	// First query for the timestamp of the root transaction
+
+	const query = `query getByIds {
+						transactions(ids: ["${rootTxId}"]) {
+							edges {
+								node {
+									timestamp
+								}
+							}
+						}
+				   }`;
+
+	const url = "https://devnet.bundlr.network/graphql";
+	const options = {
+		method: "POST",
+		headers: { "Content-Type": "application/json" },
+		body: JSON.stringify({ query }),
+	};
+
+	// Send the request and return  the response
+	const response = await fetch(url, options);
+	const data = await response.json();
+	const provenanceChain = data.data.transactions.edges;
+	const provenanceChainData = [];
+
+	for (const item of provenanceChain) {
+		const id = item.node.id;
+		const unixTimestamp = item.node.timestamp;
+		const date = new Date(unixTimestamp);
+		const humanReadable = dateToHumanReadable(date);
+
+		const url = `https://arweave.net/${rootTxId}`;
+		const response = await fetch(url);
+		const data = await response.text();
+
+		const provenanceEntry = { Date: humanReadable, Data: data };
+		provenanceChainData.push(provenanceEntry);
+	}
+
+	return provenanceChainData;
+};
+```
+
+### Update Timestamps And Data
+
+Then query for all transaction IDs and timestamps in the update chain, fetch the associated data payloads and return them as an array of objects.
+
+```js
+// Query for all transactions tagged as having a root-tx matching ours
+// You could optionally expand on this by querying for the `owner` value
+// and making sure it matches the wallet address used to upload
+// the original transactions.
+const getProveanceChain = async (rootTxId) => {
+	const query = `
+	query getProvenanceChain{
+		transactions(tags: [{ name: "root-tx", values: ["${rootTxId}"] }], order: ASC) {
+			edges {
+				node {
+					id
+					timestamp
+				}
+			}
+		}
+	}`;
+
+	// Define the URL of your GraphQL server
+	const url = "https://devnet.bundlr.network/graphql";
+
+	// Define the options for the fetch request
+	const options = {
+		method: "POST",
+		headers: { "Content-Type": "application/json" },
+		body: JSON.stringify({ query }),
+	};
+
+	// Send the request and return  the response
+	const response = await fetch(url, options);
+	const data = await response.json();
+	const provenanceChain = data.data.transactions.edges;
+	const provenanceChainData = [];
+
+	for (const item of provenanceChain) {
+		const id = item.node.id;
+		const unixTimestamp = item.node.timestamp;
+		const date = new Date(unixTimestamp);
+		const humanReadable = dateToHumanReadable(date);
+
+		const url = `https://arweave.net/${id}`;
+		const response = await fetch(url);
+		const data = await response.text();
+
+		const provenanceEntry = { Date: humanReadable, Data: data };
+		provenanceChainData.push(provenanceEntry);
+	}
+	return provenanceChainData;
+};
+```
+
+## Creating The Chain
+
+To create the full chain, first request the root data, then the update data. Concatenate both arrays together and output using the `console.table()` function.
+
+```js
+// Print the full provenance chain in a table
+const printProveanceChain = async (rootTxId) => {
+	const provenanceChainData = await getRootTx(rootTxId);
+	provenanceChainData.push(...(await getProveanceChain(rootTxId)));
+	console.table(provenanceChainData);
+};
+```
+
+## Calling The Functions
+
+This is an example of calling the functions first with “Hello World” and then with updates that translate it into different languages.
+
+```js
+// Create a provenance chain showing "Hello World" changing from one language to the next
+const rootId = await storeRoot("Hello World");
+await storeUpdate(rootId, "Hola Mundo"); // Spanish
+await storeUpdate(rootId, "Olá Mundo"); // Portuguese
+await storeUpdate(rootId, "こんにちは世界"); // Japanese
+await storeUpdate(rootId, "สวัสดีชาวโลก"); // Thai
+await storeUpdate(rootId, "GM"); // Web3
+console.log(`Provenance Chain Stored: rootId=${rootId}`);
+
+// And then print out the full provenance chain
+await printProveanceChain(rootId);
+```
+
+When run, the code will output something similar to this.
+
+<img className="border border-[#FEF4EE] rounded mt-5 w-5/6" src="/img/recipes/provenance-chain-output.png" />
+
+## Full Code
+
+For ease of implementation, the full code for this recipe is as follows.
+
+```js
+import Bundlr from "@bundlr-network/client";
+import fetch from "node-fetch";
+import dotenv from "dotenv";
+dotenv.config();
+
+// Returns a reference to a Bundlr node
+const getBundlr = async () => {
+	const privateKey = process.env.PRIVATE_KEY;
+	const bundlr = new Bundlr.default("http://devnet.bundlr.network", "matic", privateKey, {
+		providerUrl: "https://rpc-mumbai.maticvigil.com",
+	});
+	return bundlr;
+};
+
+// Stores the root transaction and returns the transaction id
+const storeRoot = async (myData) => {
+	const bundlr = await getBundlr();
+	const tags = [{ name: "Content-Type", value: "text/plain" }];
+
+	const tx = await bundlr.uploadWithReceipt(myData, { tags });
+	return tx.id;
+};
+
+// Stores an "update" to the root transaction by creating
+// a new transaction and tying it back to the original using
+// the "root-id" metatag.
+const storeUpdate = async (rootTxId, myData) => {
+	const bundlr = await getBundlr();
+
+	const tags = [
+		{ name: "Content-Type", value: "text/plain" },
+		{ name: "root-tx", value: rootTxId },
+	];
+
+	const tx = await bundlr.uploadWithReceipt(myData, { tags });
+	return tx.id;
+};
+
+// Helper function, takes a Date object and returns a human readable string
+// showing date, month, year and time accurate to the millisecond
+const dateToHumanReadable = (date) => {
+	const options = {
+		year: "numeric",
+		month: "2-digit",
+		day: "2-digit",
+		hour: "2-digit",
+		minute: "2-digit",
+		second: "2-digit",
+		fractionalSecondDigits: 3, // milliseconds
+	};
+
+	// Pass "undefined" to force the default local to be used for formatting
+	return date.toLocaleString(undefined, options);
+};
+
+// Gets the timestamp of the root transaction
+const getRootTx = async (rootTxId) => {
+	// First query for the timestamp of the root transaction
+	const query = `
+	query getByIds {
+		transactions(ids:["${rootTxId}"]) {
+			edges {
+				node {
+					timestamp
+				}
+			}
+		}
+	}`;
+
+	const url = "https://devnet.bundlr.network/graphql";
+	const options = {
+		method: "POST",
+		headers: { "Content-Type": "application/json" },
+		body: JSON.stringify({ query }),
+	};
+
+	// Send the request and return  the response
+	const response = await fetch(url, options);
+	const data = await response.json();
+	const provenanceChain = data.data.transactions.edges;
+	const provenanceChainData = [];
+
+	for (const item of provenanceChain) {
+		const id = item.node.id;
+		const unixTimestamp = item.node.timestamp;
+		const date = new Date(unixTimestamp);
+		const humanReadable = dateToHumanReadable(date);
+
+		const url = `https://arweave.net/${rootTxId}`;
+		const response = await fetch(url);
+		const data = await response.text();
+
+		const provenanceEntry = { Date: humanReadable, Data: data };
+		provenanceChainData.push(provenanceEntry);
+	}
+
+	return provenanceChainData;
+};
+
+// Query for all transactions tagged as having a root-tx matching ours
+// You could optionally expand on this by querying for the `owner` value
+// and making sure it matches the wallet address used to upload
+// the original transactions.
+const getProveanceChain = async (rootTxId) => {
+	const query = `
+	query getProvenanceChain{
+		transactions(tags: [{ name: "root-tx", values: ["${rootTxId}"] }], order: ASC) {
+			edges {
+				node {
+					id
+					timestamp
+				}
+			}
+		}
+	}`;
+
+	// Define the URL of your GraphQL server
+	const url = "https://devnet.bundlr.network/graphql";
+
+	// Define the options for the fetch request
+	const options = {
+		method: "POST",
+		headers: { "Content-Type": "application/json" },
+		body: JSON.stringify({ query }),
+	};
+
+	// Send the request and return  the response
+	const response = await fetch(url, options);
+	const data = await response.json();
+	const provenanceChain = data.data.transactions.edges;
+	const provenanceChainData = [];
+
+	for (const item of provenanceChain) {
+		const id = item.node.id;
+		const unixTimestamp = item.node.timestamp;
+		const date = new Date(unixTimestamp);
+		const humanReadable = dateToHumanReadable(date);
+
+		const url = `https://arweave.net/${id}`;
+		const response = await fetch(url);
+		const data = await response.text();
+
+		const provenanceEntry = { Date: humanReadable, Data: data };
+		provenanceChainData.push(provenanceEntry);
+	}
+	return provenanceChainData;
+};
+
+// Print the full provenance chain in a table
+const printProveanceChain = async (rootTxId) => {
+	const provenanceChainData = await getRootTx(rootTxId);
+	provenanceChainData.push(...(await getProveanceChain(rootTxId)));
+	console.table(provenanceChainData);
+};
+
+// Create a provenance chain showing "Hello World" changing from one language to the next
+const rootId = await storeRoot("Hello World");
+await storeUpdate(rootId, "Hola Mundo"); // Spanish
+await storeUpdate(rootId, "Olá Mundo"); // Portuguese
+await storeUpdate(rootId, "こんにちは世界"); // Japanese
+await storeUpdate(rootId, "สวัสดีชาวโลก"); // Thai
+await storeUpdate(rootId, "GM"); // Web3
+console.log(`Provenance Chain Stored: rootId=${rootId}`);
+
+// And then print out the full provenance chain
+await printProveanceChain(rootId);
+```
