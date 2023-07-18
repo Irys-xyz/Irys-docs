@@ -4,9 +4,7 @@ description: Using Livepeer to transcode video stored on Arweave
 
 # Using Livepeer To Transcode Video
 
-Livepeer is a decentralized video protocol for transcoding video content. For projects involving both live and recorded video, Livepeer combined with Bundlr allows you to optimize video delivery for each unique client.
-
-We also have a full working demo of this code in our [WebBundlr Basics project](https://webbundlr-basics.vercel.app/livepeer) and in [the associated GitHub repo.](https://github.com/Bundlr-Network/webbundlr-basics/)
+Livepeer is a decentralized video protocol for transcoding video content. For projects involving both live and recorded video, Livepeer combined with Irys allows you to optimize video delivery for each unique client.
 
 ## Transcoding
 
@@ -24,12 +22,12 @@ npm @livepeer/react
 
 ## Transcoding A Video Stored On Arweave
 
-Video files can be uploaded to Arweave via Bundlr using our [CLI,](/developer-docs/cli/installation) [SDK](/developer-docs/sdk) or any of our [web-based uploaders.](https://demo.bundlr.network/)
+Video files can be uploaded to Arweave via Irys using our [CLI,](/developer-docs/cli) or [SDK](/developer-docs/irys-sdk).
 
 Using the `<Player>` tag from the Livepeer SDK you can embed an Arweave URL, the URL format can be either `ar://aqvPK_xi-EDcmAHPAPpDcaYyGekp-06T16ElvNTnJNk` or `https://arweave.net/aqvPK_xi-EDcmAHPAPpDcaYyGekp-06T16ElvNTnJNk`. The first time Livepeer encounters the URL it will transcode the file, the transcoded versions are then stored in an account tied to your API key. Transcoded files are kept for as long as your account is active.
 
 ```js
-<Player title="Bundlr SDK For NodeJs" src="ar://aqvPK_xi-EDcmAHPAPpDcaYyGekp-06T16ElvNTnJNk" autoPlay muted />
+<Player title="Irys SDK For NodeJS" src="ar://aqvPK_xi-EDcmAHPAPpDcaYyGekp-06T16ElvNTnJNk" autoPlay muted />
 ```
 
 In order to properly transcode your video, the `<Player>` component must have access to a Livepeer client that contains a valid API key. Best practice is to use the provider pattern and the `<LivepeerConfig>` component.
