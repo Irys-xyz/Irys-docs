@@ -4,7 +4,7 @@ description: Use Tagging And GraphQL To Build A Provenance Chain
 
 # Build A Provenance Chain
 
-This recipe guides you through building a provenance chain. If the topics of [provenance](/terminology#data-provenance) and [provenance chain](/terminology#provenance-chain) are new to you, start with [Strong Provenance](/learn/strong-provenance).
+This tutorial guides you through building a provenance chain. If the topics of [provenance](/terminology#data-provenance) and [provenance chain](/terminology#provenance-chain) are new to you, start with [Strong Provenance](/learn/strong-provenance).
 
 In this tutorial, you will:
 
@@ -16,35 +16,43 @@ In this tutorial, you will:
 
 ## Setup
 
-Start by [installing our SDK](/developer-docs/sdk/installing-the-sdk), setting up your imports, and creating a helper function that returns a reference to a configured Irys object.
+Start by [installing the Irys SDK](/developer-docs/irys-sdk/installing-the-sdk), and the [Query SDK](/developer-docs/query-sdk/installing-the-sdk), setting up your imports, and creating a helper function that returns a reference to a configured Irys object.
 
 ```js
-import Bundlr from "@bundlr-network/client";
+import Irys from "@irys/client/node";
 import fetch from "node-fetch";
 import dotenv from "dotenv";
+import Query from "@irys/query";
 dotenv.config();
 
-// Returns a reference to a Bundlr node
-const getBundlr = async () => {
-	const privateKey = process.env.PRIVATE_KEY;
-	const bundlr = new Bundlr("http://devnet.bundlr.network", "matic", privateKey, {
-		providerUrl: "https://rpc-mumbai.maticvigil.com",
+// Returns a reference to an Irys node
+const getIrys = async () => {
+	const url = "https://devnet.irys.xyz";
+	const providerUrl = "https://rpc-mumbai.maticvigil.com";
+	const currency = "matic";
+	const privateKey = process.env.ETH_PRIVATE_KEY;
+
+	const irys = new Irys({
+		url: url, // URL of the node you want to connect to
+		currency: currency, // Currency used for payment
+		key: privateKey, // ETH or SOL private key
+		config: { providerUrl: providerUrl }, // Optional provider URL, only required when using Devnet
 	});
-	return bundlr;
+	return irys;
 };
 ```
 
 ## Storing The Root Asset
 
-Create a function that stores your root transaction. In the interest of simplicity, we will use text strings in this recipe. We upload with the function [`bundlr.uploadWithReceipt()`](/developer-docs/sdk/api/uploadWithReceipt) which returns a cryptographically signed receipt containing a timestamp accurate to the millisecond of when the upload happened.
+Create a function that stores your root transaction. In the interest of simplicity, we will use text strings in this tutorial. We upload with the function [`irys.provenance.upload()`](/developer-docs/irys-sdk/api/provenance-upload) which returns a cryptographically signed receipt containing a timestamp accurate to the millisecond of when the upload happened.
 
 ```js
 // Stores the root transaction and returns the transaction id
 const storeRoot = async (myData) => {
-	const bundlr = await getBundlr();
+	const irys = await getIrys();
 	const tags = [{ name: "Content-Type", value: "text/plain" }];
 
-	const tx = await bundlr.uploadWithReceipt(myData, { tags });
+	const tx = await irys.upload(myData, { tags });
 	return tx.id;
 };
 ```
@@ -58,25 +66,116 @@ Next, create a function that stores “updates”. This is similar to the above 
 // a new transaction and tying it back to the original using
 // the "root-id" metatag.
 const storeUpdate = async (rootTxId, myData) => {
-	const bundlr = await getBundlr();
+	const irys = await getIrys();
 
 	const tags = [
 		{ name: "Content-Type", value: "text/plain" },
 		{ name: "root-tx", value: rootTxId },
 	];
 
-	const tx = await bundlr.uploadWithReceipt(myData, { tags });
+	const tx = await irys.provenance.upload(myData, { tags });
 	return tx.id;
 };
 ```
 
-## GraphQL Queries
+## Provenance Chains
+
+We'll construct the provenance chain using two methods: the [Query SDK](/hands-on/tutorials/provenance-chain#query-sdk-provenance-chain) and [GraphQL](/hands-on/tutorials/provenance-chain#graphql-provenance-chain). Both methods are equally performant, but the Query SDK significantly simplifies the process by abstracting the intricacies of GraphQL. You interact with the Query SDK using familiar JavaScript techniques, making it a much more straightforward approach.
+
+## Query SDK Provenance Chain
+
+Start by defining two functions. The first, `printProveanceChainSDK()` handles formatting the data and printing it using `console.table()`
+
+```js
+// Print the full provenance chain in a table
+const printProveanceChainSDK = async (rootTxId) => {
+	const provenanceChainData = await getProveanceChainSDK(rootTxId);
+	console.table(provenanceChainData);
+};
+```
+
+and the second `getProveanceChainSDK()` does the bulk of the work as it interacts with the Query SDK.
+
+The function starts by connecting to a new `Query` object and then searching for the transaction with our root transaction ID. Since we uploaded the provenance chain to the Irys Devnet node, we have to connect to the Devnet when setting up the `Query` object.
+
+```js
+const myQuery = new Query({ url: "https://devnet.irys.xyz/graphql" });
+
+// First, get the root TX
+const rootTx = await myQuery
+	.search("irys:transactions")
+	.ids([rootTxId]);
+```
+
+After extracting the data, we again return to the same `Query` object and this time search for transactions with the metadata tag named `root-tx` that has the same transaction ID as our root transaction.
+
+```js
+const chain = await myQuery
+	.search("irys:transactions")
+	.tags([{ name: "root-tx", values: [rootTxId] }]);
+```
+
+Here's the full function that includes all data parsing.
+
+```js
+// Query for all transactions tagged as having a root-tx matching ours
+// You could optionally expand on this by querying for the `owner` value
+// and making sure it matches the wallet address used to upload
+// the original transactions.
+const getProveanceChainSDK = async (rootTxId) => {
+	const provenanceChainData = [];
+
+	// Connect to a Query object
+	const myQuery = new Query({ url: "https://devnet.irys.xyz/graphql" });
+
+	// First, get the root TX
+	const rootTx = await myQuery
+		.search("irys:transactions")
+		.ids([rootTxId]);
+
+	// Extract the id and timestamp and download the data payload
+	if (rootTx) {
+		const unixTimestamp = rootTx[0].timestamp;
+		const date = new Date(unixTimestamp);
+		const humanReadable = dateToHumanReadable(date);
+
+		const url = `https://arweave.net/${rootTx[0].id}`;
+		const response = await fetch(url);
+		const data = await response.text();
+
+		const provenanceEntry = { Date: humanReadable, Data: data };
+		provenanceChainData.push(provenanceEntry);
+	}
+
+	// Now, get the provenance chain
+	const chain = await myQuery
+		.search("irys:transactions")
+		.tags([{ name: "root-tx", values: [rootTxId] }]);
+
+	// Iterate over entries
+	for (const item of chain) {
+		const unixTimestamp = item.timestamp;
+		const date = new Date(unixTimestamp);
+		const humanReadable = dateToHumanReadable(date);
+
+		const url = `https://arweave.net/${item.id}`;
+		const response = await fetch(url);
+		const data = await response.text();
+
+		const provenanceEntry = { Date: humanReadable, Data: data };
+		provenanceChainData.push(provenanceEntry);
+	}
+	return provenanceChainData;
+};
+```
+
+## GraphQL Provenance Chain
+
+For the GraphQL version, first we'll create and test the queries, and then look at how to call them from JavaScript. You can experiment with these queries [by accessing our GraphQL sandbox](/developer-docs/graphql#endpoints).
 
 We'll employ two GraphQL queries to identify the transaction IDs and timestamps for each component in our provenance chain. The initial query fetches the timestamp for the root transaction, while the subsequent query retrieves all transaction IDs and timestamps for the updates.
 
-We'll examine the GraphQL queries first and then look at how to call them from JavaScript. You can experiment with these queries [by accessing our GraphQL sandbox](/developer-docs/graphql#endpoints).
-
-### Root Transaction Timestamp
+### Root Transaction
 
 For the root transaction, we'll retrieve the timestamp from when it was uploaded. This provides a baseline for our provenance chain, as all subsequent updates will possess timestamps that follow this initial one.
 
@@ -92,7 +191,7 @@ query getByIds {
 }
 ```
 
-### Update Transaction IDs and Timestamps
+### Update Transactions
 
 The second query retrieves all following transactions and arranges them chronologically according to their timestamps, thus establishing the correct time sequence.
 
@@ -111,28 +210,28 @@ query getProvenanceChain {
 
 ## Query Functions
 
-This recipe uses the HTTP fetch library to interact with our GraphQL endpoint due to its simplicity. However, if your application demands a more robust solution, consider replacing it with a comprehensive GraphQL client like [Apollo.](https://www.apollographql.com/)
+This tutorial uses the HTTP fetch library to interact with our GraphQL endpoint due to its simplicity. However, if your application demands a more robust solution, consider replacing it with a comprehensive GraphQL client like [Apollo.](https://www.apollographql.com/)
 
-### Root Timestamp And Data
+### Root Transaction And Data
 
 Use GraphQL to query for the timestamp of the root transaction, then fetch the data payload. Create a JavaScript object holding both and return it embedded in an array.
 
 ```js
 // Gets the timestamp of the root transaction
-const getRootTx = async (rootTxId) => {
+const getRootTxGQL = async (rootTxId) => {
 	// First query for the timestamp of the root transaction
+	const query = `
+	query getByIds {
+		transactions(ids:["${rootTxId}"]) {
+			edges {
+				node {
+					timestamp
+				}
+			}
+		}
+	}`;
 
-	const query = `query getByIds {
-						transactions(ids: ["${rootTxId}"]) {
-							edges {
-								node {
-									timestamp
-								}
-							}
-						}
-				   }`;
-
-	const url = "https://devnet.bundlr.network/graphql";
+	const url = "https://devnet.irys.xyz/graphql";
 	const options = {
 		method: "POST",
 		headers: { "Content-Type": "application/json" },
@@ -163,7 +262,7 @@ const getRootTx = async (rootTxId) => {
 };
 ```
 
-### Update Timestamps And Data
+### Update Transaction And Data
 
 Then query for all transaction IDs and timestamps in the update chain, fetch the associated data payloads and return them as an array of objects.
 
@@ -172,7 +271,7 @@ Then query for all transaction IDs and timestamps in the update chain, fetch the
 // You could optionally expand on this by querying for the `owner` value
 // and making sure it matches the wallet address used to upload
 // the original transactions.
-const getProveanceChain = async (rootTxId) => {
+const getProveanceChainGQL = async (rootTxId) => {
 	const query = `
 	query getProvenanceChain{
 		transactions(tags: [{ name: "root-tx", values: ["${rootTxId}"] }], order: ASC) {
@@ -186,7 +285,7 @@ const getProveanceChain = async (rootTxId) => {
 	}`;
 
 	// Define the URL of your GraphQL server
-	const url = "https://devnet.bundlr.network/graphql";
+	const url = "https://devnet.irys.xyz/graphql";
 
 	// Define the options for the fetch request
 	const options = {
@@ -224,9 +323,9 @@ To create the full chain, first request the root data, then the update data. Con
 
 ```js
 // Print the full provenance chain in a table
-const printProveanceChain = async (rootTxId) => {
-	const provenanceChainData = await getRootTx(rootTxId);
-	provenanceChainData.push(...(await getProveanceChain(rootTxId)));
+const printProveanceChainGQL = async (rootTxId) => {
+	const provenanceChainData = await getRootTxGQL(rootTxId);
+	provenanceChainData.push(...(await getProveanceChainGQL(rootTxId)));
 	console.table(provenanceChainData);
 };
 ```
@@ -246,7 +345,8 @@ await storeUpdate(rootId, "GM"); // Web3
 console.log(`Provenance Chain Stored: rootId=${rootId}`);
 
 // And then print out the full provenance chain
-await printProveanceChain(rootId);
+await printProveanceChainGQL(rootId);
+await printProveanceChainSDK(rootId);
 ```
 
 When run, the code will output something similar to this.
@@ -255,29 +355,37 @@ When run, the code will output something similar to this.
 
 ## Full Code
 
-For ease of implementation, the full code for this recipe is as follows.
+For ease of implementation, the full code for this tutorial is as follows.
 
 ```js
-import Bundlr from "@bundlr-network/client";
+import Irys from "@irys/client/node";
 import fetch from "node-fetch";
 import dotenv from "dotenv";
+import Query from "@irys/query";
 dotenv.config();
 
-// Returns a reference to a Bundlr node
-const getBundlr = async () => {
-	const privateKey = process.env.PRIVATE_KEY;
-	const bundlr = new Bundlr.default("http://devnet.bundlr.network", "matic", privateKey, {
-		providerUrl: "https://rpc-mumbai.maticvigil.com",
+// Returns a reference to an Irys node
+const getIrys = async () => {
+	const url = "https://devnet.irys.xyz";
+	const providerUrl = "https://rpc-mumbai.maticvigil.com";
+	const currency = "matic";
+	const privateKey = process.env.ETH_PRIVATE_KEY;
+
+	const irys = new Irys({
+		url: url, // URL of the node you want to connect to
+		currency: currency, // Currency used for payment
+		key: privateKey, // ETH or SOL private key
+		config: { providerUrl: providerUrl }, // Optional provider URL, only required when using Devnet
 	});
-	return bundlr;
+	return irys;
 };
 
 // Stores the root transaction and returns the transaction id
 const storeRoot = async (myData) => {
-	const bundlr = await getBundlr();
+	const irys = await getIrys();
 	const tags = [{ name: "Content-Type", value: "text/plain" }];
 
-	const tx = await bundlr.uploadWithReceipt(myData, { tags });
+	const tx = await irys.upload(myData, { tags });
 	return tx.id;
 };
 
@@ -285,14 +393,14 @@ const storeRoot = async (myData) => {
 // a new transaction and tying it back to the original using
 // the "root-id" metatag.
 const storeUpdate = async (rootTxId, myData) => {
-	const bundlr = await getBundlr();
+	const irys = await getIrys();
 
 	const tags = [
 		{ name: "Content-Type", value: "text/plain" },
 		{ name: "root-tx", value: rootTxId },
 	];
 
-	const tx = await bundlr.uploadWithReceipt(myData, { tags });
+	const tx = await irys.provenance.upload(myData, { tags });
 	return tx.id;
 };
 
@@ -314,7 +422,7 @@ const dateToHumanReadable = (date) => {
 };
 
 // Gets the timestamp of the root transaction
-const getRootTx = async (rootTxId) => {
+const getRootTxGQL = async (rootTxId) => {
 	// First query for the timestamp of the root transaction
 	const query = `
 	query getByIds {
@@ -327,7 +435,7 @@ const getRootTx = async (rootTxId) => {
 		}
 	}`;
 
-	const url = "https://devnet.bundlr.network/graphql";
+	const url = "https://devnet.irys.xyz/graphql";
 	const options = {
 		method: "POST",
 		headers: { "Content-Type": "application/json" },
@@ -361,7 +469,7 @@ const getRootTx = async (rootTxId) => {
 // You could optionally expand on this by querying for the `owner` value
 // and making sure it matches the wallet address used to upload
 // the original transactions.
-const getProveanceChain = async (rootTxId) => {
+const getProveanceChainGQL = async (rootTxId) => {
 	const query = `
 	query getProvenanceChain{
 		transactions(tags: [{ name: "root-tx", values: ["${rootTxId}"] }], order: ASC) {
@@ -375,7 +483,7 @@ const getProveanceChain = async (rootTxId) => {
 	}`;
 
 	// Define the URL of your GraphQL server
-	const url = "https://devnet.bundlr.network/graphql";
+	const url = "https://devnet.irys.xyz/graphql";
 
 	// Define the options for the fetch request
 	const options = {
@@ -407,9 +515,65 @@ const getProveanceChain = async (rootTxId) => {
 };
 
 // Print the full provenance chain in a table
-const printProveanceChain = async (rootTxId) => {
-	const provenanceChainData = await getRootTx(rootTxId);
-	provenanceChainData.push(...(await getProveanceChain(rootTxId)));
+const printProveanceChainGQL = async (rootTxId) => {
+	const provenanceChainData = await getRootTxGQL(rootTxId);
+	provenanceChainData.push(...(await getProveanceChainGQL(rootTxId)));
+	console.table(provenanceChainData);
+};
+
+// Query for all transactions tagged as having a root-tx matching ours
+// You could optionally expand on this by querying for the `owner` value
+// and making sure it matches the wallet address used to upload
+// the original transactions.
+const getProveanceChainSDK = async (rootTxId) => {
+	const provenanceChainData = [];
+
+	// Connect to a Query object
+	const myQuery = new Query({ url: "https://devnet.irys.xyz/graphql" });
+
+	// First, get the root TX
+	const rootTx = await myQuery
+		.search("irys:transactions"
+		.ids([rootTxId]);
+
+	// Extract the id and timestamp and download the data payload
+	if (rootTx) {
+		const unixTimestamp = rootTx[0].timestamp;
+		const date = new Date(unixTimestamp);
+		const humanReadable = dateToHumanReadable(date);
+
+		const url = `https://arweave.net/${rootTx[0].id}`;
+		const response = await fetch(url);
+		const data = await response.text();
+
+		const provenanceEntry = { Date: humanReadable, Data: data };
+		provenanceChainData.push(provenanceEntry);
+	}
+
+	// Now, get the provenance chain
+	const chain = await myQuery
+		.search("irys:transactions")
+		.tags([{ name: "root-tx", values: [rootTxId] }]);
+
+	// Iterate over entries
+	for (const item of chain) {
+		const unixTimestamp = item.timestamp;
+		const date = new Date(unixTimestamp);
+		const humanReadable = dateToHumanReadable(date);
+
+		const url = `https://arweave.net/${item.id}`;
+		const response = await fetch(url);
+		const data = await response.text();
+
+		const provenanceEntry = { Date: humanReadable, Data: data };
+		provenanceChainData.push(provenanceEntry);
+	}
+	return provenanceChainData;
+};
+
+// Print the full provenance chain in a table
+const printProveanceChainSDK = async (rootTxId) => {
+	const provenanceChainData = await getProveanceChainSDK(rootTxId);
 	console.table(provenanceChainData);
 };
 
@@ -420,8 +584,8 @@ await storeUpdate(rootId, "Olá Mundo"); // Portuguese
 await storeUpdate(rootId, "こんにちは世界"); // Japanese
 await storeUpdate(rootId, "สวัสดีชาวโลก"); // Thai
 await storeUpdate(rootId, "GM"); // Web3
-console.log(`Provenance Chain Stored: rootId=${rootId}`);
 
 // And then print out the full provenance chain
-await printProveanceChain(rootId);
+await printProveanceChainGQL(rootId);
+await printProveanceChainSDK(rootId);
 ```
