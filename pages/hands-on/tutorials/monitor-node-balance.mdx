@@ -4,28 +4,39 @@ description: Monitor Your Node Balance Using JavaScript, our CLI, or cURL
 
 # Monitor Node Balance With A Script
 
-Bundlr's upfront funding simplifies the uploading process by allowing you to pre-fund your uploads. This eliminates the need for individual funding calls for each upload as the loaded balance is automatically deducted from with each upload. To keep track of your loaded balance, users commonly create scripts that periodically check their balance and provide notifications when it approaches zero.
+Irys' upfront funding simplifies the uploading process by allowing you to pre-fund your uploads. This eliminates the need for individual funding calls for each upload as the loaded balance is automatically deducted from with each upload. To keep track of your loaded balance, users commonly create scripts that periodically check their balance and provide notifications when it approaches zero.
 
-This recipe offers examples of how to monitor your balance using [JavaScript](/developer-docs/recipes/monitor-node-balance#javascript), our [Command Line Interface (CLI)](/developer-docs/recipes/monitor-node-balance#cli), and [cURL](/developer-docs/recipes/monitor-node-balance#curl). These techniques are all equally effective options for balance monitoring, choose the method that aligns with your unique architecture and requirements.
+This tutorial offers examples of how to monitor your balance using [JavaScript](/hands-on/tutorials/monitor-node-balance#javascript), our [Command Line Interface (CLI)](/hands-on/tutorials/monitor-node-balance#cli), and [cURL](/hands-on/tutorials/monitor-node-balance#curl). These techniques are all equally effective options for balance monitoring, choose the method that aligns with your unique architecture and requirements.
 
 ## JavaScript
 
 ```js
-import Bundlr from "@bundlr-network/client";
+import Irys from "@irys/client";
+import dotenv from "dotenv";
+dotenv.config();
+
+const getIrys = async () => {
+	const url = "https://devnet.irys.xyz";
+	const providerUrl = "https://rpc-mumbai.maticvigil.com";
+	const currency = "matic";
+	const privateKey = process.env.ETH_PRIVATE_KEY;
+
+	const irys = new Irys({
+		url: url, // URL of the node you want to connect to
+		currency: currency, // Currency used for payment
+		key: privateKey, // ETH or SOL private key
+		config: { providerUrl: providerUrl }, // Optional provider URL, only required when using Devnet
+	});
+	return irys;
+};
 
 const checkBalance = async () => {
-	// Your EVM or Solana private key
-	const privateKey = "";
+	const irys = await getIrys();
 
-	// Initailze the bundlr SDK
-	// Funding is node-specefic, connect to the node you funded
-	const bundlr = new Bundlr("http://devnet.bundlr.network", "matic", privateKey, {
-		providerUrl: "https://rpc-mumbai.maticvigil.com",
-	});
 	// Get loaded balance in atomic units
-	const atomicBalance = await bundlr.getLoadedBalance();
+	const atomicBalance = await irys.getLoadedBalance();
 	// Convert balance to standard units
-	const convertedBalance = bundlr.utils.fromAtomic(atomicBalance);
+	const convertedBalance = irys.utils.fromAtomic(atomicBalance);
 	return convertedBalance;
 };
 
@@ -49,7 +60,7 @@ setInterval(checkAndPrintBalance, 30 * 60 * 1000);
 
 ## CLI
 
-You can achieve the same thing using our CLI and a bash script. The advantage to doing it this way is you’re not connecting to a Bundlr node, which means you don’t need to provide your private key. Using your wallet’s public address, script calls to our CLI’s `[bundlr balance](/developer-docs/cli/getting-node-balance)` command, parse the output and test if it’s close to 0.
+You can achieve the same thing using our CLI and a bash script. The advantage to doing it this way is you’re not connecting to an Irys node, which means you don’t need to provide your private key. Using your wallet’s public address, the script calls our CLI’s [`irys balance`](/developer-docs/cli/commands/balance) command, parses the output and tests if it’s close to 0.
 
 ```bash
 #!/bin/bash
@@ -57,16 +68,16 @@ You can achieve the same thing using our CLI and a bash script. The advantage to
 # Define your variables
 address="0xaC568a981B1370B2e1bAA8cE30BD5AC9E28C572D" # Public wallet address
 provider_url="https://rpc-mumbai.maticvigil.com"
-node_address="https://devnet.bundlr.network"
+node_address="https://devnet.irys.xyz"
 currency="matic"
 balance_output="";
 
 # Check if node_address contains "devnet"
 # When using devnet, you must also include a provider-url
 if [[ $node_address == *"devnet"* ]]; then
-   balance_output=$(bundlr balance $address --provider-url $provider_url -h $node_address -c $currency)
+   balance_output=$(irys balance $address --provider-url $provider_url -h $node_address -c $currency)
 else
-   balance_output=$(bundlr balance $address -h $node_address -c $currency)
+   balance_output=$(irys balance $address -h $node_address -c $currency)
 fi
 
 # Use regex to parse the output and assign the parsed value to a variable
@@ -91,7 +102,7 @@ To run a bash script periodically, use `cron`. Assuming you saved the above scri
 ## cURL
 
 A third option is to make cURL request using an URL with the following format `https://<node-address>/account/balance/<currency>?address=<address>`. For example to check the Devnet MATIC balance of the wallet with address `0xaC568a981B1370B2e1bAA8cE30BD5AC9E28C572D`, you would use the command
-`https://devnet.bundlr.network/account/balance/matic?address=0xaC568a981B1370B2e1bAA8cE30BD5AC9E28C572D`
+`https://devnet.irys.xyz/account/balance/matic?address=0xaC568a981B1370B2e1bAA8cE30BD5AC9E28C572D`
 
 Just as with our CLI, you don’t need to to provide your private key. This version is also more streamlined than the CLI version as you don’t need to include the provider URL when checking the Devnet balances.
 
@@ -100,7 +111,7 @@ Just as with our CLI, you don’t need to to provide your private key. This vers
 
 # Define your variables
 address="0xaC568a981B1370B2e1bAA8cE30BD5AC9E28C572D" # Public wallet address
-node_address="https://devnet.bundlr.network"
+node_address="https://devnet.irys.xyz"
 currency="matic"
 balance_output="";
 
