@@ -3,11 +3,7 @@ import { DiscordIcon, GitIcon, MediumIcon, MirrorIcon, TelegramIcon, TwitterIcon
 import FooterDesktop from "../NewFooter/FooterDesktop";
 import FooterMobile from "../NewFooter/FooterMobile";
 
-const Footer = ({
-	noPadding
-}: {
-	noPadding?: boolean
-}) => {
+const Footer = ({ noPadding }: { noPadding?: boolean }) => {
 	const DEFINITIONS = [
 		{
 			title: "OVERVIEW",
@@ -98,7 +94,7 @@ const Footer = ({
 						<TwitterIcon />
 					</a>
 					<a
-						href="https://discord.gg/bundlr"
+						href="https://discord.gg/4AsTuQ8pp9"
 						target={"_blank"}
 						rel="nofollow noreferrer"
 						className="transition-all hover:rotate-6 hover:scale-105 text-black hover:text-black"
