@@ -33,12 +33,7 @@ const bundlr = new WebBundlr("https://devnet.bundlr.network", "matic", provider)
 #### `WebBundlr` Class And Non-EVM Chains
 
 ```js
-const bundlr = new WebBundlr(
-	"https://devnet.bundlr.network",
-	"solana",
-	provider
-	{
-		providerUrl: "https://api.devnet.solana.com",
-	},
-);
+const bundlr = new WebBundlr("https://devnet.bundlr.network", "solana", provider, {
+	providerUrl: "https://api.devnet.solana.com",
+});
 ```
