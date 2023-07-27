@@ -23,21 +23,23 @@ const ButtonBar: React.FC<ButtonBarProps> = ({ submitUrl, contractAddress, token
 			{isExploding && <ConfettiExplosion />}
 			<div className="flex flex-row gap-4 mt-10">
 				<Button onClick={() => window.open(submitUrl)}>Submit Quest</Button>
-				<Web3Button
-					theme="dark"
-					contractAddress={contractAddress}
-					action={(contract) => contract.erc1155.claim(tokenId, 1)}
-					className="bundlr-web3-button"
-					onSuccess={() => {
-						setMessage(successMessage);
-						setIsExploding(true);
-					}}
-					onError={(error) => {
-						setMessage(errorMessage);
-					}}
-				>
-					{claimButtonText}
-				</Web3Button>
+				{contractAddress && (
+					<Web3Button
+						theme="dark"
+						contractAddress={contractAddress}
+						action={(contract) => contract.erc1155.claim(tokenId, 1)}
+						className="bundlr-web3-button"
+						onSuccess={() => {
+							setMessage(successMessage);
+							setIsExploding(true);
+						}}
+						onError={(error) => {
+							setMessage(errorMessage);
+						}}
+					>
+						{claimButtonText}
+					</Web3Button>
+				)}
 			</div>
 			<div className="mt-5 text-left" dangerouslySetInnerHTML={{ __html: message }} />
 		</div>
