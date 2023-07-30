@@ -91,7 +91,7 @@ or [a cryptographically signed receipt](/learn/receipts).
 // Upload data
 const dataToUpload = "GM world.";
 try {
-	const receipt = await bundlr.upload(dataToUpload);
+	const receipt = await bundlr.uploadWithReceipt(dataToUpload);
 	console.log(`Data uploaded ==> https://arweave.net/${receipt.id}`);
 } catch (e) {
 	console.log("Error uploading file ", e);
