@@ -1,32 +1,15 @@
 {
-	"arweave-wallet": "Get An Arweave Wallet",
-	"setup-metamask": "Setup MetaMask",
-	"---": {
-		"type": "separator"
-	},
 	"react": "Using Irys With npx create-react-app",
 	"monitor-node-balance": "Monitoring Node Balance",
-	"----": {
-		"type": "separator"
-	},
 	"provenance-chain": "Build a Provenance Chain",
 	"uploading-static-sites": "Uploading Static Websites",
 	"uploading-nfts": "Uploading NFTs",
-	"-----": {
-		"type": "separator"
-	},
 	"github_link": {
 		"title": "Build A QuerySDK Explorer",
 		"href": "https://docs.google.com/document/d/1BRc4PQ1F2Y6vLE1bVdzRITZzBIzwi7L-K0id_hGErr8/edit"
 	},
-	"--------": {
-		"type": "separator"
-	},
 	"gassless-uploading": "Gassless Uploading",
 	"strong-provenance-toolkit": "Strong Provenance Toolkit",
-	"---------": {
-		"type": "separator"
-	},
 	"lens": "Uploading Lens Metadata",
 	"livepeer": "Transcoding With Livepeer"
 }
