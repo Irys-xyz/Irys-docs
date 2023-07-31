@@ -17,7 +17,7 @@ If you’d prefer to learn using a long-form tutorial, [we have this one on crea
 
 Provider setup varies based on wallet type / version:
 
-[Ethers 5](/developer-docs/sdk/bundlr-in-the-browser#ethers-5) | [Ethers 6](/developer-docs/sdk/bundlr-in-the-browser#ethers-6) | [RainbowKit / WAGMI](/developer-docs/sdk/bundlr-in-the-browser#rainbowkit--wagmi-hooks) | [viem](/developer-docs/sdk/bundlr-in-the-browser#viem) | [WalletConnect](/developer-docs/sdk/bundlr-in-the-browser#walletconnect) | [Phantom](/developer-docs/sdk/bundlr-in-the-browser#phantom) | [Near](/developer-docs/sdk/bundlr-in-the-browser#near)
+[Ethers 5](/developer-docs/sdk/bundlr-in-the-browser#ethers-5) | [Ethers 6](/developer-docs/sdk/bundlr-in-the-browser#ethers-6) | [RainbowKit / WAGMI](/developer-docs/sdk/bundlr-in-the-browser#rainbowkit-v1) | [viem](/developer-docs/sdk/bundlr-in-the-browser#viem) | [WalletConnect](/developer-docs/sdk/bundlr-in-the-browser#walletconnect) | [Phantom](/developer-docs/sdk/bundlr-in-the-browser#phantom) | [Near](/developer-docs/sdk/bundlr-in-the-browser#near)
 
 ## Ethers 5
 
@@ -48,17 +48,85 @@ const bundlr = new WebBundlr("https://node1.bundlr.network", "matic", provider);
 await bundlr.ready();
 ```
 
-## RainbowKit / WAGMI Hooks
+## RainbowKit v1
 
 ```js
 import { WebBundlr } from "@bundlr-network/client";
+import { ethers } from "ethers";
+import { mainnet, polygonMumbai } from "viem/chains";
+import { createWalletClient, custom, parseEther } from "viem";
+import { usePrepareSendTransaction, useSendTransaction } from "wagmi";
 
-const provider = useProvider();
-const { data: rainbowKitSigner, isError, isLoading } = useSigner();
-// use method injection to add the missing function
-provider.getSigner = () => rainbowKitSigner;
-const bundlr = new WebBundlr("https://node1.bundlr.network", "matic", provider);
+const url = "https://devnet.bundlr.network";
+const currency = "matic";
+const providerUrl = "https://rpc-mumbai.maticvigil.com";
+
+const client = createWalletClient({
+	chain: mainnet,
+	transport: custom(window.ethereum),
+});
+//@ts-expect-error injected
+client.getSigner = () => client;
+// client.getAddress = async () => client.getAddresses();
+//@ts-expect-error injected
+client.getAddress = async () => client.getAddresses().then((a) => a[0]);
+
+const bundlr = new WebBundlr(url, currency, client, { providerUrl });
+
+// @ts-expect-error
+bundlr.currencyConfig.getFee = async (_amount, _to): Promise<number> => {
+	return 0;
+};
+
+// if you're using react hooks:
+bundlr.currencyConfig.sendTx = async (data): Promise<string> => {
+	const { sendTransaction } = useSendTransaction(data);
+	await sendTransaction?.();
+	// make this function return the transaction id
+	// think it's
+	return data.hash;
+};
+
+bundlr.currencyConfig.createTx = async (
+	amount: string | number,
+	to: string,
+	_fee?: string,
+): Promise<{ txId: string | undefined; tx: any }> => {
+	const { config } = usePrepareSendTransaction({
+		to, //@ts-expect-error weird type
+		value: parseEther(+amount),
+	});
+	return { txId: undefined, tx: config };
+};
+
+// Otherwise
+bundlr.currencyConfig.sendTx = async (data): Promise<string> => {
+	const hash = await client.sendTransaction({
+		to: data.to,
+		value: parseEther(data.amount.toString()),
+		account: bundlr.address as `0x${string}`,
+	});
+	return hash;
+};
+
+bundlr.currencyConfig.createTx = async (amount, to, fee): Promise<{ txId: string | undefined; tx: any }> => {
+	// dummy value/method
+	return { txId: undefined, tx: { amount, to, fee } };
+};
+
 await bundlr.ready();
+//@ts-expect-error injected
+client._signTypedData = async (domain, types, message) => {
+	message["Transaction hash"] = "0x" + Buffer.from(message["Transaction hash"]).toString("hex");
+	//@ts-ignore
+	return await client.signTypedData({
+		domain,
+		message,
+		types,
+		account: bundlr.address!,
+		primaryType: "Bundlr",
+	});
+};
 ```
 
 ## viem
