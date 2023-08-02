@@ -22,8 +22,8 @@ Provider setup varies based on wallet type / version:
 ## Ethers 5
 
 ```js
-import { providers } from "ethers";
 import { WebBundlr } from "@bundlr-network/client";
+import { providers } from "ethers";
 
 await window.ethereum.enable();
 const provider = new providers.Web3Provider(window.ethereum);
@@ -36,15 +36,66 @@ await bundlr.ready();
 Import our SDK and connect to a Bundlr node using injected providers and ethers version 6.
 
 ```js
-import { ethers } from "ethers";
 import { WebBundlr } from "@bundlr-network/client";
+import { ethers } from "ethers";
+import BigNumber from "bignumber.js";
 
 const provider = new ethers.BrowserProvider(window.ethereum);
+
+provider.getGasPrice = async () => {
+	const gp = +((await provider.getFeeData()).gasPrice?.toString() ?? 0);
+	console.log("getGasPrice", gp, typeof gp);
+	return gp;
+};
+
+const e = provider.estimateGas.bind(provider);
+provider.estimateGas = async (tx) => {
+	const est = +((await e(tx))?.toString() ?? 0);
+	return { mul: (n) => +est * +n };
+};
+
 const signer = await provider.getSigner();
 
+signer.estimateGas = e;
+signer.getGasPrice = provider.getGasPrice;
 provider.getSigner = () => signer;
 
-const bundlr = new WebBundlr("https://node1.bundlr.network", "matic", provider);
+signer._signTypedData = (domain, types, value) => signer.signTypedData(domain, types, value);
+
+const bundlr = new WebBundlr("https://devnet.bundlr.network/", "matic", provider, {
+	providerUrl: "https://rpc-mumbai.maticvigil.com/",
+});
+
+bundlr.currencyConfig.createTx = async (amount, to) => {
+	const estimatedGas = await signer.estimateGas({ to, from: bundlr.address, amount });
+	const gasPrice = await signer.getGasPrice();
+	const txr = await signer.populateTransaction({
+		// eslint-disable-next-line no-undef
+		to,
+		from: bundlr.address,
+		value: BigInt(amount),
+		gasPrice,
+		gasLimit: estimatedGas,
+	});
+	return { txId: undefined, tx: txr };
+};
+
+bundlr.currencyConfig.getTx = async function (txId: string): Promise<Tx> {
+	const provider = this.providerInstance;
+	const response = await provider.getTransaction(txId);
+
+	if (!response) throw new Error("Tx doesn't exist");
+	if (!response.to) throw new Error(`Unable to resolve transactions ${txId} receiver`);
+
+	return {
+		from: response.from,
+		to: response.to,
+		blockHeight: response.blockNumber ? new BigNumber(response.blockNumber) : undefined,
+		amount: new BigNumber(response.value),
+		pending: response.blockNumber ? false : true,
+		confirmed: response.confirmations >= this.minConfirm,
+	};
+};
 await bundlr.ready();
 ```
 
@@ -67,7 +118,6 @@ const client = createWalletClient({
 });
 //@ts-expect-error injected
 client.getSigner = () => client;
-// client.getAddress = async () => client.getAddresses();
 //@ts-expect-error injected
 client.getAddress = async () => client.getAddresses().then((a) => a[0]);
 
@@ -132,9 +182,9 @@ client._signTypedData = async (domain, types, message) => {
 ## viem
 
 ```js
+import { WebBundlr } from "@bundlr-network/client";
 import { createWalletClient, custom } from "viem";
 import { mainnet } from "viem/chains";
-import { WebBundlr } from "@bundlr-network/client";
 
 const client = createWalletClient({
 	chain: mainnet,
@@ -150,9 +200,10 @@ await bundlr.ready();
 ## WalletConnect
 
 ```js
+import { WebBundlr } from "@bundlr-network/client";
+
 import { ethers } from "ethers";
 import WalletConnectProvider from "@walletconnect/web3-provider";
-import { WebBundlr } from "@bundlr-network/client";
 
 const connector = await new WalletConnectProvider({
 	rpc: "https://cloudflare-eth.com/",
