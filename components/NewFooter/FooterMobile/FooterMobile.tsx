@@ -62,7 +62,7 @@ const FooterMobile = ({
 						<TwitterIcon />
 					</a>
 					<a
-						href="https://discord.gg/4AsTuQ8pp9"
+						href="https://discord.bundlr.network"
 						target={"_blank"}
 						rel="nofollow noreferrer"
 						className="transition-all hover:rotate-6 hover:scale-105"

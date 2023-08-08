@@ -6,7 +6,7 @@ description: Frequently asked questions about Bundlr.
 
 ## Where should I subscribe to receive the latest news?
 
-Please follow us on [Discord](https://discord.gg/4AsTuQ8pp9) and [Twitter](https://twitter.com/BundlrNetwork) to keep up with the latest updates and news.
+Please follow us on [Discord](https://discord.bundlr.network) and [Twitter](https://twitter.com/BundlrNetwork) to keep up with the latest updates and news.
 
 ## What is Bundlr?
 
@@ -74,7 +74,7 @@ There’s no limitation on the number of uploads and you can store as much as da
 
 ## Is there a public sale, Airdrop or etc?
 
-We do not have a public token yet. Anyone claiming a presale, token airdrop, etc via DM is a scam. Please follow the announcements on [Discord](https://discord.gg/4AsTuQ8pp9) and [Twitter.](https://twitter.com/BundlrNetwork)
+We do not have a public token yet. Anyone claiming a presale, token airdrop, etc via DM is a scam. Please follow the announcements on [Discord](https://discord.bundlr.network) and [Twitter.](https://twitter.com/BundlrNetwork)
 
 ## What currencies does Bundlr support?
 
