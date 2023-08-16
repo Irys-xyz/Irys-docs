@@ -1,0 +1,47 @@
+---
+description: Verifies the accuracy of a  receipt.
+---
+
+import { Callout } from "nextra-theme-docs";
+
+# `bundlr.utils.verifyReceipt(receipt)`
+
+Returns true or false, indicating if a [receipt](/learn/receipts) is valid or not.
+
+**Parameters**
+
+<div className="-mt-6" />- `receipt`: The receipt as a JSON object in the following format
+```json
+{
+    id, // Transaction id 
+    public, // Public key of the bundler node used
+    signature, // A signed deep hash of the JSON receipt
+    deadlineHeight, // The block number by which the transaction must be finalized on Arweave
+    timestamp, // Timestamp (UNIX milliseconds) of when the transaction was created and verified
+    version, // The version of this JSON file, currently 1.0.0
+}
+```
+
+**Returns**
+
+<div className="-mt-6" />
+
+-   `isValid`: A true or false value indicating if the receipt is valid
+
+```js
+const verifyReceipt = async () => {
+	const bundlr = await getBundlr();
+
+	try {
+		// First get a receipt
+		const transactionId = "i9tgbHsr6c1sxryAQ-SLM2rfQAYRuyap7RmGgH28mI4"; // Your transaction Id
+		const receipt = await bundlr.utils.getReceipt(transactionId);
+
+		// The verify it
+		const isReceiptValid = await bundlr.utils.verifyReceipt(receipt);
+		console.log(isReceiptValid);
+	} catch (e) {
+		console.log("Error getting receipt ", e);
+	}
+};
+```
