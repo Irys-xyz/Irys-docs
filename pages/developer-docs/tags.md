@@ -23,7 +23,7 @@ This tag is added automatically when using our NodeJS SDK and uploading files wi
 const dataStream = fileReaderStream(fileToUpload);
 
 const tags = [{ name: "Content-Type", value: "image/png" }];
-const response = await webBundlr.upload(dataStream, { tags });
+const response = await webBundlr.upload(dataStream, { tags: tags });
 
 console.log(`File uploaded ==> https://arweave.net/${response.id}`);
 ```
@@ -38,7 +38,7 @@ const fileToUpload = "./myNFT.png";
 
 const tags = [{ name: "app-id", value: "NFTs To The Moon" }];
 try {
-	const response = await bundlr.uploadFile(fileToUpload, { tags });
+	const response = await bundlr.uploadFile(fileToUpload, { tags: tags });
 	console.log(`File uploaded ==> https://arweave.net/${response.id}`);
 } catch (e) {
 	console.log("Error uploading file ", e);
