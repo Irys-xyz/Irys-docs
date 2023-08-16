@@ -22,7 +22,7 @@
 	"overview": "OVERVIEW",
 	"developer-docs": "DEVELOPER DOCS",
 	"hands-on": "HANDS ON",
-	"learn": "COMPREHENSIVE RESOURCES",
+	"learn": "BUNDLR 101",
 	"terminology": "TERMINOLOGY",
 	"faqs": "FAQs",
 	"twitter": {
@@ -37,7 +37,7 @@
 		"newWindow": true,
 		"type": "page"
 	},
-	"Youtube": {
+	"YouTube": {
 		"title": "YouTube",
 		"href": "https://www.youtube.com/@bundlr-network",
 		"newWindow": true,

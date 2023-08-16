@@ -2,7 +2,7 @@
 description: Linking your wallet's private key.
 ---
 
-# Setting A Private Key
+# Setting a private key
 
 A private key is required when funding a node or uploading a file. If paying using AR, the CLI will automatically try to load a private key stored in "./wallet.json". For all other currencies, there is no default behavior and a private key must be specified.
 

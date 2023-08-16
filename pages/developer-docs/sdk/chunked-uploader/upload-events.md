@@ -2,7 +2,7 @@
 description: Track upload progress with event callbacks.
 ---
 
-# Upload Events
+# Upload events
 
 The uploader emits three events during each upload. These can be subscribed to for any use case when tracking upload progress is needed.
 

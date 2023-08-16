@@ -20,7 +20,7 @@ Bundlr supports adding custom metadata tags to each upload, these tags allow use
 
 When a user posts a transaction to Bundlr, the gateways pick it up and store it in their database. This allows gateways to support optimistic GraphQL, meaning query results include both transactions seeded on Arweave as well as those expected to be seeded soon. This ensures users have access to the most up-to-date data and can use it to build real-time applications.
 
-## Serving Data
+## Serving data
 
 <img src="/img/learn/gateways.png" />
 
@@ -38,7 +38,7 @@ If the data is not found on Arweave or the gateway’s local cache, the gateway 
 
 Gateways are a crucial component in Bundlr's scaling strategy. To effectively scale, it's important to separate read and write components so they can be optimized independently. In Bundlr's approach, bundlers handle writing while gateways handle reading.
 
-## Gateway Schema / Endpoints
+## Gateway schema / endpoints
 
 To download data from a gateway, use the transaction id obtained during upload. The most commonly used gateway is `https://arweave.net`, and the format used to download data is `https://arweave.net/[transaction-id]`.
 
@@ -53,7 +53,7 @@ Or this endpoint from Goldsky which offers fast response times:
 
 https://arweave-search.goldsky.com/graphql
 
-## Further Reading
+## Further reading
 
 For a detailed discussion of the full GraphQL schema, see [querying data](/developer-docs/graphql).
 

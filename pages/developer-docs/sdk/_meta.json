@@ -1,10 +1,9 @@
 {
-	"bundlr-in-the-browser": "Bundlr In The Browser",
-	"installing-the-sdk": "Installing The SDK",
-	"connecting-node": "Conecting To A Node",
-	"api": "API Docs",
-	"downloading-data": "Downloading Data",
-	"supported-wallets": "Supported Wallets",
-	"chunked-uploader": "Chunked Uploader",
-	"umd-bundles": "UMD Bundles"
+	"bundlr-in-the-browser": "Bundlr in the browser",
+	"installing-the-sdk": "Installing our SDK",
+	"connecting-node": "Connecting to a node",
+	"api": "API docs",
+	"downloading-data": "Downloading data",
+	"supported-wallets": "Supported wallets",
+	"chunked-uploader": "Chunked uploader"
 }

@@ -5,17 +5,17 @@ description: Technical terms you'll need to know to understand Bundlr
 
 # Terminology
 
-[Bundle](/terminology#bundle) | [Bundlr](/terminology#bundler) | [Data Provenance](/terminology#data-provenance) | [Deep Hash](/terminology#deep-hash) | [Gateways](/terminology#gateways) | [Proof Of Provenance](/terminology#proof-of-provenance) | [Provenance Chain](/terminology#provenance-chain) | [Transaction](/terminology#transaction) | [Transaction Receipt](/terminology#transaction-receipt) | [Validator](/terminology#validator)
+[Bundle](/terminology#bundle) | [Bundlr](/terminology#bundler) | [Data provenance](/terminology#data-provenance) | [Deep hash](/terminology#deep-hash) | [Gateways](/terminology#gateways) | [Proof Of Provenance](/terminology#proof-of-provenance) | [Provenance chain](/terminology#provenance-chain) | [Transaction](/terminology#transaction) | [Transaction receipt](/terminology#transaction-receipt) | [Validator](/terminology#validator)
 
-## Data Provenance
+## Data provenance
 
 The history of data. It can describe where data came from, how it was created, and who has handled it. Data provenance provides transparency into the lifecycle of data and is critical for building trust in the data.
 
-## Proof Of Provenance
+## Proof of provenance
 
 The issuing of cryptographically signed receipts, including a timestamp accurate to the millisecond, that provide irrefutable proof of data provenance.
 
-## Provenance Chain
+## Provenance chain
 
 The chain of custody or the history and evolution of data.
 
@@ -27,7 +27,7 @@ A set of Bundlr transactions joined into a single Arweave transaction.
 
 A bundler is a node on Bundlr that receives Bundlr transactions, handles payment channels and produces bundles.
 
-## Deep Hash
+## Deep hash
 
 A hash algorithm which takes a nested list of values as input and produces a 384 bit hash, where a change of any value or the structure will affect the hash.
 
@@ -39,7 +39,7 @@ Gateways are nodes that listen to both bundlers and the Arweave L1 with the purp
 
 A single item sent to a specific address, usually contains a data payload.
 
-## Transaction Receipt
+## Transaction receipt
 
 A financial proof that a Bundlr transaction gets on to Arweave by an expected block.
 The transaction receipt format is.

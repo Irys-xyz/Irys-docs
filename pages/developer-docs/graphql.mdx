@@ -4,7 +4,7 @@ description: Querying with GraphQL.
 
 import { Callout } from "nextra-theme-docs";
 
-# Querying With GraphQL
+# Querying with GraphQL
 
 Transaction metadata can be queried using GraphQL. This includes both metadata automatically stored for each transaction and custom metadata you design yourself using our [tags](/developer-docs/tags) feature.
 
@@ -26,7 +26,7 @@ Bundlr GraphQL and [Arweave GraphQL](https://gql-guide.vercel.app/) both offer w
 | Timestamp                                               | Includes a timestamp accurate to the millisecond of when the transaction was posted, along with an (optional) cryptographically signed [receipt](/learn/receipts). | Timestamp is based on block time, accurate to ~2 minutes.                                                                   |
 | Blocks                                                  | Not included.                                                                                                                                                      | [Included](https://gql-guide.vercel.app/#block-query-structures). You can query by block ID, block range, and block height. |
 
-## GraphQL Clients
+## GraphQL clients
 
 You can query using an HTTP library like fetch or axios. You can also use specialized clients like [Apollo Client](https://www.apollographql.com/) or [urql](https://formidable.com/open-source/urql/).
 
@@ -34,7 +34,7 @@ The next two sections detail first [Bundlr GraphQL](/developer-docs/graphql#bund
 
 ## Bundlr GraphQL
 
-### Anatomy Of A Query
+### Anatomy of a query
 
 A GraphQL query is made up of:
 
@@ -43,7 +43,7 @@ A GraphQL query is made up of:
 
 <img className="border border-[#FEF4EE] rounded mt-5 w-5/6" src="/img/graphql/BundlrGQL-Anatomy.png" />
 
-### Query Arguments
+### Query arguments
 
 Any of the following query arguments can be used as search parameters:
 
@@ -54,7 +54,7 @@ Any of the following query arguments can be used as search parameters:
 | `currency` | The [currency](/overview/supported-tokens) used to pay for the transaction.                                                                                                                                |
 | `tags`     | An array of tag name / value pairs passed as JSON objects.                                                                                                                                                 |
 
-### Results Fields
+### Results fields
 
 When building a query, any of the following values be included in your results:
 | Field | Description |
@@ -76,13 +76,13 @@ Connect to the GraphQL endpoint associated with the node you uploaded your trans
 | Node 2 | https://node2.bundlr.network/graphql  |
 | Devnet | https://devnet.bundlr.network/graphql |
 
-### GraphQL Sandbox
+### GraphQL sandbox
 
 Clicking on any of the endpoint URLs above will direct you to the GraphQL Sandbox used for building and testing queries. Press Control+Space at any time to see an interactive popup window of either query arguments or results fields.
 
 <img className="border border-[#FEF4EE] rounded mt-5 w-5/6" src="/img/graphql/BundlrGQL-Sandbox.png" />
 
-### Sample Queries
+### Sample queries
 
 Queries return transaction metadata. To then retrieve data, use the returned transaction ID and download the data from a [gateway](/learn/gateways) using an URL formed as follows `https://arweave.net/[transaction-id]`.
 
@@ -203,7 +203,7 @@ query getTagsWithAnd {
 }
 ```
 
-#### Limiting Results
+#### Limiting results
 
 Limit the number of results returned by including the `limit` parameter.
 
@@ -289,7 +289,7 @@ query getAllByOwnerDesc {
 
 ## Arweave GraphQL
 
-### Anatomy Of A Query
+### Anatomy of a query
 
 A GraphQL query is made up of:
 
@@ -298,7 +298,7 @@ A GraphQL query is made up of:
 
 <img className="border border-[#FEF4EE] rounded mt-5 w-5/6" src="/img/graphql/ArweaveGQL-Anatomy.png" />
 
-### Query Arguments
+### Query arguments
 
 Any of the following query arguments can be used as search parameters:
 
@@ -311,7 +311,7 @@ Any of the following query arguments can be used as search parameters:
 | `block`      | Details specific to a transaction's block.                                                                                                                                                                                                                                                            |
 | `tags`       | An array of tag name / value pairs passed as JSON objects. Values are ORed together, matching results will include transactions matching any of the supplied tags.                                                                                                                                    |
 
-### Results Fields
+### Results fields
 
 When building a query, you can request any of the following values be included in your results:
 | Field | Description |
@@ -336,13 +336,13 @@ Arweave offers a universal endpoint, you do not need to pick an endpoint associa
 -   https://arweave.dev/graphql
 -   https://arweave-search.goldsky.com/graphql
 
-### GraphQL Playground
+### GraphQL playground
 
 Clicking on any of the endpoint URLs will direct you to the GraphQL Playground used for building and testing queries. Press Control+Space at any time to see an interactive popup window of either query arguments or results fields.
 
 <img className="border border-[#FEF4EE] rounded mt-5 w-5/6" src="/img/graphql/ArweaveGQL-Sandbox.png" />
 
-### Sample Queries
+### Sample queries
 
 Queries return transaction metadata. To then retrieve data, use the returned transaction ID and download the data from a [gateway](/learn/gateways) using an URL formed as follows `https://arweave.net/[transaction-id]`.
 
@@ -398,7 +398,7 @@ query getAllPNGs {
 }
 ```
 
-#### Limiting Results
+#### Limiting results
 
 Limit the number of results returned by including the `first` parameter.
 
@@ -479,6 +479,6 @@ query getByOwnersDesc {
 }
 ```
 
-#### Further Reading
+#### Further reading
 
 Additional information on Arweave GraphQL [can be found on their website](https://gql-guide.vercel.app/).

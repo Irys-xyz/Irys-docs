@@ -15,7 +15,7 @@ const Footer = ({ noPadding }: { noPadding?: boolean }) => {
 				},
 				{
 					name: "Permanent Decentralized Storage",
-					href: "/overview/solutions/permanent-storage",
+					href: "/overview/solutions/permanent-data",
 					newTab: false,
 				},
 				{

@@ -2,7 +2,7 @@
 description: Uploading a single file from the CLI.
 ---
 
-# Uploading A File
+# Uploading a file
 
 Use the `upload` command followed by a file name to upload a file. The CLI will respond with the URL used to query the network for the uploaded file.
 

@@ -4,7 +4,7 @@ description: You'll Learn - Everything you need to start building with Bundlr + 
 
 import { Callout } from "nextra-theme-docs";
 
-# Bundlr SDK Tutorial
+# Bundlr SDK
 
 ## Introduction
 
@@ -16,7 +16,7 @@ This tutorial takes you through getting a wallet on the Arweave blockchain and b
 
 We’ve created [a GitHub repository](https://github.com/Bundlr-Network/bundlr-basics) with all the code and sample images for this project, feel free to download and follow along as you code.
 
-## Video Verison
+## Video verison
 
 <div
 	className="video"
@@ -40,7 +40,7 @@ We’ve created [a GitHub repository](https://github.com/Bundlr-Network/bundlr-b
 	/>
 </div>
 
-## Installing The SDK
+## Installing the SDK
 
 These examples use NodeJS, an open-source server environment that allows you to use JavaScript to create applications. If you haven’t done so already, start by installing NodeJS. It’s totally free and [can be found here](https://nodejs.org/). Many coding tutorials require NodeJS so there’s a good chance you have it already installed. If you’re not sure, run
 
@@ -89,7 +89,7 @@ Finally, run the following in your command prompt to create a new JavaScript fil
 touch bundlr-basics.js
 ```
 
-## Connecting To A Node
+## Connecting to a node
 
 First up is importing your private key and using it to securely connect to a Bundlr node.
 
@@ -117,7 +117,7 @@ console.log(`wallet address = ${bundlr.address}`);
 
 Paste the above code into the `bundlr-basics.js` file you created and then run it by typing `node bundlr-basics.js` in your command line. If it successfully prints your wallet address, you’re good to go.
 
-## Get Funded Balance
+## Get funded balance
 
 When you fund a node, you fund that one specific node. Your balance exists there and there only, not on other nodes. At present there are two nodes (http://node1.bundlr.network and http://node2.bundlr.network), you are welcome to use either one.
 
@@ -144,7 +144,7 @@ console.log(`node balance (converted) = ${convertedBalance}`);
 
 Again, return to your command line and run the code again by typing `node bundlr-basics.js`. As you have yet to fund a node, the results should show a balance of 0.
 
-## Getting Upload Price
+## Getting upload price
 
 The 0.02 AR you received for free in the [previous tutorial](01-get-an-arweave-wallet.md) will go pretty far. This next code block shows how to check the price to upload 1 megabyte of data. The function `bundlr.getPrice(numBytes)` returns the price in atomic units to upload the specified number of bytes. Since 1 megabyte is 1048576 bytes, we check that number. As with before, we convert the result from atomic units to make it easier to understand.
 
@@ -179,7 +179,7 @@ const { size } = statSync(pathToFile);
 const price = await bundlr.getPrice(size);
 ```
 
-## Funding A Node
+## Funding a node
 
 This next code block funds the node with enough to cover a full megabyte of data. In your projects, you’re welcome to fund once for all files that will be uploaded or do lazy funding where you only fund enough for each file as needed.
 
@@ -222,7 +222,7 @@ const { id } = await bundlr.uploadFile(pathToFile);
 console.log(`${pathToFile} --> Uploaded to https://arweave.net/${id}`);
 ```
 
-## Withdrawing Funds
+## Withdrawing funds
 
 Funds deposited into a node can be easily withdrawn at any time. The function `bundlr.withdrawBalance(amountInAtomicUnits)` accepts an amount (in atomic units) to withdraw and returns a response object that includes transaction id, requested amount, network fees and final cost.
 
@@ -251,7 +251,7 @@ try {
 }
 ```
 
-## Uploading Data
+## Uploading data
 
 If it can be reduced to 1s and 0s, you can upload it via Bundlr to Arweave. The function `bundlr.upload(data)` uploads any data passed to it. Use this for projects like blockchain games where you might need to store data about a player’s character stats on the blockchain.
 
@@ -267,7 +267,7 @@ try {
 }
 ```
 
-## Uploading A File
+## Uploading a file
 
 If you’re following along with [the GitHub repository](https://github.com/Bundlr-Network/bundlr-basics/blob/master/scripts/bundlr-basics.js), you may have noticed a file called `large_llama.png`. This next code block shows how to upload that file to the Arweve permaweb using Bundlr. You are welcome to swap out this file for anything else you may want to upload, but remember the permaweb is permanent. Once uploaded, you can’t delete it. Be very careful to not upload anything private or personal.
 
@@ -289,7 +289,7 @@ try {
 }
 ```
 
-## Uploading A Folder
+## Uploading a folder
 
 In addition to uploading arbitrary data and single files, you can batch upload an entire folder of files all at once. This is perfect for NFT projects that might want to upload thousands of files in one go. The function `bundlr.uploadFolder(pathToFolder+folderName)` accepts a path to a folder and then uploads all files in that folder.
 
@@ -343,7 +343,7 @@ The `bundlr.uploadFolder()` function takes one required parameter pointing to th
 
 ## Conclusion
 
-Cool, cool, cool. Great job making it this far. If you want to challenge yourself and take this code a bit further, there are lots of small projects you could build on top. Things like:
+Great job making it this far. If you want to challenge yourself and take this code a bit further, there are lots of small projects you could build on top. Things like:
 
 1. A command-line journal: Write from terminal and save your thoughts to the permaweb.
 2. Vacation photo archive: Pick your best trip photos, create an index page, upload the entire folder and share with your friends and family.

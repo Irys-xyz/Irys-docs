@@ -4,7 +4,7 @@ description: Uploading Lens metadata using Bundlr (GraphQL and Lens React Hooks)
 
 import { Callout } from "nextra-theme-docs";
 
-# Storing Lens Metadata on Bundlr
+# Storing Lens metadata on Bundlr
 
 Lens Protocol is a composable and decentralized social graph; it allows you to quickly create social applications without having to build your own large backend services. The Lens documentation is extensive and very well done. The point of this guide isn't to replicate anything on the Lens site, rather it's a focused guide showing how to create and store your post metadata on Arweave via Bundlr. For additional information of creating a post on Lens, definitely [spend some time on their docs.](https://docs.lens.xyz/docs/create-post-typed-data).
 
@@ -15,7 +15,7 @@ There are two ways to interact with Lens:
 1. [Using React hooks](https://docs.lens.xyz/docs/sdk-react-intro)
 2. [Using calls to `post()` and `postWithSig()`](https://docs.lens.xyz/docs/introduction)
 
-## React Hooks
+## React hooks
 
 The React hooks for Lens make client-side development easier as streamline much of the development, including generating correct metadata for you to upload.
 
@@ -83,7 +83,7 @@ export const upload = async (data) => {
 
 When working with the functions `post()` and `postWithSig()`, it is your responsibility to correctly build the required metadata for each interaction, store it on Bundlr and then pass the URL to Lens.
 
-### Uploading Metadata
+### Uploading metadata
 
 The full Lens Protocol [metadata specification](https://docs.lens.xyz/docs/metadata-standards) details how to create just about any type of post. For this guide, we're focusing on an image post and will use the following metadata.
 
@@ -136,7 +136,7 @@ console.log(`Upload success content URI= https://arweave.net/${tx.id}`);
 	If you incorrectly set the `Content-Type` attribute, Lens will not read your data.
 </Callout>
 
-### Creating A Post
+### Creating a post
 
 After successfully uploading your metadata, you'll get a transaction id that can be combined with `https://arweave.net/` to create your content URI (`https://arweave.net/6eARMSxeRRhOU0iJEivNB_naY-YFuh_D9d0-58ccKfI`).
 

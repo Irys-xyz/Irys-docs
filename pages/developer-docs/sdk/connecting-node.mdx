@@ -4,7 +4,7 @@ description: Public and Devnet node addresses.
 
 import { Callout } from "nextra-theme-docs";
 
-# Connecting To A Node
+# Connecting to a node
 
 To connect to a Bundlr node, provide your private key to allow for access to stored funds and for signing transactions.
 
@@ -28,24 +28,19 @@ const bundlr = new Bundlr("http://node1.bundlr.network", "matic", myPrivateKey);
 console.log(`wallet address = ${bundlr.address}`);
 ```
 
-## Custom RPC
+## Using a custom RPC
 
 You can optionally specify a custom RPC:
 
 ```js
-const bundlr = new Bundlr(
-	"https://devnet.bundlr.network",
-	"solana",
-	"<solana-private-key>",
-	{
-		providerUrl: "https://api.devnet.solana.com",
-	},
-);
+const bundlr = new Bundlr("https://devnet.bundlr.network", "solana", "<solana-private-key>", {
+	providerUrl: "https://api.devnet.solana.com",
+});
 ```
 
 <Callout type="info" emoji="ℹ️">
 As of the 0.11.0 SDK release, it is no longer required to use the following format when instantiating a Bundlr object via JavaScript. If your code still uses the .default() format, you will need to update it when upgrading your SDK.
 
-`const bundlr = new Bundlr.default("http://node1.bundlr.network", "matic", “<polygon-private-key>”);`
+`const bundlr = new Bundlr.default("http://node1.bundlr.network", "matic", "<polygon-private-key>");`
 
 </Callout>

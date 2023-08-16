@@ -2,7 +2,7 @@
 description: Learn our Bundlr GraphQL, earn an NFT.
 ---
 
-# Quest 3: GraphQL Scavenger Hunt
+# Quest 3: GraphQL scavenger hunt
 
 Welcome to Bundlr Developer Quest 3!
 
@@ -20,12 +20,12 @@ In this Quest, you’ll learn about:
 
 Upon completion, you’ll take a brief quiz. If you achieve a perfect score you’ll earn a spot on the whitelist for the Bundlr Developer Quest #3 NFT.
 
-## Time Requirements
+## Time requirements
 
 - 15-20 minutes to read / watch
 - 10 minutes to answer the quiz
 
-## Video Version
+## Video version
 <div
 	className="video mt-5"
 	style={{
@@ -47,13 +47,13 @@ Upon completion, you’ll take a brief quiz. If you achieve a perfect score you�
 		frameBorder="0"
 	/>
 </div>
-## What Is GraphQL
+## What is GraphQL
 
 GraphQL is a query language, and in this Quest you’ll use it to search for information about Bundlr transactions. For example, you’ll use it to query for transactions by creator `address` or the `currency` used to pay for the upload. You can also use it to fetch details like the creation `timestamp` and upload `receipt`.
 
 It's a simple language that's easy to understand and learn. Though compatible with JavaScript, in this Quest, we will exclusively use it through a web interface called The Bundlr GraphQL Sandbox. This interface allows for direct interaction with GraphQL queries, enabling you to explore transaction data easily.
 
-## Strong Provenance
+## Strong provenance
 
 <img className="border border-[#FEF4EE] rounded mt-5 w-5/6" src="/img/quests/graphql/strong-provenance.png" />
 
@@ -73,7 +73,7 @@ When using Bundlr GraphQL, connect to the endpoint that matches the node you use
 -   Node 2: https://node2.bundlr.network/graphql
 -   Devnet: https://devnet.bundlr.network/graphql
 
-## Welcome To The Sandbox
+## Welcome to the sandbox
 
 Ready to dive in? Start by clicking on the `Node 1` link above:
 
@@ -94,7 +94,7 @@ Don't stop there; keep playing around while using the “Control + Space” shor
 
 <img className="border border-[#FEF4EE] rounded mt-5 w-5/6" src="/img/quests/graphql/how-to-control-space.gif" />
 
-## Anatomy Of A Query
+## Anatomy of a query
 
 <img className="border border-[#FEF4EE] rounded mt-5 w-5/6" src="/img/quests/graphql/bundlr-gql-query-format.png" />
 
@@ -107,7 +107,7 @@ A GraphQL query is structured to precisely fetch the data you need. Here's a bre
 
 Now that we've covered the all the basics, it's time to dive in and get hands-on. Throughout this Quest, you’ll build a rich library of queries for interacting with Bundlr, starting with searching by transaction ID.
 
-## Search By Transaction ID
+## Search by transaction ID
 
 When you upload data to Bundlr, each upload is assigned a unique transaction ID. In this first query, you will search using a single transaction by ID and return all of its metadata.
 
@@ -189,7 +189,7 @@ When you run it, you can see all the metadata for the transaction with ID `mjswL
 
 Transactions, once uploaded to Bundlr, are instantly available for query via GraphQL. This feature is incredibly useful as it allows immediate access to the transaction data. The next time you perform an upload, take a moment to query it right away. It's a fun way to observe how quickly Bundlr makes transaction data accessible.
 
-## Query Tabs
+## Query tabs
 
 Great job! At this point, you've grasped the fundamentals of using GraphQL to query transaction metadata. Next, let's expand your query library by learning how to query by currency. But first, click the `+` icon at the top of the query builder to open a new tab.
 
@@ -197,7 +197,7 @@ Placing each new query in its separate tab ensures that when you revisit the San
 
 <img className="border border-[#FEF4EE] rounded mt-5 w-5/6" src="/img/quests/graphql/GraphQL-PressPlus.png" />
 
-## Query By Currency
+## Query by currency
 
 Bundlr supports [paying for uploads with 14 different tokens](/overview/supported-tokens), the token used for payment is recorded as metadata with the transaction and is available for query via GraphQL
 
@@ -238,7 +238,7 @@ query getByCurrency {
 }
 ```
 
-## Query By Owners
+## Query by owners
 
 Ok, remember how to create a [new tab](/hands-on/quests/quest3-graphql#query-tabs) in the GraphQL Sandbox? Go ahead and do that, and let’s start the next query.
 
@@ -258,7 +258,7 @@ query getByOwner {
 }
 ```
 
-## Query By Tags
+## Query by tags
 
 Tags are versatile pieces of custom metadata that can be associated with any transaction uploaded to Bundlr. When you upload an image, for instance, Bundlr automatically assigns a `Content-Type` metatag [with the appropriate value](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Type). Additionally, you can attach any custom metatags, such as using an `application-id` tag to distinguish your transactions from others.
 
@@ -320,7 +320,7 @@ query getTagsWithAnd {
 }
 ```
 
-## Query By Timestamps
+## Query by timestamps
 
 Timestamps play a crucial role in building projects rooted in strong provenance. Every transaction, once uploaded on Bundlr, receives a timestamp that's accurate down to the millisecond. Filtering by timestamps allows you to fetch transactions from a specific point in time.
 
@@ -435,7 +435,7 @@ To answer this question, you’ll need to build a query that searches by transac
 
 <img className="border border-[#FEF4EE] rounded mt-5 w-5/6" src="/img/quests/graphql/Quiz-Question-1-Answer.png" />
 
-## Getting Help
+## Getting help
 
 To have your wallet added to the Quest 3 whitelist, you need to get a perfect score on the quiz. If you’re not sure of a question, make sure to reach out to us on [Discord](https://discord.bundlr.network) and someone will help you out right away. Also, you can always check out our docs entry on [GraphQL](/developer-docs/graphql) and on [receipts](/learn/receipts).
 

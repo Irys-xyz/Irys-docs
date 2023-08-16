@@ -2,11 +2,11 @@
 description: How to upload NFT assets to Bundlr.
 ---
 
-# Uploading NFTs To Bundlr
+# Uploading NFTs to Bundlr
 
 When you use Bundlr to store NFT data on Arweave, you’re guaranteed your NFT will be both permanent and immutable. Here’s how you do it.
 
-## NFT Assets
+## NFT assets
 
 <img src="/img/learn/NFTs/nft-metadata.png" />
 
@@ -20,13 +20,13 @@ The smart contract can be on any chain, the metadata and assets are stored on an
 
 In the example above for the [Bundlr Developer Quests NFT](https://opensea.io/assets/matic/0x1c8f5f29d1498474844d6a5160b640c674276dba/0), there is a `name` and `description` that are shown on platforms like Opensea when the NFT is viewed. The `image` parameter points to a static image of the NFT. The `animation_url` parameter is optional and points to a video, song, or HTML animation file.
 
-## Steps To Creating An NFT
+## Steps to creating an NFT
 
 1. Upload your assets to Bundlr
 2. Embed the URLs to the assets in NFT metadata
 3. Use the URL to the NFT metadata to mint your NFT. This guide does not cover the smart contract setup, if you’re unsure of how to do this, [Thirdweb](https://thirdweb.com/) has free, audited contracts available for use.
 
-## Uploading Assets
+## Uploading assets
 
 After [installing the Bundlr SDK](/developer-docs/sdk/installing-the-sdk), use the following to upload your assets. Make sure to set the Content-Type value to match the content type of your asset.
 
@@ -68,7 +68,7 @@ try {
 }
 ```
 
-## Creating Metadata
+## Creating metadata
 
 Embed the URLs generated from the above script into your NFT metadata. The following example is from the Bundlr Quests NFT.
 
@@ -82,7 +82,7 @@ Embed the URLs generated from the above script into your NFT metadata. The follo
 }
 ```
 
-## Uploading Metadata
+## Uploading metadata
 
 Finally, upload your NFT metadata to Bundlr and use the URL generated to mint the NFT.
 

@@ -2,7 +2,7 @@
 description: Transferring funds from your wallet to a node.
 ---
 
-# Funding A Node
+# Funding a node
 
 Use the `fund` command followed by a funding amount in atomic units to transfer funds from your wallet to the specified node.
 

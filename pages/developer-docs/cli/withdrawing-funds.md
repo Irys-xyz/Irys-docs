@@ -2,7 +2,7 @@
 description: Withdrawing excess funds from a node.
 ---
 
-# Withdrawing Funds
+# Withdrawing funds
 
 Use the `withdraw` command followed by a withdrawal amount in atomic units to withdraw funds from a node.
 

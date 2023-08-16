@@ -4,7 +4,7 @@ description: Build a decentralized social network for the creator economy using 
 
 import { Callout } from "nextra-theme-docs";
 
-# Bundlr Lens Quest
+# Bundlr Lens quest
 
 Welcome to the second Bundlr developer quest! In our first quest, we introduced our [SDK and each of its functions.](/hands-on/quests/bundlr-sdk-quest) Everyone who completed it learned skills needed to build a dApp using Bundlr, and earned an [NFT](https://opensea.io/assets/matic/0x1c8f5f29d1498474844d6a5160b640c674276dba/0).
 
@@ -42,7 +42,7 @@ For our second developer quest, we're going bigger: we're building a full social
 -   You'll learn how to build using the Lens React hooks
 -   Those that complete the quest will get an NFT
 
-## Time Requirements
+## Time requirements
 
 -   **Prep time**: 30 minutes
 -   **Build time**: 60 minutes
@@ -86,11 +86,11 @@ Then, if you want to take things a step further, there are coding challenges whe
 
 When you're done, you'll get access to an exclusive Developer Quest 2 NFT to celebrate your achievement.
 
-### Getting Help
+### Getting help
 
-We prepared this quest in both written and video forms to make sure there's something for all learning styles. There are links to outside documentation and lots of side notes that provide additional tips and tricks. If you do get stuck while building, the best way to get help is to hop on over to our [Discord](https://discord.bundlr.network), or [Telegram](https://t.me/bundlr) Someone from our team is always ready to answer questions. Additionally, you can compare the code you're writing against the main branch of the [GitHub repo](TODO) for this quest.
+We prepared this quest in both written and video forms to make sure there's something for all learning styles. There are links to outside documentation and lots of side notes that provide additional tips and tricks. If you do get stuck while building, the best way to get help is to hop on over to our [Discord](https://discord.bundlr.network), or [Telegram](https://t.me/bundlr) Someone from our team is always ready to answer questions. Additionally, you can compare the code you're writing against the main branch of the GitHub repo for this quest.
 
-### Mainnet vs Testnet
+### Mainnet vs testnet
 
 <img src="/img/quests/onlybundlr/LensHandles.png" width="80%" />
 
@@ -102,7 +102,7 @@ We'll build OnlyBundlr on the testnet.
 
 ## Architecture
 
-## Project Setup
+## Project setup
 
 Think of this quest like a coloring book. Just as a coloring book creates structure for you to make art, we've created a framework project you'll use to build a full application. The pieces you build will help you learn how to build with Bundlr and Lens.
 
@@ -125,17 +125,17 @@ If you clone with `framework` branch and try interacting with the project, you'l
 
 Take a moment and look at the code, you'll see multiple places where a function is empty and there's a comment saying, **`BUILDOOOORS: Complete this`**. This is a note to you that you'll need to code that section yourself using what you've learned here. All the answers are contained in the quest, read everything carefully and you'll finish the quest in 60 to 90 minutes.
 
-## Utils, Components, Pages
+## Utils, components, pages
 
 <img src="/img/quests/onlybundlr/VSCode.png" width="80%" />
 
 If you look at the layout of files in our framework project, you'll notice three folders `utils`, `components`, and `pages`. We'll start by building out the `utils` section by building a reusable library of Bundlr utility functions. Then we'll build out a library of reusable `components,`. The `pages` section contains code to combine your components together, there's only one file in here you'll need to complete there.
 
-## Lens React Hooks
+## Lens React hooks
 
 React hooks are an abstraction that allows developers to encapsulate and reuse stateful logic, simplifying the process of building in React. The [Lens SDK includes a collection of React Hooks](https://docs.lens.xyz/docs/sdk-react-intro) containing all you need to interact with the Lens Protocol. OnlyBundlr will use the React hooks to help simplify development.
 
-## Bundlr Utility Functions
+## Bundlr utility functions
 
 Storing data permanently on Bundlr is a four-step process that can be done from any JavaScript / TypeScript application:
 
@@ -146,7 +146,7 @@ Storing data permanently on Bundlr is a four-step process that can be done from 
 
 In this next section, we'll build utility functions for each.
 
-### Utils: Setting Up WebBundlr
+### Utils: Setting up `WebBundlr`
 
 The WebBundlr class is the point of entry used when interacting with Bundlr. It connects your code to a Bundlr node, and exposes functions used for funding, and uploading.
 
@@ -170,7 +170,7 @@ export const getBundlr = async () => {
 };
 ```
 
-### Utils: Getting Bundlr Node Balance
+### Utils: Getting Bundlr node blance
 
 Our Edit Profile UI has an option to fund a Bundlr node to pay for uploads, the utility function `bundlr.getLoadedBalance()` will be called to get the current funded balance. Note that node balances are recorded in atomic units, a number format that increases accuracy when doing floating point math in JavaScript. To make things easier to understand, this function converts the atomic balance into an easy-to-read format before returning it.
 
@@ -202,7 +202,7 @@ export const getBalanceMatic = async () => {
 };
 ```
 
-### Utils: Funding Bundlr Node
+### Utils: Funding Bundlr node
 
 As a pair to the previous function, the function `bundlr.fund()` will also be called from our Edit Profile UI to increase the amount funded on the current node.
 
@@ -234,7 +234,7 @@ export const fundNode = async (fundAmount) => {
 };
 ```
 
-### Utils: Uploading Images
+### Utils: Uploading images
 
 The next utility function accepts an image and a file type, then it checks the price to upload that image using `bundlr.getPrice()`, checks the current node balance, adds additional funds if needed, finally uploads the file using `bundlr.upload()`. This function will cause the browser wallet to popup twice, once to sign the funding transaction and once to sign the upload transaction.
 
@@ -284,7 +284,7 @@ export const uploadImage = async (fileToUpload, fileType) => {
 };
 ```
 
-### Utils: Uploading Metadata
+### Utils: Uploading metadata
 
 Our next utility function, `upload()` is similar to `upload-image()` however instead of uploading an image, it uploads a JSON object containing metadata. When working with Lens, all posts, likes, comments, and profile data is structured in a JSON object. That JSON object gets uploaded to Bundlr, and the URL to the metadata is then posted to Lens.
 
@@ -1693,7 +1693,7 @@ In about 90 minutes, you built an entire social dApp similar to OnlyFans or Patr
 
 Pat yourself on the back. You did something impressive.
 
-## Bonus Challenges
+## Bonus challenges
 
 You learn a lot from following along with a quest, however to really level up your skills, you need to take charge and build some additional features on your own. Before sharing your quest online and submitting to earn an NFT, pick one of these challenges and add some new features. There are challenges for all experience levels, pick the one that looks the most fun.
 
@@ -1702,7 +1702,7 @@ You learn a lot from following along with a quest, however to really level up yo
 -   **Encryption Challenge:** In OnlyBundlr we partially implemented follow-gating. We set things so you can set a fee to follow and that publications are only visible to followers. But, in the world of blockchains, information is public unless it's encrypted. Someone could circumvent our follow-gating by monitoring Bundlr for new metadata uploads and building a UI to show them. If you're up for a challenging challenge, try building full token-gating by [encrypting publication metadata with Lit Protocol.](https://docs.lens.xyz/docs/gated)
 -   **DIY Challenge:** Software design is all about being creative and thinking outside of the box. If the above challenges bore you and you'd rather do something different. Go for it! The last challenge is fully free-form, you think of some new feature and you built it!
 
-## How To Submit Your Work
+## How to submit your work
 
 Once you're done, [upload your project to GitHub](https://docs.github.com/en/get-started/quickstart/hello-world) and [set it up to preview on Vercel.](https://vercel.com/docs/concepts/get-started/deploy) Both GitHub and Vercel are free to use, and represent the best way to start building your portfolio as a developer.
 

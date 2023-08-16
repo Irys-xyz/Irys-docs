@@ -31,27 +31,27 @@ or yarn
 yarn add @bundlr-network/client
 ```
 
-#### 2: [Connect To A Bundlr Node](/developer-docs/sdk/connecting-node)
+#### 2: [Connect to a Bundlr node](/developer-docs/sdk/connecting-node)
 
 ```js
 const polygonPrivateKey = "6d779d4..."; // your private key
 const bundlr = new Bundlr("http://node2.bundlr.network", "matic", polygonPrivateKey);
 ```
 
-#### 3: [Fund Your Node](/developer-docs/sdk/api/fund) (To Pay For Uploads)
+#### 3: [Fund your node](/developer-docs/sdk/api/fund) (to pay for uploads)
 
 ```js
 const response = await bundlr.fund(fundAmount);
 ```
 
-#### 4: [Upload Data](/developer-docs/sdk/api/upload)
+#### 4: [Upload data](/developer-docs/sdk/api/upload)
 
 ```js
 const dataToUpload = "GM world.";
 const response = await bundlr.upload(dataToUpload);
 ```
 
-#### Step 5: [Download Your Data](/developer-docs/sdk/downloading-data)
+#### Step 5: [Download data](/developer-docs/sdk/downloading-data)
 
 ```js
 console.log(`Data Available at => https://arweave.net/${response.id}`);

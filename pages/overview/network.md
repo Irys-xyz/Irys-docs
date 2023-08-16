@@ -20,6 +20,6 @@ Uploads to the Mainnet can be paid for in any of the [14 tokens we support](/ove
 
 Uploads to Bundlr's [Devnet](/developer-docs/using-devnet) are kept for roughly 60 days. The Devnet is for building and prototyping projects along with learning our SDK.
 
-## Chain Integrations
+## Chain integrations
 
 Bundlr is multichain, supporting both paying for uploads with [14 tokens](/overview/supported-tokens) and signing that upload using the token’s cryptography. The signature type used to sign a transaction is tracked at the [transaction-level](/learn/bundles).

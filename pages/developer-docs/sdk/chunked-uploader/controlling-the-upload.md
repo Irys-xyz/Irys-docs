@@ -2,7 +2,7 @@
 description: Pausing and resuming uploads.
 ---
 
-# Controlling The Upload
+# Controlling the upload
 
 Uploads created with the chunked uploader can be paused and resumed at any time using the functions `uploader.pause()` and `uploader.resume()`. For these functions to work, the initial call to `uploader.uploadData()` or `uploader.uploadTransaction()` must not be preceded with the `await` keyword.
 

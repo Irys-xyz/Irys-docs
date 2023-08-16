@@ -2,7 +2,7 @@
 description: Use Tagging And GraphQL To Build A Provenance Chain
 ---
 
-# Build A Provenance Chain
+# Build a provenance chain
 
 This recipe guides you through building a provenance chain. If the topics of [provenance](/terminology#data-provenance) and [provenance chain](/terminology#provenance-chain) are new to you, start with [Proof of Provenance](/overview/solutions/proof-of-provenance).
 
@@ -33,7 +33,7 @@ const getBundlr = async () => {
 };
 ```
 
-## Storing The Root Asset
+## Storing the root asset
 
 Create a function that stores your root transaction. In the interest of simplicity, we will use text strings in this recipe. We upload with the function [`bundlr.uploadWithReceipt()`](/developer-docs/sdk/api/uploadWithReceipt) which returns a cryptographically signed receipt containing a timestamp accurate to the millisecond of when the upload happened.
 
@@ -48,7 +48,7 @@ const storeRoot = async (myData) => {
 };
 ```
 
-## Storing Updates
+## Storing updates
 
 Next, create a function that stores “updates”. This is similar to the above function, the only difference is it adds a new tag called `root-tx` that ties back each update to the root transaction.
 
@@ -69,13 +69,13 @@ const storeUpdate = async (rootTxId, myData) => {
 };
 ```
 
-## GraphQL Queries
+## GraphQL queries
 
 We'll employ two GraphQL queries to identify the transaction IDs and timestamps for each component in our provenance chain. The initial query fetches the timestamp for the root transaction, while the subsequent query retrieves all transaction IDs and timestamps for the updates.
 
 We'll examine the GraphQL queries first and then look at how to call them from JavaScript. You can experiment with these queries [by accessing our GraphQL sandbox](/developer-docs/graphql#endpoints).
 
-### Root Transaction Timestamp
+### Root transaction timestamp
 
 For the root transaction, we'll retrieve the timestamp from when it was uploaded. This provides a baseline for our provenance chain, as all subsequent updates will possess timestamps that follow this initial one.
 
@@ -91,7 +91,7 @@ query getByIds {
 }
 ```
 
-### Update Transaction IDs and Timestamps
+### Update transaction IDs and timestamps
 
 The second query retrieves all following transactions and arranges them chronologically according to their timestamps, thus establishing the correct time sequence.
 
@@ -108,11 +108,11 @@ query getProvenanceChain {
 }
 ```
 
-## Query Functions
+## Query functions
 
 This recipe uses the HTTP fetch library to interact with our GraphQL endpoint due to its simplicity. However, if your application demands a more robust solution, consider replacing it with a comprehensive GraphQL client like [Apollo.](https://www.apollographql.com/)
 
-### Root Timestamp And Data
+### Root timestamp and data
 
 Use GraphQL to query for the timestamp of the root transaction, then fetch the data payload. Create a JavaScript object holding both and return it embedded in an array.
 
@@ -162,7 +162,7 @@ const getRootTx = async (rootTxId) => {
 };
 ```
 
-### Update Timestamps And Data
+### Update timestamps and data
 
 Then query for all transaction IDs and timestamps in the update chain, fetch the associated data payloads and return them as an array of objects.
 
@@ -217,7 +217,7 @@ const getProveanceChain = async (rootTxId) => {
 };
 ```
 
-## Creating The Chain
+## Creating the chain
 
 To create the full chain, first request the root data, then the update data. Concatenate both arrays together and output using the `console.table()` function.
 
@@ -230,7 +230,7 @@ const printProveanceChain = async (rootTxId) => {
 };
 ```
 
-## Calling The Functions
+## How to run
 
 This is an example of calling the functions first with “Hello World” and then with updates that translate it into different languages.
 
@@ -252,7 +252,7 @@ When run, the code will output something similar to this.
 
 <img className="border border-[#FEF4EE] rounded mt-5 w-5/6" src="/img/recipes/provenance-chain-output.png" />
 
-## Full Code
+## Full code
 
 For ease of implementation, the full code for this recipe is as follows.
 

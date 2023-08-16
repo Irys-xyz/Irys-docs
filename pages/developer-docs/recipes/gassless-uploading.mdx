@@ -2,7 +2,7 @@
 description: Using Server-Side signing to implement gassless transactions.
 ---
 
-# Gassless Uploading With Server-Side Signing
+# Gassless uploading with server-side signing
 
 Server-side signing is a method to allow you to sign (and pay) for your users' data securely (without exposing your private key). It is a form of gassless transactions.
 
@@ -13,7 +13,7 @@ Server-side signing works in 4 main steps:
 3. The server then signs this data and returns the resulting signature to the client.
 4. The client then inserts this signature into their data, resulting in a signed transaction identical to if the client had access to the private key.
 
-## Supported Currencies
+## Supported currencies
 
 Currently, server-side signing is supported for the following:
 
@@ -28,7 +28,7 @@ Currently, server-side signing is supported for the following:
 -   Boba
 -   Solana
 
-## Getting Started
+## Getting started
 
 We have a full demo app written in NextJS and TypeScript that demonstrates uploading an image using server-side signing. It's available in two versions
 
@@ -37,7 +37,7 @@ We have a full demo app written in NextJS and TypeScript that demonstrates uploa
 
 The demo app completely hides the entire process of using Bundlr and any form of Web3 technology from the user. The user simply uploads an image, and an URL to preview the image on the permaweb is returned. Upload fees are paid by the private key owned by the server.
 
-## API Routes
+## API routes
 
 The [example app](https://github.com/Bundlr-Network/tutorial-server-side-signing) exposes three API routes, you can pick and choose which to use based on your own app design.
 
@@ -45,7 +45,7 @@ The [example app](https://github.com/Bundlr-Network/tutorial-server-side-signing
 
 The route `publicKey.ts` returns the public key for the server's wallet. This is the first route called by the client.
 
-#### Solana-Based Wallets
+#### Solana-based wallets
 
 ```ts filename="publicKey.ts"
 import Bundlr from "@bundlr-network/client/build/node";
@@ -78,7 +78,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 }
 ```
 
-#### ETH-Based Wallets
+#### ETH-Based wallets
 
 ```ts filename="publicKey.ts"
 import { TypedEthereumSigner } from "arbundles";
@@ -103,7 +103,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
 The route `signData.ts` signs the data provided using the server's private key. This is the second route called by the client.
 
-#### Solana-Based Wallets
+#### Solana-based wallets
 
 ```ts filename="signData.ts"
 import Bundlr from "@bundlr-network/client/build/node";
@@ -151,7 +151,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 }
 ```
 
-#### Eth-Based Wallets
+#### ETH-based wallets
 
 ```ts filename="signData.ts"
 import type { NextApiRequest, NextApiResponse } from "next";
@@ -182,7 +182,7 @@ The route `lazyFund.ts` is an optional route used for lazy-funding uploads. Some
 
 To perform lazy-funding of uploads, pass the exact number of bytes you want to fund to this route. The route will compute the current cost to upload those bytes and fund it using the server's private key.
 
-#### Solana-Based Wallets
+#### Solana-based wallets
 
 ```ts filename="lazyFund.ts"
 import Bundlr from "@bundlr-network/client/build/node";
@@ -225,7 +225,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 }
 ```
 
-#### Eth-Based Wallets
+#### ETH-based wallets
 
 ```ts
 import Bundlr from "@bundlr-network/client";
@@ -276,13 +276,13 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 }
 ```
 
-## Client-Side Code
+## Client-side code
 
 Below are snippets showing how to call each server route.
 
-### Obtaining The Server's Public Key
+### Obtaining the server's public key
 
-#### For Solana and Eth-Based Wallets
+#### For Solana and ETH-based wallets
 
 ```ts
 // obtain the server's public key
@@ -292,9 +292,9 @@ const pubKeyRes = await(await fetch("/api/publicKey")).json() as unknown as {
 const pubKey = Buffer.from(pubKeyRes.pubKey, "hex");
 ```
 
-### Creating A Provider Using The `signData` Route
+### Creating a provider using the `signData` route
 
-#### For Solana-Based Wallets
+#### For Solana-based wallets
 
 ```ts
 // create a provider
@@ -318,7 +318,7 @@ const provider = {
 };
 ```
 
-#### For Eth-Based Wallets
+#### For ETH-based wallets
 
 ```ts
 const provider = {
@@ -352,9 +352,9 @@ const provider = {
 };
 ```
 
-### Lazy-Funding Uploads
+### Lazy funding uploads
 
-#### For Solana and Eth-Based Wallets
+#### For Solana and ETH-based wallets
 
 ```ts
 // 1. first create the datastream and get the size

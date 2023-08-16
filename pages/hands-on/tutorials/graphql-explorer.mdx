@@ -4,7 +4,7 @@ description: You'll Learn - How use GraphQL to query Arweave
 
 import { Callout } from "nextra-theme-docs";
 
-# Build A GraphQL Explorer
+# Build a GraphQL explorer
 
 When uploading data to Arweave using Bundlr, you have an option to [tag that data with metadata](/developer-docs/tags). This is generally used to do things like set the `Content-Type` tag to help browsers render the data, or to set a custom `App-Name` tag to help you organize your uploads.
 
@@ -21,19 +21,19 @@ While this is a pretty simple tutorial meant to teach the basics of GraphQL and 
 
 All the code for this project can be [found on GitHub](https://github.com/Bundlr-Network/tutorial-graphql-tag-explorer).
 
-## Here's A Peek At What We're Going To Build.
+## Preview
 
 ![](/img/tutorials/graphql-explorer/graphql-project-overview.png)
 
-## What Is GraphQL
+## What is GraphQL?
 
 GraphQL is a **query language** for APIs, it's used to search for, retrieve, update and write information. It's different from JavaScript which is a full-blown **programming language** where you can do just about anything.
 
 If you have experience querying APIs directly in a REST architecture, or making database queries with SQL, then you're familiar with query languages. GraphQL takes a different approach though, one that makes a lot of sense when working with blockchains. With GraphQL you're able to optimize your interactions by making multiple requests in a single query call. You're further able to optimize by requesting the exact data you want out. You don't need to over-fetch data and waste bandwidth transferring data you don't need.
 
-## Query, Mutation, Subscription
+## Query, mutation, subscription
 
-If you're going to grok GraphQL, you'll need to start with the basics: **queries, mutations and subscriptions.**
+If you're going to understand GraphQL, you'll need to start with the basics: **queries, mutations and subscriptions.**
 
 1. Query: A query is the most common operation in GraphQL. It allows the client to retrieve specific data from the server by specifying the fields they need. Queries are used to fetch data and are read-only operations.
 
@@ -43,7 +43,7 @@ If you're going to grok GraphQL, you'll need to start with the basics: **queries
 
 To put that in simple language. Queries get data out, subscriptions are like queries that update automatically, and muations put data in. This tutorial focuses specifically on queries.
 
-## Anatomy Of A Query
+## Anatomy of a query
 
 When creating a query using GraphQL, you have two main tasks. First specify your filter criteria, the data points you want to search for. Then you specify the structure of the result, the data you want out.
 
@@ -59,7 +59,7 @@ We start out by specifying that we're creating a query (not a subscription or a 
 
 When building and testing your own queries, you can test them [in the Arweave GraphQL playground.](https://arweave.dev/graphql)
 
-## Installation And Setup
+## Installation and setup
 
 Cool, cool, cool. Ready to code?
 
@@ -152,7 +152,7 @@ By wrapping the `<App />` tag with `<ApolloProvider>` tags, you make the client 
 const client = useApolloClient();
 ```
 
-## Query File
+## Query file
 
 As we're working with two different languages in this project (JavaScript and GraphQL), it's good practice to bifurcate your file structure and store all of your GraphQL queries separately from your main JavaScript code. The GraphQL file then exports the queries as constants that can be used by other parts of your application.
 
@@ -164,7 +164,7 @@ The two queries below are an extension of what we created above. The first one `
 
 If you've only used JavaScript before, you may not be used to declaring the type of your variable. JavaScript is what's called dynamically typed, meaning you don't need to declare what type a variable is when creating it. This does make coding rather quick but can lead to confusion and problems down the line. TypeScript was built on top of JavaScript and added a handful of features including the ability to declare variable types. GraphQL, like TypeScript, is a statically typed language. Meaning you have to declare a variable's type when using it.
 
-A full deep-dive into GraphQL types is beyond the scope of this tutorial, but it's worth taking a time to look at one specific subset. Here's a table comparing GraphQL Scaler Types to JavaScript Primitive Types. As my query is specifying a number of images to return, I use the GraphQL Int Scaler Type. Were I to pass in the value of the the `Content-Type` tag as a variable, I would declare that variable as a `String`.
+A full deep-dive into GraphQL types is beyond the scope of this tutorial, but it's worth taking a time to look at one specific subset. Here's a table comparing GraphQL Scaler Types to JavaScript Primitive Types. As my query is specifying a number of images to return, I use the GraphQL Int Scaler Type. Were I to pass in the value of the `Content-Type` tag as a variable, I would declare that variable as a `String`.
 
 | GraphQL Scalar Types | JavaScript Primitive Types |
 | -------------------- | -------------------------- |
@@ -206,7 +206,7 @@ export const GET_PNG_10 = gql`
 `;
 ```
 
-## Page Structure
+## Page structure
 
 Nice, making progress. Next, modify your `App.js` file as follows. Notice how on lines 6 and 7, we import the queries declared above. Then on line 19, we have an empty `useEffect()` function and on line 39 an empty `doQuery()` function. Take a look at the code first, in the next sections we'll flush out `useEffect` and `doQuery` and look at how to run the actual query.
 

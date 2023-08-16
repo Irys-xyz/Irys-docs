@@ -2,7 +2,7 @@
 description: Uploading an entire folder from the CLI.
 ---
 
-# Uploading A Folder
+# Uploading a folder
 
 Use the `upload-dir` command followed by a file name to upload a directory. The CLI will respond with a manifest id that can be used to query the network for the uploaded files.
 

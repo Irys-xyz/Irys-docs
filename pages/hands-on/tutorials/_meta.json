@@ -1,8 +1,8 @@
 {
-	"arweave-wallet": "Get An Arweave Wallet",
+	"arweave-wallet": "Get an Arweave wallet",
 	"setup-metamask": "Setup MetaMask",
-	"bundlr-sdk": "Learn The Bundlr SDK",
-	"react-components": "Build Bundlr React Components",
-	"mixtape-dapp": "Build a 90s-Style Mixtape dApp",
-	"graphql-explorer": "Build A GraphQL Explorer"
+	"bundlr-sdk": "Learn our SDK",
+	"react-components": "Build Bundlr react components",
+	"mixtape-dapp": "Build a 90s-style mixtape dApp",
+	"graphql-explorer": "Build a GraphQL explorer"
 }

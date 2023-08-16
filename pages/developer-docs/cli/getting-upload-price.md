@@ -2,7 +2,7 @@
 description: Checking the price to upload n bytes.
 ---
 
-# Getting Upload Price
+# Getting upload price
 
 Use the `price` command to query the price to upload a n bytes to a given node.
 

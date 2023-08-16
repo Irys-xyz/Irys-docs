@@ -2,7 +2,7 @@
 description: Our instantly accessible immutable data layer with custom metadata tagging and verifiable timestamping helps you build irrefutable provenance chains.
 ---
 
-# Proof Of Provenance
+# Proof of provenance
 
 Data provenance is a critical aspect of trustworthy and reliable data. It enables us to trace the origin and movement of data throughout its lifecycle, providing valuable insights into how it was created, who has interacted with it, and how it has evolved over time.
 
@@ -16,7 +16,7 @@ Bundlr's Proof of Provenance leverages cryptographic techniques to establish an 
 
 -   **Provenance chains** refer to the chain of custody or the history and evolution of data stored on a blockchain.
 
-## Why Use Proof Of Provenance?
+## Why use proof of provenance?
 
 An illustrator could create and upload an image, and the receipt received on upload would provide proof they were the first to upload it. The receipt would establish provenance.
 
@@ -28,11 +28,11 @@ All of this would create a chain of provenance showing the original artwork and 
 
 <img className="mt-5" src="/img/learn/provenance-chain.png" width="80%" />
 
-## Receipts / Timestamps
+## Receipts / timestamps
 
 With Bundlr, users have the option to receive a receipt containing a [signed timestamp proof](/learn/receipts). For Proof of Provenance, a receipt is essential as it provides a verifiable record of transaction sequencing, ensuring no malicious activity has taken place.
 
-## Querying Data
+## Querying data
 
 All metadata uploaded to Bundlr is readily queryable using GraphQL. Proof of Provenance is supported on Node 1 and on Devnet.
 
@@ -63,12 +63,7 @@ To query metadata associated with the upload, use the following query:
 query DataProvenanceQuery {
 	transactions(
 		order: ASC
-		tags: [
-			{
-				name: "provenance-chain-id"
-				values: ["Yaa-ZPQQub_66joUJZ-2BDRbmaPj-q3SHdiSiHb06hc"]
-			}
-		]
+		tags: [{ name: "provenance-chain-id", values: ["Yaa-ZPQQub_66joUJZ-2BDRbmaPj-q3SHdiSiHb06hc"] }]
 	) {
 		edges {
 			node {

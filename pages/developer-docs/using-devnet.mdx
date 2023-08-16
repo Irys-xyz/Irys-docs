@@ -10,7 +10,7 @@ To connect to Devnet, supply the address of our Devnet node when instantiating e
 
 It's important to note that when using Devnet with the `Bundlr` class, you must specify an RPC address. When using the `WebBundlr` class, the RPC address is only required when using non-EVM chains.
 
-#### `Bundlr` Class
+#### `Bundlr` class
 
 ```js
 // For Solana
@@ -24,13 +24,13 @@ const bundlr = new Bundlr("https://devnet.bundlr.network", "matic", "<polygon-pr
 });
 ```
 
-#### `WebBundlr` Class And EVM Chains
+#### `WebBundlr` class and EVM chains
 
 ```js
 const bundlr = new WebBundlr("https://devnet.bundlr.network", "matic", provider);
 ```
 
-#### `WebBundlr` Class And Non-EVM Chains
+#### `WebBundlr` class and non-EVM chains
 
 ```js
 const bundlr = new WebBundlr("https://devnet.bundlr.network", "solana", provider, {

@@ -4,7 +4,7 @@ description: You'll Learn - How to build a full dApp using React, Bundlr, Alchem
 
 import { Callout } from "nextra-theme-docs";
 
-# Build A 90s Style Mixtape dApp
+# Build a 90s style mixtape dApp
 
 ## Overview
 
@@ -268,11 +268,11 @@ In the actual template, we'll mark the location where this data should be inject
 ]
 ```
 
-### Mixtape Title
+### Mixtape title
 
 The Mixtape title will be written by the user at creation time and injected into the template at the location marked by the tag `||TITLE||`.
 
-### Mixtape Image
+### Mixtape image
 
 For the mixtape image, I took the cassette tape graphic on that page of 90s vectors and made 20 different versions each with different colors. Then when the user initiates a save, I pick one image at random and inject it into the template at a location marked by the tag `||IMAGE||`.
 
@@ -524,7 +524,7 @@ Here's the full html for the template, I'm not going to dig into it line by line
 </html>
 ```
 
-### Moving The Template On-Chain
+### Moving the template on-chain
 
 Our template consists of the document above and also the 20 different cassette images. Since the images and template file are immutable, we can move them onto Arweave using Bundlr and then not have to worry about them again. You can either follow along with the following steps, or just read along and use the versions I uploaded already. The rest of the tutorial code will reference the versions I uploaded to Bundlr myself, and since the data is available publically and guaranteed to be there forever, there's no need to duplicate the uploads if you don't want to.
 
@@ -551,7 +551,7 @@ After running the command, you'll notice a file created in your local file syste
 
 That's it! Amazing, huh? One command, a few seconds of processing, a very small fee paid and all that data is not only uploaded to the permaweb, but guaranteed to be there for a minimum of 200 years.
 
-## Page Structure
+## Page structure
 
 ![](/img/tutorials/blockmix/blockmix-overview-3.png)
 
@@ -737,7 +737,7 @@ I've abstracted out a bunch of the logic into different components:
 3. `<TrackList />` A table showing search results.
 4. `<SplashScreen />` A opening screen showing some cool 90s graphics
 
-### Full Code
+### Full code
 
 Start by typing this into `pages/Mix.js`, once you're done we'll break down the different components.
 
@@ -915,7 +915,7 @@ All the logic on this page is dedicated to searching, first we search Audius, th
 
 Start first with the `doSearch()` function on line 116. This function sets a max number of tracks per data source at 15, then calls sub-search functions for each data source. If you wanted to expand on this project and allow searching of additional contracts, this is where you'd put all your logic. Finally we randomize the track list so that the same items aren't always appearing at the top. If you did want to create a traditional search engine, you could easily remove the randomness.
 
-### Audius Search
+### Audius search
 
 The Audius SDK makes it crazy easy to search for tracks. We simply:
 
@@ -955,7 +955,7 @@ for (let i = 0; i < audiusTracks.length; i++) {
 }
 ```
 
-### Alchemy SDK Search
+### Alchemy SDK search
 
 The search using the Alchmey SDK is similar, and it's also the code that will be most reusable. The Alchemy SDK makes is very easy to query metadata for different NFT projects, which means you can easily add newer contracts simply by changing the contract address. You can even make this project cross-chain by using contract addresses from different blockchains.
 
@@ -1482,7 +1482,7 @@ const Mixtape = ({ playlistTracks, setPlaylistTracks }) => {
 export default Mixtape;
 ```
 
-Ok, cool. Let's start with the `doSave()` function on line 41.
+Let's start with the `doSave()` function on line 41.
 
 The top of the function is where we define the URL for the template and cassette images uploaded to Bundlr earlier on. If you're using my versions, just leave this code alone. If you decided to create your own look at feel, change these values to the ones you uploaded.
 
