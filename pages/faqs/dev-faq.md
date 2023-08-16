@@ -9,6 +9,58 @@ description: Frequently asked questions from our developer community.
 Each node has different pricing. From network design, it creates competition.
 Higher Competition = Higher user value for money (to a point). Nodes do not share funding balances, you can only upload to a node you have funded.
 
+## How can I see the manifest file associated with my upload?
+
+You can request it from the Bundlr gateway with an URL in this format. Replace `txid` with your transaction id. `https://gateway.bundlr.network/tx/:txid/data`
+Why do we subsidize uploads <= 100 KB on Node 2?
+This is a public good for users to be encouraged to try Bundlr.
+
+## Do you support UMD bundles for your SDKs?
+
+When using Bundlr in the browser, you can either install using npm / yarn if you’re using a framework or load via a UMD if you’re using VanillaJS. To load via a CDN, include the following URL
+
+```console
+https://unpkg.com/@bundlr-network/client/build/bundle.js
+```
+
+Include via a script tag (in the head section of your main html file).
+
+```html
+<script src="https://unpkg.com/@bundlr-network/client/build/bundle.js"></script>
+```
+
+## How do I create a notification script to notify me when my node balance is close to 0?
+
+You can do this using [JavaScript](/developer-docs/recipes/monitor-node-balance#javascript), our [CLI](/developer-docs/recipes/monitor-node-balance#cli), or [cURL](/developer-docs/recipes/monitor-node-balance#curl).
+
+## Why can Bundlr be more expensive than Arweave sometimes?
+
+The additional fees cover the value-added services that Bundlr offers on top of Arweave [including guarantees on finalization and seeding of data to miners](/learn/transaction-lifecycle), instant uploads via [optimistic finalization](/faqs/dev-faq#what-is-optimistic-finalization), instant retrieval via [Optimistic GraphQL](/learn/gateways#querying) and the [Optimistic Cache](/learn/optimistic-cache), and also covers the risk we assume by offering payments in [14 different tokens](/overview/supported-tokens).
+
+It's important to recognize that Bundlr's pricing structure differs from Arweave's. Where Arweave charges storage fees in 256 KiB chunks, Bundlr charges on a per-byte basis, with a premium on top of Arweave's rates. Consequently, for uploads of <200KB where Bundlr is a cheaper option.
+
+For a comprehensive understanding of our fee structure, [please refer to our documentation](/overview/fees).
+
+## What is a nested bundle?
+
+Bundling aggregates multiple transactions into a single top-level bundle before storing on Arweave. Nested bundles are transactions in a [bundle](/learn/bundles) that contain another bundle, not just a single upload. As Arweave has a limit of 1000 transactions per block, the use of bundles and nested bundles exponentially increases the number of transactions that can be posted per block.
+
+Regardless of where in the [bundle](/learn/bundles) your transaction is stored, it’s still [instantly available](/learn/optimistic-cache) via [gateways](/learn/gateways).
+
+For more information see the [ANS-104 Bundle spec](https://github.com/ArweaveTeam/arweave-standards/blob/master/ans/ANS-104.md).
+
+## What does the Error “Not enough funds to send data” mean?
+
+This is an indication [you haven’t funded a node yet or haven’t funded enough to cover the cost of your upload](/developer-docs/sdk#connect-to-and-fund-a-node). When uploading to Bundlr, you first connect a node and then fund that node. Balances are not shared between nodes, so if you’re uploading to Node 1, you will need to fund Node 1. You can fund the node in any of the tokens we support, and when working with our Devnet, you fund with free faucet tokens like [Mumbai MATIC](https://mumbaifaucet.com/), [Sepolia ETH](https://sepoliafaucet.com/) or [SOLANA](https://solfaucet.com/).
+
+To check the cost of a given upload, use our [`bundlr.getPrice()`](/developer-docs/sdk/api/getPrice) function.
+
+## Are there any 3rd party implementations of the Bundlr client in languages besides JavaScript?
+
+For users looking to integrate Bundlr into projects written in languages other than JavaScript or TypeScript, there are other clients created and managed by our community. These clients are community-developed and, while not officially endorsed by Bundlr, they implement functionality similar to our official SDK.
+
+-   [Go](https://github.com/warp-contracts/syncer/blob/main/src/bundle/bundler.go)
+
 ## What is the difference between `<uploadFile>` and `<uploadFolder>` ?
 
 `<uploadFile>` is one by one.
