@@ -2,9 +2,11 @@
 
 ## Nodes
 
-Bundlr has three nodes. Uploads to node 1 and node 2 are permanent. Uploads of less than 100 KiB are currently free on node 2.
+Bundlr has three nodes.
 
-Node 1 and Devnet support bundling and [Proof of Provenance](/overview/solutions/proof-of-provenance), Node 2 supports bundling only.
+Uploads to Node 1 and Node 2 are permanent, while uploads to Devnet are kept for ~60 days.
+
+Node 2 is ideal for early-stage projects, while larger projects typically prefer Node 1 as it can scale to a higher TPS. Uploads of less than 100 KiB are currently free on Node 2.
 
 -   `https://node1.bundlr.network`
 -   `https://node2.bundlr.network`
