@@ -15,13 +15,15 @@ The UDL uploader attaches a Universal Data License to files and uploads them to 
 
 ## Universal Data License
 
-The [Universal Data License (UDL)](https://mirror.xyz/0x64eA438bd2784F2C52a9095Ec0F6158f847182d9/AjNBmiD4A4Sw-ouV9YtCO6RCq0uXXcGwVJMB5cdfbhE) provides content creators with a straightforward way to define how their content can be used, along with the prices they set for its use. It is a standardized and parameterized approach that opens up new financial opportunities for creators and builders.
+The [Universal Data License (UDL)](https://mirror.xyz/0x64eA438bd2784F2C52a9095Ec0F6158f847182d9/AjNBmiD4A4Sw-ouV9YtCO6RCq0uXXcGwVJMB5cdfbhE) provides content creators with a straightforward way to define how their content can be used. It is a standardized and parameterized approach that opens up new financial opportunities for creators and builders.
 
 ## Tags
 
 When using Bundlr to upload data to Arweave, [you can attach up to 20 tags to each transaction](/developer-docs/tags). These tags, in the form of name / value pairs, are [indexed and are queryable using GraphQL](/developer-docs/graphql). When adding a UDL to an upload, you use a pre-defined set of tags to describe how you allow your data to be used.
 
-The UDL uploader has a UI that covers most UDL parameters. When uploading a file, the UDL parameters are converted to tags and attached to the file at upload.
+The UDL uploader has a UI that covers most UDL parameters, you can manually [customize the UI to include additional parameters as needed](https://dev.to/fllstck/monetize-your-content-with-the-udl-1i1l).
+
+When uploading data, UDL parameters are converted to tags and attached to the data at upload.
 
 ## Code
 
@@ -29,7 +31,7 @@ The UDL uploader does not natively support any customizations, however when fork
 
 ### Configuring the license
 
-All of the processing for this component happens in the `handleUpload()` function. After validating input, an array of tags is built. This is where you could hardcode values instead of having them configurable in the UI.
+All of the processing for UDLUploader happens in the `handleUpload()` function. After validating input, an array of tags is built. This is where you could hardcode values instead of having them configurable in the UI.
 
 ```ts filename="components/UDLUploader.tsx"
 const tags: Tag[] = [];

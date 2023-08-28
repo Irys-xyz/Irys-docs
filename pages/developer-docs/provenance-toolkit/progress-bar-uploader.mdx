@@ -21,12 +21,12 @@ The component uses a lazy funding approach, it first determines the cost to uplo
 
 You can customize the behavior of the component to either show or hide the preview panel. Users may choose to hide the panel if it doesn't fit with their UI design, or if they are uploading files other than images or videos.
 
-| Description           | Code                                                      |
-| --------------------- | --------------------------------------------------------- |
-| Default Behavior      | `<ProgressBarUploader />`                                 |
-| Hide the file preview | `<ProgressBarUploader config={{ showPreview: false }} />` |
+| Description           | Code                                             |
+| --------------------- | ------------------------------------------------ |
+| Default Behavior      | `<ProgressBarUploader />`                        |
+| Hide the file preview | `<ProgressBarUploader showPreview = {false } />` |
 
-If the `showPreview` parameter is not provided, the component defaults to showing the preview.
+If `showPreview` parameter is omitted, the component defaults to showing the preview.
 
 ## Code
 
@@ -40,7 +40,7 @@ const [progress, setProgress] = useState<number>(0);
 
 ### Using the chunked uploader
 
-When setting up the chunked uploader, configure it by setting the batch size and chunk size. You may need to experiment with these values as you build your application, the ideal configuration will depend on factors like your average file size and the quality of your end-user's internet connections.
+When setting up the chunked uploader, configure it by setting the batch size and chunk size. You may need to experiment with these values as you build your application, the ideal configuration will depend on factors including average file size and the quality of your end-user's internet connection.
 
 ```ts filename="components/ProgressBarUploader.tsx"
 const bundlr = await getBundlr();
@@ -52,7 +52,7 @@ uploader.setChunkSize(2000000);
 
 ### Event callbacks
 
-Three different event handlers are supported.
+Three different event callbacks are supported, use them to have code run during and after your upload. Currently they are used to update the progress bar.
 
 `chunkUpload`: Called after each chunk is uploaded, updates the progress bar.
 
@@ -73,7 +73,7 @@ uploader.on("chunkError", (e) => {
 });
 ```
 
-`done`: Called when the upload is complete.
+`done`: Called when the upload is complete, sets the progress bar to 100%.
 
 ```ts filename="components/ProgressBarUploader.tsx"
 uploader.on("done", (finishRes) => {
@@ -85,7 +85,9 @@ uploader.on("done", (finishRes) => {
 
 ## Uploading the file
 
-Finally the file is passed to the uploader and the URL to the file is shown in the UI and stored in a state variable. The file is uploaded with strong provenance, to obtain a copy of the [receipt](/learn/receipts), you can request it by passing the transaction id to our SDK function [`bundlr.utils.getReceipt()`](/developer-docs/sdk/api/utils-getReceipt)
+Once the event callbacks are setup, the file is passed to the uploader and the URL to the file is shown in the UI and stored in a state variable.
+
+The file is uploaded with strong provenance, to obtain a copy of the [receipt](/learn/receipts), you can request it by passing the transaction id to our SDK function [`bundlr.utils.getReceipt()`](/developer-docs/sdk/api/utils-getReceipt)
 
 ```ts filename="components/ProgressBarUploader.tsx"
 await uploader

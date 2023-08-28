@@ -4,9 +4,9 @@ description: UI component to manage funding and withdrawing node balances
 
 import { Callout } from "nextra-theme-docs";
 
-# Fund / Withdraw
+# Fund / withdraw
 
-The fund / withdraw UI component is used to manage node balances.
+The FundWithdraw UI component is used to manage node balances.
 
 <img
 	className="border border-[#FEF4EE] rounded-xl mt-5 md:w-3/6 w-full"
@@ -17,27 +17,25 @@ The fund / withdraw UI component is used to manage node balances.
 
 When uploading data to Bundlr, first connect to and then fund a node. Balances are not shared between nodes, fund the node you intend to use.
 
-For dApps where end-users are responsible for upload costs, use this component so your users can both fund and withdraw from nodes. You can customize the UI using component parameters, anchoring it to a single node and payment token.
-
-For those using our gasless uploader, you can use this component to easily top-up node balances.
-
 ## Customizing the UI
 
-The FundWithdraw component provides a default UI that includes options for the end user to select a node, choose a currency, and decide between funding or withdrawing. You can also modify the UI to hardwire the node address, currency, or fix the mode (either to "fund-only" or "withdraw-only") using configuration parameters.
+The FundWithdraw component provides a default UI that includes options for the end user to select a node, choose a currency, and decide between funding or withdrawing.
 
-| Description               | Code                                                                 |
-| ------------------------- | -------------------------------------------------------------------- |
-| Default Behavior          | `<FundWithdraw />`                                                   |
-| Fix the node              | `<FundWithdraw config={{ node: "https://node1.bundlr.network" }} />` |
-| Fix the currency          | `<FundWithdraw config={{ currency: "ethereum" }} />`                 |
-| Set to fund-only mode     | `<FundWithdraw config={{ fundOnly: true }} />`                       |
-| Set to withdraw-only mode | `<FundWithdraw config={{ withdrawOnly: true }} />`                   |
+You can also modify the UI to hardwire the node address, currency, or fix the mode (either to "fund-only" or "withdraw-only") using configuration parameters.
 
-If both fundOnly and withdrawOnly are set to false, the component defaults to the "fund-only" mode.
+| Description               | Code                                                   |
+| ------------------------- | ------------------------------------------------------ |
+| Default Behavior          | `<FundWithdraw />`                                     |
+| Fix the node              | `<FundWithdraw node="https://node1.bundlr.network" />` |
+| Fix the currency          | `<FundWithdraw currency="ethereum" />`                 |
+| Set to fund-only mode     | `<FundWithdraw fundOnly={ true } />`                   |
+| Set to withdraw-only mode | `<FundWithdraw withdrawOnly={ true }/>`                |
+
+If both fundOnly and withdrawOnly are set to false, the component defaults to fund-only mode.
 
 ## Code
 
-The component is designed to be used as-is, however, you are welcome to manually customize it in any way you need. Below are key code aspects to retain during modifications.
+The component is designed to be used as-is. Users making significant changes to the UI will need to understand the following.
 
 ### Atomic units
 
@@ -52,9 +50,9 @@ When funding and withdrawing using the functions [`bundlr.fund()`](/developer-do
 
 ### Getting funded balance
 
-When the component is set to "withdraw" mode, the UI will automatically check and display the user's currently funded balance. This enhances the UX by allowing users to see exactly how much they can withdraw. Given that balances are both node and currency-specific, this balance check is encapsulated within a `useEffect()` hook that gets triggered when the component mounts and also whenever the user changes either the selected node or currency.
+When the component is set to "withdraw" mode, the UI will automatically check and display the user's currently funded balance. As balances are both node and currency-specific, this balance check is encapsulated within a `useEffect()` hook that gets triggered when the component mounts and also whenever the user changes either the selected node or currency.
 
-To get the currently funded balance, first connect to a Bundlr node using the Node and currency selected by the user:
+To get the currently funded balance, first connect to a Bundlr node using the node and currency selected by the user:
 
 ```ts filename="components/FundWithdraw.tsx"
 const bundlr = await getBundlr(selectedNode?.value, selectedCurrency?.value);
@@ -100,13 +98,13 @@ Funding and withdrawing happen in the function `handleFundWithdraw()`. This func
 const bundlr = await getBundlr(selectedNode?.value, selectedCurrency?.value);
 ```
 
-When funding, the function first converts the value entered by the user to atomic units and then uses that value to fund:
+When funding, convert the value entered by the user to atomic units and then use that value to fund:
 
 ```ts filename="components/FundWithdraw.tsx"
 const fundTx = await bundlr.fund(bundlr.utils.toAtomic(amount));
 ```
 
-And when withdrawing, the function does the same:
+When withdrawing, convert the value entered by the user to atomic units and then use that value to withdraw:
 
 ```ts filename="components/FundWithdraw.tsx"
 const fundTx = await bundlr.withdrawBalance(bundlr.utils.toAtomic(amount));

@@ -1,4 +1,16 @@
 {
-	"react-components": "Build Bundlr react components",
-	"graphql-explorer": "Build a GraphQL explorer"
+	"react": "Using npx-create-react-app",
+	"react-components": "Bundlr React components",
+	"monitor-node-balance": "Monitor node balance",
+	"provenance-chain": "Provenance chain",
+	"uploading-static-sites": "Upload a static website",
+	"livepeer": "Transcode video with Livepeer",
+	"graphql-explorer": "GraphQL explorer",
+	"gassless-uploading": "Gassless uploads",
+	"uploading-nfts": "Upload NFT assets",
+	"metaplex": "Solana NFTs with Metaplex",
+	"udl-erc20": "Manage UDL ownership with ERC20",
+	"udl-nft": "NFT licnesning and UDL",
+	"lens": "Upload Lens metadata",
+	"lens-mobile": "Create a mobile Lens app"
 }
