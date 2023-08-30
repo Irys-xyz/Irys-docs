@@ -23,19 +23,19 @@ When uploading a single file, the URL generated is in the form `https://arweave.
 	src="/img/provenance-toolkit/uploader-view-options.png"
 />
 
-Once uploaded, the UI updates to include buttons that can be clicked to view the upload and the upload [receipt](/learn/receipts). When previewing uploads, all image types are supported. If your application is working with files other than images, you can remove the upload preview or modify the code to include support for previewing your file type.
+Once uploaded, the UI updates to include buttons that can be clicked to view the upload and the upload [receipt](/learn/receipts). When previewing uploads, all image types are supported. If your application is working with files other than images, [you can remove the upload preview](/developer-docs/provenance-toolkit/uploader#customizing-the-ui) or modify the code to include support for previewing your file type.
 
-If you don't choose to show the receipt, you can always retrieve it later using the upload transaction id and the function [`bundlr.utils.getReceipt()`](/developer-docs/sdk/api/utils-getReceipt`).
+If you don't choose to show the receipt, you can retrieve it later using the upload transaction id and the function [`bundlr.utils.getReceipt()`](/developer-docs/sdk/api/utils-getReceipt`).
 
 ## Customizing the UI
 
-In default mode, the `Uploader` component shows both the image preview and receipt preview buttons, which can be optionally hidden by passing config parameters to the component.
+In default mode, the `Uploader` component shows both the image preview and receipt preview buttons. They can be hidden by passing config parameters to the component.
 
-| Description              | Code                                  |
-| ------------------------ | ------------------------------------- |
-| Default Behavior         | `<Uploder />`                         |
-| Hide the image preview   | `<Uploder showImageView={false} />`   |
-| Hide the receipt preview | `<Uploder showReceiptView={false} />` |
+| Description              | Code                                    |
+| ------------------------ | --------------------------------------- |
+| Default Behavior         | `<Uploder />`                           |
+| Hide the image preview   | `<Uploder showImageView={ false } />`   |
+| Hide the receipt preview | `<Uploder showReceiptView={ false } />` |
 
 If either parameter is left blank, it defaults to `true`.
 
@@ -61,6 +61,7 @@ interface FileWrapper {
 	isUploaded: boolean;
 	id: string;
 	previewUrl: string;
+	loadingReceipt: boolean;
 }
 ```
 
@@ -111,6 +112,8 @@ try {
 ### Showing receipts
 
 When showing a receipt, it is first retrieved using [`bundlr.utils.getReceipt()`](/developer-docs/sdk/api/utils-getReceipt`) and then set to the `receipt` state variable.
+
+The receipt is formatted in the class `ReceiptJSONView`, which can be modified if you desire custom formatting.
 
 ```ts filename="components/Uploader.tsx"
 const showReceipt = async (id: string) => {

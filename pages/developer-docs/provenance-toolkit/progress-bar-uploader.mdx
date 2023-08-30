@@ -19,16 +19,17 @@ The component uses a lazy funding approach, it first determines the cost to uplo
 
 ## Customizing the UI
 
-You can customize the behavior of the component to either show or hide the preview panel. Users may choose to hide the panel if it doesn't fit with their UI design, or if they are uploading files other than images or videos.
+In default mode, the `ProgressBarUploader` component shows both the image preview and receipt preview buttons. They can be hidden by passing config parameters.
 
-| Description           | Code                                             |
-| --------------------- | ------------------------------------------------ |
-| Default Behavior      | `<ProgressBarUploader />`                        |
-| Hide the file preview | `<ProgressBarUploader showPreview = {false } />` |
-
-If `showPreview` parameter is omitted, the component defaults to showing the preview.
+| Description              | Code                                                |
+| ------------------------ | --------------------------------------------------- |
+| Default Behavior         | `<ProgressBarUploader />`                           |
+| Hide the image preview   | `<ProgressBarUploader showImageView={ false } />`   |
+| Hide the receipt preview | `<ProgressBarUploader showReceiptView={ false } />` |
 
 ## Code
+
+The component is designed to be used as-is. Users making significant changes to the UI will need to understand the following.
 
 The progress bar uploader uses our [chunked uploader](/developer-docs/sdk/chunked-uploader), which gives users fine-grained control over how files are uploaded. You can specify how to break a large file into smaller "chunks", how big each should be and how many should be uploaded at once. The uploader also supports event callbacks which update you on the upload's progress.
 
@@ -86,8 +87,6 @@ uploader.on("done", (finishRes) => {
 ## Uploading the file
 
 Once the event callbacks are setup, the file is passed to the uploader and the URL to the file is shown in the UI and stored in a state variable.
-
-The file is uploaded with strong provenance, to obtain a copy of the [receipt](/learn/receipts), you can request it by passing the transaction id to our SDK function [`bundlr.utils.getReceipt()`](/developer-docs/sdk/api/utils-getReceipt)
 
 ```ts filename="components/ProgressBarUploader.tsx"
 await uploader

@@ -15,7 +15,7 @@ The FundWithdraw UI component is used to manage node balances.
 
 ## Funding and withdrawing
 
-When uploading data to Bundlr, first connect to and then fund a node. Balances are not shared between nodes, fund the node you intend to use.
+When uploading data to Bundlr, first connect to and then fund a [node](/overview/network). Balances are not shared between nodes, fund the node you intend to use.
 
 ## Customizing the UI
 
@@ -36,17 +36,6 @@ If both fundOnly and withdrawOnly are set to false, the component defaults to fu
 ## Code
 
 The component is designed to be used as-is. Users making significant changes to the UI will need to understand the following.
-
-### Atomic units
-
-When funding and withdrawing using the functions [`bundlr.fund()`](/developer-docs/sdk/api/fund) or [`bundlr.withdrawBalance()`](/developer-docs/sdk/api/withdrawBalance), pass a value in atomic units.
-
-<Callout type="info" emoji="ℹ️">
-	Atomic units refer to the smallest possible unit of a given cryptocurrency. In Ethereum, atomic units are called
-	Wei, and they represent the smallest unit of Ether. Similar to how 1 dollar can be broken down into 100 cents, 1
-	Ether can be broken down into 10^18 Wei. In Solana, atomic units are called Lamports, 1 SOL can be broken down into
-	10^9 Lamports.
-</Callout>
 
 ### Getting funded balance
 
@@ -98,14 +87,25 @@ Funding and withdrawing happen in the function `handleFundWithdraw()`. This func
 const bundlr = await getBundlr(selectedNode?.value, selectedCurrency?.value);
 ```
 
-When funding, convert the value entered by the user to atomic units and then use that value to fund:
+When funding, it converts the value entered by the user to atomic units and then uses that value to fund:
 
 ```ts filename="components/FundWithdraw.tsx"
 const fundTx = await bundlr.fund(bundlr.utils.toAtomic(amount));
 ```
 
-When withdrawing, convert the value entered by the user to atomic units and then use that value to withdraw:
+When withdrawing, it converts the value entered by the user to atomic units and then uses that value to withdraw:
 
 ```ts filename="components/FundWithdraw.tsx"
 const fundTx = await bundlr.withdrawBalance(bundlr.utils.toAtomic(amount));
 ```
+
+### Atomic units
+
+When funding and withdrawing using the functions [`bundlr.fund()`](/developer-docs/sdk/api/fund) or [`bundlr.withdrawBalance()`](/developer-docs/sdk/api/withdrawBalance), pass a value in atomic units.
+
+<Callout type="info" emoji="ℹ️">
+	Atomic units refer to the smallest possible unit of a given cryptocurrency. In Ethereum, atomic units are called
+	Wei, and they represent the smallest unit of Ether. Similar to how 1 dollar can be broken down into 100 cents, 1
+	Ether can be broken down into 10^18 Wei. In Solana, atomic units are called Lamports, 1 SOL can be broken down into
+	10^9 Lamports.
+</Callout>
