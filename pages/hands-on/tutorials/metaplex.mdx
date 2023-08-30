@@ -35,7 +35,7 @@ In this tutorial you will work with:
 
 ### Tutorial Repository
 
-To help you get going quickly and let you focus on learning how to use Metaplex with Bundlr, I created a Github repository with some artwork you can use for your NFTs, along with a framework for the marketplace UI.
+To help you get going quickly and let you focus on learning how to use Metaplex with Bundlr, I created a Github repository with some artwork you can use for your NFTs. Additionally, I created a framework UI for the minting website.
 
 Start by cloning [this repository](https://github.com/Bundlr-Network/metaplex-tutorial).
 
@@ -45,21 +45,21 @@ At the top-level are two folders, one called `NFTs` that contains 20 PNGs we'll 
 
 ### Solana CLI
 
-Before you can use Sugar to prepare and upload your NFTs, you’ll need to install the Solana CLI. [Follow these instructions](https://docs.solana.com/cli/install-solana-cli-tools) and then return to this tutorial.
+Start by installing the Solana CLI. [Follow these instructions](https://docs.solana.com/cli/install-solana-cli-tools) and then return to this tutorial.
 
-If you are not sure if you have already installed the tools, you can try running:
+If you are not sure if you have already installed the CLI, you can try running:
 
 ```console
 solana --version
 ```
 
-As new versions of the tools are constantly being released, it’s recommended you update before continuing:
+As new versions of the CLI are constantly being released, it’s recommended you update before continuing:
 
 ```console
 solana-install update
 ```
 
-Next setup a Solana Devnet wallet and fund it with Devnet tokens:
+Next setup a Solana Devnet wallet:
 
 ```console
 solana-keygen new --outfile ~/.config/solana/devnet.json
@@ -96,9 +96,9 @@ solana airdrop 2
 ```
 
 <Callout type="info" emoji="ℹ️">
-	The airdrop command is sometimes unreliable. If you have trouble funding your wallet, you may need to use the Solana
-	Faucet website, be sure to request Devnet tokens and not Testnet tokens. You can find your wallet address using the
-	command `solana address`.
+	The airdrop command is sometimes unreliable. If you have trouble funding your wallet, you may need to use the
+	[Solana Faucet](https://solfaucet.com/). Be sure to request Devnet tokens and not Testnet tokens. You can find your
+	wallet address using the command `solana address`.
 </Callout>
 
 You can test that you have a balance using:
@@ -115,7 +115,7 @@ You’ll use Metaplex’s Sugar to upload your NFT assets. Start by installing t
 bash <(curl -sSf https://sugar.metaplex.com/install.sh)
 ```
 
-You may need to restart your CLI, after which you can confirm that it was successfully installed by running
+You may need to restart your CLI, after which you can confirm that Sugar was successfully installed by running
 
 ```console
 sugar -V
@@ -172,7 +172,7 @@ Here's a breakdown of each command line argument:
 -   `file_extension`: This should be either "png" or "jpg", depending on the format of the images you're working with.
 -   `name`: The base name for your NFTs. For images not named "collection", a number will be appended (e.g., "Space Llamas #1").
 -   `symbol`: A short representation of your NFT's name, such as "SPL".
--   `description`: A brief description of your NFT, like "These llamas are going to the moon".
+-   `description`: A brief description of your NFT collection.
 -   `[resize]`: If you provide "resize" as the sixth argument, the script will resize each image to 800x800 pixels. If you don’t have the open-source ImageMagick library installed, you will be prompted to install it. (optional)
 
 After running the script, your images and corresponding JSON metadata files will be properly organized and prepared for uploading with Sugar. The original files are copied to an `originals` subfolder, which can be deleted if you no longer want them.
@@ -308,10 +308,10 @@ sugar upload
 ```
 
 <Callout type="info" emoji="ℹ️">
-	Bundlr supports payment with 14 different tokens, when using the Metaplex tools the wallet you previously set up
-	will be automatically debited with SOL to cover the costs. You should already have Devnet SOL, which is all you’ll
-	need now. If you decide to launch your collection on Mainnet later, ensure your wallet has sufficient Mainnet SOL
-	first.
+	Bundlr supports payment with [14 different tokens](https://docs.bundlr.network/overview/supported-tokens), when
+	using the Metaplex tools the wallet you previously set up will be automatically debited with SOL to cover the costs.
+	You should already have Devnet SOL, which is all you’ll need now. If you decide to launch your collection on Mainnet
+	later, ensure your wallet has sufficient Mainnet SOL first.
 </Callout>
 
 Create and deploy a candy machine:
@@ -343,7 +343,7 @@ This indicates that a Candy Machine instance has already been set up for your pr
 
 ### Folder Structure
 
-Within the Github repository you downloaded, there is a subdirectory called `mint-storefront`. `cd` into this directory and take a look at the folder structure. As this tutorial focuses on building with Metaplex, I created a UI framework in advance so we don’t have to spend time covering the basics of how to use NextJS and Tailwind. The NextJS project has been set up for you and the UI framework is there.
+Within the Github repository you downloaded, there is a subdirectory called `mint-storefront`. `cd` into this directory and take a look at the folder structure. As this tutorial focuses on building with Metaplex, I created a UI framework so we don’t have to spend time covering the basics of how to use NextJS and Tailwind. The NextJS project has been set up for you and the UI framework is there.
 
 Return to your terminal and from the `mint-storefront` directory run:
 

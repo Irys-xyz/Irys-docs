@@ -4,15 +4,19 @@ description: Learn how to attach a UDL to an NFT
 
 # Define NFT licensing with the UDL
 
-In this tutorial, you'll learn how to leverage the UDL to specify the intellectual property rights you grant to owners of your NFTs.
+In this tutorial, you'll learn how to attach a [Universal Data License (UDL)](https://mirror.xyz/0x64eA438bd2784F2C52a9095Ec0F6158f847182d9/AjNBmiD4A4Sw-ouV9YtCO6RCq0uXXcGwVJMB5cdfbhE) to an NFT.
+
+The UDL is a parameterized license you can use to explicitly define how you allow your content to be used.
 
 ## Overview
 
-Purchasing an NFT not only gives you ownership of the token itself but, depending on the collection, may also grant certain rights over the underlying intellectual property. These rights cover things like creating derivative works or merchandising the artwork on items such as t-shirts. [Each NFT collection varies in the rights it provides to its token holders](https://www.forbes.com/sites/digital-assets/article/what-rights-come-with-your-nft/?sh=416b44b06fe7) and historically, there hasn't been a straightforward, customizable license attached to NFTs. With the UDL creators now have a simple, customizable license they can easily attach to NFT metadata at upload that spells out the permissions they grant to the token holders.
+Purchasing an NFT not only gives you ownership of the token itself but, depending on the collection, may also grant certain rights over the underlying intellectual property. These rights cover things like creating derivative works or merchandising the artwork on items such as t-shirts. [Each NFT collection varies in the rights it provides to its token holders](https://www.forbes.com/sites/digital-assets/article/what-rights-come-with-your-nft/?sh=416b44b06fe7) and historically, there hasn't been a straightforward, customizable license attached to NFTs.
+
+With the UDL creators now have a simple, customizable license they can easily attach to NFT metadata at upload that spells out the permissions they grant to the token holders.
 
 ## Adding UDL to NFTs
 
-When uploading an NFT, [you first upload the visual asset, then embed the link to that in a metadata file and finally upload the metadata file](/developer-docs/recipes/uploading-nfts). This metadata file is used by the NFT contract to mint the NFT.
+When uploading an NFT, [you first upload the visual asset, then embed the link to that in a metadata file and then upload the metadata file](/hands-on/tutorials/uploading-nfts).
 
 When uploading the metadata, you can modify your upload script to attach UDL terms to the file. One way to do this is by forking the [Bundlr Provenance Toolkit repository](/developer-docs/provenance-toolkit) and using the UDL Uploader component to upload the metadata. This tool presents a simple UI you can use to define the rights you grant over your intellectual property.
 
@@ -44,6 +48,7 @@ const fileToUpload = "./metadata.json";
 const tags: Tag[] = [
 	{ name: "Content-Type", value: "application/json" },
 	{ name: "Contract", value: "0xd9145CCE52D386f254917e481eB44e9943F39138" },
+	{ name: "Payment-Mode", value: "Global-Distribution" },
 	{ name: "License", value: "yRj4a5KMctX_uOmKWCFJIjmY8DeJcusVk6-HzLiM_t8" },
 	{ name: "License-Fee", value: "Monthly-1" },
 	{ name: "Derivation", value: "Allowed-With-Credit" },
