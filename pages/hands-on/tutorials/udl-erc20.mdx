@@ -117,16 +117,23 @@ contract MySong is ERC20, Ownable {
         }
     }
 
-    function _distributeRandom() private {
-        uint256 randomIndex = uint256(keccak256(abi.encodePacked(block.timestamp, msg.sender))) % _holders.length;
-        address randomHolder = _holders[randomIndex];
-        uint256 holderBalance = balanceOf(randomHolder);
+function _distributeRandom() private {
+    uint256 randomValue = uint256(keccak256(abi.encodePacked(block.timestamp, msg.sender))) % totalSupply();
+    uint256 cumulativeSum = 0;
 
-        if (holderBalance > 0) {
-            uint256 amountToDistribute = msg.value.mul(holderBalance).div(totalSupply());
-            payable(randomHolder).transfer(amountToDistribute);
+    for (uint256 i = 0; i < _holders.length; i++) {
+        address holder = _holders[i];
+        uint256 holderBalance = balanceOf(holder);
+
+        cumulativeSum = cumulativeSum.add(holderBalance);
+
+        if (randomValue < cumulativeSum) {
+            payable(holder).transfer(msg.value);
+            break;
         }
     }
+}
+
 
     address[] private _holders;
 
@@ -160,6 +167,7 @@ contract MySong is ERC20, Ownable {
         }
     }
 } // MySong
+
 ```
 
 ## Testing on Remix

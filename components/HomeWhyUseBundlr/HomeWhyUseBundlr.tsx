@@ -16,7 +16,7 @@ const HomeWhyUseBundlr = ({
 		<>
 			<section>
 				<div className="mx-4 flex items-center justify-center pt-20 md:ml-[79px] lg:justify-start">
-					<SectionTitle title="Comprehensive Resources" />
+					<SectionTitle title="Bundlr 101" />
 				</div>
 				<ul className="mx-4 mt-[49px] flex max-w-[1128px] flex-col gap-10 pb-[50px] lg:ml-auto lg:mr-[79px] lg:mt-[66px] lg:pl-10 2xl:max-w-[80%]">
 					{/* Dots border bottom */}
