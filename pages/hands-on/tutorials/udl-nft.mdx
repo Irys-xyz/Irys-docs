@@ -1,0 +1,85 @@
+---
+description: Learn how to attach a UDL to an NFT
+---
+
+# Define NFT licensing with the UDL
+
+In this tutorial, you'll learn how to attach a [Universal Data License (UDL)](https://mirror.xyz/0x64eA438bd2784F2C52a9095Ec0F6158f847182d9/AjNBmiD4A4Sw-ouV9YtCO6RCq0uXXcGwVJMB5cdfbhE) to an NFT.
+
+The UDL is a parameterized license you can use to explicitly define how you allow your content to be used.
+
+## Overview
+
+Purchasing an NFT not only gives you ownership of the token itself but, depending on the collection, may also grant certain rights over the underlying intellectual property. These rights cover things like creating derivative works or merchandising the artwork on items such as t-shirts. [Each NFT collection varies in the rights it provides to its token holders](https://www.forbes.com/sites/digital-assets/article/what-rights-come-with-your-nft/?sh=416b44b06fe7) and historically, there hasn't been a standard license attached to NFTs.
+
+With the UDL creators now have a simple, customizable license they can easily attach to NFT metadata at upload that spells out the permissions they grant to the token holders.
+
+## Adding UDL to NFTs
+
+Creating an NFT is (generally) a four step process:
+
+1. Upload the visual asset (image or video)
+2. Embed the URL to the visual asset in a metadata file
+3. Upload the metadata file
+4. Use the link to the metadata when minting the NFT
+
+For more details on this, we have [a separate tutorial](/hands-on/tutorials/uploading-nfts).
+
+When uploading the metadata, you can attach a UDL in the form of [tags](/developer-docs/tags) with name / value pairs.
+
+If you’re using our NodeJS SDK to upload your metadata files, you can modify your upload script to include the UDL parameters. [Not all UDL tags are required](https://arwiki.wiki/#/en/Universal-Data-License-How-to-use-it), and the ones you use will depend on how you want to allow your content to be used. The script below demonstrates how to add common tags to a metadata file upload, when using it for your own project, customize as needed.
+
+```ts
+import Bundlr from "@bundlr-network/client";
+import * as fs from "fs";
+import dotenv from "dotenv";
+dotenv.config();
+
+// Define the Tag type
+type Tag = {
+	name: string;
+	value: string;
+};
+
+// Connect to a Bundlr node
+const privateKey = process.env.PRIVATE_KEY;
+const currency = "matic";
+const bundlr = new Bundlr("http://devnet.bundlr.network", currency, privateKey, {
+	providerUrl: "https://rpc-mumbai.maticvigil.com",
+});
+
+// Path to metadata file
+const fileToUpload = "./metadata.json";
+
+// Define your unique license
+const tags: Tag[] = [
+	{ name: "Content-Type", value: "application/json" },
+	{ name: "Contract", value: "0xd9145CCE52D386f254917e481eB44e9943F39138" },
+	{ name: "Payment-Mode", value: "Global-Distribution" },
+	{ name: "License", value: "yRj4a5KMctX_uOmKWCFJIjmY8DeJcusVk6-HzLiM_t8" },
+	{ name: "License-Fee", value: "Monthly-1" },
+	{ name: "Derivation", value: "Allowed-With-Credit" },
+	{ name: "Commerical-Use", value: "Allowed" },
+	{ name: "Currency", value: "ETH" },
+];
+
+// Upload the metadata with UDL tags
+async function uploadMetadata() {
+	try {
+		const response = await bundlr.uploadFile(fileToUpload, tags);
+		console.log(`File uploaded ==> https://arweave.net/${response.id}`);
+	} catch (e) {
+		console.log("Error uploading file ", e);
+	}
+}
+
+uploadMetadata();
+```
+
+## Using the provenance toolkit
+
+You can also use the [Bundlr Provenance Toolkit repository](/developer-docs/provenance-toolkit) which provides a simple graphical interface.
+
+1. Fork or clone the [repository](https://github.com/Bundlr-Network/provenance-toolkit)
+2. Use the [Uploader](/developer-docs/provenance-toolkit/uploader) component to upload your visual assets
+3. Use the [UDL Uploader](/developer-docs/provenance-toolkit/udl-uploader) component to upload your metadata file

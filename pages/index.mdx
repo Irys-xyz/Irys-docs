@@ -109,10 +109,7 @@ import Link from "next/link";
 
 <div className="px-4 lg:px-[79px] py-20">
 
-<Heading
-	level={6}
-	className="!font-fkDisplay leading-none text-center md:text-left mt-10"
->
+<Heading level={6} className="!font-fkDisplay leading-none text-center md:text-left mt-10">
 	Use our SDK and start storing data permanently with 3 lines of code.
 </Heading>
 
@@ -225,7 +222,7 @@ const bundlr = new Bundlr("https://node1.bundlr.network", "matic", polygonPrivat
 				CLI
 			</div>
 		</Link>
-		<Link href="/developer-docs/recipes">
+		<Link href="/developer-docs/provenance-toolkit">
 			<div
 				className="bg-seashell text-black h-[156px] rounded-2xl overflow-hidden bannerHover pt-10 pl-10 text-2xl hover:scale-[99%] cursor-pointer transition-all"
 				style={{
@@ -236,7 +233,7 @@ const bundlr = new Bundlr("https://node1.bundlr.network", "matic", polygonPrivat
 					backdropFilter: "blur(10px)",
 				}}
 			>
-				Cut & Paste Code Recipes
+				Provenance toolkit
 			</div>
 		</Link>
 	</div>
@@ -248,8 +245,8 @@ const bundlr = new Bundlr("https://node1.bundlr.network", "matic", polygonPrivat
 
 <SectionTitle title="Hands On" />
 <p className="pt-8 font-robotoMono leading-loose">
-	Start with tutorials and then join a global community of over 40,000 developers in our
-	Quests program. Earn unique NFTs for every quest you complete.
+	Start with tutorials and then join a global community of over 40,000 developers in our Quests program. Earn unique
+	NFTs for every quest you complete.
 </p>
 
   <ul className="flex flex-col gap-10 lg:flex-row mt-16">
@@ -295,7 +292,7 @@ const bundlr = new Bundlr("https://node1.bundlr.network", "matic", polygonPrivat
 			description: "A bundle is a group of transactions",
 		},
     	{
-    		title: "Bundlr And Arweave",
+    		title: "Bundlr & arweave",
     		href: "/learn/bundlr-arweave",
     		description: "Bundlr makes Arweave easier to use",
     	},
@@ -305,7 +302,7 @@ const bundlr = new Bundlr("https://node1.bundlr.network", "matic", polygonPrivat
     		description: "Gateways are responsible for indexing, serving, and making data available to users",
     	},
 		{
-    		title: "Optimistic Cache",
+    		title: "Optimistic cache",
     		href: "/learn/optimistic-cache",
     		description: "Optimistic caching makes your uploads instantly available",
     	},
@@ -316,10 +313,16 @@ const bundlr = new Bundlr("https://node1.bundlr.network", "matic", polygonPrivat
     			"Receipts give you cryptographic proof of the exact time a transaction occurred",
     	},
     	{
-    		title: "Transaction Lifecycle",
+    		title: "Transaction lifecycle",
     		href: "/learn/transaction-lifecycle",
     		description:
     			"Understand each step of the process as a transaction is processed by Bundlr",
+    	},
+		    	{
+    		title: "UDL & bulders",
+    		href: "/learn/udl",
+    		description:
+    			"Understand unique opportunities the UDL opens up for builders",
     	},
     ]}
 

@@ -6,16 +6,14 @@ import { Callout } from "nextra-theme-docs";
 
 # Bundlr in the browser (WebBundlr)
 
+When building with Bundlr in the browser, we recommend starting by forking the [Bundlr provenance toolkit](/developer-docs/provenance-toolkit) and building your project using its rich UI component library and helper functions.
+
 <Callout emoji="🚀">
 	If you're using Bundlr with React and `npx create-react-app`, you will need to follow [some extra setup
-	steps](/developer-docs/recipes/react).
+	steps](/hands-on/tutorials/react).
 </Callout>
 
-To use Bundlr with browser wallets like MetaMask and Phantom, use the `WebBundlr` class. Usage is similar to the Bundlr class used with server-side development, however you don’t need to provide a private key as that will be linked via the user’s wallet. When functions that require signing are called (upload, fund, withdraw etc.) the linked wallet will prompt the user to confirm the required actions.
-
-If you’d prefer to learn using a long-form tutorial, [we have this one on creating a web-based uploader with progress bars](/tutorials/file-uploader).
-
-Provider setup varies based on wallet type / version:
+To manually add Bundlr support to an existing project, use the code snippets for your preferred provider.
 
 [Ethers 5](/developer-docs/sdk/bundlr-in-the-browser#ethers-5) | [Ethers 6](/developer-docs/sdk/bundlr-in-the-browser#ethers-6) | [RainbowKit / WAGMI](/developer-docs/sdk/bundlr-in-the-browser#rainbowkit-v1) | [viem](/developer-docs/sdk/bundlr-in-the-browser#viem) | [WalletConnect](/developer-docs/sdk/bundlr-in-the-browser#walletconnect) | [Phantom](/developer-docs/sdk/bundlr-in-the-browser#phantom) | [Near](/developer-docs/sdk/bundlr-in-the-browser#near)
 

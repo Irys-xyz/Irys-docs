@@ -53,6 +53,11 @@ const Footer = ({ noPadding }: { noPadding?: boolean }) => {
 					href: "/developer-docs/cli",
 					newTab: false,
 				},
+				{
+					name: "Provenance toolkit",
+					href: "/developer-docs/provenance-toolkit",
+					newTab: false,
+				},
 			],
 		},
 		{

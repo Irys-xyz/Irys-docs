@@ -48,8 +48,8 @@ export default {
 	banner: {
 		key: "dev-quest2",
 		text: (
-			<a href="https://docs.bundlr.network/hands-on/quests/quest3-graphql" target="_blank">
-				🎉 Bundlr Developer Quest #3 Released. Read More →
+			<a href="https://docs.bundlr.network/developer-docs/provenance-toolkit" target="_blank">
+				🎉 Bundlr Provenance Toolkit Released! →
 			</a>
 		),
 	},

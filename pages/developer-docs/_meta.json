@@ -2,9 +2,9 @@
 	"quickstart": "Quickstart",
 	"sdk": "SDK",
 	"cli": "CLI",
+	"provenance-toolkit": "Provenance toolkit",
 	"using-devnet": "Using Devnet",
 	"tags": "Tags",
 	"querying-downloading": "Querying & downloading",
-	"graphql": "GraphQL",
-	"recipes": "Cut & paste code recipes"
+	"graphql": "GraphQL"
 }
