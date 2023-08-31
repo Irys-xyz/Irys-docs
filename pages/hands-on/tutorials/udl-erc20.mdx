@@ -18,7 +18,7 @@ To charge a fee of 42 tokens, you’d add this tag:
 { "name": "License-Fee", "value": "One-Time-42" }
 ```
 
-And to specify the Matic token, you’d add this tag:
+To specify the Matic token, you’d add this tag:
 
 ```json
 { "name": "Currency", "value": "MATIC" }
@@ -56,7 +56,7 @@ In this tutorial, we’ll write an ERC20 profit-sharing token contract. The cont
 
 To complete this tutorial, you should have a [basic understanding of the UDL](https://mirror.xyz/0x64eA438bd2784F2C52a9095Ec0F6158f847182d9/AjNBmiD4A4Sw-ouV9YtCO6RCq0uXXcGwVJMB5cdfbhE) and the [opportunities it affords builders](/learn/udl). You should understand the basics of Solidity but do not need to be an expert.
 
-## The Smart Contract
+## The smart contract
 
 Our contract, named `MySong`, represents ownership in a single music NFT. This contract is an ERC20 token, and we've set its total supply to a fixed 100 tokens.
 
@@ -67,7 +67,7 @@ Our contract, named `MySong`, represents ownership in a single music NFT. This c
 
 The majority of the contract is boilerplate ERC20, it mints 100 tokens to the contract deployer at creation, and through inheritance, it includes functions for transferring tokens between addresses.
 
-In its constructor, the contract is set to either global or random mode, and then exposes a function called `distributeRevenue()`, which splits revenue payments among token-holders. The function accepts payment in the form of ETH, then either does global or random distribution. To simplify things, this contract uses pseudo-random number generation which comes with an element of risk. When building your own solutions, you might choose to use a verifiable random number generator.
+In its constructor, the contract is set to either global or random mode, and then exposes a function called `distributeRevenue()`, which splits revenue payments among token-holders. The function accepts payment in the form of ETH, then either does global or random distribution. To simplify things, this contract uses pseudo-random number generation which comes with an element of risk. When building your own solutions, you might choose to use a [verifiable random number generator](https://docs.chain.link/vrf/v2/introduction).
 
 <Callout type="info" emoji="ℹ️">
 	This is just one way revenue distribution could be handled, another way would be for the contract to hold all
@@ -162,7 +162,7 @@ contract MySong is ERC20, Ownable {
 } // MySong
 ```
 
-## Testing On Remix
+## Testing on Remix
 
 To understand how token works, let’s test it in the Remix IDE.
 
@@ -174,7 +174,7 @@ To understand how token works, let’s test it in the Remix IDE.
 4. Compile the Contract: In the left sidebar, click on the "Solidity compiler" tab, then click the "Compile MySong.sol" button.
 5. Deploy: Go back to the "Deploy & run transactions" tab. MySong should be selected in the "Contract" dropdown. Click the orange "Deploy" button and either enter `0` for global distribution or `1` for random distribution.
 
-### Transferring Tokens
+### Transferring tokens
 
 Once the contract is deployed, under "Deployed Contracts", find MySong. You'll see buttons representing contract functions. To transfer tokens:
 
@@ -183,7 +183,7 @@ Once the contract is deployed, under "Deployed Contracts", find MySong. You'll s
 3. Specify the number of tokens to send in the "value" field ({"<="} 100)
 4. Click the transact button.
 
-## Sending Revenue
+## Sending revenue
 
 Once you’ve distributed tokens between holders, test revenue distribution.
 

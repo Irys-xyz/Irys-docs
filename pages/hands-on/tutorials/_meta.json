@@ -10,7 +10,6 @@
 	"uploading-nfts": "Upload NFT assets",
 	"metaplex": "Solana NFTs with Metaplex",
 	"udl-erc20": "Manage UDL ownership with ERC20",
-	"udl-nft": "NFT licnesning and UDL",
-	"lens": "Upload Lens metadata",
-	"lens-mobile": "Create a mobile Lens app"
+	"udl-nft": "NFT licensing and UDL",
+	"lens": "Upload Lens metadata"
 }
