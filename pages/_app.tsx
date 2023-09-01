@@ -9,6 +9,7 @@ import type { AppProps } from "next/app";
 import { useEffect } from "react";
 import useGoogleTagManager from "../hooks/useGoogleTagManager";
 import { ThirdwebProvider } from "@thirdweb-dev/react";
+import { ethers } from "ethers";
 
 export default function App({ Component, pageProps }: AppProps) {
 	useEffect(() => {
@@ -19,7 +20,7 @@ export default function App({ Component, pageProps }: AppProps) {
 
 	return (
 		<>
-			<ThirdwebProvider activeChain="polygon">
+			<ThirdwebProvider activeChain="polygon" clientId="8026fd043736df9e5a4bfa9a57e5f66c">
 				<Component {...pageProps} />
 				<Analytics />
 			</ThirdwebProvider>
