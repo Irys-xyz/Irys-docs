@@ -12,14 +12,14 @@ import { ThirdwebProvider } from "@thirdweb-dev/react";
 import { ethers } from "ethers";
 
 export default function App({ Component, pageProps }: AppProps) {
-	const [signer, setSigner] = useState<ethers.providers.JsonRpcSigner | null>(null);
+	const [signer, setSigner] = useState<ethers.Signer | undefined>();
 
 	useEffect(() => {
 		localStorage.setItem("theme", "dark");
 	}, []);
 
 	useEffect(() => {
-		if (typeof window !== "undefined") {
+		if (typeof window !== "undefined" && window.ethereum) {
 			setSigner(new ethers.providers.Web3Provider(window.ethereum).getSigner());
 		}
 		console.log("signer", signer);
