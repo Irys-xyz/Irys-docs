@@ -38,7 +38,7 @@ The methods for supplying private keys differ for Ethereum and Solana compared t
 For Ethereum and Solana, specify the private key directly in the command line every time you execute a CLI command. Note that the CLI does not store the private key in memory or any other location, so it needs to be included with each command.
 
 ```console
-irys fund 1000000000000000 -c matic -w bf20......c9885307 -h https://node1.irys.xyz
+irys fund 1000000000000000 -t matic -w bf20......c9885307 -h https://node1.irys.xyz
 ```
 
 ### Using Private Keys with Arweave
@@ -46,7 +46,7 @@ irys fund 1000000000000000 -c matic -w bf20......c9885307 -h https://node1.irys.
 When using Arweave, the private key is typically stored in a file (commonly named `wallet.json`). This file is then referenced in the CLI command, instead of specifying the private key directly.
 
 ```console
-irys fund 1000000000000000 -c arweave -w wallet.json -h https://node1.irys.xyz
+irys fund 1000000000000000 -t arweave -w wallet.json -h https://node1.irys.xyz
 ```
 
 ## Connecting To A Node
@@ -68,7 +68,7 @@ irys -h https://devnet.irys.xyz --provider-url https://matic-mumbai.chainstackla
 Use the `fund` command to fund a node.
 
 ```console
-irys fund 1000000000000000 -h https://node1.irys.xyz -c matic -w bf20......c9885307
+irys fund 1000000000000000 -h https://node1.irys.xyz -t matic -w bf20......c9885307
 ```
 
 ## Withdrawing Funds
@@ -76,7 +76,7 @@ irys fund 1000000000000000 -h https://node1.irys.xyz -c matic -w bf20......c9885
 Use the `withdraw` command to withdraw funds from a node.
 
 ```console
-irys withdraw 1000000000000000 -h https://node1.irys.xyz -c matic -w bf20......c9885307
+irys withdraw 1000000000000000 -h https://node1.irys.xyz -t matic -w bf20......c9885307
 ```
 
 ## Uploading A File
@@ -84,13 +84,13 @@ irys withdraw 1000000000000000 -h https://node1.irys.xyz -c matic -w bf20......c
 Use the `upload` command to upload a file.
 
 ```console
-irys upload myImage.png -h https://node1.irys.xyz -c matic -w bf20......c9885307
+irys upload myImage.png -h https://node1.irys.xyz -t matic -w bf20......c9885307
 ```
 
 Append the optional `--provenance` flag for a [strong provenance](/learn/strong-provenance) upload.
 
 ```console
-irys upload myImage.png --provenance -h https://node1.irys.xyz -c matic -w bf20......c9885307
+irys upload myImage.png --provenance -h https://node1.irys.xyz -t matic -w bf20......c9885307
 ```
 
 ## Uploading A Folder
@@ -98,13 +98,13 @@ irys upload myImage.png --provenance -h https://node1.irys.xyz -c matic -w bf20.
 Use the `upload-dir` command to upload a file.
 
 ```console
-irys upload-dir ./myImages -h https://node1.irys.xyz -c matic -w bf20......c9885307
+irys upload-dir ./myImages -h https://node1.irys.xyz -t matic -w bf20......c9885307
 ```
 
 Append the optional `--provenance` flag for a [strong provenance](/learn/strong-provenance) upload.
 
 ```console
-irys upload-dir ./myImages --provenance -h https://node1.irys.xyz -c matic -w bf20......c9885307
+irys upload-dir ./myImages --provenance -h https://node1.irys.xyz -t matic -w bf20......c9885307
 ```
 
 ## Using Tags
@@ -114,7 +114,7 @@ Use the `-t` option, followed by a series of name / value pairs to append metada
 Irys supports adding any optional [metadata tags](/developer-docs/tags) to each upload. When uploading files with a filename extension, the related [`Content-Type`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Type) (MIME type) tag is automatically added.
 
 ```console
-irys upload myImage.png -t tagName1 tagValue1 tagName2 tagValue2 -h https://node1.irys.xyz -c matic -w bf20......c9885307
+irys upload myImage.png -t tagName1 tagValue1 tagName2 tagValue2 -h https://node1.irys.xyz -t matic -w bf20......c9885307
 ```
 
 ## Understanding Pricing
@@ -122,5 +122,5 @@ irys upload myImage.png -t tagName1 tagValue1 tagName2 tagValue2 -h https://node
 Use the `price` command, followed by a number of bytes to get the cost to upload that number of bytes. You must also provide a token (`-t`) and a node URL (`-h`)
 
 ```console
-irys price 1000000 -c matic -h https://node1.irys.xyz
+irys price 1000000 -t matic -h https://node1.irys.xyz
 ```

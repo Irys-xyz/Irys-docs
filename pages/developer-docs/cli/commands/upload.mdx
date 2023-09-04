@@ -19,13 +19,13 @@ Uploads a single file.
 ## Example
 
 ```console
-irys upload myImage.png -h https://node1.irys.xyz -c matic -w bf20......c9885307
+irys upload myImage.png -h https://node1.irys.xyz -t matic -w bf20......c9885307
 ```
 
 Append the optional `--provenance` flag for a [strong provenance](/learn/strong-provenance) upload.
 
 ```console
-irys upload myImage.png --provenance -h https://node1.irys.xyz -c matic -w bf20......c9885307
+irys upload myImage.png --provenance -h https://node1.irys.xyz -t matic -w bf20......c9885307
 ```
 
 ## Downloading Files
@@ -33,7 +33,7 @@ irys upload myImage.png --provenance -h https://node1.irys.xyz -c matic -w bf20.
 Files uploaded via `irys upload` can be downloaded using the transaction ID provided after a successful upload.
 
 ```console
-irys upload myImage.png -t tagName1 tagValue1 tagName2 tagValue2 -h https://node1.irys.xys -c matic -w bf20......c9885307
+irys upload myImage.png -t tagName1 tagValue1 tagName2 tagValue2 -h https://node1.irys.xys -t matic -w bf20......c9885307
 
 Loaded address: 0xac568a981b1370b2e1baa8ce30bd5ac9e28c572d
 Uploaded to https://arweave.net/yPX6_rwxfJ_2gTvXSHGoumIvlFR-EwuRlUMmHpeLHUM

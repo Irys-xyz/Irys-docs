@@ -6,23 +6,17 @@ import { Callout } from "nextra-theme-docs";
 
 # Querying With GraphQL
 
-Transaction metadata can be queried using GraphQL. This includes both metadata automatically stored for each transaction and custom metadata you design yourself using our [tags](/developer-docs/tags) feature.
-
-<Callout type="info" emoji="ℹ️">
-	If you prefer learning by building a project, you may enjoy this [step-by-step
-	tutorial](/hands-on/tutorials/graphql-explorer) where you’ll learn how to setup a project, install the Apollo
-	GraphQL libraries and then build a tool to search Arweave for recently uploaded image files.
-</Callout>
+In addition to the query package, you can also query Irys transactions directly using GraphQL.
 
 ## Irys vs Arweave GraphQL
 
-Transactions uploaded to Irys are queryable using both the Irys and [Arweave GraphQL schemas](https://gql-guide.vercel.app/). This document covers how to query Irys directly, Arweave [also has docs on their query schema](https://gql-guide.vercel.app/).
+This document covers how to query Irys directly, Arweave [also has docs on their query schema](https://gql-guide.vercel.app/).
 
-## GraphQL Clients
+## GraphQL clients
 
 You can query using an HTTP library like fetch or axios. You can also use specialized clients like [Apollo Client](https://www.apollographql.com/) or [urql](https://formidable.com/open-source/urql/).
 
-## Anatomy Of A Query
+## Anatomy of a query
 
 A GraphQL query is made up of:
 
@@ -31,7 +25,7 @@ A GraphQL query is made up of:
 
 <img className="border border-[#FEF4EE] rounded mt-5 w-5/6" src="/img/graphql/BundlrGQL-Anatomy.png" />
 
-## Query Arguments
+## Query arguments
 
 Any of the following query arguments can be used as search parameters:
 
@@ -42,7 +36,7 @@ Any of the following query arguments can be used as search parameters:
 | `token` | The [token](/overview/supported-tokens) used to pay for the transaction.                                                                                                                                   |
 | `tags`  | An array of tag name / value pairs passed as JSON objects.                                                                                                                                                 |
 
-## Results Fields
+## Results fields
 
 When building a query, any of the following values be included in your results:
 | Field | Description |
@@ -52,7 +46,7 @@ When building a query, any of the following values be included in your results:
 | `token` | The token used to pay for the transaction. |
 | `receipt { `<br/>&nbsp;&nbsp;`deadlineHeight `<br/>&nbsp;&nbsp;`signature  `<br/>&nbsp;&nbsp;`version `<br/>`}` | An optional receipt, only exists if a user requested one at upload.<br/> `deadlineHeight`: The block number by which the transaction must be finalized on Arweave. <br/>`signature`: A signed deep hash of the JSON receipt. |
 | `tags {    `<br/>&nbsp;&nbsp;`name     `<br/>&nbsp;&nbsp;`value`<br/>`}` | An array of tags supplied as name / value pairs. Exists if the user added them at upload. |
-|`timestamp` | The timestamp, accurate to the millisecond of when the transaction was posted. In cases where there exists a receipt, this value will be the same as the receipt timestamp. |
+|`timestamp` | The timestamp, accurate to the millisecond of when the transaction was posted. This value is the same as the receipt timestamp. |
 
 ## Endpoints
 
@@ -64,17 +58,17 @@ Connect to the GraphQL endpoint associated with the node you uploaded your trans
 | Node 2 | https://node2.bundlr.network/graphql  |
 | Devnet | https://devnet.bundlr.network/graphql |
 
-## GraphQL Sandbox
+## GraphQL sandbox
 
 Clicking on any of the endpoint URLs above will direct you to the GraphQL Sandbox used for building and testing queries. Press Control+Space at any time to see an interactive popup window of either query arguments or results fields.
 
 <img className="border border-[#FEF4EE] rounded mt-5 w-5/6" src="/img/graphql/BundlrGQL-Sandbox.png" />
 
-## Sample Queries
+## Sample queries
 
 Queries return transaction metadata. To then retrieve data, use the returned transaction ID and download the data from a [gateway](/learn/gateways) using an URL formed as follows `https://arweave.net/[transaction-id]`.
 
-### Transaction IDs
+### Transaction ids
 
 Search by transaction IDs.
 
@@ -96,23 +90,7 @@ query getByIds {
 
 ### Timestamps
 
-Search by timestamps.
-
-```graphql
-query getByTimestamp {
-	transactions(timestamp: { from: 1688144401000, to: 1688317201000 }) {
-		edges {
-			node {
-				id
-			}
-		}
-	}
-}
-```
-
-### Timestamps
-
-Search by timestamps.
+Search by timestamps:
 
 ```graphql
 query getByTimestamp {
@@ -129,12 +107,12 @@ query getByTimestamp {
 <Callout type="info" emoji="ℹ️">
 	Irys timestamps are accurate to the millisecond, so you need to provide a timestamp in millisecond format. You can
 	convert from human-readable time to UNIX timestamp using websites like [Epoch101](https://www.epoch101.com/), be
-	sure to convert in **millisecond** format not **second**.
+	sure to convert in **millisecond** format, not **second**.
 </Callout>
 
 ### Owners
 
-Search for transactions matching the wallet address used when posting the transaction.
+Search for transactions matching the wallet address used when posting the transaction:
 
 ```graphql
 query getByOwner {
@@ -151,7 +129,7 @@ query getByOwner {
 
 ### Tags
 
-Search for transactions matching [tag](/developer-docs/tags) name / value pairs.
+Search for transactions matching [tag](/developer-docs/tags) name / value pairs:
 
 ```graphql
 query getAllPNGs {
@@ -166,7 +144,7 @@ query getAllPNGs {
 }
 ```
 
-Search for transactions matching the tag with name **Content-Type** and the values of **image/png** OR **image/jpg**.
+Search for transactions matching the tag with name **Content-Type** and the values of **image/png** OR **image/jpg**:
 
 ```graphql
 query getTagsWithOR {
@@ -183,7 +161,7 @@ query getTagsWithOR {
 }
 ```
 
-Search for transactions matching the tag with name **Content-Type** and the values of **image/png** AND **image/jpg**.
+Search for transactions matching the tag with name **Content-Type** and the values of **image/png** AND **image/jpg**:
 
 ```graphql
 query getTagsWithAnd {
@@ -202,9 +180,9 @@ query getTagsWithAnd {
 }
 ```
 
-### Limiting Results
+### Limiting results
 
-Limit the number of results returned by including the `limit` parameter.
+Limit the number of results returned by including the `limit` parameter:
 
 ```graphql
 query getAllPNGs {
