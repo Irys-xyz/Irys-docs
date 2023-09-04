@@ -1,20 +1,8 @@
-# Querying & Downloading
+# Downloading data
 
-When a transaction is uploaded to Bundlr, its header and data are stored separately (as explained in [transaction lifecycle](/learn/transaction-lifecycle)).
-
-Contained within the header is the transaction metadata, this is available for querying via a REST API and [GraphQL](/developer-docs/graphql).
+When you upload data to Irys, our [optimistic cache](/learn/optimistic-cache) ensures your data is immediately available for download.
 
 Data is available for downloading via [gateways](/learn/gateways).
-
-## Querying Metadata
-
-Bundlr supports adding custom metadata tags to each upload, these tags allow users to build semi-relational data models, all queryable via [GraphQL](/developer-docs/graphql).
-
-Tags can be used to:
-
--   Categorize transactions, making it easier to search for and retrieve relevant information using GraphQL
--   Build provenance chains for [Proof Of Provenance](/overview/solutions/proof-of-provenance) applications
--   Inform web browsers how to render image files
 
 ## Downloading Data
 

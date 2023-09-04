@@ -5,7 +5,7 @@ description: Searches Irys or Arweave via tags
 import { Callout } from "nextra-theme-docs";
 
 # `to([addresses])`
-TODO
+
 Queries by the wallet addresses used when signing and paying for the upload. 
 
 **Parameters**
@@ -14,12 +14,13 @@ Queries by the wallet addresses used when signing and paying for the upload.
 
 ## Search By **Transaction Sender**
 
-When querying Irys, accepts addresses from [any of Irys' supported chains](https://docs.bundlr.network/overview/supported-tokens) are accepted.
+When querying Irys, accepts addresses from [any of Irys' supported chains](/overview/supported-tokens) are accepted.
 
 ```js
 const results = await myQuery
 	.search("irys:transactions")
-	.from(["UsWPlOBHRyfWcbrlC5sV3-pNUjOQEI5WmDxLnypc93I", "0x4adDE0b3C686B4453e007994edE91A7832CF3c99"]);
+	.from(["UsWPlOBHRyfWcbrlC5sV3-pNUjOQEI5WmDxLnypc93I", 
+	       "0x4adDE0b3C686B4453e007994edE91A7832CF3c99"]);
 ```
 
 When querying Arweave, accepts Arweave addresses only.

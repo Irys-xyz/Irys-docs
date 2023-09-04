@@ -5,12 +5,9 @@ description: Installing the SDK with Npm and Yarn
 import { Tab, Tabs } from "nextra-theme-docs";
 import { Callout } from "nextra-theme-docs";
 
-# Overview
+# Query package
 
-The Irys query package features:
-
--   Single Main Class: Use the `Query` class as a single point of entry to query Irys and Arweave
--   Ease of Use: The package is designed to be intuitive, saving you the complexity of dealing directly with GraphQL.
+The Irys query package is a JavaScript-based abstraction that sits on top of our GraphQL schema. It simplifies querying transaction metadata and is easily integrated into JavaScript-based projects with a few lines of code.
 
 ## Installation
 
@@ -44,7 +41,7 @@ const myQuery = new Query();
 
 Then execute a query by chaining together a series of functions that collaboratively narrow down the results returned.
 
-To retrieve the 20 latest transactions with the tag `Content-Type` set to `image/png` on Irys, use:
+To retrieve the 20 latest transactions with the tag `Content-Type` set to `image/png` on Irys:
 
 ```js
 const results = await myQuery
@@ -54,17 +51,43 @@ const results = await myQuery
 	.limit(20);
 ```
 
-# Query Type
+## Endpoints
 
-When using the Irys Query SDK, set the query location using the [`search()`](/developer-docs/query-sdk/api/search) function.
+The `Query` class links to a GraphQL endpoint for query execution, defaulting to `https://node1.irys.xyz/graphql` for Irys and `https://arweave.net/graphql` for Arweave.
 
-The Query class serves as a unified interface for querying Irys transactions, Arweave transactions, and Arweave blocks. Define the query type using the [`search()`](/developer-docs/query-sdk/api/search) function.
+When querying Irys, you must query the same node you uploaded to. To change the endpoint, pass any of the following to the `Query` object constructor:
 
-The selected search type influences the [returned fields](/developer-docs/query-sdk/api/fields) and the availability of specific query functions.
+-   https://node1.irys.xyz/graphql (Default)
+-   https://node2.irys.xyz/graphql
+-   https://devnet.irys.xyz/graphql
 
-Refer to the following table for available functions, including their availability with each query type.
+When querying Arweave, any of these may be used:
 
-| Function Name                    | irys:transactions | arweave:transactions | arweave:blocks |
+-   https://arweave.net/graphql (Default)
+-   https://arweave.dev/graphql
+-   https://arweave-search.goldsky.com/graphql
+
+```js
+const myQuery = new Query({ url: "https://devnet.irys.xyz/graphql" });
+```
+
+# Query type
+
+Using the `Query` class users can search any of:
+
+-   Irys transactions
+-   Arweave transactions
+-   Arweave blocks
+
+The search location is specified by passing a parameter to the [`search()`](/developer-docs/query-sdk/api/search) function.
+
+```js
+const results = await myQuery.search("irys:transactions");
+```
+
+The selected search type influences the [returned fields](/developer-docs/querying/query-package#limiting-fields-returned) and the availability of specific query functions.
+
+| Function                         | irys:transactions | arweave:transactions | arweave:blocks |
 | -------------------------------- | ----------------- | -------------------- | -------------- |
 | [`search()`](./api/search)       | Yes               | Yes                  | Yes            |
 | [`tags()`](./api/tags)           | Yes               | Yes                  | No             |
@@ -79,43 +102,11 @@ Refer to the following table for available functions, including their availabili
 | [`stream()`](./api/stream)       | Yes               | Yes                  | Yes            |
 | [`fields()`](./api/fields)       | Yes               | Yes                  | Yes            |
 
-## Changing default endpoints
-
-The `Query` class links to a GraphQL endpoint for query execution, defaulting to `https://node1.irys.xyz/graphql` for Irys and `https://arweave.net/graphql` for Arweave.
-
-When querying Irys, you must query the same node you uploaded to. To change node, pass any of the following to the `Query` object constructor:
-
--   https://node1.irys.xyz/graphql (Default)
--   https://node2.irys.xyz/graphql
--   https://devnet.irys.xyz/graphql
-
-When querying Arweave, any of these may be used:
-
--   https://arweave.net/graphql (Default)
--   https://arweave.dev/graphql
--   https://arweave-search.goldsky.com/graphql
-
-```js
-const myQuery = new Query({ url: "https://node2.irys.xyz/graphql" });
-```
-
-## Changing search type
-
-Use the `search()` function to change between searching Irys and Arweave.
-
--   `irys:transactions`: Searches transactions uploaded to Arweave via to any of Irys' nodes
--   `arweave:transactions`: Searches all transactions posted to Arweave
--   `arweave:blocks`: Searches all of Arweave for a specific block
-
-```js
-const results = await myQuery.search("irys:transactions");
-```
-
-## Searching by timestamp
+## Timestamp
 
 Use the `fromTimestamp()` and `toTimestamp()` functions to search for transactions by timestamp. Results returned are `>= fromTimestamp` and `< toTimestamp`.
 
-You can search by passing `Date` objects to the functions.
+You can search by passing `Date` objects to the functions:
 
 ```js
 const results = await myQuery
@@ -124,29 +115,34 @@ const results = await myQuery
 	.toTimestamp(new Date("2023-07-03"));
 ```
 
-Or by using UNIX timestamps in millisecond format.
+Or by using UNIX timestamps in millisecond format:
 
 ```js
-const results = await myQuery.search("irys:transactions").fromTimestamp(1688144401000).toTimestamp(1688317201000);
+const results = await myQuery
+	.search("irys:transactions")
+	.fromTimestamp(1688144401000)
+	.toTimestamp(1688317201000);
 ```
 
 <Callout type="info" emoji="ℹ️">
 	Irys timestamps are accurate to the millisecond, so you need to provide a timestamp in millisecond format. You can
 	convert from human-readable time to UNIX timestamp using websites like [Epoch101](https://www.epoch101.com/), be
-	sure to convert in **millisecond** format not **second**.
+	sure to convert in **millisecond** format, not **second**.
 </Callout>
 
-## Searching by **tags**
+## Tags
 
-Use the `tags()` function to search [metadata tags](https://docs.irys.xyz/developer-docs/tags) attached to transactions during upload.
+Use the `tags()` function to search [metadata tags](/developer-docs/tags) attached to transactions during upload.
 
 Search for a single tag name / value pair:
 
 ```js
-const results = await myQuery.search("irys:transactions").tags([{ name: "Content-Type", values: ["image/png"] }]);
+const results = await myQuery
+	.search("irys:transactions")
+	.tags([{ name: "Content-Type", values: ["image/png"] }]);
 ```
 
-Search for a single tag name with a list of possible values. The search employs OR logic, returning transactions tagged with ANY provided value.
+Search for a single tag name with a list of possible values. The search uses OR logic and returns transactions tagged with ANY provided value.
 
 ```js
 const results = await myQuery
@@ -154,16 +150,16 @@ const results = await myQuery
 	.tags([{ name: "Content-Type", values: ["image/png", "image/jpg"] }]);
 ```
 
-Search for multiple tags. The search employs AND logic, returning transactions tagged with ALL provided values.
+Search for multiple tags. The search uses AND logic and returns transactions tagged with ALL provided values.
 
 ```js
-const results = await myQuery.search("irys:transactions").tags([
-	{ name: "Content-Type", values: ["image/png"] },
-	{ name: "Application-ID", values: ["myApp"] },
-]);
+const results = await myQuery
+	.search("irys:transactions")
+	.tags([{ name: "Content-Type", values: ["image/png"] },
+	       { name: "Application-ID", values: ["myApp"] }]);
 ```
 
-You can also search Arweave by tags.
+You can also search Arweave by tags:
 
 ```js
 const results = await myQuery
@@ -171,14 +167,15 @@ const results = await myQuery
 	.tags([{ name: "Content-Type", values: ["image/png", "image/jpg"] }]);
 ```
 
-## Search by **transaction id**
+## Transaction id
 
-Use the `ids()` function to by transaction ID. The search employs OR logic, returning transactions tagged with ANY provided value:
+Use the `ids()` function to by transaction ID. The search uses OR logic and returns transactions tagged with ANY provided value:
 
 ```js
 const results = await myQuery
 	.search("irys:transactions")
-	.ids(["xXyv3u9nHHWGiMJl_DMgLwwRdOTlIlQZyqaK_rOkNZw", "_xE7tG1kl2FgCUDgJ5jNJeVA6R5kuys7A6f1qfh9_Kw"]);
+	.ids(["xXyv3u9nHHWGiMJl_DMgLwwRdOTlIlQZyqaK_rOkNZw",     
+	      "_xE7tG1kl2FgCUDgJ5jNJeVA6R5kuys7A6f1qfh9_Kw"]);
 ```
 
 You can also search Arweave by transaction ID.
@@ -186,44 +183,52 @@ You can also search Arweave by transaction ID.
 ```js
 const results = await myQuery
 	.search("arweave:transactions")
-	.ids(["xXyv3u9nHHWGiMJl_DMgLwwRdOTlIlQZyqaK_rOkNZw", "_xE7tG1kl2FgCUDgJ5jNJeVA6R5kuys7A6f1qfh9_Kw"]);
+	.ids(["xXyv3u9nHHWGiMJl_DMgLwwRdOTlIlQZyqaK_rOkNZw", 
+	      "_xE7tG1kl2FgCUDgJ5jNJeVA6R5kuys7A6f1qfh9_Kw"]);
 ```
 
-## Search by **transaction sender**
+## Transaction sender
 
-Use the `from()` function to search by wallet addresses used when signing and paying for the upload. Addresses from any of [Irys' supported chains](https://docs.irys.xyz/overview/supported-tokens) are accepted.
+Use the `from()` function to search by wallet addresses used when signing and paying for the upload. Addresses from any of [Irys' supported chains](/overview/supported-tokens) are accepted.
 
 The search employs OR logic, returning transactions tagged with ANY provided value:
 
 ```js
 const results = await myQuery
 	.search("irys:transactions")
-	.from(["UsWPlOBHRyfWcbrlC5sV3-pNUjOQEI5WmDxLnypc93I", "0x4adDE0b3C686B4453e007994edE91A7832CF3c99"]);
+	.from(["UsWPlOBHRyfWcbrlC5sV3-pNUjOQEI5WmDxLnypc93I", 
+	       "0x4adDE0b3C686B4453e007994edE91A7832CF3c99"]);
 ```
 
-When searching Arweave by transaction sender, only Arweave addresses are accepted.
+When searching Arweave by transaction sender, only Arweave addresses are accepted:
 
 ```js
-const results = await myQuery.search("arweave:transactions").from(["TrnCnIGq1tx8TV8NA7L2ejJJmrywtwRfq9Q7yNV6g2A"]);
+const results = await myQuery
+	.search("arweave:transactions")
+	.from(["TrnCnIGq1tx8TV8NA7L2ejJJmrywtwRfq9Q7yNV6g2A"]);
 ```
 
-## Search by **transaction recipient**
+## Transaction recipient
 
-Use the `to()` function to search the wallet address of the transaction recipient. This search works on Arweave only and is used when there's a fund transfer.
+Use the `to()` function to search for the wallet address of the transaction recipient. This works on Arweave only and is used when there's a fund transfer.
 
 ```js
-const results = await myQuery.search("arweave:transactions").to("TrnCnIGq1tx8TV8NA7L2ejJJmrywtwRfq9Q7yNV6g2A");
+const results = await myQuery
+	.search("arweave:transactions")
+	.to("TrnCnIGq1tx8TV8NA7L2ejJJmrywtwRfq9Q7yNV6g2A");
 ```
 
-## Search by token
+## Token
 
-Use the `token()` function to search based on the token name used to pay for the upload. Any of [these values](https://docs.irys.xyz/overview/supported-tokens) are acceptable.
+Use the `token()` function to search based on the token name used to pay for the upload. Any of [these values](/overview/supported-tokens) are acceptable.
 
 ```js
-const results = await myQuery.search("irys:transactions").token("solana");
+const results = await myQuery
+	.search("irys:transactions")
+	.token("solana");
 ```
 
-## Search by block id
+## Block id
 
 Use the `ids()` function to search for Arweave blocks with the specified IDs.
 
@@ -233,37 +238,49 @@ const results = await myQuery
 	.ids(["R0ZLe4RvHxLJLzI1Z9ppyYVWFyHW4D1YrxXKuA9PGrwkk2QAuXCnD1xOJe-QOz4l"]);
 ```
 
-## Searching by block height
+## Block height
 
 Use the `mixHeight()` and `maxHeight()` functions to search for blocks within the specified block height range. Results are `>= minHeight and < maxHeight`.
 
 ```js
-const results = await myQuery.search("arweave:blocks").minHeight(1188272).maxHeight(1188279);
+const results = await myQuery
+	.search("arweave:blocks")
+	.minHeight(1188272)
+	.maxHeight(1188279);
 ```
 
 Or for transactions within the specified block height range. Results are `>= minHeight and < maxHeight`.
 
 ```js
-const results = await myQuery.search("arweave:transactions").minHeight(1188272).maxHeight(1188279);
+const results = await myQuery
+	.search("arweave:transactions")
+	.minHeight(1188272)
+	.maxHeight(1188279);
 ```
 
 ## Sorting
 
-Use the `sort()` function to sort results by timestamp in ascending order (`ASC`)
+Use the `sort()` function to sort results by timestamp in ascending order:
 
 ```js
-const results = await myQuery.search("irys:transactions").token("ethereum").sort("ASC");
+const results = await myQuery
+	.search("irys:transactions")
+	.token("ethereum")
+	.sort("ASC");
 ```
 
-or descending (`DESC`) order.
+or descending order:
 
 ```js
-const results = await myQuery.search("irys:transactions").token("matic").sort("DESC");
+const results = await myQuery
+	.search("irys:transactions")
+	.token("matic")
+	.sort("DESC");
 ```
 
-## Obtaining only the first result
+## First result
 
-Use the `first()` function to return only the first result.
+Use the `first()` function to return only the first result:
 
 ```js
 const results = await myQuery
@@ -279,17 +296,20 @@ Use the `limit()` function to limit the maximum number of results returned. This
 ```js
 const results = await myQuery
 	.search("irys:transactions")
-	.ids(["xXyv3u9nHHWGiMJl_DMgLwwRdOTlIlQZyqaK_rOkNZw", "_xE7tG1kl2FgCUDgJ5jNJeVA6R5kuys7A6f1qfh9_Kw"])
+	.ids(["xXyv3u9nHHWGiMJl_DMgLwwRdOTlIlQZyqaK_rOkNZw", 
+	      "_xE7tG1kl2FgCUDgJ5jNJeVA6R5kuys7A6f1qfh9_Kw"])
 	.limit(20);
 ```
 
 ## Pagination / streaming
 
-Use the `stream()` function to manage large results sets. This function returns an iterable stream which will continuously yield results as long as your query keeps producing them.
+Use the `stream()` function to manage large results sets. This function returns an iterable stream that continuously yields results as long as your query keeps producing them.
 
 ```js
 // Create the stream
-const stream = await myQuery.search("irys:transactions").token("solana").stream();
+const stream = await myQuery
+	.search("irys:transactions")
+	.token("solana").stream();
 
 // Iterate over the results
 for await (const result of stream) {
@@ -324,8 +344,6 @@ The fields available for retrieval depend on the search type, when searching `ir
 ```
 
 When searching by `arweave:transactions` the following fields are available:
-
-TODO: I need to sync with JB or Jesse on these, not sure what they all are
 
 ```js
 .fields({

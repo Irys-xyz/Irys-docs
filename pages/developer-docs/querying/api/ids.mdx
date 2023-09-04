@@ -20,7 +20,8 @@ Use the `ids()` function to by transaction ID. The search employs OR logic, retu
 ```js
 const results = await myQuery
 	.search("irys:transactions")
-	.ids(["xXyv3u9nHHWGiMJl_DMgLwwRdOTlIlQZyqaK_rOkNZw", "_xE7tG1kl2FgCUDgJ5jNJeVA6R5kuys7A6f1qfh9_Kw"]);
+	.ids(["xXyv3u9nHHWGiMJl_DMgLwwRdOTlIlQZyqaK_rOkNZw", 
+	      "_xE7tG1kl2FgCUDgJ5jNJeVA6R5kuys7A6f1qfh9_Kw"]);
 ```
 
 You can also search Arweave by transaction ID.
@@ -28,7 +29,8 @@ You can also search Arweave by transaction ID.
 ```js
 const results = await myQuery
 	.search("arweave:transactions")
-	.ids(["xXyv3u9nHHWGiMJl_DMgLwwRdOTlIlQZyqaK_rOkNZw", "_xE7tG1kl2FgCUDgJ5jNJeVA6R5kuys7A6f1qfh9_Kw"]);
+	.ids(["xXyv3u9nHHWGiMJl_DMgLwwRdOTlIlQZyqaK_rOkNZw", 
+	      "_xE7tG1kl2FgCUDgJ5jNJeVA6R5kuys7A6f1qfh9_Kw"]);
 ```
 
 ## Search By Block ID
@@ -39,5 +41,4 @@ Use the `ids()` function to search for Arweave blocks with the specified IDs.
 const results = await myQuery
 	.search("arweave:blocks")
 	.ids(["R0ZLe4RvHxLJLzI1Z9ppyYVWFyHW4D1YrxXKuA9PGrwkk2QAuXCnD1xOJe-QOz4l"])
-
 ```

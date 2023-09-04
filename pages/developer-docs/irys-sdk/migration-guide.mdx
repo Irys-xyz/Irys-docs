@@ -4,25 +4,23 @@ description: Migrating from Bundlr SDK to Irys SDK
 
 import { Callout } from "nextra-theme-docs";
 
-# Migration Guide
+# Migration guide
 
 Migrating your application from the Bundlr SDK to the Irys SDK is a simple process.
 
 ## Installation
 
-Install the Irys SDK using npm
+Install the Irys SDK using npm:
 
 ```console
 npm install @irys/client
 ```
 
-or yarn.
+or yarn:
 
 ```console
 yarn add @irys/client
 ```
-
-TODO: Update install instructions once final
 
 ## Imports
 
@@ -61,24 +59,14 @@ const irys = new Irys({
 
 ## Changes to upload functions
 
-In the Bundlr SDK, there were separate functions for uploading data and uploading data and getting a receipt.
+In the Bundlr SDK there were separate upload functions depending on whether you wanted a receipt or not. With the Irys SDK, all upload functions return a [receipt](/learn/receipts).
 
-With the Irys SDK, all upload functions now return [a cryptographically signed receipt](/learn/receipts).
+The following function is removed:
 
-The
+-   `bundlr.uploadWithReceipt()`
 
-`bundlr.uploadWithReceipt()` was used for strong provenance uploads.
-
-The following functions used for permanent storage uploads have not changed, as long as you properly instantiate the `Irys` object, your previous upload code will work as before.
+The following functions upload data as before however, the return type has changed to be a receipt.
 
 -   [`irys.upload()`](./api/upload) To upload any data
 -   [`irys.uploadFile()`](./api/uploadFile) To upload a file
 -   [`irys.uploadFolder()`](./api/uploadFolder) To upload a folder
-
-## Strong Provenance Uploads
-
-The Irys SDK introduces three new functions for this purpose, all residing under the `irys.provenance` namespace, and sharing identical signatures with the permanent storage upload functions.
-
--   [`irys.provenance.upload()`](./api/provenance-upload) To upload any data
--   [`irys.provenance.uploadFile()`](./api/provenance-uploadFile) To upload a file
--   [`irys.provenance.uploadFolder()`](./api/provenance-uploadFolder) To upload a folder

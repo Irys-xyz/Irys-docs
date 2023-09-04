@@ -66,7 +66,7 @@ const uploadImage = async () => {
 
 	// Upload metadata
 	try {
-		const response = await irys.provenance.uploadFile(fileToUpload);
+		const response = await irys.uploadFile(fileToUpload);
 		console.log(`File uploaded ==> https://arweave.net/${response.id}`);
 	} catch (e) {
 		console.log("Error uploading file ", e);
@@ -130,7 +130,7 @@ const uploadMetadata = async () => {
 
 	// Upload metadata
 	try {
-		const response = await irys.provenance.uploadFile(fileToUpload, { tags });
+		const response = await irys.uploadFile(fileToUpload, { tags });
 		console.log(`File uploaded ==> https://arweave.net/${response.id}`);
 	} catch (e) {
 		console.log("Error uploading file ", e);

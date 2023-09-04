@@ -44,7 +44,7 @@ const getIrys = async () => {
 
 ## Storing The Root Asset
 
-Create a function that stores your root transaction. In the interest of simplicity, we will use text strings in this tutorial. We upload with the function [`irys.provenance.upload()`](/developer-docs/irys-sdk/api/provenance-upload) which returns a cryptographically signed receipt containing a timestamp accurate to the millisecond of when the upload happened.
+Create a function that stores your root transaction. In the interest of simplicity, we will use text strings in this tutorial. We upload with the function [`irys.upload()`](/developer-docs/irys-sdk/api/upload) which returns a cryptographically signed receipt containing a timestamp accurate to the millisecond of when the upload happened.
 
 ```js
 // Stores the root transaction and returns the transaction id
@@ -73,7 +73,7 @@ const storeUpdate = async (rootTxId, myData) => {
 		{ name: "root-tx", value: rootTxId },
 	];
 
-	const tx = await irys.provenance.upload(myData, { tags });
+	const tx = await irys.upload(myData, { tags });
 	return tx.id;
 };
 ```
@@ -400,7 +400,7 @@ const storeUpdate = async (rootTxId, myData) => {
 		{ name: "root-tx", value: rootTxId },
 	];
 
-	const tx = await irys.provenance.upload(myData, { tags });
+	const tx = await irys.upload(myData, { tags });
 	return tx.id;
 };
 
