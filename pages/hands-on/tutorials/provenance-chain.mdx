@@ -29,12 +29,12 @@ dotenv.config();
 const getIrys = async () => {
 	const url = "https://devnet.irys.xyz";
 	const providerUrl = "https://rpc-mumbai.maticvigil.com";
-	const currency = "matic";
+	const token = "matic";
 	const privateKey = process.env.ETH_PRIVATE_KEY;
 
 	const irys = new Irys({
 		url: url, // URL of the node you want to connect to
-		currency: currency, // Currency used for payment
+		token: token, // Token used for payment
 		key: privateKey, // ETH or SOL private key
 		config: { providerUrl: providerUrl }, // Optional provider URL, only required when using Devnet
 	});
@@ -368,12 +368,12 @@ dotenv.config();
 const getIrys = async () => {
 	const url = "https://devnet.irys.xyz";
 	const providerUrl = "https://rpc-mumbai.maticvigil.com";
-	const currency = "matic";
+	const token = "matic";
 	const privateKey = process.env.ETH_PRIVATE_KEY;
 
 	const irys = new Irys({
 		url: url, // URL of the node you want to connect to
-		currency: currency, // Currency used for payment
+		token: token, // Token used for payment
 		key: privateKey, // ETH or SOL private key
 		config: { providerUrl: providerUrl }, // Optional provider URL, only required when using Devnet
 	});

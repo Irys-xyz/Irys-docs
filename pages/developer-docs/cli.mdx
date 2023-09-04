@@ -28,7 +28,7 @@ When executing CLI commands involving funding nodes or signing transactions, you
 Use the `-w` flag to specify a private key along with the `-c` flag to indicate the token you'll use.
 
 ```console
-bundlr -w <wallet-file-name> -c <currency>
+bundlr -w <wallet-file-name> -t <token>
 ```
 
 The methods for supplying private keys differ for Ethereum and Solana compared to Arweave.
@@ -119,7 +119,7 @@ irys upload myImage.png -t tagName1 tagValue1 tagName2 tagValue2 -h https://node
 
 ## Understanding Pricing
 
-Use the `price` command, followed by a number of bytes to get the cost to upload that number of bytes. You must also provide a currency (`-c`) and a node URL (`-h`)
+Use the `price` command, followed by a number of bytes to get the cost to upload that number of bytes. You must also provide a token (`-t`) and a node URL (`-h`)
 
 ```console
 irys price 1000000 -c matic -h https://node1.irys.xyz

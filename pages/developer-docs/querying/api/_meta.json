@@ -4,7 +4,7 @@
 	"ids": "ids()",
 	"from": "from()",
 	"to": "to()",
-	"currency": "currency()",
+	"token": "token()",
 	"minHeight": "minHeight()",
 	"maxHeight": "maxHeight()",
 	"sort": "sort()",

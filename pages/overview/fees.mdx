@@ -15,13 +15,13 @@ Fees are computed as follows:
 ```
 bundlr_fee(X = number of bytes) =
 arweave_cost(max(X, 10000)) *
-conversion_rate("AR", currency) *
+conversion_rate("AR", token) *
 global_multiplier *
 oracle_fee
 ```
 
 -   `arweave_cost` is cost of storing `X` number of bytes on Arweave using linear pricing (i.e. ignoring minimum chunk size). e.g. if `arweave_cost(256KB) = $2.56` then `arweave_cost(1KB) = $0.01`
--   `conversion_rate` is the conversion rate between AR and some other currency (e.g. MATIC). This allows users to pay the same fees in different currencies.
+-   `conversion_rate` is the conversion rate between AR and some other token (e.g. MATIC). This allows users to pay the same fees in different currencies.
 -   `global_multiplier` is a multiplier applied to all transactions which can be seen as a “profit margin”.
 -   `oracle_fee` is a risk multiplier which accounts for cost of treasury management and asset volatility.
 

@@ -35,7 +35,7 @@ You can up-front fund a node, where you send over enough funds to cover all of a
 ```js
 try {
 	const fundTx = await irys.fund(irys.utils.toAtomic(0.05));
-	console.log(`Successfully funded ${irys.utils.fromAtomic(fundTx.quantity)} ${irys.currency}`);
+	console.log(`Successfully funded ${irys.utils.fromAtomic(fundTx.quantity)} ${irys.token}`);
 } catch (e) {
 	console.log("Error funding node ", e);
 }

@@ -43,8 +43,8 @@ type Tag = {
 
 // Connect to a Bundlr node
 const privateKey = process.env.PRIVATE_KEY;
-const currency = "matic";
-const bundlr = new Bundlr("http://devnet.bundlr.network", currency, privateKey, {
+const token = "matic";
+const bundlr = new Bundlr("http://devnet.bundlr.network", token, privateKey, {
 	providerUrl: "https://rpc-mumbai.maticvigil.com",
 });
 

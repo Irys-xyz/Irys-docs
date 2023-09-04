@@ -1,11 +1,9 @@
 {
 	"irys-sdk": "Irys SDK",
-	"query": "Query package",
+	"querying": "Querying",
 	"cli": "CLI",
 	"provenance-toolkit": "Provenance toolkit",
 	"nodes": "Nodes",
 	"using-devnet": "Using Devnet",
-	"tags": "Tags",
-	"querying-downloading": "Querying & Downloading",
-	"graphql": "GraphQL"
+	"tags": "Tags"
 }

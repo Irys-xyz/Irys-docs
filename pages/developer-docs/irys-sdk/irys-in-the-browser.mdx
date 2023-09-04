@@ -25,7 +25,7 @@ import { WebIrys } from "@irys/client";
 
 await window.ethereum.enable();
 const provider = new providers.Web3Provider(window.ethereum);
-const irys = new WebIrys("https://node2.irys.xyz", "matic", provider);
+const irys = new WebIrys("https://node1.irys.xyz", "matic", provider);
 await irys.ready();
 ```
 

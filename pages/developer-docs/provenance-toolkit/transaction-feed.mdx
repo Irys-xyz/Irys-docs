@@ -6,7 +6,7 @@ import { Callout } from "nextra-theme-docs";
 
 # Transaction feed
 
-The transaction feed component queries transactions based on node, currency, content type and timestamp and renders the results in an easy-to-view format.
+The transaction feed component queries transactions based on node, token, content type and timestamp and renders the results in an easy-to-view format.
 
 <img
 	className="border border-[#FEF4EE] rounded mt-5 md:w-5/6 w-full"
@@ -29,7 +29,7 @@ When forking this component, you could modify the query construction to do thing
 const queryGraphQL = async (
 	endpoint: string,
 	contentType: string | null,
-	currency: string | null,
+	token: string | null,
 	from: Date | null,
 	to: Date | null,
 ): Promise<QueryResult[]> => {
@@ -37,7 +37,7 @@ const queryGraphQL = async (
 	let query = "query getData { transactions";
 
 	// Check for any arguments to include in the query
-	if (contentType ?? (null || currency) ?? (null || (from ?? null) !== null || (to ?? null) !== null)) {
+	if (contentType ?? (null || token) ?? (null || (from ?? null) !== null || (to ?? null) !== null)) {
 		query += "(";
 
 		// Add the tags field to the query if contentType is not null (or undefined)
@@ -45,9 +45,9 @@ const queryGraphQL = async (
 			query += 'tags: [{ name: "Content-Type", values: ["' + contentType + '"]}], ';
 		}
 
-		// Check for currency (null or undefined)
-		if (currency ?? null) {
-			query += 'currency: "' + currency + '", ';
+		// Check for token (null or undefined)
+		if (token ?? null) {
+			query += 'token: "' + token + '", ';
 		}
 
 		// Check for from and to (null or undefined)
@@ -63,7 +63,7 @@ const queryGraphQL = async (
 	}
 
 	// Complete the query string
-	query += " { edges { node { id currency timestamp tags { name value } } } } }";
+	query += " { edges { node { id token timestamp tags { name value } } } } }";
 	try {
 		const response = await fetch(endpoint, {
 			method: "POST",

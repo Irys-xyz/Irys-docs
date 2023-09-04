@@ -17,11 +17,11 @@ For Solana:
 ```js
 const url = "https://devnet.irys.xyz";
 const providerUrl = "https://api.devnet.solana.com";
-const currency = "matic";
+const token = "matic";
 
 const irys = new Irys({
 	url, // URL of the node you want to connect to
-	currency, // Currency used for payment and signing
+	token, // Token used to pay for uploads.
 	key: process.env.ETH_PRIVATE_KEY, // SOL private key
 	config: { providerUrl }, // Optional provider URL, only required when using Devnet
 });
@@ -32,11 +32,11 @@ For Polygon / Matic:
 ```js
 const url = "https://devnet.irys.xyz";
 const providerUrl = "https://rpc-mumbai.maticvigil.com;
-const currency = "matic";
+const token = "matic";
 
 const irys = new Irys({
 	url, // URL of the node you want to connect to
-	currency, // Currency used for payment and signing
+	token, // Token used to pay for uploads.
 	key: process.env.ETH_PRIVATE_KEY, // SOL private key
 	config: { providerUrl }, // Optional provider URL, only required when using Devnet
 });

@@ -24,7 +24,7 @@ const CODE_SECTIONS: CodeSections = {
 		>
 			<span className="text-[#eb707d]">const</span> <span className="text-[#79b8ff]">irys</span>{" "}
 			<span className="text-[#eb707d]">= new</span> <span className="text-[#b392f0]">Irys</span>({"{ url: "}
-			<span className="text-[#44a447]">"https://node1.irys.network"</span>,{" currency: "}
+			<span className="text-[#44a447]">"https://node1.irys.network"</span>,{" token: "}
 			<span className="text-[#44a447]">"matic"</span>,{" key: "}
 			<span className="text-[#44a447]">"polygon-private-key"</span>
 			{" });"}

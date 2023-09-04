@@ -38,7 +38,7 @@ const withdrawFunds = async () => {
 		const curBalance = await irys.getLoadedBalance();
 		// 2. Withdraw all
 		const response = await irys.withdrawBalance(curBalance);
-		console.log(`Successfully withdrew ${irys.utils.fromAtomic(curBalance)} ${irys.currency}`);
+		console.log(`Successfully withdrew ${irys.utils.fromAtomic(curBalance)} ${irys.token}`);
 	} catch (e) {
 		console.log("Error uploading data ", e);
 	}

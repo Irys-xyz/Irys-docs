@@ -6,12 +6,11 @@ import { Callout } from "nextra-theme-docs";
 
 # `fields({})`
 
-Limits the fields returned. 
-
+Limits the fields returned.
 
 **Parameters**
-<div className="-mt-6" />
--   `fields`: A JSON object detailing the desired fields
+
+<div className="-mt-6" />- `fields`: A JSON object detailing the desired fields
 
 To limit the results, set a field's value to `false` or omit it entirely.
 
@@ -20,7 +19,7 @@ The fields available for retrieval depend on the search type, when searching `ir
 ```js
 .fields({
 	id: true, // Transaction ID
-	currency: true, // Currency used for payment
+	token: true, // Token used for payment
 	address: true, // Cross-chain address used for signing and payment
 	receipt: {
 		deadlineHeight: true, // The block number by which the transaction must be finalized on Arweave

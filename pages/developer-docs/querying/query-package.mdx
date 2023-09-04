@@ -1,28 +1,20 @@
 ---
-title: SDK
-description: Query Irys and Arweave transactions
+description: Installing the SDK with Npm and Yarn
 ---
 
 import { Tab, Tabs } from "nextra-theme-docs";
-import Heading from "../../components/Heading";
-import SectionTitle from "../../components/SectionTitle";
 import { Callout } from "nextra-theme-docs";
 
-<div className="mt-7">
-	<Heading level={1} className="">
-		Query Package
-	</Heading>
-	The Irys Query package simplifies querying Irys and Arweave.
-</div>
+# Overview
 
-It features:
+The Irys query package features:
 
 -   Single Main Class: Use the `Query` class as a single point of entry to query Irys and Arweave
 -   Ease of Use: The package is designed to be intuitive, saving you the complexity of dealing directly with GraphQL.
 
 ## Installation
 
-You can install via npm:
+Install via npm:
 
 ```console
 npm install @irys/query
@@ -36,7 +28,7 @@ yarn add @irys/query
 
 ## Imports
 
-Import the Irys Query package with:
+Import with:
 
 ```js
 import Query from "@irys/query";
@@ -52,7 +44,7 @@ const myQuery = new Query();
 
 Then execute a query by chaining together a series of functions that collaboratively narrow down the results returned.
 
-To retrieve the 20 latest transactions with the tag `Content-Type` set to `image/png` on Irys, use the following:
+To retrieve the 20 latest transactions with the tag `Content-Type` set to `image/png` on Irys, use:
 
 ```js
 const results = await myQuery
@@ -61,6 +53,31 @@ const results = await myQuery
 	.sort("ASC")
 	.limit(20);
 ```
+
+# Query Type
+
+When using the Irys Query SDK, set the query location using the [`search()`](/developer-docs/query-sdk/api/search) function.
+
+The Query class serves as a unified interface for querying Irys transactions, Arweave transactions, and Arweave blocks. Define the query type using the [`search()`](/developer-docs/query-sdk/api/search) function.
+
+The selected search type influences the [returned fields](/developer-docs/query-sdk/api/fields) and the availability of specific query functions.
+
+Refer to the following table for available functions, including their availability with each query type.
+
+| Function Name                    | irys:transactions | arweave:transactions | arweave:blocks |
+| -------------------------------- | ----------------- | -------------------- | -------------- |
+| [`search()`](./api/search)       | Yes               | Yes                  | Yes            |
+| [`tags()`](./api/tags)           | Yes               | Yes                  | No             |
+| [`ids()`](./api/ids)             | Yes               | Yes                  | Yes            |
+| [`from()`](./api/from)           | Yes               | Yes                  | No             |
+| [`to()`](./api/to)               | No                | Yes                  | No             |
+| [`token()`](./api/token)         | Yes               | No                   | No             |
+| [`minHeight()`](./api/minHeight) | No                | No                   | Yes            |
+| [`maxHeight()`](./api/maxHeight) | No                | No                   | Yes            |
+| [`sort()`](./api/sort)           | Yes               | Yes                  | Yes            |
+| [`limit()`](./api/limit)         | Yes               | Yes                  | Yes            |
+| [`stream()`](./api/stream)       | Yes               | Yes                  | Yes            |
+| [`fields()`](./api/fields)       | Yes               | Yes                  | Yes            |
 
 ## Changing default endpoints
 
@@ -72,7 +89,7 @@ When querying Irys, you must query the same node you uploaded to. To change node
 -   https://node2.irys.xyz/graphql
 -   https://devnet.irys.xyz/graphql
 
-When querying Arweave, any of these values may be used:
+When querying Arweave, any of these may be used:
 
 -   https://arweave.net/graphql (Default)
 -   https://arweave.dev/graphql
@@ -198,12 +215,12 @@ Use the `to()` function to search the wallet address of the transaction recipien
 const results = await myQuery.search("arweave:transactions").to("TrnCnIGq1tx8TV8NA7L2ejJJmrywtwRfq9Q7yNV6g2A");
 ```
 
-## Search by currency
+## Search by token
 
-Use the `currency()` function to search based on the token name used to pay for the upload. Any of [these values](https://docs.irys.xyz/overview/supported-tokens) are acceptable.
+Use the `token()` function to search based on the token name used to pay for the upload. Any of [these values](https://docs.irys.xyz/overview/supported-tokens) are acceptable.
 
 ```js
-const results = await myQuery.search("irys:transactions").currency("solana");
+const results = await myQuery.search("irys:transactions").token("solana");
 ```
 
 ## Search by block id
@@ -235,13 +252,13 @@ const results = await myQuery.search("arweave:transactions").minHeight(1188272).
 Use the `sort()` function to sort results by timestamp in ascending order (`ASC`)
 
 ```js
-const results = await myQuery.search("irys:transactions").currency("ethereum").sort("ASC");
+const results = await myQuery.search("irys:transactions").token("ethereum").sort("ASC");
 ```
 
 or descending (`DESC`) order.
 
 ```js
-const results = await myQuery.search("irys:transactions").currency("matic").sort("DESC");
+const results = await myQuery.search("irys:transactions").token("matic").sort("DESC");
 ```
 
 ## Obtaining only the first result
@@ -272,7 +289,7 @@ Use the `stream()` function to manage large results sets. This function returns 
 
 ```js
 // Create the stream
-const stream = await myQuery.search("irys:transactions").currency("solana").stream();
+const stream = await myQuery.search("irys:transactions").token("solana").stream();
 
 // Iterate over the results
 for await (const result of stream) {
@@ -289,7 +306,7 @@ The fields available for retrieval depend on the search type, when searching `ir
 ```js
 .fields({
 	id: true, // Transaction ID
-	currency: true, // Currency used for payment
+	token: true, // Token used for payment
 	address: true, // Cross-chain address used for signing and payment
 	receipt: {
 		deadlineHeight: true, // The block number by which the transaction must be finalized on Arweave

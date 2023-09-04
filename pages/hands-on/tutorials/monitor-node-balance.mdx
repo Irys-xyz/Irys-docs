@@ -18,12 +18,12 @@ dotenv.config();
 const getIrys = async () => {
 	const url = "https://devnet.irys.xyz";
 	const providerUrl = "https://rpc-mumbai.maticvigil.com";
-	const currency = "matic";
+	const token = "matic";
 	const privateKey = process.env.ETH_PRIVATE_KEY;
 
 	const irys = new Irys({
 		url: url, // URL of the node you want to connect to
-		currency: currency, // Currency used for payment
+		token: token, // Token used for payment
 		key: privateKey, // ETH or SOL private key
 		config: { providerUrl: providerUrl }, // Optional provider URL, only required when using Devnet
 	});
@@ -69,15 +69,15 @@ You can achieve the same thing using our CLI and a bash script. The advantage to
 address="0xaC568a981B1370B2e1bAA8cE30BD5AC9E28C572D" # Public wallet address
 provider_url="https://rpc-mumbai.maticvigil.com"
 node_address="https://devnet.irys.xyz"
-currency="matic"
+token="matic"
 balance_output="";
 
 # Check if node_address contains "devnet"
 # When using devnet, you must also include a provider-url
 if [[ $node_address == *"devnet"* ]]; then
-   balance_output=$(irys balance $address --provider-url $provider_url -h $node_address -c $currency)
+   balance_output=$(irys balance $address --provider-url $provider_url -h $node_address -c $token)
 else
-   balance_output=$(irys balance $address -h $node_address -c $currency)
+   balance_output=$(irys balance $address -h $node_address -t $token)
 fi
 
 # Use regex to parse the output and assign the parsed value to a variable
@@ -101,10 +101,10 @@ To run a bash script periodically, use `cron`. Assuming you saved the above scri
 
 ## cURL
 
-A third option is to make cURL request using an URL with the following format `https://<node-address>/account/balance/<currency>?address=<address>`. For example to check the Devnet MATIC balance of the wallet with address `0xaC568a981B1370B2e1bAA8cE30BD5AC9E28C572D`, you would use the command
+A third option is to make cURL request using an URL with the following format `https://<node-address>/account/balance/<token>?address=<address>`. For example to check the Devnet MATIC balance of the wallet with address `0xaC568a981B1370B2e1bAA8cE30BD5AC9E28C572D`, you would use the command
 `https://devnet.irys.xyz/account/balance/matic?address=0xaC568a981B1370B2e1bAA8cE30BD5AC9E28C572D`
 
-Just as with our CLI, you don’t need to to provide your private key. This version is also more streamlined than the CLI version as you don’t need to include the provider URL when checking the Devnet balances.
+Just as with our CLI, you don’t need to provide your private key. This version is also more streamlined than the CLI version as you don’t need to include the provider URL when checking the Devnet balances.
 
 ```bash
 #!/bin/bash
@@ -112,11 +112,11 @@ Just as with our CLI, you don’t need to to provide your private key. This vers
 # Define your variables
 address="0xaC568a981B1370B2e1bAA8cE30BD5AC9E28C572D" # Public wallet address
 node_address="https://devnet.irys.xyz"
-currency="matic"
+token="token"
 balance_output="";
 
 # Create the API endpoint URL
-balance_check_url="${node_address}/account/balance/${currency}?address=${address}"
+balance_check_url="${node_address}/account/balance/${token}?address=${address}"
 
 # Make the cURL request and capture the response
 balance_output=$(curl -s "$balance_check_url")

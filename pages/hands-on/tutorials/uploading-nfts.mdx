@@ -40,12 +40,12 @@ dotenv.config();
 const getIrys = async () => {
 	const url = "https://devnet.irys.xyz";
 	const providerUrl = "https://rpc-mumbai.maticvigil.com";
-	const currency = "matic";
+	const token = "matic";
 	const privateKey = process.env.ETH_PRIVATE_KEY;
 
 	const irys = new Irys({
-		url: url, // URL of the node you want to connect to
-		currency: currency, // Currency used for payment
+		url, // URL of the node you want to connect to
+		token, // Token used for payment
 		key: privateKey, // ETH or SOL private key
 		config: { providerUrl: providerUrl }, // Optional provider URL, only required when using Devnet
 	});
@@ -60,7 +60,7 @@ const uploadImage = async () => {
 	const { size } = await fs.promises.stat(fileToUpload);
 	// Get cost to upload "size" bytes
 	const price = await irys.getPrice(size);
-	console.log(`Uploading ${size} bytes costs ${irys.utils.fromAtomic(price)} ${currency}`);
+	console.log(`Uploading ${size} bytes costs ${irys.utils.fromAtomic(price)} ${token}`);
 	// Fund the node
 	await irys.fund(price);
 
@@ -102,12 +102,12 @@ dotenv.config();
 const getIrys = async () => {
 	const url = "https://devnet.irys.xyz";
 	const providerUrl = "https://rpc-mumbai.maticvigil.com";
-	const currency = "matic";
+	const token = "matic";
 	const privateKey = process.env.ETH_PRIVATE_KEY;
 
 	const irys = new Irys({
-		url: url, // URL of the node you want to connect to
-		currency: currency, // Currency used for payment
+		url, // URL of the node you want to connect to
+		token, // Token used for payment
 		key: privateKey, // ETH or SOL private key
 		config: { providerUrl: providerUrl }, // Optional provider URL, only required when using Devnet
 	});
@@ -124,7 +124,7 @@ const uploadMetadata = async () => {
 	const { size } = await fs.promises.stat(fileToUpload);
 	// Get cost to upload "size" bytes
 	const price = await irys.getPrice(size);
-	console.log(`Uploading ${size} bytes costs ${irys.utils.fromAtomic(price)} ${currency}`);
+	console.log(`Uploading ${size} bytes costs ${irys.utils.fromAtomic(price)} ${token}`);
 	// Fund the node
 	await irys.fund(price);
 
