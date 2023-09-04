@@ -1,0 +1,221 @@
+---
+description: Create an ERC20 profit-sharing token for NFTs with UDL
+---
+
+import { Callout } from "nextra-theme-docs";
+
+# Create an ERC20 profit-sharing token for NFTs with UDL
+
+In this tutorial, you will create a custom ERC20 token and use it to [manage fractional ownership of NFTs](./udl-nft) that have a [Universal Data License (UDL)](https://arwiki.wiki/#/en/Universal-Data-License-How-to-use-it).
+
+## Monetizing UDL
+
+Using the UDL, creators [can define a set of rules](https://mirror.xyz/0x64eA438bd2784F2C52a9095Ec0F6158f847182d9/AjNBmiD4A4Sw-ouV9YtCO6RCq0uXXcGwVJMB5cdfbhE) that clearly define how their content can be used and what fees are charged for different uses.
+
+To charge a fee of 42 tokens, you’d add this tag:
+
+```json
+{ "name": "License-Fee", "value": "One-Time-42" }
+```
+
+To specify the Matic token, you’d add this tag:
+
+```json
+{ "name": "Currency", "value": "MATIC" }
+```
+
+To specify that payments should be made to a given address, you’d add this tag:
+
+```json
+{ "name": "Payment-Address", "value": "0xBundlooor" }
+```
+
+However this only allows for a single owner, in cases where you want to have fractional ownership, you would attach a profit-sharing token (PST) contract to the UDL using the `Contract` tag:
+
+```json
+{ "name": "Contract", "value": "0xFoo" }
+```
+
+When the `Contact` tag is present, you have to further define how payments should be distributed:
+
+Either setting it so that fees are split between all holders proportionally to their holdings:
+
+```json
+{ "name": "Payment-Mode", "value": "Global-Distribution" }
+```
+
+Or randomly distributed to one holder, with distribution weighted proportionally to holdings:
+
+```json
+{ "name": "Payment-Mode", "value": "Random-Distribution" }
+```
+
+In this tutorial, we’ll write an ERC20 profit-sharing token contract. The contract will be set to either global or random distribution at creation and will expose a function called `distributeRevenue()` which accepts payments and distributes it between holders. You can use the contract as is, or use its logic as a base for building your own contracts.
+
+## Prerequisites
+
+To complete this tutorial, you should have a [basic understanding of the UDL](https://mirror.xyz/0x64eA438bd2784F2C52a9095Ec0F6158f847182d9/AjNBmiD4A4Sw-ouV9YtCO6RCq0uXXcGwVJMB5cdfbhE) and the [opportunities it affords builders](/learn/udl). You should understand the basics of Solidity but do not need to be an expert.
+
+## The smart contract
+
+Our contract, named `MySong`, represents ownership in a single music NFT. This contract is an ERC20 token, and we've set its total supply to a fixed 100 tokens.
+
+<Callout type="info" emoji="ℹ️">
+	Having 100 tokens makes it easy to mentally model ownership amounts, as having 1 coin means you own 1% of the total.
+	In practice, the number of coins could be anything.
+</Callout>
+
+The majority of the contract is boilerplate ERC20, it mints 100 tokens to the contract deployer at creation, and through inheritance, it includes functions for transferring tokens between addresses.
+
+In its constructor, the contract is set to either global or random mode, and then exposes a function called `distributeRevenue()`, which splits revenue payments among token-holders. The function accepts payment in the form of ETH, then either does global or random distribution. To simplify things, this contract uses pseudo-random number generation which comes with an element of risk. When building your own solutions, you might choose to use a [verifiable random number generator](https://docs.chain.link/vrf/v2/introduction).
+
+<Callout type="info" emoji="ℹ️">
+	This is just one way revenue distribution could be handled, another way would be for the contract to hold all
+	payments and let recipients claim them when it makes sense. This method would help save gas costs, as recipients
+	could choose to only take distributions when their balance is higher the gas fees.
+</Callout>
+
+```solidity
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.9;
+
+import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
+import "@openzeppelin/contracts/access/Ownable.sol";
+import "@openzeppelin/contracts/utils/math/SafeMath.sol";
+
+contract MySong is ERC20, Ownable {
+    using SafeMath for uint256;
+
+    enum PaymentMode { GLOBAL, RANDOM }
+    PaymentMode public paymentMode;
+
+    constructor(PaymentMode _paymentMode) ERC20("MySong", "MSG") {
+        _mint(msg.sender, 100);
+        paymentMode = _paymentMode;
+    }
+
+    function distributeRevenue() external payable onlyOwner {
+        uint256 totalSupply = totalSupply();
+        require(totalSupply > 0, "No tokens exist.");
+
+        if (paymentMode == PaymentMode.GLOBAL) {
+            _distributeGlobal();
+        } else if (paymentMode == PaymentMode.RANDOM) {
+            _distributeRandom();
+        }
+    }
+
+    function _distributeGlobal() private {
+        for (uint256 i = 0; i < _holders.length; i++) {
+            address holder = _holders[i];
+            uint256 holderBalance = balanceOf(holder);
+
+            if (holderBalance > 0) {
+                uint256 amountToDistribute = msg.value.mul(holderBalance).div(totalSupply());
+                payable(holder).transfer(amountToDistribute);
+            }
+        }
+    }
+
+function _distributeRandom() private {
+    uint256 randomValue = uint256(keccak256(abi.encodePacked(block.timestamp, msg.sender))) % totalSupply();
+    uint256 cumulativeSum = 0;
+
+    for (uint256 i = 0; i < _holders.length; i++) {
+        address holder = _holders[i];
+        uint256 holderBalance = balanceOf(holder);
+
+        cumulativeSum = cumulativeSum.add(holderBalance);
+
+        if (randomValue < cumulativeSum) {
+            payable(holder).transfer(msg.value);
+            break;
+        }
+    }
+}
+
+
+    address[] private _holders;
+
+    function _beforeTokenTransfer(address from, address to, uint256 amount) internal override {
+        super._beforeTokenTransfer(from, to, amount);
+
+        if (from == address(0)) {
+            _addHolder(to);
+        } else if (to == address(0)) {
+            _removeHolder(from);
+        } else {
+            _addHolder(to);
+        }
+    }
+
+    function _addHolder(address newHolder) private {
+        if (balanceOf(newHolder) == 0) {
+            _holders.push(newHolder);
+        }
+    }
+
+    function _removeHolder(address oldHolder) private {
+        if (balanceOf(oldHolder) == 0) {
+            for (uint256 i = 0; i < _holders.length; i++) {
+                if (_holders[i] == oldHolder) {
+                    _holders[i] = _holders[_holders.length - 1];
+                    _holders.pop();
+                    break;
+                }
+            }
+        }
+    }
+} // MySong
+
+```
+
+## Testing on Remix
+
+To understand how token works, let’s test it in the Remix IDE.
+
+### Deploying the contract
+
+1. Launch [Remix](https://remix.ethereum.org)
+2. Select Environment: In the left sidebar, under the "Deploy & run transactions" tab, ensure "Remix VM (Shanghai)" is selected as the environment.
+3. Paste the Contract: In the “File explorer” tab click the + icon to create a new file. Name it `MySong.sol` and paste in the MySong contract code.
+4. Compile the Contract: In the left sidebar, click on the "Solidity compiler" tab, then click the "Compile MySong.sol" button.
+5. Deploy: Go back to the "Deploy & run transactions" tab. MySong should be selected in the "Contract" dropdown. Click the orange "Deploy" button and either enter `0` for global distribution or `1` for random distribution.
+
+### Transferring tokens
+
+Once the contract is deployed, under "Deployed Contracts", find MySong. You'll see buttons representing contract functions. To transfer tokens:
+
+1. Click the transfer function.
+2. Enter the recipient address in the "to" field (choose from the "Account" dropdown at the top of the page)
+3. Specify the number of tokens to send in the "value" field ({"<="} 100)
+4. Click the transact button.
+
+## Sending revenue
+
+Once you’ve distributed tokens between holders, test revenue distribution.
+
+1. In the "Deploy & run transactions" tab, above to the "Deploy" button, there's a field labeled "Value". Enter the amount of Ether you want to distribute as revenue.
+2. n the "Deployed Contracts" section, find `MySong` and click the `distributeRevenue()` function.
+3. Click the transact button.
+4. Check Balances: After distributing revenue, you can switch between accounts in the "Account" dropdown at the top to see how the Ether balance of each account has changed.
+
+## `Contract` tag
+
+After creating and deploying the contract, fork the [Bundlr Provenance toolkit](/developer-docs/provenance-toolkit) and use the Bundlr UDL Uploader to upload a new asset while setting the `Contract` tag to be the address of the smart contract you just deployed. This pairs the UDL-protected asset with the smart contract, establishing a payment management rule for platforms.
+
+## Alternatives
+
+While creating a custom ERC20 and attaching it to the NFT’s UDL via the `Contract` tag works fine, it has one possible downside that the ERC20 needs to be created before the NFT. You create the ERC20 contract and then attach the contract address to the NFT’s UDL. In cases where you have an existing NFT with UDL, and want to layer on fractional ownership afterwards, you will need an alternative approach, [like the one implemented in this repository](https://github.com/fractional-company/contracts).
+
+## Extending
+
+Using an ERC20 token to model ownership of a UDL asset opens up new ideas for builders including:
+
+-   Creating a DEX that focuses on trading the tokens, where the market cap of the token represents the value placed on the UDL NFT.
+-   Creating a lending platform that uses the tokens as collateral. The platform could base the loan amount on the artist’s historical sales data.
+-   Gifting long-term token holders with tokens from new creations.
+
+The UDL's strength lies in its parametrized rules without preset enforcement. As builders, you have the freedom to craft tools that uphold these rules and also innovate beyond them.
+
+What will you build?

@@ -6,16 +6,14 @@ import { Callout } from "nextra-theme-docs";
 
 # Irys In The Browser (WebIrys)
 
+When building with Irys in the browser, the easiest way to get started is by forking the [Irys provenance toolkit](/developer-docs/provenance-toolkit) and building your project using its rich UI component library and helper functions.
+
 <Callout emoji="🚀">
-	If you're using Irys with React and `npx create-react-app`, you will need to follow [some extra setup
-	steps](/developer-docs/recipes/react).
+	If you're using Bundlr with React and npx create-react-app, you will need to [follow some extra setup
+	steps](https://docs.bundlr.network/hands-on/tutorials/react).
 </Callout>
 
-To use Irys with browser wallets like MetaMask and Phantom, use the `WebIrys` class. Usage is similar to the Irys class used with server-side development, however you don’t need to provide a private key as that will be linked via the user’s wallet. When functions that require signing are called (upload, fund, withdraw etc.) the linked wallet will prompt the user to confirm the required actions.
-
-If you’d prefer to learn using a long-form tutorial, [we have this one on creating a web-based uploader with progress bars](/tutorials/file-uploader).
-
-Provider setup varies based on wallet type / version:
+To manually add Irys support to an existing project, use the code snippets for your preferred provider.
 
 [Ethers 5](/developer-docs/sdk/irys-in-the-browser#ethers-5) | [Ethers 6](/developer-docs/sdk/irys-in-the-browser#ethers-6) | [RainbowKit / WAGMI](/developer-docs/sdk/irys-in-the-browser#rainbowkit--wagmi-hooks) | [viem](/developer-docs/sdk/irys-in-the-browser#viem) | [WalletConnect](/developer-docs/sdk/irys-in-the-browser#walletconnect) | [Phantom](/developer-docs/sdk/irys-in-the-browser#phantom) | [Near](/developer-docs/sdk/irys-in-the-browser#near)
 

@@ -1,6 +1,6 @@
 ---
 title: SDK
-description: Copy & Paste Code To Get You Started With Bundlr SDK
+description: Query Irys and Arweave transactions
 ---
 
 import { Tab, Tabs } from "nextra-theme-docs";
@@ -10,14 +10,14 @@ import { Callout } from "nextra-theme-docs";
 
 <div className="mt-7">
 	<Heading level={1} className="">
-		Query SDK
+		Query Package
 	</Heading>
-	The Irys Query SDK is a powerful package that simplifies querying Irys and Arweave.
+	The Irys Query package simplifies querying Irys and Arweave.
 </div>
 
 It features:
 
--   Single Main Class: Use the Query class as a single point of entry to query Irys and Arweave
+-   Single Main Class: Use the `Query` class as a single point of entry to query Irys and Arweave
 -   Ease of Use: The package is designed to be intuitive, saving you the complexity of dealing directly with GraphQL.
 
 ## Installation
@@ -34,8 +34,6 @@ and yarn:
 yarn add @irys/query
 ```
 
-TODO: Install instructions may change once the package is pushed
-
 ## Imports
 
 Import the Irys Query package with:
@@ -44,7 +42,7 @@ Import the Irys Query package with:
 import Query from "@irys/query";
 ```
 
-## Creating A Query Object
+## Creating a query object
 
 Start by instantiating a new `Query` object, this is a shared instance you can reuse each time you want to execute a new query.
 
@@ -64,21 +62,19 @@ const results = await myQuery
 	.limit(20);
 ```
 
-## Changing Default Query Endpoints
+## Changing default endpoints
 
-The `Query` class simplifies querying Irys and Arweave by abstracting GraphQL complexities. Internally, it links to a GraphQL endpoint for query execution. Typically, the default endpoint suffices, but sometimes you might need a different query location, for example, when connecting Irys' Node 2, Devnet, or an alternative Arweave endpoint.
+The `Query` class links to a GraphQL endpoint for query execution, defaulting to `https://node1.irys.xyz/graphql` for Irys and `https://arweave.net/graphql` for Arweave.
 
-To change the endpoint, pass the desired URL to the Query class constructor.
+When querying Irys, you must query the same node you uploaded to. To change node, pass any of the following to the `Query` object constructor:
 
-When connecting to Irys, any of these values may be used:
-
--   https://node1.irys.xyz/graphql (DEFAULT)
+-   https://node1.irys.xyz/graphql (Default)
 -   https://node2.irys.xyz/graphql
 -   https://devnet.irys.xyz/graphql
 
 When querying Arweave, any of these values may be used:
 
--   https://arweave.net/graphql (DEFAULT)
+-   https://arweave.net/graphql (Default)
 -   https://arweave.dev/graphql
 -   https://arweave-search.goldsky.com/graphql
 
@@ -86,7 +82,7 @@ When querying Arweave, any of these values may be used:
 const myQuery = new Query({ url: "https://node2.irys.xyz/graphql" });
 ```
 
-## Changing Between Irys and Arweave Searches
+## Changing search type
 
 Use the `search()` function to change between searching Irys and Arweave.
 
@@ -97,7 +93,8 @@ Use the `search()` function to change between searching Irys and Arweave.
 ```js
 const results = await myQuery.search("irys:transactions");
 ```
-## Searching By Timestamp
+
+## Searching by timestamp
 
 Use the `fromTimestamp()` and `toTimestamp()` functions to search for transactions by timestamp. Results returned are `>= fromTimestamp` and `< toTimestamp`.
 
@@ -113,10 +110,7 @@ const results = await myQuery
 Or by using UNIX timestamps in millisecond format.
 
 ```js
-const results = await myQuery
-	.search("irys:transactions")
-	.fromTimestamp(1688144401000)
-	.toTimestamp(1688317201000);
+const results = await myQuery.search("irys:transactions").fromTimestamp(1688144401000).toTimestamp(1688317201000);
 ```
 
 <Callout type="info" emoji="ℹ️">
@@ -125,16 +119,14 @@ const results = await myQuery
 	sure to convert in **millisecond** format not **second**.
 </Callout>
 
-## Searching By **Tags**
+## Searching by **tags**
 
 Use the `tags()` function to search [metadata tags](https://docs.irys.xyz/developer-docs/tags) attached to transactions during upload.
 
 Search for a single tag name / value pair:
 
 ```js
-const results = await myQuery
-	.search("irys:transactions")
-	.tags([{ name: "Content-Type", values: ["image/png"] }]);
+const results = await myQuery.search("irys:transactions").tags([{ name: "Content-Type", values: ["image/png"] }]);
 ```
 
 Search for a single tag name with a list of possible values. The search employs OR logic, returning transactions tagged with ANY provided value.
@@ -148,8 +140,9 @@ const results = await myQuery
 Search for multiple tags. The search employs AND logic, returning transactions tagged with ALL provided values.
 
 ```js
-const results = await myQuery.search("irys:transactions")
-	.tags([{ name: "Content-Type", values: ["image/png"] },{ name: "Application-ID", values: ["myApp"] },
+const results = await myQuery.search("irys:transactions").tags([
+	{ name: "Content-Type", values: ["image/png"] },
+	{ name: "Application-ID", values: ["myApp"] },
 ]);
 ```
 
@@ -161,7 +154,7 @@ const results = await myQuery
 	.tags([{ name: "Content-Type", values: ["image/png", "image/jpg"] }]);
 ```
 
-## Search By **Transaction ID**
+## Search by **transaction id**
 
 Use the `ids()` function to by transaction ID. The search employs OR logic, returning transactions tagged with ANY provided value:
 
@@ -179,7 +172,7 @@ const results = await myQuery
 	.ids(["xXyv3u9nHHWGiMJl_DMgLwwRdOTlIlQZyqaK_rOkNZw", "_xE7tG1kl2FgCUDgJ5jNJeVA6R5kuys7A6f1qfh9_Kw"]);
 ```
 
-## Search By **Transaction Sender**
+## Search by **transaction sender**
 
 Use the `from()` function to search by wallet addresses used when signing and paying for the upload. Addresses from any of [Irys' supported chains](https://docs.irys.xyz/overview/supported-tokens) are accepted.
 
@@ -194,60 +187,47 @@ const results = await myQuery
 When searching Arweave by transaction sender, only Arweave addresses are accepted.
 
 ```js
-const results = await myQuery
-	.search("arweave:transactions")
-	.from(["TrnCnIGq1tx8TV8NA7L2ejJJmrywtwRfq9Q7yNV6g2A"]);
+const results = await myQuery.search("arweave:transactions").from(["TrnCnIGq1tx8TV8NA7L2ejJJmrywtwRfq9Q7yNV6g2A"]);
 ```
 
-## Search By **Transaction Recipient**
+## Search by **transaction recipient**
 
 Use the `to()` function to search the wallet address of the transaction recipient. This search works on Arweave only and is used when there's a fund transfer.
 
 ```js
-const results = await myQuery
-	.search("arweave:transactions")
-	.to("TrnCnIGq1tx8TV8NA7L2ejJJmrywtwRfq9Q7yNV6g2A");
+const results = await myQuery.search("arweave:transactions").to("TrnCnIGq1tx8TV8NA7L2ejJJmrywtwRfq9Q7yNV6g2A");
 ```
 
-## Search By Currency
+## Search by currency
 
 Use the `currency()` function to search based on the token name used to pay for the upload. Any of [these values](https://docs.irys.xyz/overview/supported-tokens) are acceptable.
 
 ```js
-const results = await myQuery
-	.search("irys:transactions")
-	.currency("solana");
+const results = await myQuery.search("irys:transactions").currency("solana");
 ```
 
-## Search By Block ID
+## Search by block id
 
 Use the `ids()` function to search for Arweave blocks with the specified IDs.
 
 ```js
 const results = await myQuery
 	.search("arweave:blocks")
-	.ids(["R0ZLe4RvHxLJLzI1Z9ppyYVWFyHW4D1YrxXKuA9PGrwkk2QAuXCnD1xOJe-QOz4l"])
-
+	.ids(["R0ZLe4RvHxLJLzI1Z9ppyYVWFyHW4D1YrxXKuA9PGrwkk2QAuXCnD1xOJe-QOz4l"]);
 ```
 
-## Searching By Block Height
+## Searching by block height
 
 Use the `mixHeight()` and `maxHeight()` functions to search for blocks within the specified block height range. Results are `>= minHeight and < maxHeight`.
 
 ```js
-const results = await myQuery
-	.search("arweave:blocks")
-	.minHeight(1188272)
-	.maxHeight(1188279);
+const results = await myQuery.search("arweave:blocks").minHeight(1188272).maxHeight(1188279);
 ```
 
 Or for transactions within the specified block height range. Results are `>= minHeight and < maxHeight`.
 
 ```js
-const results = await myQuery
-	.search("arweave:transactions")
-	.minHeight(1188272)
-	.maxHeight(1188279);
+const results = await myQuery.search("arweave:transactions").minHeight(1188272).maxHeight(1188279);
 ```
 
 ## Sorting
@@ -255,22 +235,16 @@ const results = await myQuery
 Use the `sort()` function to sort results by timestamp in ascending order (`ASC`)
 
 ```js
-const results = await myQuery
-	.search("irys:transactions")
-	.currency("ethereum")
-	.sort("ASC");
+const results = await myQuery.search("irys:transactions").currency("ethereum").sort("ASC");
 ```
 
 or descending (`DESC`) order.
 
 ```js
-const results = await myQuery
-	.search("irys:transactions")
-	.currency("matic")
-	.sort("DESC");
+const results = await myQuery.search("irys:transactions").currency("matic").sort("DESC");
 ```
 
-## Obtaining Only The First Result
+## Obtaining only the first result
 
 Use the `first()` function to return only the first result.
 
@@ -281,28 +255,24 @@ const results = await myQuery
 	.first();
 ```
 
-## Limiting Search Results
+## Limiting search results
 
 Use the `limit()` function to limit the maximum number of results returned. This overrides the default value of 1000 results when searching Irys and 100 when searching Arweave directly.
 
 ```js
 const results = await myQuery
 	.search("irys:transactions")
-	.ids(["xXyv3u9nHHWGiMJl_DMgLwwRdOTlIlQZyqaK_rOkNZw",       	
-	      "_xE7tG1kl2FgCUDgJ5jNJeVA6R5kuys7A6f1qfh9_Kw"])
+	.ids(["xXyv3u9nHHWGiMJl_DMgLwwRdOTlIlQZyqaK_rOkNZw", "_xE7tG1kl2FgCUDgJ5jNJeVA6R5kuys7A6f1qfh9_Kw"])
 	.limit(20);
 ```
 
-## Pagination / Streaming
+## Pagination / streaming
 
 Use the `stream()` function to manage large results sets. This function returns an iterable stream which will continuously yield results as long as your query keeps producing them.
 
 ```js
 // Create the stream
-const stream = await myQuery
-	.search("irys:transactions")
-	.currency("solana")
-	.stream();
+const stream = await myQuery.search("irys:transactions").currency("solana").stream();
 
 // Iterate over the results
 for await (const result of stream) {
@@ -310,7 +280,7 @@ for await (const result of stream) {
 }
 ```
 
-## Limiting Fields Returned
+## Limiting fields returned
 
 Use the `fields()` function to limit the fields returned. To limit the results, set a field's value to `false` or omit it entirely.
 

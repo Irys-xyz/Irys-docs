@@ -17,22 +17,30 @@ Uploads data for [permanent storage](/learn/permanent-storage).
 
 **Returns**
 
-<div className="-mt-6" />- `response`: A JSON object with the following values
+<div className="-mt-6" />- `receipt`: A [receipt](/learn/receipts) in the form of a JSON object with the following values:
 
 ```json
 response = {
-  id, // the transaction id of the upload
-  timestamp: // The timestamp of when the transaction was uploaded and verified
+	id, // Transaction id (used to download the data)
+	timestamp, // Timestamp (UNIX milliseconds) of when the transaction was created and verified
+	version, // The version of this JSON file, currently 1.0.0
+	public, // Public key of the bundler node used
+	signature, // A signed deep hash of the JSON receipt
+	deadlineHeight, // The block number by which the transaction must be finalized on Arweave
+	block, // Deprecated
+	validatorSignatures, // Reserved for future use once we're decentralized
+	verify, // An async function used to verify the receipt at any time
 }
 ```
 
 ```js
 const uploadData = async () => {
 	const irys = await getIrys();
+	
 	const dataToUpload = "GM world.";
 	try {
-		const response = await irys.upload(dataToUpload);
-		console.log(`Data uploaded ==> https://arweave.net/${response.id}`);
+		const receipt = await irys.upload(dataToUpload);
+		console.log(`Data uploaded ==> https://arweave.net/${receipt.id}`);
 	} catch (e) {
 		console.log("Error uploading data ", e);
 	}

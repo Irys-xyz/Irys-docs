@@ -1,7 +1,8 @@
 {
-	"about-bundlr": "About Bundlr",
+	"about": "About Irys",
 	"network": "Network",
-	"use-cases": "Use Cases",
+	"tools": "Tools",
+	"services": "Services",
 	"fees": "Fees",
 	"supported-tokens": "Supported Tokens"
 }

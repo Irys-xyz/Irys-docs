@@ -2,7 +2,7 @@
 description: Unlock the full potential of Bundlr's technology with our developer resources. Use our SDK and start storing data permanently with 3 lines of code.
 ---
 
-# About Bundlr
+# About Irys
 
 Bundlr is a data layer for the internet. We are a foundation upon which developers can solve complex data integrity issues, permissionlessly.
 
