@@ -28,23 +28,17 @@ Estimates the cost in atomic units for uploading a given set of files.
 -   `cost`: The estimated cost in atomic units
 
 ```js
-const estimatePrice = async (files) => {
-	const bundlr = await getBundlr();
+const fileCount = files.length;
+let totalBytes = 0;
+for (const file of files) {
+	totalBytes += file.size;
+}
 
-	const fileCount = files.length;
-	let totalBytes = 0;
-	for (const file of files) {
-		totalBytes += file.size;
-	}
+// Create a dummy tx to help estimate header size
+// If you're you're using multiple tags, add them all so they are accounted for when computing space
+const tx = bundlr.createTransaction("Hello, world!", { tags: [{ name: "application", value: "Bundlr" }] });
+const headerSizeAvg = tx.size - tx.data.length;
 
-	// Create a dummy tx to help estimate header size
-	// If you're you're using multiple tags, add them all so they are accounted for when computing space
-	const tx = bundlr.createTransaction("Hello, world!", { tags: [{ name: "application", value: "Bundlr" }] });
-	const headerSizeAvg = tx.size - tx.data.length;
-
-	const price = await bundlr.utils.estimateFolderPrice({ fileCount, totalBytes, headerSizeAvg });
-	console.log(
-		`Cost to upload ${fileCount} files containing ${totalBytes} bytes is ${bundlr.utils.fromAtomic(price)}`,
-	);
-};
+const price = await bundlr.utils.estimateFolderPrice({ fileCount, totalBytes, headerSizeAvg });
+console.log(`Cost to upload ${fileCount} files containing ${totalBytes} bytes is ${bundlr.utils.fromAtomic(price)}`);
 ```
