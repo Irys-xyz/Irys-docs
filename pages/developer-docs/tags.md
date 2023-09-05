@@ -36,7 +36,7 @@ try {
 You can also add tags via the [CLI's](/developer-docs/cli) `-t` option, followed by a series of name / value pairs
 
 ```console
-irys upload myImage.png -t tagName1 tagValue1 tagName2 tagValue2 -h https://node1.irys.xyz -c matic -w bf20......c9885307
+irys upload myImage.png -t tagName1 tagValue1 tagName2 tagValue2 -h https://node1.irys.xyz -t matic -w bf20......c9885307
 ```
 
 ## Additional Uses
