@@ -18,7 +18,7 @@ Estimates the cost in atomic units for uploading a given set of files.
 
 <Callout type="info" emoji="ℹ️">
 	The function becomes less accurate the smaller your transactions unless you provide it with an accurate
-	headerSizeAvg.
+	`headerSizeAvg`.
 </Callout>
 
 **Returns**
@@ -36,7 +36,13 @@ const estimatePrice = async (files) => {
 	for (const file of files) {
 		totalBytes += file.size;
 	}
-	const price = await bundlr.utils.estimateFolderPrice({ fileCount, totalBytes });
+
+	// Create a dummy tx to help estimate header size
+	// If you're you're using multiple tags, add them all so they are accounted for when computing space
+	const tx = bundlr.createTransaction("Hello, world!", { tags: [{ name: "application", value: "Bundlr" }] });
+	const headerSizeAvg = tx.size - tx.data.length;
+
+	const price = await bundlr.utils.estimateFolderPrice({ fileCount, totalBytes, headerSizeAvg });
 	console.log(
 		`Cost to upload ${fileCount} files containing ${totalBytes} bytes is ${bundlr.utils.fromAtomic(price)}`,
 	);
