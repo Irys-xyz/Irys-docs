@@ -1,0 +1,44 @@
+---
+description: Verifies the accuracy of a  receipt.
+---
+
+import { Callout } from "nextra-theme-docs";
+
+# `bundlr.utils.estimateFolderPrice()`
+
+Estimates the cost in atomic units for uploading a given set of files.
+
+**Parameters**
+
+<div className="-mt-6" />
+
+-   `fileCount`: Total number of files to upload
+-   `totalBytes`: Total number of bytes to upload
+-   `headerSizeAvg`: Average header size (optional)
+
+<Callout type="info" emoji="ℹ️">
+	The function becomes less accurate the smaller your transactions unless you provide it with an accurate
+	headerSizeAvg.
+</Callout>
+
+**Returns**
+
+<div className="-mt-6" />
+
+-   `cost`: Returns the estimated cost in atomic units
+
+```js
+const estimatePrice = async (files) => {
+	const bundlr = await getBundlr();
+
+	const fileCount = files.length;
+	let totalBytes = 0;
+	for (const file of files) {
+		totalBytes += file.size;
+	}
+	const price = await bundlr.utils.estimateFolderPrice({ fileCount, totalBytes });
+	console.log(
+		`Cost to upload ${fileCount} files containing ${totalBytes} bytes is ${bundlr.utils.fromAtomic(price)}`,
+	);
+};
+```
