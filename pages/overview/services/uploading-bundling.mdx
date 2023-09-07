@@ -7,7 +7,7 @@ import SectionTitle from "../../../components/SectionTitle";
 
 <div className="flex flex-col mt-5">
 	<div className="flex items-end">
-    	<div className=""><Heading level={1}>Uploading / Bundling</Heading></div>
+    	<div className=""><Heading level={1}>Uploading / bundling</Heading></div>
     </div>
 
     <p className="mt-4 text-xl">
@@ -31,7 +31,7 @@ Irys supports paying with [14 different tokens](/overview/supported-tokens), inc
 
 Uploading large numbers of files to Arweave can be technically challenging due to Arweave's limit of 1000 transactions per block. When demand spikes, that drives up fees, making permanent data unaffordable for many users. To address these challenges, bundlers are used to collate transactions into a single bundle and submit them to Arweave.
 
-These transactions are instantly retrievable and available to be queried via GraphQL, further detailed in the gateway section. It is not necessary to wait for uploads to be confirmed and seeded on Arweave before they appear in query results.
+These transactions are instantly retrievable and available to be [queried](/developer-docs/querying). It is not necessary to wait for uploads to be confirmed and seeded on Arweave before they appear in query results.
 
 The implementation of bundlers and bundles has helped stabilize feeds on Arweave.
 

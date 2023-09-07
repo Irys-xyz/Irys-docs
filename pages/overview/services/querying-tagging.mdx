@@ -2,9 +2,19 @@
 description: Our querying and tagging services combine to allow users to build semi-relational data models, all queryable via GraphQL
 ---
 
-# Querying & Tagging
+import Heading from "../../../components/Heading";
+import SectionTitle from "../../../components/SectionTitle";
 
-Irys' querying and tagging services support [adding custom metadata tags](/developer-docs/tags) to each upload, these tags allow users to build semi-relational data models, all instantly [queryable](/developer-docs/querying).
+<div className="flex flex-col mt-5">
+	<div className="flex items-end">
+    	<div className=""><Heading level={1}>Querying & tagging</Heading></div>
+    </div>
+
+    <p className="mt-4 text-xl">
+    	Irys' querying and tagging services support [adding custom metadata tags](/developer-docs/tags) to each upload, these tags allow users to build semi-relational data models, all instantly [queryable](/developer-docs/querying).
+    </p>
+
+</div>
 
 ## Tagging
 
@@ -13,7 +23,7 @@ Irys supports attaching [metadata tags](/developer-docs/tags) to each transactio
 Tags can be used to:
 
 -   Categorize transactions, making it easier to search for and retrieve relevant information using GraphQL
--   Build provenance chains for Proof Of Provenance applications
+-   [Build provenance chains](/hands-on/tutorials/provenance-chain)
 -   Inform web browsers how to render image files
 
 ## Querying

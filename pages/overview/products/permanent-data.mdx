@@ -3,12 +3,25 @@ import SectionTitle from "../../../components/SectionTitle";
 
 <div className="flex flex-col mt-5">
 	<div className="flex items-end">
-    	<img src="https://bundlr.network/new/assets/home/data-donuts.webp" className="w-[150px] " />
-    	<div className="ml-5"><Heading level={1}>Permanent data</Heading></div>
-    </div>
-
-    <p className="mt-4 text-xl">
-      blah blah.
-    </p>
-
+		<img src="https://bundlr.network/new/assets/home/data-donuts.webp" className="w-[150px] " />
+		<div className="">
+			<Heading level={1}>Permanent data</Heading>
+		</div>
+	</div>
 </div>
+Data stored on Irys is censorship-resistant and immutable, forever.
+
+When you upload data to Irys, it is stamped with attributes of [strong provenance](./strong-provenance) before being passed to Arweave where it is stored permanently.
+
+Permanence guarantees your data can be retrieved at any point in the future. Permanent data is fault-tolerant, tamperproof, and paid-for:
+
+-   <p className="font-bold">Fault-tolerant</p>
+    Data is stored so that it can survive unexpected events, including data corruption and loss. This typically comes from
+    replicating the data redundantly across geographies and hosts.
+
+-   <p className="font-bold">Tamperproof</p>
+    Stored data is immutable, it can’t be maliciously changed.{" "}
+
+-   <p className="font-bold">Paid-for</p>
+    The cost of storing the data permanently is covered up-front, and [there is a mechanism for paying miners on an acceptable
+    cadence](/learn/transaction-lifecycle).{" "}
