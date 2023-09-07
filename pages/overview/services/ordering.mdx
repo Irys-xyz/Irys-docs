@@ -2,16 +2,24 @@
 description: Bundlr’s ordering service allows for immutable chronological sequencing of data
 ---
 
-# Ordering
+import Heading from "../../../components/Heading";
+import SectionTitle from "../../../components/SectionTitle";
 
-<h2 className="text-xl mt-2">
-	Bundlr’s ordering service allows for immutable chronological sequencing of data.
-</h2>
+<div className="flex flex-col mt-5">
+	<div className="flex items-end">
+    	<div className=""><Heading level={1}>Ordering</Heading></div>
+    </div>
+
+    <p className="mt-4 text-xl">
+    	Irys' ordering service allows for immutable chronological sequencing of data.
+    </p>
+
+</div>
 
 This supports applications that require a guarantee on order such as execution layers (rollups),
 messaging and event processing, among others.
 
-<img className="mt-5" src="/img/learn/ordering.png" />
+<img className="mt-5 w-2/3" src="/img/overview/irys-ordering.png" />
 
 When a user uploads a transaction, they are given back a signed [receipt](/learn/receipts) that includes a timestamp, accurate to the millisecond, providing a proof of time. Users can verify the timestamp at any time, ensuring the order is both constant and consistent.
 

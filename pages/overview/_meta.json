@@ -1,8 +1,9 @@
 {
 	"about": "About Irys",
 	"network": "Network",
+	"products": "Products",
 	"tools": "Tools",
 	"services": "Services",
 	"fees": "Fees",
-	"supported-tokens": "Supported Tokens"
+	"supported-tokens": "Supported tokens"
 }

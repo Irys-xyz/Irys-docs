@@ -1,33 +1,31 @@
 ---
-description: Bundlr’s core capabilities, designed to assist users in building solutions and addressing business challenges
+description: Irys' core capabilities, designed to assist users in building solutions and addressing business challenges
 ---
 
 import Heading from "../../components/Heading";
 import SectionTitle from "../../components/SectionTitle";
 
-<div className="py-20">
-<Heading level={1}  className="mb-4">Services</Heading>
+<div className="flex flex-col mt-5">
+	<div className="flex items-end">
+    	<img src="https://bundlr.network/new/assets/home/data-donuts.webp" className="w-[150px] " />
+    	<div className="ml-5"><Heading level={1}>Services</Heading></div>
+    </div>
 
-<p>
-	Bundlr’s core capabilities, designed to assist users in building solutions and
-	addressing business challenges
-</p>
+    <p className="mt-4 text-xl">
+    	Irys' core capabilities, designed to assist users in building solutions and addressing business challenges.
+    </p>
 
 </div>
 
-<img
-	src="https://bundlr.network/new/assets/home/data-donuts.webp"
-	className="absolute mt-20 top-10 hidden xl:flex right-10 w-[300px]"
-/>
+<div className="flex flex-col mt-10">
 
--   [**Uploading**](/overview/services/uploading)
-    {" "}<br/>Permanent decentralized storage, simple and seamless
+<div className="text-xl">[**Uploading / Bundling**](./services/uploading-bundling)</div>
+<div>Combine permanent decentralized storage with near-infinite TPS and flexibility in payment options.</div>
 
--   [**Bundling**](/overview/services/bundling)
-    {" "}<br/>Near infinite TPS combined and flexibility in payment options
+<div className="text-xl mt-5">[**Ordering**](./services/ordering)</div>
+<div>Ensure immutable chronological sequencing of data.</div>
 
--   [**Ordering**](/overview/services/ordering)
-    {" "}<br/>Immutable chronological sequencing of data
+<div className="text-xl mt-5">[**Querying & Tagging**](./services//querying-tagging)</div>
+<div>Tag transactions using metadata tags and use our query package to build semi-relational data models.</div>
 
--   [**Querying & Tagging**](/overview/services/querying-tagging)
-    {" "}<br/>Our querying and tagging services combine to allow users to build semi-relational data models, all queryable via GraphQL
+</div>

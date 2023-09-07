@@ -1,6 +1,5 @@
 {
-	"uploading": "Uploading",
-	"bundling": "Bundling",
+	"uploading-bundling": "Uploading & bundling",
 	"ordering": "Ordering",
-	"querying-tagging": "Querying & Tagging"
+	"querying-tagging": "Querying & tagging"
 }

@@ -1,23 +1,33 @@
-# Network
+import Heading from "../../components/Heading";
+import SectionTitle from "../../components/SectionTitle";
 
-## Nodes
+<div className="flex flex-col mt-5">
+	<div className="flex items-end">
+		<img src="https://bundlr.network/new/assets/home/data-donuts.webp" className="w-[150px] " />
+		<div className="ml-5">
+			<Heading level={1}>Network</Heading>
+		</div>
+	</div>
+</div>
 
-Bundlr has three nodes. Uploads to Node 1 and Node 2 are permanent. Uploads of less than 100 KiB are currently free on node 2.
+Irys has three nodes:
 
--   `https://node1.bundlr.network`
--   `https://node2.bundlr.network`
--   `https://devnet.bundlr.network`
+-   `https://node1.irys.xyz`
+-   `https://node2.irys.xyz`
+-   `https://devnet.irys.xyz`
 
 ## Mainnet
 
-Uploads to Bundlr's Mainnet are finalized on Arweave where they inherit the L1's guarantees of permanence. Your upload will remain accessible at all times, even if Bundlr is no longer available.
+Uploads to Irys's Mainnet (Nodes 1 and 2) are finalized on Arweave where they inherit the L1's guarantees of permanence. Your upload will remain accessible at all times, even if Irys is no longer available.
+
+Uploads of less than 100 KiB are free on Node 2.
 
 Uploads to the Mainnet can be paid for in any of the [14 tokens we support](/overview/supported-tokens).
 
 ## Devnet
 
-Uploads to Bundlr's [Devnet](/developer-docs/using-devnet) are kept for roughly 60 days. The Devnet is for building and prototyping projects along with learning our SDK.
+Uploads to Irys's [Devnet](/developer-docs/using-devnet) are kept for roughly 60 days. The Devnet is for building and prototyping projects along with learning our SDK.
 
 ## Chain integrations
 
-Bundlr is multichain, supporting both paying for uploads with [14 tokens](/overview/supported-tokens) and signing that upload using the token’s cryptography. The signature type used to sign a transaction is tracked at the [transaction-level](/learn/bundles).
+Irys is multichain, supporting both paying for uploads with [14 tokens](/overview/supported-tokens) and signing that upload using the token’s cryptography. The signature type used to sign a transaction is tracked at the [transaction-level](/learn/bundles).

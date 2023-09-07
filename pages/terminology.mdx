@@ -1,0 +1,66 @@
+---
+title: Terminology
+description: Technical terms to help you understand Irys
+---
+
+import Heading from "../components/Heading";
+import SectionTitle from "../components/SectionTitle";
+
+<div className="flex flex-col mt-5">
+	<div className="flex items-end">
+    	<img src="https://bundlr.network/new/assets/home/data-donuts.webp" className="w-[150px] " />
+    	<div className="ml-5"><Heading level={1}>Terminology</Heading></div>
+    </div>
+
+    <p className="mt-4 text-xl">
+    	Technical terms to help you understand Irys
+    </p>
+
+</div>
+
+[Bundle](/terminology#bundle) | [Bundlr](/terminology#bundler) | [Deep Hash](/terminology#deep-hash) | [Provenance](/terminology#provenance) | [Gateways](/terminology#gateways) | [Optimistic finalization](/terminology#optimistic-finalization) | [Provenance](/terminology#provenance) | [Provenance Chain](/terminology#provenance-chain) | [Transaction](/terminology#transaction) | [Transaction Receipt](/terminology#transaction-receipt)
+
+## Bundle
+
+A set of transactions joined into a single Arweave transaction.
+
+## Bundler
+
+A node on Irys that receives transactions, handles payment channels and produces bundles.
+
+## Deep Hash
+
+A hash algorithm that takes a nested list of values as input and produces a 384 bit hash, where a change of any value or the structure will affect the hash.
+
+## Provenance
+
+The history of data. It can describe where data came from, how it was created, and who has handled it. Data provenance provides transparency into the lifecycle of data and is critical for building trust in the data.
+
+## Gateways
+
+Nodes that listen to both bundlers and the Arweave L1 with the purpose of aggregating and indexing transactions. This allows you to retrieve and lookup transactions from clusters of bundlers without maintaining your own index.
+
+## Optimistic finalization
+
+An incentive mechanism used by Irys to provide instant upload times.
+
+On Arweave, a block is considered confirmed after 50 block confirmations. Data is considered seeded after it is stored by a minimum number of miners. This can take up to 100 minutes.
+
+When you post a transaction to Irys, you are given a signed receipt. At this point, we can optimistically consider the transaction final because there is a greater financial incentive for nodes to behave honestly than there is for malicious behavior.
+
+## Provenance
+
+The issuing of cryptographically signed [receipts](/learn/receipts), including a timestamp accurate to the millisecond, that provide irrefutable proof of data provenance.
+
+## Provenance Chain
+
+The chain of custody or the history and evolution of data.
+
+## Transaction
+
+A single item sent to a specific address, usually contains a data payload.
+
+## Transaction Receipt
+
+A financial proof that a Bundlr transaction gets on to Arweave by an expected block.
+The transaction receipt format is.

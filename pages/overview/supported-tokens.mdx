@@ -2,9 +2,22 @@
 description: Pay and sign for uploads with multiple tokens.
 ---
 
-# Supported Tokens
+import Heading from "../../components/Heading";
+import SectionTitle from "../../components/SectionTitle";
 
-## Mainnet Supported Tokens
+<div className="flex flex-col mt-5">
+	<div className="flex items-end">
+    	<img src="https://bundlr.network/new/assets/home/data-donuts.webp" className="w-[150px] " />
+    	<div className="ml-5"><Heading level={1}>Tokens</Heading></div>
+    </div>
+
+    <p className="mt-4 text-xl">
+    	Iyrs supports 14 tokens used when paying for and signing uploads.
+    </p>
+
+</div>
+
+## Mainnet Tokens
 
 On Nodes 1 and 2 can pay for uploads in any of these tokens:
 
@@ -24,7 +37,7 @@ On Nodes 1 and 2 can pay for uploads in any of these tokens:
 | Polygon            | MATIC | matic           | yes            | yes               |
 | Solana             | SOL   | solana          | yes            | yes               |
 
-## Devnet Supported Tokens
+## Devnet Tokens
 
 On [Devnet](/developer-docs/using-devnet), you can pay for uploads in any of these tokens:
 
