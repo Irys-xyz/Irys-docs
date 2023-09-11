@@ -14,7 +14,7 @@ Uploads a single file.
 
 -   `-h`: The you'll node upload to
 -   `-t`: The [token](/overview/supported-tokens) to use when uploading.
--   `-w`: Your [private key](/developer-docs/cli#private-keys-for-funding-and-signing).
+-   `-w`: Your [private key](/developer-docs/cli#using-private-keys).
 
 ## Example
 
@@ -22,13 +22,7 @@ Uploads a single file.
 irys upload myImage.png -h https://node1.irys.xyz -t matic -w bf20......c9885307
 ```
 
-Append the optional `--provenance` flag for a [strong provenance](/learn/strong-provenance) upload.
-
-```console
-irys upload myImage.png --provenance -h https://node1.irys.xyz -t matic -w bf20......c9885307
-```
-
-## Downloading Files
+## Downloading
 
 Files uploaded via `irys upload` can be downloaded using the transaction ID provided after a successful upload.
 
