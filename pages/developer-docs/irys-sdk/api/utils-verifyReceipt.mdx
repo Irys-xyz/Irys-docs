@@ -29,19 +29,17 @@ Returns true or false, indicating if a [receipt](/learn/receipts) is valid or no
 -   `isValid`: A true or false value indicating if the receipt is valid
 
 ```js
-const verifyReceipt = async () => {
-	const irys = await getIrys();
+const irys = await getIrys();
 
-	try {
-		// First get a receipt
-		const transactionId = "i9tgbHsr6c1sxryAQ-SLM2rfQAYRuyap7RmGgH28mI4"; // Your transaction Id
-		const receipt = await irys.utils.getReceipt(transactionId);
+try {
+	// First get a receipt
+	const transactionId = "i9tgbHsr6c1sxryAQ-SLM2rfQAYRuyap7RmGgH28mI4"; // Your transaction Id
+	const receipt = await irys.utils.getReceipt(transactionId);
 
-		// The verify it
-		const isReceiptValid = await irys.utils.verifyReceipt(receipt);
-		console.log(isReceiptValid);
-	} catch (e) {
-		console.log("Error getting receipt ", e);
-	}
-};
+	// Then verify it
+	const isReceiptValid = await irys.utils.verifyReceipt(receipt);
+	console.log(isReceiptValid);
+} catch (e) {
+	console.log("Error getting receipt ", e);
+}
 ```

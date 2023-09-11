@@ -1,10 +1,9 @@
 {
-	"about": "About",
-	"connecting-node": "Conecting To A Node",
-	"setting-upload-parameters": "Upload Parameters",
-	"data-mode": "Data Mode",
-	"transaction-mode": "Transaction Mode",
-	"controlling-the-upload": "Controlling The Upload",
-	"expired-uploads": "Expired Uploads",
-	"upload-events": "Upload Events"
+	"connecting-node": "Conecting to a node",
+	"setting-upload-parameters": "Upload parameters",
+	"data-mode": "Data mode",
+	"transaction-mode": "Transaction mode",
+	"controlling-the-upload": "Controlling the upload",
+	"expired-uploads": "Expired uploads",
+	"upload-events": "Upload events"
 }

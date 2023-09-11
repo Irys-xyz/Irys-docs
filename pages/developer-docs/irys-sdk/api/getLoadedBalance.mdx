@@ -14,6 +14,8 @@ Returns the connected wallet's balance on the connected node.
 into standard units using [`irys.utils.fromAtomic(atomicUnits)`](/developer-docs/irys-sdk/api/utils-fromAtomic).
 
 ```js
+const irys = await getIrys();
+
 // Get loaded balance in atomic units
 const atomicBalance = await irys.getLoadedBalance();
 console.log(`Node balance (atomic units) = ${atomicBalance}`);

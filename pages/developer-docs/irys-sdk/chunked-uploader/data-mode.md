@@ -2,14 +2,14 @@
 description: Automate transaction creation in data mode.
 ---
 
-# Data Mode
+# Data mode
 
-The chunked uploader has two modes of operation, data mode and transaction mode. When using data mode do not create a transaction, this will be done automatically for you.
+The chunked uploader has two modes of operation, data mode and [transaction mode](/developer-docs/irys-sdk/chunked-uploader/transaction-mode). When using data mode do not create a transaction, this will be done automatically for you.
 
 Within data mode, you can either upload using:
 
-A buffer containing the data you want to upload.
-A readable stream pointing to the data you want to upload.
+-   A buffer containing the data you want to upload.
+-   A readable stream pointing to the data you want to upload.
 
 ## `uploader.uploadData()`
 

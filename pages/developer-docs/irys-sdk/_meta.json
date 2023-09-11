@@ -1,8 +1,8 @@
 {
 	"installing-the-sdk": "Installing the SDK",
+	"migration-guide": "Migration guide",
 	"irys-in-the-browser": "Irys in the browser",
 	"api": "API Docs",
 	"downloading": "Downloading data",
-	"chunked-uploader": "Chunked uploader",
-	"migration-guide": "Migration guide"
+	"chunked-uploader": "Chunked uploader"
 }

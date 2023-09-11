@@ -30,17 +30,15 @@ response.data = {
 ```
 
 ```js
-const withdrawFunds = async () => {
-	const irys = await getIrys();
+const irys = await getIrys();
 
-	try {
-		// 1. Get current balance
-		const curBalance = await irys.getLoadedBalance();
-		// 2. Withdraw all
-		const response = await irys.withdrawBalance(curBalance);
-		console.log(`Successfully withdrew ${irys.utils.fromAtomic(curBalance)} ${irys.token}`);
-	} catch (e) {
-		console.log("Error uploading data ", e);
-	}
-};
+try {
+	// 1. Get current balance
+	const curBalance = await irys.getLoadedBalance();
+	// 2. Withdraw all
+	const response = await irys.withdrawBalance(curBalance);
+	console.log(`Successfully withdrew ${irys.utils.fromAtomic(curBalance)} ${irys.token}`);
+} catch (e) {
+	console.log("Error uploading data ", e);
+}
 ```

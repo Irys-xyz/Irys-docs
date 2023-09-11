@@ -35,15 +35,13 @@ response = {
 ```
 
 ```js
-const getReceipt = async () => {
-	const irys = await getIrys();
+const irys = await getIrys();
 
-	try {
-		const transactionId = "i9tgbHsr6c1sxryAQ-SLM2rfQAYRuyap7RmGgH28mI4"; // Your transaction Id
-		const receipt = await irys.utils.getReceipt(transactionId);
-		console.log(receipt);
-	} catch (e) {
-		console.log("Error getting receipt ", e);
-	}
-};
+try {
+	const transactionId = "i9tgbHsr6c1sxryAQ-SLM2rfQAYRuyap7RmGgH28mI4"; // Your transaction Id
+	const receipt = await irys.utils.getReceipt(transactionId);
+	console.log(receipt);
+} catch (e) {
+	console.log("Error getting receipt ", e);
+}
 ```

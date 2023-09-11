@@ -2,7 +2,7 @@
 description: Recovering expired uploads.
 ---
 
-# Expired Uploads
+# Expired uploads
 
 Paused uploads will expire after a period of inactivity. If you do need to recover an expired upload, use the following:
 

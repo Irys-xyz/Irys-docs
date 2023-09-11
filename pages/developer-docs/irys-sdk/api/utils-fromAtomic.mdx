@@ -21,6 +21,8 @@ Converts from atomic to standard units.
 -   `standardValue`: The value in standard units
 
 ```js
+const irys = await getIrys();
+
 const atomicBalance = await irys.getLoadedBalance();
 const convertedBalance = irys.utils.fromAtomic(atomicBalance).toString();
 ```

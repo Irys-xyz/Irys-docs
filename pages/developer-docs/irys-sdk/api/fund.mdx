@@ -28,12 +28,14 @@ response = {
 };
 ```
 
-## Upfront Funding
+## Upfront funding
 
-You can up-front fund a node, where you send over enough funds to cover all of a project’s uploads. When upfront funding, you may want to [write a script to monitor your stored balance, topping up when needed.](TODO)
+You can up-front fund a node, where you send over enough funds to cover all of a project’s uploads. When upfront funding, you may want to [write a script to monitor your stored balance, topping up when needed.](/hands-on/tutorials/monitor-node-balance)
 
 ```js
 try {
+	const irys = await getIrys();
+	
 	const fundTx = await irys.fund(irys.utils.toAtomic(0.05));
 	console.log(`Successfully funded ${irys.utils.fromAtomic(fundTx.quantity)} ${irys.token}`);
 } catch (e) {
@@ -41,18 +43,24 @@ try {
 }
 ```
 
-## Lazy-Funding
+## Lazy-funding
 
 You can also lazy-fund a node where you check the cost to upload each file first and then transfer exact funds. This works best with currencies like MATIC, ETH and SOL whose balances post (almost) instantly.
 
 ```js
-const pathToFile = "./llama.png";
-const { size } = await fs.promises.stat(pathToFile);
-const price = await irys.getPrice(size);
-await irys.fund(price);
+try {
+	const irys = await getIrys();
 
-const { id } = await irys.uploadFile(pathToFile);
-console.log(`${pathToFile} --> Uploaded to https://arweave.net/${id}`);
+	const pathToFile = "./llama.png";
+	const { size } = await fs.promises.stat(pathToFile);
+	const price = await irys.getPrice(size);
+	await irys.fund(price);
+
+	const { id } = await irys.uploadFile(pathToFile);
+	console.log(`${pathToFile} --> Uploaded to https://arweave.net/${id}`);
+} catch (e) {
+	console.log("Error funding node ", e);
+}
 ```
 
 <Callout type="info" emoji="ℹ️">

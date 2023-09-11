@@ -4,7 +4,7 @@ description: Uploads a folder of files to Irys.
 
 # `irys.uploadFolder()`
 
-Uploads a folder for [permanent storage](/learn/permanent-storage).
+[Permanently](/overview/products/permanent-data) uploads a folder.
 
 **Parameters**
 
@@ -38,23 +38,21 @@ response = {
 ```
 
 ```js
-const uploadFolder = async () => {
-	const irys = await getIrys();
+const irys = await getIrys();
 
-	// Upload an entire folder
-	const folderToUpload = "./my-images/"; // Path to folder
-	try {
-		const response = await irys.uploadFolder("./" + folderToUpload, {
-			indexFile: "", // optional index file (file the user will load when accessing the manifest)
-			batchSize: 50, //number of items to upload at once
-			keepDeleted: false, // whether to keep now deleted items from previous uploads
-		}); //returns the manifest ID
+// Upload an entire folder
+const folderToUpload = "./my-images/"; // Path to folder
+try {
+	const response = await irys.uploadFolder("./" + folderToUpload, {
+		indexFile: "", // optional index file (file the user will load when accessing the manifest)
+		batchSize: 50, //number of items to upload at once
+		keepDeleted: false, // whether to keep now deleted items from previous uploads
+	}); //returns the manifest ID
 
-		console.log(`Files uploaded. Manifest Id ${response.id}`);
-	} catch (e) {
-		console.log("Error uploading file ", e);
-	}
-};
+	console.log(`Files uploaded. Manifest Id ${response.id}`);
+} catch (e) {
+	console.log("Error uploading file ", e);
+}
 ```
 
 Files uploaded via `irys.uploadFolder(folderToUpload)` can be retrieved in one of two ways.

@@ -18,6 +18,8 @@ Returns the cost to upload the specified number of bytes.
     Return value is in atomic units, to convert to standard units use [`irys.utils.fromAtomic()`](./utils-fromAtomic)
 
 ```js
+const irys = await getIrys();
+
 const numBytes = 1048576; // Number of bytes to check
 const priceAtomic = await irys.getPrice(numBytes);
 

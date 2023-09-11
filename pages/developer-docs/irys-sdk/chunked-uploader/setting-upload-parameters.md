@@ -2,7 +2,7 @@
 description: Changing batch and chunk size.
 ---
 
-# Setting Upload Parameters
+# Setting upload parameters
 
 ## `setBatchSize()` and `uploader.setUploadSize()`
 

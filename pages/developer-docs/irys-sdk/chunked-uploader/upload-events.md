@@ -2,13 +2,13 @@
 description: Track upload progress with event callbacks.
 ---
 
-# Upload Events
+# Upload events
 
 The uploader emits three events during each upload. These can be subscribed to for any use case when tracking upload progress is needed.
 
--   chunkUpload: Emitted whenever a chunk is uploaded.
--   chunkError: Emitted whenever a chunk upload fails. Due to internal retry logic, these errors can most likely be ignored as long as the upload doesn't error overall.
--   done: Emitted when the upload completes.
+-   `chunkUpload``: Emitted whenever a chunk is uploaded.
+-   `chunkError``: Emitted whenever a chunk upload fails. Due to internal retry logic, these errors can most likely be ignored as long as the upload doesn't error overall.
+-   `done``: Emitted when the upload completes.
 
 ```js
 uploader.on("chunkUpload", (chunkInfo) => {

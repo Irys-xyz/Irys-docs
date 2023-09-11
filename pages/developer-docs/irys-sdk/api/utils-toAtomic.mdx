@@ -14,10 +14,13 @@ Converts from standard to atomic units.
 
 **Returns**
 
-<div className="-mt-6" />- `atomicValue`: The value in atomic units
+<div className="-mt-6" />
+- `atomicValue`: The value in atomic units
 
 ```js
-const fundAmountAtomic = irys.utils.toAtomic(fundAmountStandard);
+const irys = await getIrys();
+
+const amountAtomic = irys.utils.toAtomic(amountStandard);
 ```
 
 <Callout type="info" emoji="ℹ️">

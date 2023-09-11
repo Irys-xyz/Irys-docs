@@ -36,7 +36,7 @@ import Irys from "@irys/client";
 
 ## Connecting to a node
 
-Connect [to any of our three nodes](/developer-docs/nodes), using a serialized JWK file when using an Arweave wallet
+Connect [to any of our three nodes](/developer-docs/nodes), using a serialized JWK file when using an Arweave wallet:
 
 ```js
 const getIrysArweave = async () => {
@@ -55,7 +55,7 @@ const getIrysArweave = async () => {
 };
 ```
 
-Or a private key when using an EVM or Solana wallet
+Or a private key when using an EVM or Solana wallet:
 
 ```js
 const getIrys = async () => {
@@ -75,7 +75,7 @@ const getIrys = async () => {
 
 ## Funding a node
 
-Fund a node using any of our [supported tokens](/overview/supported-tokens).
+Fund a node using any of our [supported tokens](/overview/supported-tokens):
 
 ```js
 const fundNode = async () => {
@@ -91,7 +91,7 @@ const fundNode = async () => {
 
 ## Uploading
 
-Data uploaded to Irys is stamped with a millisecond-accurate timecode and attestation details before being passed to Arweave for permanent storage. This information is used to create a cryptographically signed [receipt](/learn/receipts) that is returned to the user upon successful upload.
+Data uploaded to Irys is stamped with a millisecond-accurate timecode and attestation details before being passed to Arweave for permanent storage. This information is used to create a cryptographically signed [receipt](/learn/receipts) that is returned to the user upon successful upload and can be [verifed](/developer-docs/irys-sdk/api/utils-verifyReceipt) by anyone at any time.
 
 ### Uploading data
 

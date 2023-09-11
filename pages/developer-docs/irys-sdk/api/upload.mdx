@@ -6,7 +6,7 @@ import { Callout } from "nextra-theme-docs";
 
 # `irys.upload(data, tags)`
 
-Uploads data for [permanent storage](/learn/permanent-storage).
+[Permanently](/overview/products/permanent-data) uploads data.
 
 **Parameters**
 
@@ -34,17 +34,15 @@ response = {
 ```
 
 ```js
-const uploadData = async () => {
-	const irys = await getIrys();
-	
-	const dataToUpload = "GM world.";
-	try {
-		const receipt = await irys.upload(dataToUpload);
-		console.log(`Data uploaded ==> https://arweave.net/${receipt.id}`);
-	} catch (e) {
-		console.log("Error uploading data ", e);
-	}
-};
+const irys = await getIrys();
+
+const dataToUpload = "GM world.";
+try {
+	const receipt = await irys.upload(dataToUpload);
+	console.log(`Data uploaded ==> https://arweave.net/${receipt.id}`);
+} catch (e) {
+	console.log("Error uploading data ", e);
+}
 ```
 
 <Callout type="info" emoji="ℹ️">
