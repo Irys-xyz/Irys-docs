@@ -24,9 +24,8 @@ const HomeWhyUseIrys = ({
 						return (
 							<li
 								key={`definition-${index}`}
-								className={`flex border-spacing-4 flex-col items-center justify-between gap-5 border-b-[2.5px] border-dotted border-gray-400 pb-9 lg:flex-row lg:gap-0 ${
-									index === content.length - 1 ? "!border-b-0" : ""
-								}`}
+								className={`flex border-spacing-4 flex-col items-center justify-between gap-5 border-b-[2.5px] border-dotted border-gray-400 pb-9 lg:flex-row lg:gap-0 ${index === content.length - 1 ? "!border-b-0" : ""
+									}`}
 							>
 								<a href={definition.href}>
 									<Heading level={3} className="whitespace-nowrap text-center lg:text-left">
@@ -34,7 +33,7 @@ const HomeWhyUseIrys = ({
 									</Heading>
 								</a>
 
-								<p className="pl-6 text-center font-robotoMono text-base lg:text-left max-w-md">
+								<p className="pl-6 text-center font-robotoMono text-base lg:text-end max-w-md">
 									{definition.description}
 								</p>
 							</li>
