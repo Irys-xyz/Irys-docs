@@ -2,14 +2,25 @@
 description: Optimistic caching makes your uploads instantly available
 ---
 
-# Optimistic Cache
+import { Callout } from "nextra-theme-docs";
+import Heading from "../../components/Heading";
+import SectionTitle from "../../components/SectionTitle";
 
-The optimistic cache ensures all data uploaded to Bundlr is immediately available via [gateways](/learn/gateways), which are responsible for making data available to users.
+<div className="flex flex-col mt-5">
+	<div className="flex items-end">
+		<img src="https://bundlr.network/new/assets/home/data-donuts.webp" className="w-[150px] " />
+		<div className="">
+			<Heading level={1}>Optimistic cache</Heading>
+		</div>
+	</div>
+</div>
+The optimistic cache ensures all data uploaded to Irys is immediately available via [gateways](/learn/gateways), which are
+responsible for making data available to users.
 
-When a user requests data from a gateway, it searches for it in its local cache. If the data is not found, the gateway requests it from Arweave. If the data is still not found, the gateway requests it from Bundlr’s optimistic cache. The optimistic cache is essential for providing users with real-time access to uploaded data, as it provides access to transactions that have not yet been seeded on Arweave, but are expected to be seeded soon.
+When a user requests data from a gateway, it searches for it in its local cache. If the data is not found, the gateway requests it from Arweave. If the data is still not found, the gateway requests it from Irys' optimistic cache. The optimistic cache is essential for providing users with real-time access to uploaded data, as it provides access to transactions that have not yet been seeded on Arweave, but are expected to be seeded soon.
 
-<img className="mt-5" src="/img/learn/optimistic-cache.png" />
+<img className="border border-[#FEF4EE] rounded mt-5 w-5/6" src="/img/learn/irys-optimistic-cache.png" />
 
-The optimistic cache queries each Bundlr node sequentially until the data is found. Node 1 and Node 2 are queried first, followed by Devnet. If the data is found, it is returned instantly. Otherwise, a 404 code is returned.
+The optimistic cache queries each Irys node sequentially until the data is found. Node 1 and 2 are queried first, followed by Devnet. If the data is found, it is returned instantly. Otherwise, a 404 code is returned.
 
-On Bundlr's Devnet, uploads are kept for approximately 60 days, during this time, the data is available from gateways in the same way that normal uploads are.
+On Irys' Devnet, uploads are kept for approximately 60 days, during this time, the data is available from gateways in the same way that normal uploads are.
