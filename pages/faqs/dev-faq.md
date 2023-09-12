@@ -22,7 +22,7 @@ Follow [this tutorial](https://docs.bundlr.network/hands-on/tutorials/react).
 
 Yes. You can host static websites. We have [a detailed tutorial on how to do it here.](/hands-on/tutorials/uploading-static-sites)
 
-## Is it possible to assign an api key to a funded Irys account so that I can pay for my client's uploads?
+## Is it possible to assign an API key to a funded Irys account so that I can pay for my client's uploads?
 
 No, but we do support [gassless uploads](/hands-on/tutorials/gassless-uploading).
 
@@ -49,3 +49,15 @@ It is 32 bytes base64url encoded.
 ## Is there an expected max/min length of a transaction id?
 
 43 bytes.
+
+## Is there a max size limit for an upload?
+
+No
+
+## How soon after I upload data is it available for downlaod?
+
+Our [optimistic cache](/learn/optimistic-cache) makes it available instantly.
+
+## Where can I see my data before it gets seeded onto Arweave?
+
+As soon as your upload is complete, the data can be requested from a [gateway](/learn/gateways).
