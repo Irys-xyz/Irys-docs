@@ -24,8 +24,8 @@ const Video = () => {
 
     const opts = {
         height: 390 * 1.4,
-        width: windowWidth && windowWidth < 640 ? 450 : 640 * 1.4,
-    };
+        width: windowWidth && windowWidth < 1024 ? windowWidth - windowWidth * .1 : 640 * 1.4
+    }
 
     return (
         <YouTube
