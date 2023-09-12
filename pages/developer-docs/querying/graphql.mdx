@@ -29,12 +29,12 @@ A GraphQL query is made up of:
 
 Any of the following query arguments can be used as search parameters:
 
-| Field   | Description                                                                                                                                                                                                |
-| ------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `ids`   | An array of transaction IDs passed as strings. Values are ORed together, matching results will include transactions that have any of the supplied IDs.                                                     |
-| `owner` | The address used when posting the transaction. Can be a native address from [any of the chains supported by Bundlr](/overview/supported-tokens). Note in results fields, this is referred to as `address`. |
-| `token` | The [token](/overview/supported-tokens) used to pay for the transaction.                                                                                                                                   |
-| `tags`  | An array of tag name / value pairs passed as JSON objects.                                                                                                                                                 |
+| Field   | Description                                                                                                                                                                                              |
+| ------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `ids`   | An array of transaction IDs passed as strings. Values are ORed together, matching results will include transactions that have any of the supplied IDs.                                                   |
+| `owner` | The address used when posting the transaction. Can be a native address from [any of the chains supported by Irys](/overview/supported-tokens). Note in results fields, this is referred to as `address`. |
+| `token` | The [token](/overview/supported-tokens) used to pay for the transaction.                                                                                                                                 |
+| `tags`  | An array of tag name / value pairs passed as JSON objects.                                                                                                                                               |
 
 ## Results fields
 
@@ -42,7 +42,7 @@ When building a query, any of the following values be included in your results:
 | Field | Description |
 |---|---|
 | `id` | The transaction ID. |
-| `address` | The address used when posting the transaction. Can be a native address from any of the chains supported by Bundlr. Note in query arguements, this is referred to as `owner`. |
+| `address` | The address used when posting the transaction. Can be a native address from any of the chains supported by Irys. Note in query arguements, this is referred to as `owner`. |
 | `token` | The token used to pay for the transaction. |
 | `receipt { `<br/>&nbsp;&nbsp;`deadlineHeight `<br/>&nbsp;&nbsp;`signature  `<br/>&nbsp;&nbsp;`version `<br/>`}` | An optional receipt, only exists if a user requested one at upload.<br/> `deadlineHeight`: The block number by which the transaction must be finalized on Arweave. <br/>`signature`: A signed deep hash of the JSON receipt. |
 | `tags {    `<br/>&nbsp;&nbsp;`name     `<br/>&nbsp;&nbsp;`value`<br/>`}` | An array of tags supplied as name / value pairs. Exists if the user added them at upload. |
@@ -52,11 +52,11 @@ When building a query, any of the following values be included in your results:
 
 Connect to the GraphQL endpoint associated with the node you uploaded your transaction to.
 
-| Node   | Endpoint                              |
-| ------ | ------------------------------------- |
-| Node 1 | https://node1.bundlr.network/graphql  |
-| Node 2 | https://node2.bundlr.network/graphql  |
-| Devnet | https://devnet.bundlr.network/graphql |
+| Node   | Endpoint                        |
+| ------ | ------------------------------- |
+| Node 1 | https://node1.irys.xyz/graphql  |
+| Node 2 | https://node2.irys.xyz/graphql  |
+| Devnet | https://devnet.irys.xyz/graphql |
 
 ## GraphQL sandbox
 

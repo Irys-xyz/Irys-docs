@@ -12,41 +12,41 @@ import Highlight from "react-highlight";
 import Video from "../components/Video";
 
 <Head>
-  <title>Irys Docs</title>
-  <meta
-    name="description"
-    content="Unlock the full potential of Irys' technology with our developer resources. Start building on Irys today! "
-  />
+	<title>Irys Docs</title>
+	<meta
+		name="description"
+		content="Unlock the full potential of Irys' technology with our developer resources. Start building on Irys today! "
+	/>
 </Head>
 
 <style jsx>
-  {`
-    :global(nav) {
-      min-width: 100% !important;
-      padding-right: 79px !important;
-      padding-left: 79px !important;
-    }
+	{`
+		:global(nav) {
+			min-width: 100% !important;
+			padding-right: 79px !important;
+			padding-left: 79px !important;
+		}
 
-    @media (max-width: 768px) {
-      :global(nav) {
-        padding-right: 16px !important;
-        padding-left: 16px !important;
-      }
-    }
-  `}
+		@media (max-width: 768px) {
+			:global(nav) {
+				padding-right: 16px !important;
+				padding-left: 16px !important;
+			}
+		}
+	`}
 </style>
 
 <div>
 
 <div
-  className="absolute top-0 left-0 w-full h-full"
-  style={{
-    backgroundImage: "url('./img/dots-cloud.png')",
-    backgroundSize: "140%",
-    backgroundRepeat: "no-repeat",
-    filter: "blur(20px)",
-    opacity: ".3",
-  }}
+	className="absolute top-0 left-0 w-full h-full"
+	style={{
+		backgroundImage: "url('./img/dots-cloud.png')",
+		backgroundSize: "140%",
+		backgroundRepeat: "no-repeat",
+		filter: "blur(20px)",
+		opacity: ".3",
+	}}
 />
 
 <header className="px-4 lg:px-[79px] py-14">
@@ -147,11 +147,8 @@ import Video from "../components/Video";
 
 <div className="px-4 lg:px-[79px] py-20">
 
-<Heading
-  level={6}
-  className="!font-fkDisplay leading-none text-center md:text-left mt-10"
->
-  Use our SDK and start storing data permanently with 3 lines of code.
+<Heading level={6} className="!font-fkDisplay leading-none text-center md:text-left mt-10">
+	Use our SDK and start storing data permanently with 3 lines of code.
 </Heading>
 
          <div className="rounded-xl bg-black p-4 mt-4">
@@ -159,7 +156,7 @@ import Video from "../components/Video";
 {" "}
 
 <Highlight className="js text-base leading-loose">
-  {`const irys = new Irys({ url, token, key });
+	{`const irys = new Irys({ url, token, key });
 const fundTx = await irys.fund(irys.utils.toAtomic(0.05));
 const receipt = await irys.uploadFile("./myImage.png");`}
 </Highlight>
@@ -174,19 +171,19 @@ const receipt = await irys.uploadFile("./myImage.png");`}
 			id: 0,
 			title: "About",
 			description: "Unlock the potential of Irys' technology",
-			href: "/overview/about-irys",
+			href: "/overview/about",
 		},
 		{
 			id: 1,
 			title: "Products",
 			description: "Discover Irys' core offerings",
-			href: "/overview/network",
+			href: "/overview/products",
 		},
 		{
 			id: 2,
 			title: "Tools",
 			description: "Get started building with Irys today",
-			href: "/overview/solutions",
+			href: "/overview/tools",
 		},
     	{
     		id: 3,
@@ -224,9 +221,8 @@ className={`mt-4 text-md z-50 flex items-center gap-2 rounded-full px-4 py-3 fon
 
 <SectionTitle title="Hands On" />
 <p className="pt-8 font-robotoMono leading-loose">
-  Start with tutorials and then join a global community of over 40,000
-  developers in our Quests program. Earn unique NFTs for every quest you
-  complete.
+	Start with tutorials and then join a global community of over 40,000 developers in our Quests program. Earn unique
+	NFTs for every quest you complete.
 </p>
 
   <ul className="flex flex-col gap-10 lg:flex-row mt-16">
@@ -267,51 +263,63 @@ className={`mt-4 text-md z-50 flex items-center gap-2 rounded-full px-4 py-3 fon
 <HomeWhyUseIrys
 	content={[
 		{
-			title: "Permanent Storage",
-			href: "/learn/permanent-storage",
+			title: "Permanent data",
+			href: "/overview/products/permanent-data",
 			description: "Permanent and immutable storage on Arweave via Irys",
 		},
-				{
-			title: "Strong Provenance",
-			href: "/learn/strong-provenance",
+		{
+			title: "Strong provenance",
+			href: "/overview/products/strong-provenance",
 			description: "Cryptographically guaranteed provenance, millisecond accurate timestamps",
 		},
 		{
 			title: "Bundles",
 			href: "/learn/bundles",
-			description: "A bundle is a group of transactions",
+			description: "Scaling Arweave by grouping transactions",
 		},
-    	{
-    		title: "Irys And Arweave",
-    		href: "/learn/irys-arweave",
-    		description: "Irys makes Arweave easier to use",
-    	},
 		{
     		title: "Gateways",
     		href: "/learn/gateways",
     		description: "Gateways are responsible for indexing, serving, and making data available to users",
     	},
 		{
-    		title: "Optimistic Cache",
-    		href: "/learn/optimistic-cache",
-    		description: "Optimistic caching makes your uploads instantly available",
-    	},
-    	{
     		title: "Receipts",
     		href: "/learn/receipts",
     		description:
     			"Receipts give you cryptographic proof of the exact time a transaction occurred",
     	},
-    	{
-    		title: "Transaction Lifecycle",
+		{
+    		title: "Optimistic cache",
+    		href: "/learn/optimistic-cache",
+    		description: "Optimistic caching makes your uploads instantly available",
+    	},
+		{
+    		title: "Funding and withdrawing",
+    		href: "/learn/funding-withdrawing",
+    		description: "Understand what happens each step of the way when transferring tokens to or from a node",
+    	},
+		{
+    		title: "Transaction lifecycle",
     		href: "/learn/transaction-lifecycle",
     		description:
     			"Understand each step of the process as a transaction is processed by Irys",
     	},
+    	{
+    		title: "Irys and Arweave",
+    		href: "/learn/irys-arweave",
+    		description: "Irys makes Arweave easier to use",
+    	},
+    	{
+    		title: "Volumetric scaling",
+    		href: "/learn/volumetric-scaling",
+    		description: "Irys scales to over 50,000 TPS",
+    	},
+    	{
+    		title: "UDL and builders",
+    		href: "/learn/udl",
+    		description: "Understand unique opportunities the UDL opens up for builders",
+    	},
+
     ]}
 
 />
-
-```
-
-```
