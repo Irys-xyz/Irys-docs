@@ -5,14 +5,15 @@ import ButtonBar from "../../components/ButtonBar";
 <div className="py-20">
 <Heading level={1} className="mb-4">Developer Quests</Heading>
 
-<p>Join a global community of over 40,000 developers building on Bundlr.</p>
+<p>Join a global community of over 40,000 developers building on Irys.</p>
 <p>Earn unique NFTs for each quest you complete!</p>
-<p className="mt-5">
-	After completing each quest, submit your work using the button below. We will review your submission within two
-	weeks and notify you by email if it meets the criteria. Once you have received the email, click on **Connect
-	Wallet** and then **Claim NFT**. <br /> <br /> Please note that clicking **Claim NFT** before receiving our email
-	will not work.
-</p>
+<ul className="mt-5 space-y-3 ml-10">
+	<li className="list-disc pl-5">
+		Season 1 quests are currently closed to new submissions, but you can still claim your NFT if you've been
+		whitelisted.
+	</li>
+	<li className="list-disc pl-5">Season 2 is launching soon. Stay tuned!</li>
+</ul>
 
 </div>
 
@@ -25,29 +26,23 @@ import ButtonBar from "../../components/ButtonBar";
 
 {" "}
 
-<SectionTitle title={"Quest 1: SDK Quest"} />
-<p className="mt-4">
-	[Learn the Bundlr SDK](/hands-on/quests/bundlr-sdk-quest) as you upload files, folders and a full static website to
-	the permaweb.
-</p>
+<SectionTitle title={"Season 1 Quests"} />
+<div className="flex flex-row">
+	<div className="flex flex-col items-center mb-2 px-5 border border-gray-300 rounded-xl mt-5 mx-2">
+		<span className="text-lg mr-3">Quest 1:</span>
+		<ButtonBar submitUrl="" contractAddress="0x1c8F5F29D1498474844D6a5160B640C674276DBa" tokenId="0" />
+	</div>
 
-{" "}
+    <div className="flex flex-col items-center mb-2 px-5 border border-gray-300 rounded-xl mt-5 mx-2">
+    	<span className="text-lg mr-3">Quest 2:</span>
+    	<ButtonBar submitUrl="" contractAddress="0x1c8F5F29D1498474844D6a5160B640C674276DBa" tokenId="0" />
+    </div>
 
-<div className="flex flex-row gap-4 mt-10">
-	{/* <Button props="https://forms.gle/VUv81Sbx6a1nPvNRA">Submit Quest</Button> */}
+    <div className="flex flex-col items-center mb-2 px-5 border border-gray-300 rounded-xl mt-5 mx-2">
+    	<span className="text-lg mr-3">Quest 3:</span>
+    	<ButtonBar submitUrl="" contractAddress="0x1c8F5F29D1498474844D6a5160B640C674276DBa" tokenId="0" />
+    </div>
+
 </div>
-</div>
- 
-<div className="mt-10 border p-5 rounded-2xl border-white/20">
-<SectionTitle title={"Quest 2: Lens Quest"} />
-<p className="mt-4">
-    [Build OnlyBundlr](/hands-on/quests/bundlr-lens-quest), a social dApp for the creator economy using Bundlr and Lens Protocol.
-</p>
-
-<ButtonBar
-	submitUrl="https://forms.gle/BHP2UgmDqw1hPDZy5"
-	contractAddress="0x1c8F5F29D1498474844D6a5160B640C674276DBa"
-	tokenId="1"
-/>
 
 </div>

@@ -21,8 +21,8 @@ const ButtonBar: React.FC<ButtonBarProps> = ({ submitUrl, contractAddress, token
 	return (
 		<div className="flex flex-col">
 			{isExploding && <ConfettiExplosion />}
-			<div className="flex flex-row gap-4 mt-10">
-				<Button onClick={() => window.open(submitUrl)}>Submit Quest</Button>
+			<div className="flex flex-row gap-4 mt-2">
+				{submitUrl && <Button onClick={() => window.open(submitUrl)}>Submit Quest</Button>}
 				<Web3Button
 					theme="dark"
 					contractAddress={contractAddress}
