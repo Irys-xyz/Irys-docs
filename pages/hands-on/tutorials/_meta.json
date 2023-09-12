@@ -1,15 +1,15 @@
 {
-	"react": "Using Irys With npx create-react-app",
-	"monitor-node-balance": "Monitoring Node Balance",
-	"provenance-chain": "Build a Provenance Chain",
-	"uploading-static-sites": "Uploading Static Websites",
-	"uploading-nfts": "Uploading NFTs",
-	"github_link": {
-		"title": "Build A QuerySDK Explorer",
-		"href": "https://docs.google.com/document/d/1BRc4PQ1F2Y6vLE1bVdzRITZzBIzwi7L-K0id_hGErr8/edit"
-	},
-	"gassless-uploading": "Gassless Uploading",
-	"strong-provenance-toolkit": "Strong Provenance Toolkit",
-	"lens": "Uploading Lens Metadata",
-	"livepeer": "Transcoding With Livepeer"
+	"react": "Using npx-create-react-app",
+	"irys-sdk": "Learn the Irys SDK",
+	"monitor-node-balance": "Monitor node balance",
+	"provenance-chain": "Provenance chain",
+	"uploading-static-sites": "Upload a static website",
+	"livepeer": "Transcode video with Livepeer",
+	"irys-explorer": "Transaction explorer",
+	"gassless-uploading": "Gassless uploads",
+	"uploading-nfts": "Upload NFT assets",
+	"metaplex": "Solana NFTs with Metaplex",
+	"udl-erc20": "Manage UDL ownership with ERC20",
+	"udl-nft": "NFT licensing and UDL",
+	"lens": "Upload Lens metadata"
 }

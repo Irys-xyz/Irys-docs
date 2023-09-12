@@ -117,23 +117,22 @@ contract MySong is ERC20, Ownable {
         }
     }
 
-function _distributeRandom() private {
-    uint256 randomValue = uint256(keccak256(abi.encodePacked(block.timestamp, msg.sender))) % totalSupply();
-    uint256 cumulativeSum = 0;
+	function _distributeRandom() private {
+		uint256 randomValue = uint256(keccak256(abi.encodePacked(block.timestamp, msg.sender))) % totalSupply();
+		uint256 cumulativeSum = 0;
 
-    for (uint256 i = 0; i < _holders.length; i++) {
-        address holder = _holders[i];
-        uint256 holderBalance = balanceOf(holder);
+		for (uint256 i = 0; i < _holders.length; i++) {
+			address holder = _holders[i];
+			uint256 holderBalance = balanceOf(holder);
 
-        cumulativeSum = cumulativeSum.add(holderBalance);
+			cumulativeSum = cumulativeSum.add(holderBalance);
 
-        if (randomValue < cumulativeSum) {
-            payable(holder).transfer(msg.value);
-            break;
-        }
-    }
-}
-
+			if (randomValue < cumulativeSum) {
+				payable(holder).transfer(msg.value);
+				break;
+			}
+		}
+	}
 
     address[] private _holders;
 
@@ -202,7 +201,7 @@ Once you’ve distributed tokens between holders, test revenue distribution.
 
 ## `Contract` tag
 
-After creating and deploying the contract, fork the [Bundlr Provenance toolkit](/developer-docs/provenance-toolkit) and use the Bundlr UDL Uploader to upload a new asset while setting the `Contract` tag to be the address of the smart contract you just deployed. This pairs the UDL-protected asset with the smart contract, establishing a payment management rule for platforms.
+After creating and deploying the contract, fork the [Irys Provenance toolkit](/developer-docs/provenance-toolkit) and use the Irys UDL Uploader to upload a new asset while setting the `Contract` tag to be the address of the smart contract you just deployed. This pairs the UDL-protected asset with the smart contract, establishing a payment management rule for platforms.
 
 ## Alternatives
 

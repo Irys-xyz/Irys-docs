@@ -1,10 +1,10 @@
 ---
-description: Use Tagging And GraphQL To Build A Provenance Chain
+description: Use tagging and the query package to build a provenance chain
 ---
 
-# Build A Provenance Chain
+# Build a provenance chain
 
-This tutorial guides you through building a provenance chain. If the topics of [provenance](/terminology#data-provenance) and [provenance chain](/terminology#provenance-chain) are new to you, start with [Strong Provenance](/learn/strong-provenance).
+This tutorial guides you through building a provenance chain. If the topics of [provenance](/terminology#data-provenance) and [provenance chain](/terminology#provenance-chain) are new to you, start with [strong provenance](/overview/products/strong-provenance).
 
 In this tutorial, you will:
 
@@ -16,10 +16,10 @@ In this tutorial, you will:
 
 ## Setup
 
-Start by [installing the Irys SDK](/developer-docs/irys-sdk/installing-the-sdk), and the [Query SDK](/developer-docs/query-sdk/installing-the-sdk), setting up your imports, and creating a helper function that returns a reference to a configured Irys object.
+Start by [installing the Irys SDK](/developer-docs/irys-sdk/installing-the-sdk), and the [Query package](/developer-docs/querying/query-package#installation), setting up your imports, and creating a helper function that returns a reference to a configured Irys object.
 
 ```js
-import Irys from "@irys/client/node";
+import Irys from "@irys/client";
 import fetch from "node-fetch";
 import dotenv from "dotenv";
 import Query from "@irys/query";
@@ -42,9 +42,9 @@ const getIrys = async () => {
 };
 ```
 
-## Storing The Root Asset
+## Storing the root asset
 
-Create a function that stores your root transaction. In the interest of simplicity, we will use text strings in this tutorial. We upload with the function [`irys.upload()`](/developer-docs/irys-sdk/api/upload) which returns a cryptographically signed receipt containing a timestamp accurate to the millisecond of when the upload happened.
+Create a function that stores your root transaction. In the interest of simplicity, we use text strings in this tutorial. We upload with the function [`irys.upload()`](/developer-docs/irys-sdk/api/upload) which returns a cryptographically signed receipt containing a timestamp accurate to the millisecond of when the upload happened.
 
 ```js
 // Stores the root transaction and returns the transaction id
@@ -57,7 +57,7 @@ const storeRoot = async (myData) => {
 };
 ```
 
-## Storing Updates
+## Storing updates
 
 Next, create a function that stores “updates”. This is similar to the above function, the only difference is it adds a new tag called `root-tx` that ties back each update to the root transaction.
 
@@ -78,11 +78,16 @@ const storeUpdate = async (rootTxId, myData) => {
 };
 ```
 
-## Provenance Chains
+## Provenance chains
 
-We'll construct the provenance chain using two methods: the [Query SDK](/hands-on/tutorials/provenance-chain#query-sdk-provenance-chain) and [GraphQL](/hands-on/tutorials/provenance-chain#graphql-provenance-chain). Both methods are equally performant, but the Query SDK significantly simplifies the process by abstracting the intricacies of GraphQL. You interact with the Query SDK using familiar JavaScript techniques, making it a much more straightforward approach.
+We'll construct the provenance chain using two methods: 
 
-## Query SDK Provenance Chain
+- The [Query package](/developer-docs/querying/query-package) 
+- [GraphQL](/developer-docs/querying/graphql)
+
+Both methods are equally performant, but the Query package significantly simplifies the process by abstracting the intricacies of GraphQL. 
+
+## Query package provenance chain
 
 Start by defining two functions. The first, `printProveanceChainSDK()` handles formatting the data and printing it using `console.table()`
 
@@ -94,7 +99,7 @@ const printProveanceChainSDK = async (rootTxId) => {
 };
 ```
 
-and the second `getProveanceChainSDK()` does the bulk of the work as it interacts with the Query SDK.
+and the second `getProveanceChainSDK()` does the bulk of the work as it interacts with the Query package.
 
 The function starts by connecting to a new `Query` object and then searching for the transaction with our root transaction ID. Since we uploaded the provenance chain to the Irys Devnet node, we have to connect to the Devnet when setting up the `Query` object.
 
@@ -169,13 +174,13 @@ const getProveanceChainSDK = async (rootTxId) => {
 };
 ```
 
-## GraphQL Provenance Chain
+## GraphQL provenance chain
 
-For the GraphQL version, first we'll create and test the queries, and then look at how to call them from JavaScript. You can experiment with these queries [by accessing our GraphQL sandbox](/developer-docs/graphql#endpoints).
+For the GraphQL version, first we'll create and test the queries, and then look at how to call them from JavaScript. You can experiment with these queries [by accessing our GraphQL sandbox](/developer-docs/querying/graphql#graphql-sandbox).
 
 We'll employ two GraphQL queries to identify the transaction IDs and timestamps for each component in our provenance chain. The initial query fetches the timestamp for the root transaction, while the subsequent query retrieves all transaction IDs and timestamps for the updates.
 
-### Root Transaction
+### Root transaction
 
 For the root transaction, we'll retrieve the timestamp from when it was uploaded. This provides a baseline for our provenance chain, as all subsequent updates will possess timestamps that follow this initial one.
 
@@ -191,7 +196,7 @@ query getByIds {
 }
 ```
 
-### Update Transactions
+### Update transactions
 
 The second query retrieves all following transactions and arranges them chronologically according to their timestamps, thus establishing the correct time sequence.
 
@@ -208,11 +213,11 @@ query getProvenanceChain {
 }
 ```
 
-## Query Functions
+## Query functions
 
 This tutorial uses the HTTP fetch library to interact with our GraphQL endpoint due to its simplicity. However, if your application demands a more robust solution, consider replacing it with a comprehensive GraphQL client like [Apollo.](https://www.apollographql.com/)
 
-### Root Transaction And Data
+### Root transaction and data
 
 Use GraphQL to query for the timestamp of the root transaction, then fetch the data payload. Create a JavaScript object holding both and return it embedded in an array.
 
@@ -262,7 +267,7 @@ const getRootTxGQL = async (rootTxId) => {
 };
 ```
 
-### Update Transaction And Data
+### Update transaction and data
 
 Then query for all transaction IDs and timestamps in the update chain, fetch the associated data payloads and return them as an array of objects.
 
@@ -317,7 +322,7 @@ const getProveanceChainGQL = async (rootTxId) => {
 };
 ```
 
-## Creating The Chain
+## Creating the chain
 
 To create the full chain, first request the root data, then the update data. Concatenate both arrays together and output using the `console.table()` function.
 
@@ -330,7 +335,7 @@ const printProveanceChainGQL = async (rootTxId) => {
 };
 ```
 
-## Calling The Functions
+## Calling the functions
 
 This is an example of calling the functions first with “Hello World” and then with updates that translate it into different languages.
 
@@ -353,11 +358,12 @@ When run, the code will output something similar to this.
 
 <img className="border border-[#FEF4EE] rounded mt-5 w-5/6" src="/img/recipes/provenance-chain-output.png" />
 
-## Full Code
+## Full code
 
-For ease of implementation, the full code for this tutorial is as follows.
+Here's the full code:
 
 ```js
+
 import Irys from "@irys/client/node";
 import fetch from "node-fetch";
 import dotenv from "dotenv";
@@ -589,3 +595,10 @@ await storeUpdate(rootId, "GM"); // Web3
 await printProveanceChainGQL(rootId);
 await printProveanceChainSDK(rootId);
 ```
+
+
+## Getting help
+
+If you get stuck or need help, reach out in our [Discord](https://discord.irys.xyz) and someone will get back to you quickly.
+
+And, most importantly pleaase let us know how you're using Irys and what you're building. Let us know how we can best support you!

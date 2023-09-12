@@ -30,26 +30,35 @@ When uploading the metadata, you can attach a UDL in the form of [tags](/develop
 If you’re using our NodeJS SDK to upload your metadata files, you can modify your upload script to include the UDL parameters. [Not all UDL tags are required](https://arwiki.wiki/#/en/Universal-Data-License-How-to-use-it), and the ones you use will depend on how you want to allow your content to be used. The script below demonstrates how to add common tags to a metadata file upload, when using it for your own project, customize as needed.
 
 ```ts
-import Bundlr from "@bundlr-network/client";
+import Irys from "@irys/client";
 import * as fs from "fs";
 import dotenv from "dotenv";
 dotenv.config();
+
+// Returns a reference to an Irys node
+const getIrys = async () => {
+	const url = "https://devnet.irys.xyz";
+	const providerUrl = "https://rpc-mumbai.maticvigil.com";
+	const token = "matic";
+	const privateKey = process.env.ETH_PRIVATE_KEY;
+
+	const irys = new Irys({
+		url, // URL of the node you want to connect to
+		token, // Token used for payment
+		key: privateKey, // ETH or SOL private key
+		config: { providerUrl: providerUrl }, // Optional provider URL, only required when using Devnet
+	});
+	return irys;
+};
+
+// Path to metadata file
+const fileToUpload = "./metadata.json";
 
 // Define the Tag type
 type Tag = {
 	name: string;
 	value: string;
 };
-
-// Connect to a Bundlr node
-const privateKey = process.env.PRIVATE_KEY;
-const token = "matic";
-const bundlr = new Bundlr("http://devnet.bundlr.network", token, privateKey, {
-	providerUrl: "https://rpc-mumbai.maticvigil.com",
-});
-
-// Path to metadata file
-const fileToUpload = "./metadata.json";
 
 // Define your unique license
 const tags: Tag[] = [
@@ -64,21 +73,21 @@ const tags: Tag[] = [
 ];
 
 // Upload the metadata with UDL tags
-async function uploadMetadata() {
+const uploadMetadata = async () => {
 	try {
-		const response = await bundlr.uploadFile(fileToUpload, tags);
+		const irys = await getIrys();
+		const response = await irys.uploadFile(fileToUpload, { tags });
 		console.log(`File uploaded ==> https://arweave.net/${response.id}`);
 	} catch (e) {
 		console.log("Error uploading file ", e);
 	}
-}
-
+};
 uploadMetadata();
 ```
 
 ## Using the provenance toolkit
 
-You can also use the [Bundlr Provenance Toolkit repository](/developer-docs/provenance-toolkit) which provides a simple graphical interface.
+You can also use the [Irys Provenance Toolkit repository](/developer-docs/provenance-toolkit) which provides a simple graphical interface.
 
 1. Fork or clone the [repository](https://github.com/Bundlr-Network/provenance-toolkit)
 2. Use the [Uploader](/developer-docs/provenance-toolkit/uploader) component to upload your visual assets

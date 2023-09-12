@@ -4,24 +4,31 @@ description: Uploading Lens metadata using Bundlr (GraphQL and Lens React Hooks)
 
 import { Callout } from "nextra-theme-docs";
 
-# Storing Lens Metadata on Bundlr
+# Storing Lens metadata on Irys
 
-Lens Protocol is a composable and decentralized social graph; it allows you to quickly create social applications without having to build your own large backend services. The Lens documentation is extensive and very well done. The point of this guide isn't to replicate anything on the Lens site, rather it's a focused guide showing how to create and store your post metadata on Arweave via Bundlr. For additional information of creating a post on Lens, definitely [spend some time on their docs.](https://docs.lens.xyz/docs/create-post-typed-data).
+In this tutorial, you will learn two techniques for storing Lens metadata on Irys:
 
-When working with Lens, you upload structured metadata to a permanent storage provider (Bundlr) and then pass the URL to that content to Lens.
+-   Using React hooks
+-   Using `post()` and `postWithSig()`
+
+Lens Protocol is a composable and decentralized social graph; it allows you to quickly create social applications without having to build your own backend services.
+
+The Lens documentation is extensive and very well done. For additional information of creating a post on Lens, definitely [spend some time on their docs.](https://docs.lens.xyz/docs/create-post-typed-data).
+
+When working with Lens, you upload structured metadata to a permanent storage provider (Irys / Arweave) and then pass the URL to that content to Lens.
 
 There are two ways to interact with Lens:
 
 1. [Using React hooks](https://docs.lens.xyz/docs/sdk-react-intro)
 2. [Using calls to `post()` and `postWithSig()`](https://docs.lens.xyz/docs/introduction)
 
-## React Hooks
+## React hooks
 
-The React hooks for Lens make client-side development easier as streamline much of the development, including generating correct metadata for you to upload.
+The React hooks for Lens make client-side development easier as they streamline much of the development, including generating correct metadata for you to upload.
 
 ### `upload()` pattern
 
-When working with hooks like `useUpdateProfileDetails()` and `useCreatePost()`, Lens works using a pattern where you define a function called `upload()` that matches the following signature.
+When working with hooks like [`useUpdateProfileDetails()`](https://docs.lens.xyz/docs/use-update-profile-details) and [`useCreatePost()`](https://docs.lens.xyz/docs/use-create-post), Lens works using a pattern where you define a function called `upload()` that matches the following signature.
 
 ```ts
 export const upload = (data: unknown): Promise<string> => {
@@ -33,7 +40,7 @@ export const upload = (data: unknown): Promise<string> => {
 }
 ```
 
-The `upload()` function is passed to the hooks on initialization, the hooks then prepare the required metadata and pass it to `upload()` in the `data` parameter. In implementing the function, it's up to you to serialize the metadata (JSON object), store it on Bundlr and then return the URL from the function. The hook then takes the URL to the uploaded metadata and continues using it to update profile details or create a new post.
+The `upload()` function is passed to the hooks on initialization, the hooks then prepare the required metadata and pass it to `upload()` in the `data` parameter. When implementing the function, it's up to you to serialize the metadata (JSON object), store it on Irys and then return the URL from the function. The hook then takes the URL to the uploaded metadata and continues using it to update profile details or create a new post.
 
 A full ready-to-use implementation of the `upload()` function is as follows:
 
@@ -81,7 +88,7 @@ export const upload = async (data) => {
 
 ## Using `post()` and `postWithSig()`
 
-When working with the functions `post()` and `postWithSig()`, it is your responsibility to correctly build the required metadata for each interaction, store it on Bundlr and then pass the URL to Lens.
+When working with the functions `post()` and `postWithSig()`, it is your responsibility to correctly build the required metadata for each interaction, store it on Irys and then pass the URL to Lens.
 
 ### Uploading Metadata
 
@@ -113,7 +120,7 @@ The full Lens Protocol [metadata specification](https://docs.lens.xyz/docs/metad
 	The function `uuid()` generates a unique post id using the [UUID npm package](https://www.npmjs.com/package/uuid).
 </Callout>
 
-To upload to Bundlr, first stringify the data, then pass it to `bundlr.upload()`, tagging it with the `Content-Type` of `application/json`.
+To upload to Irys, first stringify the data, then pass it to `irys.upload()`, tagging it with the `Content-Type` of `application/json`.
 
 ```js
 // Create a WebBundlr object
