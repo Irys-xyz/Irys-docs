@@ -120,7 +120,10 @@ const results = await myQuery
 Or by using UNIX timestamps in millisecond format:
 
 ```js
-const results = await myQuery.search("irys:transactions").fromTimestamp(1688144401000).toTimestamp(1688317201000);
+const results = await myQuery
+	.search("irys:transactions")
+	.fromTimestamp(1688144401000)
+	.toTimestamp(1688317201000);
 ```
 
 <Callout type="info" emoji="ℹ️">
@@ -136,7 +139,9 @@ Use the `tags()` function to search [metadata tags](/developer-docs/tags) attach
 Search for a single tag name / value pair:
 
 ```js
-const results = await myQuery.search("irys:transactions").tags([{ name: "Content-Type", values: ["image/png"] }]);
+const results = await myQuery
+	.search("irys:transactions")
+	.tags([{ name: "Content-Type", values: ["image/png"] }]);
 ```
 
 Search for a single tag name with a list of possible values. The search uses OR logic and returns transactions tagged with ANY provided value.
@@ -197,7 +202,9 @@ const results = await myQuery
 When searching Arweave by transaction sender, only Arweave addresses are accepted:
 
 ```js
-const results = await myQuery.search("arweave:transactions").from(["TrnCnIGq1tx8TV8NA7L2ejJJmrywtwRfq9Q7yNV6g2A"]);
+const results = await myQuery
+	.search("arweave:transactions")
+	.from(["TrnCnIGq1tx8TV8NA7L2ejJJmrywtwRfq9Q7yNV6g2A"]);
 ```
 
 ## Transaction recipient
@@ -205,7 +212,9 @@ const results = await myQuery.search("arweave:transactions").from(["TrnCnIGq1tx8
 Use the `to()` function to search for the wallet address of the transaction recipient. This works on Arweave only and is used when there's a fund transfer.
 
 ```js
-const results = await myQuery.search("arweave:transactions").to("TrnCnIGq1tx8TV8NA7L2ejJJmrywtwRfq9Q7yNV6g2A");
+const results = await myQuery
+	.search("arweave:transactions")
+	.to("TrnCnIGq1tx8TV8NA7L2ejJJmrywtwRfq9Q7yNV6g2A");
 ```
 
 ## Token
@@ -213,7 +222,9 @@ const results = await myQuery.search("arweave:transactions").to("TrnCnIGq1tx8TV8
 Use the `token()` function to search based on the token name used to pay for the upload. Any of [these values](/overview/supported-tokens) are acceptable.
 
 ```js
-const results = await myQuery.search("irys:transactions").token("solana");
+const results = await myQuery
+	.search("irys:transactions")
+	.token("solana");
 ```
 
 ## Block id
@@ -231,13 +242,19 @@ const results = await myQuery
 Use the `mixHeight()` and `maxHeight()` functions to search for blocks within the specified block height range. Results are `>= minHeight and < maxHeight`.
 
 ```js
-const results = await myQuery.search("arweave:blocks").minHeight(1188272).maxHeight(1188279);
+const results = await myQuery
+	.search("arweave:blocks")
+	.minHeight(1188272)
+	.maxHeight(1188279);
 ```
 
 Or for transactions within the specified block height range. Results are `>= minHeight and < maxHeight`.
 
 ```js
-const results = await myQuery.search("arweave:transactions").minHeight(1188272).maxHeight(1188279);
+const results = await myQuery
+	.search("arweave:transactions")
+	.minHeight(1188272)
+	.maxHeight(1188279);
 ```
 
 ## Sorting
@@ -245,13 +262,19 @@ const results = await myQuery.search("arweave:transactions").minHeight(1188272).
 Use the `sort()` function to sort results by timestamp in ascending order:
 
 ```js
-const results = await myQuery.search("irys:transactions").token("ethereum").sort("ASC");
+const results = await myQuery
+	.search("irys:transactions")
+	.token("ethereum")
+	.sort("ASC");
 ```
 
 or descending order:
 
 ```js
-const results = await myQuery.search("irys:transactions").token("matic").sort("DESC");
+const results = await myQuery
+	.search("irys:transactions")
+	.token("matic")
+	.sort("DESC");
 ```
 
 ## First result
@@ -282,7 +305,10 @@ Use the `stream()` function to manage large results sets. This function returns 
 
 ```js
 // Create the stream
-const stream = await myQuery.search("irys:transactions").token("solana").stream();
+const stream = await myQuery
+	.search("irys:transactions")
+	.token("solana")
+	.stream();
 
 // Iterate over the results
 for await (const result of stream) {
