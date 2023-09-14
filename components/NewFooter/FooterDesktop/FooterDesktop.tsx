@@ -1,4 +1,5 @@
 import { FooterLogo } from "../../svg";
+import IrysLogoText from "../../svg/IrysLogoText";
 import Link from "next/link";
 import { ReactNode } from "react";
 
@@ -21,19 +22,18 @@ const FooterDesktop = ({
   return (
     <>
       <footer
-        className={`hidden items-start border-t border-timberwolf bg-seashell  font-robotoMono antialiased lg:flex !text-black mt-10 ${noPadding ? "px-[24px]" : "px-[79px]"
+        className={`hidden items-start border-t border-timberwolf bg-seashell  font-backup font-satoshi antialiased lg:flex !text-black mt-10 ${noPadding ? "px-[24px]" : "px-[79px]"
           }`}
       >
         <section className="flex w-auto max-w-[513px] flex-col pt-[36px] leading-none">
-          <Link legacyBehavior href="/">
-            <FooterLogo className="cursor-pointer" />
+          <Link href="/">
+            <IrysLogoText className="cursor-pointer w-[140px]" />
           </Link>
-          <p className="mt-[230px] whitespace-normal text-[62px] tracking-tighter lg:text-[31px]">
-            THE WORLD&apos;S <br />
-            DATA LAYER
+          <p className="mt-[140px] whitespace-normal text-[62px] tracking-tighter lg:text-[31px] font-semibold">
+            PROVENANCE <br />IS THE PROOF
           </p>
           <p className="mt-[47px]">
-            {new Date().getFullYear()} Bundlr. All rights reserved.
+            {new Date().getFullYear()} Irys. All rights reserved.
           </p>
         </section>
         <section className="ml-auto flex h-[568px] min-w-[272px] gap-20">
@@ -49,7 +49,7 @@ const FooterDesktop = ({
                     return (
                       <li
                         key={option.name}
-                        className="self-start hover:font-bold"
+                        className="self-start hover:underline"
                       >
                         <Link
                           legacyBehavior

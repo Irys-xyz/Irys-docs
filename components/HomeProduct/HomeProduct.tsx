@@ -47,14 +47,14 @@ const HomeProduct = ({
                   }}
                 />
                 <p
-                  className={` mt-auto font-robotoMono text-lg font-normal leading-loose ${items.length === 1 ? "text-center" : ""
+                  className={` mt-auto font-backup font-satoshi text-lg font-normal leading-loose ${items.length === 1 ? "text-center" : ""
                     }`}
                 >
                   {info.description}
                 </p>
                 <a
                   href={info.href}
-                  className="mt-auto whitespace-nowrap font-robotoMono text-base uppercase tracking-widest text-white hover:font-bold"
+                  className="mt-auto whitespace-nowrap font-backup font-satoshi text-base uppercase tracking-widest text-white hover:font-bold"
                 >
                   [ Find out more ]
                 </a>

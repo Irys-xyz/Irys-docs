@@ -33,7 +33,7 @@ const HomeWhyUseIrys = ({
 									</Heading>
 								</a>
 
-								<p className="pl-6 text-center font-robotoMono text-base lg:text-end max-w-md">
+								<p className="pl-6 text-center font-backup font-satoshi text-base lg:text-end max-w-md">
 									{definition.description}
 								</p>
 							</li>

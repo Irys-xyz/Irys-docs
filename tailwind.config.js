@@ -9,6 +9,7 @@ module.exports = {
       fontFamily: {
         robotoMono: ["Roboto Mono", "monospace"],
         fkDisplay: ["FKDisplay", "sans-serif"],
+        satoshi: ["Satoshi", "sans-serif"],
       },
       colors: {
         timberwolf: "#D8CFCA",

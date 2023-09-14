@@ -17,17 +17,16 @@ interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
 }
 
 const Button = ({ scheme = ButtonScheme.black, children, className, ...props }: ButtonProps) => {
-	const {} = useButton();
+	const { } = useButton();
 
 	return (
 		<>
 			<button
-				className={`border border-white text-md z-50 flex items-center gap-2 rounded-full px-4 py-3 font-robotoMono uppercase hover:font-bold lg:px-6 lg:py-5 ${
-					{
+				className={`border border-white text-md z-50 flex items-center gap-2 rounded-full px-4 py-3 font-backup font-satoshi uppercase hover:font-bold lg:px-6 lg:py-5 ${{
 						[ButtonScheme.black]: "bg-black text-white",
 						[ButtonScheme.white]: "bg-white text-black",
 					}[scheme]
-				} ${className}}`}
+					} ${className}}`}
 				{...props}
 			>
 				{children}

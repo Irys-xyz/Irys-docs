@@ -1,4 +1,5 @@
 import Footer from "../components/Footer";
+import BannerContainer from "../components/BannerContainer";
 import Head from "next/head";
 import Heading from "../components/Heading";
 import HomeOptions from "../components/HomeOptions";
@@ -12,41 +13,41 @@ import Highlight from "react-highlight";
 import Video from "../components/Video";
 
 <Head>
-	<title>Irys Docs</title>
-	<meta
-		name="description"
-		content="Unlock the full potential of Irys' technology with our developer resources. Start building on Irys today! "
-	/>
+  <title>Irys Docs</title>
+  <meta
+    name="description"
+    content="Unlock the full potential of Irys' technology with our developer resources. Start building on Irys today! "
+  />
 </Head>
 
 <style jsx>
-	{`
-		:global(nav) {
-			min-width: 100% !important;
-			padding-right: 79px !important;
-			padding-left: 79px !important;
-		}
+  {`
+    :global(nav) {
+      min-width: 100% !important;
+      padding-right: 79px !important;
+      padding-left: 79px !important;
+    }
 
-		@media (max-width: 768px) {
-			:global(nav) {
-				padding-right: 16px !important;
-				padding-left: 16px !important;
-			}
-		}
-	`}
+    @media (max-width: 768px) {
+      :global(nav) {
+        padding-right: 16px !important;
+        padding-left: 16px !important;
+      }
+    }
+  `}
 </style>
 
 <div>
 
 <div
-	className="absolute top-0 left-0 w-full h-full"
-	style={{
-		backgroundImage: "url('./img/dots-cloud.png')",
-		backgroundSize: "140%",
-		backgroundRepeat: "no-repeat",
-		filter: "blur(20px)",
-		opacity: ".3",
-	}}
+  className="absolute top-0 left-0 w-full h-full"
+  style={{
+    backgroundImage: "url('./img/dots-cloud.png')",
+    backgroundSize: "140%",
+    backgroundRepeat: "no-repeat",
+    filter: "blur(20px)",
+    opacity: ".3",
+  }}
 />
 
 <header className="px-4 lg:px-[79px] py-14">
@@ -54,109 +55,29 @@ import Video from "../components/Video";
     Irys Docs
   </Heading>
 
-  <p className="font-robotoMono leading-loose mt-6">
+  <p className="font-backup font-satoshi leading-loose mt-6">
     Unlock the full potential of Irys' technology with our developer
     resources
   </p>
 </header>
 
-<div className="flex flex-col md:flex-row w-full gap-4 items-stretch px-4 lg:px-[79px]">
-  <div className="flex flex-col w-full md:w-1/2 gap-4">
-    <Link href="/developer-docs/irys-sdk">
-      <div
-        className="bg-black h-[244px] rounded-2xl overflow-hidden bannerHover pt-10 pl-10 text-2xl hover:scale-[99%] cursor-pointer transition-all"
-        style={{
-          backgroundImage: "url('./img/data-donuts.webp')",
-          backgroundSize: "140%",
-          backgroundRepeat: "no-repeat",
-          backgroundPosition: "-40% -20%",
-          backdropFilter: "blur(10px)",
-        }}
-      >
-        Irys SDK
-      </div>
-    </Link>
-    <Link href="/developer-docs/querying">
-      <div
-        className="bg-black h-[244px] rounded-2xl overflow-hidden bannerHover pt-10 pl-10 text-2xl hover:scale-[99%] cursor-pointer transition-all"
-        style={{
-          backgroundImage: "url('./img/dots-cloud.png')",
-          backgroundSize: "140%",
-          backgroundRepeat: "no-repeat",
-          backgroundPosition: "40% -20%",
-          backdropFilter: "blur(10px)",
-        }}
-      >
-        Query package
-      </div>
-    </Link>
-  </div>
-
-    <div className="flex flex-col w-full md:w-1/2 gap-4">
-    <Link href="/developer-docs/provenance-toolkit">
-      <div
-        className="bg-black h-[244px] rounded-2xl overflow-hidden bannerHover pt-10 pl-10 text-2xl hover:scale-[99%] cursor-pointer transition-all"
-        style={{
-          backgroundImage: "url('./img/data-exponential.webp')",
-          backgroundSize: "140%",
-          backgroundRepeat: "no-repeat",
-          backgroundPosition: "-80% 100%",
-          backdropFilter: "blur(10px)",
-        }}
-      >
-      Provenance toolkit
-      </div>
-    </Link>
-    <Link href="#PLEASE-CHANGE-THIS-LINK">
-      <div
-        className="bg-black h-[244px] rounded-2xl overflow-hidden bannerHover pt-10 pl-10 text-2xl hover:scale-[99%] cursor-pointer transition-all"
-        style={{
-          backgroundImage: "url('./img/data-spiral.webp')",
-          backgroundSize: "140%",
-          backgroundRepeat: "no-repeat",
-          backgroundPosition: "40% -20%",
-          backdropFilter: "blur(10px)",
-        }}
-      >
-        Demo
-      </div>
-    </Link>
-
-  </div>
-
-      {/* <div className="flex flex-col bg-black  h-[244px] md:h-auto w-full md:w-1/2 pt-10 pl-10 text-2xl rounded-2xl hover:scale-[99%] cursor-pointer transition-all"
-        onClick={() => {
-          window.open("https://demo.bundlr.network", "_blank");
-        }}
-        style={{
-          backgroundImage: "url('./img/vortex.png')",
-          backgroundSize: "140%",
-          backgroundRepeat: "no-repeat",
-          backgroundPosition: "-40% -40%",
-          backdropFilter: "blur(10px)",
-        }}
-      >
-
-      Demo
-
-      </div> */}
-
-</div>
+<BannerContainer />
 
 </div>
 
 <div className="px-4 lg:px-[79px] py-20">
 
-<Heading level={6} className="!font-fkDisplay leading-none text-center md:text-left mt-10">
-	Use our SDK and start storing data permanently with 3 lines of code.
+<Heading
+  level={6}
+  className="!font-satoshi leading-none text-center md:text-left mt-10"
+>
+  Use our SDK and start storing data permanently with 3 lines of code.
 </Heading>
 
          <div className="rounded-xl bg-black p-4 mt-4">
 
-{" "}
-
 <Highlight className="js text-base leading-loose">
-	{`const irys = new Irys({ url, token, key });
+  {`const irys = new Irys({ url, token, key });
 const fundTx = await irys.fund(irys.utils.toAtomic(0.05));
 const receipt = await irys.uploadFile("./myImage.png");`}
 </Highlight>
@@ -203,12 +124,11 @@ const receipt = await irys.uploadFile("./myImage.png");`}
         <Video />
 
 <Link href="/overview/about" passHref legacyBehavior>
-<a
-className={`mt-4 text-md z-50 flex items-center gap-2 rounded-full px-4 py-3 font-robotoMono uppercase hover:font-bold lg:px-6 lg:py-5 bg-transparent text-white border-white border`} >
 
+          <Button>
             Learn more
+          </Button>
 
-          </a>
         </Link>
         <img
           src="/img/dataverse.webp"
@@ -220,9 +140,10 @@ className={`mt-4 text-md z-50 flex items-center gap-2 rounded-full px-4 py-3 fon
 <section className="bg-seashell px-4 lg:px-[79px] text-black py-28">
 
 <SectionTitle title="Hands On" />
-<p className="pt-8 font-robotoMono leading-loose">
-	Start with tutorials and then join a global community of over 40,000 developers in our Quests program. Earn unique
-	NFTs for every quest you complete.
+<p className="pt-8 font-backup font-satoshi leading-loose">
+  Start with tutorials and then join a global community of over 40,000
+  developers in our Quests program. Earn unique NFTs for every quest you
+  complete.
 </p>
 
   <ul className="flex flex-col gap-10 lg:flex-row mt-16">
@@ -249,7 +170,7 @@ className={`mt-4 text-md z-50 flex items-center gap-2 rounded-full px-4 py-3 fon
             {/* make image as background of rectangle box */}
             <div className="flex flex-col gap-4 px-5 pb-10">
               <Heading level={3}>{item.Title}</Heading>
-              <p className="font-robotoMono text-lg leading-loose">
+              <p className="font-backup font-satoshi text-lg leading-loose">
                 {item.FirstParagraph}
               </p>
             </div>
