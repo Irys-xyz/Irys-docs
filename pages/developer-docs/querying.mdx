@@ -1,24 +1,39 @@
 ---
-title: SDK
-description: Query Irys and Arweave transactions
+title: Querying
+description: Search Irys and Arweave
 ---
 
-import { Tab, Tabs } from "nextra-theme-docs";
 import Heading from "../../components/Heading";
 import SectionTitle from "../../components/SectionTitle";
-import { Callout } from "nextra-theme-docs";
 
-<div className="mt-7">
-	<Heading level={1} className="">
-		Querying
-	</Heading>
+<div className="flex flex-col mt-5">
+	<div className="mt-7">
+		<Heading level={1} className="">
+			Querying
+		</Heading>
+	</div>
+
+    <p className="mt-10 text-xl">
+    	Search Irys and Arweave using our query package and GraphQL endpoints.
+    </p>
+
 </div>
 
-<div className="mt-10">
-You can query transaction metadata using the Irys [query package](/developer-docs/querying/query-package) and [GraphQL](/developer-docs/graphql).
+<div className="flex flex-col mt-10">
 
-The easiest way to query Irys and Arweave transactions is by using the [Irys query package](/developer-docs/querying/query-package), a JavaScript-based abstraction that sits on top of our GraphQL endpoints.
+<div className="text-xl">[**Query package**](/developer-docs/irys-sdk)</div>
+<div>
+	The easiest way to search Irys and Arweave is by using the [Irys query
+	package](/developer-docs/querying/query-package), a JavaScript-based abstraction that sits on top of our GraphQL
+	endpoints.
+</div>
 
-Irys also supports querying directly using GraphQL. Users can query [Irys directly using the GraphQL sandbox](/developer-docs/querying/graphql#graphql-sandbox), or embed GraphQL queries in any other programming language.
+<div className="text-xl mt-5">[**GraphQL**](/developer-docs/cli)</div>
+
+<div>
+	Irys also supports querying directly using GraphQL. Users can query [Irys directly using the GraphQL
+	sandbox](/developer-docs/querying/graphql#graphql-sandbox), or embed GraphQL queries in any other programming
+	language.
+</div>
 
 </div>
