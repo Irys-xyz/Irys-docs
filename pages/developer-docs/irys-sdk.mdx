@@ -91,7 +91,7 @@ const fundNode = async () => {
 
 ## Uploading
 
-Data uploaded to Irys is stamped with a millisecond-accurate timecode and attestation details before being passed to Arweave for permanent storage. This information is used to create a cryptographically signed [receipt](/learn/receipts) that is returned to the user upon successful upload and can be [verifed](/developer-docs/irys-sdk/api/utils-verifyReceipt) by anyone at any time.
+Data uploaded to Irys is given a millisecond-accurate timestamp, attributes and authorship details before being passed to Arweave for permanent storage. This information is used to create a signed [receipt](/learn/receipts) that can be used to [verify](/developer-docs/irys-sdk/api/utils-verifyReceipt) the data's provenance at any time.
 
 ### Uploading data
 

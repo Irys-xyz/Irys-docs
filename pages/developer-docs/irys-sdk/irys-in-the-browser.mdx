@@ -6,11 +6,96 @@ import { Callout } from "nextra-theme-docs";
 
 # Irys In The Browser (WebIrys)
 
-When building with Irys in the browser, the easiest way to get started is by forking the [Irys provenance toolkit](/developer-docs/provenance-toolkit) and building your project using its rich UI component library and helper functions.
-
 <Callout emoji="🚀">
-	If you're using Bundlr with React and npx create-react-app, you will need to [follow some extra setup
-	steps](https://docs.bundlr.network/hands-on/tutorials/react).
+	When building with Irys in the browser, the easiest way to get started is by forking the [Irys provenance
+	toolkit](/developer-docs/provenance-toolkit) and building your project using its rich UI component library and
+	helper functions.
 </Callout>
 
-TODO, this will be done once Jesse figures out how we're handling providers in WebIrys
+Working with Irys in the browser is similar to working with our server-side SDK, however there are a few differences which demonstrated below.
+
+## Installing
+
+## Installing
+
+Install using npm:
+
+```console
+npm install @irys/client
+```
+
+or yarn:
+
+```console
+yarn add @irys/client
+```
+
+## Importing
+
+```js
+import Irys from "@irys/client";
+```
+
+## Connecting to a node
+
+When instantiating a `WebIrys` object pass:
+
+-   `url`: Irys [node address](/overview/network)
+-   `token`: Payment [token](/overview/supported-tokens)
+-   `providerName`: The provider package your project uses
+
+```js
+const getWebIrys = async () => {
+	// Ethers5 provider
+	await (window as WindowWithEthereum).ethereum.enable();
+	const provider = new providers.Web3Provider((window as WindowWithEthereum).ethereum);
+
+	const url = "https://node1.irys.xyz"
+	const token = "matic";
+	const providerName = "ethersv5";
+	const webIrys = new WebIrys({ url, token, provider, providerName });
+	await webIrys.ready(); // Always call after instantiating
+	return webIrys;
+};
+
+```
+
+After instantiating the object, call `webIrys.ready()`.
+
+## Supported providers
+
+WebIrys supports the following providers. When instantiating a new `WebIrys` object, you must pass in the name of the provider you will be using.
+
+| Package                                        | `providerName` value |
+| ---------------------------------------------- | -------------------- |
+| [ Ethers 5 ](https://docs.ethers.org/v5/)      | ethersv5             |
+| [ Ethers 6 ](https://docs.ethers.org/v6/)      | ethersv6             |
+| [ Rainbowkit v1 ](https://www.rainbowkit.com/) | rainbowkitv1         |
+| [ Viem v1 ](https://viem.sh/)                  | viemv1               |
+
+## Funding a node
+
+Fund a node using any of our supported tokens:
+
+```js
+const fundNode = async () => {
+	const webIrys = await getWebIrys();
+	try {
+		const fundTx = await webIrys.fund(webIrys.utils.toAtomic(0.05));
+		console.log(`Successfully funded ${webIrys.utils.fromAtomic(fundTx.quantity)} ${webIrys.token}`);
+	} catch (e) {
+		console.log("Error uploading data ", e);
+	}
+};
+```
+
+## Uploading
+
+## Uploading a folder
+
+and then you can [fund your node](/developer-docs/irys-sdk#funding-a-node) and permanently upload data.
+
+<Callout emoji="🚀">
+	If you're using Bundlr with React and `npx create-react-app`, you will need to [follow some extra setup
+	steps](https://docs.bundlr.network/hands-on/tutorials/react).
+</Callout>
