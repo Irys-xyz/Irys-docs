@@ -57,6 +57,24 @@ const irys = new Irys({
 });
 ```
 
+## Domain Changes
+
+With the release of the Irys SDK our domain has changed from `https://bundlr.network` to `https://irys.xyz`. When upgrading your code, you must change your Node URLs:
+
+| Bundlr Node Address             | Irys Node Address         |
+| ------------------------------- | ------------------------- |
+| `https://node1.bundlr.network`  | `https://node1.irys.xyz`  |
+| `https://node2.bundlr.network`  | `https://node2.irys.xyz`  |
+| `https://devnet.bundlr.network` | `https://devnet.irys.xyz` |
+
+And your GraphQL endpoints
+
+| Bundlr GraphQL Endpoint                 | Irys GraphQL Endpoint             |
+| --------------------------------------- | --------------------------------- |
+| `https://node1.bundlr.network/graphql`  | `https://node1.irys.xyz/graphql`  |
+| `https://node2.bundlr.network/graphql`  | `https://node2.irys.xyz/graphql`  |
+| `https://devnet.bundlr.network/graphql` | `https://devnet.irys.xyz/graphql` |
+
 ## Changes to upload functions
 
 In the Bundlr SDK there were separate upload functions depending on whether you wanted a receipt or not. With the Irys SDK, all upload functions return a [receipt](/learn/receipts).

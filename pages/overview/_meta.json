@@ -1,9 +1,10 @@
 {
 	"about": "About Irys",
-	"network": "Network",
-	"products": "Products",
 	"tools": "Tools",
-	"services": "Services",
+	"nodes": "Nodes",
+	"permanent-data": "Permanent data",
+	"ordering": "Ordering",
+	"querying-tagging": "Querying & tagging",
 	"fees": "Fees",
 	"supported-tokens": "Supported tokens"
 }

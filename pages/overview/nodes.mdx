@@ -1,11 +1,11 @@
 import Heading from "../../components/Heading";
 import SectionTitle from "../../components/SectionTitle";
+import { Callout } from "nextra-theme-docs";
 
 <div className="flex flex-col mt-5">
 	<div className="flex items-end">
-		<img src="https://bundlr.network/new/assets/home/data-donuts.webp" className="w-[150px] " />
-		<div className="ml-5">
-			<Heading level={1}>Network</Heading>
+		<div className="">
+			<Heading level={1}>Nodes</Heading>
 		</div>
 	</div>
 </div>
@@ -15,6 +15,11 @@ Irys has three nodes:
 -   `https://node1.irys.xyz`
 -   `https://node2.irys.xyz`
 -   `https://devnet.irys.xyz`
+
+<Callout type="info" emoji="ℹ️">
+	Our Node URLs have recently changed from `bundlr.network` to `irys.xyz`, if you have an existing project, see our
+	[migration guide](/developer-docs/irys-sdk/migration-guide) for details on how to upgrade.
+</Callout>
 
 ## Mainnet
 

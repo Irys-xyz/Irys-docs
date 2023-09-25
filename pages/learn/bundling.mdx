@@ -2,17 +2,16 @@
 description: Permanent decentralized storage, simple and seamless
 ---
 
-import Heading from "../../../components/Heading";
-import SectionTitle from "../../../components/SectionTitle";
+import Heading from "../../components/Heading";
+import SectionTitle from "../../components/SectionTitle";
 
 <div className="flex flex-col mt-5">
 	<div className="flex items-end">
-    	<div className=""><Heading level={1}>Uploading / bundling</Heading></div>
+    	<div className=""><Heading level={1}>Bundling</Heading></div>
     </div>
 
     <p className="mt-4 text-xl">
-    	Irys' uploading and bundling service makes adding permanent decentralized data with strong provenance to your dApp
-    simple and seamless. All at scale.
+    	Irys uses Bundling to help Arweave scale.
     </p>
 
 </div>
@@ -34,7 +33,3 @@ Uploading large numbers of files to Arweave can be technically challenging due t
 These transactions are instantly retrievable and available to be [queried](/developer-docs/querying). It is not necessary to wait for uploads to be confirmed and seeded on Arweave before they appear in query results.
 
 The implementation of bundlers and bundles has helped stabilize feeds on Arweave.
-
-### Scalability
-
-Irys' bundlers are highly scalable and [have been tested at over 50,000 transactions per second](https://www.youtube.com/watch?v=JKEivHKDXAo).

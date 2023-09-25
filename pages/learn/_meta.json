@@ -1,11 +1,13 @@
 {
+	"strong-provenance": "Strong provenance",
 	"bundles": "Bundles",
+	"bundling": "Bundling",
 	"gateways": "Gateways",
 	"receipts": "Receipts",
-	"optimistic-cache": "Optimistic Cache",
-	"funding-withdrawing": "Funding & Withdrawing",
-	"transaction-lifecycle": "Transaction Lifecycle",
+	"optimistic-cache": "Optimistic cache",
+	"funding-withdrawing": "Funding & withdrawing",
+	"transaction-lifecycle": "Transaction lifecycle",
 	"irys-arweave": "Irys & Arweave",
-	"volumetric-scaling": "Volumetric Scaling",
+	"volumetric-scaling": "Volumetric scaling",
 	"udl": "UDL and builders"
 }
