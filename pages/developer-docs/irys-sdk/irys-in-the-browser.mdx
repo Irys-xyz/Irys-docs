@@ -48,10 +48,10 @@ When instantiating a `WebIrys` object pass:
 ```js
 const getWebIrys = async () => {
 	// Ethers5 provider
-	await (window as WindowWithEthereum).ethereum.enable();
-	const provider = new providers.Web3Provider((window as WindowWithEthereum).ethereum);
+	await window.ethereum.enable();
+	const provider = new providers.Web3Provider(window.ethereum);
 
-	const url = "https://node1.irys.xyz"
+	const url = "https://node1.irys.xyz";
 	const token = "matic";
 	const rpcURL = "https://rpc-mumbai.maticvigil.com"; // Optional parameter
 
@@ -63,7 +63,6 @@ const getWebIrys = async () => {
 
 	return webIrys;
 };
-
 ```
 
 After instantiating the object, call `webIrys.ready()`.
