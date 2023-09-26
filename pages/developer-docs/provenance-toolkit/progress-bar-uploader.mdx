@@ -44,9 +44,9 @@ const [progress, setProgress] = useState<number>(0);
 When setting up the chunked uploader, configure it by setting the batch size and chunk size. You may need to experiment with these values as you build your application, the ideal configuration will depend on factors including average file size and the quality of your end-user's internet connection.
 
 ```ts filename="components/ProgressBarUploader.tsx"
-const bundlr = await getBundlr();
+const irys = await getIrys();
 
-const uploader = bundlr.uploader.chunkedUploader;
+const uploader = irys.uploader.chunkedUploader;
 uploader.setBatchSize(1);
 uploader.setChunkSize(2000000);
 ```

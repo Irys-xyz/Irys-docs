@@ -6,15 +6,16 @@ import { Callout } from "nextra-theme-docs";
 
 # Irys In The Browser (WebIrys)
 
+Working with Irys in the browser is similar to working with our server-side SDK, however there are a few differences which are demonstrated below.
+
+In addition to creating your own components using the code below, you can also fork the [Irys provenance
+toolkit](/developer-docs/provenance-toolkit) and quickly build your project using its rich UI component library and
+helper functions.
+
 <Callout emoji="🚀">
-	When building with Irys in the browser, the easiest way to get started is by forking the [Irys provenance
-	toolkit](/developer-docs/provenance-toolkit) and building your project using its rich UI component library and
-	helper functions.
+	If you're using Bundlr with React and `npx create-react-app`, you will need to [follow some extra setup
+	steps](https://docs.bundlr.network/hands-on/tutorials/react).
 </Callout>
-
-Working with Irys in the browser is similar to working with our server-side SDK, however there are a few differences which demonstrated below.
-
-## Installing
 
 ## Installing
 
@@ -33,7 +34,7 @@ yarn add @irys/client
 ## Importing
 
 ```js
-import Irys from "@irys/client";
+import Irys from "@irys/sdk";
 ```
 
 ## Connecting to a node
@@ -42,7 +43,7 @@ When instantiating a `WebIrys` object pass:
 
 -   `url`: Irys [node address](/overview/nodes)
 -   `token`: Payment [token](/overview/supported-tokens)
--   `providerName`: The provider package your project uses
+-   `wallet`: A wallet object containing the end-user's injected provider and the name of the provider package your project uses
 
 ```js
 const getWebIrys = async () => {
@@ -52,9 +53,14 @@ const getWebIrys = async () => {
 
 	const url = "https://node1.irys.xyz"
 	const token = "matic";
-	const providerName = "ethersv5";
-	const webIrys = new WebIrys({ url, token, provider, providerName });
-	await webIrys.ready(); // Always call after instantiating
+	const rpcURL = "https://rpc-mumbai.maticvigil.com"; // Optional parameter
+
+	// Create a wallet object
+	const wallet = { rpcUrl: rpcURL, name: "ethersv5", provider: provider };
+	// Use the wallet object
+	const webIrys = new WebIrys({ url, token, wallet });
+	await webIrys.ready();
+
 	return webIrys;
 };
 
@@ -62,20 +68,20 @@ const getWebIrys = async () => {
 
 After instantiating the object, call `webIrys.ready()`.
 
-## Supported providers
+### Supported providers
 
 WebIrys supports the following providers. When instantiating a new `WebIrys` object, you must pass in the name of the provider you will be using.
 
-| Package                                        | `providerName` value |
-| ---------------------------------------------- | -------------------- |
-| [ Ethers 5 ](https://docs.ethers.org/v5/)      | ethersv5             |
-| [ Ethers 6 ](https://docs.ethers.org/v6/)      | ethersv6             |
-| [ Rainbowkit v1 ](https://www.rainbowkit.com/) | rainbowkitv1         |
-| [ Viem v1 ](https://viem.sh/)                  | viemv1               |
+| Package                                        | Parameter value |
+| ---------------------------------------------- | --------------- |
+| [ Ethers 5 ](https://docs.ethers.org/v5/)      | ethersv5        |
+| [ Ethers 6 ](https://docs.ethers.org/v6/)      | ethersv6        |
+| [ Rainbowkit v1 ](https://www.rainbowkit.com/) | rainbowkitv1    |
+| [ Viem v1 ](https://viem.sh/)                  | viemv1          |
 
 ## Funding a node
 
-Fund a node using any of our supported tokens:
+Fund a node using any of our [supported tokens](/overview/supported-tokens):
 
 ```js
 const fundNode = async () => {
@@ -91,11 +97,62 @@ const fundNode = async () => {
 
 ## Uploading
 
-## Uploading a folder
+The [provenance toolkit contains an uploader component](/developer-docs/provenance-toolkit/uploader) that can be dropped into any project to instantly enable file uploading.
 
-and then you can [fund your node](/developer-docs/irys-sdk#funding-a-node) and permanently upload data.
+Data uploaded to Irys is given a millisecond-accurate timestamp, attributes and authorship details before being passed to Arweave for permanent storage. This information is used to create a signed [receipt](/learn/receipts) that can be used to [verify](/developer-docs/irys-sdk/api/utils-verifyReceipt) the data's provenance at any time.
 
-<Callout emoji="🚀">
-	If you're using Bundlr with React and `npx create-react-app`, you will need to [follow some extra setup
-	steps](https://docs.bundlr.network/hands-on/tutorials/react).
-</Callout>
+### Uploading data
+
+```js
+const uploadData = async () => {
+	const webIrys = await getWebIrys();
+	const dataToUpload = "GM world.";
+	try {
+		const receipt = await webIrys.upload(dataToUpload);
+		console.log(`Data uploaded ==> https://arweave.net/${receipt.id}`);
+	} catch (e) {
+		console.log("Error uploading data ", e);
+	}
+};
+```
+
+### Uploading a file
+
+Upload a [File](https://developer.mozilla.org/en-US/docs/Web/API/File) object.
+
+```js
+const uploadFile = async (fileToUpload) => {
+	const webirys = await getWebIrys();
+	// Your file
+	const tags = [{ name: "application-id", value: "MyNFTDrop" }];
+
+	try {
+		const receipt = await webIrys.uploadFile(fileToUpload, { tags });
+		console.log(`File uploaded ==> https://arweave.net/${receipt.id}`);
+	} catch (e) {
+		console.log("Error uploading file ", e);
+	}
+};
+```
+
+### Uploading a folder
+
+Upload an array of [File](https://developer.mozilla.org/en-US/docs/Web/API/File) objects.
+
+Upon upload, a manifest is automatically created. Your files can be accessed `https://arweave.net/[manifestId]/[file-name]`.
+
+```js
+const uploadFolder = async (files: File[], tags: Tag[]) => {
+	const irys = await getIrys();
+
+	try {
+		const receipt = await irys.uploadFolder(files, {
+			tags,
+		}); //returns the manifest ID
+
+		console.log(`Files uploaded. Manifest Id=${receipt.manifestId} Receipt Id=${receipt.id}`);
+	} catch (e) {
+		console.log("Error uploading file ", e);
+	}
+};
+```

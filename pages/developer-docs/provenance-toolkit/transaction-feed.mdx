@@ -6,7 +6,7 @@ import { Callout } from "nextra-theme-docs";
 
 # Transaction feed
 
-The transaction feed component queries transactions based on node, token, content type and timestamp and renders the results in an easy-to-view format.
+The transaction feed component uses the [query package](/developer-docs/querying/query-package) to search transactions based on node, token, content type and timestamp and renders the results in an easy-to-view format.
 
 <img
 	className="border border-[#FEF4EE] rounded mt-5 md:w-5/6 w-full"
@@ -19,73 +19,69 @@ The component could be easily forked and used as part of applications like:
 -   A music discovery tool highlighting songs uploaded to Arweave
 -   A browsing tool as part of a platform for academic research and papers
 
-## GraphQL
+## Query function
 
-The core of the work for this component happens in the file `utils/queryGraphQL.ts`. This file exposes one function, `queryGraphQL()` which dynamically builds a query based on the parameters passed.
+The actual querying takes place in the function `handleQuery()` where parameters entered in the UI are used to create a new Query object.
 
 When forking this component, you could modify the query construction to do things like limit query results to transactions with your `application-id` or transactions of a single `Content-Type`.
 
-```ts filename="utils/queryGraphQL.ts"
-const queryGraphQL = async (
-	endpoint: string,
-	contentType: string | null,
-	token: string | null,
-	from: Date | null,
-	to: Date | null,
-): Promise<QueryResult[]> => {
-	// Start building the GraphQL query string
-	let query = "query getData { transactions";
+```ts filename="components/TransactionFeed.ts"
+const handleQuery = async () => {
+	setTxProcessing(true);
+	setQueryResults([]);
 
-	// Check for any arguments to include in the query
-	if (contentType ?? (null || token) ?? (null || (from ?? null) !== null || (to ?? null) !== null)) {
-		query += "(";
-
-		// Add the tags field to the query if contentType is not null (or undefined)
-		if (contentType ?? null) {
-			query += 'tags: [{ name: "Content-Type", values: ["' + contentType + '"]}], ';
-		}
-
-		// Check for token (null or undefined)
-		if (token ?? null) {
-			query += 'token: "' + token + '", ';
-		}
-
-		// Check for from and to (null or undefined)
-		if (from instanceof Date && to instanceof Date) {
-			const fromTimestamp = from.getTime();
-			const toTimestamp = to.getTime();
-			query += "timestamp: { from: " + fromTimestamp + ", to: " + toTimestamp + " }, ";
-		}
-
-		// Complete the arguments section of the query
-		query = query.slice(0, -2); // Remove the trailing comma and space
-		query += ")";
+	setError("");
+	if (selectedNode === null) {
+		// Should never happen, but better to check
+		setError("Please select a node");
+		return;
 	}
 
-	// Complete the query string
-	query += " { edges { node { id token timestamp tags { name value } } } } }";
-	try {
-		const response = await fetch(endpoint, {
-			method: "POST",
-			headers: {
-				"Content-Type": "application/json",
-			},
-			body: JSON.stringify({ query }),
-		});
+	// Convert the timestamp strings to Date objects
+	const fromDate = fromTimestamp ? new Date(fromTimestamp) : null;
+	const toDate = toTimestamp ? new Date(toTimestamp) : null;
 
-		if (!response.ok) {
-			throw new Error("Network response was not ok");
+	try {
+		const query = new Query({ url: selectedNode.value });
+		const myQuery = query.search("irys:transactions").limit(42);
+
+		// Set query params based on input in NavBar
+		if (selectedContentType?.value) {
+			console.log("Adding content type=", selectedContentType?.value);
+			myQuery.tags([{ name: "Content-Type", values: [selectedContentType?.value] }]);
+		}
+		if (selectedToken?.value) {
+			console.log("Adding token=", selectedToken?.value);
+			myQuery.token(selectedToken?.value);
+		}
+		if (fromDate) {
+			console.log("Adding fromDate=", fromDate);
+			myQuery.fromTimestamp(fromDate);
+		}
+		if (toDate) {
+			console.log("Adding fromDate=", toDate);
+			myQuery.toTimestamp(toDate);
 		}
 
-		const data: DataResponse = await response.json();
-		console.log("data=", data);
+		// Having configured the query, call await on it to execute
+		const results = await myQuery;
+		console.log("Query results ", results);
+		let convertedResults: QueryResult[] = [];
+		for (const result of results) {
+			const transformedResult: QueryResult = {
+				txID: result.id, // adjust as necessary based on the structure of results
+				creationDate: result.timestamp.toString(),
+				token: result.token,
+				tags: result.tags,
+			};
+			convertedResults.push(transformedResult);
+		}
 
-		const processedData = processDataResponse(data.data);
-		console.log(processedData);
-		return processedData;
+		setQueryResults(convertedResults);
 	} catch (error) {
-		console.error("Error executing the GraphQL query:", error);
-		return [];
+		setError("Error executing the GraphQL query");
+	} finally {
+		setTxProcessing(false);
 	}
 };
 ```
