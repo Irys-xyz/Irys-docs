@@ -3,10 +3,32 @@ description: Using the WebIrys class to interact with Irys from the browser
 ---
 
 import { Callout } from "nextra-theme-docs";
+import Heading from "../../../components/Heading";
 
-# Irys In The Browser (WebIrys)
+<div
+	className="video mt-5 -mb-10"
+	style={{
+		position: "relative",
+		paddingBottom: "56.25%" /* 16:9 */,
+		paddingTop: 25,
+		height: 0,
+	}}
+>
+	<iframe
+		style={{
+			position: "absolute",
+			top: 0,
+			left: 0,
+			width: "80%",
+			height: "80%",
+		}}
+		src={`https://www.youtube.com/embed/jnqJ8su9_Rk`}
+		frameBorder="0"
+	/>
+</div>
 
-Working with Irys in the browser is similar to working with our server-side SDK, however there are a few differences which are demonstrated below.
+Working with Irys in the browser is similar to working with our server-side SDK, however
+there are a few differences which are demonstrated below.
 
 In addition to creating your own components using the code below, you can also fork the [Irys provenance
 toolkit](/developer-docs/provenance-toolkit) and quickly build your project using its rich UI component library and
@@ -120,8 +142,8 @@ const uploadData = async () => {
 Upload a [File](https://developer.mozilla.org/en-US/docs/Web/API/File) object.
 
 ```js
-const uploadFile = async (fileToUpload) => {
-	const webirys = await getWebIrys();
+const uploadFile = async (fileToUpload: File) => {
+	const webIrys = await getWebIrys();
 	// Your file
 	const tags = [{ name: "application-id", value: "MyNFTDrop" }];
 
@@ -142,10 +164,10 @@ Upon upload, a manifest is automatically created. Your files can be accessed `ht
 
 ```js
 const uploadFolder = async (files: File[], tags: Tag[]) => {
-	const irys = await getIrys();
+	const webIrys = await getIrys();
 
 	try {
-		const receipt = await irys.uploadFolder(files, {
+		const receipt = await webIrys.uploadFolder(files, {
 			tags,
 		}); //returns the manifest ID
 
