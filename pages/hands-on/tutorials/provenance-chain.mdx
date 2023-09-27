@@ -44,7 +44,7 @@ const getIrys = async () => {
 
 ## Storing the root asset
 
-Create a function that stores your root transaction. In the interest of simplicity, we use text strings in this tutorial. We upload with the function [`irys.upload()`](/developer-docs/irys-sdk/api/upload) which returns a cryptographically signed receipt containing a timestamp accurate to the millisecond of when the upload happened.
+Create a function that stores your root transaction. In the interest of simplicity, we use text strings in this tutorial. We upload with the function [`irys.upload()`](/developer-docs/irys-sdk/api/upload) which returns a signed receipt containing a timestamp accurate to the millisecond of when the upload happened.
 
 ```js
 // Stores the root transaction and returns the transaction id
