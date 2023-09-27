@@ -10,22 +10,22 @@ const Footer = ({ noPadding }: { noPadding?: boolean }) => {
 			options: [
 				{
 					name: "About Irys",
-					href: "/overview/about-irys",
+					href: "/overview/about",
 					newTab: false,
 				},
 				{
-					name: "Permanent Decentralized Storage",
-					href: "/overview/solutions/permanent-storage",
+					name: "Permanent Data",
+					href: "/overview/permanent-data",
 					newTab: false,
 				},
 				{
-					name: "Proof of Provenance",
-					href: "/overview/solutions/proof-of-provenance",
+					name: "Ordering",
+					href: "/overview/ordering",
 					newTab: false,
 				},
 				{
-					name: "General FAQs",
-					href: "/faqs/general-faq",
+					name: "Tools",
+					href: "/overview/tools",
 					newTab: false,
 				},
 				{
@@ -39,13 +39,18 @@ const Footer = ({ noPadding }: { noPadding?: boolean }) => {
 			title: "DEVELOPER DOCS",
 			options: [
 				{
-					name: "Quickstart",
-					href: "/developer-docs/quickstart",
+					name: "SDK",
+					href: "/developer-docs/sdk",
 					newTab: false,
 				},
 				{
-					name: "SDK",
-					href: "/developer-docs/sdk",
+					name: "Query package",
+					href: "/developer-docs/querying/query-package",
+					newTab: false,
+				},
+				{
+					name: "Provenance Toolkit",
+					href: "/developer-docs/provenance-toolkit",
 					newTab: false,
 				},
 				{
