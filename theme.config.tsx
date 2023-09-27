@@ -28,11 +28,7 @@ export default {
 	sidebar: {
 		toggleButton: true,
 	},
-	logo: (
-
-		<IrysLogoText width={65} />
-
-	),
+	logo: <IrysLogoText width={65} />,
 	project: {
 		link: "https://github.com/Bundlr-Network",
 	},
@@ -55,25 +51,23 @@ export default {
 			};
 		}
 	},
-	// head: () => {
-	//   const { asPath, defaultLocale, locale } = useRouter();
-	//   const { frontMatter } = useConfig();
-	//   const url =
-	//     "https://my-app.com" +
-	//     (defaultLocale === locale ? asPath : `/${locale}${asPath}`);
+	head: () => {
+		const { asPath, defaultLocale, locale } = useRouter();
+		const { frontMatter } = useConfig();
+		const url = "https://my-app.com" + (defaultLocale === locale ? asPath : `/${locale}${asPath}`);
 
-	//   return (
-	//     <>
-	//       <meta property="og:url" content={url} />
-	//       <meta property="og:title" content={frontMatter.title || "Bundlr"} />
-	//       <meta
-	//         property="og:description"
-	//         content={
-	//           frontMatter.description ||
-	//           "Unlock the full potential of Bundlr's technology with our developer resources. Use our SDK and start storing data permanently with 3-4 lines of code."
-	//         }
-	//       />
-	//     </>
-	//   );
-	// },
+		return (
+			<>
+				<meta property="og:url" content="https://docs.irys.xyz" />
+				<meta property="og:title" content={frontMatter.title || "Irys"} />
+				<meta
+					property="og:description"
+					content={
+						frontMatter.description ||
+						"Unlock the full potential of Irys' technology with our developer resources. Use our SDK and start storing data permanently with 3-4 lines of code."
+					}
+				/>
+			</>
+		);
+	},
 };
