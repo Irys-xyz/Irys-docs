@@ -44,7 +44,7 @@ const banners = [
 	{
 		href: "/developer-docs/provenance-toolkit",
 		backgroundImage: "./img/data-exponential.webp",
-		title: "Provenance toolkit",
+		title: "Provenance Toolkit",
 		sub: "UI components to kickstart your next project",
 		backgroundPosition: "-80% 100%",
 	},
