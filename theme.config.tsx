@@ -47,7 +47,7 @@ export default {
 		const { asPath } = useRouter();
 		if (asPath !== "/") {
 			return {
-				titleTemplate: "%s | Bundlr Docs",
+				titleTemplate: "%s | Irys Docs",
 			};
 		}
 	},

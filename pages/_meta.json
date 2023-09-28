@@ -27,19 +27,19 @@
 	"faqs": "FAQs",
 	"twitter": {
 		"title": "Twitter",
-		"href": "https://twitter.com/BundlrNetwork",
+		"href": "https://twitter.irys.xyz",
 		"newWindow": true,
 		"type": "page"
 	},
 	"Discord": {
 		"title": "Discord",
-		"href": "https://discord.gg/bundlr",
+		"href": "https://discord.irys.xyz",
 		"newWindow": true,
 		"type": "page"
 	},
 	"Youtube": {
 		"title": "YouTube",
-		"href": "https://www.youtube.com/@bundlr-network",
+		"href": "https://youtube.irys.xyz",
 		"newWindow": true,
 		"type": "page"
 	}
