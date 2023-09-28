@@ -38,7 +38,6 @@ The fields available for retrieval depend on the search type, when searching `ir
 
 When searching by `arweave:transactions` the following fields are available:
 
-TODO: I need to sync with JB or Jesse on these, not sure what they all are
 
 ```js
 .fields({
@@ -59,23 +58,23 @@ TODO: I need to sync with JB or Jesse on these, not sure what they all are
 		id: true,
 	},
 	data: {
-		size: true,
-		type: true,
+		size: true, // Data size
+		type: true, // Date type
 	},
 	fee: {
-		ar: true,
-		winston: true,
+		ar: true, // Fee paid in AR
+		winston: true, // Fee paid in Winston
 	},
 	owner: {
-		address: true,
-		key: true,
+		address: true, // Transation originator
+		key: true, // Public key
 	},
 	quantity: {
-		ar: true,
-		winston: true,
+		ar: true, // Amount of AR transferred (for token transfers)
+		winston: true, // Amount of AR transferred (for token transfers)
 	},
-	recipient: true,
-	signature: true,
+	recipient: true, // Transfer recipient (for token transfers)
+	signature: true, // Transaction signature
 })
 ```
 

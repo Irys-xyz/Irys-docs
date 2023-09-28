@@ -12,7 +12,7 @@ The Uploader component is used to upload either single files or groups of files 
 
 ## Uploading
 
-The component uses [lazy funding](/developer-docs/sdk/api/fund#lazy-funding), only funding when the currently funded balance is not sufficient to cover the cost of this upload. Once uploaded, file URLs are stored in the `fileUrls` state variable.
+The component uses [lazy funding](/developer-docs/irys-sdk/api/fund#lazy-funding), only funding when the currently funded balance is not sufficient to cover the cost of this upload. Once uploaded, file URLs are stored in the `fileUrls` state variable.
 
 When uploading a single file, the URL generated is in the form `https://arweave.net/[transaction-id]`. When uploading multiple files, they are grouped together and uploaded as a group along with a manifest. The URL generated is in the form `https://arweave.net/[manifest-id]/[file-name]`.
 
@@ -25,7 +25,7 @@ When uploading a single file, the URL generated is in the form `https://arweave.
 
 Once uploaded, the UI updates to include buttons that can be clicked to view the upload and the upload [receipt](/learn/receipts). When previewing uploads, all image types are supported. If your application is working with files other than images, [you can remove the upload preview](/developer-docs/provenance-toolkit/uploader#customizing-the-ui) or modify the code to include support for previewing your file type.
 
-If you don't choose to show the receipt, you can retrieve it later using the upload transaction id and the function [`irys.utils.getReceipt()`](/developer-docs/sdk/api/utils-getReceipt).
+If you don't choose to show the receipt, you can retrieve it later using the upload transaction id and the function [`irys.utils.getReceipt()`](/developer-docs/irys-sdk/api/utils-getReceipt).
 
 ## Customizing the UI
 
@@ -111,7 +111,7 @@ try {
 
 ### Showing receipts
 
-When showing a receipt, it is first retrieved using [`irys.utils.getReceipt()`](/developer-docs/sdk/api/utils-getReceipt`) and then set to the `receipt` state variable.
+When showing a receipt, it is first retrieved using [`irys.utils.getReceipt()`](/developer-docs/irys-sdk/api/utils-getReceipt`) and then set to the `receipt` state variable.
 
 The receipt is formatted in the class `ReceiptJSONView`, which can be modified if you desire custom formatting.
 

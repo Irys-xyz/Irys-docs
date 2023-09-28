@@ -16,7 +16,7 @@ Gateways are responsible for indexing, serving, and making data available to use
 
 ## Indexing
 
-To ensure that all transactions on Arweave are easily searchable and accessible, gateways index all transaction metadata, including transactions posted via [Irys](/overview/services/bundling), and transactions posted directly to Arweave. Gateways monitor Arweave for new blocks, and indexes them as they are propagated. Whenever a user posts a transaction to Irys, gateways detect it and add it to its own database.
+To ensure that all transactions on Arweave are easily searchable and accessible, gateways index all transaction metadata, including transactions posted via [Irys](/learn/bundling), and transactions posted directly to Arweave. Gateways monitor Arweave for new blocks, and indexes them as they are propagated. Whenever a user posts a transaction to Irys, gateways detect it and add it to its own database.
 
 During the indexing process, gateways extract transactions from each block and index the metadata. When a bundle is encountered, gateways index all the transactions within. Similarly, if a manifest is found, gateways indexes it. By indexing manifests, gateways create a virtual directory structure that mimics the original folder system. This allows users to access data using the URL format `https://arweave.net/[manifest-id]/[file-name]`.
 

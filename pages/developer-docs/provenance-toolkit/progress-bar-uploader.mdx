@@ -31,7 +31,7 @@ In default mode, the `ProgressBarUploader` component shows both the image previe
 
 The component is designed to be used as-is. Users making significant changes to the UI will need to understand the following.
 
-The progress bar uploader uses our [chunked uploader](/developer-docs/sdk/chunked-uploader), which gives users fine-grained control over how files are uploaded. You can specify how to break a large file into smaller "chunks", how big each should be and how many should be uploaded at once. The uploader also supports event callbacks which update you on the upload's progress.
+The progress bar uploader uses our [chunked uploader](/developer-docs/irys-sdk/chunked-uploader), which gives users fine-grained control over how files are uploaded. You can specify how to break a large file into smaller "chunks", how big each should be and how many should be uploaded at once. The uploader also supports event callbacks which update you on the upload's progress.
 
 The progress bar is controlled using the `progress` state variable, as its value is incrementally updated from 0 to 100, the visual representation automatically updates.
 

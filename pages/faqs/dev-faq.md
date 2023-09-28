@@ -12,15 +12,15 @@ Nodes maintain [separate balances](/learn/funding-withdrawing); fund the node yo
 
 ## What is the difference between `Irys` and `WebIrys` classes?
 
-The `Irys` class is used for server-side apps and `WebIrys` is used when [building with Irys in the browser](/developer-docs/sdk/bundlr-in-the-browser).
+The `Irys` class is used for server-side apps and `WebIrys` is used when [building with Irys in the browser](/developer-docs/irys-sdk/irys-in-the-browser).
 
-## How do I use WebBundlr in a create-react-app project?
+## How do I use WebIrys in a create-react-app project?
 
-Follow [this tutorial](https://docs.bundlr.network/hands-on/tutorials/react).
+Follow [this tutorial](/hands-on/tutorials/react).
 
-## Can I host a website using Bundlr?
+## Can I host a website using Irys?
 
-Yes. You can host static websites. We have [a detailed tutorial on how to do it here.](/hands-on/tutorials/uploading-static-sites)
+Yes. You can host static websites. We have [a tutorial on how to do it here.](/hands-on/tutorials/uploading-static-sites)
 
 ## Is it possible to assign an API key to a funded Irys account so that I can pay for my client's uploads?
 
@@ -29,10 +29,6 @@ No, but we do support [gassless uploads](/hands-on/tutorials/gassless-uploading)
 ## Which Ethereum Testnet is supported on Devnet?
 
 [Sepolia](https://sepoliafaucet.com/).
-
-## Which other Testnets does Bundlr support in other chains on Devnet?
-
-Solana (devnet), Sepolia ETH, Matic, Fantom, BNB, Chainlink, Avalanche, Near, Algorand, arbEth, Aptos.
 
 ## Are Irys nodes rate-limited?
 

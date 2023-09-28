@@ -6,7 +6,7 @@ description: Frequently asked questions about Bundlr.
 
 ## Where should I subscribe to receive the latest news?
 
-Please follow us on [Discord](https://discord.gg/bundlr) and [Twitter](https://twitter.com/BundlrNetwork) to keep up with the latest updates and news.
+Please follow us on [Discord](https://discord.irys.xyz) and [Twitter](https://twitter.irys.xyz) to keep up with the latest updates and news.
 
 ## What is Bundlr?
 
@@ -43,7 +43,7 @@ Bundles do not have a size limit.
 
 ## How can I use Bundlr?
 
-You can use [Bundlr via Nodejs on the server](/developer-docs/sdk) or [directly in the browser.](/developer-docs/sdk/bundlr-in-the-browser) View more on how to use Bundlr [in the CLI section.](/developer-docs/cli)
+You can use [Bundlr via Nodejs on the server](/developer-docs/irys-sdk) or [directly in the browser.](/developer-docs/irys-sdk/irys-in-the-browser) View more on how to use Bundlr [in the CLI section.](/developer-docs/cli)
 
 ## How long does it take to upload data on Bundlr?
 
@@ -55,18 +55,16 @@ Once the data is uploaded, you can instantly retrieve your data.
 
 ## Where can I see my data before it gets seeded onto Arweave?
 
-`gateway.bundlr.network/tx/:txid/data` (Bundlr uploads only).
-Or, `arweave.net/<your transaction id>`
+`gateway.irys.xyz/<transaction-id>` (Irys uploads only).
+Or, `arweave.net/<transaction-id>`
 
 ## How long does it take for data to be seeded onto Arweave?
 
 It takes ~100 minutes for a transaction to be final on Arweave.
 
-## Is there an explorer for Bundlr/Arweave?
+## Is there an explorer for Irys / Arweave?
 
-[Arweave Explorer](https://v2.viewblock.io/arweave) | [ViewBlock](https://v2.viewblock.io/arweave)
-
-[SCAR](https://scar.vercel.app/)
+[Irys Explorer](https://explorer.irys.xyz) | [Arweave Explorer](https://viewblock.io/arweave)
 
 ## Is there any limitation for uploads/storage on Bundlr?
 

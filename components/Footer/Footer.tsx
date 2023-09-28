@@ -40,7 +40,7 @@ const Footer = ({ noPadding }: { noPadding?: boolean }) => {
 			options: [
 				{
 					name: "SDK",
-					href: "/developer-docs/sdk",
+					href: "/developer-docs/irys-sdk",
 					newTab: false,
 				},
 				{
