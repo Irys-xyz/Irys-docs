@@ -2,83 +2,43 @@
 description: Using the Irys SDK with create-react-app.
 ---
 
-# Using Bundlr With npx create-react-app
+# Using Irys With npx create-react-app
 
-Bundlr is fully compatible with React, however, if you’re using `npx create-react-app` to create your project, you will need to do some additional configuration and installation. This guide details how to create a new React project and add Bundlr support, if you already have a React project open, free to skip down a few steps.
+Irys is fully compatible with React, however, if you’re using `npx create-react-app` to create your project, you will need to do some additional configuration and installation. This guide details how to create a new React project and add Irys support, if you already have a React project open, free to skip down a few steps.
 
 Create a new directory for your project, cd into it, and create your React project:
 
 ```console
-mkdir bundlr-react
-cd bundlr-react
+mkdir irys-react
+cd irys-react
 npx create-react-app .
 ```
 
-Install the Bundlr library and ethers (for interacting with the blockchain):
+Install the Irys SDK and ethers (for interacting with the blockchain):
 
 ```console
-npm install @bundlr-network/client ethers
+npm install @irys/sdk ethers
 ```
 
-There are currently two versions of ethers.js in use, if you're using the v5 release, change you `App.js` file to:
+In your `App.js` file write an initialization function that sets up a `WebIrys` object. The following code shows how to use ethers5, if you're using [a different provider](/developer-docs/irys-sdk/irys-in-the-browser#supported-providers) make sure to specify it when creating the `wallet`.
 
 ```js
 import { providers } from "ethers";
-import { WebBundlr } from "@bundlr-network/client";
+import { WebIrys } from "@irys/sdk";
 
 function App() {
-	const initialiseBundlr = async () => {
+	const initialiseIrys = async () => {
 		await window.ethereum.enable();
-
 		const provider = new providers.Web3Provider(window.ethereum);
-		await provider._ready();
-
-		const bundlr = new WebBundlr("https://node1.bundlr.network", "matic", provider);
-		await bundlr.ready();
-
-		return bundlr; // done!
+		const wallet = { name: "ethersv5", provider: provider };
+		const url = "https://node1.irys.xyz";
+		const token = "matic";
+		const webIrys = new WebIrys({ url, token, wallet });
+		await webIrys.ready();
+		return webIrys;
 	};
 
-	return <div className="App">Bundlr Test</div>;
-}
-
-export default App;
-```
-
-If you're using the v6 beta version, the API has changed and you'll need to use the following code instead.
-
-```js
-import { ethers } from "ethers";
-import { WebBundlr } from "@bundlr-network/client";
-
-// This code has been updated for ethers.js v6
-// https://docs.ethers.org/v6-beta/getting-started/
-function App() {
-	const initialiseBundlr = async () => {
-		// Connect to the MetaMask EIP-1193 object.
-		// provider used for writing to the blockchain
-		const provider = new ethers.BrowserProvider(window.ethereum);
-		// signer used for reading from the blockchain
-		const signer = await provider.getSigner();
-
-		// link the signer to the provider
-		provider.getSigner = () => signer;
-
-		// create the WebBundlr object
-		const bundlr = new WebBundlr("https://node1.bundlr.network", "matic", provider);
-		await bundlr.ready();
-		console.log("bundlr=", bundlr);
-
-		return bundlr; // done
-	};
-
-	return (
-		<div className="App">
-			<button type="button" onClick={initialiseBundlr}>
-				Initialize Bundlr
-			</button>
-		</div>
-	);
+	return <div className="App">Irys Test</div>;
 }
 
 export default App;
@@ -146,22 +106,4 @@ and replace it with this block:
 
 ```
 
-Quit out of the React server and restart it with `npm run start` you should be good to go.
-
-## Working With Aptos
-
-Aptos's export structure occasionally breaks webpack's ESM loader. If you're working with Aptos, you may need the following extra steps:
-
-Modify your `config-overrides.js` file to include:
-
-```js
-externals: {
-	aptos: "aptos"
-},
-```
-
-Change:
-`import Bundlr from '@bundlr-network/client';`
-
-To:
-`import Bundlr from '@bundlr-network/client/build/cjs/web/bundlr';
+Quit React server and restart it with `npm run start` you should be good to go.

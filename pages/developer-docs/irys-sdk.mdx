@@ -158,7 +158,7 @@ const uploadFolder = async () => {
 			keepDeleted: false, // whether to keep now deleted items from previous uploads
 		}); //returns the manifest ID
 
-		console.log(`Files uploaded. Manifest Id ${receipt.id}`);
+		console.log(`Files uploaded. Manifest ID ${receipt.id}`);
 	} catch (e) {
 		console.log("Error uploading file ", e);
 	}

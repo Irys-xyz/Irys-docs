@@ -56,7 +56,7 @@ const uploadFolder = async () => {
 			keepDeleted: false, // wWhether to keep now deleted items from previous uploads
 		}); // Returns the manifest ID
 
-		console.log(`Website uploaded. Manifest Id ${response.id}`);
+		console.log(`Website uploaded. Manifest ID ${response.id}`);
 	} catch (e) {
 		console.log("Error uploading file ", e);
 	}

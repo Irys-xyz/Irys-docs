@@ -1,26 +1,14 @@
 ---
-description: Uploading Lens metadata using Bundlr (GraphQL and Lens React Hooks)
+description: Uploading Lens metadata using Irys
 ---
 
 import { Callout } from "nextra-theme-docs";
 
 # Storing Lens metadata on Irys
 
-In this tutorial, you will learn two techniques for storing Lens metadata on Irys:
-
--   Using React hooks
--   Using `post()` and `postWithSig()`
+In this tutorial, you will learn how to use Irys with the [Lens React hooks](https://docs.lens.xyz/docs/sdk-react-intro) to upload post metadata.
 
 Lens Protocol is a composable and decentralized social graph; it allows you to quickly create social applications without having to build your own backend services.
-
-The Lens documentation is extensive and very well done. For additional information of creating a post on Lens, definitely [spend some time on their docs.](https://docs.lens.xyz/docs/create-post-typed-data).
-
-When working with Lens, you upload structured metadata to a permanent storage provider (Irys / Arweave) and then pass the URL to that content to Lens.
-
-There are two ways to interact with Lens:
-
-1. [Using React hooks](https://docs.lens.xyz/docs/sdk-react-intro)
-2. [Using calls to `post()` and `postWithSig()`](https://docs.lens.xyz/docs/introduction)
 
 ## React hooks
 
@@ -45,30 +33,30 @@ The `upload()` function is passed to the hooks on initialization, the hooks then
 A full ready-to-use implementation of the `upload()` function is as follows:
 
 ```js
-import { WebBundlr } from "@bundlr-network/client";
-import { getBundlr } from "./get-bundlr";
-import { fetchSigner } from "wagmi/actions";
+import { WebIrys } from "@irys/sdk";
+import { providers } from "ethers";
 
-const getBundlr = async () => {
-	const signer = await fetchSigner();
-	const provider = signer?.provider;
-
-	const bundlr = new WebBundlr("https://node2.bundlr.network", "matic", provider);
-
-	await bundlr.ready();
-	return bundlr;
+const getIrys = async () => {
+	await window.ethereum.enable();
+	const provider = new providers.Web3Provider(window.ethereum);
+	const wallet = { name: "ethersv5", provider: provider };
+	const url = "https://node1.irys.xyz";
+	const token = "matic";
+	const webIrys = new WebIrys({ url, token, wallet });
+	await webIrys.ready();
+	return webIrys;
 };
 
 export const upload = async (data) => {
 	try {
-		const bundlr = await getBundlr();
+		const irys = await getIrys();
 		const serialized = JSON.stringify(data);
 
 		// fund (if needed)
-		const price = await bundlr.getPrice(new Blob([serialized]).size);
-		await bundlr.fund(price);
+		const price = await irys.getPrice(new Blob([serialized]).size);
+		await irys.fund(price);
 
-		const tx = await bundlr.upload(serialized, {
+		const tx = await irys.upload(serialized, {
 			tags: [{ name: "Content-Type", value: "application/json" }],
 		});
 
@@ -84,89 +72,4 @@ export const upload = async (data) => {
 
 <Callout type="warning" emoji="⚠️">
 	If you incorrectly set the `Content-Type` attribute, Lens will not read your data.
-</Callout>
-
-## Using `post()` and `postWithSig()`
-
-When working with the functions `post()` and `postWithSig()`, it is your responsibility to correctly build the required metadata for each interaction, store it on Irys and then pass the URL to Lens.
-
-### Uploading Metadata
-
-The full Lens Protocol [metadata specification](https://docs.lens.xyz/docs/metadata-standards) details how to create just about any type of post. For this guide, we're focusing on an image post and will use the following metadata.
-
-```json
-{
-	"version": "2.0.0",
-	"metadata_id": "${uuid()}",
-	"description": "gm (🌿, 🌿)",
-	"image": "https://arweave.net/CO9EpX0lekJEfXUOeXncUmMuG8eEp5WJHXl9U9yZUYA",
-	"imageMimeType": "image/png",
-	"name": "Post by foo.lens",
-	"attributes": [{ "traitType": "type", "value": "POST" }],
-	"media": [
-		{
-			"item": "https://arweave.net/CO9EpX0lekJEfXUOeXncUmMuG8eEp5WJHXl9U9yZUYA",
-			"type": "image/png",
-			"altTag": ""
-		}
-	],
-	"appId": "MyApp",
-	"locale": "en",
-	"mainContentFocus": "IMAGE"
-}
-```
-
-<Callout type="info" emoji="ℹ️">
-	The function `uuid()` generates a unique post id using the [UUID npm package](https://www.npmjs.com/package/uuid).
-</Callout>
-
-To upload to Irys, first stringify the data, then pass it to `irys.upload()`, tagging it with the `Content-Type` of `application/json`.
-
-```js
-// Create a WebBundlr object
-const bundlr = new WebBundlr("https://node2.bundlr.network", "matic", provider);
-await bundlr.ready();
-
-// Stringify our data
-const data = JSON.stringify(metadata);
-
-// Upload to Arweave via Bundlr
-const tx = await bundlr.upload(data, {
-	tags: [{ name: "Content-Type", value: "application/json" }],
-});
-
-// Print our URI, note use of HTTPS
-console.log(`Upload success content URI= https://arweave.net/${tx.id}`);
-```
-
-<Callout type="warning" emoji="⚠️">
-	If you incorrectly set the `Content-Type` attribute, Lens will not read your data.
-</Callout>
-
-### Creating A Post
-
-After successfully uploading your metadata, you'll get a transaction id that can be combined with `https://arweave.net/` to create your content URI (`https://arweave.net/6eARMSxeRRhOU0iJEivNB_naY-YFuh_D9d0-58ccKfI`).
-
-Finally, create a post request using the generated content URL and pass to the Lens contract calling either of the `.post()` or `.postWithSig()` functions.
-
-```js
-const tx = await lensHub.postWithSig({
-	profileId: typedData.value.profileId,
-	contentURI: typedData.value.contentURI, // URL from the metadata uploaded above
-	collectModule: typedData.value.collectModule,
-	collectModuleInitData: typedData.value.collectModuleInitData,
-	referenceModule: typedData.value.referenceModule,
-	referenceModuleInitData: typedData.value.referenceModuleInitData,
-	sig: {
-		v,
-		r,
-		s,
-		deadline: typedData.value.deadline,
-	},
-});
-```
-
-<Callout type="warning" emoji="⚠️">
-	While `http://arweave.net/[transaction-id]` and `https://arweave.net/[transaction-id]` will both work in your
-	browser, only the `https` version will work when creating your Lens post.
 </Callout>

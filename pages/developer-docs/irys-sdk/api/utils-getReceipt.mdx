@@ -12,7 +12,7 @@ Returns the [receipt](/learn/receipts) associated with the supplied transaction 
 
 <div className="-mt-6" />
 
--   `transactionId`: The transaction Id associated with the receipt
+-   `transactionId`: The transaction ID associated with the receipt
 
 **Returns**
 
@@ -38,8 +38,8 @@ response = {
 const irys = await getIrys();
 
 try {
-	const transactionId = "i9tgbHsr6c1sxryAQ-SLM2rfQAYRuyap7RmGgH28mI4"; // Your transaction Id
-	const receipt = await irys.utils.getReceipt(transactionId);
+	const transactionID = "i9tgbHsr6c1sxryAQ-SLM2rfQAYRuyap7RmGgH28mI4"; // Your transaction Id
+	const receipt = await irys.utils.getReceipt(transactionID);
 	console.log(receipt);
 } catch (e) {
 	console.log("Error getting receipt ", e);
