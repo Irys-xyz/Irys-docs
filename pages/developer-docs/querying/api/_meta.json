@@ -1,5 +1,7 @@
 {
 	"search": "search()",
+	"fromTimestamp": "fromTimestamp()",
+	"toTimestamp": "toTimestamp()",
 	"tags": "tags()",
 	"ids": "ids()",
 	"from": "from()",

@@ -30,6 +30,37 @@ const Banner: React.FC<BannerProps> = ({ href, backgroundImage, title, sub, back
 
 const banners = [
 	{
+		href: "/overview/about",
+		backgroundImage: "./img/data-donuts.webp",
+		title: "About Irys",
+		sub: "Dive in and learn about Irys",
+		backgroundPosition: "-40% -10%",
+	},
+	{
+		href: "/developer-docs/irys-sdk",
+		backgroundImage: "./img/dots-cloud.png",
+		title: "Tutorials",
+		sub: "Written and video tutorials for all levels",
+		backgroundPosition: "40% -20%",
+	},
+	{
+		href: "/overview/tools",
+		backgroundImage: "./img/data-exponential.webp",
+		title: "Tools for builders",
+		sub: "Irys SDK, Query package, Provenance Toolkit, and more",
+		backgroundPosition: "-80% 100%",
+	},
+	{
+		href: "https://demo.irys.xyz",
+		backgroundImage: "./img/data-spiral.webp",
+		title: "Demo",
+		sub: "Explore Irys in action",
+		backgroundPosition: "40% -10%",
+	},
+];
+
+const bannersOLD = [
+	{
 		href: "/developer-docs/irys-sdk",
 		backgroundImage: "./img/data-donuts.webp",
 		title: "Irys SDK",
