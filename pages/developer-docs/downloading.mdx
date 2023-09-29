@@ -1,11 +1,31 @@
+---
+description: Instantly downloading data from a network of gateways
+---
+
+import { Callout } from "nextra-theme-docs";
+
 # Downloading data
 
-When you upload data to Irys, our [optimistic cache](/learn/optimistic-cache) ensures your data is immediately available for download.
+Once data is uploaded to Irys, it becomes instantly accessible through [gateways](/learn/gateways), which work hand in hand with our [optimistic cache](/learn/optimistic-cache). To download data, use the transaction id to query the relevant gateway.
 
-Data is available for downloading via [gateways](/learn/gateways).
+There are multiple gateways, including those running open source software that can be spun up by anyone. Here are examples of how to use the two most common ones.
 
-## Downloading Data
+## Arweave gateway
 
-The transaction id returned when uploading data is used to generate an URL you can use to download the data.
+### URL format
 
-The format used is `https://arweave.net/[transaction_id]`. For example `https://arweave.net/CO9EpX0lekJEfXUOeXncUmMuG8eEp5WJHXl9U9yZUYA`.
+`https://arweave.net/[transaction-id]`
+
+### Example
+
+`https://arweave.net/CO9EpX0lekJEfXUOeXncUmMuG8eEp5WJHXl9U9yZUYA`
+
+## Irys gateway
+
+### URL format
+
+`https://gateway.irys.xyz/[transaction-id]`
+
+### Example
+
+`https://gateway.irys.xyz/CO9EpX0lekJEfXUOeXncUmMuG8eEp5WJHXl9U9yZUYA`

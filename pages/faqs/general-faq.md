@@ -1,114 +1,41 @@
 ---
-description: Frequently asked questions about Bundlr.
+description: Frequently asked questions about Irys.
 ---
 
 # General FAQ
 
-## Where should I subscribe to receive the latest news?
+## 𝗪𝗵𝗮𝘁 𝗶𝘀 Irys?
 
-Please follow us on [Discord](https://discord.irys.xyz) and [Twitter](https://twitter.irys.xyz) to keep up with the latest updates and news.
+[Irys](/overview/about) is the only provenance layer. It enables users to [scale](/learn/volumetric-scaling) [permanent data](/overview/permanent-data) and [precisely attribute its origin](/learn/receipts). By tracing and verifying where data comes from, Irys paves the way to incorporate accountability into all information.
 
-## What is Bundlr?
+## What is a provenance layer?
 
-Bundlr is a new data layer for the internet. Through decentralized consensus, Bundlr transparently shows the source and time at which data originated and proves that it has not been censored. For censorship resistance and permanence, this data is stored on Arweave’s blockchain. Bundlr is the foundational infrastructure that enables the creation of solutions to data integrity issues.
+A provenance layer acts as a ledger of record for digital information, tracking the origins and modifications of data. Data on a provenance layer must be permanent, precise, and unconstrained.
+
+## Why Bundlr has been renamed to Irys?
+
+Bundlr has evolved into Irys, symbolizing our commitment to being a strong provenance layer and a witness for humanity. Learn more about our mission, vision, and network principles in this <blog post>.
+
+## Is there a terminology page for Irys?
+
+[Yes](/terminology).
 
 ## What is Arweave?
 
-An incentivized/immutable storage protocol that lets users store their data permanently with a one-time fee. Arweave is a new type of storage that backs data with a sustainable and perpetual endowment, allowing users and developers to truly store data forever for the very first time.
-As a collectively owned hard drive that never forgets, Arweave allows us to remember and preserve valuable information, apps, and history indefinitely. By preserving history, it prevents others from rewriting it.
+Arweave enables permanent onchain data, which is a core component of strong provenance. Arweave offers a sustainable and perpetual endowment, allowing users and developers to store data for at least 200 years. With Arweave, valuable information, apps, and history are preserved indefinitely, preventing any rewriting of the past.
 
-## What does Bundlr solve?
+## How does Irys work?
 
-Bundlr is solving the data integrity challenge by making permanent decentralized data storage performant and scalable. Bundlr allows you to upload data in ~8ms while being able to scale to tens of thousands of transactions per second.
+When you [upload data to Irys](/learn/transaction-lifecycle), it is stamped with a millisecond-accurate [timestamp, attribution, and authorship details](/learn/receipts) before being passed to Arweave where it is stored permanently. For more details, see our docs.
 
-## How does Bundlr work?
+## Where should I subscribe to receive the latest news?
 
-Please check out [the Bundlr docs](https://docs.bundlr.network/) to get a deeper understanding of how Bundlr works.
+Please follow us on [Discord](https://discord.irys.xyz) and [X (Twitter)](https://twitter.irys.xyz) to keep up with the latest updates and news.
 
-## What is a bundle?
+## Is there a public sale, airdrop, etc?
 
-A set of Bundlr transactions joined into a single Arweave transaction.
+We do not have a token. Anyone claiming a presale, token airdrop, etc is presenting inaccurate information. Please follow Irys announcements on [Discord](https://discord.irys.xyz) and [X (Twitter)](https://twitter.irys.xyz).
 
-## What are bundlers?
+## What tokens does Irys support?
 
-Bundlers are nodes on the Bundlr network that receive Bundlr transactions, handle payment channels, and produce bundles.
-
-## Why bundles?
-
-Bundles allow for infinite transaction scaling. Arweave is limited to 1000 transactions per block (one every 2 minutes). This limits Arweave to an absolute maximum of 8.3 Arweave transactions per second. Bundles can contain an unlimited number of transactions, whilst only counting as one Arweave transaction. For example, If every one of those 1000 Arweave transactions was a bundle that contained 1000 transactions, Arweave would be effectively capable of 8,333 transactions per second. If the network needs higher transaction throughput, you simply have to increase the number of transactions per bundle.
-
-## Is there a max size limit for a bundle?
-
-Bundles do not have a size limit.
-
-## How can I use Bundlr?
-
-You can use [Bundlr via Nodejs on the server](/developer-docs/irys-sdk) or [directly in the browser.](/developer-docs/irys-sdk/irys-in-the-browser) View more on how to use Bundlr [in the CLI section.](/developer-docs/cli)
-
-## How long does it take to upload data on Bundlr?
-
-~8ms.
-
-## How long does it take to retrieve my data?
-
-Once the data is uploaded, you can instantly retrieve your data.
-
-## Where can I see my data before it gets seeded onto Arweave?
-
-`gateway.irys.xyz/<transaction-id>` (Irys uploads only).
-Or, `arweave.net/<transaction-id>`
-
-## How long does it take for data to be seeded onto Arweave?
-
-It takes ~100 minutes for a transaction to be final on Arweave.
-
-## Is there an explorer for Irys / Arweave?
-
-[Irys Explorer](https://explorer.irys.xyz) | [Arweave Explorer](https://viewblock.io/arweave)
-
-## Is there any limitation for uploads/storage on Bundlr?
-
-There’s no limitation on the number of uploads and you can store as much as data you need.
-
-## Is there a public sale, Airdrop or etc?
-
-We do not have a public token yet. Anyone claiming a presale, token airdrop, etc via DM is a scam. Please follow the announcements on [Discord](https://discord.gg/bundlr) and [Twitter.](https://twitter.com/BundlrNetwork)
-
-## What currencies does Bundlr support?
-
-Please [view all supported currencies here.](/overview/supported-tokens)
-
-## Does Bundlr offer free uploads?
-
-Yes. Uploads below 100KB are free. Please note that free uploads are only on node2.
-
-## Do I need to have a balance on my node for free uploads?
-
-No. For uploads below 100KB you do not need a balance on your node.
-
-## How does Bundlr facilitate payment in any token?
-
-Bundlr registers funding / withdraw transactions off-chain in payment channels.
-Example: With Polygon, you will send MATIC and the Polygon tx is recorded off-chain which will credit your Polygon (MATIC) account on Bundlr.
-
-## How does the payment channel work?
-
-You can submit an on-chain transaction using the chains we support via their own cryptography.
-Then, this transaction is recorded off-chain by the bundlers and you receive the equivalent amount of token(s) in your Bundlr account.
-
-## How are funds secure?
-
-Each bundler stakes $BNDLR which acts as leverage for their balances. A bundler can’t hold more balance than a fraction of their stake. The higher the stake, the more balances they can handle.
-
-## How long does the funding process take?
-
-The funding process varies depending on which chain you use for funding and the speed of that network.
-Example: Funding with Arweave takes ~20 minutes to show up, whereas funding with Polygon/Solana can be pretty instant.
-
-## How does the fee function work on Bundlr?
-
-Please check out [the fee function here.](/overview/fees)
-
-## Is there a calculator for Arweave fees?
-
-[Arweave Fees](https://ar-fees.arweave.dev/)
+We support [14 different tokens](/overview/supported-tokens), covering all of the most popular ones.
