@@ -4,16 +4,17 @@ interface BannerProps {
 	href: string;
 	backgroundImage: string;
 	title: string;
+	sub: string;
 	backgroundPosition: string;
 }
 
-const Banner: React.FC<BannerProps> = ({ href, backgroundImage, title, backgroundPosition }) => {
+const Banner: React.FC<BannerProps> = ({ href, backgroundImage, title, sub, backgroundPosition }) => {
 	return (
 		<Link href={href}>
 			<div
 				className="bg-black h-[244px] rounded-2xl overflow-hidden bannerHover pt-10 pl-10 text-2xl hover:scale-[99%] cursor-pointer transition-all font-semibold"
 				style={{
-					backgroundImage: `url('${backgroundImage}')`,
+					backgroundImage: `linear-gradient(180deg, #000000 0%, rgba(0, 0, 0, 0) 100%), linear-gradient(90deg, #000000 0%, rgba(0, 0, 0, 0) 100%), url('${backgroundImage}')`,
 					backgroundSize: "140%",
 					backgroundRepeat: "no-repeat",
 					backgroundPosition,
@@ -21,6 +22,7 @@ const Banner: React.FC<BannerProps> = ({ href, backgroundImage, title, backgroun
 				}}
 			>
 				{title}
+				<p className="text-base font-light pt-4">{sub}</p>
 			</div>
 		</Link>
 	);
@@ -32,7 +34,7 @@ const banners = [
 		backgroundImage: "./img/data-donuts.webp",
 		title: "Irys SDK",
 		sub: "Permanent data with strong provenance in 3 lines of code",
-		backgroundPosition: "-40% -20%",
+		backgroundPosition: "-40% -10%",
 	},
 	{
 		href: "developer-docs/querying/query-package",
@@ -53,7 +55,7 @@ const banners = [
 		backgroundImage: "./img/data-spiral.webp",
 		title: "Demo",
 		sub: "Explore Irys in action",
-		backgroundPosition: "40% -20%",
+		backgroundPosition: "40% -10%",
 	},
 ];
 

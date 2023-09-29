@@ -23,16 +23,15 @@ const HomeProduct = ({
 				</div>
 				<div
 					style={{}}
-					className={`mt-16 flex w-full flex-col items-center lg:items-start gap-20 lg:flex-row lg:justify-evenly lg:mt-28 lg:gap-0`}
+					className={`mx-auto mt-16 flex w-full flex-col items-center lg:items-stretch justify-center gap-20 lg:flex-row lg:justify-evenly lg:mt-28 lg:gap-0`}
 				>
 					{/* 1st column title, text, and find out more button */}
 					{items.map((info, index) => {
 						return (
 							<div
 								key={`info-${index}`}
-								className={`flex w-full lg:max-w-xs flex-col items-start gap-4 text-white ${
-									items.length === 1 ? "max-w-full flex-row items-center" : ""
-								}`}
+								className={`flex w-full xl:max-w-[250px] 2xl:max-w-2xl flex-col items-center lg:items-start gap-4 text-white ${items.length === 1 ? "max-w-full flex-row items-center" : ""
+									}`}
 							>
 								{/* <h3
                 className="text-3xl lg:text-5xl leading-none font-fkDisplay"
@@ -48,9 +47,8 @@ const HomeProduct = ({
 									}}
 								/>
 								<p
-									className={` mt-auto font-backup font-satoshi text-lg font-normal leading-loose ${
-										items.length === 1 ? "text-center" : ""
-									}`}
+									className={` white mt-auto font-backup font-satoshi text-lg font-normal leading-loose ${items.length === 1 ? "text-center" : ""
+										}`}
 								>
 									{info.description}
 								</p>
@@ -58,7 +56,7 @@ const HomeProduct = ({
 									href={info.href}
 									className="mt-auto whitespace-nowrap font-backup font-satoshi text-base uppercase tracking-widest text-white hover:font-bold"
 								>
-									[ Learn more ]
+									Learn more
 								</a>
 							</div>
 						);

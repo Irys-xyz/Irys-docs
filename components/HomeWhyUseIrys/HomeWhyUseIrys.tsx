@@ -28,7 +28,7 @@ const HomeWhyUseIrys = ({
 									}`}
 							>
 								<a href={definition.href}>
-									<Heading level={3} className="whitespace-nowrap text-center lg:text-left">
+									<Heading level={4} className="whitespace-nowrap text-center lg:text-left">
 										{definition.title}
 									</Heading>
 								</a>
