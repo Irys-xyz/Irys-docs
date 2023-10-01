@@ -5,32 +5,48 @@ description: Unlock the full potential of Irys's technology with our developer r
 import Heading from "../../components/Heading";
 import SectionTitle from "../../components/SectionTitle";
 
-<div className="flex flex-col mt-5">
-	<div className="flex items-end">
-    	<div className=""><Heading level={1}>About Irys</Heading></div>
-    </div>
-
-    <p className="mt-4 text-xl">
-      Irys is the only provenance layer. It enables users to scale permanent data and precisely attribute its origin. By tracing and verifying where data comes from, Irys paves the way to incorporate accountability into all information.
-    </p>
-
+<div
+	className="video mt-5 -mb-10"
+	style={{
+		position: "relative",
+		paddingBottom: "56.25%" /* 16:9 */,
+		paddingTop: 25,
+		height: 0,
+	}}
+>
+	<iframe
+		style={{
+			position: "absolute",
+			top: 0,
+			left: 0,
+			width: "80%",
+			height: "80%",
+		}}
+		src={`https://www.youtube.com/embed/8CuS7aJJShU`}
+		frameBorder="0"
+	/>
 </div>
+Irys is the only provenance layer. It enables users to scale permanent data and precisely attribute its origin. By tracing
+and verifying where data comes from, Irys paves the way to incorporate accountability into all information.
 
-A
-provenance layer is a ledger of record for digital information, tracking the origins and modifications of data.
+A provenance layer is a ledger of record for digital information, tracking the origins and modifications of data.
 
-<img className="border border-[#FEF4EE] rounded mt-5 md:w-4/6 w-full" src="/img/overview/irys-architecture.png" />
-
-Data uploaded to Irys is permanent, precise, and unconstrained.
+Data [uploaded to Irys](/learn/transaction-lifecycle) is permanent, precise, and unconstrained.
 
 -   <p className="font-bold">Permanent</p>
-    Data stored on Irys is censorship-resistant and immutable, forever. There's no counterparty risk of data being removed.
+    Data stored on Irys is [censorship-resistant and immutable, forever](/overview/permanent-data). There's no counterparty
+    risk of data being removed.
 
 -   <p className="font-bold">Precise</p>
-    Each piece of data is timestamped with a high-precision timestamp, providing a reliable sequence of events.
+    Each piece of data is [timestamped with a high-precision timestamp](/learn/receipts), providing a reliable sequence of
+    events.
 
 -   <p className="font-bold">Unconstrained</p>
     Users can always read, write, and easily discover data at any scale, making the data fully composable. Irys is permissionless
     and offers limitless permanent data, enabling it to provide provenance for all information.
 
-All uploads to Irys are verifiable. After uploading data, you’re given a receipt that can be used by anyone to verify the data’s provenance at any time.
+All uploads to Irys are verifiable. After uploading data, you’re given a receipt that can be used by anyone to [verify](/learn/receipts) the data’s provenance at any time.
+
+## Building with Irys
+
+Irys's [developer tools](/overview/tools) make it easy to add permanent data with strong provenance to your projects.
