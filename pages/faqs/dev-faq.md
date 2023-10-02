@@ -56,4 +56,4 @@ Our [optimistic cache](/learn/optimistic-cache) makes it available instantly.
 
 ## Where can I see my data before it gets seeded onto Arweave?
 
-As soon as your upload is complete, the data can be requested from a [gateway](/learn/gateways).
+As soon as your upload is complete, the data can be requested from a [gateway](/overview/gateways).
