@@ -8,59 +8,87 @@ Irys' Devnet is for developers who are building projects or learning how to use 
 
 To connect to Devnet, supply the address of our Devnet node when instantiating either an `Irys` or `WebIrys` object.
 
-When using Devnet with the `Bundlr` class, you must specify an RPC address. When using the `WebIrys` class, the RPC address is only required when using non-EVM chains.
+When using Devnet with the `Irys` class, you must specify an RPC address. When using the `WebIrys` class, the RPC address is only required when using non-EVM chains.
 
-#### `Bundlr` Class
+## `Irys` Class (Server-side)
 
-For Solana:
-
-```js
-const url = "https://devnet.irys.xyz";
-const providerUrl = "https://api.devnet.solana.com";
-const token = "matic";
-
-const irys = new Irys({
-	url, // URL of the node you want to connect to
-	token, // Token used to pay for uploads.
-	key: process.env.ETH_PRIVATE_KEY, // SOL private key
-	config: { providerUrl }, // Optional provider URL, only required when using Devnet
-});
-```
-
-For Polygon / Matic:
+### EVM Chains
 
 ```js
-const url = "https://devnet.irys.xyz";
-const providerUrl = "https://rpc-mumbai.maticvigil.com;
-const token = "matic";
+const getIrys = async () => {
+	const url = "https://devnet.irys.xyz";
+	const token = "matic";
+	const providerUrl = "https://rpc-mumbai.maticvigil.com";
 
-const irys = new Irys({
-	url, // URL of the node you want to connect to
-	token, // Token used to pay for uploads.
-	key: process.env.ETH_PRIVATE_KEY, // SOL private key
-	config: { providerUrl }, // Optional provider URL, only required when using Devnet
-});
+	const irys = new Irys({
+		url, // URL of the node you want to connect to
+		token, // Token used for payment
+		key: process.env.EVM_PRIVATE_KEY, // EVM private key
+		config: { providerUrl }, // Optional provider URL, only required when using Devnet
+	});
+	return irys;
+};
 ```
 
-#### `WebIrys` Class And EVM Chains
+### Solana
 
 ```js
-const bundlr = new WebIrys("https://devnet.irys.xyz", "matic", provider);
+const getIrys = async () => {
+	const url = "https://devnet.irys.xyz";
+	const token = "solana";
+	const providerUrl = "https://api.devnet.solana.com";
+
+	const irys = new Irys({
+		url, // URL of the node you want to connect to
+		token, // Token used for payment
+		key: process.env.SOL_PRIVATE_KEY, // SOL private key
+		config: { providerUrl }, // Optional provider URL, only required when using Devnet
+	});
+	return irys;
+};
 ```
 
-TODO
+## `WebIrys` class (Browser)
 
-#### `WebIrys` Class And Non-EVM Chains
+### EVM Chains
 
 ```js
-const bundlr = new WebIrys(
-	"https://devnet.irys.xyzk",
-	"solana",
-	provider
-	{
-		providerUrl: "https://api.devnet.solana.com",
-	},
-);
+const getWebIrys = async () => {
+	// Ethers5 provider
+	await window.ethereum.enable();
+	const provider = new providers.Web3Provider(window.ethereum);
+
+	const url = "https://devnet.irys.xyz";
+	const token = "matic";
+
+	// Create a wallet object
+	const wallet = { name: "ethersv5", provider: provider };
+	// Use the wallet object
+	const webIrys = new WebIrys({ url, token, wallet });
+	await webIrys.ready();
+
+	return webIrys;
+};
 ```
 
-TODO
+### Solana
+
+```js
+const getWebIrys = async () => {
+	await window.solana.connect();
+	const provider = new PhantomWalletAdapter();
+	await provider.connect();
+
+	const url = "https://devnet.irys.xyz";
+	const token = "solana";
+	const rpcURL = "https://api.devnet.solana.com"; // Required
+
+	// Create a wallet object
+	const wallet = { rpcUrl: rpcURL, name: "ethersv5", provider: provider };
+	// Use the wallet object
+	const webIrys = new WebIrys({ url, token, wallet });
+	await webIrys.ready();
+
+	return webIrys;
+};
+```

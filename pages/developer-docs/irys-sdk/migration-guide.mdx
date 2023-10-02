@@ -8,18 +8,23 @@ import { Callout } from "nextra-theme-docs";
 
 Migrating your application from the Bundlr SDK to the Irys SDK is a simple process.
 
+<Callout type="info" emoji="ℹ️">
+	All existing legacy packages will be maintained until October 2024 and will continue to work until at least October
+	2025. All domains will be supported in perpetuity (e.g., https://node1.bundlr.network)
+</Callout>
+
 ## Installation
 
 Install the Irys SDK using npm:
 
 ```console
-npm install @irys/client
+npm install @irys/sdk
 ```
 
 or yarn:
 
 ```console
-yarn add @irys/client
+yarn add @irys/sdk
 ```
 
 ## Imports
@@ -33,7 +38,7 @@ import Bundlr from "@bundlr-network/client";
 to:
 
 ```js
-import Irys from "@irys/client";
+import Irys from "@irys/sdk";
 ```
 
 ## Constructor
@@ -79,7 +84,7 @@ And your GraphQL endpoints
 
 In the Bundlr SDK there were separate upload functions depending on whether you wanted a receipt or not. With the Irys SDK, all upload functions return a [receipt](/learn/receipts).
 
-The following function is removed:
+The following function is deprecated:
 
 -   `bundlr.uploadWithReceipt()`
 
@@ -91,4 +96,26 @@ The following functions upload data as before however, the return type has chang
 
 ## Change to WebBundlr / WebIrys
 
-TODO: talk about how providers change
+With the Bundlr SDK, using providers other than Ethers 5 required extra setup code unique to each provider. Now, we natively support multiple different provider types.
+
+When connecting to a `WebIrys` class, you pass both a reference to a provider and the provider type. The following example is for Ethers 5, we also have a full list of supported provider types see [Irys in the browser](/developer-docs/irys-sdk/irys-in-the-browser).
+
+```js
+const getWebIrys = async () => {
+	// Ethers5 provider
+	await window.ethereum.enable();
+	const provider = new providers.Web3Provider(window.ethereum);
+
+	const url = "https://node1.irys.xyz";
+	const token = "matic";
+	const rpcURL = "https://rpc-mumbai.maticvigil.com"; // Optional parameter
+
+	// Create a wallet object
+	const wallet = { rpcUrl: rpcURL, name: "ethersv5", provider: provider };
+	// Use the wallet object
+	const webIrys = new WebIrys({ url, token, wallet });
+	await webIrys.ready();
+
+	return webIrys;
+};
+```
