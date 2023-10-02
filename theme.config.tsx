@@ -64,7 +64,7 @@ export default {
 					property="og:description"
 					content={
 						frontMatter.description ||
-						"Unlock the full potential of Irys' technology with our developer resources. Use our SDK and start storing data permanently with 3-4 lines of code."
+						"Unlock the full potential of Irys’ technology with our developer resources. Start building on Irys today!"
 					}
 				/>
 			</>
