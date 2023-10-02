@@ -164,3 +164,18 @@ const uploadFolder = async () => {
 	}
 };
 ```
+
+## Querying
+
+In addition to using the [query package](/developer-docs/querying/query-package) to search Irys and Arweave, you can also search directly from the Irys SDK. The following shows how to search for all transactions posted to [Node 1](/overview/nodes), paid for with Matic, and uploaded during a three day period.
+
+For more details on all search functions, see [query package documentation](/developer-docs/querying/query-package).
+
+```js
+const result = await irys
+	.search("irys:transactions")
+	.url("https://node1.irys.xyz/graphql")
+	.token("matic")
+	.fromTimestamp(new Date("2023-07-01"))
+	.toTimestamp(new Date("2023-07-03"));
+```

@@ -37,17 +37,17 @@ const banners = [
 		backgroundPosition: "-40% -10%",
 	},
 	{
-		href: "/developer-docs/irys-sdk",
+		href: "/developer-docs/querying/query-package",
 		backgroundImage: "./img/dots-cloud.png",
-		title: "Irys SDK",
-		sub: "Frictionless integration with 3 lines of code",
+		title: "Query package",
+		sub: "Easily search Irys & Arweave",
 		backgroundPosition: "40% -20%",
 	},
 	{
-		href: "/developer-docs/querying/query-package",
+		href: "/developer-docs/irys-sdk",
 		backgroundImage: "./img/data-exponential.webp",
-		title: "Query package",
-		sub: "Easily search Irys & Arweave",
+		title: "Irys SDK",
+		sub: "Frictionless integration with 3 lines of code",
 		backgroundPosition: "-80% 100%",
 	},
 	{

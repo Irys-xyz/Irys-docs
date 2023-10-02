@@ -1,5 +1,5 @@
 ---
-description: By separating read and write components into separate components, Irys is able to separately optimize each
+description: Irys’ scaling is volumetric because it can independently scale across three vectors - writing, reading, and verification.
 ---
 
 import { Callout } from "nextra-theme-docs";
@@ -13,4 +13,33 @@ import SectionTitle from "../../components/SectionTitle";
 		</div>
 	</div>
 </div>
-TODO Luke
+
+Irys’ scaling is volumetric because it can independently scale across three vectors: writing, reading, and verification. This scaling architecture enables each axis to adapt to meet fluctuating demand.
+
+<img className="border border-[#FEF4EE] rounded-xl mt-5 w-full" src="/img/irys-volumetric-scaling.png" />
+
+## Bundlers (writers)
+
+Arweave has a limit of 1,000 transactions per block. When demand surges, fees shoot up, and spikes in network traffic can cause fees to increase exponentially, rendering permanent data unaffordable for many users. To solve this problem, Irys uses [bundlers](/learn/bundling) to collate transactions together into a [bundle](/learn/bundles) before submitting them to Arweave as a single transaction. Irys handles over 90% of all traffic on Arweave, has been tested at [50K TPS, and could easily scale to over 1,000,000 TPS](https://www.youtube.com/watch?v=JKEivHKDXAo).
+
+## Gateways (readers)
+
+[Gateways](/overview/gateways) are responsible for indexing, serving, and making data and transactions on Arweave available to users.
+
+While many users rely on well-known gateways such as `arweave.net` and `gateway.irys.xyz`, it's also possible to run your own gateway using the [AR.io](https://ar.io/) open-source offering. This means that anyone can spin up a new gateway at any point in time to meet their unique demand requirements.
+
+## Verification
+
+When you upload a transaction to Irys, you’re given a [receipt](/learn/receipts) containing a millisecond-accurate timestamp, authorship details, and other metadata. This receipt can be permissionlessly verified either by manually creating a [deep hash](/terminology#deep-hash) of all its fields and comparing it against the receipt's signature or by using the SDK function `irys.utils.verifyReceipt()`, an abstraction of the manual verification process.
+
+## Transaction verification
+
+In addition to verifying receipts, you can verify transactions by creating a [deep hash](/terminology#deep-hash) of all transaction fields and verifying that the transaction signature was generated using the [deep hash](/terminology#deep-hash).
+
+## Volumetric scaling now and in the future
+
+Irys is a [fully unconstrained point of entry to Arweave](/learn/transaction-lifecycle), making [permanent data](/overview/permanent-data) with [strong provenance](/learn/strong-provenance) accessible with [just a few lines of code](/developer-docs/irys-sdk#uploading-a-file). Irys can handle [millions of transactions per second](https://www.youtube.com/watch?v=JKEivHKDXAo) and limitless data volumes, all while being permissionlessly verifiable. Arweave scales horizontally by increasing the number of miners storing data; therefore, more miners on Arweave means more bandwidth on the network.
+
+Irys is designed to handle more than just current demand; we're built for growth. Our scalability tests go beyond today's needs, ensuring we're prepared for what comes next.
+
+We're future-proof.
