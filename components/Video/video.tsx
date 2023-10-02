@@ -27,7 +27,7 @@ const Video = () => {
 		width: windowWidth && windowWidth < 1024 ? windowWidth - windowWidth * 0.1 : 640 * 1.4,
 	};
 
-	return <YouTube opts={opts} videoId={"p9IN_m34cB0"} className="z-10 overflow-hidden rounded-md" />;
+	return <YouTube opts={opts} videoId={"8CuS7aJJShU"} className="z-10 overflow-hidden rounded-md" />;
 };
 
 export default Video;
