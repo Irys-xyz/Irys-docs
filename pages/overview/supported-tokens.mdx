@@ -66,7 +66,7 @@ const getIrys = async () => {
 	const irys = new Irys({
 		url, // URL of the node you want to connect to
 		token, // Token used for payment
-		key: process.env.ETH_PRIVATE_KEY, // ETH or SOL private key
+		key: process.env.PRIVATE_KEY, // ETH or SOL private key
 		config: { providerUrl }, // Optional provider URL, only required when using Devnet
 	});
 	return irys;
