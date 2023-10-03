@@ -2,12 +2,13 @@ import {
   DiscordIcon,
   FooterLogo,
   GitIcon,
-  MediumIcon,
+  IrysIcon,
   MinusFooterDetailIcon,
   MirrorIcon,
   PlusFooterDetailIcon,
   TelegramIcon,
-  TwitterIcon
+  TwitterIcon,
+  YoutubeIcon
 } from '../../svg'
 import { useEffect, useState } from 'react'
 
@@ -41,6 +42,15 @@ const FooterMobile = ({
           />
         ))}
         <section className="mt-[60px] flex items-center gap-[21px] pb-[10px]">
+          <a
+            href="https://www.youtube.com/@bundlr-network"
+            target="_blank"
+            rel="nofollow noreferrer"
+            className="transition-all hover:rotate-6 hover:scale-105"
+            aria-label="Telegram"
+          >
+            <YoutubeIcon />
+          </a>
           {/* <a
             href="https://medium.com/bundlr-network"
             target={'_blank'}
@@ -49,14 +59,14 @@ const FooterMobile = ({
           >
             <MediumIcon />
           </a> */}
-          <a
+          {/* <a
             href="https://mirror.xyz/0x9AbB09BF9F58E72A532E859d798eB4E8e10A35e1"
             target={'_blank'}
             rel="nofollow noreferrer"
             className="transition-all hover:rotate-6 hover:scale-105"
           >
             <MirrorIcon className="h-6 w-6 text-black" />
-          </a>
+          </a> */}
           <a
             href="https://twitter.com/BundlrNetwork"
             target={'_blank'}
@@ -90,7 +100,8 @@ const FooterMobile = ({
             <TelegramIcon />
           </a>
         </section>
-        <p className="mt-[17px] mb-[36px]">
+        <p className="mt-[17px] mb-[36px] flex items-center gap-2">
+          <IrysIcon className='w-6 h-6' />
           {new Date().getFullYear()} Irys. All rights reserved.
         </p>
       </footer>

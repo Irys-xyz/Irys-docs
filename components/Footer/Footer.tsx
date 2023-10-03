@@ -1,4 +1,4 @@
-import { DiscordIcon, GitIcon, MediumIcon, MirrorIcon, TelegramIcon, TwitterIcon } from "../svg";
+import { DiscordIcon, GitIcon, MediumIcon, TelegramIcon, TwitterIcon, YoutubeIcon } from "../svg";
 
 import FooterDesktop from "../NewFooter/FooterDesktop";
 import FooterMobile from "../NewFooter/FooterMobile";
@@ -74,6 +74,15 @@ const Footer = ({ noPadding }: { noPadding?: boolean }) => {
 			],
 			footer: (
 				<div className="mt-auto flex items-center gap-[21px] pb-[40px]">
+					<a
+						href="https://www.youtube.com/@bundlr-network"
+						target="_blank"
+						rel="nofollow noreferrer"
+						className="transition-all hover:rotate-6 hover:scale-105"
+						aria-label="Telegram"
+					>
+						<YoutubeIcon />
+					</a>
 					{/* <a
 						href="https://medium.com/bundlr-network"
 						target={"_blank"}
@@ -82,14 +91,14 @@ const Footer = ({ noPadding }: { noPadding?: boolean }) => {
 					>
 						<MediumIcon />
 					</a> */}
-					<a
+					{/* <a
 						href="https://mirror.xyz/0x9AbB09BF9F58E72A532E859d798eB4E8e10A35e1"
 						target={"_blank"}
 						rel="nofollow noreferrer"
 						className="transition-all hover:rotate-6 hover:scale-105 text-black hover:text-black"
 					>
 						<MirrorIcon className="w-6 h-6 text-black" />
-					</a>
+					</a> */}
 					<a
 						href="https://twitter.com/BundlrNetwork"
 						target={"_blank"}

@@ -1,4 +1,5 @@
-import { FooterLogo } from "../../svg";
+import { FooterLogo, IrysIcon } from "../../svg";
+
 import IrysLogoText from "../../svg/IrysLogoText";
 import Link from "next/link";
 import { ReactNode } from "react";
@@ -22,7 +23,7 @@ const FooterDesktop = ({
   return (
     <>
       <footer
-        className={`hidden items-start border-t border-timberwolf bg-seashell  font-backup font-satoshi antialiased lg:flex !text-black mt-10 ${noPadding ? "px-[24px]" : "px-[79px]"
+        className={`hidden items-start border-t border-timberwolf bg-seashell  font-backup font-satoshi antialiased xl:flex !text-black mt-10 ${noPadding ? "px-[24px]" : "px-[79px]"
           }`}
       >
         <section className="flex w-auto max-w-[513px] flex-col pt-[36px] leading-none">
@@ -32,7 +33,8 @@ const FooterDesktop = ({
           <p className="mt-[140px] whitespace-normal text-[62px] tracking-tighter lg:text-[31px] font-semibold">
             PROVENANCE <br />IS THE PROOF
           </p>
-          <p className="mt-[47px]">
+          <p className="mt-[47px] flex items-center gap-2 pr-4">
+            <IrysIcon className='w-6 h-6' />
             {new Date().getFullYear()} Irys. All rights reserved.
           </p>
         </section>
