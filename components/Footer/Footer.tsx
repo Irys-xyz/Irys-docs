@@ -108,7 +108,7 @@ const Footer = ({ noPadding }: { noPadding?: boolean }) => {
 						<TwitterIcon />
 					</a>
 					<a
-						href="https://discord.gg/bundlr"
+						href="https://discord.irys.xyz"
 						target={"_blank"}
 						rel="nofollow noreferrer"
 						className="transition-all hover:rotate-6 hover:scale-105 text-black hover:text-black"
