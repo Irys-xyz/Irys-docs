@@ -7,6 +7,6 @@ description: Install using npm, optionally sudo.
 Install using npm with the -g global flag. Depending on your setup, you may need to use the sudo command.
 
 ```console
-npm i -g @irys/client
-sudo npm i -g @irys/client
+npm i -g @irys/sdk
+sudo npm i -g @irys/sdk
 ```

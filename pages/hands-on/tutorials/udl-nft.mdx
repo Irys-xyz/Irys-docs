@@ -30,7 +30,7 @@ When uploading the metadata, you can attach a UDL in the form of [tags](/develop
 If you’re using our NodeJS SDK to upload your metadata files, you can modify your upload script to include the UDL parameters. [Not all UDL tags are required](https://arwiki.wiki/#/en/Universal-Data-License-How-to-use-it), and the ones you use will depend on how you want to allow your content to be used. The script below demonstrates how to add common tags to a metadata file upload, when using it for your own project, customize as needed.
 
 ```ts
-import Irys from "@irys/client";
+import Irys from "@irys/sdk";
 import * as fs from "fs";
 import dotenv from "dotenv";
 dotenv.config();
