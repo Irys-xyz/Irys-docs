@@ -55,7 +55,6 @@ Connect [to any of our three nodes](/developer-docs/nodes), using a serialized J
 ```js
 const getIrysArweave = async () => {
 	const url = "https://devnet.irys.xyz";
-	const providerUrl = "https://rpc-mumbai.maticvigil.com";
 	const token = "arweave";
 	const key = JSON.parse(fs.readFileSync("arweaveWallet.json").toString());
 
@@ -63,7 +62,6 @@ const getIrysArweave = async () => {
 		url, // URL of the node you want to connect to
 		token, // Token used for payment and signing
 		key, // Arweave wallet
-		config: { providerUrl }, // Optional provider URL, only required when using Devnet
 	});
 	return irys;
 };

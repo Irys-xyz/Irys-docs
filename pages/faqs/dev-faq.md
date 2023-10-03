@@ -10,6 +10,10 @@ Node 2 is ideal for early-stage projects, while larger projects typically prefer
 
 Nodes maintain [separate balances](/learn/funding-withdrawing); fund the node you intend to upload to.
 
+## Does Irys offer free uploads?
+
+Yes. Uploads below 100KiB are free on Node 2 only. This is a public good for users to be encouraged to try Irys.
+
 ## What is the difference between `Irys` and `WebIrys` classes?
 
 The `Irys` class is used for server-side apps and `WebIrys` is used when [building with Irys in the browser](/developer-docs/irys-sdk/irys-in-the-browser).
