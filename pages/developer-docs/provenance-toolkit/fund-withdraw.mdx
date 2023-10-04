@@ -41,7 +41,7 @@ The component is designed to be used as-is. Users making significant changes to 
 
 When the component is set to "withdraw" mode, the UI will automatically check and display the user's currently funded balance. As balances are both node and token-specific, this balance check is encapsulated within a `useEffect()` hook that gets triggered when the component mounts and also whenever the user changes either the selected node or token.
 
-To get the currently funded balance, first connect to a Bundlr node using the node and token selected by the user:
+To get the currently funded balance, first connect to a Irys node using the node and token selected by the user:
 
 ```ts filename="components/FundWithdraw.tsx"
 const irys = await getIrys(selectedNode?.value, selectedToken?.value);

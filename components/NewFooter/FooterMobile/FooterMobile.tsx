@@ -40,7 +40,7 @@ const FooterMobile = ({
 				))}
 				<section className="mt-[60px] flex items-center gap-[21px] pb-[10px]">
 					<a
-						href="https://www.youtube.com/@bundlr-network"
+						href="https://youtube.irys.xyz"
 						target="_blank"
 						rel="nofollow noreferrer"
 						className="transition-all hover:rotate-6 hover:scale-105"
@@ -65,7 +65,7 @@ const FooterMobile = ({
             <MirrorIcon className="h-6 w-6 text-black" />
           </a> */}
 					<a
-						href="https://twitter.com/BundlrNetwork"
+						href="https://twitter.irys.xyz"
 						target={"_blank"}
 						rel="nofollow noreferrer"
 						className="transition-all hover:rotate-6 hover:scale-105"
@@ -73,7 +73,7 @@ const FooterMobile = ({
 						<TwitterIcon />
 					</a>
 					<a
-						href="https://discord.gg/bundlr"
+						href="https://discord.irys.xyz"
 						target={"_blank"}
 						rel="nofollow noreferrer"
 						className="transition-all hover:rotate-6 hover:scale-105"
@@ -89,7 +89,7 @@ const FooterMobile = ({
 						<GitIcon />
 					</a>
 					<a
-						href="https://t.me/bundlr"
+						href="https://telegram.irys.xyz"
 						target={"_blank"}
 						rel="nofollow noreferrer"
 						className="transition-all hover:rotate-6 hover:scale-105"
