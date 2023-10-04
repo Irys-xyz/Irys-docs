@@ -30,7 +30,7 @@ export default {
 	},
 	logo: <IrysLogoText width={65} />,
 	project: {
-		link: "https://github.com/Bundlr-Network",
+		link: "https://github.com/Irys-xyz/",
 	},
 	footer: {
 		component: FooterWrapper,

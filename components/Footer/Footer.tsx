@@ -116,7 +116,7 @@ const Footer = ({ noPadding }: { noPadding?: boolean }) => {
 						<DiscordIcon />
 					</a>
 					<a
-						href="https://github.com/Bundlr-Network"
+						href="https://github.com/Irys-xyz/"
 						target={"_blank"}
 						rel="nofollow noreferrer"
 						className="transition-all hover:rotate-6 hover:scale-105 text-black hover:text-black"
