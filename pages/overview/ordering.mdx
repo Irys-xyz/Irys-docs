@@ -39,4 +39,43 @@ Each transaction comes with a [signed receipt](/learn/receipts) that includes a 
 
 ## Getting started
 
-Our [provenance chain tutorial](/hands-on/tutorials/provenance-chain) is a good starting point for users looking to understand how ordering and searching works. In less than a page of code you will create multiple transactions, and use the query package to sequence them chronologically.
+You can upload multiple transactions and sequence them using our [SDK](/developer-docs/irys-sdk) and [query package](/developer-docs/querying/query-package) in a few lines of code.
+
+### Uploading
+
+```js
+// Connect to a node
+const irys = new Irys({ url, token, key });
+
+// Fund the node
+const fundTx = await irys.fund(irys.utils.toAtomic(0.05));
+
+// Tag your uploads
+const tags = [{ name: "application-id", value: "my-tx-sequence" }];
+
+// Upload 10 transactions
+for (let i = 0; i < 10; i++) {
+	const receipt = await irys.upload("GM " + i, { tags });
+	console.log(`Transaction #${i} uploaded at ${receipt.timestamp}`);
+}
+```
+
+### Ordering
+
+```js
+const myQuery = new Query();
+const results = await myQuery
+	.search("irys:transactions")
+	.tags([{ name: "application-id", values: ["my-tx-sequence"] }])
+	.sort("ASC")
+	.stream();
+
+// Iterate over the results
+for await (const result of stream) {
+	console.log(result);
+}
+```
+
+### Beginners
+
+Beginners should start with our [provenance chain tutorial](/hands-on/tutorials/provenance-chain). In less than a page of code you will create multiple transactions, and use the [query package](/developer-docs/querying/query-package) to sequence them chronologically.

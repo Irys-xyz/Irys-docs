@@ -57,6 +57,29 @@ It also enables composability. Chunks of permanent data can be used as primitive
 
 Irys enables a global dataset that will always be reliable and accessible.
 
+## Getting started
+
+You can permanently upload data in 3 lines of code.
+
+```js
+// Connect to a node
+const irys = new Irys({ url, token, key });
+
+// Fund the node
+const fundTx = await irys.fund(irys.utils.toAtomic(0.05));
+
+// Upload data
+const receipt = await irys.uploadFile("./myImage.png");
+```
+
+For full code examples you can copy and paste into your projects, check out our [SDK](/developer-docs/irys-sdk).
+
+If you are builing a browser-based app, check out [Irys in the browser](/developer-docs/irys-sdk/irys-in-the-browser), and the [Provenance Toolkit](/developer-docs/provenance-toolkit), a suite of UI open-source UI components for managing node balances and uploading files.
+
+Our [query package](/developer-docs/querying/query-package) contains everything you need to search Irys transaction [metadata](/developer-docs/tags).
+
+Beginners should start with our [SDK tutorial](/hands-on/tutorials/irys-sdk).
+
 ## What can you build with permanent data?
 
 Learn more in our [use-cases section](https://irys.xyz/use-cases).
