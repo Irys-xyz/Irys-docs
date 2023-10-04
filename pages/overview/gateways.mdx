@@ -18,7 +18,7 @@ Gateways are responsible for indexing, serving, and making data available to use
 
 To ensure that all transactions on Arweave are easily searchable and accessible, gateways index all transaction metadata, including transactions posted via [Irys](/learn/bundling), and transactions posted directly to Arweave. Gateways monitor Arweave for new blocks, and indexes them as they are propagated. Whenever a user posts a transaction to Irys, gateways detect it and add it to its own database.
 
-During the indexing process, gateways extract transactions from each block and index the metadata. When a bundle is encountered, gateways index all the transactions within. Similarly, if a manifest is found, gateways indexes it. By indexing manifests, gateways create a virtual directory structure that mimics the original folder system. This allows users to access data using the URL format `https://arweave.net/[manifest-id]/[file-name]`.
+During the indexing process, gateways extract transactions from each block and index the metadata. When a bundle is encountered, gateways index all the transactions within. Similarly, if a manifest is found, gateways indexes it. By indexing manifests, gateways create a virtual directory structure that mimics the original folder system. This allows users to access data using the URL format `https://gateway.irys.xyz/[manifest-id]/[file-name]`.
 
 ## Querying
 
@@ -48,13 +48,13 @@ Gateways are a crucial component in Irys' scaling strategy. To effectively scale
 
 ## Gateway schema / endpoints
 
-To download data from a gateway, use the transaction id obtained during upload. The most commonly used gateway is `https://arweave.net`, and the format used to download data is `https://arweave.net/[transaction-id]`.
+To download data from a gateway, use the transaction id obtained during upload. The most commonly used gateway is `https://gateway.irys.xyz`, and the format used to download data is `https://gateway.irys.xyz/[transaction-id]`.
 
-For example `https://arweave.net/CO9EpX0lekJEfXUOeXncUmMuG8eEp5WJHXl9U9yZUYA`.
+For example `https://gateway.irys.xyz/CO9EpX0lekJEfXUOeXncUmMuG8eEp5WJHXl9U9yZUYA`.
 
 For GraphQL queries, you can connect to either of these official endpoints:
 
--   https://arweave.net/graphql
+-   https://gateway.irys.xyz/graphql
 -   https://arweave.dev/graphql
 
 Or this endpoint from Goldsky which offers fast response times:
