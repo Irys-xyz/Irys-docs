@@ -75,7 +75,7 @@ const Footer = ({ noPadding }: { noPadding?: boolean }) => {
 			footer: (
 				<div className="mt-auto flex items-center gap-[21px] pb-[40px]">
 					<a
-						href="https://www.youtube.com/@bundlr-network"
+						href="https://www.youtube.com/@irys_xyz"
 						target="_blank"
 						rel="nofollow noreferrer"
 						className="transition-all hover:rotate-6 hover:scale-105"
@@ -100,7 +100,7 @@ const Footer = ({ noPadding }: { noPadding?: boolean }) => {
 						<MirrorIcon className="w-6 h-6 text-black" />
 					</a> */}
 					<a
-						href="https://twitter.com/BundlrNetwork"
+						href="https://twitter.com/irys_xyz"
 						target={"_blank"}
 						rel="nofollow noreferrer"
 						className="transition-all hover:rotate-6 hover:scale-105 text-black hover:text-black"
