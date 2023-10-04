@@ -23,11 +23,11 @@ const transactionOptions = { tags: [{ name: "Content-Type", value: "text/plain" 
 const dataBuffer = Buffer.from("Hello, world!");
 const response = await uploader.uploadData(dataBuffer, transactionOptions);
 // The transaction id (used to query the network) is found in response.data.id
-console.log(`Data buffer uploaded ==> https://arweave.net/${response.data.id}`);
+console.log(`Data buffer uploaded ==> https://gateway.irys.xyz/${response.data.id}`);
 
 // 2. Using a Readable (stream) pointing to the data
 uploader = bundlr.uploader.chunkedUploader; // recreate for each transaction
 const dataStream = fs.createReadStream("./data.txt");
 response = await uploader.uploadData(dataStream, transactionOptions);
-console.log(`Read Stream uploaded ==> https://arweave.net/${response.data.id}`);
+console.log(`Read Stream uploaded ==> https://gateway.irys.xyz/${response.data.id}`);
 ```

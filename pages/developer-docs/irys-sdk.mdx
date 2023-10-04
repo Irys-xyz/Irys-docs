@@ -113,7 +113,7 @@ const uploadData = async () => {
 	const dataToUpload = "GM world.";
 	try {
 		const receipt = await irys.upload(dataToUpload);
-		console.log(`Data uploaded ==> https://arweave.net/${receipt.id}`);
+		console.log(`Data uploaded ==> https://gateway.irys.xyz/${receipt.id}`);
 	} catch (e) {
 		console.log("Error uploading data ", e);
 	}
@@ -132,7 +132,7 @@ const uploadFile = async () => {
 
 	try {
 		const receipt = await irys.uploadFile(fileToUpload, { tags });
-		console.log(`File uploaded ==> https://arweave.net/${receipt.id}`);
+		console.log(`File uploaded ==> https://gateway.irys.xyz/${receipt.id}`);
 	} catch (e) {
 		console.log("Error uploading file ", e);
 	}
@@ -141,7 +141,7 @@ const uploadFile = async () => {
 
 ### Uploading a folder
 
-When [uploading a folder](/developer-docs/irys-sdk/api/uploadFolder), files can be accessed either directly at `https://arweave.net/[transaction-id]` or `https://arweave.net/[manifest-id]/[file-name]`
+When [uploading a folder](/developer-docs/irys-sdk/api/uploadFolder), files can be accessed either directly at `https://gateway.irys.xyz/[transaction-id]` or `https://gateway.irys.xyz/[manifest-id]/[file-name]`
 
 ```js
 const uploadFolder = async () => {

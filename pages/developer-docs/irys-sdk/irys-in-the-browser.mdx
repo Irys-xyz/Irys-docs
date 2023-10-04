@@ -131,7 +131,7 @@ const uploadData = async () => {
 	const dataToUpload = "GM world.";
 	try {
 		const receipt = await webIrys.upload(dataToUpload);
-		console.log(`Data uploaded ==> https://arweave.net/${receipt.id}`);
+		console.log(`Data uploaded ==> https://gateway.irys.xyz/${receipt.id}`);
 	} catch (e) {
 		console.log("Error uploading data ", e);
 	}
@@ -150,7 +150,7 @@ const uploadFile = async (fileToUpload: File) => {
 
 	try {
 		const receipt = await webIrys.uploadFile(fileToUpload, { tags });
-		console.log(`File uploaded ==> https://arweave.net/${receipt.id}`);
+		console.log(`File uploaded ==> https://gateway.irys.xyz/${receipt.id}`);
 	} catch (e) {
 		console.log("Error uploading file ", e);
 	}
@@ -161,7 +161,7 @@ const uploadFile = async (fileToUpload: File) => {
 
 Upload an array of [File](https://developer.mozilla.org/en-US/docs/Web/API/File) objects.
 
-Upon upload, a manifest is automatically created. Your files can be accessed `https://arweave.net/[manifestId]/[file-name]`.
+Upon upload, a manifest is automatically created. Your files can be accessed `https://gateway.irys.xyz/[manifestId]/[file-name]`.
 
 ```js
 const uploadFolder = async (files: File[], tags: Tag[]) => {

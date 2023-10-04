@@ -60,9 +60,9 @@ export const upload = async (data) => {
 			tags: [{ name: "Content-Type", value: "application/json" }],
 		});
 
-		console.log(`Upload success content URL= https://arweave.net/${tx.id}`);
+		console.log(`Upload success content URL= https://gateway.irys.xyz/${tx.id}`);
 
-		return `https://arweave.net/${tx.id}`;
+		return `https://gateway.irys.xyz/${tx.id}`;
 	} catch (e) {
 		console.log("error on upload ", e);
 	}

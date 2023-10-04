@@ -95,8 +95,10 @@ await uploader
 		upload: { getReceiptSignature: true },
 	})
 	.then((res) => {
-		setFileUrl(`https://arweave.net/${res.data.id}`);
-		setMessage(`File <a class="underline" target="_blank" href="https://arweave.net/${res.data.id}">uploaded</a>`);
+		setFileUrl(`https://gateway.irys.xyz/${res.data.id}`);
+		setMessage(
+			`File <a class="underline" target="_blank" href="https://gateway.irys.xyz/${res.data.id}">uploaded</a>`,
+		);
 	})
 	.catch((e) => {
 		setMessage("Upload error " + e.message);

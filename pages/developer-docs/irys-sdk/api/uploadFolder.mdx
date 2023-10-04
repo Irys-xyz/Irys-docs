@@ -13,7 +13,7 @@ description: Uploads a folder of files to Irys
 -   `folderToUpload`: Path to the folder being uploaded
 -   `indexFile`: (optional) The name of an
     index file also included in the folder you upload. If provided, this index file will load when a user requests
-    `https://arweave.net/[manifest_id]`
+    `https://gateway.irys.xyz/[manifest_id]`
 -   `batchSize`: (optional) The number of files to upload at once.
 -   `keepDeleted`: (optional) Whether to keep now deleted items from previous uploads. When you upload a folder, the file names are indexed and saved. If you then re-upload that same folder, Irys will only upload new files added since the previous upload. In the case where you delete files from your source directory, this flag tells Irys whether to keep those deleted files in the index or remove them.
 
@@ -57,10 +57,10 @@ try {
 
 Files uploaded via `irys.uploadFolder(folderToUpload)` can be retrieved in one of two ways.
 
-1. Creating an URL with the format `https://arweave.net/[manifest-id]/[original-file-name]`.
-2. Creating an URL using the transaction ID of each individual file uploaded with the format `https://arweave.net/[transacton-id]`
+1. Creating an URL with the format `https://gateway.irys.xyz/[manifest-id]/[original-file-name]`.
+2. Creating an URL using the transaction ID of each individual file uploaded with the format `https://gateway.irys.xyz/[transacton-id]`
 
-After a successful folder upload, two files are written to your local project directory `[folder_name].csv` and `[folder_name].json`. The example below highlights a folder called “llama_folder” with a total of 5 files in it. The transaction id for each file can be used to retrieve the uploaded data by forming an URL with the format `https://arweave.net]/[transaction-id]`
+After a successful folder upload, two files are written to your local project directory `[folder_name].csv` and `[folder_name].json`. The example below highlights a folder called “llama_folder” with a total of 5 files in it. The transaction id for each file can be used to retrieve the uploaded data by forming an URL with the format `https://gateway.irys.xyz]/[transaction-id]`
 
 <img
 	className="border border-[#FEF4EE] rounded-xl mt-5 md:w-5/6 w-full"
