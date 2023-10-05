@@ -30,16 +30,13 @@ Currently, server-side signing is supported for the following:
 
 ## Getting Started
 
-We have a full demo app written in NextJS and TypeScript that demonstrates uploading an image using server-side signing. It's available in two versions
+The quickest way to get started is to clone [our example repository](https://github.com/Irys-xyz/gassless-uploads) which supports gassless uploads from both EVM and Solana chains.
 
--   [A branch for Solana-based wallets](https://github.com/Irys-xyz/tutorial-server-side-signing)
--   [A branch for ETH-based wallets](https://github.com/Irys-xyz/tutorial-server-side-signing/tree/ethwallet)
-
-The demo app completely hides the entire process of using Irys and any form of Web3 technology from the user. The user simply uploads an image, and an URL to preview the image on the permaweb is returned. Upload fees are paid by the private key owned by the server.
+We also have an [online demo available](https://provenance-toolkit.irys.xyz/gassless-uploader) as part of [the Provenance Toolkit](https://docs.irys.xyz/developer-docs/provenance-toolkit).
 
 ## API Routes
 
-The [example app](https://github.com/Irys-xyz/tutorial-server-side-signing) exposes three API routes, you can pick and choose which to use based on your own app design.
+The [example app](hhttps://github.com/Irys-xyz/gassless-uploads) exposes three API routes, you can pick and choose which to use based on your own app design.
 
 ### `publicKey.ts`
 
@@ -47,55 +44,53 @@ The route `publicKey.ts` returns the public key for the server's wallet. This is
 
 #### Solana-Based Wallets
 
-```ts filename="publicKey.ts"
-import Bundlr from "@bundlr-network/client/build/node";
-import { NextApiRequest, NextApiResponse } from "next";
+```ts filename="publicKeySOL/route.ts"
+import { TypedEthereumSigner } from "arbundles";
+import { NextResponse } from "next/server";
+import Irys from "@irys/sdk";
 
 /**
- *
- * @returns The server's private key.
+ * @returns The server's public key.
  */
-export async function serverInit(): Promise<Buffer> {
-	const key = process.env.PAYMENT_PRIVATE_KEY; // your private key
-	const bundlrNodeAddress = process.env.BUNDLR_NODE_ADDRESS;
-	const rpcUrl = process.env.RPC;
-
-	const serverBundlr = new Bundlr(
-		//@ts-ignore
-		bundlrNodeAddress,
-		"solana",
-		key,
-		{
-			providerUrl: rpcUrl,
-		},
-	);
-	const publicKey = serverBundlr.currencyConfig.getSigner().publicKey;
+async function serverInit(): Promise<Buffer> {
+	const key = process.env.PRIVATE_KEY_SOL;
+	const token = "solana";
+	const url = process.env.NEXT_PUBLIC_NODE || "";
+	const providerUrl = "https://api.devnet.solana.com"; //getRpcUrl(token || "");
+	const serverIrys = new Irys({
+		url, // URL of the node you want to connect to
+		token, // Token used for payment and signing
+		key: key,
+		config: { providerUrl }, // Optional provider URL, only required when using Devnet
+	});
+	const publicKey = serverIrys.tokenConfig.getSigner().publicKey;
 	return publicKey;
 }
 
-export default async function handler(req: NextApiRequest, res: NextApiResponse) {
-	res.status(200).json({ pubKey: (await serverInit()).toString("hex") });
+export async function GET(req: Request) {
+	return NextResponse.json({ pubKey: (await serverInit()).toString("hex") });
 }
 ```
 
-#### ETH-Based Wallets
+#### EVM-Based
 
-```ts filename="publicKey.ts"
+```ts filename="publicKeyEVM/route.ts"
 import { TypedEthereumSigner } from "arbundles";
-import { NextApiRequest, NextApiResponse } from "next";
+import { NextResponse } from "next/server";
 
 /**
- * @returns The server's private key.
+ * @returns The server's public key.
  */
-export async function serverInit(): Promise<Buffer> {
-	const key = process.env.PAYMENT_PRIVATE_KEY; // your private key;
+async function serverInit(): Promise<Buffer> {
+	const key = process.env.PRIVATE_KEY_EVM; // your private key;
+	console.log("key=", key);
 	if (!key) throw new Error("Private key is undefined!");
 	const signer = new TypedEthereumSigner(key);
 	return signer.publicKey;
 }
 
-export default async function handler(req: NextApiRequest, res: NextApiResponse) {
-	res.status(200).json({ pubKey: (await serverInit()).toString("hex") });
+export async function GET(req: Request) {
+	return NextResponse.json({ pubKey: (await serverInit()).toString("hex") });
 }
 ```
 
@@ -105,74 +100,116 @@ The route `signData.ts` signs the data provided using the server's private key. 
 
 #### Solana-Based Wallets
 
-```ts filename="signData.ts"
-import Bundlr from "@bundlr-network/client/build/node";
-import type { NextApiRequest, NextApiResponse } from "next";
-import HexInjectedSolanaSigner from "arbundles/src/signing/chains/HexInjectedSolanaSigner";
+```ts filename="signDataSOL/route.ts"
+import Irys from "@irys/sdk";
+import getRpcUrl from "@/app/utils/getRpcUrl";
+import { NextResponse } from "next/server";
+import { ReadableStream } from "stream/web";
 
 /**
- *
- * @returns A signed version of the data, signatureData, as sent by the client.
+ * Given a file of the specified size, get the cost to upload, then fund a node that amount
+ * @param filesize The size of a file to fund for
+ * @returns
  */
-export async function signDataOnServer(signatureData: Buffer): Promise<Buffer> {
-	const key = process.env.PAYMENT_PRIVATE_KEY; // your private key
-	const bundlrNodeAddress = process.env.BUNDLR_NODE_ADDRESS;
-	const rpcUrl = process.env.RPC;
+async function lazyFund(filesize: string): Promise<string> {
+	console.log("lazyFund SOL");
 
-	const serverBundlr = new Bundlr(
-		//@ts-ignore
-		bundlrNodeAddress,
-		"solana",
-		key,
-		{
-			providerUrl: rpcUrl,
-		},
-	);
+	const key = process.env.PRIVATE_KEY_SOL;
+	const token = "solana";
+	const url = process.env.NEXT_PUBLIC_NODE || "";
+	const providerUrl = "https://api.devnet.solana.com"; //getRpcUrl(token || "");
 
-	const encodedMessage = Buffer.from(signatureData);
+	const serverIrys = new Irys({
+		url, // URL of the node you want to connect to
+		token, // Token used for payment and signing
+		key: key,
+		config: { providerUrl }, // Optional provider URL, only required when using Devnet
+	});
 
-	const signature = await serverBundlr.currencyConfig.sign(encodedMessage);
+	const price = await serverIrys.getPrice(parseInt(filesize));
+	console.log("lazyFund SOL price=", price);
 
-	const isValid = await HexInjectedSolanaSigner.verify(
-		serverBundlr.currencyConfig.getPublicKey() as Buffer,
-		signatureData,
-		signature,
-	);
+	const balance = await serverIrys.getLoadedBalance();
+	console.log("lazyFund SOL balance=", balance);
 
-	return Buffer.from(signature);
+	let fundTx;
+	if (price.isGreaterThanOrEqualTo(balance)) {
+		console.log("Funding node.");
+		fundTx = await serverIrys.fund(price);
+		console.log("Successfully funded fundTx=", fundTx);
+	} else {
+		console.log("Funding not needed, balance sufficient.");
+	}
+
+	// return the transaction id
+	return fundTx?.id || "";
 }
-// req: NextApiRequest,
-// res: NextApiResponse,
-export default async function handler(req: NextApiRequest, res: NextApiResponse) {
-	const body = JSON.parse(req.body);
-	const signatureData = Buffer.from(body.signatureData, "hex");
-	const signature = await signDataOnServer(signatureData);
-	res.status(200).json({ signature: signature.toString("hex") });
+
+async function readFromStream(stream: ReadableStream<Uint8Array> | null): Promise<string> {
+	if (!stream) return "";
+	const reader = stream.getReader();
+	let result = "";
+
+	while (true) {
+		const { done, value } = await reader.read();
+		if (done) break;
+		result += new TextDecoder().decode(value);
+	}
+
+	return result;
+}
+
+export async function POST(req: Request) {
+	//@ts-ignore
+	const rawData = await readFromStream(req.body as ReadableStream<Uint8Array> | null);
+
+	const body = JSON.parse(rawData);
+	const fundTx = await lazyFund(body);
+
+	return NextResponse.json({ txResult: fundTx });
 }
 ```
 
-#### Eth-Based Wallets
+#### EVM-Based
 
-```ts filename="signData.ts"
+```ts filename="signDataEVM/route.ts"
 import type { NextApiRequest, NextApiResponse } from "next";
 import { TypedEthereumSigner } from "arbundles";
+import { NextResponse } from "next/server";
 
 /**
  *
  * @returns A signed version of the data, signatureData, as sent by the client.
  */
-export async function signDataOnServer(signatureData: Buffer): Promise<Buffer> {
-	const key = process.env.PAYMENT_PRIVATE_KEY; // your private key
+async function signDataOnServer(signatureData: Buffer): Promise<Buffer> {
+	const key = process.env.PRIVATE_KEY_EVM;
 	if (!key) throw new Error("Private key is undefined!");
 	const signer = new TypedEthereumSigner(key);
 	return Buffer.from(await signer.sign(signatureData));
 }
 
-export default async function handler(req: NextApiRequest, res: NextApiResponse) {
-	const body = JSON.parse(req.body);
+async function readFromStream(stream: ReadableStream): Promise<string> {
+	const reader = stream.getReader();
+	let result = "";
+
+	while (true) {
+		const { done, value } = await reader.read();
+		if (done) break;
+		result += new TextDecoder().decode(value);
+	}
+
+	return result;
+}
+
+export async function POST(req: Request) {
+	//@ts-ignore
+	const rawData = await readFromStream(req.body);
+	const body = JSON.parse(rawData);
+
 	const signatureData = Buffer.from(body.signatureData, "hex");
 	const signature = await signDataOnServer(signatureData);
-	res.status(200).json({ signature: signature.toString("hex") });
+
+	return NextResponse.json({ signature: signature.toString("hex") });
 }
 ```
 
@@ -184,185 +221,226 @@ To perform lazy-funding of uploads, pass the exact number of bytes you want to f
 
 #### Solana-Based Wallets
 
-```ts filename="lazyFund.ts"
-import Bundlr from "@bundlr-network/client/build/node";
-import type { NextApiRequest, NextApiResponse } from "next";
+```ts filename="lazyFundSOL/route.ts"
+import { TypedEthereumSigner } from "arbundles";
+import { NextResponse } from "next/server";
+import Irys from "@irys/sdk";
 
 /**
- * Given a file of the specified size, get the cost to upload, then fund a node that amount
- * @param filesize The size of a file to fund for
- * @returns
+ * @returns The server's public key.
  */
-export async function lazyFund(filesize: string): Promise<string> {
-	// nodeJS client
-	const key = process.env.PAYMENT_PRIVATE_KEY; // your private key
-	const bundlrNodeAddress = process.env.BUNDLR_NODE_ADDRESS;
-	const rpcUrl = process.env.RPC;
-
-	const serverBundlr = new Bundlr(
-		//@ts-ignore
-		bundlrNodeAddress,
-		"solana",
-		key,
-		{
-			providerUrl: rpcUrl,
-		},
-	);
-
-	const price = await serverBundlr.getPrice(parseInt(filesize));
-	const fundTx = await serverBundlr.fund(price);
-
-	// return the transaction id
-	return fundTx.id;
+async function serverInit(): Promise<Buffer> {
+	const key = process.env.PRIVATE_KEY_SOL;
+	const token = "solana";
+	const url = process.env.NEXT_PUBLIC_NODE || "";
+	const providerUrl = "https://api.devnet.solana.com"; //getRpcUrl(token || "");
+	const serverIrys = new Irys({
+		url, // URL of the node you want to connect to
+		token, // Token used for payment and signing
+		key: key,
+		config: { providerUrl }, // Optional provider URL, only required when using Devnet
+	});
+	const publicKey = serverIrys.tokenConfig.getSigner().publicKey;
+	return publicKey;
 }
-// req: NextApiRequest,
-// res: NextApiResponse,
-export default async function handler(req: NextApiRequest, res: NextApiResponse) {
-	const body = JSON.parse(req.body);
-	const fundTx = await lazyFund(body);
 
-	res.status(200).json({ txResult: fundTx });
+export async function GET(req: Request) {
+	return NextResponse.json({ pubKey: (await serverInit()).toString("hex") });
 }
 ```
 
-#### Eth-Based Wallets
+#### EVM-Based
 
-```ts
-import Bundlr from "@bundlr-network/client";
+```ts filename="lazyFundEVM/route.ts"
 import type { NextApiRequest, NextApiResponse } from "next";
+import { TypedEthereumSigner } from "arbundles";
+import { NextResponse } from "next/server";
 
 /**
- * Given a file of the specified size, get the cost to upload, then fund a node that amount
- * @param filesize The size of a file to fund for
- * @returns
+ *
+ * @returns A signed version of the data, signatureData, as sent by the client.
  */
-export async function lazyFund(filesize: string): Promise<string> {
-	// nodeJS client
-	const key = process.env.PAYMENT_PRIVATE_KEY; // your private key
-	const bundlrNodeAddress = process.env.BUNDLR_NODE_ADDRESS;
-	const rpcUrl = process.env.RPC;
+async function signDataOnServer(signatureData: Buffer): Promise<Buffer> {
+	const key = process.env.PRIVATE_KEY_EVM;
+	if (!key) throw new Error("Private key is undefined!");
+	const signer = new TypedEthereumSigner(key);
+	return Buffer.from(await signer.sign(signatureData));
+}
 
-	const serverBundlr = new Bundlr(
-		//@ts-ignore
-		bundlrNodeAddress,
-		"matic",
-		key,
-		{
-			providerUrl: rpcUrl,
+async function readFromStream(stream: ReadableStream): Promise<string> {
+	const reader = stream.getReader();
+	let result = "";
+
+	while (true) {
+		const { done, value } = await reader.read();
+		if (done) break;
+		result += new TextDecoder().decode(value);
+	}
+
+	return result;
+}
+
+export async function POST(req: Request) {
+	//@ts-ignore
+	const rawData = await readFromStream(req.body);
+	const body = JSON.parse(rawData);
+
+	const signatureData = Buffer.from(body.signatureData, "hex");
+	const signature = await signDataOnServer(signatureData);
+
+	return NextResponse.json({ signature: signature.toString("hex") });
+}
+```
+
+## Client-side
+
+On the client-side there is a single utility function that calls either the EVM or SOL routes.
+
+```ts filename="utils/gasslessFundAndUpload.ts"
+import { WebIrys } from "@irys/sdk";
+import getIrys from "../utils/getIrys";
+
+type Tag = {
+	name: string;
+	value: string;
+};
+
+const gasslessFundAndUploadEVM = async (selectedFile: File, tags: Tag[]): Promise<string> => {
+	// obtain the server's public key
+	const pubKeyRes = (await (await fetch("/api/publicKeyEVM")).json()) as unknown as {
+		pubKey: string;
+	};
+	const pubKey = Buffer.from(pubKeyRes.pubKey, "hex");
+	// Create a provider - this mimics the behaviour of the injected provider, i.e metamask
+	const provider = {
+		// For EVM wallets
+		getPublicKey: async () => {
+			return pubKey;
 		},
-	);
-	console.log(
-		"serverBundlrPubKey",
-		//@ts-ignore
-		serverBundlr.currencyConfig.getPublicKey().toJSON(),
-	);
+		getSigner: () => {
+			return {
+				getAddress: () => pubKey.toString(), // pubkey is address for TypedEthereumSigner
+				_signTypedData: async (
+					_domain: never,
+					_types: never,
+					message: { address: string; "Transaction hash": Uint8Array },
+				) => {
+					const convertedMsg = Buffer.from(message["Transaction hash"]).toString("hex");
+					console.log("convertedMsg: ", convertedMsg);
+					const res = await fetch("/api/signDataEVM", {
+						method: "POST",
+						body: JSON.stringify({ signatureData: convertedMsg }),
+					});
+					const { signature } = await res.json();
+					const bSig = Buffer.from(signature, "hex");
+					// Pad & convert so it's in the format the signer expects to have to convert from.
+					const pad = Buffer.concat([Buffer.from([0]), Buffer.from(bSig)]).toString("hex");
+					return pad;
+				},
+			};
+		},
 
-	const price = await serverBundlr.getPrice(parseInt(filesize));
-	console.log("price=", price.toString());
-	const fundTx = await serverBundlr.fund(price);
-	console.log("successfully funded fundTx=", fundTx);
+		_ready: () => {},
+	};
+	console.log("Got provider=", provider);
+	// You can delete the lazyFund route if you're prefunding all uploads
+	// 2. then pass the size to the lazyFund API route
+	const fundTx = await fetch("/api/lazyFundEVM", {
+		method: "POST",
+		body: selectedFile.size.toString(),
+	});
 
-	// return the transaction id
-	return fundTx.id;
-}
-// req: NextApiRequest,
-// res: NextApiResponse,
-export default async function handler(req: NextApiRequest, res: NextApiResponse) {
-	const body = JSON.parse(req.body);
-	console.log("lazyFund body=", body);
-	const fundTx = await lazyFund(body);
+	// Create a new WebIrys object using the provider created with server info.
+	const url = process.env.NEXT_PUBLIC_NODE || "";
+	const token = process.env.NEXT_PUBLIC_TOKEN || "";
 
-	res.status(200).json({ txResult: fundTx });
-}
-```
+	const wallet = { name: "ethersv5", provider: provider };
+	const irys = new WebIrys({ url, token, wallet });
 
-## Client-Side Code
+	const w3signer = await provider.getSigner();
+	const address = (await w3signer.getAddress()).toLowerCase();
+	await irys.ready();
 
-Below are snippets showing how to call each server route.
+	console.log("Uploading...");
+	const tx = await irys.uploadFile(selectedFile, {
+		tags,
+	});
+	console.log(`Uploaded successfully. https://gateway.irys.xyz/${tx.id}`);
 
-### Obtaining The Server's Public Key
-
-#### For Solana and Eth-Based Wallets
-
-```ts
-// obtain the server's public key
-const pubKeyRes = await(await fetch("/api/publicKey")).json() as unknown as {
-	pubKey: string;
+	return tx.id;
 };
-const pubKey = Buffer.from(pubKeyRes.pubKey, "hex");
-```
 
-### Creating A Provider Using The `signData` Route
+const gasslessFundAndUploadSOL = async (selectedFile: File, tags: Tag[]): Promise<string> => {
+	// Obtain the server's public key
+	const pubKeyRes = (await (await fetch("/api/publicKeySOL")).json()) as unknown as {
+		pubKey: string;
+	};
+	const pubKey = Buffer.from(pubKeyRes.pubKey, "hex");
+	console.log("got pubKey=", pubKey);
+	// Create a provider
+	const provider = {
+		publicKey: {
+			toBuffer: () => pubKey,
+			byteLength: 32,
+		},
+		signMessage: async (message: Uint8Array) => {
+			let convertedMsg = Buffer.from(message).toString("hex");
+			const res = await fetch("/api/signDataSOL", {
+				method: "POST",
+				body: JSON.stringify({
+					signatureData: convertedMsg,
+				}),
+			});
+			const { signature } = await res.json();
+			const bSig = Buffer.from(signature, "hex");
+			return bSig;
+		},
+	};
 
-#### For Solana-Based Wallets
+	// You can delete the lazyFund route if you're prefunding all uploads
+	const fundTx = await fetch("/api/lazyFundSOL", {
+		method: "POST",
+		body: selectedFile.size.toString(),
+	});
 
-```ts
-// create a provider
-const provider = {
-	publicKey: {
-		toBuffer: () => pubKey,
-		byteLength: 32,
-	},
-	signMessage: async (message: Uint8Array) => {
-		const convertedMsg = Buffer.from(message).toString("hex");
-		const res = await fetch("/api/signData", {
-			method: "POST",
-			body: JSON.stringify({
-				signatureData: convertedMsg,
-			}),
-		});
-		const { signature } = await res.json();
-		const bSig = Buffer.from(signature, "hex");
-		return bSig;
-	},
+	// Create a new WebIrys object using the provider created with server info.
+	const url = process.env.NEXT_PUBLIC_NODE || "";
+	const wallet = { rpcURL: "https://api.devnet.solana.com", name: "solana", provider: provider };
+	const irys = new WebIrys({ url, token: "solana", wallet });
+
+	await irys.ready();
+	console.log("WebIrys=", irys);
+
+	console.log("Uploading...");
+	const tx = await irys.uploadFile(selectedFile, {
+		tags,
+	});
+	console.log(`Uploaded successfully. https://gateway.irys.xyz/${tx.id}`);
+
+	return tx.id;
 };
-```
 
-#### For Eth-Based Wallets
-
-```ts
-const provider = {
-	// for ETH wallets
-	getPublicKey: async () => {
-		return pubKey;
-	},
-	getSigner: () => {
-		return {
-			getAddress: () => pubKey, // pubkey is address for TypedEthereumSigner
-			_signTypedData: async (
-				_domain: never,
-				_types: never,
-				message: { address: string; "Transaction hash": Uint8Array },
-			) => {
-				let convertedMsg = Buffer.from(message["Transaction hash"]).toString("hex");
-				const res = await fetch("/api/signData", {
-					method: "POST",
-					body: JSON.stringify({ signatureData: convertedMsg }),
-				});
-				const { signature } = await res.json();
-				const bSig = Buffer.from(signature, "hex");
-				// pad & convert so it's in the format the signer expects to have to convert from.
-				const pad = Buffer.concat([Buffer.from([0]), Buffer.from(bSig)]).toString("hex");
-				return pad;
-			},
-		};
-	},
-
-	_ready: () => {},
+/**
+ * Uploads the selected file and tags after funding if necessary.
+ *
+ * @param {File} selectedFile - The file to be uploaded.
+ * @param {Tag[]} tags - An array of tags associated with the file.
+ * @returns {Promise<string>} - The transaction ID of the upload.
+ */
+const gasslessFundAndUpload = async (selectedFile: File, tags: Tag[], blockchain: "EVM" | "SOL"): Promise<string> => {
+	let txId = "";
+	switch (blockchain) {
+		case "EVM":
+			txId = await gasslessFundAndUploadEVM(selectedFile, tags);
+			break;
+		case "SOL":
+			txId = await gasslessFundAndUploadSOL(selectedFile, tags);
+			break;
+		default:
+			throw new Error("Unsupported blockchain");
+	}
+	return txId;
 };
-```
 
-### Lazy-Funding Uploads
-
-#### For Solana and Eth-Based Wallets
-
-```ts
-// 1. first create the datastream and get the size
-const dataStream = fileReaderStream(fileToUpload);
-
-// 2. then pass the size to the lazyFund API route
-const fundTx = await fetch("/api/lazyFund", {
-	method: "POST",
-	body: dataStream.size,
-});
+export default gasslessFundAndUpload;
 ```
