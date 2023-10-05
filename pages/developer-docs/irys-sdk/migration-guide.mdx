@@ -41,6 +41,14 @@ to:
 import Irys from "@irys/sdk";
 ```
 
+## Name Changes
+Apart from rebrand to Irys, certain elements within the SDK have undergone a name change.
+
+WebBundlr and (Node)Bundlr have been changed to WebIrys and (Node)Irys respectively. \
+*All* usage of `currency` in the SDK has been replaced with `token`, notably the argument as part of client instantiation (see [Constructor](migration-guide#constructor))
+as well as internal APIs (such as currencyConfig -> tokenConfig)
+
+
 ## Constructor
 
 In the Bundlr SDK, parameters are passed directly. In the Irys SDK, parameters are passed inside an options object.
