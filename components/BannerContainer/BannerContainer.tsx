@@ -59,37 +59,6 @@ const banners = [
 	},
 ];
 
-const bannersOLD = [
-	{
-		href: "/developer-docs/irys-sdk",
-		backgroundImage: "./img/data-donuts.webp",
-		title: "Irys SDK",
-		sub: "Permanent data with strong provenance in 3 lines of code",
-		backgroundPosition: "-40% -10%",
-	},
-	{
-		href: "developer-docs/querying/query-package",
-		backgroundImage: "./img/dots-cloud.png",
-		title: "Query package",
-		sub: "Search Irys and Arweave with this intuitive JavaScript package",
-		backgroundPosition: "40% -20%",
-	},
-	{
-		href: "/developer-docs/provenance-toolkit",
-		backgroundImage: "./img/data-exponential.webp",
-		title: "Provenance Toolkit",
-		sub: "UI components to kickstart your next project",
-		backgroundPosition: "-80% 100%",
-	},
-	{
-		href: "https://demo.irys.xyz",
-		backgroundImage: "./img/data-spiral.webp",
-		title: "Demo",
-		sub: "Explore Irys in action",
-		backgroundPosition: "40% -10%",
-	},
-];
-
 const BannerContainer: React.FC = () => {
 	return (
 		<div className="flex flex-col md:flex-row w-full gap-4 items-stretch px-4 lg:px-[79px]">

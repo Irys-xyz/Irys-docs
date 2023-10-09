@@ -1,0 +1,96 @@
+---
+description: Manually creating, signing and uploading a transaction.
+---
+
+import { Callout } from "nextra-theme-docs";
+import Heading from "../../../components/Heading";
+
+# Manually creating a transaction
+
+In addition to uploading using the SDK functions [`irys.upload()`](/developer-docs/irys-sdk/api/upload),[`irys.uploadFile()`](/developer-docs/irys-sdk/api/uploadFile),
+and [`irys.uploadFolder()`](/developer-docs/irys-sdk/api/uploadFolder), you can also manually create, sign, and upload a transaction in separate steps.
+
+## Creating, signing, uploading
+
+```js
+const createSignUpload = async () => {
+	// Get a reference to a pre-configured Irys object
+	const irys = await getIrys();
+
+	// Create the transaction
+	const tx = irys.createTransaction("GM World!", { tags: [{ name: "Content-Type", value: "text/plain" }] });
+
+	// Sign the transaction
+	await tx.sign();
+	// ID is now set
+	console.log(`Tx created and signed, ID=${tx.id}`);
+
+	// Upload the transaction
+	const receipt = await tx.upload();
+	console.log(receipt);
+	console.log(`\nTx uploaded. https://gateway.irys.xyz/${receipt.id}`);
+};
+```
+
+## Serializing a transaction
+
+You can serialize a transaction and then recreate it later.
+
+```js
+const serializationUpload = async () => {
+	// Get a reference to a pre-configured Irys object
+	const irys = await getIrys();
+
+	// Create the transaction
+	const tx1 = irys.createTransaction("GM World!", { tags: [{ name: "Content-Type", value: "text/plain" }] });
+	// Note: You can sign before *or* after serializing
+	await tx1.sign();
+	// ID is now set
+	console.log(`Tx created and signed, ID=${tx1.id}`);
+
+	// Serialize the transaction
+	const txSerialized = tx1.getRaw();
+
+	// Recreate the transaction from the serialized version
+	const tx2 = irys.transaction.fromRaw(txSerialized);
+	// ID is the same as before
+	console.log(`Tx re-created from serialized, ID=${tx2.id}`);
+
+	// Upload the tx
+	const receipt = await tx2.upload();
+
+	console.log(`\nTx uploaded. https://gateway.irys.xyz/${receipt.id}`);
+};
+```
+
+## Deterministic ID
+
+```js
+const deterministicIDUpload = async () => {
+	// Get a reference to a pre-configured Irys object
+	const irys = await getIrys();
+
+	// Needs to generate 32 bytes through Buffer.from(anchor)
+	const anchor = randomBytes(16).toString("hex");
+	const tx1 = irys.createTransaction("GM World!", {
+		tags: [{ name: "content-type", value: "text/plain" }],
+		anchor,
+	});
+	await tx1.sign();
+	console.log(`Tx1 ID={$tx1.id}`);
+	console.log(tx1.id); // ID is now set
+
+	const tx2 = irys.createTransaction("GM World!", {
+		tags: [{ name: "content-type", value: "text/plain" }],
+		anchor,
+	});
+	await tx2.sign();
+	console.log(`Tx2 ID={$tx2.id}`);
+	console.log(tx2.id); // id is the same as tx
+
+	const receipt1 = await tx1.upload();
+
+	// This will throw an error as the Tx ID has already been used
+	const receipt2 = await tx1.upload();
+};
+```
