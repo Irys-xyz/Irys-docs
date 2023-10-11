@@ -20,7 +20,7 @@ const Document = () => {
 
 				<meta name="twitter:card" content="summary_large_image" />
 				<meta property="twitter:domain" content="irys.xyz" />
-				<meta property="twitter:url" content="https://iryx.xyz" />
+				<meta property="twitter:url" content="https://irys.xyz" />
 				<meta name="twitter:title" content="Irys | Home" />
 				<meta
 					name="twitter:description"
