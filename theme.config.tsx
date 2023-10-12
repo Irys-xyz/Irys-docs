@@ -38,8 +38,8 @@ export default {
 	banner: {
 		key: "dev-quest2",
 		text: (
-			<a href="/developer-docs/provenance-toolkit" target="_blank">
-				🎉 Irys Provenance Toolkit Released. Read More →
+			<a href="https://irys.xyz/blog/bundlr-is-now-irys" target="_blank">
+				🎉 Bundlr is now Irys. Read More →
 			</a>
 		),
 	},

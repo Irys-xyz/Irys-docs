@@ -4,7 +4,5 @@
 	"irys-in-the-browser": "Irys in the browser",
 	"api": "API Docs",
 	"chunked-uploader": "Chunked uploader",
-	"manual-transaction": {
-		"display": "hidden"
-	}
+	"manual-transaction": "Manually creating a Tx"
 }
