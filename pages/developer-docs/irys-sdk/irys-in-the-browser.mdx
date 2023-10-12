@@ -93,11 +93,98 @@ After instantiating the object, call `webIrys.ready()`.
 
 WebIrys supports the following providers. When instantiating a new `WebIrys` object, you must pass in the name of the provider you will be using.
 
-| Package                                   | Parameter value |
-| ----------------------------------------- | --------------- |
-| [ Ethers 5 ](https://docs.ethers.org/v5/) | ethersv5        |
-| [ Ethers 6 ](https://docs.ethers.org/v6/) | ethersv6        |
-| [Solana ](https://solana.com/)            | solana          |
+| Package                                 | Parameter value |
+| --------------------------------------- | --------------- |
+| [Ethers 5](https://docs.ethers.org/v5/) | ethersv5        |
+| [Ethers 6](https://docs.ethers.org/v6/) | ethersv6        |
+| [Solana](https://solana.com/)           | solana          |
+
+### Additional providers
+
+Additionally, the following providers will work with extra setup code.
+
+#### [Viem](https://viem.sh/)
+
+```ts
+const getIrys = async (): Promise<WebIrys> => {
+	const url = "https://node1.irys.xyz";
+	const token = "matic";
+	const rpcURL = "https://rpc-mumbai.maticvigil.com"; // Optional parameter
+
+	const client = createWalletClient({
+		chain: polygonMumbai,
+		//@ts-ignore
+		transport: custom(window.ethereum),
+	});
+
+	console.log("client=", client);
+	//@ts-expect-error injected
+	client.getSigner = () => client;
+	//@ts-expect-error injected
+	client.getAddress = async () => client.getAddresses().then((a) => a[0]);
+
+	const wallet = { name: "viem", provider: client };
+	const webIrys = new WebIrys({ url, token, wallet });
+
+	// @ts-expect-error
+	webIrys.tokenConfig.getFee = async (_amount, _to): Promise<number> => {
+		return 0;
+	};
+
+	// if you're using react hooks:
+	webIrys.tokenConfig.sendTx = async (data): Promise<string> => {
+		const { sendTransaction } = useSendTransaction(data);
+		await sendTransaction?.();
+		// make this function return the transaction id
+		// think it's
+		return data.hash;
+	};
+
+	webIrys.tokenConfig.createTx = async (
+		amount: string | number,
+		to: string,
+		_fee?: string,
+	): Promise<{ txId: string | undefined; tx: any }> => {
+		const { config } = usePrepareSendTransaction({
+			to, //@ts-expect-error weird type
+			value: parseEther(+amount),
+		});
+		return { txId: undefined, tx: config };
+	};
+
+	// Otherwise
+	webIrys.tokenConfig.sendTx = async (data): Promise<string> => {
+		const hash = await client.sendTransaction({
+			to: data.to,
+			value: parseEther(data.amount.toString()),
+			account: webIrys.address as `0x${string}`,
+		});
+		return hash;
+	};
+
+	webIrys.tokenConfig.createTx = async (amount, to, fee): Promise<{ txId: string | undefined; tx: any }> => {
+		// dummy value/method
+		return { txId: undefined, tx: { amount, to, fee } };
+	};
+	await webIrys.ready();
+
+	//@ts-expect-error injected
+	client._signTypedData = async (domain, types, message) => {
+		message["Transaction hash"] = "0x" + Buffer.from(message["Transaction hash"]).toString("hex");
+		//@ts-ignore
+		return await client.signTypedData({
+			domain,
+			message,
+			types,
+			account: webIrys.address!,
+			primaryType: "Bundlr",
+		});
+	};
+
+	console.log(`Conected to webIrys from ${webIrys.address}`);
+	return webIrys;
+};
+```
 
 ## Funding a node
 
