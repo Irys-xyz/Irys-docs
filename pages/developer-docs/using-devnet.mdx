@@ -2,13 +2,24 @@
 description: Build and prototype your application on Irys' Devnet
 ---
 
+import { Callout } from "nextra-theme-docs";
+
 # Using Devnet
 
-Irys' Devnet is for developers who are building projects or learning how to use our SDK. Uploads to Devnet are kept for approximately 60 days. When using Devnet, developers pay using tokens that are available from free public faucets.
+Uploads to Irys' Devnet are paid for using free faucet tokens and are kept for approximately 60 days. Devnet is for developers who are building projects or learning how to use our SDK.
 
-To connect to Devnet, supply the address of our Devnet node when instantiating either an `Irys` or `WebIrys` object.
+To connect to Devnet, supply the address of our [Devnet node](/overview/nodes) when instantiating either an `Irys` or `WebIrys` object.
 
-When using Devnet with the `Irys` class, you must specify an RPC address. When using the `WebIrys` class, the RPC address is only required when using non-EVM chains.
+## RPC / Provider URL
+
+When using Devnet with the `Irys` class and with our CLI, you must specify an RPC address. When using the `WebIrys` class, the RPC address is only required when using non-EVM chains.
+
+<Callout type="info" emoji="ℹ️">
+If you encounter this message when using our SDK or CLI, make sure you are supplying the correct RPC URL for the chain you're using.
+
+`Using devnet.irys.xyz requires a dev/testnet RPC to be configured!`
+
+</Callout>
 
 ## `Irys` Class (Server-side)
 
@@ -91,4 +102,17 @@ const getWebIrys = async () => {
 
 	return webIrys;
 };
+```
+
+## CLI
+
+See [CLI documentation](/developer-docs/cli) for examples of how to use each command with our Devnet.
+
+```console
+irys upload myImage.png \
+  -h https://devnet.irys.xyz \
+  -t matic \
+  -w bf20......c9885307 \
+  --tags tagName1 tagValue1 tagName2 tagValue2 \
+  --provider-url https://rpc-mumbai.maticvigil.com
 ```

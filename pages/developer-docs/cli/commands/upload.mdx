@@ -8,18 +8,37 @@ import { Callout } from "nextra-theme-docs";
 
 Uploads a single file.
 
-**Required Parameters**
+**Parameters**
 
 <div className="-mt-6" />
 
 -   `-h`: The you'll node upload to
 -   `-t`: The [token](/overview/supported-tokens) to use when uploading.
 -   `-w`: Your [private key](/developer-docs/cli#using-private-keys).
+-   `--tags`: [Tags](/developer-docs/tags) to include, format `<name>` `<value>`
+-   `--provider-url`: RPC URL to use. This is only required when using Devnet.
 
-## Example
+## Examples
+
+### Nodes 1 and 2
 
 ```console
-irys upload myImage.png -h https://node1.irys.xyz -t matic -w bf20......c9885307
+irys upload myImage.png \
+  -h https://node1.irys.xyz \
+  -t matic \
+  -w bf20......c9885307 \
+  --tags tagName1 tagValue1 tagName2 tagValue2
+```
+
+### Devnet
+
+```console
+irys upload myImage.png \
+  -h https://devnet.irys.xyz \
+  -t matic \
+  -w bf20......c9885307 \
+  --tags tagName1 tagValue1 tagName2 tagValue2 \
+  --provider-url https://rpc-mumbai.maticvigil.com
 ```
 
 ## Downloading
@@ -27,7 +46,11 @@ irys upload myImage.png -h https://node1.irys.xyz -t matic -w bf20......c9885307
 Files uploaded via `irys upload` can be downloaded using the transaction ID provided after a successful upload.
 
 ```console
-irys upload myImage.png -t tagName1 tagValue1 tagName2 tagValue2 -h https://node1.irys.xys -t matic -w bf20......c9885307
+irys upload myImage.png \
+  -h https://node1.irys.xyz \
+  -t matic \
+  -w bf20......c9885307 \
+  --tags tagName1 tagValue1 tagName2 tagValue2
 
 Loaded address: 0xac568a981b1370b2e1baa8ce30bd5ac9e28c572d
 Uploaded to https://gateway.irys.xyz/yPX6_rwxfJ_2gTvXSHGoumIvlFR-EwuRlUMmHpeLHUM

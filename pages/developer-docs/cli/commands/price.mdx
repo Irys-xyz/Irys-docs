@@ -8,15 +8,29 @@ import { Callout } from "nextra-theme-docs";
 
 Checks the price to upload the specified number of bytes.
 
-**Required Parameters**
+**Parameters**
 
 <div className="-mt-6" />
 
 -   `-t`: The [token](/overview/supported-tokens) used for payment.
 -   `-h`: URL of the node you will upload to.
+-   `--provider-url`: RPC URL to use. This is only required when using Devnet.
 
-## Example
+## Examples
+
+### Nodes 1 and 2
 
 ```console
-irys price 1000000 -t matic -h https://node1.irys.xyz
+irys price 1000000 \
+  -t matic \
+  -h https://node1.irys.xyz
+```
+
+### Devnet
+
+```console
+irys price 1000000 \
+  -t matic \
+  -h https://devnet.irys.xyz \
+  --provider-url https://rpc-mumbai.maticvigil.com
 ```

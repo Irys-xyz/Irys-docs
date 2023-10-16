@@ -8,18 +8,34 @@ import { Callout } from "nextra-theme-docs";
 
 Funds the [Irys node](/overview/nodes) you connected to with the specified amount of tokens. Fund the node you intend to upload to, funded balances are not shared between nodes.
 
-**Required Parameters**
+**Parameters**
 
 <div className="-mt-6" />
 
 -   `-h`: The node to fund
 -   `-t`: The [token](/overview/supported-tokens) to use when funding.
 -   `-w`: Your [private key](/developer-docs/cli#using-private-keys).
+-   `--provider-url`: RPC URL to use. This is only required when using Devnet.
 
-## Example
+## Examples
+
+### Nodes 1 and 2
 
 ```console
-irys fund 1000000000000000 -h https://node1.irys.xyz -t matic -w bf20......c9885307
+irys fund 1000000000000000 \
+  -h https://node1.irys.xyz \
+  -t matic \
+  -w bf20......c9885307
+```
+
+### Devnet
+
+```console
+irys fund 1000000000000000 \
+  -h https://devnet.irys.xyz \
+  -t matic \
+  -w bf20......c9885307 \
+  --provider-url https://rpc-mumbai.maticvigil.com
 ```
 
 <Callout type="info" emoji="ℹ️">

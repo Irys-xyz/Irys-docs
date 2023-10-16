@@ -8,19 +8,29 @@ import { Callout } from "nextra-theme-docs";
 
 Returns the amount of funds available on the specified node. Provide your public wallet address as an argument, along with the following required paramters.
 
-**Required Parameters**
+**Parameters**
 
 <div className="-mt-6" />
 
 -   `-h`: The node to check
 -   `-t`: The [token](/overview/supported-tokens) to use when funding.
+-   `--provider-url`: RPC URL to use. This is only required when using Devnet.
 
-## Example
+## Examples
+
+### Nodes 1 and 2
 
 ```console
-irys balance 0xac568a981b1370b2e1baa8ce30bd5ac9e28c572d -t matic -h https://node1.irys.xyz
+irys balance 0xac568a981b1370b2e1baa8ce30bd5ac9e28c572d \
+  -t matic \
+  -h https://node1.irys.xyz
 ```
 
-<Callout type="info" emoji="ℹ️">
-Not all calls to `fund` will post immediately to your account, some blockchains are faster than others. When funding with AR, it can take upwards of 40 minutes before the balance post. For MATIC, ETH and SOL, balances will usually post in < 10s.
-</Callout>
+### Devnet
+
+```console
+irys balance 0x591B5Ce7cA10a55A9B5d1516eF89693D5b3586b8 \
+  -t matic \
+  -h https://devnet.irys.xyz \
+  --provider-url https://rpc-mumbai.maticvigil.com
+```
