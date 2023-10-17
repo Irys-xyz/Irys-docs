@@ -2,9 +2,11 @@
 description: Uploads a folder of files to Irys
 ---
 
-# `irys.uploadFolder()`
+# `uploadFolder()`
 
-[Permanently](/overview/permanent-data) uploads a folder.
+[Permanently](/overview/permanent-data) uploads a folder. This function is supported with both server-side [`Irys`](/developer-docs/irys-sdk/api/uploadFolder#irysuploadfolder) class and browser-based [`WebIrys`](/developer-docs/irys-sdk/api/uploadFolder#webirysuploadfolder) class, however the signatures differ.
+
+## `irys.uploadFolder()`
 
 **Parameters**
 
@@ -21,10 +23,10 @@ description: Uploads a folder of files to Irys
 
 <div className="-mt-6" />
 
--   `receipt`: A JSON object with the following values
+-   `response`: A JSON object with the following values
 
 ```json
-response = {
+{
 	id, // Transaction id (used to download the data)
 	timestamp, // Timestamp (UNIX milliseconds) of when the transaction was created and verified
 	version, // The version of this JSON file, currently 1.0.0
@@ -37,6 +39,8 @@ response = {
 }
 ```
 
+**Example**
+
 ```js
 const irys = await getIrys();
 
@@ -44,10 +48,10 @@ const irys = await getIrys();
 const folderToUpload = "./my-images/"; // Path to folder
 try {
 	const response = await irys.uploadFolder("./" + folderToUpload, {
-		indexFile: "", // optional index file (file the user will load when accessing the manifest)
-		batchSize: 50, //number of items to upload at once
-		keepDeleted: false, // whether to keep now deleted items from previous uploads
-	}); //returns the manifest ID
+		indexFile: "", // Optional index file (file the user will load when accessing the manifest)
+		batchSize: 50, // Number of items to upload at once
+		keepDeleted: false, // Whether to keep now deleted items from previous uploads
+	}); 
 
 	console.log(`Files uploaded. Manifest ID ${response.id}`);
 } catch (e) {
@@ -55,7 +59,89 @@ try {
 }
 ```
 
-Files uploaded via `irys.uploadFolder(folderToUpload)` can be retrieved in one of two ways.
+## `webIrys.uploadFolder()`
+
+**Parameters**
+
+<div className="-mt-6" />
+
+-   `files`: An array of `TaggedFile` objects, each containing a `File` and an array of tags to be added to that file
+-   `indexFileRelPath`: (optional) The name of an
+    index file also included in the folder you upload. If provided, this index file will load when a user requests
+    `https://gateway.irys.xyz/[manifest_id]`
+-   `throwawayKey`: (optional) Your own throwaway JWK to use for signing (i.e if you want to use the same one for more than one set of uploads).
+-   `seperateManifestTx`: (optional) If true, the manifest transaction will be excluded from the bundle making its tags indexable and queryable.
+
+**Returns**
+
+<div className="-mt-6" />
+
+-   `manifest`: A JSON object with the following values
+
+```json
+{
+	id, // Manifest ID 
+	timestamp, // Timestamp (UNIX milliseconds) of when the transaction was created and verified
+	version, // The version of this JSON file, currently 1.0.0
+	public, // Public key of the bundler node used
+	signature, // A signed deep hash of the JSON receipt
+	deadlineHeight, // The block number by which the transaction must be finalized on Arweave
+	block, // Deprecated
+	validatorSignatures, // Reserved for future use once we're decentralized
+	verify, // An async function used to verify the receipt at any time
+}
+```
+
+**Example**
+```ts
+const webIrys = await getWebIrys();
+
+const files: File[] = [];
+const tags: { name: string; value: string }[][] = [];
+
+// Set files and tags in your UI
+
+// Convert to TaggedFile objects
+const taggedFiles = files.map((f: TaggedFile, i: number) => {
+	f.tags = tags[i];
+	return f;
+});
+
+// Optional parameters
+const uploadOptions = {
+	indexFileRelPath: "./index.html",
+	manifestTags: myTags,
+	throwawayKey: myKey,
+	seperateManifestTx: true,
+};
+const response = await webIrys.uploadFolder(taggedFiles, uploadOptions);
+```
+**Returns**
+
+A JSON object containing the following values. A receipt is also generated which can be retrieved using [`irys.utils.getReceipt(response.id)`](/developer-docs/irys-sdk/api/utils-getReceipt)
+
+```json
+{
+	id, // Transaction ID 
+	manifestId, // Manifest ID
+	manifest, // The manifest
+    txs, // An array of DataItems, one for each entry in the bundle
+	timestamp, // Timestamp (UNIX milliseconds) of when the transaction was created and verified
+	version, // The version of this JSON file, currently 1.0.0
+	public, // Public key of the bundler node used
+	signature, // A signed deep hash of the JSON receipt
+	deadlineHeight, // The block number by which the transaction must be finalized on Arweave
+	block, // Deprecated
+	validatorSignatures, // Reserved for future use once we're decentralized
+	verify, // An async function used to verify the receipt at any time
+}
+```
+
+
+
+## Downloading
+
+Files uploaded via `uploadFolder()` can be retrieved in one of two ways.
 
 1. Creating an URL with the format `https://gateway.irys.xyz/[manifest-id]/[original-file-name]`.
 2. Creating an URL using the transaction ID of each individual file uploaded with the format `https://gateway.irys.xyz/[transacton-id]`
