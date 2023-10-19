@@ -13,41 +13,42 @@ import Highlight from "react-highlight";
 import Video from "../components/Video";
 
 <Head>
-	<title>Irys | Docs</title>
-	<meta
-		name="description"
-		content="Unlock the full potential of Irys’ technology with our developer resources. Start building on Irys today!"
-	/>
+  <title>Irys | Docs</title>
+  <meta
+    name="description"
+    content="Unlock the full potential of Irys’ technology with our developer resources. Start building on Irys today!"
+  />
 </Head>
 
 <style jsx>
-	{`
-		:global(nav) {
-			min-width: 100% !important;
-			padding-right: 79px !important;
-			padding-left: 79px !important;
-		}
+  {`
+    :global(nav) {
+      min-width: 100% !important;
+      padding-right: 79px !important;
+      padding-left: 79px !important;
+    }
 
-		@media (max-width: 768px) {
-			:global(nav) {
-				padding-right: 16px !important;
-				padding-left: 16px !important;
-			}
-		}
-	`}
+    @media (max-width: 768px) {
+      :global(nav) {
+        padding-right: 16px !important;
+        padding-left: 16px !important;
+      }
+    }
+  `}
 </style>
 
 <div>
 
 <div
-	className="absolute top-0 left-0 w-full h-full"
-	style={{
-		backgroundImage: "url('./img/dots-cloud.png')",
-		backgroundSize: "140%",
-		backgroundRepeat: "no-repeat",
-		filter: "blur(20px)",
-		opacity: ".3",
-	}}
+  className="absolute top-0 left-0 w-full h-full"
+  style={{
+    backgroundImage: "url('./img/dots-cloud.png')",
+    backgroundSize: "140%",
+    backgroundRepeat: "no-repeat",
+    filter: "blur(20px)",
+    opacity: ".3",
+    zIndex: "-1",
+  }}
 />
 
 <header className="px-4 lg:px-[79px] py-14">
@@ -67,14 +68,17 @@ import Video from "../components/Video";
 
 <div className="px-4 lg:px-[79px] py-20">
 
-<Heading level={6} className="!font-satoshi leading-none text-center md:text-left mt-10">
-	Use our SDK and start storing data permanently with 3 lines of code.
+<Heading
+  level={6}
+  className="!font-satoshi leading-none text-center md:text-left mt-10"
+>
+  Use our SDK and start storing data permanently with 3 lines of code.
 </Heading>
 
          <div className="rounded-xl bg-black p-4 mt-4">
 
 <Highlight className="js text-base leading-loose">
-	{`const irys = new Irys({ url, token, key });
+  {`const irys = new Irys({ url, token, key });
 const fundTx = await irys.fund(irys.utils.toAtomic(0.05));
 const receipt = await irys.uploadFile("./myImage.png");`}
 </Highlight>
@@ -83,33 +87,33 @@ const receipt = await irys.uploadFile("./myImage.png");`}
 </div>
 
 <HomeProduct
-	title={"Overview"}
-	items={[
-		{
-			id: 0,
-			title: "About",
-			description: "Unlock the potential of Irys' technology",
-			href: "/overview/about",
-		},
-		{
-			id: 1,
-			title: "Permanent data",
-			description: "Performant and scalable – forever",
-			href: "/overview/permanent-data",
-		},
-		{
-			id: 2,
-			title: "Ordering",
-			description: "Sequence data with extreme precision",
-			href: "/overview/ordering",
-		},
-		{
-			id: 3,
-			title: "Tools",
-			description: "Get started building with Irys",
-			href: "/overview/tools",
-		},
-	]}
+  title={"Overview"}
+  items={[
+    {
+      id: 0,
+      title: "About",
+      description: "Unlock the potential of Irys' technology",
+      href: "/overview/about",
+    },
+    {
+      id: 1,
+      title: "Permanent data",
+      description: "Performant and scalable – forever",
+      href: "/overview/permanent-data",
+    },
+    {
+      id: 2,
+      title: "Ordering",
+      description: "Sequence data with extreme precision",
+      href: "/overview/ordering",
+    },
+    {
+      id: 3,
+      title: "Tools",
+      description: "Get started building with Irys",
+      href: "/overview/tools",
+    },
+  ]}
 />
 
       <section className="relative flex flex-col items-center justify-center gap-10 overflow-hidden bg-black pt-20 pb-20 text-white md:pb-[100px]">
@@ -136,11 +140,12 @@ const receipt = await irys.uploadFile("./myImage.png");`}
 <section className="bg-seashell px-4 lg:px-[79px] text-black py-28 text-center lg:text-left flex flex-col items-stretch justify-center lg:items-stretch lg:justify-center w-full">
 
 <div className="flex items-center justify-center lg:items-start lg:justify-start">
-	<SectionTitle title="Hands on" />
+  <SectionTitle title="Hands on" />
 </div>
 <p className="pt-8 font-backup font-satoshi leading-loose">
-	Start with tutorials and then join a global community of over 40,000 developers in our Quests program. Earn unique
-	NFTs for every quest you complete.
+  Start with tutorials and then join a global community of over 40,000
+  developers in our Quests program. Earn unique NFTs for every quest you
+  complete.
 </p>
 
   <ul className="flex flex-col gap-10 lg:flex-row mt-16">
