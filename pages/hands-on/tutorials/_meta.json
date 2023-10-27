@@ -12,7 +12,7 @@
 	"udl-erc20": "Manage UDL ownership with ERC20",
 	"udl-nft": "NFT licensing and UDL",
 	"lens": "Upload Lens metadata",
-	"server-side-encyption": {
-		"display": "hidden"
-	}
+	"encrypting-on-chain-data": "Encrypting on-chain data",
+	"server-side-encryption": "Encryping data server-side",
+	"browser-based-encryption": "Encryping data in the browser"
 }
