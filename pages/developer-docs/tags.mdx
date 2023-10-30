@@ -10,7 +10,11 @@ Tags can be used to:
 
 -   Categorize transactions, making it easier to [search for and retrieve relevant information](/developer-docs/querying)
 -   Build [provenance chains](/hands-on/tutorials/provenance-chain)
--   Inform web browsers how to render image files
+-   Inform web browsers how to render files
+
+## Querying
+
+Tags are indexed by gateways and are queryable using the [Irys query package](/developer-docs/querying/query-package#tags) and [GraphQL](/developer-docs/querying/graphql#tags).
 
 ## Content-Type
 
@@ -43,7 +47,7 @@ irys upload myImage.png -t tagName1 tagValue1 tagName2 tagValue2 -h https://node
 
 There are no limits on the number of tags you can append to your files or folders. You're free to add as many tags as you wish, enabling the construction of semi-relational models within your data.
 
-A popular practice involves creating an `application-id tag`, this tag helps segregate your uploads from others.
+A popular practice involves creating an `application-id` tag, this tag helps segregate your uploads from others.
 
 ```js
 // Your file
