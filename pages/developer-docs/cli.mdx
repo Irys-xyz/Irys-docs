@@ -5,6 +5,7 @@ description: Use Irys from your CLI
 import { Tab, Tabs } from "nextra-theme-docs";
 import Heading from "../../components/Heading";
 import SectionTitle from "../../components/SectionTitle";
+import { Callout } from "nextra-theme-docs";
 
 <div className="mt-7">
 	<Heading level={1} className="">
@@ -65,8 +66,12 @@ irys -h https://node1.irys.xyz
 When connecting to Devnet, you must supply the additional `--provider-url` paramter.
 
 ```console
-irys -h https://devnet.irys.xyz --provider-url https://matic-mumbai.chainstacklabs.com
+irys -h https://devnet.irys.xyz --provider-url https://rpc-mumbai.maticvigil.com
 ```
+
+<Callout type="info" emoji="ℹ️">
+	Devnet RPC URLs change often, use a recent one from https://chainlist.org/chain/80001
+</Callout>
 
 ## Funding
 

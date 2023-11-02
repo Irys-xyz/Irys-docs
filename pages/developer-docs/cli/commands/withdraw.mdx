@@ -8,6 +8,10 @@ import { Callout } from "nextra-theme-docs";
 
 Withdraws funds from specified [Irys node](/overview/nodes).
 
+<Callout type="info" emoji="ℹ️">
+Not all calls to `withdraw` will post immediately to your account, some blockchains are faster than others. When funding with AR, it can take upwards of 40 minutes before the balance post. For MATIC, ETH and SOL, balances will usually post in < 10s.
+</Callout>
+
 **Parameters**
 
 <div className="-mt-6" />
@@ -39,5 +43,5 @@ irys withdraw 1000000000000000 \
 ```
 
 <Callout type="info" emoji="ℹ️">
-Not all calls to `withdraw` will post immediately to your account, some blockchains are faster than others. When funding with AR, it can take upwards of 40 minutes before the balance post. For MATIC, ETH and SOL, balances will usually post in < 10s.
+	Devnet RPC URLs change often, use a recent one from https://chainlist.org/chain/80001
 </Callout>

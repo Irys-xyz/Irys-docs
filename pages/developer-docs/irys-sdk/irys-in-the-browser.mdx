@@ -75,7 +75,8 @@ const getWebIrys = async () => {
 
 	const url = "https://node1.irys.xyz";
 	const token = "matic";
-	const rpcURL = "https://rpc-mumbai.maticvigil.com"; // Optional parameter
+	// Devnet RPC URLs change often, use a recent one from https://chainlist.org/chain/80001
+	const rpcURL = "";
 
 	// Create a wallet object
 	const wallet = { rpcUrl: rpcURL, name: "ethersv5", provider: provider };

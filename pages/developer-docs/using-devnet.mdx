@@ -29,7 +29,8 @@ If you encounter this message when using our SDK or CLI, make sure you are suppl
 const getIrys = async () => {
 	const url = "https://devnet.irys.xyz";
 	const token = "matic";
-	const providerUrl = "https://rpc-mumbai.maticvigil.com";
+	// Devnet RPC URLs change often, use a recent one from https://chainlist.org/chain/80001
+	const providerUrl = "";
 
 	const irys = new Irys({
 		url, // URL of the node you want to connect to
@@ -116,3 +117,7 @@ irys upload myImage.png \
   --tags tagName1 tagValue1 tagName2 tagValue2 \
   --provider-url https://rpc-mumbai.maticvigil.com
 ```
+
+<Callout type="info" emoji="ℹ️">
+	Devnet RPC URLs change often, use a recent one from https://chainlist.org/chain/80001
+</Callout>

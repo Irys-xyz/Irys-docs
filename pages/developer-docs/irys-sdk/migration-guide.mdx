@@ -42,12 +42,12 @@ import Irys from "@irys/sdk";
 ```
 
 ## Name Changes
+
 Apart from rebrand to Irys, certain elements within the SDK have undergone a name change.
 
 WebBundlr and (Node)Bundlr have been changed to WebIrys and (Node)Irys respectively. \
-*All* usage of `currency` in the SDK has been replaced with `token`, notably the argument as part of client instantiation (see [Constructor](migration-guide#constructor))
+_All_ usage of `currency` in the SDK has been replaced with `token`, notably the argument as part of client instantiation (see [Constructor](migration-guide#constructor))
 as well as internal APIs (such as currencyConfig -> tokenConfig)
-
 
 ## Constructor
 
@@ -57,7 +57,8 @@ Update `new Bundlr` to `new Irys` and then wrap your constructor arguments in `{
 
 ```js
 const url = "https://devnet.irys.xyz";
-const providerUrl = "https://rpc-mumbai.maticvigil.com";
+// Devnet RPC URLs change often, use a recent one from https://chainlist.org/chain/80001
+const providerUrl = "";
 const token = "matic";
 
 const bundlr = new Bundlr(url, token, process.env.PRIVATE_KEY);
@@ -116,7 +117,8 @@ const getWebIrys = async () => {
 
 	const url = "https://node1.irys.xyz";
 	const token = "matic";
-	const rpcURL = "https://rpc-mumbai.maticvigil.com"; // Optional parameter
+	// Devnet RPC URLs change often, use a recent one from https://chainlist.org/chain/80001
+	const rpcUrl = "";
 
 	// Create a wallet object
 	const wallet = { rpcUrl: rpcURL, name: "ethersv5", provider: provider };

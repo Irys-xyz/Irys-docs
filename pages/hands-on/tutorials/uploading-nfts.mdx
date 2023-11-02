@@ -49,7 +49,8 @@ dotenv.config();
 // Returns a reference to an Irys node
 const getIrys = async () => {
 	const url = "https://devnet.irys.xyz";
-	const providerUrl = "https://rpc-mumbai.maticvigil.com";
+	// Devnet RPC URLs change often, use a recent one from https://chainlist.org/chain/80001
+	const providerUrl = "";
 	const token = "matic";
 	const privateKey = process.env.PRIVATE_KEY;
 
@@ -111,7 +112,8 @@ dotenv.config();
 // Returns a reference to an Irys node
 const getIrys = async () => {
 	const url = "https://devnet.irys.xyz";
-	const providerUrl = "https://rpc-mumbai.maticvigil.com";
+	// Devnet RPC URLs change often, use a recent one from https://chainlist.org/chain/80001
+	const providerUrl = "";
 	const token = "matic";
 	const privateKey = process.env.PRIVATE_KEY;
 
@@ -119,7 +121,7 @@ const getIrys = async () => {
 		url, // URL of the node you want to connect to
 		token, // Token used for payment
 		key: privateKey, // ETH or SOL private key
-		config: { providerUrl: providerUrl }, // Optional provider URL, only required when using Devnet
+		config: { providerUrl }, // Optional provider URL, only required when using Devnet
 	});
 	return irys;
 };
