@@ -3,6 +3,8 @@
 	"uploader": "Uploader",
 	"progress-bar-uploader": "Progress bar uploader",
 	"udl-uploader": "UDL uploader",
+	"encrypted-uploader": "Encrypted uploader",
+	"solana-nft-minter": "Solana NFT minter",
 	"gassless-uploader": "Gassless uploader",
 	"transaction-feed": "Transaction feed"
 }
