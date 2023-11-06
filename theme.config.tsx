@@ -38,8 +38,8 @@ export default {
 	banner: {
 		key: "dev-quest2",
 		text: (
-			<a href="https://irys.xyz/blog/bundlr-is-now-irys" target="_blank">
-				🎉 Bundlr is now Irys. Read More →
+			<a href="/developer-docs/status" target="_blank">
+				Irys and NodeJS v20 Incompatibility Update. Read More →
 			</a>
 		),
 	},
