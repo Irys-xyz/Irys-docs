@@ -35,14 +35,14 @@ export default {
 	footer: {
 		component: FooterWrapper,
 	},
-	banner: {
-		key: "dev-quest2",
-		text: (
-			<a href="/developer-docs/status" target="_blank">
-				Irys and NodeJS v20 Incompatibility Update. Read More →
-			</a>
-		),
-	},
+	// banner: {
+	// 	key: "dev-quest2",
+	// 	text: (
+	// 		<a href="/developer-docs/status" target="_blank">
+	// 			Irys and NodeJS v20 Incompatibility Update. Read More →
+	// 		</a>
+	// 	),
+	// },
 	useNextSeoProps() {
 		const { asPath } = useRouter();
 		if (asPath !== "/") {
