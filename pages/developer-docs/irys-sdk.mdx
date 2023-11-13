@@ -179,3 +179,17 @@ const result = await irys
 	.fromTimestamp(new Date("2023-07-01"))
 	.toTimestamp(new Date("2023-07-03"));
 ```
+
+## 3rd party build tools
+
+### Parcel
+
+If using [Parcel](https://parceljs.org/), you will need to [manually enable package exports](https://parceljs.org/features/dependency-resolution/#package-exports) by adding the following to the `package.json` file in your project root directory.
+
+```json
+{
+	"@parcel/resolver-default": {
+		"packageExports": true
+	}
+}
+```
