@@ -36,7 +36,7 @@ Three steps to creating an NFT:
 	[Thirdweb](https://thirdweb.com/) has free, audited contracts available for use.
 </Callout>
 
-## Uploading assets
+## Uploading assets (SDK)
 
 After [installing the Irys SDK](/developer-docs/irys-sdk), use the following to upload your assets.
 
@@ -85,6 +85,19 @@ const uploadImage = async () => {
 };
 ```
 
+## Uploading assets (CLI)
+
+Alternatively, you can [upload](/developer-docs/cli/commands/upload) using our [CLI](/developer-docs/cli).
+
+```console
+irys upload myNFT.png \
+  -h https://devnet.irys.xyz \
+  -t matic \
+  -w bf20......c9885307 \
+  --tags Content-Type image/png \
+  --provider-url https://rpc-mumbai.maticvigil.com
+```
+
 ## Creating metadata
 
 Embed the URLs generated from the above script into your NFT metadata. The following example is from the Developer Quests NFT.
@@ -99,7 +112,7 @@ Embed the URLs generated from the above script into your NFT metadata. The follo
 }
 ```
 
-## Uploading metadata
+## Uploading metadata (SDK)
 
 Finally, upload your NFT metadata to Irys and use the URL generated to mint the NFT.
 
@@ -148,4 +161,17 @@ const uploadMetadata = async () => {
 		console.log("Error uploading file ", e);
 	}
 };
+```
+
+## Uploading metadata (SDK)
+
+Alternatively, you can [upload](/developer-docs/cli/commands/upload) using our [CLI](/developer-docs/cli).
+
+```console
+irys upload metadata.json \
+  -h https://devnet.irys.xyz \
+  -t matic \
+  -w bf20......c9885307 \
+  --tags Content-Type application/json \
+  --provider-url https://rpc-mumbai.maticvigil.com
 ```
