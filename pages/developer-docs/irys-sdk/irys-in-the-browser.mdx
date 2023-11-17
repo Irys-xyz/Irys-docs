@@ -187,6 +187,32 @@ const getIrys = async (): Promise<WebIrys> => {
 };
 ```
 
+#### [Arconnect](https://www.arconnect.io/)
+
+```js
+const getWebIrys = async () => {
+	const arconnect = window.arweaveWallet;
+	await arconnect.connect(["ACCESS_ADDRESS", "ACCESS_PUBLIC_KEY", "SIGN_TRANSACTION", "SIGNATURE"]);
+	const webIrys = new WebIrys({ url: "https://node1.irys.xyz", token: "arweave", wallet: { provider: arconnect } });
+	await webIrys.ready();
+
+	return webIrys;
+};
+```
+
+#### [Othent](https://othent.io/)
+
+```js
+export const getWebIrys = async () => {
+	const wallet = { name: "Othent KMS", provider: othentKMS };
+	const url = "https://node1.irys.xyz";
+	const token = "arweave";
+	const webIrys = new WebIrys({ url, token, wallet });
+	await webIrys.ready();
+	return webIrys;
+};
+```
+
 ## Funding a node
 
 Fund a node using any of our [supported tokens](/overview/supported-tokens):
