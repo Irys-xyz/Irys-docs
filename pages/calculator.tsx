@@ -189,6 +189,7 @@ const UploadFeeCalculator: React.FC = () => {
                         />
                         <DropdownSelector
                             selectedOption={selectedFileUnit}
+                            // @ts-ignore
                             onChange={setSelectedFileUnit}
                             options={FILE_UNITS}
                         />
