@@ -7,5 +7,8 @@
 	"ordering": "Ordering",
 	"querying-tagging": "Querying & tagging",
 	"fees": "Fees",
+	"fees2": {
+		"display": "hidden"
+	},
 	"supported-tokens": "Supported tokens"
 }
