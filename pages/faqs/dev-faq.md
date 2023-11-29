@@ -54,7 +54,7 @@ It is 32 bytes base64url encoded.
 
 No
 
-## How soon after I upload data is it available for downlaod?
+## How soon after I upload data is it available for download?
 
 Our [optimistic cache](/learn/optimistic-cache) makes it available instantly.
 
