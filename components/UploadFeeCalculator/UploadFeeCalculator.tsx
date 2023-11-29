@@ -5,7 +5,7 @@ import React, { useCallback, useEffect, useState } from "react";
 import { CURRENCY_ATOMIC } from "../../lib/atomicValues";
 import { CiFileOn } from "react-icons/ci";
 import DropdownSelector from "../DropdownSelector";
-import { FaPlus } from "react-icons/fa6";
+import { FaPlus } from "react-icons/fa";
 import { MdClose } from "react-icons/md";
 import { tokenOptions } from "../../lib/tokens";
 import { useDropzone } from "react-dropzone";
