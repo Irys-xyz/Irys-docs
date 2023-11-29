@@ -58,7 +58,7 @@ const DropdownSelector: React.FC<DropdownSelectorProps> = ({
           type="button"
           // @ts-ignore
           ref={dropdownRef}
-          className="flex bg-white items-center text-lg justify-between rounded-full border border-gray-500 py-3 px-4 focus:outline-none"
+          className="flex !bg-white items-center text-lg justify-between rounded-full border border-gray-500 py-3 px-4 focus:outline-none"
         >
           {selectedOption?.label} <FaChevronDown className="ml-2 text-black" />
         </button>
