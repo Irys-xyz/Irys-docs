@@ -7,9 +7,24 @@ import Heading from "../../components/Heading";
 import SectionTitle from "../../components/SectionTitle";
 import UploadFeeCalculator from "../../components/UploadFeeCalculator";
 
-<div class="mt-10">
-    <UploadFeeCalculator />
+<div className="flex flex-col mt-5">
+	<div className="flex items-end">
+		<div className="">
+			<Heading level={1}>Fees</Heading>
+		</div>
+	</div>
 </div>
+The cost to upload data to Arweave using Irys is based on the number of bytes uploaded.{" "}
+
+## Price calculator
+
+The calculator provides the real-time cost of permanently uploading your data. Input a fixed amount of data, or add the file you plan to upload. For a more accurate estimate, include any [tags](/developer-docs/tags) you plan to use.
+
+<div class="mt-10">
+	<UploadFeeCalculator />
+</div>
+
+## Fee breakdown
 
 Fees are computed as follows:
 

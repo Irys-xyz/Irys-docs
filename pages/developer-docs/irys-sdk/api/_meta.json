@@ -10,5 +10,7 @@
 	"utils-fromAtomic": "utils.fromAtomic()",
 	"utils-getReceipt": "utils.getReceipt()",
 	"utils-verifyReceipt": "utils.verifyReceipt()",
-	"funder-submitFundTransaction": "funder.submitFundTransaction()"
+	"funder-submitFundTransaction": "funder.submitFundTransaction()",
+	"uploader-uploadBundle": "uploader.uploadBundle()",
+	"uploader-generateManifest": "uploader.generateManifest()"
 }

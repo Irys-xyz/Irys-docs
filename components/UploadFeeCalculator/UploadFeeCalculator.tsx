@@ -69,10 +69,21 @@ const ItemInput = ({ onItemAdd }: { onItemAdd: (name: string, value: string) => 
 
 	return (
 		<div className="flex items-center gap-4 justify-between">
+			<DefaultInput
+				type="text"
+				placeholder="Name"
+				value={itemName}
+				onChange={handleItemNameChange}
+				style={{ width: "100%" }}
+			/>
 
-			<DefaultInput type="text" placeholder="Name" value={itemName} onChange={handleItemNameChange} style={{ width: "100%" }} />
-
-			<DefaultInput type="text" placeholder="Value" value={itemValue} onChange={handleItemValueChange} style={{ width: "100%" }} />
+			<DefaultInput
+				type="text"
+				placeholder="Value"
+				value={itemValue}
+				onChange={handleItemValueChange}
+				style={{ width: "100%" }}
+			/>
 			<button
 				onClick={handleAddClick}
 				className="border-gray-500 border bg-white text-black justify-center text-md z-50 flex items-center gap-2 rounded-full px-4 py-3 font-backup font-satoshi uppercase font-semibold hover:scale-[98%] active:scale-95 transition-all lg:px-6 lg:py-3"
@@ -149,9 +160,9 @@ const UploadFeeCalculator: React.FC = () => {
 
 	return (
 		// screen size, centered content
-		<div className="flex flex-col lg:flex-row justify-center gap-10 bg-black text-white p-6 shadow-lg rounded-2xl">
+		<div className="flex flex-col lg:flex-row justify-center gap-10 bg-black text-white p-6 shadow-lg rounded-2xl border-white border-2">
 			<div className="flex flex-col p-4 max-w-full lg:max-w-[446px] bg-black text-white gap-5">
-				<h1 className="text-2xl font-bold">Irys price calculator</h1>
+				{/* <h1 className="text-2xl font-bold">Irys price calculator</h1> */}
 				<div className="flex gap-4">
 					<DefaultInput
 						type="number"
@@ -236,7 +247,7 @@ const UploadFeeCalculator: React.FC = () => {
 				/>
 				{/* Total cost */}
 				<div className="flex justify-between mt-auto border-t pt-6">
-					<div className="font-semibold">{currency.ticker} total</div>
+					<div className="font-semibold">Total</div>
 					<div className="text-neutral-300">
 						{price.toFixed(8)} {currency.label.split(" - ")[1]}
 					</div>
@@ -247,7 +258,7 @@ const UploadFeeCalculator: React.FC = () => {
                             {price.toFixed(8)} {currency.label.split(" - ")[1]}
                         </div>
                     </div> */}
-				<p>Irys' fee is dynamic and depends on several parameters.</p>
+				{/* <p>Irys' fee is dynamic and depends on several parameters.</p> */}
 			</div>
 		</div>
 	);
