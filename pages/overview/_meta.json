@@ -6,9 +6,9 @@
 	"permanent-data": "Permanent data",
 	"ordering": "Ordering",
 	"querying-tagging": "Querying & tagging",
-	"fees": "Fees",
-	"fees2": {
+	"fees": {
 		"display": "hidden"
 	},
+	"cost-to-upload": "Cost to upload",
 	"supported-tokens": "Supported tokens"
 }

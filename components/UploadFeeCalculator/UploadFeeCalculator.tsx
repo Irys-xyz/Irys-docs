@@ -7,7 +7,7 @@ import { CiFileOn } from "react-icons/ci";
 import DropdownSelector from "../DropdownSelector";
 import { FaPlus } from "react-icons/fa";
 import { MdClose } from "react-icons/md";
-import redstone from 'redstone-api';
+import redstone from "redstone-api";
 import { tokenOptions } from "../../lib/tokens";
 import { useDropzone } from "react-dropzone";
 
@@ -33,7 +33,6 @@ export interface Source {
 	coingecko: number;
 	htx: number;
 }
-
 
 interface FileWithPreview extends File {
 	preview: string;
@@ -134,7 +133,7 @@ const UploadFeeCalculator: React.FC = () => {
 	const [customSize, setCustomSize] = useState(0);
 	const [price, setPrice] = useState(0);
 	const [sumOfBytes, setsumOfBytes] = useState(0);
-	const [usdPrice, setUsdPrice] = useState<RedstonePrice | null>(null)
+	const [usdPrice, setUsdPrice] = useState<RedstonePrice | null>(null);
 
 	const handleFileChange = (newFiles: FileWithPreview[]) => {
 		setDroppedFiles((prevFiles) => [...prevFiles, ...newFiles]);
@@ -186,13 +185,9 @@ const UploadFeeCalculator: React.FC = () => {
 
 	return (
 		// screen size, centered content
-<<<<<<< HEAD
-		<div className="flex flex-col lg:flex-row justify-center gap-10 bg-black text-white p-6 shadow-lg rounded-2xl border-white border-2">
-=======
 		<div className="antialiased flex flex-col lg:flex-row justify-center gap-10 bg-black text-white p-6 shadow-lg rounded-2xl">
->>>>>>> 4f99256dd41729967fbbfe675a92dac1e64a25e3
 			<div className="flex flex-col p-4 max-w-full lg:max-w-[446px] bg-black text-white gap-5">
-				{/* <h1 className="text-2xl font-bold">Irys price calculator</h1> */}
+				<h1 className="text-2xl font-bold">Irys price calculator</h1>
 				<div className="flex gap-4">
 					<DefaultInput
 						type="number"
@@ -277,31 +272,21 @@ const UploadFeeCalculator: React.FC = () => {
 				/>
 				{/* Total cost */}
 				<div className="flex justify-between mt-auto border-t pt-6">
-					<div className="font-semibold">Total</div>
+					<div className="font-semibold">{currency.ticker} total</div>
 					<div className="text-neutral-300">
-						{sumOfBytes === 0 ? 0 : (price).toFixed(8)} {currency.label.split(" - ")[1]}
+						{sumOfBytes === 0 ? 0 : price.toFixed(8)} {currency.label.split(" - ")[1]}
 					</div>
 				</div>
-<<<<<<< HEAD
-				{/* <div className="flex justify-between mt-auto border-t pt-6">
-                        <div className="font-semibold">USD total</div>
-                        <div>
-                            {price.toFixed(8)} {currency.label.split(" - ")[1]}
-                        </div>
-                    </div> */}
-				{/* <p>Irys' fee is dynamic and depends on several parameters.</p> */}
-=======
-				{usdPrice && <div className="flex justify-between mt-auto border-t pt-6">
-					<div className="font-semibold">USD total</div>
-					<div className="font-semibold">
-						${
-							sumOfBytes === 0 ? 0 : (price * usdPrice?.value).toFixed(8)
-						}
-						{/* {(price * usdPrice?.value).toFixed(8)} USD */}
+				{usdPrice && (
+					<div className="flex justify-between mt-auto border-t pt-6">
+						<div className="font-semibold">USD total</div>
+						<div className="font-semibold">
+							${sumOfBytes === 0 ? 0 : (price * usdPrice?.value).toFixed(8)}
+							{/* {(price * usdPrice?.value).toFixed(8)} USD */}
+						</div>
 					</div>
-				</div>}
+				)}
 				<p>Irys' fee is dynamic and depends on several parameters.</p>
->>>>>>> 4f99256dd41729967fbbfe675a92dac1e64a25e3
 			</div>
 		</div>
 	);
