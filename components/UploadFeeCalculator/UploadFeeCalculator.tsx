@@ -127,7 +127,7 @@ const UploadFeeCalculator: React.FC = () => {
 	];
 
 	const [selectedFileUnit, setSelectedFileUnit] = useState(FILE_UNITS[0]);
-	const [currency, setCurrency] = useState(tokenOptions[6]);
+	const [currency, setCurrency] = useState(tokenOptions[5]);
 	const [droppedFiles, setDroppedFiles] = useState<FileWithPreview[]>([]);
 	const [items, setItems] = useState<{ name: string; value: string }[]>([]);
 	const [customSize, setCustomSize] = useState(0);
