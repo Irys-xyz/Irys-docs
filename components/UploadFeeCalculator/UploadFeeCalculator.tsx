@@ -188,6 +188,7 @@ const UploadFeeCalculator: React.FC = () => {
 		<div className="antialiased flex flex-col lg:flex-row justify-center gap-10 bg-black text-white p-6 shadow-lg rounded-2xl">
 			<div className="flex flex-col p-4 max-w-full lg:max-w-[446px] bg-black text-white gap-5">
 				<h1 className="text-2xl font-bold">Irys price calculator</h1>
+				<p>How much data would you like to upload?</p>
 				<div className="flex gap-4">
 					<DefaultInput
 						type="number"
@@ -207,6 +208,7 @@ const UploadFeeCalculator: React.FC = () => {
 					<div className="">OR</div>
 					<div className="w-full h-[1px] bg-gray-200"></div>
 				</div>
+				<p>Simply upload the file(s) that you would like to upload</p>
 				<FileInput onFileChange={handleFileChange} />
 				<div className="flex flex-col gap-4 border-l-2 pl-4 overflow-y-scroll scrollbar-thumb-gray-200 scrollbar-thin max-h-48 [&::-webkit-scrollbar]:rounded-full [&::-webkit-scrollbar-thumb]:rounded-full">
 					{droppedFiles.map((file, index) => (
@@ -286,7 +288,7 @@ const UploadFeeCalculator: React.FC = () => {
 						</div>
 					</div>
 				)}
-				<p>Irys' fee is dynamic and depends on several parameters.</p>
+				<p>Irys' fee is dynamic and depends on several parameters, mentioned below.</p>
 			</div>
 		</div>
 	);
