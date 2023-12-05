@@ -27,6 +27,7 @@
     "react-icons": "^4.8.0",
     "react-loading-skeleton": "^3.3.1",
     "react-youtube": "^10.1.0",
+    "redstone-api": "^0.4.11",
     "tailwind-scrollbar": "^3.0.5",
     "tailwindcss": "^3.3.1"
   },

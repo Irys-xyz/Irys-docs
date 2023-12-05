@@ -7,10 +7,33 @@ import { CiFileOn } from "react-icons/ci";
 import DropdownSelector from "../DropdownSelector";
 import { FaPlus } from "react-icons/fa";
 import { MdClose } from "react-icons/md";
+import redstone from 'redstone-api';
 import { tokenOptions } from "../../lib/tokens";
 import { useDropzone } from "react-dropzone";
 
 type DefaultInputProps = React.InputHTMLAttributes<HTMLInputElement>;
+
+export interface RedstonePrice {
+	id: string;
+	symbol: string;
+	provider: string;
+	value: number;
+	liteEvmSignature: string;
+	permawebTx: string;
+	version: string;
+	source: Source;
+	timestamp: number;
+	minutes: number;
+	providerPublicKey: string;
+}
+
+export interface Source {
+	binance: number;
+	binanceusdm: number;
+	coingecko: number;
+	htx: number;
+}
+
 
 interface FileWithPreview extends File {
 	preview: string;
@@ -100,6 +123,7 @@ const UploadFeeCalculator: React.FC = () => {
 	const [customSize, setCustomSize] = useState(0);
 	const [price, setPrice] = useState(0);
 	const [sumOfBytes, setsumOfBytes] = useState(0);
+	const [usdPrice, setUsdPrice] = useState<RedstonePrice | null>(null)
 
 	const handleFileChange = (newFiles: FileWithPreview[]) => {
 		setDroppedFiles((prevFiles) => [...prevFiles, ...newFiles]);
@@ -130,6 +154,8 @@ const UploadFeeCalculator: React.FC = () => {
 				setPrice(data / CURRENCY_ATOMIC[currency.value].atomic);
 			});
 
+		redstone.getPrice(currency.ticker).then((price: any) => setUsdPrice(price as RedstonePrice));
+
 		setsumOfBytes(sum);
 	}, [currency, droppedFiles, items, customSize, selectedFileUnit]);
 
@@ -149,7 +175,7 @@ const UploadFeeCalculator: React.FC = () => {
 
 	return (
 		// screen size, centered content
-		<div className="flex flex-col lg:flex-row justify-center gap-10 bg-black text-white p-6 shadow-lg rounded-2xl">
+		<div className="antialiased flex flex-col lg:flex-row justify-center gap-10 bg-black text-white p-6 shadow-lg rounded-2xl">
 			<div className="flex flex-col p-4 max-w-full lg:max-w-[446px] bg-black text-white gap-5">
 				<h1 className="text-2xl font-bold">Irys price calculator</h1>
 				<div className="flex gap-4">
@@ -238,15 +264,18 @@ const UploadFeeCalculator: React.FC = () => {
 				<div className="flex justify-between mt-auto border-t pt-6">
 					<div className="font-semibold">{currency.ticker} total</div>
 					<div className="text-neutral-300">
-						{price.toFixed(8)} {currency.label.split(" - ")[1]}
+						{sumOfBytes === 0 ? 0 : (price).toFixed(8)} {currency.label.split(" - ")[1]}
 					</div>
 				</div>
-				{/* <div className="flex justify-between mt-auto border-t pt-6">
-                        <div className="font-semibold">USD total</div>
-                        <div>
-                            {price.toFixed(8)} {currency.label.split(" - ")[1]}
-                        </div>
-                    </div> */}
+				{usdPrice && <div className="flex justify-between mt-auto border-t pt-6">
+					<div className="font-semibold">USD total</div>
+					<div className="font-semibold">
+						${
+							sumOfBytes === 0 ? 0 : (price * usdPrice?.value).toFixed(8)
+						}
+						{/* {(price * usdPrice?.value).toFixed(8)} USD */}
+					</div>
+				</div>}
 				<p>Irys' fee is dynamic and depends on several parameters.</p>
 			</div>
 		</div>
