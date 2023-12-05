@@ -7,7 +7,7 @@ export const tokenOptions: {
         { value: "algorand", label: "Algorand - ALGO", ticker: "ALGO" },
         { value: "arweave", label: "Arweave - AR", ticker: "AR" },
         { value: "avalanche", label: "Avalanche C-Chain - AVAX", ticker: "AVAX" },
-        { value: "boba", label: "Boba - BOBA", ticker: "BOBA" },
+        // { value: "boba", label: "Boba - BOBA", ticker: "BOBA" },
         { value: "chainlink", label: "Chainlink - LINK", ticker: "LINK" },
         { value: "ethereum", label: "Ethereum - ETH", ticker: "ETH" },
         { value: "fantom", label: "Fantom - FTM", ticker: "FTM" },
