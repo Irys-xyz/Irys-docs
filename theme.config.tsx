@@ -52,14 +52,17 @@ export default {
 		}
 	},
 	head: () => {
-		const { asPath, defaultLocale, locale } = useRouter();
 		const { frontMatter } = useConfig();
-		const url = "https://my-app.com" + (defaultLocale === locale ? asPath : `/${locale}${asPath}`);
 
 		return (
 			<>
 				<meta property="og:url" content="https://docs.irys.xyz" />
-				<meta property="og:title" content={frontMatter.title || "Irys"} />
+				<meta property="og:type" content="website" />
+				<meta property="og:title" content={frontMatter.title || "Irys | Docs"} />
+				<meta
+					property="og:image"
+					content="https://irys.xyz/new/assets/shared/open-graph.png"
+				/>
 				<meta
 					property="og:description"
 					content={
@@ -67,6 +70,7 @@ export default {
 						"Unlock the full potential of Irys’ technology with our developer resources. Start building on Irys today!"
 					}
 				/>
+				<meta name="twitter:card" content="summary_large_image" />
 			</>
 		);
 	},
