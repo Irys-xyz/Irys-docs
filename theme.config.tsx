@@ -49,26 +49,20 @@ export default {
 			return {
 				titleTemplate: "Irys (previously Bundlr) | %s",
 			};
+		} else {
+			return {
+				titleTemplate: "Irys (previously Bundlr) | Docs",
+			};
 		}
 	},
 	head: () => {
-		const { frontMatter } = useConfig();
-
 		return (
 			<>
 				<meta property="og:url" content="https://docs.irys.xyz" />
 				<meta property="og:type" content="website" />
-				<meta property="og:title" content={frontMatter.title || "Irys (previously Bundlr) | Docs"} />
 				<meta
 					property="og:image"
 					content="https://irys.xyz/new/assets/shared/open-graph.png"
-				/>
-				<meta
-					property="og:description"
-					content={
-						frontMatter.description ||
-						"Unlock the full potential of Irys’ technology with our developer resources. Start building on Irys today!"
-					}
 				/>
 				<meta name="twitter:card" content="summary_large_image" />
 			</>
