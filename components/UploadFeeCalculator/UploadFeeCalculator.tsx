@@ -119,11 +119,11 @@ const ItemInput = ({ onItemAdd }: { onItemAdd: (name: string, value: string) => 
 // Main component
 const UploadFeeCalculator: React.FC = () => {
 	const FILE_UNITS = [
-		{ value: "bytes", label: "Bytes", mult: 1 },
-		{ value: "kb", label: "KB", mult: 1000 },
-		{ value: "mb", label: "MB", mult: 1000 ** 2 },
-		{ value: "gb", label: "GB", mult: 1000 ** 3 },
-		{ value: "tb", label: "TB", mult: 1000 ** 4 },
+		{ value: "bytes", label: "Bytes (B)", mult: 1 },
+		{ value: "kb", label: "Kilobytes (KB)", mult: 1000 },
+		{ value: "mb", label: "Megabytes (MB)", mult: 1000 ** 2 },
+		{ value: "gb", label: "Gigabytes (GB)", mult: 1000 ** 3 },
+		{ value: "tb", label: "Terabytes (TB)", mult: 1000 ** 4 },
 	];
 
 	const [selectedFileUnit, setSelectedFileUnit] = useState(FILE_UNITS[0]);
