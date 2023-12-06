@@ -58,7 +58,7 @@ export default {
 			<>
 				<meta property="og:url" content="https://docs.irys.xyz" />
 				<meta property="og:type" content="website" />
-				<meta property="og:title" content={frontMatter.title || "Irys | Docs"} />
+				<meta property="og:title" content={frontMatter.title || "Irys (previously Bundlr) | Docs"} />
 				<meta
 					property="og:image"
 					content="https://irys.xyz/new/assets/shared/open-graph.png"
