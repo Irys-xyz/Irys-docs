@@ -225,7 +225,13 @@ const UploadFeeCalculator: React.FC = () => {
 						</div>
 					))}
 				</div>
-				<p>Include any tags you'll use</p>
+				<p>
+					Include any{" "}
+					<a className="underline" href="/developer-docs/tags">
+						tags
+					</a>{" "}
+					you'll use
+				</p>
 				<ItemInput onItemAdd={handleItemAdd} />
 				<div className="flex flex-wrap gap-4 overflow-y-scroll scrollbar-thumb-gray-200 scrollbar-thin max-h-60 [&::-webkit-scrollbar]:rounded-full [&::-webkit-scrollbar-thumb]:rounded-full">
 					{items.map((item, index) => (
