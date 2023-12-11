@@ -36,17 +36,19 @@ No, but we do support [gassless uploads](/hands-on/tutorials/gassless-uploading)
 
 ## Are Irys nodes rate-limited?
 
-There is no limitation on the number of requests from one IP to a node.
+There are no rate-limits on paid-for uploads.
 
-## Is it possible to know an upload’s id before uploading?
+Uploads below 100 KiB are free on Node 2, these uploads are rate-limited. If you upload more than 600 transactions within a minute and have a funded balance on Node 2 that balance will be used to pay for the transaction. If you don't have a balance, then you'll get a `402 - Free transaction limit exceeded, funds required` error.
+
+## Is it possible to know an upload’s ID before uploading?
 
 Yes. You can create/sign/upload transactions in multiple steps.
 
-## What is the format of the transaction id?
+## What is the format of the transaction ID?
 
 It is 32 bytes base64url encoded.
 
-## Is there an expected max/min length of a transaction id?
+## Is there an expected max/min length of a transaction ID?
 
 43 bytes.
 
