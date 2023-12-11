@@ -113,20 +113,22 @@ const results = await myQuery.search("irys:transactions");
 
 The selected search type influences the [returned fields](/developer-docs/querying/query-package#limiting-fields-returned) and the availability of specific query functions.
 
-| Function                         | irys:transactions | arweave:transactions | arweave:blocks |
-| -------------------------------- | ----------------- | -------------------- | -------------- |
-| [`search()`](./api/search)       | Yes               | Yes                  | Yes            |
-| [`tags()`](./api/tags)           | Yes               | Yes                  | No             |
-| [`ids()`](./api/ids)             | Yes               | Yes                  | Yes            |
-| [`from()`](./api/from)           | Yes               | Yes                  | No             |
-| [`to()`](./api/to)               | No                | Yes                  | No             |
-| [`token()`](./api/token)         | Yes               | No                   | No             |
-| [`minHeight()`](./api/minHeight) | No                | No                   | Yes            |
-| [`maxHeight()`](./api/maxHeight) | No                | No                   | Yes            |
-| [`sort()`](./api/sort)           | Yes               | Yes                  | Yes            |
-| [`limit()`](./api/limit)         | Yes               | Yes                  | Yes            |
-| [`stream()`](./api/stream)       | Yes               | Yes                  | Yes            |
-| [`fields()`](./api/fields)       | Yes               | Yes                  | Yes            |
+| Function                                         | irys:transactions | arweave:transactions | arweave:blocks |
+| ------------------------------------------------ | ----------------- | -------------------- | -------------- |
+| [`search()`](./api/search)                       | Yes               | Yes                  | Yes            |
+| [`tags()`](./api/tags)                           | Yes               | Yes                  | No             |
+| [`ids()`](./api/ids)                             | Yes               | Yes                  | Yes            |
+| [`from()`](./api/from)                           | Yes               | Yes                  | No             |
+| [`to()`](./api/to)                               | No                | Yes                  | No             |
+| [`token()`](./api/token)                         | Yes               | No                   | No             |
+| [`fromTimestamp()`](./api/fromTimestamp)         | Yes               | No                   | Yes            |
+| [`toTimestamp()`](./api/toTimestamp)             | Yes               | No                   | Yes            |
+| [`minHeight()`](./api/minHeight)                 | No                | No                   | Yes            |
+| [`maxHeight()`](./api/maxHeight)                 | No                | No                   | Yes            |
+| [`sort()`](./api/sort)                           | Yes               | Yes                  | Yes            |
+| [`limit()`](./api/limit)                         | Yes               | Yes                  | Yes            |
+| [`stream()`](./api/stream)                       | Yes               | Yes                  | Yes            |
+| [`fields()`](./api/fields)                       | Yes               | Yes                  | Yes            |
 
 ## Timestamp
 
