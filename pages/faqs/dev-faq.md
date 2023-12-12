@@ -14,6 +14,12 @@ Nodes maintain [separate balances](/learn/funding-withdrawing); fund the node yo
 
 Yes. Uploads below 100KiB are free on Node 2 only. This is a public good for users to be encouraged to try Irys.
 
+## How do I set up a Devnet wallet and fund it with free faucet tokens?
+
+Our [Devnet](/developer-docs/using-devnet) is free to use, however to mirror the DX of working on our main nodes, you'll need to fund it with free faucet tokens. You can use any EVM or Solana wallet, however, beginners will likely want to use either [Metamask](https://metamask.io/) for EVM chains and [Phantom](https://phantom.app/) for both Solana and EVM chains.
+
+Devnet tokens can be obtained for free from common faucets like the ones for [Solana](https://faucet.solana.com/), [Sepolia](https://sepoliafaucet.com/) and [Mumbai](https://mumbaifaucet.com/).
+
 ## What is the difference between `Irys` and `WebIrys` classes?
 
 The `Irys` class is used for server-side apps and `WebIrys` is used when [building with Irys in the browser](/developer-docs/irys-sdk/irys-in-the-browser).
