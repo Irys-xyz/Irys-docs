@@ -104,6 +104,90 @@ WebIrys supports the following providers. When instantiating a new `WebIrys` obj
 
 Additionally, the following providers will work with extra setup code.
 
+| Package                                                             | Parameter value |
+| ------------------------------------------------------------------- | --------------- |
+| [Arconnect](/developer-docs/irys-sdk/irys-in-the-browser#arconnect) | arconnect       |
+| [Othent](/developer-docs/irys-sdk/irys-in-the-browser#othent)       | othent          |
+| [Privy](/developer-docs/irys-sdk/irys-in-the-browser#privy)         | privy           |
+| [Viem](/developer-docs/irys-sdk/irys-in-the-browser#viem)           | viem            |
+
+#### [Arconnect](https://www.arconnect.io/)
+
+```js
+const getWebIrys = async () => {
+	const arconnect = window.arweaveWallet;
+	await arconnect.connect(["ACCESS_ADDRESS", "ACCESS_PUBLIC_KEY", "SIGN_TRANSACTION", "SIGNATURE"]);
+	const webIrys = new WebIrys({ url: "https://node1.irys.xyz", token: "arweave", wallet: { provider: arconnect } });
+	await webIrys.ready();
+
+	return webIrys;
+};
+```
+
+#### [Othent](https://othent.io/)
+
+```js
+export const getWebIrys = async () => {
+	const wallet = { name: "Othent KMS", provider: othentKMS };
+	const url = "https://node1.irys.xyz";
+	const token = "arweave";
+	const webIrys = new WebIrys({ url, token, wallet });
+	await webIrys.ready();
+	return webIrys;
+};
+```
+
+#### [Privy](https://www.privy.io/)
+
+Initialize the Privy provider with your app ID:
+
+```js
+import { PrivyProvider } from "@privy-io/react-auth";
+
+<PrivyProvider
+	appId="YOUR-APP-ID"
+	onSuccess={handlePrivyLogin}
+	config={{
+		loginMethods: ["email", "wallet"],
+		appearance: {
+			theme: "dark",
+			accentColor: "#676FFF",
+			logo: "https://docs.irys.xyz/img/favicon.svg",
+		},
+		embeddedWallets: {
+			createOnLogin: "users-without-wallets",
+		},
+	}}
+>
+	<PrivyIrys />
+</PrivyProvider>;
+```
+
+Then define a component called `PrivyIrys` and write code to login with Privy and create a new `WebIrys` object:
+
+```js
+import { User, usePrivy, useWallets } from "@privy-io/react-auth";
+
+const { wallets } = useWallets();
+const { login } = usePrivy();
+
+// First login
+login();
+
+// Then create a WebIrys object
+const w = wallets.at(0);
+const getWebIrys = async () => {
+	const url = "https://node1.irys.xyz";
+	const token = "matic";
+
+	const client = await w?.getEthersProvider();
+	if (!client) throw new Error(`Cannot find privy wallet`);
+
+	const irys = new WebIrys({ url, token, wallet: { name: "privy", provider } });
+	await webIrys.ready();
+};
+```
+
 #### [Viem](https://viem.sh/)
 
 ```ts
@@ -183,32 +267,6 @@ const getIrys = async (): Promise<WebIrys> => {
 	};
 
 	console.log(`Conected to webIrys from ${webIrys.address}`);
-	return webIrys;
-};
-```
-
-#### [Arconnect](https://www.arconnect.io/)
-
-```js
-const getWebIrys = async () => {
-	const arconnect = window.arweaveWallet;
-	await arconnect.connect(["ACCESS_ADDRESS", "ACCESS_PUBLIC_KEY", "SIGN_TRANSACTION", "SIGNATURE"]);
-	const webIrys = new WebIrys({ url: "https://node1.irys.xyz", token: "arweave", wallet: { provider: arconnect } });
-	await webIrys.ready();
-
-	return webIrys;
-};
-```
-
-#### [Othent](https://othent.io/)
-
-```js
-export const getWebIrys = async () => {
-	const wallet = { name: "Othent KMS", provider: othentKMS };
-	const url = "https://node1.irys.xyz";
-	const token = "arweave";
-	const webIrys = new WebIrys({ url, token, wallet });
-	await webIrys.ready();
 	return webIrys;
 };
 ```
