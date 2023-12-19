@@ -174,8 +174,12 @@ const { login } = usePrivy();
 // First login
 login();
 
-// Then create a WebIrys object
+// Get a reference to the user's wallet
 const w = wallets.at(0);
+// Or find the embedded wallet
+// const w = wallets.find((wallet) => wallet.walletClientType === 'privy');
+
+// Then create a WebIrys object
 const getWebIrys = async () => {
 	const url = "https://node1.irys.xyz";
 	const token = "matic";
