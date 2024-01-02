@@ -6,7 +6,7 @@ import FooterMobile from "../NewFooter/FooterMobile";
 const Footer = ({ noPadding }: { noPadding?: boolean }) => {
 	const DEFINITIONS = [
 		{
-			title: "OVERVIEW",
+			title: "DEVELOPER 101",
 			options: [
 				{
 					name: "About Irys",
