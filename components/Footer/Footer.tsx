@@ -58,18 +58,30 @@ const Footer = ({ noPadding }: { noPadding?: boolean }) => {
 					href: "/developer-docs/cli",
 					newTab: false,
 				},
-			],
-		},
-		{
-			title: "HANDS ON",
-			options: [
 				{
 					name: "Tutorials",
 					href: "/hands-on/tutorials",
 				},
+			],
+		},
+		{
+			title: "ABOUT IRYS",
+			options: [
 				{
-					name: "Developer Quests",
-					href: "/hands-on/quests",
+					name: "What is Irys?",
+					href: "https://irys.xyz/what-is-irys",
+				},
+				{
+					name: "Blog",
+					href: "https://irys.xyz/blog",
+				},
+				{
+					name: "Careers",
+					href: "https://irys-xyz.notion.site/Careers-4c9e42d84d7d4740a293c07c1f057ca4?pvs=4",
+				},
+				{
+					name: "Media Kit",
+					href: "https://irys.xyz/media-kit",
 				},
 			],
 			footer: (
