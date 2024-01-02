@@ -4,7 +4,7 @@ description: Frequently asked questions from our developer community.
 
 # Developer FAQ
 
-## What is the difference between Node 1 and 2.
+## What is the difference between Node 1 and 2?
 
 Node 2 is ideal for early-stage projects, while larger projects typically prefer Node 1 as it can scale to a higher TPS. Uploads of less than 100 KiB are currently free on Node 2.
 
@@ -24,7 +24,7 @@ Devnet tokens can be obtained for free from common faucets like the ones for [So
 
 The `Irys` class is used for server-side apps and `WebIrys` is used when [building with Irys in the browser](/developer-docs/irys-sdk/irys-in-the-browser).
 
-## How do I use WebIrys in a create-react-app project?
+## How do I use WebIrys in a `create-react-app`` project?
 
 Follow [this tutorial](/hands-on/tutorials/react).
 
@@ -69,3 +69,15 @@ Our [optimistic cache](/learn/optimistic-cache) makes it available instantly.
 ## Where can I see my data before it gets seeded onto Arweave?
 
 As soon as your upload is complete, the data can be requested from a [gateway](/overview/gateways).
+
+## How does the Arweave endowment help ensure data permanence?
+
+For data to be permanent, [it must be fault-tolerant, tamper-proof, and paid-for](https://irys.xyz/blog/irys-solution-provenance-trilemma). When you upload data to Irys, it’s stored permanently on Arweave. You pay a single up-front fee that covers paying for storage today and far into the future.
+
+Arweave estimates storage costs using the Kryder rate, the exponential rate at which digital storage capacities increase over time. [Data from past years](https://arweave.net/wufZ10dlzwfPFTNKr3uRAyeMRfMdkNx1iG9yjolRbv8) shows the rate is 38%, meaning the physical cost to store 1 Gig of data has decreased by 38% yearly. Arweave charges a base fee that covers storing 20 replicas of your data for 200 years, assuming a very conservative 0.5% yearly decrease in storage costs. This base fee is then multiplied by 1.05, the additional 5% is paid to the miner who includes your transaction in a winning block, and the remainder is reserved for funding future storage via the [Arweave endowment](https://arwiki.wiki/#/en/endowment-simulation).
+
+[Arweave's models](https://arwiki.wiki/#/en/endowment-simulation) demonstrate the endowment's longevity under various projections of decreasing storage costs with the main scenario indicating adequate funds for approximately 10,000 years of storage.
+
+Storage costs, denominated in AR, may rise temporarily with an increase in the token's price. However, this uptick in cost is offset as higher block rewards lead to more competition among miners. In response, miners expand their storage capacity, which, in turn, brings down the cost of data storage.
+
+Short-term price fluctuations are also accounted for as down-side token volatility is offset by up-side token volatility. As people purchase storage, contributions to the endowment made when the token price is lower are offset by contributions made when the price is higher.
