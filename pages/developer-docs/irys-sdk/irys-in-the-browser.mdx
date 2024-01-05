@@ -100,6 +100,44 @@ WebIrys supports the following providers. When instantiating a new `WebIrys` obj
 | [Ethers 6](https://docs.ethers.org/v6/) | ethersv6        |
 | [Solana](https://solana.com/)           | solana          |
 
+### Solana React Hooks
+
+When working with the Solana React hooks, start by wrapping your components in the Solana `ConnectionProvider` `WalletProvider` and `WalletModalProvider` providers.
+
+```js
+import { ConnectionProvider, WalletProvider } from "@solana/wallet-adapter-react";
+import { WalletModalProvider } from "@solana/wallet-adapter-react-ui";
+import { PhantomWalletAdapter } from "@solana/wallet-adapter-wallets";
+
+// Devnet or Mainnet
+const network = WalletAdapterNetwork.Devnet;
+const endpoint = useMemo(() => clusterApiUrl(network), [network]);
+
+const wallets = useMemo(() => [new PhantomWalletAdapter()], [network]);
+
+<ConnectionProvider endpoint={endpoint}>
+	<WalletProvider wallets={wallets} autoConnect>
+		<WalletModalProvider>
+			<YourComponents />
+		</WalletModalProvider>
+	</WalletProvider>
+</ConnectionProvider>;
+```
+
+Then, in components where you need to access a `WebIrys` object use the `useWallet()` hook to get a reference to the user's injected provider, and pass that into `WebIrys` when instantiating a new object.
+
+```js
+import { useWallet } from "@solana/wallet-adapter-react";
+const wallet = useWallet();
+
+const getIrys = async (): Promise<WebIrys> => {
+	const wallet = { name: "solana", provider: wallet };
+	const webIrys = new WebIrys({ url: "https://devnet.irys.xyz", token: "solana", wallet });
+	await webIrys.ready();
+	return webIrys;
+};
+```
+
 ### Additional providers
 
 Additionally, the following providers will work with extra setup code.
@@ -187,7 +225,7 @@ const getWebIrys = async () => {
 	const client = await w?.getEthersProvider();
 	if (!client) throw new Error(`Cannot find privy wallet`);
 
-	const irys = new WebIrys({ url, token, wallet: { name: "privy", provider } });
+	const irys = new WebIrys({ url, token, wallet: { name: "privy", client } });
 	await webIrys.ready();
 };
 ```
