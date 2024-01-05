@@ -75,7 +75,7 @@ const getWebIrys = async () => {
 
 	const url = "https://node1.irys.xyz";
 	const token = "matic";
-	// Devnet RPC URLs change often, use a recent one from https://chainlist.org/chain/80001
+	// Devnet RPC URLs change often, use a recent one from https://chainlist.org
 	const rpcURL = "";
 
 	// Create a wallet object
@@ -131,7 +131,10 @@ import { useWallet } from "@solana/wallet-adapter-react";
 const wallet = useWallet();
 
 const getIrys = async (): Promise<WebIrys> => {
-	const wallet = { name: "solana", provider: wallet };
+	// Devnet RPC URLs change often, use a recent one from https://chainlist.org
+	const rpcURL = "";
+
+	const wallet = { rpcUrl: rpcURL, name: "solana", provider: wallet };
 	const webIrys = new WebIrys({ url: "https://devnet.irys.xyz", token: "solana", wallet });
 	await webIrys.ready();
 	return webIrys;
