@@ -225,10 +225,10 @@ const getWebIrys = async () => {
 	const url = "https://node1.irys.xyz";
 	const token = "matic";
 
-	const client = await w?.getEthersProvider();
-	if (!client) throw new Error(`Cannot find privy wallet`);
+	const provider = await w?.getEthersProvider();
+	if (!provider) throw new Error(`Cannot find privy wallet`);
 
-	const irys = new WebIrys({ url, token, wallet: { name: "privy", client } });
+	const webIrys = new WebIrys({ url, token, wallet: { name: "privy", provider: provider } });
 	await webIrys.ready();
 };
 ```
