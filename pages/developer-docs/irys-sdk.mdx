@@ -149,7 +149,14 @@ const uploadFile = async () => {
 
 ### Uploading a folder
 
-When [uploading a folder](/developer-docs/irys-sdk/api/uploadFolder), files can be accessed either directly at `https://gateway.irys.xyz/[transaction-id]` or `https://gateway.irys.xyz/[manifest-id]/[file-name]`
+You can upload a group of files as a single transaction from both the server and the browser.
+
+<Callout type="info" emoji="ℹ️">
+	When [uploading a folder](/developer-docs/irys-sdk/api/uploadFolder), files can be accessed either directly at
+	`https://gateway.irys.xyz/[transaction-id]` or `https://gateway.irys.xyz/[manifest-id]/[file-name]`
+</Callout>
+
+### Server
 
 ```js
 const uploadFolder = async () => {
@@ -169,6 +176,23 @@ const uploadFolder = async () => {
 		console.log("Error uploading file ", e);
 	}
 };
+```
+
+### Browser
+
+```ts
+const webIrys = await getWebIrys();
+
+const files: File[] = [];
+const tags: { name: string; value: string }[][] = [];
+
+// Convert Files to TaggedFiles
+const taggedFiles = files.map((f: TaggedFile, i: number) => {
+	f.tags = tags[i];
+	return f;
+});
+
+const response = await webIrys.uploadFolder(taggedFiles);
 ```
 
 ## Querying
