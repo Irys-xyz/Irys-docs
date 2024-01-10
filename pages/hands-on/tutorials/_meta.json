@@ -1,5 +1,6 @@
 {
 	"react": "Using npx-create-react-app",
+	"cite": "Using React + Vite",
 	"irys-sdk": "Learn the Irys SDK",
 	"monitor-node-balance": "Monitor node balance",
 	"provenance-chain": "Provenance chain",

@@ -1,0 +1,120 @@
+---
+description: Using the Irys SDK with create-react-app and Vite.
+---
+
+# Using Irys With React + Vite
+
+This guide covers how to setup an Irys project using React + Vite.
+
+Setup a new project:
+
+```console
+mkdir irys-vite
+cd irys-vite
+npm create vite@latest .
+npm install
+```
+
+Choose React and either TypeScript or JavaScript, then:
+
+```console
+npm install
+```
+
+Install the Irys SDK and ethers:
+
+```console
+npm install @irys/sdk ethers@5
+```
+
+Change your `App.tsx` file as follows. This example uses ethere5, if you're using [a different provider](/developer-docs/irys-sdk/irys-in-the-browser#supported-providers) make sure to specify it when creating the `wallet`.
+
+```ts
+import "./App.css";
+import { useState } from "react";
+import { providers } from "ethers";
+import { WebIrys } from "@irys/sdk";
+
+function App() {
+	const [connectedAddress, setConnectedAddress] = useState<string>("");
+
+	const getWebIrys = async () => {
+		await window.ethereum.enable();
+		const provider = new providers.Web3Provider(window.ethereum);
+		console.log("provider=", provider);
+		const url = "https://node1.irys.xyz";
+		const token = "matic";
+
+		const wallet = { name: "ethersv5", provider: provider };
+		console.log("wallet=", wallet);
+		const webIrys = new WebIrys({ url, token, wallet });
+		console.log("webIrys=", webIrys);
+		await webIrys.ready();
+		setConnectedAddress(webIrys.address);
+	};
+
+	return (
+		<>
+			<h1>Vite + React + Irys</h1>
+			{connectedAddress && connectedAddress.length > 0 && <h3>Connected from: {connectedAddress}</h3>}
+			<div className="card">
+				<button onClick={getWebIrys}>Connect To Irys Node</button>
+			</div>
+		</>
+	);
+}
+
+export default App;
+```
+
+When you load your app, you will see a blank white screen and find the following in your developer console.
+
+```
+Vite error
+Class extends value undefined is not a constructor or null
+```
+
+To fix this, first install:
+
+```
+npm install -D crypto-browserify stream-browserify os-browserify path-browserify vite-plugin-node-polyfills vite-plugin-notifier
+```
+
+And then modify `vite.config.ts` to use the following:
+
+```js
+import { defineConfig } from "vite";
+import react from "@vitejs/plugin-react";
+import { nodePolyfills } from "vite-plugin-node-polyfills";
+
+// https://vitejs.dev/config/
+export default defineConfig({
+	resolve: {
+		alias: {
+			process: "process/browser",
+			path: "path-browserify",
+			os: "os-browserify",
+		},
+	},
+	plugins: [
+		react(),
+		nodePolyfills({
+			// To exclude specific polyfills, add them to this list.
+			exclude: [
+				"fs", // Excludes the polyfill for `fs` and `node:fs`.
+				"stream",
+			],
+			// Whether to polyfill specific globals.
+			globals: {
+				Buffer: true,
+				global: true,
+				process: true,
+			},
+			// Whether to polyfill `node:` protocol imports.
+			protocolImports: true,
+		}),
+	],
+});
+```
+
+Restart React+Vite and you should be good to go.

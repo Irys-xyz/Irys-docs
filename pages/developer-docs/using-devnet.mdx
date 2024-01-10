@@ -72,9 +72,11 @@ const getWebIrys = async () => {
 
 	const url = "https://devnet.irys.xyz";
 	const token = "matic";
+	// Devnet RPC URLs change often, use a recent one from https://chainlist.org
+	const rpcURL = ""; // Required
 
 	// Create a wallet object
-	const wallet = { name: "ethersv5", provider: provider };
+	const wallet = { rpcUrl: rpcURL, name: "ethersv5", provider: provider };
 	// Use the wallet object
 	const webIrys = new WebIrys({ url, token, wallet });
 	await webIrys.ready();

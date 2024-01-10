@@ -2,7 +2,14 @@
 description: Using the Irys SDK with create-react-app.
 ---
 
+import { Callout } from "nextra-theme-docs";
+
 # Using Irys With npx create-react-app
+
+<Callout type="info" emoji="ℹ️">
+	If you're using React with Vite, polyfills are handled differently. You'll need to follow [this guide
+	instead](./vite).
+</Callout>
 
 Irys is fully compatible with React, however, if you’re using `npx create-react-app` to create your project, you will need to do some additional configuration and installation. This guide details how to create a new React project and add Irys support, if you already have a React project open, free to skip down a few steps.
 
@@ -14,7 +21,7 @@ cd irys-react
 npx create-react-app .
 ```
 
-Install the Irys SDK and ethers (for interacting with the blockchain):
+Install the Irys SDK and ethers:
 
 ```console
 npm install @irys/sdk ethers@5
