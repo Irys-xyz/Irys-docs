@@ -215,7 +215,7 @@ const { login } = usePrivy();
 // First login
 login();
 
-// Get a reference to the user's wallet
+// The 0th position wallet is the most recently used one
 const w = wallets.at(0);
 // Or find the embedded wallet
 // const w = wallets.find((wallet) => wallet.walletClientType === 'privy');
@@ -229,6 +229,15 @@ const getWebIrys = async () => {
 	if (!provider) throw new Error(`Cannot find privy wallet`);
 
 	const webIrys = new WebIrys({ url, token, wallet: { name: "privy", provider: provider } });
+	webIrys.tokenConfig.sendTx = async (data) =>
+		//@ts-ignore
+		sendTransaction({
+			...data,
+			gasLimit: data.gasLimit.toHexString(),
+			maxFeePerGas: data.maxFeePerGas.toHexString(),
+			maxPriorityFeePerGas: data.maxPriorityFeePerGas.toHexString(),
+			//@ts-ignore
+		}).then((r) => r.transactionHash);
 	await webIrys.ready();
 };
 ```
