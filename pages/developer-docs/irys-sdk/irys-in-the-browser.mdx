@@ -180,7 +180,7 @@ export const getWebIrys = async () => {
 
 #### [Privy](https://www.privy.io/)
 
-Initialize the Privy provider with your app ID:
+Initialize the Privy provider with your app ID and wrap it around your components. In most NextJS projects, you will place this code in your `app.tsx` file. In our example, we use the `<PrivyIrys />` component as a placeholder for your app's top-level component structure.
 
 ```js
 import { PrivyProvider } from "@privy-io/react-auth";
@@ -204,9 +204,9 @@ import { PrivyProvider } from "@privy-io/react-auth";
 </PrivyProvider>;
 ```
 
-Then, define a component called `PrivyIrys` and write code to login with Privy and create a new `WebIrys` object.
+Then, write code to login with Privy and create a new `WebIrys` object.
 
-The code to create a `WebIrys` object differs depending on if you're using an [external wallet](https://docs.privy.io/guide/frontend/wallets/external) vs an [embedded one](https://docs.privy.io/guide/frontend/embedded/overview). When using external wallets, you pass the Ethers provider returned from the `Wallet` object, when using embedded wallets you pass the `sendTransaction` Privy hook.
+The code to create a `WebIrys` object differs depending on if you're using an [external wallet](https://docs.privy.io/guide/frontend/wallets/external) vs an [embedded one](https://docs.privy.io/guide/frontend/embedded/overview). When using external wallets, pass the Ethers provider returned from the `Wallet` object, when using embedded wallets pass the `sendTransaction` Privy React hook.
 
 The following code uses conditional logic to create the correct `WebIrys` object based on the wallet type. If your application only supports a single wallet type, feel free to simplify the code.
 
