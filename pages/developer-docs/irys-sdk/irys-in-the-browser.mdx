@@ -204,13 +204,18 @@ import { PrivyProvider } from "@privy-io/react-auth";
 </PrivyProvider>;
 ```
 
-Then define a component called `PrivyIrys` and write code to login with Privy and create a new `WebIrys` object:
+Then, define a component called `PrivyIrys` and write code to login with Privy and create a new `WebIrys` object.
+
+The code to create a `WebIrys` object differs depending on if you're using an [external wallet](https://docs.privy.io/guide/frontend/wallets/external) vs an [embedded one](https://docs.privy.io/guide/frontend/embedded/overview). When using external wallets, you pass the Ethers provider returned from the `Wallet` object, when using embedded wallets you pass the `sendTransaction` Privy hook.
+
+The following code uses conditional logic to create the correct `WebIrys` object based on the wallet type. If your application only supports a single wallet type, feel free to simplify the code.
 
 ```js
 import { User, usePrivy, useWallets } from "@privy-io/react-auth";
 
 const { wallets } = useWallets();
 const { login } = usePrivy();
+const { sendTransaction } = usePrivy();
 
 // First login
 login();
@@ -227,17 +232,17 @@ const getWebIrys = async () => {
 
 	const provider = await w?.getEthersProvider();
 	if (!provider) throw new Error(`Cannot find privy wallet`);
+	const irysWallet =
+		w?.walletClientType === "privy"
+			? { name: "privy-embedded", provider, sendTransaction }
+			: { name: "privy", provider };
 
-	const webIrys = new WebIrys({ url, token, wallet: { name: "privy", provider: provider } });
-	webIrys.tokenConfig.sendTx = async (data) =>
-		//@ts-ignore
-		sendTransaction({
-			...data,
-			gasLimit: data.gasLimit.toHexString(),
-			maxFeePerGas: data.maxFeePerGas.toHexString(),
-			maxPriorityFeePerGas: data.maxPriorityFeePerGas.toHexString(),
-			//@ts-ignore
-		}).then((r) => r.transactionHash);
+	const webIrys = new WebIrys({
+		url: url,
+		token: token,
+		wallet: irysWallet,
+	});
+
 	await webIrys.ready();
 };
 ```
