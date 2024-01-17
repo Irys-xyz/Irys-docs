@@ -48,18 +48,19 @@ You can query a version chain using the [Irys query package](/developer-docs/que
 ```js
 import Query from "@irys/query";
 
-const rootTX = "WF--VR1ZERvABYy1aNYD3QJ0OAVDSUF8dTlg6zFKveQ";
+const txID = "WF--VR1ZERvABYy1aNYD3QJ0OAVDSUF8dTlg6zFKveQ";
 const fromAddress = "0x591b5ce7ca10a55a9b5d1516ef89693d5b3586b8";
 
-const myQuery = new Query();
+const myQuery = new Query({ url: "https://node2.irys.xyz/graphql" });
 const results = await myQuery
 	.search("irys:transactions")
-	.tags([{ name: "Root-TX", values: [rootTX] }])
-	.from([fromAddress]);
+	.tags([{ name: "Root-TX", values: [txID] }])
+	.from([fromAddress])
+	.sort("ASC");
 
-results.forEach((result) => {
+results.forEach((result, i) => {
 	const formattedTimestamp = new Date(result.timestamp).toLocaleString();
-	console.log(`ID: ${result.id}, Timestamp: ${formattedTimestamp}`);
+	console.log(`Update ${i + 1}: ID: ${result.id}, Timestamp: ${formattedTimestamp}`);
 });
 ```
 
@@ -75,6 +76,7 @@ query getChain {
       }
     ]
     owners: ["0x591b5ce7ca10a55a9b5d1516ef89693d5b3586b8"]
+    order: ASC
   ) {
     edges {
       node {
@@ -88,7 +90,8 @@ query getChain {
 
 ## Use-cases
 
--   Irys’ mutable references open up new opportunities for builders, including:
+Irys’ mutable references open up new opportunities for builders, including:
+
 -   Gaming NFTs: Metadata changes based on in-game actions
 -   Dynamic NFTs: Images change based on onchain activity
 -   Software distribution: The latest version is always available via the same link
