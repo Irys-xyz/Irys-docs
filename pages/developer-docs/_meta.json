@@ -4,5 +4,6 @@
 	"cli": "CLI",
 	"provenance-toolkit": "Provenance Toolkit",
 	"using-devnet": "Using Devnet",
-	"tags": "Tags"
+	"tags": "Tags",
+	"mutable-references": "Mutable references"
 }
