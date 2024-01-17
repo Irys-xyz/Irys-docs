@@ -28,7 +28,7 @@ const receiptTwo = await irys.upload("Second TX", { tags });
 console.log(`TX 2 uploaded https://gateway.irys.xyz/mutable/${receiptOne.id}`);
 ```
 
-The original URL (https://gateway.irys.xyz/mutable/:id) now resolves to the second transaction in the chain.
+The original URL (`https://gateway.irys.xyz/mutable/:id`) now resolves to the second transaction in the chain.
 
 <Callout type="info" emoji="ℹ️">
 	When building a transaction chain, additions must be made using the same wallet that created the original
