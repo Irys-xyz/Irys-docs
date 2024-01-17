@@ -48,13 +48,13 @@ You can query a version chain using the [Irys query package](/developer-docs/que
 ```js
 import Query from "@irys/query";
 
-const rooTX = "WF--VR1ZERvABYy1aNYD3QJ0OAVDSUF8dTlg6zFKveQ";
+const rootTX = "WF--VR1ZERvABYy1aNYD3QJ0OAVDSUF8dTlg6zFKveQ";
 const fromAddress = "0x591b5ce7ca10a55a9b5d1516ef89693d5b3586b8";
 
 const myQuery = new Query();
 const results = await myQuery
 	.search("irys:transactions")
-	.tags([{ name: "Root-TX", values: [rooTX] }])
+	.tags([{ name: "Root-TX", values: [rootTX] }])
 	.from([fromAddress]);
 
 results.forEach((result) => {
