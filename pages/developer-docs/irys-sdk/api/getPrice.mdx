@@ -26,7 +26,7 @@ const numBytes = 1048576; // Number of bytes to check
 const priceAtomic = await irys.getPrice(numBytes);
 
 // Convert from atomic units to standard units
-const priceConverted = irys.utils.fromAtomic(numBytes);
+const priceConverted = irys.utils.fromAtomic(priceAtomic);
 
 console.log(`Uploading ${numBytes} bytes costs ${priceConverted}`);
 ```
