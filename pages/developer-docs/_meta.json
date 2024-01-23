@@ -5,5 +5,8 @@
 	"provenance-toolkit": "Provenance Toolkit",
 	"using-devnet": "Using Devnet",
 	"tags": "Tags",
-	"mutable-references": "Mutable references"
+	"mutable-references": "Mutable references",
+	"ipfs-migration": {
+		"display": "hidden"
+	}
 }
