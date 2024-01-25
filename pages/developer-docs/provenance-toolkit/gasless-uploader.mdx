@@ -4,7 +4,7 @@ description: UI component to upload single files or groups of files
 
 import { Callout } from "nextra-theme-docs";
 
-# Gassless uploader
+# Gasless uploader
 
 The [Gasless Uploader component](https://provenance-toolkit.irys.xyz/gasless-uploader) is used to upload either single files or groups of files. Uploads are signed and paid for using a wallet linked to the server.
 
@@ -25,16 +25,16 @@ Once uploaded, the UI updates to include buttons that can be clicked to view the
 
 ## Customizing the UI
 
-In default mode, the `GasslessUploader` component shows both the image preview and receipt preview buttons, which can be optionally hidden by passing config parameters to the component.
+In default mode, the `GaslessUploader` component shows both the image preview and receipt preview buttons, which can be optionally hidden by passing config parameters to the component.
 
-| Description              | Code                                           |
-| ------------------------ | ---------------------------------------------- |
-| Default Behavior         | `<GasslessUploader />`                         |
-| Hide the image preview   | `<GasslessUploader showImageView={false} />`   |
-| Hide the receipt preview | `<GasslessUploader showReceiptView={false} />` |
+| Description              | Code                                          |
+| ------------------------ | --------------------------------------------- |
+| Default Behavior         | `<GaslessUploader />`                         |
+| Hide the image preview   | `<GaslessUploader showImageView={false} />`   |
+| Hide the receipt preview | `<GaslessUploader showReceiptView={false} />` |
 
 If either parameter is left blank, it defaults to `true`.
 
 ## Code
 
-The component is designed to be used as-is. Users making significant changes to the UI can familiarize themselves with the code [using this tutorial](/hands-on/tutorials/gassless-uploading).
+The component is designed to be used as-is. Users making significant changes to the UI can familiarize themselves with the code [using this tutorial](/hands-on/tutorials/gasless-uploading).

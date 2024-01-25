@@ -27,7 +27,7 @@ import { Callout } from "nextra-theme-docs";
 </div>
 
 <div className="md:-mt-15">
-The Irys Provenance Toolkit is a collection of UI components you can use to kickstart your next application. It contains UI components for managing node balances, uploading files, performing gassless uploads, and querying transactions.
+The Irys Provenance Toolkit is a collection of UI components you can use to kickstart your next application. It contains UI components for managing node balances, uploading files, performing gasless uploads, and querying transactions.
 
 The toolkit is fully open source, you are welcome to use it any way you want with or without attribution.
 
@@ -73,7 +73,7 @@ Included within the Provenance Toolkit are the following components:
 -   [Progress Bar Uploader](./provenance-toolkit/progress-bar-uploader): Upload large files, and provide feedback with a progress bar.
 -   [UDL Uploader](./provenance-toolkit/udl-uploader): Upload files and attach a UDL.
 -   [Encrypted Uploader](./provenance-toolkit/encrypted-uploader): Encrypt files before uploading.
--   [Gasless Uploader](./provenance-toolkit/gassless-uploader): Pay for user uploads server-side.
+-   [Gasless Uploader](./provenance-toolkit/gasless-uploader): Pay for user uploads server-side.
 -   [Solana NFT Minter](./provenance-toolkit/solana-nft-minter): Upload an image and mint on Solana as an NFT.
 -   [Transaction Feed](./provenance-toolkit/transaction-feed): Query Irys transactions.
 
@@ -91,5 +91,5 @@ The following utility functions are used internally by the components. If you're
 -   `getRpcUrl.ts`: Returns the RPC URL for the chain associated with the specified token.
 -   `getIrys.ts`: Instantiates an Irys object using the parameters in `.env.local`. Currently designed to work with the Ethers 5 provider. You use a different provider, modify code here.
 -   `fundAndUpload.ts`: Determines the upload cost for the specified data, funds the node if needed, and then uploads the file.
--   `gasslessFundAndUpload.ts`: Using the private key supplied in `.env.local`, determines the upload cost for the specified data, funds the node if needed, and then uploads the file.
+-   `gaslessFundAndUpload.ts`: Using the private key supplied in `.env.local`, determines the upload cost for the specified data, funds the node if needed, and then uploads the file.
 -   `queryGraphQL.ts`: Uses the Irys query package to search based on parameters entered in the UI

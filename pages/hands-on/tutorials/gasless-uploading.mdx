@@ -1,10 +1,10 @@
 ---
-description: Using Server-Side signing to implement gassless transactions.
+description: Using Server-Side signing to implement gasless transactions.
 ---
 
-# Gassless Uploading With Server-Side Signing
+# Gasless Uploading With Server-Side Signing
 
-Server-side signing is a method to allow you to sign (and pay) for your users' data securely (without exposing your private key). It is a form of gassless transactions.
+Server-side signing is a method to allow you to sign (and pay) for your users' data securely (without exposing your private key). It is a form of gasless transactions.
 
 Server-side signing works in 4 main steps:
 
@@ -30,13 +30,13 @@ Currently, server-side signing is supported for the following:
 
 ## Getting Started
 
-The quickest way to get started is to clone [our example repository](https://github.com/Irys-xyz/gassless-uploader) which supports gassless uploads from both EVM and Solana chains.
+The quickest way to get started is to clone [our example repository](https://github.com/Irys-xyz/gasless-uploader) which supports gasless uploads from both EVM and Solana chains.
 
-We also have an [online demo available](https://provenance-toolkit.irys.xyz/gassless-uploader) as part of [the Provenance Toolkit](https://docs.irys.xyz/developer-docs/provenance-toolkit).
+We also have an [online demo available](https://provenance-toolkit.irys.xyz/gasless-uploader) as part of [the Provenance Toolkit](https://docs.irys.xyz/developer-docs/provenance-toolkit).
 
 ## API Routes
 
-The [example app](https://github.com/Irys-xyz/gassless-uploader) exposes three API routes, you can pick and choose which to use based on your own app design.
+The [example app](https://github.com/Irys-xyz/gasless-uploader) exposes three API routes, you can pick and choose which to use based on your own app design.
 
 ### `publicKey.ts`
 
@@ -296,7 +296,7 @@ export async function POST(req: Request) {
 
 On the client-side there is a single utility function that calls either the EVM or SOL routes.
 
-```ts filename="utils/gasslessFundAndUpload.ts"
+```ts filename="utils/gaslessFundAndUpload.ts"
 import { WebIrys } from "@irys/sdk";
 import getIrys from "../utils/getIrys";
 
@@ -305,7 +305,7 @@ type Tag = {
 	value: string;
 };
 
-const gasslessFundAndUploadEVM = async (selectedFile: File, tags: Tag[]): Promise<string> => {
+const gaslessFundAndUploadEVM = async (selectedFile: File, tags: Tag[]): Promise<string> => {
 	// obtain the server's public key
 	const pubKeyRes = (await (await fetch("/api/publicKeyEVM")).json()) as unknown as {
 		pubKey: string;
@@ -370,7 +370,7 @@ const gasslessFundAndUploadEVM = async (selectedFile: File, tags: Tag[]): Promis
 	return tx.id;
 };
 
-const gasslessFundAndUploadSOL = async (selectedFile: File, tags: Tag[]): Promise<string> => {
+const gaslessFundAndUploadSOL = async (selectedFile: File, tags: Tag[]): Promise<string> => {
 	// Obtain the server's public key
 	const pubKeyRes = (await (await fetch("/api/publicKeySOL")).json()) as unknown as {
 		pubKey: string;
@@ -427,14 +427,14 @@ const gasslessFundAndUploadSOL = async (selectedFile: File, tags: Tag[]): Promis
  * @param {Tag[]} tags - An array of tags associated with the file.
  * @returns {Promise<string>} - The transaction ID of the upload.
  */
-const gasslessFundAndUpload = async (selectedFile: File, tags: Tag[], blockchain: "EVM" | "SOL"): Promise<string> => {
+const gaslessFundAndUpload = async (selectedFile: File, tags: Tag[], blockchain: "EVM" | "SOL"): Promise<string> => {
 	let txId = "";
 	switch (blockchain) {
 		case "EVM":
-			txId = await gasslessFundAndUploadEVM(selectedFile, tags);
+			txId = await gaslessFundAndUploadEVM(selectedFile, tags);
 			break;
 		case "SOL":
-			txId = await gasslessFundAndUploadSOL(selectedFile, tags);
+			txId = await gaslessFundAndUploadSOL(selectedFile, tags);
 			break;
 		default:
 			throw new Error("Unsupported blockchain");
@@ -442,5 +442,5 @@ const gasslessFundAndUpload = async (selectedFile: File, tags: Tag[], blockchain
 	return txId;
 };
 
-export default gasslessFundAndUpload;
+export default gaslessFundAndUpload;
 ```

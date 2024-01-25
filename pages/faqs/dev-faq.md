@@ -34,7 +34,7 @@ Yes. You can host static websites. We have [a tutorial on how to do it here.](/h
 
 ## Is it possible to assign an API key to a funded Irys account so that I can pay for my client's uploads?
 
-No, but we do support [gassless uploads](/hands-on/tutorials/gassless-uploading).
+No, but we do support [gasless uploads](/hands-on/tutorials/gasless-uploading).
 
 ## Which Ethereum Testnet is supported on Devnet?
 
