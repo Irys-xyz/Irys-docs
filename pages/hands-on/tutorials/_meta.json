@@ -11,9 +11,7 @@
 	"metaplex": "Solana NFTs with Metaplex",
 	"udl-erc20": "Manage UDL ownership with ERC20",
 	"udl-nft": "NFT licensing and UDL",
-	"dynamic-nft": {
-		"display": "hidden"
-	},
+	"dynamic-nft": "Build a dynamic NFT",
 	"lens": "Upload Lens metadata",
 	"encrypting-on-chain-data": "Encrypting on-chain data",
 	"server-side-encryption": "Encrypting data server-side",

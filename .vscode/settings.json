@@ -1,3 +1,4 @@
 {
-	"editor.wordWrapColumn": 80
+	"editor.wordWrapColumn": 80,
+	"cSpell.enableFiletypes": ["mdx"]
 }
