@@ -122,7 +122,7 @@ const directoryPath = "./pages/";
 
 const mdxFiles = findAllMDXFiles(directoryPath);
 
-const outputPath = "./pages/api/search/db.csv";
+const outputPath = "./pages/api/db.csv";
 
 processMDXFilesToCSV(mdxFiles, outputPath);
 

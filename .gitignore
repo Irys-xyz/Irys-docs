@@ -7,4 +7,4 @@ pages/.DS_Store
 package-lock.json
 yarn.lock
 
-pages/api/search/db.csv
+pages/api/db.csv

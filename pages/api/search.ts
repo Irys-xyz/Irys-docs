@@ -5,7 +5,7 @@ import { finished } from "stream/promises";
 import fs from "fs";
 import { parse } from "csv-parse";
 
-export default async (req: NextApiRequest, res: NextApiResponse) => {
+const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   if (req.method !== "GET") {
     return res.status(405).json({ message: "Method not allowed" });
   }
@@ -22,9 +22,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
       description: string;
       content: string;
     }[] = [];
-    const parser = fs
-      .createReadStream(`./pages/api/search/db.csv`)
-      .pipe(parse());
+    const parser = fs.createReadStream(`./pages/api/db.csv`).pipe(parse());
     parser.on("readable", function () {
       let record;
       while ((record = parser.read()) !== null) {
@@ -61,3 +59,5 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     })
   );
 };
+
+export default handler;
