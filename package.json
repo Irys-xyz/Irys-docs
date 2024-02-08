@@ -7,7 +7,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "postinstall": "node ./scripts/generate-search-csv.js"
+    "postinstall": "node ./scripts/generate-search-json.js"
   },
   "dependencies": {
     "@fontsource/roboto-mono": "^4.5.10",
@@ -17,7 +17,7 @@
     "autoprefixer": "^10.4.14",
     "csv-parse": "^5.5.3",
     "ethers": "^5.7.2",
-    "fuse.js": "^7.0.0",
+    "flexsearch": "^0.7.43",
     "next": "^13.2.4",
     "nextra": "^2.3.0",
     "nextra-theme-docs": "^2.3.0",

@@ -1,63 +1,36 @@
 import { NextApiRequest, NextApiResponse } from "next";
 
-import Fuse from "fuse.js";
-import { finished } from "stream/promises";
-import fs from "fs";
-import { parse } from "csv-parse";
+import FlexSearch from "flexsearch";
+import db from "./db.json";
 
-const handler = async (req: NextApiRequest, res: NextApiResponse) => {
-  if (req.method !== "GET") {
-    return res.status(405).json({ message: "Method not allowed" });
+const index = new FlexSearch.Index({
+  tokenize: "forward",
+  resolution: 3,
+});
+
+db.forEach((doc, id) => {
+  const content = `${doc.path} ${doc.description} ${doc.content}`;
+  index.add(id, content);
+});
+
+export default async (req: NextApiRequest, res: NextApiResponse) => {
+  // Get the query from request
+  const { q } = req.query;
+
+  if (!q || typeof q !== "string") {
+    res.status(400).json({ error: "Query parameter is required" });
+    return;
   }
 
-  const query = req.query.q as string;
+  const results = index.search(q, { limit: 10 });
 
-  if (!query) {
-    return res.status(400).json({ message: "Query is required" });
-  }
+  const searchResults = results.map((id: any) => {
+    return {
+      path: db[id].path,
+      description: db[id].description,
+    };
+  });
 
-  const processFile = async () => {
-    const records: {
-      path: string;
-      description: string;
-      content: string;
-    }[] = [];
-    const parser = fs.createReadStream(`./pages/api/db.csv`).pipe(parse());
-    parser.on("readable", function () {
-      let record;
-      while ((record = parser.read()) !== null) {
-        // Work with each record
-        records.push({
-          path: record[0].replace(/pages\//, "/").replace(".mdx", ""),
-          description: record[1],
-          content: record[2],
-        });
-      }
-    });
-    await finished(parser);
-    return records;
-  };
-
-  const records = await processFile();
-
-  const options = {
-    keys: ["path", "description", "content"],
-    includeScore: false,
-    threshold: 0.46, // Adjust this value to control fuzziness
-  };
-
-  const fuse = new Fuse(records, options);
-
-  const results = fuse.search(query);
-
-  res.json(
-    results.map((result) => {
-      return {
-        path: result.item.path,
-        description: result.item.description,
-      };
-    })
-  );
+  // Respond with search results
+  res.status(200).json(searchResults);
 };
-
-export default handler;

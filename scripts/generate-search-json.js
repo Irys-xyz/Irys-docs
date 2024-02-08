@@ -96,34 +96,52 @@ const findAllMDXFiles = (dir, mdxFiles = []) => {
 };
 
 /**
- * Process an array of MDX files and generate a CSV file with the specified output path.
+ * Process an array of MDX files and generate a JSON file with the specified output path.
  *
  * @param {string[]} mdxFiles - The array of MDX file paths to process.
- * @param {string} outputPath - The output path for the generated CSV file.
+ * @param {string} outputPath - The output path for the generated JSON file.
  * @returns {void}
  */
-const processMDXFilesToCSV = (mdxFiles, outputPath) => {
-  const header = "path,description,content\n";
-  fs.writeFileSync(outputPath, header);
+const processMDXFilesToJSON = (mdxFiles, outputPath) => {
+  try {
+    const header = "[";
 
-  mdxFiles.forEach((filePath) => {
-    const content = fs.readFileSync(filePath, "utf8");
-    const { description, output } = removeMarkdown(content);
+    fs.writeFileSync(outputPath, header);
 
-    const csvLine = `"${filePath}","${description}","${output.replace(
-      /"/g,
-      '""'
-    )}"\n`; // Escape quotes and add to CSV
-    fs.appendFileSync(outputPath, csvLine);
-  });
+    mdxFiles.forEach((filePath, index) => {
+      const mdxContent = fs.readFileSync(filePath, "utf8");
+      const { description, output } = removeMarkdown(mdxContent);
+
+      const jsonLine = {
+        path: filePath.replace(/^pages/, "").replace(".mdx", ""),
+        description: description,
+        content: output.replace(/"/g, '""'),
+      };
+
+      // Add comma if not the last item
+      const isLastItem = index === mdxFiles.length - 1;
+      const lineEnding = isLastItem ? "" : ",";
+
+      fs.appendFileSync(
+        outputPath,
+        JSON.stringify(jsonLine, null, 2) + lineEnding
+      );
+    });
+
+    // Close the JSON array
+    fs.appendFileSync(outputPath, "\n]");
+    console.log("MDX files processed successfully.");
+  } catch (error) {
+    console.error("Error occurred while processing MDX files:", error);
+  }
 };
 
 const directoryPath = "./pages/";
 
 const mdxFiles = findAllMDXFiles(directoryPath);
 
-const outputPath = "./pages/api/db.csv";
+const outputPath = "./pages/api/db.json";
 
-processMDXFilesToCSV(mdxFiles, outputPath);
+processMDXFilesToJSON(mdxFiles, outputPath);
 
-console.log(`Search CSV generation complete. Output file at: ${outputPath}`);
+console.log(`Search JSON generation complete. Output file at: ${outputPath}`);
