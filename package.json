@@ -6,7 +6,7 @@
   "license": "MIT",
   "scripts": {
     "dev": "next dev",
-    "build": "next build && next export",
+    "build": "next build",
     "postinstall": "node ./scripts/generate-search-csv.js"
   },
   "dependencies": {
