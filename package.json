@@ -8,7 +8,7 @@
     "compile-search": "node ./scripts/generate-search-csv.js",
     "dev": "next dev",
     "build": "next build && next export",
-    "postinstall": "node run compile-search"
+    "postinstall": "node compile-search"
   },
   "dependencies": {
     "@fontsource/roboto-mono": "^4.5.10",
