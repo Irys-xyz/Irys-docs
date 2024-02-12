@@ -5,6 +5,6 @@
 	"udl-uploader": "UDL uploader",
 	"encrypted-uploader": "Encrypted uploader",
 	"solana-nft-minter": "Solana NFT minter",
-	"gassless-uploader": "Gassless uploader",
+	"gasless-uploader": "Gasless uploader",
 	"transaction-feed": "Transaction feed"
 }

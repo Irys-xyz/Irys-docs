@@ -366,9 +366,9 @@ async function decryptFile(id: string, encryptedFileType: string): Promise<strin
 
 ## Displaying encrypted File in the browser
 
-After decrypting the image file, you need to convert the data blob to an URL with the format `data:image/png;base64,[base64-encoded-data]` before setting it as the src attribute of an `<img>` element.
+After decrypting the image file, you need to convert the data blob to a URL with the format `data:image/png;base64,[base64-encoded-data]` before setting it as the src attribute of an `<img>` element.
 
-These functions assist in converting the data blob to an URL.
+These functions assist in converting the data blob to a URL.
 
 ```js
 // Helper functions for use in showing decrypted images
