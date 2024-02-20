@@ -8,6 +8,10 @@ import { Callout } from "nextra-theme-docs";
 
 In addition to using Irys transaction IDs, you can also use IPFS Content IDs (CIDs) when addressing data on Irys.
 
+<Callout type="info" emoji="ℹ️">
+	Irys does not currently verify that CIDs match their uploaded data. This will be added in a future release.
+</Callout>
+
 ## Content IDs vs transaction IDs
 
 IPFS and Irys take a different approach to identifying data, IPFS uses Content Identifiers (CIDs) and Irys uses transaction IDs.
@@ -129,33 +133,3 @@ const downloadAndDetermineContentType = async (ipfsCID) => {
 const ipfsCID = "QmUgL4YbnW9vMWZXLdAFzgxJwxpxJapZRLpjoT2ubU5WmF";
 downloadAndDetermineContentType(ipfsCID);
 ```
-
-## Common questions
-
-### How soon after uploading to Irys is my data available for use?
-
-Our [optimistic cache](/learn/optimistic-cache) ensures all uploads are immediately available for download.
-
-### How do I pay for uploads to Irys?
-
-Irys accepts [most major tokens](/overview/supported-tokens) for payment. When migrating data, most users will choose to [up-front fund](/developer-docs/irys-sdk/api/fund#upfront-funding) where they pre-fund an Irys node with sufficient tokens to cover all data being migrated. Users can also choose to [lazy-fund](/developer-docs/irys-sdk/api/fund#lazy-funding) the uploads where you fund each separate upload.
-
-### How much does it cost to upload data to Irys?
-
-Irys charges a fee based on the number of bytes uploaded. You can calculate the exact cost using our [SDK](/developer-docs/irys-sdk/api/getPrice) or [fee calculator](/overview/cost-to-upload).
-
-### Does Irys charge ongoing monthly fees to host my data?
-
-No. Irys has a pay-once, store-forever model.
-
-### How do I download data from Irys?
-
-Using the [Irys gateway](/overview/gateways).
-
-### Does the Irys gateway rate-limit my downloads?
-
-No.
-
-### Does Irys have a Devnet I can use while testing the migration?
-
-Yes. On [our Devnet](/developer-docs/using-devnet) uploads are kept for ~60 days. You can pay for uploads using [free tokens available from faucets](/overview/supported-tokens#devnet-tokens).
