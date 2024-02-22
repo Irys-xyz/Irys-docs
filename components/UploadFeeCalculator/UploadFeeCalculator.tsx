@@ -183,15 +183,12 @@ const UploadFeeCalculator: React.FC = () => {
 
   useEffect(() => {
     const fileSum = droppedFiles.reduce((acc, file) => acc + file.size, 0);
-    const tagSum = items.reduce(
-      (acc, item) => acc + new Blob([item.name, item.value]).size,
-      0
-    );
+
     const manualBytes = isNaN(customSize)
       ? 0
       : customSize * selectedFileUnit.mult;
 
-    const sum = fileSum + tagSum + manualBytes;
+    const sum = fileSum + manualBytes;
 
     fetch(`https://node1.irys.xyz/price/${currency.value}/${sum}/`)
       .then((res) => res.json())
