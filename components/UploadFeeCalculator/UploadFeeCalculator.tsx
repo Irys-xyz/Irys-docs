@@ -200,7 +200,12 @@ const UploadFeeCalculator: React.FC = () => {
       .getPrice(currency.ticker)
       .then((price: any) => setUsdPrice(price as RedstonePrice));
 
-    setsumOfBytes(sum);
+    const tagSum = items.reduce(
+      (acc, item) => acc + new Blob([item.name, item.value]).size,
+      0
+    );
+
+    setsumOfBytes(sum + tagSum);
   }, [currency, droppedFiles, items, customSize, selectedFileUnit]);
 
   // if the user inserts a custom size, we need to reset the dropped files
