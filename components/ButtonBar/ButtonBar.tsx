@@ -2,7 +2,7 @@ import React, { useState } from "react";
 
 import Button from "../Button";
 import ConfettiExplosion from "react-confetti-explosion";
-import { Web3Button } from "@thirdweb-dev/react";
+// import { Web3Button } from "@thirdweb-dev/react";
 
 interface ButtonBarProps {
 	submitUrl: string;
@@ -23,7 +23,7 @@ const ButtonBar: React.FC<ButtonBarProps> = ({ submitUrl, contractAddress, token
 			{isExploding && <ConfettiExplosion />}
 			<div className="flex flex-row gap-4 mt-2">
 				{submitUrl && <Button onClick={() => window.open(submitUrl)}>Submit Quest</Button>}
-				<Web3Button
+				{/* <Web3Button
 					theme="dark"
 					contractAddress={contractAddress}
 					action={(contract) => contract.erc1155.claim(tokenId, 1)}
@@ -37,7 +37,7 @@ const ButtonBar: React.FC<ButtonBarProps> = ({ submitUrl, contractAddress, token
 					}}
 				>
 					{claimButtonText}
-				</Web3Button>
+				</Web3Button> */}
 			</div>
 			<div className="mt-5 text-left" dangerouslySetInnerHTML={{ __html: message }} />
 		</div>
