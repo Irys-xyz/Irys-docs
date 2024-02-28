@@ -6,5 +6,7 @@
 	"using-devnet": "Using Devnet",
 	"tags": "Tags",
 	"mutable-references": "Mutable references",
-	"balance-approvals": "Balance approvals"
+	"balance-approvals": {
+		"display": "hidden"
+	}
 }
