@@ -1,0 +1,48 @@
+---
+description: Create an app
+---
+
+import { Callout } from "nextra-theme-docs";
+
+# Balance approvals
+
+Balance approvals allow for the sharing of balances between multiple addresses. Use balance approvals to pay for your users' uploads while still allowing those users to sign the transactions themselves.
+
+Balance approvals:
+
+-   Are non-transferable
+-   Can be configured to expire automatically
+-   Post instantly
+
+## Create an approval
+
+<Callout type="info" emoji="ℹ️">
+	Approvals are based on the token set when connecting to an Irys node. Both approver and approvee must use the same
+	token.
+</Callout>
+
+```ts
+const approvalReceipt = await irys.approval.createApproval({
+	amount: irys.utils.toAtomic(1), // Amount in atomic units
+	approvedAddress: "address",
+	expiresInSeconds: 100, // Expires in 100 seconds. Delete to remove expiration.
+});
+```
+
+## Upload using an approval
+
+```ts
+const approvedReceipt = await irys.upload("GM World", { upload: { paidBy: "payerAddress" } });
+```
+
+## Revoke an approval
+
+```ts
+const revocationReceipt = await irys.approval.revokeApproval({ approvedAddress: "address" });
+```
+
+## Get remaining approval balance & and expiration date
+
+```ts
+const approval = await irys.approval.getApprovedBalance({ approvedAddress: "address" });
+```
