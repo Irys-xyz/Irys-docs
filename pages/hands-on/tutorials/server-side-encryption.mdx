@@ -257,7 +257,7 @@ async function storeOnIrys(cipherText, dataToEncryptHash) {
 	let receipt;
 	try {
 		const tags = [{ name: "Content-Type", value: "application/json" }];
-		receipt = await irys.upload(JSON.stringify(dataToUpload), { tags });
+		receipt = await irys.upload(JSON.stringify(dataToUpload), { tags: tags });
 	} catch (e) {
 		console.log("Error uploading data ", e);
 	}

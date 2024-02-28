@@ -35,7 +35,7 @@ console.log(`TX 1 uploaded https://gateway.irys.xyz/mutable/${receiptOne.id}`);
 
 ```js
 const tags = [{ name: "Root-TX", value: receiptOne.id }];
-const receiptTwo = await irys.upload("Second TX", { tags });
+const receiptTwo = await irys.upload("Second TX", { tags: tags });
 console.log(`TX 2 uploaded https://gateway.irys.xyz/mutable/${receiptOne.id}`);
 ```
 

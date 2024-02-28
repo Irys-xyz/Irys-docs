@@ -300,7 +300,7 @@ const uploadFile = async (fileToUpload: File) => {
 	const tags = [{ name: "application-id", value: "MyNFTDrop" }];
 
 	try {
-		const receipt = await webIrys.uploadFile(fileToUpload, { tags });
+		const receipt = await webIrys.uploadFile(fileToUpload, { tags: tags });
 		console.log(`File uploaded ==> https://gateway.irys.xyz/${receipt.id}`);
 	} catch (e) {
 		console.log("Error uploading file ", e);

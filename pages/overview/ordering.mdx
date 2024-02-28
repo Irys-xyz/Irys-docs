@@ -48,7 +48,7 @@ const tags = [{ name: "application-id", value: "my-tx-sequence" }];
 
 // Upload 10 transactions
 for (let i = 0; i < 10; i++) {
-	const receipt = await irys.upload("GM " + i, { tags });
+	const receipt = await irys.upload("GM " + i, { tags: tags });
 	console.log(`Transaction #${i} uploaded at ${receipt.timestamp}`);
 }
 ```
