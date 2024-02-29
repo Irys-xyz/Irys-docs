@@ -56,12 +56,13 @@ async function serverInit(): Promise<Buffer> {
 	const key = process.env.PRIVATE_KEY_SOL;
 	const token = "solana";
 	const url = process.env.NEXT_PUBLIC_NODE || "";
-	const providerUrl = "https://api.devnet.solana.com"; //getRpcUrl(token || "");
+	// Change if deploying on mainnet
+	const providerUrl = "https://api.devnet.solana.com";
 	const serverIrys = new Irys({
 		url, // URL of the node you want to connect to
 		token, // Token used for payment and signing
 		key: key,
-		config: { providerUrl }, // Optional provider URL, only required when using Devnet
+		config: { providerUrl }, // Only required when using Devnet
 	});
 	const publicKey = serverIrys.tokenConfig.getSigner().publicKey;
 	return publicKey;
@@ -83,7 +84,6 @@ import { NextResponse } from "next/server";
  */
 async function serverInit(): Promise<Buffer> {
 	const key = process.env.PRIVATE_KEY_EVM; // your private key;
-	console.log("key=", key);
 	if (!key) throw new Error("Private key is undefined!");
 	const signer = new TypedEthereumSigner(key);
 	return signer.publicKey;
@@ -101,52 +101,44 @@ The route `signData.ts` signs the data provided using the server's private key. 
 #### Solana-Based Wallets
 
 ```ts filename="signDataSOL/route.ts"
-import Irys from "@irys/sdk";
-import getRpcUrl from "@/app/utils/getRpcUrl";
+import type { NextApiRequest, NextApiResponse } from "next";
+import { TypedEthereumSigner } from "arbundles";
 import { NextResponse } from "next/server";
-import { ReadableStream } from "stream/web";
+import Irys from "@irys/sdk";
+import HexInjectedSolanaSigner from "arbundles/build/web/esm/src/signing/chains/HexInjectedSolanaSigner";
 
 /**
- * Given a file of the specified size, get the cost to upload, then fund a node that amount
- * @param filesize The size of a file to fund for
- * @returns
+ *
+ * @returns A signed version of the data, signatureData, as sent by the client.
  */
-async function lazyFund(filesize: string): Promise<string> {
-	console.log("lazyFund SOL");
-
+async function signDataOnServer(signatureData: Buffer): Promise<Buffer> {
 	const key = process.env.PRIVATE_KEY_SOL;
 	const token = "solana";
 	const url = process.env.NEXT_PUBLIC_NODE || "";
-	const providerUrl = "https://api.devnet.solana.com"; //getRpcUrl(token || "");
+	// Change if deploying on mainnet
+	const providerUrl = "https://api.devnet.solana.com";
 
 	const serverIrys = new Irys({
 		url, // URL of the node you want to connect to
 		token, // Token used for payment and signing
 		key: key,
-		config: { providerUrl }, // Optional provider URL, only required when using Devnet
+		config: { providerUrl }, // Only required when using Devnet
 	});
 
-	const price = await serverIrys.getPrice(parseInt(filesize));
-	console.log("lazyFund SOL price=", price);
+	const encodedMessage = Buffer.from(signatureData);
 
-	const balance = await serverIrys.getLoadedBalance();
-	console.log("lazyFund SOL balance=", balance);
+	const signature = await serverIrys.tokenConfig.sign(encodedMessage);
 
-	let fundTx;
-	if (price.isGreaterThanOrEqualTo(balance)) {
-		console.log("Funding node.");
-		fundTx = await serverIrys.fund(price);
-		console.log("Successfully funded fundTx=", fundTx);
-	} else {
-		console.log("Funding not needed, balance sufficient.");
-	}
+	const isValid = await HexInjectedSolanaSigner.verify(
+		serverIrys.tokenConfig.getPublicKey() as Buffer,
+		signatureData,
+		signature,
+	);
 
-	// return the transaction id
-	return fundTx?.id || "";
+	return Buffer.from(signature);
 }
 
-async function readFromStream(stream: ReadableStream<Uint8Array> | null): Promise<string> {
-	if (!stream) return "";
+async function readFromStream(stream: ReadableStream): Promise<string> {
 	const reader = stream.getReader();
 	let result = "";
 
@@ -161,12 +153,13 @@ async function readFromStream(stream: ReadableStream<Uint8Array> | null): Promis
 
 export async function POST(req: Request) {
 	//@ts-ignore
-	const rawData = await readFromStream(req.body as ReadableStream<Uint8Array> | null);
-
+	const rawData = await readFromStream(req.body);
 	const body = JSON.parse(rawData);
-	const fundTx = await lazyFund(body);
 
-	return NextResponse.json({ txResult: fundTx });
+	const signatureData = Buffer.from(body.signatureData, "hex");
+	const signature = await signDataOnServer(signatureData);
+
+	return NextResponse.json({ signature: signature.toString("hex") });
 }
 ```
 
@@ -222,52 +215,53 @@ To perform lazy-funding of uploads, pass the exact number of bytes you want to f
 #### Solana-Based Wallets
 
 ```ts filename="lazyFundSOL/route.ts"
-import { TypedEthereumSigner } from "arbundles";
-import { NextResponse } from "next/server";
 import Irys from "@irys/sdk";
+import getRpcUrl from "@/app/utils/getRpcUrl";
+import { NextResponse } from "next/server";
+import { ReadableStream } from "stream/web";
 
 /**
- * @returns The server's public key.
+ * Given a file of the specified size, get the cost to upload, then fund a node that amount
+ * @param filesize The size of a file to fund for
+ * @returns
  */
-async function serverInit(): Promise<Buffer> {
+async function lazyFund(filesize: string): Promise<string> {
+	console.log("lazyFund SOL");
+
 	const key = process.env.PRIVATE_KEY_SOL;
 	const token = "solana";
 	const url = process.env.NEXT_PUBLIC_NODE || "";
-	const providerUrl = "https://api.devnet.solana.com"; //getRpcUrl(token || "");
+	// Change if deploying on Mainnet
+	const providerUrl = "https://api.devnet.solana.com";
+
 	const serverIrys = new Irys({
 		url, // URL of the node you want to connect to
 		token, // Token used for payment and signing
 		key: key,
-		config: { providerUrl }, // Optional provider URL, only required when using Devnet
+		config: { providerUrl }, // Only required when using Devnet
 	});
-	const publicKey = serverIrys.tokenConfig.getSigner().publicKey;
-	return publicKey;
+
+	const price = await serverIrys.getPrice(parseInt(filesize));
+	console.log("lazyFund SOL price=", price);
+
+	const balance = await serverIrys.getLoadedBalance();
+	console.log("lazyFund SOL balance=", balance);
+
+	let fundTx;
+	if (price.isGreaterThanOrEqualTo(balance)) {
+		console.log("Funding node.");
+		fundTx = await serverIrys.fund(price);
+		console.log("Successfully funded fundTx=", fundTx);
+	} else {
+		console.log("Funding not needed, balance sufficient.");
+	}
+
+	// return the transaction id
+	return fundTx?.id || "";
 }
 
-export async function GET(req: Request) {
-	return NextResponse.json({ pubKey: (await serverInit()).toString("hex") });
-}
-```
-
-#### EVM-Based
-
-```ts filename="lazyFundEVM/route.ts"
-import type { NextApiRequest, NextApiResponse } from "next";
-import { TypedEthereumSigner } from "arbundles";
-import { NextResponse } from "next/server";
-
-/**
- *
- * @returns A signed version of the data, signatureData, as sent by the client.
- */
-async function signDataOnServer(signatureData: Buffer): Promise<Buffer> {
-	const key = process.env.PRIVATE_KEY_EVM;
-	if (!key) throw new Error("Private key is undefined!");
-	const signer = new TypedEthereumSigner(key);
-	return Buffer.from(await signer.sign(signatureData));
-}
-
-async function readFromStream(stream: ReadableStream): Promise<string> {
+async function readFromStream(stream: ReadableStream<Uint8Array> | null): Promise<string> {
+	if (!stream) return "";
 	const reader = stream.getReader();
 	let result = "";
 
@@ -282,13 +276,84 @@ async function readFromStream(stream: ReadableStream): Promise<string> {
 
 export async function POST(req: Request) {
 	//@ts-ignore
-	const rawData = await readFromStream(req.body);
+	const rawData = await readFromStream(req.body as ReadableStream<Uint8Array> | null);
+
 	const body = JSON.parse(rawData);
+	const fundTx = await lazyFund(body);
 
-	const signatureData = Buffer.from(body.signatureData, "hex");
-	const signature = await signDataOnServer(signatureData);
+	return NextResponse.json({ txResult: fundTx });
+}
+```
 
-	return NextResponse.json({ signature: signature.toString("hex") });
+#### EVM-Based
+
+```ts filename="lazyFundEVM/route.ts"
+import Irys from "@irys/sdk";
+import getRpcUrl from "@/app/utils/getRpcUrl";
+import { NextResponse } from "next/server";
+import { ReadableStream } from "stream/web";
+
+/**
+ * Given a file of the specified size, get the cost to upload, then fund a node that amount
+ * @param filesize The size of a file to fund for
+ * @returns
+ */
+async function lazyFund(filesize: string): Promise<string> {
+	const key = process.env.PRIVATE_KEY_EVM;
+	const token = process.env.NEXT_PUBLIC_TOKEN || "";
+	const url = process.env.NEXT_PUBLIC_NODE || "";
+	const providerUrl = getRpcUrl(token || "");
+
+	const serverIrys = new Irys({
+		url, // URL of the node you want to connect to
+		token, // Token used for payment and signing
+		key: key,
+		config: { providerUrl }, // Only required when using Devnet
+	});
+	console.log(
+		"serverIrysPubKey",
+		//@ts-ignore
+		serverIrys.tokenConfigConfig.getPublicKey().toJSON(),
+	);
+
+	const price = await serverIrys.getPrice(parseInt(filesize));
+	const balance = await serverIrys.getLoadedBalance();
+
+	let fundTx;
+	if (price.isGreaterThanOrEqualTo(balance)) {
+		console.log("Funding node.");
+		fundTx = await serverIrys.fund(price);
+		console.log("Successfully funded fundTx=", fundTx);
+	} else {
+		console.log("Funding not needed, balance sufficient.");
+	}
+
+	// return the transaction id
+	return fundTx?.id || "";
+}
+
+async function readFromStream(stream: ReadableStream<Uint8Array> | null): Promise<string> {
+	if (!stream) return "";
+	const reader = stream.getReader();
+	let result = "";
+
+	while (true) {
+		const { done, value } = await reader.read();
+		if (done) break;
+		result += new TextDecoder().decode(value);
+	}
+
+	return result;
+}
+
+export async function POST(req: Request) {
+	//@ts-ignore
+	const rawData = await readFromStream(req.body as ReadableStream<Uint8Array> | null);
+
+	const body = JSON.parse(rawData);
+	const fundTx = await lazyFund(body);
+
+	return NextResponse.json({ txResult: fundTx });
 }
 ```
 
