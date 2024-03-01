@@ -93,6 +93,14 @@ const getIrys = async () => {
 };
 ```
 
+### Provider URLs
+
+Use the `providerUrl` parameter to specify an RPC provider.
+
+-   When working with Nodes 1 and 2, this value is optional and will default to the main public RPC provider for the chosen chain.
+-   When working with Devnet, this parameter is required.
+-   When working with Aptos, use one of "mainnet" | "testnet" | "devnet" instead of a URL.
+
 ## Funding a node
 
 Fund a node using any of our [supported tokens](/overview/supported-tokens):
