@@ -10,16 +10,13 @@ Balance approvals allow for the sharing of balances between multiple addresses. 
 
 Balance approvals:
 
--   Are non-transferable
--   Can be configured to expire automatically
--   Post instantly
+-   Are non-transferable.
+-   Can be configured to expire automatically.
+-   Are based on the token set when connecting to an Irys node. Both approver and approvee must use the same
+    token.
+-   Are registered instantly upon upload completion.
 
 ## Create an approval
-
-<Callout type="info" emoji="ℹ️">
-	Approvals are based on the token set when connecting to an Irys node. Both approver and approvee must use the same
-	token.
-</Callout>
 
 ```ts
 const approvalReceipt = await irys.approval.createApproval({
