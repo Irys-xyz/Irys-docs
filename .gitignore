@@ -6,3 +6,7 @@ pages/.DS_Store
 
 package-lock.json
 yarn.lock
+
+pages/api/db.json
+
+out

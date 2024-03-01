@@ -6,13 +6,16 @@
   "license": "MIT",
   "scripts": {
     "dev": "next dev",
-    "build": "next build && next export"
+    "build": "next build",
+    "postinstall": "node ./scripts/generate-search-json.js"
   },
   "dependencies": {
     "@fontsource/roboto-mono": "^4.5.10",
     "@irys/sdk": "^0.0.4",
     "autoprefixer": "^10.4.14",
+    "csv-parse": "^5.5.3",
     "ethers": "^5.7.2",
+    "flexsearch": "^0.7.43",
     "next": "^13.2.4",
     "nextra": "^2.3.0",
     "nextra-theme-docs": "^2.3.0",
