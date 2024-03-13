@@ -11,6 +11,7 @@ Errors:
 -   [bigint: Failed to load bindings, pure JS will be used (try npm run rebuild?)](/developer-docs/irys-sdk/troubleshooting#bigint)
 -   [Error: Using devnet.irys.xyz requires a dev/testnet RPC to be configured](/developer-docs/irys-sdk/troubleshooting#devnet-rpc)
 -   [Error: Not enough balance for transaction](/developer-docs/irys-sdk/troubleshooting#insufficient-balance)
+-   [Error: Transaction simulation failed: Blockhash not found](/developer-docs/irys-sdk/troubleshooting#blockhash-not-found)
 
 ## bigint
 
@@ -51,7 +52,7 @@ sudo apt-get install build-essential
 
 When using our [Devnet](/developer-docs/using-devnet), you must provide the URL to a Denvet RPC for the chain you're using. As this parameter is not required when using Node 1 and 2, users will sometimes get an error if they forget to add in the RPC URL.
 
-For example, this will throw an error
+For example, this will throw an error:
 
 ```js
 const getIrys = async () => {
@@ -94,3 +95,20 @@ As RPC URLs change frequently, users should always choose an up-to-date one from
 This error occurs when you try to upload to a node without first funding it. This applies to both Nodes 1 and 2 where you can pay using any our supported [mainnet tokens](/overview/supported-tokens#mainnet-tokens) and our Devnet node where you can pay using any of our supported [Devnet tokens](/overview/supported-tokens#devnet-tokens).
 
 Devnet tokens can be obtained for free from common faucets like the ones for [Solana](https://faucet.solana.com/), [Sepolia](https://sepoliafaucet.com/) and [Mumbai](https://mumbaifaucet.com/).
+
+## Blockhash not found
+
+**Error message**: Error: Transaction simulation failed: Blockhash not found
+
+Irys depends on transactions being confirmed, however, in some situations, it may be necessary to wait for the transaction to be finalized.
+
+This can be fixed by configuring Irys as follows:
+
+```js
+const irys = new Irys({
+	url: nodeUrl,
+	token,
+	provider,
+	config: { tokenOpts: { commitment: "finalized" } },
+});
+```
