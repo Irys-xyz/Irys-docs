@@ -12,11 +12,11 @@ Uploads a single file.
 
 <div className="-mt-6" />
 
--   `-h`: The you'll node upload to
--   `-t`: The [token](/overview/supported-tokens) to use when uploading.
--   `-w`: Your [private key](/developer-docs/cli#using-private-keys).
--   `--tags`: [Tags](/developer-docs/tags) to include, format `<name>` `<value>`
--   `--provider-url`: RPC URL to use. This is only required when using Devnet.
+- `-n`: The network you plan to upload to (`mainnet` or `devnet`)
+- `-t`: The [token](/overview/supported-tokens) to use when uploading.
+- `-w`: Your [private key](/developer-docs/cli#using-private-keys).
+- `--tags`: [Tags](/developer-docs/tags) to include, format `<name>` `<value>`
+- `--provider-url`: RPC URL to use. This is only required when using Devnet.
 
 ## Examples
 
@@ -24,7 +24,7 @@ Uploads a single file.
 
 ```console
 irys upload myImage.png \
-  -h https://node1.irys.xyz \
+  -n mainnet \
   -t matic \
   -w bf20......c9885307 \
   --tags tagName1 tagValue1 tagName2 tagValue2
@@ -34,7 +34,7 @@ irys upload myImage.png \
 
 ```console
 irys upload myImage.png \
-  -h https://devnet.irys.xyz \
+  -n devnet \
   -t matic \
   -w bf20......c9885307 \
   --tags tagName1 tagValue1 tagName2 tagValue2 \
@@ -42,7 +42,7 @@ irys upload myImage.png \
 ```
 
 <Callout type="info" emoji="ℹ️">
-	Devnet RPC URLs change often, use a recent one from https://chainlist.org/chain/80001
+	Devnet RPC URLs change often, use a recent one from https://chainlist.org/
 </Callout>
 
 ## Downloading
@@ -51,7 +51,7 @@ Files uploaded via `irys upload` can be downloaded using the transaction ID prov
 
 ```console
 irys upload myImage.png \
-  -h https://node1.irys.xyz \
+  -n mainnet \
   -t matic \
   -w bf20......c9885307 \
   --tags tagName1 tagValue1 tagName2 tagValue2

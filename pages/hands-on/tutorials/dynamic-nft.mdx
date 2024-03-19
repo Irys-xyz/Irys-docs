@@ -12,8 +12,8 @@ In this tutorial, you will create a dynamic NFT using Irys' [mutable references]
 
 Dynamic NFTs are NFTs whose metadata evolves over time. They are commonly used in:
 
--   Gaming projects where in-game assets evolve as players progress.
--   Loyalty programs where NFTs evolve as users accumulate points.
+- Gaming projects where in-game assets evolve as players progress.
+- Loyalty programs where NFTs evolve as users accumulate points.
 
 <img className="border border-[#FEF4EE] rounded-xl mt-5 w-full" src="/img/tutorials/dynamic-nft/all-characters.png" />
 
@@ -86,22 +86,22 @@ To deploy the smart contract using Remix IDE:
 
 2. Create a new solidity file
 
--   In the `File Explorers` pane, click on the `Create New File` icon.
--   Name your file `SuperMon.sol`, and paste the smart contract in.
+- In the `File Explorers` pane, click on the `Create New File` icon.
+- Name your file `SuperMon.sol`, and paste the smart contract in.
 
 4.  Compile the contract
 
--   Click on the `Solidity Compiler` icon in the sidebar.
--   Select the compiler version that matches your contract's pragma (`^0.8.0`).
--   Click `Compile SuperMon.sol`.
+- Click on the `Solidity Compiler` icon in the sidebar.
+- Select the compiler version that matches your contract's pragma (`^0.8.0`).
+- Click `Compile SuperMon.sol`.
 
 5. Deploy the Contract
 
--   Click on the `Deploy & Run Transactions` icon in the sidebar.
--   In the `ENVIRONMENT` dropdown, select `Injected Web3`.
--   MetaMask will prompt you to connect. Confirm the connection to your Remix session.
--   Ensure `SuperMon` is selected in the `CONTRACT` dropdown.
--   Click `Deploy`. MetaMask will ask for confirmation to proceed with the transaction.
+- Click on the `Deploy & Run Transactions` icon in the sidebar.
+- In the `ENVIRONMENT` dropdown, select `Injected Web3`.
+- MetaMask will prompt you to connect. Confirm the connection to your Remix session.
+- Ensure `SuperMon` is selected in the `CONTRACT` dropdown.
+- Click `Deploy`. MetaMask will ask for confirmation to proceed with the transaction.
 
 ## Uploading the images
 
@@ -121,7 +121,7 @@ Next, fund the Irys Devnet node with 0.1 Sepolia ETH to pay for your uploads.
 
 ```console
 irys fund 100000000000000000 \
-  -h https://devnet.irys.xyz \
+  -n devnet \
   -t base-eth \
   -w 6dd5e....54a120201cb6a \
   --provider-url https://sepolia.base.org
@@ -135,21 +135,21 @@ Next, use the Irys CLI to upload each of the images to the Irys Devnet.
 
 ```console
 irys upload image-level-1.png \
-  -h https://devnet.irys.xyz \
+  -n devnet \
   -t base-eth \
   -w 6dd5e....54a120201cb6a \
   --tags Content-Type image/png \
   --provider-url https://sepolia.base.org
 
 irys upload image-level-2.png \
-  -h https://devnet.irys.xyz \
+  -n devnet \
   -t base-eth \
   -w 6dd5e....54a120201cb6a \
   --tags Content-Type image/png \
   --provider-url https://sepolia.base.org
 
 irys upload image-level-3.png \
-  -h https://devnet.irys.xyz \
+  -n devnet \
   -t base-eth \
   -w 6dd5e....54a120201cb6a \
   --tags Content-Type image/png \
@@ -211,7 +211,7 @@ And upload just the first file using the Irys CLI.
 
 ```console
 irys upload metadata-level-1.json \
-  -h https://devnet.irys.xyz \
+  -n devnet \
   -t base-eth \
   -w 6dd5e....54a120201cb6a \
   --tags Content-Type application/json \
@@ -241,7 +241,7 @@ To now "mutate" the NFT, upload a new version of the metadata tagging it as havi
 
 ```console
 irys upload metadata-level-2.json \
-  -h https://devnet.irys.xyz \
+  -n devnet \
   -t base-eth \
   -w 6dd5e....54a120201cb6a \
   --tags Content-Type application/json Root-TX NDtKvjlmZL2iXUPmX6P-BuvtnvAEFkUiQWG8ToyK5FM \

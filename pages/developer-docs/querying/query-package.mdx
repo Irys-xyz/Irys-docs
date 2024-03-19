@@ -77,24 +77,25 @@ const results = await myQuery
 	.limit(20);
 ```
 
-## Endpoints
+## Mainnet & devnet
 
-The `Query` class links to a GraphQL endpoint for query execution, defaulting to `https://node1.irys.xyz/graphql` for Irys and `https://gateway.irys.xyz/graphql` for Arweave.
+The `Query` class defaults to querying Irys' mainnet. To search Irys' devnet or Arweave, use the `network` parameter.
 
-When querying Irys, you must query the same node you uploaded to. To change the endpoint, pass any of the following to the `Query` object constructor:
-
--   https://node1.irys.xyz/graphql (Default)
--   https://node2.irys.xyz/graphql
--   https://devnet.irys.xyz/graphql
-
-When querying Arweave, any of these may be used:
-
--   https://arweave.net/graphql (Default)
--   https://arweave.dev/graphql
--   https://arweave-search.goldsky.com/graphql
-
+### Irys mainnet
 ```js
-const myQuery = new Query({ url: "https://devnet.irys.xyz/graphql" });
+// Either will work
+const myQuery = new Query();
+const myQuery = new Query({ network: "mainnet" });
+```
+
+### Irys devnet
+```js
+const myQuery = new Query({ network: "devnet" });
+```
+
+### Arweave
+```js
+const myQuery = new Query({ network: "arweave" });
 ```
 
 ## Query type
@@ -181,9 +182,10 @@ const results = await myQuery
 Search for multiple tags. The search uses AND logic and returns transactions tagged with ALL provided values.
 
 ```js
-const results = await myQuery.search("irys:transactions").tags([
-	{ name: "Content-Type", values: ["image/png"] },
-	{ name: "Application-ID", values: ["myApp"] },
+const results = await myQuery.search("irys:transactions")
+	.tags([
+		{ name: "Content-Type", values: ["image/png"] },
+		{ name: "Application-ID", values: ["myApp"] },
 ]);
 ```
 

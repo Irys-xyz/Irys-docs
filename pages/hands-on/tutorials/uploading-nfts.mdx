@@ -49,7 +49,7 @@ dotenv.config();
 // Returns a reference to an Irys node
 const getIrys = async () => {
 	const url = "https://devnet.irys.xyz";
-	// Devnet RPC URLs change often, use a recent one from https://chainlist.org/chain/80001
+	// Devnet RPC URLs change often, use a recent one from https://chainlist.org/
 	const providerUrl = "";
 	const token = "matic";
 	const privateKey = process.env.PRIVATE_KEY;
@@ -72,7 +72,6 @@ const uploadImage = async () => {
 	// Get cost to upload "size" bytes
 	const price = await irys.getPrice(size);
 	console.log(`Uploading ${size} bytes costs ${irys.utils.fromAtomic(price)} ${token}`);
-	// Fund the node
 	await irys.fund(price);
 
 	// Upload metadata
@@ -91,7 +90,7 @@ Alternatively, you can [upload](/developer-docs/cli/commands/upload) using our [
 
 ```console
 irys upload myNFT.png \
-  -h https://devnet.irys.xyz \
+  -n devnet \
   -t matic \
   -w bf20......c9885307 \
   --tags Content-Type image/png \
@@ -125,7 +124,7 @@ dotenv.config();
 // Returns a reference to an Irys node
 const getIrys = async () => {
 	const url = "https://devnet.irys.xyz";
-	// Devnet RPC URLs change often, use a recent one from https://chainlist.org/chain/80001
+	// Devnet RPC URLs change often, use a recent one from https://chainlist.org/
 	const providerUrl = "";
 	const token = "matic";
 	const privateKey = process.env.PRIVATE_KEY;
@@ -150,7 +149,6 @@ const uploadMetadata = async () => {
 	// Get cost to upload "size" bytes
 	const price = await irys.getPrice(size);
 	console.log(`Uploading ${size} bytes costs ${irys.utils.fromAtomic(price)} ${token}`);
-	// Fund the node
 	await irys.fund(price);
 
 	// Upload metadata
@@ -169,7 +167,7 @@ Alternatively, you can [upload](/developer-docs/cli/commands/upload) using our [
 
 ```console
 irys upload metadata.json \
-  -h https://devnet.irys.xyz \
+  -n devnet \
   -t matic \
   -w bf20......c9885307 \
   --tags Content-Type application/json \

@@ -40,9 +40,9 @@ const getIrys = async () => {
 	await window.ethereum.enable();
 	const provider = new providers.Web3Provider(window.ethereum);
 	const wallet = { name: "ethersv5", provider: provider };
-	const url = "https://node1.irys.xyz";
+	const network = "mainnet"; // Or "devnet"
 	const token = "matic";
-	const webIrys = new WebIrys({ url, token, wallet });
+	const webIrys = new WebIrys({ network, token, wallet });
 	await webIrys.ready();
 	return webIrys;
 };

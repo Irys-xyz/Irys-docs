@@ -61,12 +61,12 @@ Connect [to any of our three nodes](/overview/nodes), using a serialized JWK fil
 
 ```js
 const getIrysArweave = async () => {
-	const url = "https://devnet.irys.xyz";
+	const network = "mainnet";
 	const token = "arweave";
 	const key = JSON.parse(fs.readFileSync("arweaveWallet.json").toString());
 
 	const irys = new Irys({
-		url, // URL of the node you want to connect to
+		network, // "mainnet" or "devnet"
 		token, // Token used for payment and signing
 		key, // Arweave wallet
 	});
@@ -78,13 +78,13 @@ Or a private key when using an EVM or Solana wallet:
 
 ```js
 const getIrys = async () => {
-	const url = "https://devnet.irys.xyz";
-	// Devnet RPC URLs change often, use a recent one from https://chainlist.org/chain/80001
+	const network = "mainnet";
+	// Devnet RPC URLs change often, use a recent one from https://chainlist.org/
 	const providerUrl = "";
 	const token = "matic";
 
 	const irys = new Irys({
-		url, // URL of the node you want to connect to
+		network, // "mainnet" or "devnet"
 		token, // Token used for payment
 		key: process.env.PRIVATE_KEY, // ETH or SOL private key
 		config: { providerUrl }, // Optional provider URL, only required when using Devnet
@@ -97,9 +97,9 @@ const getIrys = async () => {
 
 Use the `providerUrl` parameter to specify an RPC provider.
 
--   When working with Nodes 1 and 2, this value is optional and will default to the main public RPC provider for the chosen chain.
--   When working with Devnet, this parameter is required.
--   When working with Aptos, use one of "mainnet" | "testnet" | "devnet" instead of a URL.
+- When working with Nodes 1 and 2, this value is optional and will default to the main public RPC provider for the chosen chain.
+- When working with Devnet, this parameter is required.
+- When working with Aptos, use one of "mainnet" | "testnet" | "devnet" instead of a URL.
 
 ## Funding a node
 

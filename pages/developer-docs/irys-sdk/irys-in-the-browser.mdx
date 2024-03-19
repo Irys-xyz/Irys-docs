@@ -63,9 +63,9 @@ import { WebIrys } from "@irys/sdk";
 
 When instantiating a `WebIrys` object pass:
 
--   `url`: Irys [node address](/overview/nodes)
--   `token`: Payment [token](/overview/supported-tokens)
--   `wallet`: A wallet object containing the end-user's injected provider and the name of the provider package your project uses
+- `network`: Either `"mainnet"` or `"devnet"`
+- `token`: Payment [token](/overview/supported-tokens)
+- `wallet`: A wallet object containing the end-user's injected provider and the name of the provider package your project uses
 
 ```js
 const getWebIrys = async () => {
@@ -73,7 +73,7 @@ const getWebIrys = async () => {
 	await window.ethereum.enable();
 	const provider = new providers.Web3Provider(window.ethereum);
 
-	const url = "https://node1.irys.xyz";
+	const network = "mainnet";
 	const token = "matic";
 	// Devnet RPC URLs change often, use a recent one from https://chainlist.org
 	const rpcURL = "";
@@ -81,7 +81,7 @@ const getWebIrys = async () => {
 	// Create a wallet object
 	const wallet = { rpcUrl: rpcURL, name: "ethersv5", provider: provider };
 	// Use the wallet object
-	const webIrys = new WebIrys({ url, token, wallet });
+	const webIrys = new WebIrys({ network, token, wallet });
 	await webIrys.ready();
 
 	return webIrys;
@@ -136,7 +136,7 @@ const getIrys = async (): Promise<WebIrys> => {
 	const rpcURL = "";
 
 	const wallet = { rpcUrl: rpcURL, name: "solana", provider: wallet };
-	const webIrys = new WebIrys({ url: "https://devnet.irys.xyz", token: "solana", wallet });
+	const webIrys = new WebIrys({ network: "mainnet", token: "solana", wallet });
 	await webIrys.ready();
 	return webIrys;
 };
@@ -158,7 +158,7 @@ Additionally, the following providers will work with extra setup code.
 const getWebIrys = async () => {
 	const arconnect = window.arweaveWallet;
 	await arconnect.connect(["ACCESS_ADDRESS", "ACCESS_PUBLIC_KEY", "SIGN_TRANSACTION", "SIGNATURE"]);
-	const webIrys = new WebIrys({ url: "https://node1.irys.xyz", token: "arweave", wallet: { provider: arconnect } });
+	const webIrys = new WebIrys({ network: "mainnet", token: "arweave", wallet: { provider: arconnect } });
 	await webIrys.ready();
 
 	return webIrys;
@@ -170,9 +170,9 @@ const getWebIrys = async () => {
 ```js
 export const getWebIrys = async () => {
 	const wallet = { name: "Othent KMS", provider: othentKMS };
-	const url = "https://node1.irys.xyz";
+	const network = "mainnet";
 	const token = "arweave";
-	const webIrys = new WebIrys({ url, token, wallet });
+	const webIrys = new WebIrys({ network, token, wallet });
 	await webIrys.ready();
 	return webIrys;
 };
@@ -183,8 +183,8 @@ export const getWebIrys = async () => {
 Initialize the Privy provider with your app ID and wrap it around your components. In most NextJS projects, you will place this code in your `app.tsx` file. In our example, we use the `<PrivyIrys />` component as a placeholder for your app's top-level component structure.
 
 <Callout emoji="🚀">
-	We also have [a demo repository](https://github.com/Irys-xyz/privy-irys) teaching how to build a PWA photo-sharing
-	app using Privy and Irys.
+	We also have [a demo repository](https://github.com/Irys-xyz/privy-irys) teaching how to build a PWA photo-sharing app
+	using Privy and Irys.
 </Callout>
 
 ```js
@@ -232,7 +232,7 @@ const w = wallets.at(0);
 
 // Then create a WebIrys object
 const getWebIrys = async () => {
-	const url = "https://node1.irys.xyz";
+	const network = "devnet";
 	const token = "matic";
 
 	const provider = await w?.getEthersProvider();
@@ -243,8 +243,8 @@ const getWebIrys = async () => {
 			: { name: "privy", provider };
 
 	const webIrys = new WebIrys({
-		url: url,
-		token: token,
+		network,
+		token,
 		wallet: irysWallet,
 	});
 

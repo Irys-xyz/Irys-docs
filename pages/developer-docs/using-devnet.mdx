@@ -8,7 +8,7 @@ import { Callout } from "nextra-theme-docs";
 
 Uploads to Irys' Devnet are paid for using free faucet tokens and are kept for approximately 60 days. Devnet is for developers who are building projects or learning how to use our SDK.
 
-To connect to Devnet, supply the address of our [Devnet node](/overview/nodes) when instantiating either an `Irys` or `WebIrys` object.
+To connect to devnet, set the `network` parameter to `devnet` when instantiating either an `Irys` or `WebIrys` object.
 
 ## RPC / Provider URL
 
@@ -17,7 +17,7 @@ When using Devnet with the `Irys` class and with our CLI, you must specify an RP
 <Callout type="info" emoji="ℹ️">
 If you encounter this message when using our SDK or CLI, make sure you are supplying the correct RPC URL for the chain you're using.
 
-`Using devnet.irys.xyz requires a dev/testnet RPC to be configured!`
+`Using Irys devnet requires a dev/testnet RPC to be configured!`
 
 </Callout>
 
@@ -27,16 +27,16 @@ If you encounter this message when using our SDK or CLI, make sure you are suppl
 
 ```js
 const getIrys = async () => {
-	const url = "https://devnet.irys.xyz";
+	const network = "devnet";
 	const token = "matic";
-	// Devnet RPC URLs change often, use a recent one from https://chainlist.org/chain/80001
+	// Devnet RPC URLs change often, use a recent one from https://chainlist.org/
 	const providerUrl = "";
 
 	const irys = new Irys({
-		url, // URL of the node you want to connect to
+		network, // URL of the node you want to connect to
 		token, // Token used for payment
 		key: process.env.EVM_PRIVATE_KEY, // EVM private key
-		config: { providerUrl }, // Optional provider URL, only required when using Devnet
+		config: { providerUrl }, // Provider URL, only required when using devnet
 	});
 	return irys;
 };
@@ -46,15 +46,15 @@ const getIrys = async () => {
 
 ```js
 const getIrys = async () => {
-	const url = "https://devnet.irys.xyz";
+	const network = "devnet";
 	const token = "solana";
 	const providerUrl = "https://api.devnet.solana.com";
 
 	const irys = new Irys({
-		url, // URL of the node you want to connect to
+		network, // URL of the node you want to connect to
 		token, // Token used for payment
 		key: process.env.SOL_PRIVATE_KEY, // SOL private key
-		config: { providerUrl }, // Optional provider URL, only required when using Devnet
+		config: { providerUrl }, // Provider URL, only required when using Devnet
 	});
 	return irys;
 };
@@ -70,15 +70,15 @@ const getWebIrys = async () => {
 	await window.ethereum.enable();
 	const provider = new providers.Web3Provider(window.ethereum);
 
-	const url = "https://devnet.irys.xyz";
+	const network = "devnet";
 	const token = "matic";
 	// Devnet RPC URLs change often, use a recent one from https://chainlist.org
-	const rpcURL = ""; // Required
+	const rpcURL = ""; // Required for devnet
 
 	// Create a wallet object
 	const wallet = { rpcUrl: rpcURL, name: "ethersv5", provider: provider };
 	// Use the wallet object
-	const webIrys = new WebIrys({ url, token, wallet });
+	const webIrys = new WebIrys({ network, token, wallet });
 	await webIrys.ready();
 
 	return webIrys;
@@ -93,14 +93,14 @@ const getWebIrys = async () => {
 	const provider = new PhantomWalletAdapter();
 	await provider.connect();
 
-	const url = "https://devnet.irys.xyz";
+	const network = "devnet";
 	const token = "solana";
-	const rpcURL = "https://api.devnet.solana.com"; // Required
+	const rpcURL = "https://api.devnet.solana.com"; // Required for devnet
 
 	// Create a wallet object
 	const wallet = { rpcUrl: rpcURL, name: "ethersv5", provider: provider };
 	// Use the wallet object
-	const webIrys = new WebIrys({ url, token, wallet });
+	const webIrys = new WebIrys({ network, token, wallet });
 	await webIrys.ready();
 
 	return webIrys;
@@ -109,11 +109,11 @@ const getWebIrys = async () => {
 
 ## CLI
 
-See [CLI documentation](/developer-docs/cli) for examples of how to use each command with our Devnet.
+See [CLI documentation](/developer-docs/cli) for examples of how to use each command with our devnet.
 
 ```console
 irys upload myImage.png \
-  -h https://devnet.irys.xyz \
+  -n devnet \
   -t matic \
   -w bf20......c9885307 \
   --tags tagName1 tagValue1 tagName2 tagValue2 \
@@ -121,5 +121,5 @@ irys upload myImage.png \
 ```
 
 <Callout type="info" emoji="ℹ️">
-	Devnet RPC URLs change often, use a recent one from https://chainlist.org/chain/80001
+	Devnet RPC URLs change often, use a recent one from https://chainlist.org/
 </Callout>

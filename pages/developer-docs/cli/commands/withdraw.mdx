@@ -6,7 +6,7 @@ import { Callout } from "nextra-theme-docs";
 
 # `withdraw`
 
-Withdraws funds from specified [Irys node](/overview/nodes).
+Withdraws funds from either Irys' mainnet or devnet.
 
 <Callout type="info" emoji="ℹ️">
 Not all calls to `withdraw` will post immediately to your account, some blockchains are faster than others. When funding with AR, it can take upwards of 40 minutes before the balance post. For MATIC, ETH and SOL, balances will usually post in < 10s.
@@ -16,10 +16,10 @@ Not all calls to `withdraw` will post immediately to your account, some blockcha
 
 <div className="-mt-6" />
 
--   `-h`: The node to withdraw funds from
--   `-t`: The [token](/overview/supported-tokens) to withdraw.
--   `-w`: Your [private key](/developer-docs/cli#using-private-keys).
--   `--provider-url`: RPC URL to use. This is only required when using Devnet.
+- `-n`: The network you plan to upload to (`mainnet` or `devnet`)
+- `-t`: The [token](/overview/supported-tokens) to withdraw.
+- `-w`: Your [private key](/developer-docs/cli#using-private-keys).
+- `--provider-url`: RPC URL to use. This is only required when using Devnet.
 
 ## Examples
 
@@ -27,7 +27,7 @@ Not all calls to `withdraw` will post immediately to your account, some blockcha
 
 ```console
 irys withdraw 1000000000000000 \
-  -h https://node1.irys.xyz \
+  -n mainnet \
   -t matic \
   -w bf20......c9885307
 ```
@@ -36,12 +36,12 @@ irys withdraw 1000000000000000 \
 
 ```console
 irys withdraw 1000000000000000 \
-  -h https://devnet.irys.xyz \
+  -n devnet \
   -t matic \
   -w bf20......c9885307 \
   --provider-url https://rpc-mumbai.maticvigil.com
 ```
 
 <Callout type="info" emoji="ℹ️">
-	Devnet RPC URLs change often, use a recent one from https://chainlist.org/chain/80001
+	Devnet RPC URLs change often, use a recent one from https://chainlist.org/
 </Callout>
