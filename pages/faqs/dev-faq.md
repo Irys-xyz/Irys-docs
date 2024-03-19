@@ -4,12 +4,6 @@ description: Frequently asked questions from our developer community.
 
 # Developer FAQ
 
-## What is the difference between Node 1 and 2?
-
-Node 2 is ideal for early-stage projects, while larger projects typically prefer Node 1 as it can scale to a higher TPS. Uploads of less than 100 KiB are currently free on Node 2.
-
-Nodes maintain [separate balances](/learn/funding-withdrawing); fund the node you intend to upload to.
-
 ## Does Irys offer free uploads?
 
 Yes. Uploads below 100KiB are free on Node 2 only. This is a public good for users to be encouraged to try Irys.

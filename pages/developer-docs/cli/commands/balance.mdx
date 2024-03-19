@@ -12,9 +12,9 @@ Returns the amount of funds available on the specified node. Provide your public
 
 <div className="-mt-6" />
 
--   `-h`: The node to check
--   `-t`: The [token](/overview/supported-tokens) to use when funding.
--   `--provider-url`: RPC URL to use. This is only required when using Devnet.
+- `-n`: The network to check (`mainnet` or `devnet`)
+- `-t`: The [token](/overview/supported-tokens) to use when funding.
+- `--provider-url`: RPC URL to use. This is only required when using Devnet.
 
 ## Examples
 
@@ -23,7 +23,7 @@ Returns the amount of funds available on the specified node. Provide your public
 ```console
 irys balance 0xac568a981b1370b2e1baa8ce30bd5ac9e28c572d \
   -t matic \
-  -h https://node1.irys.xyz
+  -n mainnet
 ```
 
 ### Devnet
@@ -31,10 +31,10 @@ irys balance 0xac568a981b1370b2e1baa8ce30bd5ac9e28c572d \
 ```console
 irys balance 0x591B5Ce7cA10a55A9B5d1516eF89693D5b3586b8 \
   -t matic \
-  -h https://devnet.irys.xyz \
+  -n devnet \
   --provider-url https://rpc-mumbai.maticvigil.com
 ```
 
 <Callout type="info" emoji="ℹ️">
-	Devnet RPC URLs change often, use a recent one from https://chainlist.org/chain/80001
+	Devnet RPC URLs change often, use a recent one from https://chainlist.org/
 </Callout>

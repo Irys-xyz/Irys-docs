@@ -1,0 +1,51 @@
+---
+description: Build and prototype your application on Irys' Devnet
+---
+
+import { Callout } from "nextra-theme-docs";
+
+# Node merge
+
+On March 27th, 2024 Irys merged its two mainnet nodes.
+
+This simplifies building on Irys and means you no longer need to:
+
+- Choose a node when uploading
+- Care about which node your balance is on
+
+This change is fully backward compatible. You can continue using existing versions of our tools with no changes.
+
+<Callout type="info" emoji="ℹ️">
+	Uploads of less than 100 KiB will remain free on Mainnet and Devnet.
+</Callout>
+
+To upgrade your projects, see below:
+
+- [SDK](#sdk)
+- [CLI](#cli)
+- [Query package](#query-package)
+- [GraphQL](#graphql)
+- [Provenance Toolkit](#provenance-toolkit)
+- [Whistleblower](#whistleblower)
+
+## SDK
+
+Previously when connecting to our SDK, you specified the URL of the node you
+
+```ts
+const irys = new Irys({
+	url: "https://node2.irys.xyz", // URL of the node you want to connect to
+	token, // Token used for payment
+	key: process.env.PRIVATE_KEY, // Private key
+});
+```
+
+## CLI
+
+## Query package
+
+## GraphQL
+
+## Provenance Toolkit
+
+## Whistleblower

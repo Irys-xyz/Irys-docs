@@ -8,10 +8,10 @@ import { Callout } from "nextra-theme-docs";
 
 This guide teaches you how to:
 
--   Encrypt data using [Lit Protocol](https://litprotocol.com/)
--   Establish a set of rules determining who can decrypt the data
--   Store encrypted data on Arweave using Irys
--   Decrypt data using Lit Protocol
+- Encrypt data using [Lit Protocol](https://litprotocol.com/)
+- Establish a set of rules determining who can decrypt the data
+- Store encrypted data on Arweave using Irys
+- Decrypt data using Lit Protocol
 
 Before diving into this guide, begin with ["Encrypting onchain data"](/hands-on/tutorials/encrypting-onchain-data).
 
@@ -58,8 +58,8 @@ Then, create a helper function that creates a message and signs it using your pr
 
 <Callout type="info" emoji="ℹ️">
 	Lit Protocol supports both wallet signatures and [session
-	signatures](https://developer.litprotocol.com/v3/sdk/authentication/session-sigs/intro). This guide focuses solely
-	on wallet signatures, as session signatures are currently in development and only available for Ethereum.
+	signatures](https://developer.litprotocol.com/v3/sdk/authentication/session-sigs/intro). This guide focuses solely on
+	wallet signatures, as session signatures are currently in development and only available for Ethereum.
 </Callout>
 
 ```js
@@ -223,7 +223,7 @@ To use Irys to store data on Arweave, first connect to an [Irys node](/overview/
 ```js
 async function getIrys() {
 	const url = "https://devnet.irys.xyz";
-	// Devnet RPC URLs change often, use a recent one from https://chainlist.org/chain/80001
+	// Devnet RPC URLs change often, use a recent one from https://chainlist.org/
 	const providerUrl = "";
 	const token = "matic";
 
@@ -356,8 +356,8 @@ You can also [access the code as a single file in GitHub](https://github.com/Iry
 
 ## Browser-based example
 
--   [Browser-based encryption](./browser-based-encryption)
+- [Browser-based encryption](./browser-based-encryption)
 
 ## Demo
 
--   [Irys Provenance Toolkit](https://provenance-toolkit.irys.xyz/encrypted-uploader)
+- [Irys Provenance Toolkit](https://provenance-toolkit.irys.xyz/encrypted-uploader)
