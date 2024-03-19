@@ -57,7 +57,7 @@ import Irys from "@irys/sdk";
 
 ## Connecting to Irys
 
-Connect [to any of our three nodes](/overview/nodes), using a serialized JWK file when using an Arweave wallet:
+Connect [to any our mainnet or devnet](/overview/networks), using a serialized JWK file when using an Arweave wallet:
 
 ```js
 const getIrysArweave = async () => {
@@ -205,14 +205,14 @@ const response = await webIrys.uploadFolder(taggedFiles);
 
 ## Querying
 
-In addition to using the [query package](/developer-docs/querying/query-package) to search Irys and Arweave, you can also search directly from the Irys SDK. The following shows how to search for all transactions posted to [Node 1](/overview/nodes), paid for with Matic, and uploaded during a three day period.
+In addition to using the [query package](/developer-docs/querying/query-package) to search Irys and Arweave, you can also search directly from the Irys SDK. The following shows how to search for all transactions posted to [Irys mainnet](/overview/networks), paid for with Matic, and uploaded during a three day period.
 
 For more details on all search functions, see [query package documentation](/developer-docs/querying/query-package).
 
 ```js
 const result = await irys
 	.search("irys:transactions")
-	.url("https://node1.irys.xyz/graphql")
+	.network("mainnet")
 	.token("matic")
 	.fromTimestamp(new Date("2023-07-01"))
 	.toTimestamp(new Date("2023-07-03"));
