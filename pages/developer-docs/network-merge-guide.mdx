@@ -92,6 +92,28 @@ Now, you set the query location using the `network` parameter.
 const myQuery = new Query({ network: "mainnet" }); // "mainnet" || "devnet" || "arweave"
 ```
 
+Previously, when querying directly from the SDK, you used the `url()` method to specify a search location. This method has been depercated.
+
+```js
+const result = await irys
+	.search("irys:transactions")
+	.url("https://node1.irys.xyz/graphql")
+	.token("matic")
+	.fromTimestamp(new Date("2023-07-01"))
+	.toTimestamp(new Date("2023-07-03"));
+```
+
+And the `network()` method has been added.
+
+```js
+const result = await irys
+	.search("irys:transactions")
+	.network("mainnet") // "mainnet" || "devnet"
+	.token("matic")
+	.fromTimestamp(new Date("2023-07-01"))
+	.toTimestamp(new Date("2023-07-03"));
+```
+
 ## GraphQL
 
 Previously, we had separate URLs for our two mainnet nodes.

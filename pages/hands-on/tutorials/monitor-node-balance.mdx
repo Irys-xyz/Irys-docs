@@ -16,17 +16,16 @@ import dotenv from "dotenv";
 dotenv.config();
 
 const getIrys = async () => {
-	const url = "https://devnet.irys.xyz";
+	const network = "devnet";
 	// Devnet RPC URLs change often, use a recent one from https://chainlist.org/
 	const providerUrl = "";
 	const token = "matic";
-	const privateKey = process.env.PRIVATE_KEY;
 
 	const irys = new Irys({
-		url: url, // URL of the node you want to connect to
-		token: token, // Token used for payment
-		key: privateKey, // ETH or SOL private key
-		config: { providerUrl: providerUrl }, // Optional provider URL, only required when using Devnet
+		network, // "mainnet" || "devnet"
+		token, // Token used for payment
+		key: process.env.PRIVATE_KEY, // ETH or SOL private key
+		config: { providerUrl }, // Optional provider URL, only required when using Devnet
 	});
 	return irys;
 };
@@ -70,7 +69,7 @@ You can achieve the same thing using our CLI and a bash script. The advantage to
 address="0xaC568a981B1370B2e1bAA8cE30BD5AC9E28C572D" # Public wallet address
 # Devnet RPC URLs change often, use a recent one from https://chainlist.org/
 provider_url="https://rpc-mumbai.maticvigil.com"
-node_address="https://devnet.irys.xyz"
+node_address="https://arweave.devnet.irys.xyz"
 token="matic"
 balance_output="";
 
@@ -104,7 +103,7 @@ To run a bash script periodically, use `cron`. Assuming you saved the above scri
 ## cURL
 
 A third option is to make cURL request using a URL with the following format `https://<node-address>/account/balance/<token>?address=<address>`. For example to check the Devnet MATIC balance of the wallet with address `0xaC568a981B1370B2e1bAA8cE30BD5AC9E28C572D`, you would use the command
-`https://devnet.irys.xyz/account/balance/matic?address=0xaC568a981B1370B2e1bAA8cE30BD5AC9E28C572D`
+`https://arweave.devnet.irys.xyz/account/balance/matic?address=0xaC568a981B1370B2e1bAA8cE30BD5AC9E28C572D`
 
 Just as with our CLI, you don’t need to provide your private key. This version is also more streamlined than the CLI version as you don’t need to include the provider URL when checking the Devnet balances.
 
@@ -113,7 +112,7 @@ Just as with our CLI, you don’t need to provide your private key. This version
 
 # Define your variables
 address="0xaC568a981B1370B2e1bAA8cE30BD5AC9E28C572D" # Public wallet address
-node_address="https://devnet.irys.xyz"
+node_address="https://arweave.devnet.irys.xyz"
 token="token"
 balance_output="";
 
@@ -138,7 +137,7 @@ balance_in_standard_units=$(awk -v parsed_balance="$parsed_balance" -v decimal_f
 # Define your threshold in standard units
 threshold=0.1
 
-# Check if balance_in_standard_units is within threshold of 0
+# Check if balance_in_standard_units is within a threshold of 0
 is_close_to_zero=$(awk -v balance="$balance_in_standard_units" -v threshold="$threshold" 'BEGIN{if(balance < threshold) print 1; else print 0}')
 
 if [ $is_close_to_zero -eq 1 ]; then
