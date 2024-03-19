@@ -38,7 +38,7 @@ To upgrade your code, see below:
 
 ## SDK
 
-Previously, you specified the node's URL to connect to our SDK.
+Previously, you specified a node URL when connecting to our SDK.
 
 ```ts
 const irys = new Irys({
@@ -48,7 +48,7 @@ const irys = new Irys({
 });
 ```
 
-Now, you can pass either `"mainnet"` or `"devnet"` as a network parameter to the SDK.
+Now, you can pass either `"mainnet"` or `"devnet"` as the value of the network parameter.
 
 ```ts
 const irys = new Irys({
@@ -60,7 +60,7 @@ const irys = new Irys({
 
 ## CLI
 
-Previously, you specified the node's URL using the `-h` flag.
+Previously, you specified a node URL using the `-h` flag.
 
 ```console
 irys fund 1000000000000000 \
@@ -93,6 +93,8 @@ const myQuery = new Query({ network: "mainnet" }); // "mainnet" || "devnet" || "
 ```
 
 Previously, when querying directly from the SDK, you used the `url()` method to specify a search location. This method has been depercated.
+
+> TODO: Confirm with Jesse
 
 ```js
 const result = await irys
@@ -135,7 +137,11 @@ Now, we use a unified URL.
 
 The [Provenance Toolkit](/developer-docs/provenance-toolkit) has been updated to use our unified nodes.
 
+> TODO: Add more details here.
+
 ## Whistleblower
+
+> TODO: Confirm with Jesse
 
 Previously, you used a flag to tell Whistleblower which mainnet nodes to monitor.
 
