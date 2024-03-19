@@ -23,13 +23,13 @@ The FundWithdraw component provides a default UI that includes options for the e
 
 You can also modify the UI to hardwire the node address, token, or fix the mode (either to "fund-only" or "withdraw-only") using configuration parameters.
 
-| Description               | Code                                             |
-| ------------------------- | ------------------------------------------------ |
-| Default Behavior          | `<FundWithdraw />`                               |
-| Fix the node              | `<FundWithdraw node="https://node1.irys.xyz" />` |
-| Fix the token             | `<FundWithdraw token="ethereum" />`              |
-| Set to fund-only mode     | `<FundWithdraw fundOnly={ true } />`             |
-| Set to withdraw-only mode | `<FundWithdraw withdrawOnly={ true }/>`          |
+| Description               | Code                                    |
+| ------------------------- | --------------------------------------- |
+| Default Behavior          | `<FundWithdraw />`                      |
+| Fix the network           | `<FundWithdraw network="mainnet" />`    |
+| Fix the token             | `<FundWithdraw token="ethereum" />`     |
+| Set to fund-only mode     | `<FundWithdraw fundOnly={ true } />`    |
+| Set to withdraw-only mode | `<FundWithdraw withdrawOnly={ true }/>` |
 
 If both fundOnly and withdrawOnly are set to false, the component defaults to fund-only mode.
 
