@@ -20,8 +20,8 @@ You can query using an HTTP library like fetch or axios. You can also use specia
 
 A GraphQL query is made up of:
 
--   Query Arguments: Arguments that specify search parameters, limit the number of results returned, or enable pagination.
--   Results Fields: Fields that define the data you want to retrieve.
+- Query Arguments: Arguments that specify search parameters, limit the number of results returned, or enable pagination.
+- Results Fields: Fields that define the data you want to retrieve.
 
 <img className="border border-[#FEF4EE] rounded mt-5 w-5/6" src="/img/graphql/BundlrGQL-Anatomy.png" />
 
@@ -48,15 +48,14 @@ When building a query, any of the following values be included in your results:
 | `tags {    `<br/>&nbsp;&nbsp;`name     `<br/>&nbsp;&nbsp;`value`<br/>`}` | An array of tags supplied as name / value pairs. Exists if the user added them at upload. |
 |`timestamp` | The timestamp, accurate to the millisecond of when the transaction was posted. This value is the same as the receipt timestamp. |
 
-## Endpoints
+## Mainnet & devnet
 
-Connect to the GraphQL endpoint associated with the node you uploaded your transaction to.
+We have two GraphQL endpoints, one for mainnet and one for devnet.
 
-| Node   | Endpoint                        |
-| ------ | ------------------------------- |
-| Node 1 | https://node1.irys.xyz/graphql  |
-| Node 2 | https://node2.irys.xyz/graphql  |
-| Devnet | https://devnet.irys.xyz/graphql |
+| Node    | Endpoint                                 |
+| ------- | ---------------------------------------- |
+| Mainnet | https://arweave.mainnet.irys.xyz/graphql |
+| Devnet  | https://arweave.devnet.irys.xyz/graphql  |
 
 ## GraphQL sandbox
 
@@ -106,8 +105,8 @@ query getByTimestamp {
 
 <Callout type="info" emoji="ℹ️">
 	Irys timestamps are accurate to the millisecond, so you need to provide a timestamp in millisecond format. You can
-	convert from human-readable time to UNIX timestamp using websites like [Epoch101](https://www.epoch101.com/), be
-	sure to convert in **millisecond** format, not **second**.
+	convert from human-readable time to UNIX timestamp using websites like [Epoch101](https://www.epoch101.com/), be sure
+	to convert in **millisecond** format, not **second**.
 </Callout>
 
 ### Owners
