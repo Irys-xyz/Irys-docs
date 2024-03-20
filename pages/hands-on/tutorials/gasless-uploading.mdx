@@ -17,16 +17,16 @@ Server-side signing works in 4 main steps:
 
 Currently, server-side signing is supported for the following:
 
--   Ethereum
--   Matic
--   BNB
--   Fantom
--   Avalanche
--   Boba-Eth
--   Arbitrum
--   Chainlink
--   Boba
--   Solana
+- Ethereum
+- Matic
+- BNB
+- Fantom
+- Avalanche
+- Boba-Eth
+- Arbitrum
+- Chainlink
+- Boba
+- Solana
 
 ## Getting Started
 
@@ -301,11 +301,10 @@ import { ReadableStream } from "stream/web";
 async function lazyFund(filesize: string): Promise<string> {
 	const key = process.env.PRIVATE_KEY_EVM;
 	const token = process.env.NEXT_PUBLIC_TOKEN || "";
-	const url = process.env.NEXT_PUBLIC_NODE || "";
 	const providerUrl = getRpcUrl(token || "");
 
 	const serverIrys = new Irys({
-		url, // URL of the node you want to connect to
+		network: "mainnet", // "mainnet" || "devnet"
 		token, // Token used for payment and signing
 		key: key,
 		config: { providerUrl }, // Only required when using Devnet
@@ -416,11 +415,14 @@ const gaslessFundAndUploadEVM = async (selectedFile: File, tags: Tag[]): Promise
 	});
 
 	// Create a new WebIrys object using the provider created with server info.
-	const url = process.env.NEXT_PUBLIC_NODE || "";
 	const token = process.env.NEXT_PUBLIC_TOKEN || "";
 
 	const wallet = { name: "ethersv5", provider: provider };
-	const irys = new WebIrys({ url, token, wallet });
+	const irys = new WebIrys({
+		network: "mainnet", // "mainnet" || "devnet"
+		token,
+		wallet,
+	});
 
 	const w3signer = await provider.getSigner();
 	const address = (await w3signer.getAddress()).toLowerCase();
@@ -471,7 +473,11 @@ const gaslessFundAndUploadSOL = async (selectedFile: File, tags: Tag[]): Promise
 	// Create a new WebIrys object using the provider created with server info.
 	const url = process.env.NEXT_PUBLIC_NODE || "";
 	const wallet = { rpcURL: "https://api.devnet.solana.com", name: "solana", provider: provider };
-	const irys = new WebIrys({ url, token: "solana", wallet });
+	const irys = new WebIrys({
+		network: "mainnet", // "mainnet" || "devnet"
+		token: "solana",
+		wallet,
+	});
 
 	await irys.ready();
 	console.log("WebIrys=", irys);

@@ -38,7 +38,7 @@ You can upload multiple transactions and sequence them using our [SDK](/develope
 
 ```js
 // Connect and fund
-const irys = new Irys({ url, token, key });
+const irys = new Irys({ network, token, key });
 const fundTx = await irys.fund(irys.utils.toAtomic(0.05));
 
 // Tag your uploads

@@ -36,7 +36,7 @@ const generateCID = async (content) => {
 };
 
 const uploadToIrysWithCID = async () => {
-	// See: https://docs.irys.xyz/developer-docs/irys-sdk#connecting-to-a-node
+	// See: https://docs.irys.xyz/developer-docs/irys-sdk#connecting-to-irys
 	const irys = await getIrys();
 
 	const dataToUpload = "Irys + IPFS Content ID";
@@ -98,7 +98,7 @@ import { fileTypeFromBuffer } from "file-type";
 import Irys from "@irys/sdk";
 
 const uploadToIrysWithCID = async (dataToUpload, contentType, contentID) => {
-	// See: https://docs.irys.xyz/developer-docs/irys-sdk#connecting-to-a-node
+	// See: https://docs.irys.xyz/developer-docs/irys-sdk#connecting-to-irys
 	const irys = await getIrys();
 
 	const tags = [

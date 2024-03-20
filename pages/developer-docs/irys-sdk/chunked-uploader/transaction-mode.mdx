@@ -9,7 +9,7 @@ Transaction mode gives you more fine-grained control over the upload workflow. Y
 ## `uploadTransaction()`
 
 ```js
-uploader = irys.uploader.chunkedUploader; // recreate for each transaction
+uploader = irys.uploader.chunkedUploader; // Recreate for each transaction
 const transaction = irys.createTransaction("Hello, world!");
 await transaction.sign();
 response = await uploader.uploadTransaction(transaction);

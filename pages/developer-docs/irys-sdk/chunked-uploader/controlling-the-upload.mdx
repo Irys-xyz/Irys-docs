@@ -8,10 +8,10 @@ Uploads created with the chunked uploader can be paused and resumed at any time 
 
 To resume an upload from a new uploader instance, you must use the same:
 
--   Token
--   Node
--   Input data
--   Configured chunk size
+- Token
+- Network (mainnet or devnet)
+- Input data
+- Configured chunk size
 
 ## `uploader.pause()` and `uploader.resume()`
 
@@ -23,17 +23,17 @@ const irys = await getIrys();
 // is fully uploaded. If you omit await, the upload happens in the background
 // and you can use pause and resume as needed.
 transaction = irys.createTransaction("Hello, world!");
-uploader = irys.uploader.chunkedUploader; // recreate for each transaction
+uploader = irys.uploader.chunkedUploader; // Recreate for each transaction
 const upload = uploader.uploadTransaction(transaction);
-uploader.pause(); // pauses the upload
+uploader.pause(); // Pauses the upload
 console.log("Upload paused");
-uploader.resume(); // resumes the upload
+uploader.resume(); // Resumes the upload
 console.log("Upload resumed");
 ```
 
-While the initial call to `uploader.uploadData()` or `uploader.uploadTransaction()` should not use the `await` keyword, you can use it down the line to ensure the upload has completed.
+While the initial call to `uploader.uploadData()` or `uploader.uploadTransaction()` should not use the `await` keyword, you can use it down the line to ensure the upload is complete.
 
-You can call await at ANY TIME to ensure the upload has completed.
+You can call await at ANY TIME to ensure the upload has is complete.
 
 ```js
 response = await upload;

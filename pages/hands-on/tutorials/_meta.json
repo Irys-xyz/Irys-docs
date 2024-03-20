@@ -6,14 +6,14 @@
 	"uploading-static-sites": "Upload a static website",
 	"livepeer": "Transcode video with Livepeer",
 	"irys-explorer": "Transaction explorer",
-	"gassless-uploading": "Gasless uploading",
+	"gasless-uploading": "Gasless uploading",
 	"uploading-nfts": "Upload NFT assets",
 	"metaplex": "Solana NFTs with Metaplex",
 	"udl-erc20": "Manage UDL ownership with ERC20",
 	"udl-nft": "NFT licensing and UDL",
 	"dynamic-nft": "Build a dynamic NFT",
 	"lens": "Upload Lens metadata",
-	"encrypting-on-chain-data": "Encrypting on-chain data",
+	"encrypting-onchain-data": "Encrypting on-chain data",
 	"server-side-encryption": "Encrypting data server-side",
 	"browser-based-encryption": "Encrypting data in the browser"
 }

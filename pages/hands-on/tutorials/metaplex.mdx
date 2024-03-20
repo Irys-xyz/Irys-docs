@@ -16,10 +16,10 @@ We'll be using [NextJS](https://nextjs.org/), [TypeScript](https://www.typescrip
 
 To complete this tutorial you will need:
 
--   A recent version of [Node](https://nodejs.org/en)
--   A code editor (I use [VSCode](https://code.visualstudio.com/), but use whatever you prefer)
--   A Solana wallet (I use [Phantom](https://phantom.app/), but others are fine)
--   Some Devnet (not Testnet) Solana tokens, available [for free from a faucet](https://solfaucet.com/)
+- A recent version of [Node](https://nodejs.org/en)
+- A code editor (I use [VSCode](https://code.visualstudio.com/), but use whatever you prefer)
+- A Solana wallet (I use [Phantom](https://phantom.app/), but others are fine)
+- Some Devnet (not Testnet) Solana tokens, available [for free from a faucet](https://solfaucet.com/)
 
 ## Metaplex
 
@@ -27,9 +27,9 @@ Metaplex offers a full suite of tools that simplify creating and minting NFTs on
 
 In this tutorial you will work with:
 
--   Sugar: A CLI for uploading NFT images and metadata
--   Umi: A modular framework for building and using JavaScript that interacts with Solana
--   Candy Machine: A minting and distribution program for NFT collections on Solana
+- Sugar: A CLI for uploading NFT images and metadata
+- Umi: A modular framework for building and using JavaScript that interacts with Solana
+- Candy Machine: A minting and distribution program for NFT collections on Solana
 
 ## Setup
 
@@ -96,9 +96,9 @@ solana airdrop 2
 ```
 
 <Callout type="info" emoji="ℹ️">
-	The airdrop command is sometimes unreliable. If you have trouble funding your wallet, you may need to use the
-	[Solana Faucet](https://solfaucet.com/). Be sure to request Devnet tokens and not Testnet tokens. You can find your
-	wallet address using the command `solana address`.
+	The airdrop command is sometimes unreliable. If you have trouble funding your wallet, you may need to use the [Solana
+	Faucet](https://solfaucet.com/). Be sure to request Devnet tokens and not Testnet tokens. You can find your wallet
+	address using the command `solana address`.
 </Callout>
 
 You can test that you have a balance using:
@@ -168,12 +168,12 @@ To use the script, navigate to the `NFTs` directory and run the script, supplyin
 
 Here's a breakdown of each command line argument:
 
--   `folder_path`: The path to the directory where your images are stored.
--   `file_extension`: This should be either "png" or "jpg", depending on the format of the images you're working with.
--   `name`: The base name for your NFTs. For images not named "collection", a number will be appended (e.g., "Space Llamas #1").
--   `symbol`: A short representation of your NFT's name, such as "SPL".
--   `description`: A brief description of your NFT collection.
--   `[resize]`: If you provide "resize" as the sixth argument, the script will resize each image to 800x800 pixels. If you don’t have the open-source ImageMagick library installed, you will be prompted to install it. (optional)
+- `folder_path`: The path to the directory where your images are stored.
+- `file_extension`: This should be either "png" or "jpg", depending on the format of the images you're working with.
+- `name`: The base name for your NFTs. For images not named "collection", a number will be appended (e.g., "Space Llamas #1").
+- `symbol`: A short representation of your NFT's name, such as "SPL".
+- `description`: A brief description of your NFT collection.
+- `[resize]`: If you provide "resize" as the sixth argument, the script will resize each image to 800x800 pixels. If you don’t have the open-source ImageMagick library installed, you will be prompted to install it. (optional)
 
 After running the script, your images and corresponding JSON metadata files will be properly organized and prepared for uploading with Sugar. The original files are copied to an `originals` subfolder, which can be deleted if you no longer want them.
 
@@ -243,21 +243,21 @@ Metaplex uses a Solana program (equivalent of a smart contract on Ethereum) to t
 
 For your NFT to be permanent, it must be fault-tolerant, tamperproof, and paid-for:
 
--   Fault-tolerant:
-    This means that the data is stored so that it can survive unexpected events, including data corruption and loss.
+- Fault-tolerant:
+  This means that the data is stored so that it can survive unexpected events, including data corruption and loss.
 
--   Tamperproof:
-    The stored data is immutable so it can’t be maliciously changed.
+- Tamperproof:
+  The stored data is immutable so it can’t be maliciously changed.
 
--   Paid-for:
-    This means that the cost of storing the data permanently is covered up-front, and there is a mechanism for paying miners on an acceptable cadence. This provides strong incentives for storing the data forever.
+- Paid-for:
+  This means that the cost of storing the data permanently is covered up-front, and there is a mechanism for paying miners on an acceptable cadence. This provides strong incentives for storing the data forever.
 
 Arweave is all of these things, and by using Irys to upload your NFTs to Arweave, you’re guaranteed they will be available forever. Not all of the upload options supported by Sugar offer these same guarantees of permanence, which is why we recommend always choosing Irys to upload.
 
 <Callout type="info" emoji="ℹ️">
-	[Irys was previously named Bundlr](https://irys.xyz/blog/bundlr-is-now-irys). At the time this tutorial was
-	released, the Metaplex tools still refer to us by our old name. When uploading with sugar, you can choose either
-	Bundlr or Irys, your NFTs will still be uploaded and permanently stored on Arweave.
+	[Irys was previously named Bundlr](https://irys.xyz/blog/bundlr-is-now-irys). At the time this tutorial was released,
+	the Metaplex tools still refer to us by our old name. When uploading with sugar, you can choose either Bundlr or Irys,
+	your NFTs will still be uploaded and permanently stored on Arweave.
 </Callout>
 
 ```console
@@ -277,8 +277,8 @@ Do you want your NFTs to remain mutable? We HIGHLY recommend you choose yes.
 
 After the process completes, you'll see two new files in your local directory.
 
--   `cache.json`: Lists each NFT, including links to where your images and metadata are stored on Arweave.
--   `config.json`: Contains information describing your project setup. You will need to manually modify this file to set the mint price for each NFT.
+- `cache.json`: Lists each NFT, including links to where your images and metadata are stored on Arweave.
+- `config.json`: Contains information describing your project setup. You will need to manually modify this file to set the mint price for each NFT.
 
 Now find this section:
 
@@ -314,10 +314,10 @@ sugar upload
 ```
 
 <Callout type="info" emoji="ℹ️">
-	Irys supports payment with [14 different tokens](/overview/supported-tokens), when using the Metaplex tools the
-	wallet you previously set up will be automatically debited with SOL to cover the costs. You should already have
-	Devnet SOL, which is all you’ll need now. If you decide to launch your collection on Mainnet later, ensure your
-	wallet has sufficient Mainnet SOL first.
+	Irys supports payment with [most popular tokens](/overview/supported-tokens), when using the Metaplex tools the wallet
+	you previously set up will be automatically debited with SOL to cover the costs. You should already have Devnet SOL,
+	which is all you’ll need now. If you decide to launch your collection on Mainnet later, ensure your wallet has
+	sufficient Mainnet SOL first.
 </Callout>
 
 Create and deploy a candy machine:
@@ -380,9 +380,9 @@ Inside the `mint-storefront` directory, look for a file called `.env.local.examp
 
 The file contains two fields:
 
--   `NEXT_PUBLIC_RPC_URL`: is where you can put a custom Solana RPC, like the fast ones from [Helius](https://www.helius.dev/). This parameter is optional, if left blank, the code will revert to using the free shared endpoints.
+- `NEXT_PUBLIC_RPC_URL`: is where you can put a custom Solana RPC, like the fast ones from [Helius](https://www.helius.dev/). This parameter is optional, if left blank, the code will revert to using the free shared endpoints.
 
--   `NEXT_PUBLIC_CANDY_MACHINE`: is where you should put the value of the `candyMachine` field from the `cache.json` file generated by Sugar earlier.
+- `NEXT_PUBLIC_CANDY_MACHINE`: is where you should put the value of the `candyMachine` field from the `cache.json` file generated by Sugar earlier.
 
 After renaming this file and configuring the file, **restart your NextJS server for them to take effect**.
 
@@ -393,8 +393,8 @@ NEXT_PUBLIC_CANDY_MACHINE=
 
 There are two features we need to implement in for our NFT Marketplace to be complete.
 
--   Previewing NFTs
--   Minting NFTs
+- Previewing NFTs
+- Minting NFTs
 
 ### Previewing NFTs: `utils/loadNFTs.ts` & `components/NFTs`
 
@@ -558,9 +558,9 @@ One feature you will likely want to take advantage of to customize your collecti
 
 For a deeper dive into guards, [refer to the official documentation](https://docs.metaplex.com/programs/candy-machine/available-guards). Some noteworthy guards include:
 
--   Start Date/End Date guards: Limits minting within a specific timeframe.
--   Token Gate/NFT Gate guards: Allows minting only for select token or NFT holders.
--   Allow List guard: Limits minting to a specified wallet list.
+- Start Date/End Date guards: Limits minting within a specific timeframe.
+- Token Gate/NFT Gate guards: Allows minting only for select token or NFT holders.
+- Allow List guard: Limits minting to a specified wallet list.
 
 ## Thank you!
 
