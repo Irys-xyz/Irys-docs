@@ -2,6 +2,7 @@ import { NextApiRequest, NextApiResponse } from "next";
 
 import FlexSearch from "flexsearch";
 import db from "./db.json";
+import extractVisibleText from "../../lib/clear";
 import { findSnippetsAroundKeywords } from "../../lib/findSnippetsAroundKeywords";
 
 const allowCors = (res: NextApiResponse) => {
@@ -43,7 +44,9 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     return {
       path: db[id].path,
       description: db[id].description,
-      preview: findSnippetsAroundKeywords(db[id].content, q),
+      preview: extractVisibleText(
+        findSnippetsAroundKeywords(db[id].content, q)
+      ),
     };
   });
 
