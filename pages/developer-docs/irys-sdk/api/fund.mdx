@@ -54,7 +54,7 @@ You can also lazy-fund a node where you check the cost to upload each file first
 try {
 	const irys = await getIrys();
 
-	const pathToFile = "./llama.png";
+	const pathToFile = "./myNFT.png";
 	const { size } = await fs.promises.stat(pathToFile);
 	const price = await irys.getPrice(size);
 	await irys.fund(price);
@@ -72,7 +72,7 @@ Not all calls to `irys.fund()` will post immediately to your account, some block
 
 ## Fee multiplier
 
-The `multiplier` parameter multiplies the fees we allow the network to take, in effect prioritising the transaction. Normally you can safely ignore this parameter, however if you're experiencing errors when funding, you can try passing a value of `1.2` or more.
+The `multiplier` parameter multiplies the fees we allow the network to take, in effect prioritizing the transaction. Normally you can safely ignore this parameter, however, if you're experiencing errors when funding, you can try passing a value of `1.2` or more.
 
 ```js
 try {

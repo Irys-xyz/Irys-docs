@@ -70,9 +70,9 @@ The majority of the contract is boilerplate ERC20, it mints 100 tokens to the co
 In its constructor, the contract is set to either global or random mode, and then exposes a function called `distributeRevenue()`, which splits revenue payments among token-holders. The function accepts payment in the form of ETH, then either does global or random distribution. To simplify things, this contract uses pseudo-random number generation which comes with an element of risk. When building your own solutions, you might choose to use a [verifiable random number generator](https://docs.chain.link/vrf/v2/introduction).
 
 <Callout type="info" emoji="ℹ️">
-	This is just one way revenue distribution could be handled, another way would be for the contract to hold all
-	payments and let recipients claim them when it makes sense. This method would help save gas costs, as recipients
-	could choose to only take distributions when their balance is higher the gas fees.
+	This is just one way revenue distribution could be handled, another way would be for the contract to hold all payments
+	and let recipients claim them when it makes sense. This method would help save gas costs, as recipients could choose
+	to only take distributions when their balance is higher the gas fees.
 </Callout>
 
 ```solidity
@@ -84,7 +84,7 @@ import "@openzeppelin/contracts/access/Ownable.sol";
 import "@openzeppelin/contracts/utils/math/SafeMath.sol";
 
 contract MySong is ERC20, Ownable {
-    using SafeMath for uint256;
+		using SafeMath for uint256;
 
     enum PaymentMode { GLOBAL, RANDOM }
     PaymentMode public paymentMode;
@@ -211,9 +211,9 @@ While creating a custom ERC20 and attaching it to the NFT’s UDL via the `Contr
 
 Using an ERC20 token to model ownership of a UDL asset opens up new ideas for builders including:
 
--   Creating a DEX that focuses on trading the tokens, where the market cap of the token represents the value placed on the UDL NFT.
--   Creating a lending platform that uses the tokens as collateral. The platform could base the loan amount on the artist’s historical sales data.
--   Gifting long-term token holders with tokens from new creations.
+- Creating a DEX that focuses on trading the tokens, where the market cap of the token represents the value placed on the UDL NFT.
+- Creating a lending platform that uses the tokens as collateral. The platform could base the loan amount on the artist’s historical sales data.
+- Gifting long-term token holders with tokens from new creations.
 
 The UDL's strength lies in its parametrized rules without preset enforcement. As builders, you have the freedom to craft tools that uphold these rules and also innovate beyond them.
 

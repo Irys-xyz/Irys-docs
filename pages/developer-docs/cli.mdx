@@ -55,12 +55,16 @@ When using Arweave, the private key is typically stored in a file (commonly name
 irys fund 1000000000000000 -t arweave -w wallet.json -n mainnet
 ```
 
-## Nodes
+## Networks
 
-Fund the Node you plan to upload to.
+Fund the network you plan to upload to.
 
 ```console
+# Mainnet
 irys -n mainnet
+
+# Devnet
+irys -n devnet
 ```
 
 When connecting to Devnet, you must supply the additional `--provider-url` parameter.

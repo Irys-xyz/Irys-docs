@@ -29,7 +29,7 @@ Basic workflow.
 ```js
 const createSignUpload = async () => {
 	// Get a reference to a pre-configured Irys object
-	// See: https://docs.irys.xyz/developer-docs/irys-sdk#connecting-to-a-node
+	// See: https://docs.irys.xyz/developer-docs/irys-sdk#connecting-to-irys
 	const irys = await getIrys();
 
 	// Create the transaction
@@ -52,7 +52,7 @@ Serialize a transaction and recreate it later.
 ```js
 const serializationUpload = async () => {
 	// Get a reference to a pre-configured Irys object
-	// See: https://docs.irys.xyz/developer-docs/irys-sdk#connecting-to-a-node
+	// See: https://docs.irys.xyz/developer-docs/irys-sdk#connecting-to-irys
 	const irys = await getIrys();
 
 	// Create the transaction
@@ -85,7 +85,7 @@ First, generate an anchor and use that to create a transaction with your data. T
 ```js
 const deterministicIDUpload = async () => {
 	// Get a reference to a pre-configured Irys object
-	// See: https://docs.irys.xyz/developer-docs/irys-sdk#connecting-to-a-node
+	// See: https://docs.irys.xyz/developer-docs/irys-sdk#connecting-to-irys
 	const irys = await getIrys();
 
 	// Generate 32 bytes through Buffer.from(anchor)
