@@ -18,6 +18,9 @@ function extractVisibleText(mdString: string) {
 
   mdString = mdString.replace(/\|/g, "");
 
+  // remove -
+  mdString = mdString.replace(/-/g, "");
+
   // Remove emphasis (bold, italics)
   mdString = mdString.replace(/(\*\*|__)(.*?)\1/g, "$2"); // Bold
   mdString = mdString.replace(/(\*|_)(.*?)\1/g, "$2"); // Italics
