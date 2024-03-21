@@ -92,9 +92,13 @@ Now, you set the query location using the `network` parameter.
 const myQuery = new Query({ network: "mainnet" }); // "mainnet" || "devnet" || "arweave"
 ```
 
-Previously, when querying directly from the SDK, you used the `url()` method to specify a search location. This method has been depercated.
+If needed, you can continue using the `url` parameter to override the default GraphQL endpoint.
 
-> TODO: Confirm with Jesse
+```js
+const myQuery = new Query({ url: "https://arweave-search.goldsky.com/graphql" });
+```
+
+Previously, when querying directly from the SDK, you used the `url()` method to specify a search location. This method has been deprecated.
 
 ```js
 const result = await irys

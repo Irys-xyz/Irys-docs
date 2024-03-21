@@ -77,7 +77,7 @@ const results = await myQuery
 	.limit(20);
 ```
 
-## Mainnet & devnet
+## Query location (mainnet, devnet, arweave)
 
 The `Query` class defaults to querying Irys' mainnet. To search Irys' devnet or Arweave, use the `network` parameter.
 
@@ -96,6 +96,14 @@ const myQuery = new Query({ network: "devnet" });
 ### Arweave
 ```js
 const myQuery = new Query({ network: "arweave" });
+```
+
+## Overriding default Endpoint
+
+You can override the default GraphQL endpoint using the `url` parameter. Most users will not need this feature. 
+
+```js
+const myQuery = new Query({ url: "https://arweave-search.goldsky.com/graphql" });
 ```
 
 ## Query type
