@@ -12,7 +12,7 @@ Uploads an entire directory of files.
 
 <div className="-mt-6" />
 
-- `-n`: The network you plan to upload to (`mainnet` or `devnet`)
+- `-n`: The network to check. Values are `mainnet` or `devnet` (if you omit, the default is `mainnet`).
 - `-t`: The [token](/overview/supported-tokens) to use when uploading.
 - `-w`: Your [private key](/developer-docs/cli#using-private-keys).
 - `--index-file`: Name of the file to use as an index for manifests.
@@ -24,7 +24,6 @@ Uploads an entire directory of files.
 
 ```console
 irys upload-dir ./myImages \
-  -n mainnet \
   -t matic \
   -w bf20......c9885307
 ```

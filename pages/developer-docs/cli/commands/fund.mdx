@@ -16,7 +16,7 @@ Not all calls to `fund` will post immediately to your account, some blockchains 
 
 <div className="-mt-6" />
 
-- `-n`: The network to fund (`mainnet` or `devnet`)
+- `-n`: The network to check. Values are `mainnet` or `devnet` (if you omit, the default is `mainnet`).
 - `-t`: The [token](/overview/supported-tokens) to use when funding.
 - `-w`: Your [private key](/developer-docs/cli#using-private-keys).
 - `--provider-url`: RPC URL to use. This is only required when using Devnet.
@@ -27,7 +27,6 @@ Not all calls to `fund` will post immediately to your account, some blockchains 
 
 ```console
 irys fund 1000000000000000 \
-  -n mainnet \
   -t matic \
   -w bf20......c9885307
 ```

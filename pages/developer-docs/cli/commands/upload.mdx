@@ -12,7 +12,7 @@ Uploads a single file.
 
 <div className="-mt-6" />
 
-- `-n`: The network you plan to upload to (`mainnet` or `devnet`)
+- `-n`: The network to check. Values are `mainnet` or `devnet` (if you omit, the default is `mainnet`).
 - `-t`: The [token](/overview/supported-tokens) to use when uploading.
 - `-w`: Your [private key](/developer-docs/cli#using-private-keys).
 - `--tags`: [Tags](/developer-docs/tags) to include, format `<name>` `<value>`
@@ -24,7 +24,6 @@ Uploads a single file.
 
 ```console
 irys upload myImage.png \
-  -n mainnet \
   -t matic \
   -w bf20......c9885307 \
   --tags tagName1 tagValue1 tagName2 tagValue2
