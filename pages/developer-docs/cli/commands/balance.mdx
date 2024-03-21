@@ -6,13 +6,13 @@ import { Callout } from "nextra-theme-docs";
 
 # `balance`
 
-Returns the amount of funds available on the specified node. Provide your public wallet address as an argument, along with the following required paramters.
+Returns the amount of funds available on the specified node. Provide your public wallet address as an argument, along with:
 
 **Parameters**
 
 <div className="-mt-6" />
 
-- `-n`: The network to check (`mainnet` or `devnet`)
+- `-n`: The network to check. Values are `mainnet` or `devnet` (if you omit, the default is `mainnet`).
 - `-t`: The [token](/overview/supported-tokens) to use when funding.
 - `--provider-url`: RPC URL to use. This is only required when using Devnet.
 
@@ -23,7 +23,6 @@ Returns the amount of funds available on the specified node. Provide your public
 ```console
 irys balance 0xac568a981b1370b2e1baa8ce30bd5ac9e28c572d \
   -t matic \
-  -n mainnet
 ```
 
 ### Devnet
