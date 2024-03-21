@@ -1,4 +1,7 @@
 {
 	"tutorials": "Tutorials",
-	"quests": "Quests"
+	"repositories": "Repositories",
+	"quests": {
+		"display": "hidden"
+	}
 }
