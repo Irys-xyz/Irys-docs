@@ -19,15 +19,15 @@ Permanence guarantees your data can be retrieved at any point in the future.
 
 Permanent data is fault-tolerant, tamperproof, and paid-for:
 
--   <p className="font-bold">Fault-tolerant</p>
-    Data is stored so that it can survive unexpected events, including data corruption and loss.{" "}
+- <p className="font-bold">Fault-tolerant</p>
+  Data is stored so that it can survive unexpected events, including data corruption and loss.{" "}
 
--   <p className="font-bold">Tamperproof</p>
-    Stored data is immutable, it can’t be maliciously changed.{" "}
+- <p className="font-bold">Tamperproof</p>
+  Stored data is immutable, it can’t be maliciously changed.{" "}
 
--   <p className="font-bold">Paid-for</p>
-    The cost of storing the data permanently is covered up-front, and [there is a mechanism for paying miners on an acceptable
-    cadence](/learn/transaction-lifecycle).{" "}
+- <p className="font-bold">Paid-for</p>
+  The cost of storing the data permanently is covered up-front, and [there is a mechanism for paying miners on an acceptable
+  cadence](/learn/transaction-lifecycle).{" "}
 
 ## Fault-tolerant
 
@@ -60,19 +60,17 @@ Irys enables a global dataset that will always be reliable and accessible.
 You can permanently upload data in 3 lines of code.
 
 ```js
-// Connect to a node
-const irys = new Irys({ url, token, key });
-
-// Fund the node
+// Connect and fund
+const irys = new Irys({ network, token, key });
 const fundTx = await irys.fund(irys.utils.toAtomic(0.05));
 
 // Upload data
 const receipt = await irys.uploadFile("./myImage.png");
 ```
 
-For full code examples you can copy and paste into your projects, check out our [SDK](/developer-docs/irys-sdk).
+For full code examples, you can copy and paste into your projects, check out our [SDK](/developer-docs/irys-sdk).
 
-If you are builing a browser-based app, check out [Irys in the browser](/developer-docs/irys-sdk/irys-in-the-browser), and the [Provenance Toolkit](/developer-docs/provenance-toolkit), a suite of UI open-source UI components for managing node balances and uploading files.
+If you are building a browser-based app, check out [Irys in the browser](/developer-docs/irys-sdk/irys-in-the-browser), and the [Provenance Toolkit](/developer-docs/provenance-toolkit), a suite of UI open-source UI components for managing node balances and uploading files.
 
 Our [query package](/developer-docs/querying/query-package) contains everything you need to search Irys transaction [metadata](/developer-docs/tags).
 

@@ -25,11 +25,12 @@ The **per-token wallets** collect user deposits. All deposits for a given token 
 
 An **internal ledger** maintains a list of user wallet addresses, and records the amount deposited by each user into the node's corresponding wallet. This enables the system to accurately track each user's deposit history.
 
-In this system, every node has its own collection of wallets that records all deposits that take place on that node. Balances are not shared between nodes, each node is independent and self-contained.
+To see the list of wallets for a given node, append `/info` to the [network address](/overview/networks).
 
-One of the benefits of not sharing balances between nodes is that it simplifies the process of scaling the system. By avoiding the need for shared state, each node can operate independently and be easily scaled up as needed.
+- https://arweave.mainnet.irys.xyz/info
+- https://arweave.devnet.irys.xyz/info
 
-To see the list of wallets for a given node, append `/info` to the node address. The list for `https://node2.irys.xyz/info` is:
+Example:
 
 ```json
 {
@@ -98,6 +99,6 @@ const data = {
 | sigType   | Used internally                                                                                                                                                                   |
 
 <Callout type="info" emoji="ℹ️">
-	For implementation and usage details, see the SDK documentation for [`fund()`](/developer-docs/irys-sdk/api/fund)
-	and [`withdrawBalance()`](/developer-docs/irys-sdk/api/withdrawBalance)).
+	For implementation and usage details, see the SDK documentation for [`fund()`](/developer-docs/irys-sdk/api/fund) and
+	[`withdrawBalance()`](/developer-docs/irys-sdk/api/withdrawBalance)).
 </Callout>

@@ -6,7 +6,7 @@ import { Callout } from "nextra-theme-docs";
 
 # `fund`
 
-Funds the [Irys node](/overview/nodes) you connected to with the specified amount of tokens. Fund the node you intend to upload to, funded balances are not shared between nodes.
+Fund Irys' mainnet or devnet with the specified amount of tokens.
 
 <Callout type="info" emoji="ℹ️">
 Not all calls to `fund` will post immediately to your account, some blockchains are faster than others. When funding with AR, it can take upwards of 40 minutes before the balance post. For MATIC, ETH and SOL, balances will usually post in < 10s.
@@ -16,18 +16,17 @@ Not all calls to `fund` will post immediately to your account, some blockchains 
 
 <div className="-mt-6" />
 
--   `-h`: The node to fund
--   `-t`: The [token](/overview/supported-tokens) to use when funding.
--   `-w`: Your [private key](/developer-docs/cli#using-private-keys).
--   `--provider-url`: RPC URL to use. This is only required when using Devnet.
+- `-n`: The network to check. Values are `mainnet` or `devnet` (if you omit, the default is `mainnet`).
+- `-t`: The [token](/overview/supported-tokens) to use when funding.
+- `-w`: Your [private key](/developer-docs/cli#using-private-keys).
+- `--provider-url`: RPC URL to use. This is only required when using Devnet.
 
 ## Examples
 
-### Nodes 1 and 2
+### Mainnet
 
 ```console
 irys fund 1000000000000000 \
-  -h https://node1.irys.xyz \
   -t matic \
   -w bf20......c9885307
 ```
@@ -36,12 +35,12 @@ irys fund 1000000000000000 \
 
 ```console
 irys fund 1000000000000000 \
-  -h https://devnet.irys.xyz \
+  -n devnet \
   -t matic \
   -w bf20......c9885307 \
   --provider-url https://rpc-mumbai.maticvigil.com
 ```
 
 <Callout type="info" emoji="ℹ️">
-	Devnet RPC URLs change often, use a recent one from https://chainlist.org/chain/80001
+	Devnet RPC URLs change often, use a recent one from https://chainlist.org/
 </Callout>

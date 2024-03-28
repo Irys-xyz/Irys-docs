@@ -42,12 +42,12 @@ function App() {
 		await window.ethereum.enable();
 		const provider = new providers.Web3Provider(window.ethereum);
 		console.log("provider=", provider);
-		const url = "https://node1.irys.xyz";
+		const network = "mainnet";
 		const token = "matic";
 
 		const wallet = { name: "ethersv5", provider: provider };
 		console.log("wallet=", wallet);
-		const webIrys = new WebIrys({ url, token, wallet });
+		const webIrys = new WebIrys({ network, token, wallet });
 		console.log("webIrys=", webIrys);
 		await webIrys.ready();
 		setConnectedAddress(webIrys.address);

@@ -4,19 +4,13 @@ description: Frequently asked questions from our developer community.
 
 # Developer FAQ
 
-## What is the difference between Node 1 and 2?
-
-Node 2 is ideal for early-stage projects, while larger projects typically prefer Node 1 as it can scale to a higher TPS. Uploads of less than 100 KiB are currently free on Node 2.
-
-Nodes maintain [separate balances](/learn/funding-withdrawing); fund the node you intend to upload to.
-
 ## Does Irys offer free uploads?
 
-Yes. Uploads below 100KiB are free on Node 2 only. This is a public good for users to be encouraged to try Irys.
+Yes. Uploads below 100KiB are free. This is a public good for users to be encouraged to try Irys.
 
 ## How do I set up a Devnet wallet and fund it with free faucet tokens?
 
-Our [Devnet](/developer-docs/using-devnet) is free to use, however to mirror the DX of working on our main nodes, you'll need to fund it with free faucet tokens. You can use any EVM or Solana wallet, however, beginners will likely want to use either [Metamask](https://metamask.io/) for EVM chains and [Phantom](https://phantom.app/) for both Solana and EVM chains.
+Our [devnet](/developer-docs/using-devnet) is free to use. To mirror the DX of working on our mainnet, you'll need to fund it with free faucet tokens. You can use any EVM or Solana wallet, however, beginners will likely want to use either [Metamask](https://metamask.io/) for EVM chains and [Phantom](https://phantom.app/) for both Solana and EVM chains.
 
 Devnet tokens can be obtained for free from common faucets like the ones for [Solana](https://faucet.solana.com/), [Sepolia](https://sepoliafaucet.com/) and [Mumbai](https://mumbaifaucet.com/).
 

@@ -8,10 +8,10 @@ Troubleshooting common errors during installation and use.
 
 Errors:
 
--   [bigint: Failed to load bindings, pure JS will be used (try npm run rebuild?)](/developer-docs/irys-sdk/troubleshooting#bigint)
--   [Error: Using devnet.irys.xyz requires a dev/testnet RPC to be configured](/developer-docs/irys-sdk/troubleshooting#devnet-rpc)
--   [Error: Not enough balance for transaction](/developer-docs/irys-sdk/troubleshooting#insufficient-balance)
--   [Error: Transaction simulation failed: Blockhash not found](/developer-docs/irys-sdk/troubleshooting#blockhash-not-found)
+- [bigint: Failed to load bindings, pure JS will be used (try npm run rebuild?)](/developer-docs/irys-sdk/troubleshooting#bigint)
+- [Error: Using Irys devnet requires a dev/testnet RPC to be configured](/developer-docs/irys-sdk/troubleshooting#devnet-rpc)
+- [Error: Not enough balance for transaction](/developer-docs/irys-sdk/troubleshooting#insufficient-balance)
+- [Error: Transaction simulation failed: Blockhash not found](/developer-docs/irys-sdk/troubleshooting#blockhash-not-found)
 
 ## bigint
 
@@ -23,8 +23,8 @@ This error can be safely ignored, it will not cause any issues. To make the erro
 
 Current versions of MacOS come pre-built with Python. To install the C++ build tools:
 
--   First install [XCode](https://developer.apple.com/xcode/download/)
--   Once XCode is installed, go to Preferences, Downloads, and install the Command Line Tools
+- First install [XCode](https://developer.apple.com/xcode/download/)
+- Once XCode is installed, go to Preferences, Downloads, and install the Command Line Tools
 
 **Windows**
 
@@ -48,19 +48,18 @@ sudo apt-get install build-essential
 
 ## Devnet RPC
 
-**Error message**: Error: Using devnet.irys.xyz requires a dev/testnet RPC to be configured
+**Error message**: Error: Using Irys devnet requires a dev/testnet RPC to be configured
 
-When using our [Devnet](/developer-docs/using-devnet), you must provide the URL to a Denvet RPC for the chain you're using. As this parameter is not required when using Node 1 and 2, users will sometimes get an error if they forget to add in the RPC URL.
+When using our [devnet](/developer-docs/using-devnet), you must provide the URL to a Denvet RPC for the chain you're using. As this parameter is not required when using Node 1 and 2, users will sometimes get an error if they forget to add in the RPC URL.
 
 For example, this will throw an error:
 
 ```js
 const getIrys = async () => {
-	const url = "https://devnet.irys.xyz";
 	const token = "matic";
 
 	const irys = new Irys({
-		url, // URL of the node you want to connect to
+		network: "devnet",
 		token, // Token used for payment
 		key: process.env.PRIVATE_KEY, // EVM private key
 	});
@@ -72,12 +71,11 @@ But this will not:
 
 ```js
 const getIrys = async () => {
-	const url = "https://devnet.irys.xyz";
 	const token = "matic";
 	const providerUrl = "https://rpc-mumbai.maticvigil.com";
 
 	const irys = new Irys({
-		url, // URL of the node you want to connect to
+		network: "devnet",
 		token, // Token used for payment
 		key: process.env.EVM_PRIVATE_KEY, // EVM private key
 		config: { providerUrl }, // Optional provider URL, only required when using Devnet
@@ -92,7 +90,7 @@ As RPC URLs change frequently, users should always choose an up-to-date one from
 
 **Error message**: Error: Not enough balance for transaction
 
-This error occurs when you try to upload to a node without first funding it. This applies to both Nodes 1 and 2 where you can pay using any our supported [mainnet tokens](/overview/supported-tokens#mainnet-tokens) and our Devnet node where you can pay using any of our supported [Devnet tokens](/overview/supported-tokens#devnet-tokens).
+This error occurs when you try to upload to a node without first funding it. This applies to both Nodes 1 and 2 where you can pay using any our supported [mainnet tokens](/overview/supported-tokens#mainnet-tokens) and our devnet node where you can pay using any of our supported [devnet tokens](/overview/supported-tokens#devnet-tokens).
 
 Devnet tokens can be obtained for free from common faucets like the ones for [Solana](https://faucet.solana.com/), [Sepolia](https://sepoliafaucet.com/) and [Mumbai](https://mumbaifaucet.com/).
 

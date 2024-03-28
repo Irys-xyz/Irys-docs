@@ -6,7 +6,7 @@ import { Callout } from "nextra-theme-docs";
 
 # `irys.fund(amount)`
 
-Funds the [Irys node](/overview/nodes) you connected to with the specified amount of tokens. Fund the node you intend to upload to, funded balances are not shared between nodes.
+Funds the [Irys network](/overview/networks) you connected to with the specified number of tokens. 
 
 For more information on how funding and withdrawing are handled, [see our docs](/learn/funding-withdrawing).
 
@@ -54,7 +54,7 @@ You can also lazy-fund a node where you check the cost to upload each file first
 try {
 	const irys = await getIrys();
 
-	const pathToFile = "./llama.png";
+	const pathToFile = "./myNFT.png";
 	const { size } = await fs.promises.stat(pathToFile);
 	const price = await irys.getPrice(size);
 	await irys.fund(price);
@@ -72,7 +72,7 @@ Not all calls to `irys.fund()` will post immediately to your account, some block
 
 ## Fee multiplier
 
-The `multiplier` parameter multiplies the fees we allow the network to take, in effect prioritising the transaction. Normally you can safely ignore this parameter, however if you're experiencing errors when funding, you can try passing a value of `1.2` or more.
+The `multiplier` parameter multiplies the fees we allow the network to take, in effect prioritizing the transaction. Normally you can safely ignore this parameter, however, if you're experiencing errors when funding, you can try passing a value of `1.2` or more.
 
 ```js
 try {
@@ -90,14 +90,14 @@ try {
 When [transferring tokens](/learn/funding-withdrawing) we use public RPCs. Sometimes these can be slow to confirm transactions. If you're experiencing an error when funding, consider using a paid RPC. 
 
 ```js
-const url = "https://devnet.irys.xyz";
+const network = "devnet;
 const providerUrl = ""; // Paid RPC URL
-const currency = "matic";
+const token = "matic";
 const privateKey = process.env.PRIVATE_KEY;
 
 const irys = new Irys({
-	url: url, // URL of the node you want to connect to
-	currency: currency, // Currency used for payment
+	network, // URL of the node you want to connect to
+	token, // Currency used for payment
 	key: privateKey, // ETH or SOL private key
 	config: { providerUrl }, 
 });

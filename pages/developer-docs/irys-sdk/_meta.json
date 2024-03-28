@@ -2,7 +2,9 @@
 	"installing-the-sdk": "Installing the SDK",
 	"troubleshooting": "Troubleshooting",
 	"community-sdk": "Community SDKs",
-	"migration-guide": "Migration guide",
+	"migration-guide": {
+		"display": "hidden"
+	},
 	"irys-in-the-browser": "Irys in the browser",
 	"api": "API Docs",
 	"chunked-uploader": "Chunked uploader",

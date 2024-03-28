@@ -11,7 +11,7 @@ import SectionTitle from "../../components/SectionTitle";
     </div>
 
     <p className="mt-4 text-xl">
-    	Iyrs supports 16 tokens used when paying for and signing uploads.
+    	Iyrs supports most poppular tokens for paying for uploads.
     </p>
 
 </div>
@@ -69,13 +69,13 @@ Example:
 
 ```js copy
 const getIrys = async () => {
-	const url = "https://devnet.irys.xyz";
-	// Devnet RPC URLs change often, use a recent one from https://chainlist.org/chain/80001
+	const network = "devnet";
+	// Devnet RPC URLs change often, use a recent one from https://chainlist.org/
 	const providerUrl = "";
 	const token = "matic";
 
 	const irys = new Irys({
-		url, // URL of the node you want to connect to
+		network, // "mainnet" || "devnet"
 		token, // Token used for payment
 		key: process.env.PRIVATE_KEY, // ETH or SOL private key
 		config: { providerUrl }, // Optional provider URL, only required when using Devnet

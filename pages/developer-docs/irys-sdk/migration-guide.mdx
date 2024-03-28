@@ -57,7 +57,7 @@ Update `new Bundlr` to `new Irys` and then wrap your constructor arguments in `{
 
 ```js
 const url = "https://devnet.irys.xyz";
-// Devnet RPC URLs change often, use a recent one from https://chainlist.org/chain/80001
+// Devnet RPC URLs change often, use a recent one from https://chainlist.org/
 const providerUrl = "";
 const token = "matic";
 
@@ -95,13 +95,13 @@ In the Bundlr SDK there were separate upload functions depending on whether you 
 
 The following function is deprecated:
 
--   `bundlr.uploadWithReceipt()`
+- `bundlr.uploadWithReceipt()`
 
 The following functions upload data as before however, the return type has changed to be a receipt.
 
--   [`irys.upload()`](./api/upload) To upload any data
--   [`irys.uploadFile()`](./api/uploadFile) To upload a file
--   [`irys.uploadFolder()`](./api/uploadFolder) To upload a folder
+- [`irys.upload()`](./api/upload) To upload any data
+- [`irys.uploadFile()`](./api/uploadFile) To upload a file
+- [`irys.uploadFolder()`](./api/uploadFolder) To upload a folder
 
 ## Change to WebBundlr / WebIrys
 
@@ -117,7 +117,7 @@ const getWebIrys = async () => {
 
 	const url = "https://node1.irys.xyz";
 	const token = "matic";
-	// Devnet RPC URLs change often, use a recent one from https://chainlist.org/chain/80001
+	// Devnet RPC URLs change often, use a recent one from https://chainlist.org/
 	const rpcUrl = "";
 
 	// Create a wallet object

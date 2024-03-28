@@ -24,7 +24,7 @@ import SectionTitle from "../../../components/SectionTitle";
 			width: "80%",
 			height: "80%",
 		}}
-		src={`https://www.youtube.com/embed/eGFYxJPaEjg`}
+		src={`https://www.youtube.com/embed/CdWn9clSybM`}
 		frameBorder="0"
 	/>
 </div>
@@ -35,13 +35,13 @@ In this tutorial you will learn how to use Irys with NodeJS to permanently store
 
 To use this tutorial, you will need:
 
--   A crypto wallet with a small amount of [Devnet tokens](https://mumbaifaucet.com/)
--   A recent version of [NodeJS](https://nodejs.org/)
--   A code editor ([VSCode](https://code.visualstudio.com/) or others)
+- A crypto wallet with a small amount of [Devnet tokens](https://mumbaifaucet.com/)
+- A recent version of [NodeJS](https://nodejs.org/)
+- A code editor ([VSCode](https://code.visualstudio.com/) or others)
 
 ## Installing
 
-First make sure you have Node installed:
+First, make sure you have Node installed:
 
 ```console
 node -v
@@ -97,19 +97,19 @@ And edit it to contain the private key of a wallet file that has been funded wit
 ETH_PRIVATE_KEY=________
 ```
 
-## Connecting to a node
+## Connecting to Irys
 
-Connect to a node by supplying a Node address and the name of a the token you'll use to pay for uploads. In this example we connect to the Irys devnet, which also requires you to pass an RPC URL. When connecting to [Nodes 1 and 2](/overview/nodes), you don't need to supply an RPC address.
+Start by connecting to Irys. In this example, we connect to the Irys devnet, which also requires you to pass an RPC URL. When connecting to [Irys' mainnet](/overview/networks), you don't need to supply an RPC address.
 
 ```js
 const getIrys = async () => {
-	const url = "https://devnet.irys.xyz";
-	// Devnet RPC URLs change often, use a recent one from https://chainlist.org/chain/80001
+	const network = "devnet";
+	// Devnet RPC URLs change often, use a recent one from https://chainlist.org/
 	const providerUrl = "";
 	const token = "matic";
 
 	const irys = new Irys({
-		url, // URL of the node you want to connect to
+		network, // "mainnet" || "devnet"
 		token, // Token used for payment
 		key: process.env.ETH_PRIVATE_KEY, // Private key
 		config: { providerUrl }, // Optional provider URL, only required when using Devnet

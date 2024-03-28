@@ -6,9 +6,9 @@ description: Learn how to attach a UDL to an NFT
 
 In this tutorial you will:
 
--   Learn how to query Irys and Arweave transactions based on content type, payment token and timestamp
--   Build a powerful tool that gives you insights into how Irys is used
--   Learn how to incorporate specialized query functionality in your applications
+- Learn how to query Irys and Arweave transactions based on content type, payment token and timestamp
+- Build a powerful tool that gives you insights into how Irys is used
+- Learn how to incorporate specialized query functionality in your applications
 
 As you build the project, you'll be introduced to the [Irys Query package](/developer-docs/querying/query-package), which greatly simplifies querying Irys and Arweave. Instead of having to use [GraphQL](/developer-docs/querying/graphql), you can now search transactions through a single JavaScript class, you interact with it as you would with any other JavaScript code.
 
@@ -62,9 +62,9 @@ yarn add @irys/query
 
 We'll structure our UI beginning with the `page.tsx` file which then incorporates three additional components:
 
--   `Navbar`
--   `SearchResults`
--   `SearchResultsItem`
+- `Navbar`
+- `SearchResults`
+- `SearchResultsItem`
 
 The `page.tsx` file acts as a parent component, hosting these child components and managing shared state. All state is set up in `page.tsx` and then passed to child components when instantiated.
 
@@ -81,10 +81,10 @@ In this tutorial, first, we’ll build out the complete UI, then go back and add
 
 Start by modeling the application data using TypeScript interfaces. The `SearchData` interface models the parameters required for each search operation, these parameters include:
 
--   Irys node
--   Content-Type metatag
--   payment token
--   a date range
+- Irys node
+- Content-Type metatag
+- payment token
+- a date range
 
 The `SearchResult` interface models the structure of an individual search result. It includes the transaction ID, creation date, token, and an array of associated tags.
 
@@ -146,7 +146,7 @@ const useHome = () => {
 
 	// State variables for our search params.
 	// Set the variables here, and pass them to the Navbar
-	const [irysNode, setIrysNode] = useState<string>("https://node1.irys.xyz");
+	const [irysNetwork, setIrysNetwork] = useState<string>("mainnet"); // or "devnet"
 	const [contentType, setContentType] = useState<string>("None");
 	const [paymentToken, setPaymentToken] = useState<string>("None");
 	const [fromTimestamp, setFromTimestamp] = useState<Date | null>(null);
@@ -161,8 +161,8 @@ const useHome = () => {
 	return {
 		isLoading,
 		firstSearchRun,
-		irysNode,
-		setIrysNode,
+		irysNetwork,
+		setIrysNetwork,
 		contentType,
 		setContentType,
 		paymentToken,
@@ -234,10 +234,10 @@ The `Navbar` component is where the user will configure search parameters before
 
 Start by defining the properties of the `Navbar` component using the `NavbarProps` interface. This includes:
 
--   Node to search
--   Content type
--   Payment toke
--   To and from timestamps
+- Network to search ("mainnet" or "devnet")
+- Content type
+- Payment toke
+- To and from timestamps
 
 An `onSearch()` function is also included, which is triggered when a search operation is initiated by the user clicking `Search`.
 
@@ -245,8 +245,8 @@ All of these values are passed to `Navbar` from `page.tsx`, ensuring state is sh
 
 ```ts filename="Navbar.tsx"
 interface NavbarProps {
-	irysNode: string;
-	setIrysNode: React.Dispatch<React.SetStateAction<string>>;
+	irysNetwork: string;
+	setIrysNetwork: React.Dispatch<React.SetStateAction<string>>;
 	contentType: string;
 	setContentType: React.Dispatch<React.SetStateAction<string>>;
 	paymentToken: string;
@@ -263,8 +263,8 @@ Next, build a custom React hook called `useNavbar()` that handles all the state 
 
 ```ts filename="Navbar.tsx"
 cconst useNavbar = ({ props }: { props: NavbarProps }) => {
-	const handleIrysNodeChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-		props.setIrysNode(e.target.value);
+	const handleIrysNetworkChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+		props.setIrysNetwork(e.target.value);
 	};
 
 
@@ -289,7 +289,7 @@ cconst useNavbar = ({ props }: { props: NavbarProps }) => {
 
 
 	return {
-		handleIrysNodeChange,
+		handleIrysNetworkChange,
 		handleContentTypeChange,
 		handlePaymentTokenChange,
 		handleFromTimestampChange,
@@ -305,8 +305,8 @@ import Image from "next/image";
 import React from "react";
 
 interface NavbarProps {
-	irysNode: string;
-	setIrysNode: React.Dispatch<React.SetStateAction<string>>;
+	irysNetwork: string;
+	setIrysNetwork: React.Dispatch<React.SetStateAction<string>>;
 	contentType: string;
 	setContentType: React.Dispatch<React.SetStateAction<string>>;
 	paymentToken: string;
@@ -319,8 +319,8 @@ interface NavbarProps {
 }
 
 const useNavbar = ({ props }: { props: NavbarProps }) => {
-	const handleIrysNodeChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-		props.setIrysNode(e.target.value);
+	const handleIrysNetworkChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+		props.setIrysNetwork(e.target.value);
 	};
 
 	const handleContentTypeChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
@@ -340,7 +340,7 @@ const useNavbar = ({ props }: { props: NavbarProps }) => {
 	};
 
 	return {
-		handleIrysNodeChange,
+		handleIrysNetworkChange,
 		handleContentTypeChange,
 		handlePaymentTokenChange,
 		handleFromTimestampChange,
@@ -350,7 +350,7 @@ const useNavbar = ({ props }: { props: NavbarProps }) => {
 
 const Navbar: React.FC<NavbarProps> = (props) => {
 	const {
-		handleIrysNodeChange,
+		handleIrysNetworkChange,
 		handleContentTypeChange,
 		handlePaymentTokenChange,
 		handleFromTimestampChange,
@@ -362,24 +362,15 @@ const Navbar: React.FC<NavbarProps> = (props) => {
 			<div className="flex flex-row gap-5 justify-center justify-items-start">
 				<div className="flex flex-col">
 					<label className="text-text text-xs ml-2">Irys Node</label>
-					<select
-						value={props.irysNode}
-						onChange={handleIrysNodeChange}
-						className="rounded-xl px-2 shadow-xl"
-					>
-						<option value="https://node1.irys.xyz">https://node1.irys.xyz</option>
-						<option value="https://node2.irys.xyz">https://node2.irys.xyz</option>
-						<option value="https://devnet.irys.xyz">https://devnet.irys.xyz</option>
+					<select value={props.irysNetwork} onChange={handleIrysNetworkChange} className="rounded-xl px-2 shadow-xl">
+						<option value="mainnet">mainnet</option>
+						<option value="devnet">devnet</option>
 					</select>
 				</div>
 
 				<div className="flex flex-col">
 					<label className="text-text text-xs ml-2">Content-Type</label>
-					<select
-						value={props.contentType}
-						onChange={handleContentTypeChange}
-						className="rounded-xl px-2 shadow-xl"
-					>
+					<select value={props.contentType} onChange={handleContentTypeChange} className="rounded-xl px-2 shadow-xl">
 						<option value="None">None</option>
 						<option value="image/jpg">image/jpg</option>
 						<option value="image/png">image/png</option>
@@ -389,11 +380,7 @@ const Navbar: React.FC<NavbarProps> = (props) => {
 
 				<div className="flex flex-col">
 					<label className="text-text text-xs ml-2">Payment Token</label>
-					<select
-						value={props.paymentToken}
-						onChange={handlePaymentTokenChange}
-						className="rounded-xl px-2 shadow-xl"
-					>
+					<select value={props.paymentToken} onChange={handlePaymentTokenChange} className="rounded-xl px-2 shadow-xl">
 						<option value="None">None</option>
 						<option value="Solana">Solana</option>
 						<option value="Matic">Matic</option>
@@ -604,11 +591,11 @@ Having assembled the application's UI, running `npm run dev` in your CLI now dis
 
 Let’s jump back to `page.tsx` and finish coding the `handleSearch()` function.
 
-Irys has two main Nodes and one Devnet node. When instantiating a new `Query` object, you must connect to the node-specific endpoint where you posted your transaction. The endpoint is defined by passing it as an argument to the Query constructor. In the absence of an argument, the class defaults to connecting to Node 1.
+Irys has a mainnet and devnet. When querying,
 
 ```ts
 // Create a new Query object pointing to the node selected by the user
-const query = new Query({ url: irysNode + "/graphql" });
+const query = new Query({ network: irysNetwork });
 ```
 
 Moving forward, the `Query` object is configured to exclusively search Irys' transactions and limit the results to 42. The location of the search is determined by the value passed to `search()`, if you’re modifying this tutorial to search Arweave instead, you would change this value.
@@ -687,9 +674,9 @@ const handleSearch = async () => {
 
 Excellent job! In under an hour, you've constructed an explorer that showcases content uploaded to Irys in real time. The flexibility of the Query pacakge opens a world of opportunities for creative Web3 development.
 
--   You could expand on this tutorial to allow more advanced tag searching or even repurpose it to query Arweave directly instead.
+- You could expand on this tutorial to allow more advanced tag searching or even repurpose it to query Arweave directly instead.
 
--   When uploading to Irys, you have complete freedom over which tags you add to each transaction. Using custom tags you can build semi-relational models within your data and then use these models to construct complex queries, analyze data patterns, or create personalized user experiences.
+- When uploading to Irys, you have complete freedom over which tags you add to each transaction. Using custom tags you can build semi-relational models within your data and then use these models to construct complex queries, analyze data patterns, or create personalized user experiences.
 
 What are you going to build?
 

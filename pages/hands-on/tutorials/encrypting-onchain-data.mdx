@@ -36,9 +36,9 @@ This guide is an overview of what Lit Protocol is and how to use it with Irys. W
 
 Lit Protocol enables developers to create and manage decentralized keys for condition-based encryption and programmatic signing for digital assets. In short, you can use it to:
 
--   Encrypt data
--   Define fine-grained access rules for who can decrypt data
--   Decrypt data
+- Encrypt data
+- Define fine-grained access rules for who can decrypt data
+- Decrypt data
 
 Encrypted data can be stored on Irys, then retrieved and decrypted at any point in the future.
 
@@ -46,12 +46,12 @@ Encrypted data can be stored on Irys, then retrieved and decrypted at any point 
 
 Using Lit Protocol with Irys opens up new opportunities for builders, including:
 
--   Gating access to content
--   Encrypting posts for [Lens protocol](/hands-on/tutorials/lens)
--   Decentralized identity verification
--   Creating private data marketplaces
--   Creating NFTs only viewable by their owner
--   Storing private personal data on-chain
+- Gating access to content
+- Encrypting posts for [Lens protocol](/hands-on/tutorials/lens)
+- Decentralized identity verification
+- Creating private data marketplaces
+- Creating NFTs only viewable by their owner
+- Storing private personal data on-chain
 
 <Callout type="info" emoji="ℹ️">
 	Using Lit Protocol, the access control conditions provide near infinite flexibility. Imagine a system for government
@@ -62,12 +62,15 @@ Using Lit Protocol with Irys opens up new opportunities for builders, including:
 
 ## Encrypting data
 
-<img className="border border-[#FEF4EE] rounded mt-5 w-full" src="/img/tutorials/encrypting/irys-lit-encrypting.png" />
+<img
+	className="border border-[#FEF4EE] rounded mt-5 lg:w-5/6 w-full"
+	src="/img/tutorials/encrypting/irys-lit-encrypting.png"
+/>
 There are three steps to encrypting data
 
--   Obtain a wallet signature ([AuthSig](https://developer.litprotocol.com/v3/sdk/authentication/overview#obtain-an-authsig)), which proves you own a wallet
--   Define [access control conditions](https://developer.litprotocol.com/v3/sdk/access-control/intro) for who can decrypt your data
--   Connect to a Lit node and request that it encrypt your data
+- Obtain a wallet signature ([AuthSig](https://developer.litprotocol.com/v3/sdk/authentication/overview#obtain-an-authsig)), which proves you own a wallet
+- Define [access control conditions](https://developer.litprotocol.com/v3/sdk/access-control/intro) for who can decrypt your data
+- Connect to a Lit node and request that it encrypt your data
 
 ### Access control conditions
 
@@ -75,27 +78,30 @@ Lit Protocol enables users to set [access control conditions](https://developer.
 
 This provides builders with the flexibility to designate data decryption permissions, including:
 
--   A single wallet address
--   DAO membership
--   Owners of an ERC20 or ERC721
--   Outcomes from a smart contract call
--   Outcomes from an API call
+- A single wallet address
+- DAO membership
+- Owners of an ERC20 or ERC721
+- Outcomes from a smart contract call
+- Outcomes from an API call
 
 ## Decrypting data
 
-<img className="border border-[#FEF4EE] rounded mt-5  w-full" src="/img/tutorials/encrypting/irys-lit-decrypting.png" />
+<img
+	className="border border-[#FEF4EE] rounded mt-5 lg:w-5/6 w-full"
+	src="/img/tutorials/encrypting/irys-lit-decrypting.png"
+/>
 
 There are three steps to decrypting data:
 
--   Obtain a wallet signature ([AuthSig](https://developer.litprotocol.com/v3/sdk/authentication/overview#obtain-an-authsig)), which proves you own a wallet
--   Retrieve data stored on Arweave
--   Connect to a Lit node and request that it decrypt your data
+- Obtain a wallet signature ([AuthSig](https://developer.litprotocol.com/v3/sdk/authentication/overview#obtain-an-authsig)), which proves you own a wallet
+- Retrieve data stored on Arweave
+- Connect to a Lit node and request that it decrypt your data
 
 ## Code examples
 
--   [Server-side encryption](./server-side-encryption)
--   [Browser-based encryption](./browser-based-encryption)
+- [Server-side encryption](./server-side-encryption)
+- [Browser-based encryption](./browser-based-encryption)
 
 ## Demo
 
--   [Irys Provenance Toolkit](https://provenance-toolkit.irys.xyz/encrypted-uploader)
+- [Irys Provenance Toolkit](https://provenance-toolkit.irys.xyz/encrypted-uploader)

@@ -31,13 +31,13 @@ import dotenv from "dotenv";
 dotenv.config();
 
 const getIrys = async () => {
-	const url = "https://devnet.irys.xyz";
-	// Devnet RPC URLs change often, use a recent one from https://chainlist.org/chain/80001
+	const network = "devnet";
+	// Devnet RPC URLs change often, use a recent one from https://chainlist.org/
 	const providerUrl = "";
 	const token = "matic";
 
 	const irys = new Irys({
-		url, // URL of the node you want to connect to
+		network, // "mainnet" || "devnet"
 		token, // Token used for payment and signing
 		key: process.env.PRIVATE_KEY, // ETH or SOL private key
 		config: { providerUrl }, // Optional provider URL, only required when using Devnet
@@ -69,5 +69,5 @@ const uploadFolder = async () => {
 You can also achieve the same using our CLI and the [`upload-dir`](/developer-docs/cli/commands/upload-dir) command. Make sure to change the parameter options to provide your own private key and the name of your site's index file.
 
 ```console
-irys upload-dir ./my-spa --index-file index.html -h https://node1.irys.xyz t -w bf20......c9885307
+irys upload-dir ./my-spa --index-file index.html -n mainnet t -w bf20......c9885307
 ```

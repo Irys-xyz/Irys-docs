@@ -8,7 +8,7 @@ import { Callout } from "nextra-theme-docs";
 
 Mutable references enable the creation of a single, static URL that is linked to a sequential series of transactions. You can add a new transaction to the series at any time, and the URL will always resolve to the most recent transaction.
 
-<img className="border border-[#FEF4EE] rounded mt-5  w-full" src="/img/mutable-references.png" />
+<img className="border border-[#FEF4EE] rounded mt-5  lg:w-5/6 w-full" src="/img/mutable-references.png" />
 
 To create a mutable reference:
 
@@ -31,8 +31,8 @@ console.log(`TX 2 uploaded https://gateway.irys.xyz/mutable/${receiptOne.id}`);
 The original URL (`https://gateway.irys.xyz/mutable/:id`) now resolves to the second transaction in the chain.
 
 <Callout type="info" emoji="ℹ️">
-	When building a transaction chain, additions must be made using the same wallet that created the original
-	transaction. This prevents unauthorized actors from maliciously modifying someone else’s transaction chain.
+	When building a transaction chain, additions must be made using the same wallet that created the original transaction.
+	This prevents unauthorized actors from maliciously modifying someone else’s transaction chain.
 </Callout>
 
 ## Granularity
@@ -51,7 +51,7 @@ import Query from "@irys/query";
 const txID = "WF--VR1ZERvABYy1aNYD3QJ0OAVDSUF8dTlg6zFKveQ";
 const fromAddress = "0x591b5ce7ca10a55a9b5d1516ef89693d5b3586b8";
 
-const myQuery = new Query({ url: "https://node2.irys.xyz/graphql" });
+const myQuery = new Query({ network: "mainnet" });
 const results = await myQuery
 	.search("irys:transactions")
 	.tags([{ name: "Root-TX", values: [txID] }])
@@ -92,8 +92,8 @@ query getChain {
 
 Irys’ mutable references open up new opportunities for builders, including:
 
--   Gaming NFTs: Metadata changes based on in-game actions
--   Dynamic NFTs: Images change based on onchain activity
--   Software distribution: The latest version is always available via the same link
--   Content publishing / social media: Content can be updated at any time and users will always have the most recent version
--   Website hosting / dApp front-ends: Websites can be updated at any time without changing the main URL
+- Gaming NFTs: Metadata changes based on in-game actions
+- Dynamic NFTs: Images change based on onchain activity
+- Software distribution: The latest version is always available via the same link
+- Content publishing / social media: Content can be updated at any time and users will always have the most recent version
+- Website hosting / dApp front-ends: Websites can be updated at any time without changing the main URL

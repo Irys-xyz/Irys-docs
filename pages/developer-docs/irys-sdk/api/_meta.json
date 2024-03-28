@@ -12,5 +12,7 @@
 	"utils-verifyReceipt": "utils.verifyReceipt()",
 	"funder-submitFundTransaction": "funder.submitFundTransaction()",
 	"uploader-uploadBundle": "uploader.uploadBundle()",
-	"uploader-generateManifest": "uploader.generateManifest()"
+	"uploader-generateManifest": {
+		"display": "hidden"
+	}
 }

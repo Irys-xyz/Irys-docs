@@ -15,7 +15,7 @@ The [Fund Withdraw component](https://provenance-toolkit.irys.xyz/fund-withdraw)
 
 ## Funding and withdrawing
 
-When uploading data to Irys, first connect to and then fund a [node](/overview/nodes). Balances are not shared between nodes, fund the node you intend to use.
+When uploading data to Irys, first fund a balance [on our mainnet or devnet](/overview/networks).
 
 ## Customizing the UI
 
@@ -23,13 +23,13 @@ The FundWithdraw component provides a default UI that includes options for the e
 
 You can also modify the UI to hardwire the node address, token, or fix the mode (either to "fund-only" or "withdraw-only") using configuration parameters.
 
-| Description               | Code                                             |
-| ------------------------- | ------------------------------------------------ |
-| Default Behavior          | `<FundWithdraw />`                               |
-| Fix the node              | `<FundWithdraw node="https://node1.irys.xyz" />` |
-| Fix the token             | `<FundWithdraw token="ethereum" />`              |
-| Set to fund-only mode     | `<FundWithdraw fundOnly={ true } />`             |
-| Set to withdraw-only mode | `<FundWithdraw withdrawOnly={ true }/>`          |
+| Description               | Code                                    |
+| ------------------------- | --------------------------------------- |
+| Default Behavior          | `<FundWithdraw />`                      |
+| Fix the network           | `<FundWithdraw network="mainnet" />`    |
+| Fix the token             | `<FundWithdraw token="ethereum" />`     |
+| Set to fund-only mode     | `<FundWithdraw fundOnly={ true } />`    |
+| Set to withdraw-only mode | `<FundWithdraw withdrawOnly={ true }/>` |
 
 If both fundOnly and withdrawOnly are set to false, the component defaults to fund-only mode.
 
@@ -104,8 +104,8 @@ const fundTx = await irys.withdrawBalance(irys.utils.toAtomic(amount));
 When funding and withdrawing using the functions [`irys.fund()`](/developer-docs/irys-sdk/api/fund) or [`irys.withdrawBalance()`](/developer-docs/irys-sdk/api/withdrawBalance), pass a value in atomic units.
 
 <Callout type="info" emoji="ℹ️">
-	Atomic units refer to the smallest possible unit of a given cryptocurrency. In Ethereum, atomic units are called
-	Wei, and they represent the smallest unit of Ether. Similar to how 1 dollar can be broken down into 100 cents, 1
-	Ether can be broken down into 10^18 Wei. In Solana, atomic units are called Lamports, 1 SOL can be broken down into
-	10^9 Lamports.
+	Atomic units refer to the smallest possible unit of a given cryptocurrency. In Ethereum, atomic units are called Wei,
+	and they represent the smallest unit of Ether. Similar to how 1 dollar can be broken down into 100 cents, 1 Ether can
+	be broken down into 10^18 Wei. In Solana, atomic units are called Lamports, 1 SOL can be broken down into 10^9
+	Lamports.
 </Callout>
