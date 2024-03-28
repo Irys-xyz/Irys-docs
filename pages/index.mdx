@@ -68,7 +68,7 @@ import Video from "../components/Video";
          <div className="rounded-xl bg-black p-4 mt-4">
 
 <Highlight className="js text-base leading-loose">
-	{`const irys = new Irys({ url, token, key });
+	{`const irys = new Irys({ network, token, key });
 const fundTx = await irys.fund(irys.utils.toAtomic(0.05));
 const receipt = await irys.uploadFile("./myImage.png");`}
 </Highlight>
