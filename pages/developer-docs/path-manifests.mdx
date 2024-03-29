@@ -12,7 +12,7 @@ Path manifests map paths to transaction IDs. Use them to create logical grouping
 
 To create a path manifest:
 
-1. Create a JavaScript `Map` object where each entry maps a unique transaction ID to a unique path. Paths are arbitrary; you can use anything you want.
+1. Create a JavaScript `Map` object where each entry maps a unique transaction ID to a unique path. Paths are arbitrary; you can use anything that conforms to valid URL syntax.
 2. Create a `Manifest` object by passing the `Map` object to `irys.uploader.generateManifest()`.
 3. Upload the `Manifest` object to Irys.
 
