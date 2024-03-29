@@ -4,6 +4,9 @@
 	"cli": "CLI",
 	"provenance-toolkit": "Provenance Toolkit",
 	"using-devnet": "Using Devnet",
+	"path-manifests": {
+		"display": "hidden"
+	},
 	"tags": "Tags",
 	"mutable-references": "Mutable references",
 	"network-merge-guide": "Network merge guide"
