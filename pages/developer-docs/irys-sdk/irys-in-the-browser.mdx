@@ -76,10 +76,10 @@ const getWebIrys = async () => {
 	const network = "mainnet";
 	const token = "matic";
 	// Devnet RPC URLs change often, use a recent one from https://chainlist.org
-	const rpcURL = "";
+	const rpcUrl = "";
 
 	// Create a wallet object
-	const wallet = { rpcUrl: rpcURL, name: "ethersv5", provider: provider };
+	const wallet = { rpcUrl: rpcUrl, name: "ethersv5", provider: provider };
 	// Use the wallet object
 	const webIrys = new WebIrys({ network, token, wallet });
 	await webIrys.ready();
@@ -133,9 +133,9 @@ const wallet = useWallet();
 
 const getIrys = async (): Promise<WebIrys> => {
 	// Devnet RPC URLs change often, use a recent one from https://chainlist.org
-	const rpcURL = "";
+	const rpcUrl = "";
 
-	const wallet = { rpcUrl: rpcURL, name: "solana", provider: wallet };
+	const wallet = { rpcUrl: rpcUrl, name: "solana", provider: wallet };
 	const webIrys = new WebIrys({ network: "mainnet", token: "solana", wallet });
 	await webIrys.ready();
 	return webIrys;

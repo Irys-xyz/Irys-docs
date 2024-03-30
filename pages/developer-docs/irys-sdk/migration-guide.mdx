@@ -121,7 +121,7 @@ const getWebIrys = async () => {
 	const rpcUrl = "";
 
 	// Create a wallet object
-	const wallet = { rpcUrl: rpcURL, name: "ethersv5", provider: provider };
+	const wallet = { rpcUrl: rpcUrl, name: "ethersv5", provider: provider };
 	// Use the wallet object
 	const webIrys = new WebIrys({ url, token, wallet });
 	await webIrys.ready();
