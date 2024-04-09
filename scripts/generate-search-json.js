@@ -14,6 +14,34 @@ const path = require("path");
  */
 const removeMarkdown = (markdown) => {
   let output = markdown.trim();
+
+  let title;
+
+  // the title is going to be either # Title or inside a component called <Heading level={1}>Title</Heading>
+  const markdownTitleRegex = /^#\s(.+)/m;
+  // Adjusted regular expression to match <Heading level={1}> style title
+  // This regex now accounts for potential new lines and spaces around the title
+  const headingComponentRegex =
+    /<Heading level={[1]}(?:\s+className="[^"]*")?>(?:\n)?(.+)(?:\n)?(?:\s+)?<\/Heading>/;
+
+  // Try to match the markdown style title
+  const markdownMatch = output.match(markdownTitleRegex);
+  if (markdownMatch) {
+    title = markdownMatch[1];
+
+    if (title.startsWith("`") && title.endsWith("`")) {
+      title = title.slice(1, -1);
+    }
+  }
+
+  // If markdown title isn't found, try to match the Heading component style title
+  const headingMatch = output.match(headingComponentRegex);
+  if (headingMatch) {
+    title = headingMatch[1];
+  }
+
+  title = title?.trim();
+
   const regexImportStatements = /^import\s+[\s\S]+?from\s+['"][^'"]+['"];?/gm;
   const regexDescription = /---\s+description:\s+([\s\S]+?)\s+---/;
 
@@ -65,7 +93,7 @@ const removeMarkdown = (markdown) => {
 
   output = output.replace(/\n+/g, " ");
 
-  return { description, output };
+  return { description, output, title };
 };
 
 /**
@@ -80,6 +108,7 @@ const findAllMDXFiles = (dir, mdxFiles = []) => {
 
   files.forEach((file) => {
     const filePath = path.join(dir, file);
+    2;
     const fileStat = fs.statSync(filePath);
 
     if (fileStat.isDirectory()) {
@@ -110,12 +139,14 @@ const processMDXFilesToJSON = (mdxFiles, outputPath) => {
 
     mdxFiles.forEach((filePath, index) => {
       const mdxContent = fs.readFileSync(filePath, "utf8");
-      const { description, output } = removeMarkdown(mdxContent);
+      const { description, output, title } = removeMarkdown(mdxContent);
 
       const jsonLine = {
-        path: filePath.replace(/^pages/, "").replace(".mdx", ""),
+        url: filePath.replace(/^pages/, "").replace(".mdx", ""),
+        title,
         description: description,
-        content: output.replace(/"/g, '""'),
+        text: output.replace(/"/g, '""'),
+        origin: "docs",
       };
 
       // Add comma if not the last item
