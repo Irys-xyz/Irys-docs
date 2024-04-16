@@ -148,24 +148,10 @@ const getIrys = async (): Promise<WebIrys> => {
 
 Additionally, the following providers will work with extra setup code.
 
-| Package                                                             | Parameter value |
-| ------------------------------------------------------------------- | --------------- |
-| [Arconnect](/developer-docs/irys-sdk/irys-in-the-browser#arconnect) | arconnect       |
-| [Othent](/developer-docs/irys-sdk/irys-in-the-browser#othent)       | othent          |
-| [Privy](/developer-docs/irys-sdk/irys-in-the-browser#privy)         | privy           |
-
-#### [Arconnect](https://www.arconnect.io/)
-
-```js
-const getWebIrys = async () => {
-	const arconnect = window.arweaveWallet;
-	await arconnect.connect(["ACCESS_ADDRESS", "ACCESS_PUBLIC_KEY", "SIGN_TRANSACTION", "SIGNATURE"]);
-	const webIrys = new WebIrys({ network: "mainnet", token: "arweave", wallet: { provider: arconnect } });
-	await webIrys.ready();
-
-	return webIrys;
-};
-```
+| Package                                                       | Parameter value |
+| ------------------------------------------------------------- | --------------- |
+| [Othent](/developer-docs/irys-sdk/irys-in-the-browser#othent) | othent          |
+| [Privy](/developer-docs/irys-sdk/irys-in-the-browser#privy)   | privy           |
 
 #### [Othent](https://othent.io/)
 
