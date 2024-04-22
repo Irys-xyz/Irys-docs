@@ -8,19 +8,19 @@ import { Callout } from "nextra-theme-docs";
 
 This guide teaches you how to:
 
--   Encrypt a [File](https://developer.mozilla.org/en-US/docs/Web/API/File) uploaded from the browser using Lit Protocol
--   Establish a set of rules determining who can decrypt the File
--   Store the encrypted File on Arweave using Irys
--   Decrypt the File using Lit Protocol
--   Display the decrypted File in the browser
+- Encrypt a [File](https://developer.mozilla.org/en-US/docs/Web/API/File) uploaded from the browser using Lit Protocol
+- Establish a set of rules determining who can decrypt the File
+- Store the encrypted File on Arweave using Irys
+- Decrypt the File using Lit Protocol
+- Display the decrypted File in the browser
 
 Before diving into this guide, begin with ["Encrypting onchain data"](/hands-on/tutorials/encrypting-onchain-data).
 
 <Callout type="info" emoji="ℹ️">
 	The [Irys Provenance Toolkit](/developer-docs/provenance-toolkit) features an [encrypted uploader
 	component](https://provenance-toolkit.irys.xyz/encrypted-uploader) that allows for file uploads directly from the
-	browser, handles its encryption and decryption, and displays the decrypted file. When building your project,
-	consider cloning the [Toolkit repository](https://github.com/Irys-xyz/provenance-toolkit) to use as a foundation.
+	browser, handles its encryption and decryption, and displays the decrypted file. When building your project, consider
+	cloning the [Toolkit repository](https://github.com/Irys-xyz/provenance-toolkit) to use as a foundation.
 </Callout>
 
 ## Dependencies
@@ -41,6 +41,8 @@ yarn add @irys/sdk @lit-protocol/lit-node-client@^3 ethers@^5
 
 ```js
 import * as LitJsSdk from "@lit-protocol/lit-node-client";
+import { AccessControlConditions, ILitNodeClient } from "@lit-protocol/types";
+import { checkAndSignAuthMessage } from "@lit-protocol/lit-node-client";
 import { WebIrys } from "@irys/sdk";
 ```
 
@@ -199,8 +201,9 @@ async function encryptFile(file: File) {
 	await litNodeClient.connect();
 
 	// 2. Ensure we have a wallet signature
-	const authSig = await LitJsSdk.checkAndSignAuthMessage({
-		chain: process.env.NEXT_PUBLIC_LIT_CHAIN || "polygon",
+	const authSig = await checkAndSignAuthMessage({
+		chain: "ethereum",
+		nonce: await litNodeClient.getLatestBlockhash(),
 	});
 
 	// 3. Define access control conditions.
@@ -223,7 +226,7 @@ async function encryptFile(file: File) {
 
 	// 4. Create a zip blob containing the encrypted file and associated metadata
 	const zipBlob = await LitJsSdk.encryptFileAndZipWithMetadata({
-		chain: process.env.NEXT_PUBLIC_LIT_CHAIN || "polygon",
+		chain: process.env.NEXT_PUBLIC_LIT_CHAIN || "ethereum",
 		authSig,
 		accessControlConditions,
 		file,
@@ -340,8 +343,9 @@ async function decryptFile(id: string, encryptedFileType: string): Promise<strin
 		await litNodeClient.connect();
 
 		// 3.5 Get a reference to an AuthSig (if in local storage that will be used instead of prompting the user to sign)
-		const authSig = await LitJsSdk.checkAndSignAuthMessage({
-			chain: process.env.NEXT_PUBLIC_LIT_CHAIN || "polygon",
+		const authSig = await checkAndSignAuthMessage({
+			chain: "ethereum",
+			nonce: await litNodeClient.getLatestBlockhash(),
 		});
 
 		// 4. Decrypt the zipBlob
@@ -397,8 +401,8 @@ All of this code is contained in a single file as part of the [Provenance Toolki
 
 ## Server-side example
 
--   [Server-side encryption](./server-side-encryption)
+- [Server-side encryption](./server-side-encryption)
 
 ## Demo
 
--   [Irys Provenance Toolkit](https://provenance-toolkit.irys.xyz/encrypted-uploader)
+- [Irys Provenance Toolkit](https://provenance-toolkit.irys.xyz/encrypted-uploader)
