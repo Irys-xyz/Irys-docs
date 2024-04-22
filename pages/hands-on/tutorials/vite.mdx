@@ -24,33 +24,38 @@ npm install
 Install the Irys SDK and ethers:
 
 ```console
-npm install @irys/sdk ethers@5
+npm install @irys/sdk ethers@6
 ```
 
-Change your `App.tsx` file as follows. This example uses ethere5, if you're using [a different provider](/developer-docs/irys-sdk/irys-in-the-browser#supported-providers) make sure to specify it when creating the `wallet`.
+Change your `App.tsx` file as follows. This example uses ethers6, if you're using [a different provider](/developer-docs/irys-sdk/irys-in-the-browser#supported-providers) make sure to specify it when creating the `wallet`.
 
 ```ts
 import "./App.css";
 import { useState } from "react";
-import { providers } from "ethers";
+import { ethers } from "ethers";
 import { WebIrys } from "@irys/sdk";
 
 function App() {
 	const [connectedAddress, setConnectedAddress] = useState<string>("");
 
 	const getWebIrys = async () => {
-		await window.ethereum.enable();
-		const provider = new providers.Web3Provider(window.ethereum);
+		let provider;
+		//@ts-ignore
+		if (window.ethereum == null) {
+			console.log("MetaMask not installed; using read-only defaults");
+			provider = ethers.getDefaultProvider();
+		} else {
+			//@ts-ignore
+			provider = new ethers.BrowserProvider(window.ethereum);
+		}
 		console.log("provider=", provider);
 		const network = "mainnet";
 		const token = "matic";
 
-		const wallet = { name: "ethersv5", provider: provider };
-		console.log("wallet=", wallet);
+		const wallet = { name: "ethersv6", provider: provider };
 		const webIrys = new WebIrys({ network, token, wallet });
-		console.log("webIrys=", webIrys);
 		await webIrys.ready();
-		setConnectedAddress(webIrys.address);
+		setConnectedAddress(webIrys.address!);
 	};
 
 	return (
@@ -94,16 +99,13 @@ export default defineConfig({
 			process: "process/browser",
 			path: "path-browserify",
 			os: "os-browserify",
+			stream: "stream-browserify",
 		},
 	},
 	plugins: [
 		react(),
 		nodePolyfills({
-			// To exclude specific polyfills, add them to this list.
-			exclude: [
-				"fs", // Excludes the polyfill for `fs` and `node:fs`.
-				"stream",
-			],
+			exclude: ["fs"],
 			// Whether to polyfill specific globals.
 			globals: {
 				Buffer: true,
