@@ -28,7 +28,7 @@ If you encounter this message when using our SDK or CLI, make sure you are suppl
 ```js
 const getIrys = async () => {
 	const network = "devnet";
-	const token = "matic";
+	const token = "ethereum";
 	// Devnet RPC URLs change often, use a recent one from https://chainlist.org/
 	const providerUrl = "";
 
@@ -71,7 +71,7 @@ const getWebIrys = async () => {
 	const provider = new providers.Web3Provider(window.ethereum);
 
 	const network = "devnet";
-	const token = "matic";
+	const token = "ethereum";
 	// Devnet RPC URLs change often, use a recent one from https://chainlist.org
 	const rpcUrl = ""; // Required for devnet
 
@@ -114,10 +114,10 @@ See [CLI documentation](/developer-docs/cli) for examples of how to use each com
 ```console
 irys upload myImage.png \
   -n devnet \
-  -t matic \
+  -t ethereum \
   -w bf20......c9885307 \
   --tags tagName1 tagValue1 tagName2 tagValue2 \
-  --provider-url https://rpc-mumbai.maticvigil.com
+  --provider-url https://rpc.sepolia.dev
 ```
 
 <Callout type="info" emoji="ℹ️">

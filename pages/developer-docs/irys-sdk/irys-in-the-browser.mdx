@@ -76,7 +76,7 @@ const getWebIrys = async () => {
 	const provider = new providers.Web3Provider(window.ethereum);
 
 	const network = "mainnet";
-	const token = "matic";
+	const token = "ethereum";
 	// Devnet RPC URLs change often, use a recent one from https://chainlist.org
 	const rpcUrl = "";
 
@@ -221,7 +221,7 @@ const w = wallets.at(0);
 // Then create a WebIrys object
 const getWebIrys = async () => {
 	const network = "devnet";
-	const token = "matic";
+	const token = "ethereum";
 
 	const provider = await w?.getEthersProvider();
 	if (!provider) throw new Error(`Cannot find privy wallet`);

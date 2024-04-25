@@ -12,7 +12,7 @@ Yes. Uploads below 100KiB are free. This is a public good for users to be encour
 
 Our [devnet](/developer-docs/using-devnet) is free to use. To mirror the DX of working on our mainnet, you'll need to fund it with free faucet tokens. You can use any EVM or Solana wallet, however, beginners will likely want to use either [Metamask](https://metamask.io/) for EVM chains and [Phantom](https://phantom.app/) for both Solana and EVM chains.
 
-Devnet tokens can be obtained for free from common faucets like the ones for [Solana](https://faucet.solana.com/), [Sepolia](https://sepoliafaucet.com/) and [Mumbai](https://mumbaifaucet.com/).
+Devnet tokens can be obtained for free from common faucets like the ones for [Solana](https://faucet.solana.com/ and [Sepolia](https://sepoliafaucet.com/).
 
 ## What is the difference between `Irys` and `WebIrys` classes?
 

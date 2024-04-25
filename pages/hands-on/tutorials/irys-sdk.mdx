@@ -37,7 +37,7 @@ In this tutorial you will learn how to use Irys with NodeJS to permanently store
 
 To use this tutorial, you will need:
 
-- A crypto wallet with a small amount of [Devnet tokens](https://mumbaifaucet.com/)
+- A crypto wallet with a small amount of [Devnet tokens](https://www.alchemy.com/faucets/ethereum-sepolia)
 - A recent version of [NodeJS](https://nodejs.org/)
 - A code editor ([VSCode](https://code.visualstudio.com/) or others)
 
@@ -93,7 +93,7 @@ Now create a file called `.env` in your main directory:
 touch .env
 ```
 
-And edit it to contain the private key of a wallet file that has been funded with free [MUMBAI MATIC](https://mumbaifaucet.com/).
+And edit it to contain the private key of a wallet file that has been funded with free [Sepolia tokens](https://www.alchemy.com/faucets/ethereum-sepolia).
 
 ```
 ETH_PRIVATE_KEY=________
@@ -108,7 +108,7 @@ const getIrys = async () => {
 	const network = "devnet";
 	// Devnet RPC URLs change often, use a recent one from https://chainlist.org/
 	const providerUrl = "";
-	const token = "matic";
+	const token = "ethereum";
 
 	const irys = new Irys({
 		network, // "mainnet" || "devnet"

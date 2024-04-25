@@ -44,7 +44,7 @@ The methods for supplying private keys differ for Ethereum and Solana compared t
 For Ethereum and Solana, specify the private key directly in the command line every time you execute a CLI command. Note that the CLI does not store the private key, it needs to be included with each command.
 
 ```console
-irys fund 1000000000000000 -t matic -w bf20......c9885307 -n mainnet
+irys fund 1000000000000000 -t ethereum -w bf20......c9885307 -n mainnet
 ```
 
 ### Arweave
@@ -70,7 +70,7 @@ irys -n devnet
 When connecting to Devnet, you must supply the additional `--provider-url` parameter.
 
 ```console
-irys -n devnet --provider-url https://rpc-mumbai.maticvigil.com
+irys -n devnet --provider-url https://rpc.sepolia.dev
 ```
 
 <Callout type="info" emoji="ℹ️">
@@ -82,7 +82,7 @@ irys -n devnet --provider-url https://rpc-mumbai.maticvigil.com
 Use the `fund` command to fund a node.
 
 ```console
-irys fund 1000000000000000 -n mainnet -t matic -w bf20......c9885307
+irys fund 1000000000000000 -n mainnet -t ethereum -w bf20......c9885307
 ```
 
 ## Withdrawing funds
@@ -90,7 +90,7 @@ irys fund 1000000000000000 -n mainnet -t matic -w bf20......c9885307
 Use the `withdraw` command to withdraw funds from a node.
 
 ```console
-irys withdraw 1000000000000000 -n mainnet -t matic -w bf20......c9885307
+irys withdraw 1000000000000000 -n mainnet -t ethereum -w bf20......c9885307
 ```
 
 ## Uploading a file
@@ -98,7 +98,7 @@ irys withdraw 1000000000000000 -n mainnet -t matic -w bf20......c9885307
 Use the `upload` command to upload a file.
 
 ```console
-irys upload myImage.png -n mainnet -t matic -w bf20......c9885307
+irys upload myImage.png -n mainnet -t ethereum -w bf20......c9885307
 ```
 
 ## Uploading a folder
@@ -106,7 +106,7 @@ irys upload myImage.png -n mainnet -t matic -w bf20......c9885307
 Use the `upload-dir` command to upload a folder.
 
 ```console
-irys upload-dir ./myImages -n mainnet -t matic -w bf20......c9885307
+irys upload-dir ./myImages -n mainnet -t ethereum -w bf20......c9885307
 ```
 
 ## Using tags
@@ -116,7 +116,7 @@ Use the `-t` option, followed by a series of name / value pairs to append metada
 Irys supports adding any optional [metadata tags](/developer-docs/tags) to each upload. When uploading files with a filename extension, the related [`Content-Type`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Type) (MIME type) tag is automatically added.
 
 ```console
-irys upload myImage.png -t tagName1 tagValue1 tagName2 tagValue2 -n mainnet -t matic -w bf20......c9885307
+irys upload myImage.png -t tagName1 tagValue1 tagName2 tagValue2 -n mainnet -t ethereum -w bf20......c9885307
 ```
 
 ## Pricing
@@ -124,5 +124,5 @@ irys upload myImage.png -t tagName1 tagValue1 tagName2 tagValue2 -n mainnet -t m
 Use the `price` command, followed by a number of bytes to get the cost to upload that number of bytes. You must also provide a token (`-t`) and a node URL (`-h`)
 
 ```console
-irys price 1000000 -t matic -n mainnet
+irys price 1000000 -t ethereum -n mainnet
 ```

@@ -80,7 +80,7 @@ Previously, you specified a node URL using the `-h` flag.
 ```console
 irys fund 1000000000000000 \
   -h https://node1.irys.xyz \
-  -t matic \
+  -t ethereum \
   -w bf20......c9885307
 ```
 
@@ -89,7 +89,7 @@ Now, you specify either `mainnet` or `devnet` using the `-n` flag.
 ```console
 irys fund 1000000000000000 \
   -n mainnet \
-  -t matic \
+  -t ethereum \
   -w bf20......c9885307
 ```
 
@@ -97,7 +97,7 @@ If you omit the `-n` flag, the CLI will default to mainnet.
 
 ```console
 irys fund 1000000000000000 \
-  -t matic \
+  -t ethereum \
   -w bf20......c9885307
 ```
 
@@ -127,7 +127,7 @@ Previously, when querying directly from the SDK, you used the `url()` method to 
 const result = await irys
 	.search("irys:transactions")
 	.url("https://node1.irys.xyz/graphql")
-	.token("matic")
+	.token("ethereum")
 	.fromTimestamp(new Date("2023-07-01"))
 	.toTimestamp(new Date("2023-07-03"));
 ```
@@ -138,7 +138,7 @@ And the `network()` method has been added.
 const result = await irys
 	.search("irys:transactions")
 	.network("mainnet") // "mainnet" || "devnet"
-	.token("matic")
+	.token("ethereum")
 	.fromTimestamp(new Date("2023-07-01"))
 	.toTimestamp(new Date("2023-07-03"));
 ```

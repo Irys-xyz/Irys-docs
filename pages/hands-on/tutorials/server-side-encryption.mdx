@@ -215,9 +215,9 @@ async function encryptData(dataToEncrypt) {
 To use Irys to store data on Arweave, first connect [Irys' mainnet or devnet](/overview/networks). This function uses the same private key from our `.env` file and connects to the Irys Devnet where uploads are stored for 60 days. In a production environment, you would change this to use Irys' [mainnet](/overview/networks) where uploads are permanent.
 
 <Callout type="info" emoji="ℹ️">
-	This code is configured to MATIC to pay for uploads, and while working with the Irys Devnet, you need to fund your
-	wallet with [free MUMBAI MATIC Devnet](https://mumbaifaucet.com/) tokens. Alternatively, you could use [any other
-	Devnet token](/overview/supported-tokens#devnet-tokens) supported by Irys.
+	This code is configured to Sepolia to pay for uploads, and while working with the Irys Devnet, you need to fund your
+	wallet with [free Sepolia](https://www.alchemy.com/faucets/ethereum-sepolia) tokens. Alternatively, you could use [any
+	other Devnet token](/overview/supported-tokens#devnet-tokens) supported by Irys.
 </Callout>
 
 ```js
@@ -225,7 +225,7 @@ async function getIrys() {
 	const network = "devnet";
 	// Devnet RPC URLs change often, use a recent one from https://chainlist.org/
 	const providerUrl = "";
-	const token = "matic";
+	const token = "ethereum";
 
 	const irys = new Irys({
 		network, // "mainnet" || "devnet"

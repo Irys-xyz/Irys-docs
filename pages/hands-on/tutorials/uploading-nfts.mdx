@@ -51,7 +51,7 @@ const getIrys = async () => {
 	const network = "devnet";
 	// Devnet RPC URLs change often, use a recent one from https://chainlist.org/
 	const providerUrl = "";
-	const token = "matic";
+	const token = "ethereum";
 	const privateKey = process.env.PRIVATE_KEY;
 
 	const irys = new Irys({
@@ -91,10 +91,10 @@ Alternatively, you can [upload](/developer-docs/cli/commands/upload) using our [
 ```console
 irys upload myNFT.png \
   -n devnet \
-  -t matic \
+  -t ethereum \
   -w bf20......c9885307 \
   --tags Content-Type image/png \
-  --provider-url https://rpc-mumbai.maticvigil.com
+  --provider-url https://rpc.sepolia.dev
 ```
 
 ## Creating metadata
@@ -126,7 +126,7 @@ const getIrys = async () => {
 	const network = "devnet";
 	// Devnet RPC URLs change often, use a recent one from https://chainlist.org/
 	const providerUrl = "";
-	const token = "matic";
+	const token = "ethereum";
 	const privateKey = process.env.PRIVATE_KEY;
 
 	const irys = new Irys({
@@ -168,8 +168,8 @@ Alternatively, you can [upload](/developer-docs/cli/commands/upload) using our [
 ```console
 irys upload metadata.json \
   -n devnet \
-  -t matic \
+  -t ethereum \
   -w bf20......c9885307 \
   --tags Content-Type application/json \
-  --provider-url https://rpc-mumbai.maticvigil.com
+  --provider-url https://rpc.sepolia.dev
 ```

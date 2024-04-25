@@ -24,7 +24,7 @@ Uploads a single file.
 
 ```console
 irys upload myImage.png \
-  -t matic \
+  -t ethereum \
   -w bf20......c9885307 \
   --tags tagName1 tagValue1 tagName2 tagValue2
 ```
@@ -34,10 +34,10 @@ irys upload myImage.png \
 ```console
 irys upload myImage.png \
   -n devnet \
-  -t matic \
+  -t ethereum \
   -w bf20......c9885307 \
   --tags tagName1 tagValue1 tagName2 tagValue2 \
-  --provider-url https://rpc-mumbai.maticvigil.com
+  --provider-url https://rpc.sepolia.dev
 ```
 
 <Callout type="info" emoji="ℹ️">
@@ -51,7 +51,7 @@ Files uploaded via `irys upload` can be downloaded using the transaction ID prov
 ```console
 irys upload myImage.png \
   -n mainnet \
-  -t matic \
+  -t ethereum \
   -w bf20......c9885307 \
   --tags tagName1 tagValue1 tagName2 tagValue2
 

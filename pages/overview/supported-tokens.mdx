@@ -58,7 +58,6 @@ On [Devnet](/developer-docs/using-devnet), you can pay for uploads in any of the
 | Base Ethereum (Sepolia)   | ETH   | base-eth        | yes            | yes               |
 | Scroll Ethereum (Sepolia) | ETH   | scroll-eth      | yes            | yes               |
 | Near                      | NEAR  | near            | yes            | yes               |
-| Polygon (Mumbai)          | MATIC | matic           | yes            | yes               |
 | Polygon (Amoy)            | AMOY  | matic           | yes            | yes               |
 | Solana                    | SOL   | solana          | yes            | yes               |
 | USDC (on Ethereum)        | USDC  | usdc-eth        | yes            | yes               |
@@ -75,7 +74,7 @@ const getIrys = async () => {
 	const network = "devnet";
 	// Devnet RPC URLs change often, use a recent one from https://chainlist.org/
 	const providerUrl = "";
-	const token = "matic";
+	const token = "ethereum";
 
 	const irys = new Irys({
 		network, // "mainnet" || "devnet"

@@ -56,7 +56,7 @@ For example, this will throw an error:
 
 ```js
 const getIrys = async () => {
-	const token = "matic";
+	const token = "ethereum";
 
 	const irys = new Irys({
 		network: "devnet",
@@ -71,8 +71,8 @@ But this will not:
 
 ```js
 const getIrys = async () => {
-	const token = "matic";
-	const providerUrl = "https://rpc-mumbai.maticvigil.com";
+	const token = "ethereum";
+	const providerUrl = "https://rpc.sepolia.dev";
 
 	const irys = new Irys({
 		network: "devnet",
@@ -92,7 +92,7 @@ As RPC URLs change frequently, users should always choose an up-to-date one from
 
 This error occurs when you try to upload to a node without first funding it. This applies to both Nodes 1 and 2 where you can pay using any our supported [mainnet tokens](/overview/supported-tokens#mainnet-tokens) and our devnet node where you can pay using any of our supported [devnet tokens](/overview/supported-tokens#devnet-tokens).
 
-Devnet tokens can be obtained for free from common faucets like the ones for [Solana](https://faucet.solana.com/), [Sepolia](https://sepoliafaucet.com/) and [Mumbai](https://mumbaifaucet.com/).
+Devnet tokens can be obtained for free from common faucets like the ones for [Solana](https://faucet.solana.com/) and [Sepolia](https://sepoliafaucet.com/).
 
 ## Blockhash not found
 

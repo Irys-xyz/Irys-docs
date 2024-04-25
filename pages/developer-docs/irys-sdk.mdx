@@ -83,7 +83,7 @@ const getIrys = async () => {
 	const network = "mainnet";
 	// Devnet RPC URLs change often, use a recent one from https://chainlist.org/
 	const providerUrl = "";
-	const token = "matic";
+	const token = "ethereum";
 
 	const irys = new Irys({
 		network, // "mainnet" or "devnet"
@@ -215,7 +215,7 @@ For more details on all search functions, see [query package documentation](/dev
 const result = await irys
 	.search("irys:transactions")
 	.network("mainnet")
-	.token("matic")
+	.token("ethereum")
 	.fromTimestamp(new Date("2023-07-01"))
 	.toTimestamp(new Date("2023-07-03"));
 ```
