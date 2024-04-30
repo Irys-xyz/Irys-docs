@@ -10,11 +10,11 @@ Balance approvals allow for the sharing of balances between multiple addresses. 
 
 Balance approvals:
 
--   Are non-transferable.
--   Can be configured to expire automatically.
--   Are based on the token set when connecting to an Irys node. Both approver and approvee must use the same
-    token.
--   Are registered instantly upon upload completion.
+- Are based on the token set when connecting to an Irys node. Both approver and approvee must use the same
+  token.
+- Are registered instantly upon upload completion.
+- Are non-transferable.
+- Can be configured to expire automatically.
 
 ## Create an approval
 
@@ -40,6 +40,61 @@ const revocationReceipt = await irys.approval.revokeApproval({ approvedAddress: 
 
 ## Get remaining approval balance & and expiration date
 
+This is used by people who received an approval.
+How much balance am I approved for by payingAddress.
+
 ```ts
-const approval = await irys.approval.getApprovedBalance({ approvedAddress: "address" });
+const approvedBalance = await irys.approval.getApprovalFromCurrentAccount({
+	payingAddress: "address",
+});
+```
+
+This is used by people who issued an approval.
+How much balance have I approved for approvedAddress.
+
+```ts
+const approvedBalance = await irys.approval.getApprovals({
+	createdAddress: "address",
+	receivedAddress: "address",
+});
+```
+
+```ts
+const approvedBalance = await irys.approval.getCreatedApprovals();
+```
+
+```json
+{
+	"addresss": "balance",
+	"addresss": "balance",
+	"addresss": "balance",
+	"addresss": "balance"
+}
+```
+
+```ts
+const approvedBalance = await irys.approval.getReceivedApprovals();
+```
+
+```json
+{
+	"addresss": "balance",
+	"addresss": "balance",
+	"addresss": "balance",
+	"addresss": "balance"
+}
+```
+
+You can also request the same information from our HTTP endpoint:
+
+Devnet:
+
+```
+https://arweave.devnet.irys.xyz/account/approval?payingAddress=<...>&token=<...>&approvedAddress=<...>
+```
+
+Mainnet:
+
+```
+https://arweave.mainnet.irys.xyz/account/approval?payingAddress=<...>&token=<...>&approvedAddress=<...>
 ```
