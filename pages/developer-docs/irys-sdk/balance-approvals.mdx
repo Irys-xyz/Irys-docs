@@ -21,7 +21,7 @@ Balance approvals:
 ```ts
 const approvalReceipt = await irys.approval.createApproval({
 	amount: irys.utils.toAtomic(1), // Amount in atomic units
-	approvedAddress: "address",
+	approvedAddress: "",
 	expiresInSeconds: 100, // Expires in 100 seconds. Delete to remove expiration.
 });
 ```
@@ -38,54 +38,53 @@ const approvedReceipt = await irys.upload("GM World", { upload: { paidBy: "payer
 const revocationReceipt = await irys.approval.revokeApproval({ approvedAddress: "address" });
 ```
 
-## Get remaining approval balance & and expiration date
-
-This is used by people who received an approval.
-How much balance am I approved for by payingAddress.
+## Get balances the connected Irys account is approved for
 
 ```ts
-const approvedBalance = await irys.approval.getApprovalFromCurrentAccount({
-	payingAddress: "address",
+const approvals = await irys.approval.getApprovals({
+	payingAddresses: [],
 });
 ```
 
-This is used by people who issued an approval.
-How much balance have I approved for approvedAddress.
+Return type:
 
 ```ts
-const approvedBalance = await irys.approval.getApprovals({
-	createdAddress: "address",
-	receivedAddress: "address",
+{
+	amount: string; // Amount approved in atomic units
+	payingAddress: string; // Address of the payer's wallet
+	approvedAddress: string; // Address of the wallet that received the approval
+	expiresBy: number; // Timestamp (in milliseconds) when approval expires
+	timestamp: number; // Timestamp (in milliseconds) when the approval was created
+	token: string; // Approved token
+}
+[];
+```
+
+## Get balances the connected Irys account has created
+
+```ts
+const createdApprovals = irys.approval.getCreatedApprovals({
+	approvedAddresses: [],
 });
 ```
 
-```ts
-const approvedBalance = await irys.approval.getCreatedApprovals();
-```
-
-```json
-{
-	"addresss": "balance",
-	"addresss": "balance",
-	"addresss": "balance",
-	"addresss": "balance"
-}
-```
+Return type:
 
 ```ts
-const approvedBalance = await irys.approval.getReceivedApprovals();
-```
-
-```json
 {
-	"addresss": "balance",
-	"addresss": "balance",
-	"addresss": "balance",
-	"addresss": "balance"
+	amount: string; // Amount approved in atomic units
+	payingAddress: string; // Address of the payer's wallet
+	approvedAddress: string; // Address of the wallet that received the approval
+	expiresBy: number; // Timestamp (in milliseconds) when approval expires
+	timestamp: number; // Timestamp (in milliseconds) when the approval was created
+	token: string; // Approved token
 }
+[];
 ```
 
-You can also request the same information from our HTTP endpoint:
+## Get balance approvals via HTTP
+
+You can also request balance approvals from our HTTP endpoint:
 
 Devnet:
 
