@@ -10,5 +10,7 @@
 	"chunked-uploader": "Chunked uploader",
 	"ipfs-cid": "Using IPFS CIDs",
 	"manual-transaction": "Manually creating a Tx",
-	"balance-approvals": "Balance approvals"
+	"balance-approvals": {
+		"display": "hidden"
+	}
 }
