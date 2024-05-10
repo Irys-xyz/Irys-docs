@@ -103,6 +103,23 @@ WebIrys supports the following providers. When instantiating a new `WebIrys` obj
 | [Solana](https://solana.com/)           | solana          |
 | [Viem v2](https://viem.sh/)             | viemv2          |
 
+### Aptos
+
+```ts
+const aptosConfig = new AptosConfig({ network: Network.TESTNET });
+const aptos = new Aptos(aptosConfig);
+const aptosWallet = useWallet();
+
+const getWebIrys = async () => {
+	const network = "devnet";
+	const token = "aptos";
+	const rpcUrl = "testnet"; // "mainnet" || "testnet"
+	const wallet = { rpcUrl: rpcUrl, name: "aptos", provider: aptosWallet };
+	const webIrys = new WebIrys({ network, token, wallet });
+	await webIrys.ready();
+};
+```
+
 ### Solana React Hooks
 
 When working with the Solana React hooks, start by wrapping your components in the Solana `ConnectionProvider` `WalletProvider` and `WalletModalProvider` providers.
