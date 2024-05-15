@@ -106,8 +106,6 @@ WebIrys supports the following providers. When instantiating a new `WebIrys` obj
 ### Aptos
 
 ```ts
-const aptosConfig = new AptosConfig({ network: Network.TESTNET });
-const aptos = new Aptos(aptosConfig);
 const aptosWallet = useWallet();
 
 const getWebIrys = async () => {
@@ -117,6 +115,8 @@ const getWebIrys = async () => {
 	const wallet = { rpcUrl: rpcUrl, name: "aptos", provider: aptosWallet };
 	const webIrys = new WebIrys({ network, token, wallet });
 	await webIrys.ready();
+
+	return webIrys;
 };
 ```
 
