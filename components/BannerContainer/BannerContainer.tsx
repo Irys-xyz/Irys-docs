@@ -30,31 +30,31 @@ const Banner: React.FC<BannerProps> = ({ href, backgroundImage, title, sub, back
 
 const banners = [
 	{
-		href: "/overview/about",
-		backgroundImage: "./img/data-donuts.webp",
-		title: "About Irys",
-		sub: "Dive in and learn about Irys",
-		backgroundPosition: "-40% -10%",
-	},
-	{
-		href: "/developer-docs/querying/query-package",
-		backgroundImage: "./img/dots-cloud.png",
-		title: "Query package",
-		sub: "Easily search Irys & Arweave",
-		backgroundPosition: "40% -20%",
-	},
-	{
-		href: "/developer-docs/irys-sdk",
+		href: "/irys-sdk",
 		backgroundImage: "./img/data-exponential.webp",
 		title: "Irys SDK",
 		sub: "Frictionless integration with 3 lines of code",
+		backgroundPosition: "-40% -10%",
+	},
+	{
+		href: "/querying",
+		backgroundImage: "./img/dots-cloud.png",
+		title: "Querying",
+		sub: "Easily search transaction metadata",
+		backgroundPosition: "40% -20%",
+	},
+	{
+		href: "/irys-cli",
+		backgroundImage: "./img/data-exponential.webp",
+		title: "Irys CLI",
+		sub: "Permanent data from your CLI",
 		backgroundPosition: "-80% 100%",
 	},
 	{
-		href: "/developer-docs/provenance-toolkit",
+		href: "/tutorials",
 		backgroundImage: "./img/data-spiral.webp",
-		title: "Provenance Toolkit",
-		sub: "UI components to kickstart your project",
+		title: "Guides & Tutorials",
+		sub: "Start your learning journey here",
 		backgroundPosition: "40% -10%",
 	},
 ];

@@ -19,12 +19,15 @@
 	"test2": {
 		"display": "hidden"
 	},
+	"OLD": {
+		"display": "hidden"
+	},
 	"overview": "OVERVIEW",
-	"developer-docs": "DEVELOPER DOCS",
-	"hands-on": "HANDS ON",
-	"learn": "IRYS 101",
-	"terminology": "TERMINOLOGY",
-	"faqs": "FAQs",
+	"irys-sdk": "SDK",
+	"cli": "CLI",
+	"querying": "QUERYING",
+	"tutorials": "GUIDES & TUTORIALS",
+	"repositories": "REPOSITORIES",
 	"twitter": {
 		"title": "Twitter",
 		"href": "https://twitter.irys.xyz",

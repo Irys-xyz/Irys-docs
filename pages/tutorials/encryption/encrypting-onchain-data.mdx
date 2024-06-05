@@ -1,0 +1,81 @@
+---
+description: Using Lit Protocol to encrypt on-hain data with Irys and Arweave
+---
+
+import { Callout } from "nextra-theme-docs";
+
+# Encrypting onchain data
+
+Data uploaded to Irys is stored permanently on Arweave. Once on Arweave, this data becomes publicly accessible, anyone can view it. For projects where privacy is a concern, you can use [LitProtocol](https://litprotocol.com/) to encrypt your data before storing it on Irys.
+
+This guide is an overview of what Lit Protocol is and how to use it with Irys. We also have code examples teaching how to do [server-side](./server-side-encryption) and [browser-based encryption](./browser-based-encryption).
+
+## Lit Protocol
+
+Lit Protocol enables developers to create and manage decentralized keys for condition-based encryption and programmatic signing for digital assets. In short, you can use it to:
+
+- Encrypt data
+- Define fine-grained access rules for who can decrypt data
+- Decrypt data
+
+Encrypted data can be stored on Irys, then retrieved and decrypted at any point in the future.
+
+## Irys + Lit use cases
+
+Using Lit Protocol with Irys opens up new opportunities for builders, including:
+
+- Gating access to content
+- Encrypting posts for [Lens protocol](/tutorials/lens)
+- Decentralized identity verification
+- Creating private data marketplaces
+- Creating NFTs only viewable by their owner
+- Storing private personal data on-chain
+
+<Callout type="info" emoji="ℹ️">
+	Using Lit Protocol, the access control conditions provide near infinite flexibility. Imagine a system for government
+	bid management: bids are required to be submitted by a specific deadline, tracked using Irys' millisecond-accurate
+	timestamps. The bids remain encrypted up to this deadline, aiding in preventing corruption by ensuring the bids are
+	inaccessible to all parties until the designated time.
+</Callout>
+
+## Encrypting data
+
+<img
+	className="border border-[#FEF4EE] rounded mt-5 lg:w-5/6 w-full"
+	src="/img/tutorials/encrypting/irys-lit-encrypting.png"
+/>
+There are three steps to encrypting data
+
+- Obtain a wallet signature ([AuthSig](https://developer.litprotocol.com/v3/sdk/authentication/overview#obtain-an-authsig)), which proves you own a wallet
+- Define [access control conditions](https://developer.litprotocol.com/v3/sdk/access-control/intro) for who can decrypt your data
+- Connect to a Lit node and request that it encrypt your data
+
+### Access control conditions
+
+Lit Protocol enables users to set [access control conditions](https://developer.litprotocol.com/v3/sdk/access-control/intro) specifying who can decrypt data.
+
+This provides builders with the flexibility to designate data decryption permissions, including:
+
+- A single wallet address
+- DAO membership
+- Owners of an ERC20 or ERC721
+- Outcomes from a smart contract call
+- Outcomes from an API call
+
+## Decrypting data
+
+<img
+	className="border border-[#FEF4EE] rounded mt-5 lg:w-5/6 w-full"
+	src="/img/tutorials/encrypting/irys-lit-decrypting.png"
+/>
+
+There are three steps to decrypting data:
+
+- Obtain a wallet signature ([AuthSig](https://developer.litprotocol.com/v3/sdk/authentication/overview#obtain-an-authsig)), which proves you own a wallet
+- Retrieve data stored on Arweave
+- Connect to a Lit node and request that it decrypt your data
+
+## Code examples
+
+- [Server-side encryption](./server-side-encryption)
+- [Browser-based encryption](./browser-based-encryption)

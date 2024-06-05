@@ -2,53 +2,35 @@
 description: Unlock the full potential of Irys' technology with our developer resources.
 ---
 
-import Heading from "../../components/Heading";
-import SectionTitle from "../../components/SectionTitle";
+import Heading from "@/components/Heading";
+import SectionTitle from "@/components/SectionTitle";
 
-# About Irys
+# Irys developer tools for Arweave
 
-<div
-	className="video mt-5 -mb-10"
-	style={{
-		position: "relative",
-		paddingBottom: "56.25%" /* 16:9 */,
-		paddingTop: 25,
-		height: 0,
-	}}
->
-	<iframe
-		style={{
-			position: "absolute",
-			top: 0,
-			left: 0,
-			width: "80%",
-			height: "80%",
-		}}
-		src={`https://www.youtube.com/embed/8CuS7aJJShU`}
-		frameBorder="0"
-	/>
+Irys maintains a suite of developer tools for building on Arweave.
+
+<div className="flex flex-col mt-10">
+
+<div className="text-xl">[**Irys SDK**](/irys-sdk)</div>
+<div>Permanent data using only three lines of code with our SDK.</div>
+
+<div className="text-xl mt-5">[**CLI**](/cli)</div>
+
+<div>Permanent data from your CLI.</div>
+
+<div className="text-xl mt-5">[**Irys query package**](/querying/query-package)</div>
+
+<div>Query transactions using our JavaScript package.</div>
+
+<div className="text-xl mt-5">[**Arweave package**](https://github.com/Irys-xyz/arweave)</div>
+
+<div>
+	A fork of [arweave-js](https://github.com/ArweaveTeam/arweave-js) that introduces better typing, increased NodeJS
+	compatibility, and better support for using streams.
 </div>
 
-Irys is the only provenance layer. It enables users to scale permanent data and precisely attribute its origin.
+<div className="text-xl mt-5">[**Explorer**](https://explorer.irys.xyz/)</div>
 
-A provenance layer is a ledger of record for digital information, tracking the origins and modifications of data.
+<div className="">A transaction explorer and analytics platform for Irys.</div>
 
-Data [uploaded to Irys](/learn/transaction-lifecycle) is permanent, precise, and unconstrained.
-
-- <p className="font-bold">Permanent</p>
-  Data stored on Irys is [censorship-resistant and immutable, forever](/overview/permanent-data). There's no counterparty
-  risk of data being removed.
-
-- <p className="font-bold">Precise</p>
-  Each piece of data is [timestamped with a high-precision timestamp](/learn/receipts), providing a reliable sequence of
-  events.
-
-- <p className="font-bold">Unconstrained</p>
-  Users can always read, write, and easily discover data at any scale, making the data fully composable. Irys is permissionless
-  and offers limitless permanent data, enabling it to provide provenance for all information.
-
-All uploads to Irys are verifiable. After uploading data, you’re given a receipt that can be used by anyone to [verify](/learn/receipts) the data’s provenance at any time.
-
-## Building with Irys
-
-Irys' [developer tools](/overview/tools) make it easy to add permanent data with strong provenance to your projects.
+</div>

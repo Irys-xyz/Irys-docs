@@ -1,0 +1,359 @@
+---
+description: How to encrypt data before storing onchain (server-side edition)
+---
+
+import { Callout } from "nextra-theme-docs";
+
+# Encrypting onchain data (server-side)
+
+This guide teaches you how to:
+
+- Encrypt data using [Lit Protocol](https://litprotocol.com/)
+- Establish a set of rules determining who can decrypt the data
+- Store encrypted data on Arweave using Irys
+- Decrypt data using Lit Protocol
+
+Before diving into this guide, begin with ["Encrypting onchain data"](/tutorials/encrypting-onchain-data).
+
+All of the code from this guide is also contained in [GitHub repository](https://github.com/irys-xyz/irys-lit).
+
+## Dependencies
+
+Install using npm:
+
+```console
+npm install @irys/sdk @lit-protocol/lit-node-client-nodejs@^3 dotenv ethers@^5 siwe@^2.1.4
+```
+
+or yarn:
+
+```console
+yarn add @irys/sdk @lit-protocol/lit-node-client-nodejs@^3 dotenv ethers@^5 siwe@^2.1.4
+```
+
+## Imports
+
+```js
+import * as LitJsSdk from "@lit-protocol/lit-node-client";
+import Irys from "@irys/sdk";
+import { ethers } from "ethers";
+import siwe from "siwe";
+import dotenv from "dotenv";
+dotenv.config();
+```
+
+## Encrypting data
+
+### Wallet signature
+
+A wallet signature (`AuthSig`) proves ownership of a wallet. By signing a basic transaction, regardless of its contents, you verify access to the wallet.
+
+First, create a file called `.env` with a single value, and include your private key.
+
+```json
+PRIVATE_KEY=
+```
+
+Then, create a helper function that creates a message and signs it using your private key.
+
+<Callout type="info" emoji="ℹ️">
+	Lit Protocol supports both wallet signatures and [session
+	signatures](https://developer.litprotocol.com/v3/sdk/authentication/session-sigs/intro). This guide focuses solely on
+	wallet signatures, as session signatures are currently in development and only available for Ethereum.
+</Callout>
+
+```js
+async function getAuthSig() {
+	const litNodeClient = await getLitNodeClient();
+
+	let nonce = litNodeClient.getLatestBlockhash();
+
+	// Initialize the signer
+	const wallet = new ethers.Wallet(process.env.PRIVATE_KEY);
+	const address = ethers.getAddress(await wallet.getAddress());
+
+	// Craft the SIWE message
+	const domain = "localhost";
+	const origin = "https://localhost/login";
+	const statement = "This is a test statement.  You can put anything you want here.";
+
+	// expiration time in ISO 8601 format.  This is 7 days in the future, calculated in milliseconds
+	const expirationTime = new Date(Date.now() + 1000 * 60 * 60 * 24 * 7).toISOString();
+
+	const siweMessage = new siwe.SiweMessage({
+		domain,
+		address: address,
+		statement,
+		uri: origin,
+		version: "1",
+		chainId: 1,
+		nonce,
+		expirationTime,
+	});
+	const messageToSign = siweMessage.prepareMessage();
+
+	// Sign the message and format the authSig
+	const signature = await wallet.signMessage(messageToSign);
+
+	const authSig = {
+		sig: signature,
+		derivedVia: "web3.eth.personal.sign",
+		signedMessage: messageToSign,
+		address: address,
+	};
+
+	return authSig;
+}
+```
+
+### Access control conditions
+
+Define [rules for who to decrypt your data](https://developer.litprotocol.com/v3/sdk/access-control/intro), limiting it to anyone with `>= 0` ETH:
+
+```ts
+// This defines who can decrypt the data
+function getAccessControlConditions() {
+	const accessControlConditions = [
+		{
+			contractAddress: "",
+			standardContractType: "",
+			chain: "ethereum",
+			method: "eth_getBalance",
+			parameters: [":userAddress", "latest"],
+			returnValueTest: {
+				comparator: ">=",
+				value: "0000000000000", // 0 ETH, so anyone can open
+			},
+		},
+	];
+
+	return accessControlConditions;
+}
+```
+
+To the wallet `0x50e2dac5e78B5905CB09495547452cEE64426db2`
+
+```js
+const accessControlConditions = [
+	{
+		contractAddress: "",
+		standardContractType: "",
+		chain,
+		method: "",
+		parameters: [":userAddress"],
+		returnValueTest: {
+			comparator: "=",
+			value: "0x50e2dac5e78B5905CB09495547452cEE64426db2",
+		},
+	},
+];
+```
+
+Or by people who hold a given ERC721:
+
+```js
+const accessControlConditions = [
+	{
+		contractAddress: "0xA80617371A5f511Bf4c1dDf822E6040acaa63e71",
+		standardContractType: "ERC721",
+		chain,
+		method: "balanceOf",
+		parameters: [":userAddress"],
+		returnValueTest: {
+			comparator: ">",
+			value: "0",
+		},
+	},
+];
+```
+
+### Connecting to a Lit node
+
+Next, connect to a Lit node:
+
+```js
+async function getLitNodeClient() {
+	// Initialize LitNodeClient
+	const litNodeClient = new LitJsSdk.LitNodeClientNodeJs({
+		alertWhenUnauthorized: false,
+		litNetwork: "cayenne",
+	});
+	await litNodeClient.connect();
+
+	return litNodeClient;
+}
+```
+
+### Encrypt data
+
+Finally, write a function that encrypts a string. In this guide we're using the Lit function [`encryptString()`](https://lit-js-sdk-v3-api-docs.vercel.app/functions/encryption_src.encryptString.html) which encrypts a string and returns both the encrypted string and a hash of the original string. Lit also has [`encryptFile()`](https://lit-js-sdk-v3-api-docs.vercel.app/functions/encryption_src.encryptFile.html) for encrypting files directly.
+
+```js
+async function encryptData(dataToEncrypt) {
+	const authSig = await getAuthSig();
+	const accessControlConditions = getAccessControlConditions();
+	const litNodeClient = await getLitNodeClient();
+
+	// 1. Encryption
+	// <Blob> encryptedString
+	// <Uint8Array(32)> dataToEncryptHash
+	const { ciphertext, dataToEncryptHash } = await LitJsSdk.encryptString(
+		{
+			authSig,
+			accessControlConditions,
+			dataToEncrypt: dataToEncrypt,
+			chain: "ethereum",
+		},
+		litNodeClient,
+	);
+	return [ciphertext, dataToEncryptHash];
+}
+```
+
+## Storing on Arweave via Irys
+
+To use Irys to store data on Arweave, first connect [Irys' mainnet or devnet](/overview/networks). This function uses the same private key from our `.env` file and connects to the Irys Devnet where uploads are stored for 60 days. In a production environment, you would change this to use Irys' [mainnet](/overview/networks) where uploads are permanent.
+
+<Callout type="info" emoji="ℹ️">
+	This code is configured to Sepolia to pay for uploads, and while working with the Irys Devnet, you need to fund your
+	wallet with [free Sepolia](https://www.alchemy.com/faucets/ethereum-sepolia) tokens. Alternatively, you could use [any
+	other Devnet token](/overview/supported-tokens#devnet-tokens) supported by Irys.
+</Callout>
+
+```js
+async function getIrys() {
+	const network = "devnet";
+	// Devnet RPC URLs change often, use a recent one from https://chainlist.org/
+	const providerUrl = "";
+	const token = "ethereum";
+
+	const irys = new Irys({
+		network, // "mainnet" || "devnet"
+		token, // Token used for payment
+		key: process.env.PRIVATE_KEY, // Private key
+		config: { providerUrl }, // Optional provider URL, only required when using Devnet
+	});
+	return irys;
+}
+```
+
+Then, write a function that takes the encrypted data, the original data hash, and the access control conditions, and stores it all on Arweave using Irys. Irys' upload function returns a signed receipt containing the exact time (in milliseconds) of the upload and also a transaction ID, which can then be used to [download the data from a gateway](/downloading).
+
+<Callout type="info" emoji="ℹ️">
+	For simplicity, we'll consolidate all three values into a JSON object and upload it to Irys in one transaction. This
+	is a design choice; you have the flexibility to store these values as you see fit in your own implementation.
+</Callout>
+
+```js
+async function storeOnIrys(cipherText, dataToEncryptHash) {
+	const irys = await getIrys();
+
+	const dataToUpload = {
+		cipherText: cipherText,
+		dataToEncryptHash: dataToEncryptHash,
+		accessControlConditions: getAccessControlConditions(),
+	};
+
+	let receipt;
+	try {
+		const tags = [{ name: "Content-Type", value: "application/json" }];
+		receipt = await irys.upload(JSON.stringify(dataToUpload), { tags: tags });
+	} catch (e) {
+		console.log("Error uploading data ", e);
+	}
+
+	return receipt?.id;
+}
+```
+
+## Decrypting data
+
+### Retrieving data from Arweve using the Irys gateway
+
+To download data stored on Arweave, connect to a [gateway](/overview/gateways) and request the data using your transaction ID.
+
+This function downloads the data JSON object, parses out the three values and returns them as an array of strings.
+
+```js
+async function retrieveFromIrys(id) {
+	const gatewayAddress = "https://gateway.irys.xyz/";
+	const url = `${gatewayAddress}${id}`;
+
+	try {
+		const response = await fetch(url);
+
+		if (!response.ok) {
+			throw new Error(`Failed to retrieve data for ID: ${id}`);
+		}
+
+		const data = await response.json();
+		return [data.cipherText, data.dataToEncryptHash, data.accessControlConditions];
+	} catch (e) {
+		console.log("Error retrieving data ", e);
+	}
+}
+```
+
+### Decrypting data
+
+Finally, we decrypt the data using Lit's [`decryptString()`](https://lit-js-sdk-v3-api-docs.vercel.app/functions/encryption_src.encryptString.html) function.
+
+```js
+async function decryptData(ciphertext, dataToEncryptHash, accessControlConditions) {
+	const authSig = await getAuthSig();
+	const litNodeClient = await getLitNodeClient();
+
+	let decryptedString;
+	try {
+		decryptedString = await LitJsSdk.decryptToString(
+			{
+				authSig,
+				accessControlConditions,
+				ciphertext,
+				dataToEncryptHash,
+				chain: "ethereum",
+			},
+			litNodeClient,
+		);
+	} catch (e) {
+		console.log(e);
+	}
+
+	return decryptedString;
+}
+```
+
+## Main function
+
+Now write a `main()` function that calls the calls our encrypt, store and decrypt code.
+
+```js
+async function main() {
+	const messageToEncrypt = "Irys + Lit is 🔥x2";
+
+	// 1. Encrypt data
+	const [cipherText, dataToEncryptHash] = await encryptData(messageToEncrypt);
+
+	// 2. Store cipherText and dataToEncryptHash on Irys
+	const encryptedDataID = await storeOnIrys(cipherText, dataToEncryptHash);
+
+	console.log(`Data stored at https://gateway.irys.xyz/${encryptedDataID}`);
+
+	// 3. Retrieve data stored on Irys
+	// In real world applications, you could wait any amount of time before retrieving and decrypting
+	const [cipherTextRetrieved, dataToEncryptHashRetrieved, accessControlConditions] = await retrieveFromIrys(
+		encryptedDataID,
+	);
+	// 4. Decrypt data
+	const decryptedString = await decryptData(cipherTextRetrieved, dataToEncryptHashRetrieved, accessControlConditions);
+	console.log("decryptedString:", decryptedString);
+}
+
+main();
+```
+
+You can also [access the code as a single file in GitHub](https://github.com/Irys-xyz/irys-lit/blob/main/scripts/lit-irys.js).
+
+## Browser-based example
+
+- [Browser-based encryption](./browser-based-encryption)

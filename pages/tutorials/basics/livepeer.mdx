@@ -1,0 +1,56 @@
+---
+description: Using Livepeer to transcode video stored on Arweave
+---
+
+# Using Livepeer to transcode video
+
+Livepeer is a decentralized video protocol for transcoding video content. For projects involving both live and recorded video, Livepeer combined with Irys allows you to optimize video delivery for each unique client.
+
+## Transcoding
+
+Transcoding is the process of converting between video file format types. When streaming video, it's important as it allows you to optimize video delivery based on factors such as a client's device size, preferences and the quality of their internet connection. This allows you to upload a high-resolution 4K video file, and then deliver formats optimized for TV streaming, tablets and mobile. You can even allow clients to specify lower-quality formats to help economize bandwidth charges.
+
+## Setup
+
+To get started, you'll need to create an [API key first](https://docs.livepeer.org/guides/developing/quickstart).
+
+If you're working with React, you can install the Livepeer React SDK with:
+
+```console
+npm @livepeer/react
+```
+
+## Transcoding a video stored on Arweave
+
+Video files can be uploaded to Arweave via Irys using our [CLI,](/cli) or [SDK](/irys-sdk).
+
+Using the `<Player>` tag from the Livepeer SDK you can embed an Arweave URL, the URL format can be either `ar://aqvPK_xi-EDcmAHPAPpDcaYyGekp-06T16ElvNTnJNk` or `https://gateway.irys.xyz/aqvPK_xi-EDcmAHPAPpDcaYyGekp-06T16ElvNTnJNk`. The first time Livepeer encounters the URL it will transcode the file, the transcoded versions are then stored in an account tied to your API key. Transcoded files are kept for as long as your account is active.
+
+```js
+<Player title="Irys SDK For NodeJS" src="ar://aqvPK_xi-EDcmAHPAPpDcaYyGekp-06T16ElvNTnJNk" autoPlay muted />
+```
+
+In order to properly transcode your video, the `<Player>` component must have access to a Livepeer client that contains a valid API key. Best practice is to use the provider pattern and the `<LivepeerConfig>` component.
+
+For example, to make the client available to all child components in your app, you would structure your `index.js` file as follows.
+
+```js
+import React from "react";
+import ReactDOM from "react-dom/client";
+import "./index.css";
+import App from "./App";
+import { LivepeerConfig, createReactClient, studioProvider } from "@livepeer/react";
+
+const livepeerClient = createReactClient({
+	provider: studioProvider({
+		apiKey: process.env.LIVEPEER_API_KEY,
+	}),
+});
+
+const root = ReactDOM.createRoot(document.getElementById("root"));
+root.render(
+	<LivepeerConfig client={livepeerClient}>
+		<App />
+	</LivepeerConfig>,
+);
+```

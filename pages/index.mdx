@@ -3,15 +3,15 @@ title: Docs
 description: Unlock the full potential of Irys’ technology with our developer resources. Start building on Irys today!
 ---
 
-import BannerContainer from "../components/BannerContainer";
-import Heading from "../components/Heading";
-import HomeWhyUseIrys from "../components/HomeWhyUseIrys";
-import HomeProduct from "../components/HomeProduct";
-import Button from "../components/Button";
-import SectionTitle from "../components/SectionTitle";
+import BannerContainer from "@/components/BannerContainer";
+import Heading from "@/components/Heading";
+import HomeWhyUseIrys from "@/components/HomeWhyUseIrys";
+import HomeProduct from "@/components/HomeProduct";
+import Button from "@/components/Button";
+import SectionTitle from "@/components/SectionTitle";
 import Link from "next/link";
 import Highlight from "react-highlight";
-import Video from "../components/Video";
+import Video from "@/components/Video";
 
 <style jsx>
 	{`
@@ -45,13 +45,12 @@ import Video from "../components/Video";
 />
 
 <header className="px-4 lg:px-[79px] py-14">
-  <Heading level={1} className="text-white font-fkDisplay">
-    Irys Docs
+  <Heading level={2} className="text-white font-fkDisplay">
+    Irys Developer Tools For Arweave
   </Heading>
 
   <p className="font-backup font-satoshi leading-loose mt-6">
-    Unlock the full potential of Irys' technology with our developer
-    resources
+    High-performance tools for building on Arweave
   </p>
 </header>
 
@@ -75,165 +74,3 @@ const receipt = await irys.uploadFile("./myImage.png");`}
 
 </div>
 </div>
-
-<HomeProduct
-	title={"Overview"}
-	items={[
-		{
-			id: 0,
-			title: "About",
-			description: "Unlock the potential of Irys' technology",
-			href: "/overview/about",
-		},
-		{
-			id: 1,
-			title: "Permanent data",
-			description: "Performant and scalable – forever",
-			href: "/overview/permanent-data",
-		},
-		{
-			id: 2,
-			title: "Ordering",
-			description: "Sequence data with extreme precision",
-			href: "/overview/ordering",
-		},
-		{
-			id: 3,
-			title: "Tools",
-			description: "Get started building with Irys",
-			href: "/overview/tools",
-		},
-	]}
-/>
-
-      <section className="relative flex flex-col items-center justify-center gap-10 overflow-hidden bg-black pt-20 pb-20 text-white md:pb-[100px]">
-        <Heading level={4} className="mb-10 text-center md:text-left">
-          What is Irys
-        </Heading>
-
-        <Video />
-
-<Link href="/overview/about" passHref legacyBehavior>
-
-          <Button>
-            Learn more
-          </Button>
-
-        </Link>
-        <img
-          src="/img/dataverse.webp"
-          alt="hero"
-          className="blur-sm absolute bottom-0 hidden h-48 w-full bg-cover opacity-60 md:flex lg:h-64"
-        />
-      </section>
-
-<section className="bg-seashell px-4 lg:px-[79px] text-black py-28 text-center lg:text-left flex flex-col items-stretch justify-center lg:items-stretch lg:justify-center w-full">
-
-<div className="flex items-center justify-center lg:items-start lg:justify-start">
-	<SectionTitle title="Hands on" />
-</div>
-<p className="pt-8 font-backup font-satoshi leading-loose">
-	Learn with our tutorials and guides, or fork a repository and kickstart your next project.
-</p>
-
-  <ul className="flex flex-col gap-10 lg:flex-row mt-16">
-    {[
-      {
-        Title: "Tutorials / Guides",
-        FirstParagraph:
-          "Learn with tutorials and guides for all skill levels.",
-        URL: "/hands-on/tutorials",
-      },
-      {
-        Title: "Repositories",
-        FirstParagraph:
-          "Repositories to kickstart your next project.",
-        URL: "/hands-on/repositories",
-      },
-    ].map((item, index) => (
-      <li
-        key={`solutions-${index}`}
-        className="w-full rounded-lg bg-gradient-to-b from-[#968982] to-transparent p-[1px] lg:w-1/2 text-black"
-      >
-        <a href={item.URL || ""}  rel="noreferrer">
-          <div className="flex flex-col gap-8 overflow-hidden rounded-lg bg-seashell px-2 py-8 lg:p-11">
-            {/* make image as background of rectangle box */}
-            <div className="flex flex-col gap-8 px-5 pb-10">
-              <Heading level={3}>{item.Title}</Heading>
-              <p className="font-backup font-satoshi text-lg leading-loose whitespace-nowrap truncate">
-                {item.FirstParagraph}
-              </p>
-              <a href={item.URL || ""}  rel="noreferrer">
-                <div className="flex items-center justify-center lg:items-start lg:justify-start"><Button>Explore</Button></div>
-              </a>
-            </div>
-          </div>
-        </a>
-      </li>
-    ))}
-  </ul>
-</section>
-
-<HomeWhyUseIrys
-	content={[
-		{
-			title: "Permanent data",
-			href: "/overview/permanent-data",
-			description: "Permanent and immutable storage on Arweave via Irys",
-		},
-		{
-			title: "Strong provenance",
-			href: "/learn/strong-provenance",
-			description: "Cryptographically guaranteed provenance, millisecond accurate timestamps",
-		},
-		{
-			title: "Bundles",
-			href: "/learn/bundles",
-			description: "Scaling Arweave by grouping transactions",
-		},
-		{
-    		title: "Gateways",
-    		href: "/overview/gateways",
-    		description: "Gateways are responsible for indexing, serving, and making data available to users",
-    	},
-		{
-    		title: "Receipts",
-    		href: "/learn/receipts",
-    		description:
-    			"Receipts give you cryptographic proof of the exact time a transaction occurred",
-    	},
-		{
-    		title: "Optimistic cache",
-    		href: "/learn/optimistic-cache",
-    		description: "Optimistic caching makes your uploads instantly available",
-    	},
-		{
-    		title: "Funding and withdrawing",
-    		href: "/learn/funding-withdrawing",
-    		description: "Understand what happens each step of the way when transferring tokens to or from a node",
-    	},
-		{
-    		title: "Transaction lifecycle",
-    		href: "/learn/transaction-lifecycle",
-    		description:
-    			"Understand each step of the process as a transaction is processed by Irys",
-    	},
-    	{
-    		title: "Irys and Arweave",
-    		href: "/learn/irys-arweave",
-    		description: "Irys makes Arweave easier to use",
-    	},
-    	{
-    		title: "Volumetric scaling",
-    		href: "/learn/volumetric-scaling",
-    		description: "Irys scales to over 50,000 TPS",
-    	},
-    	{
-    		title: "UDL and builders",
-    		href: "/learn/udl",
-    		description: "Understand unique opportunities the UDL opens up for builders",
-    	},
-
-    ]}
-
-/>

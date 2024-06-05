@@ -2,8 +2,8 @@
 description: URLs for Irys' 3 nodes
 ---
 
-import Heading from "../../components/Heading";
-import SectionTitle from "../../components/SectionTitle";
+import Heading from "@/components/Heading";
+import SectionTitle from "@/components/SectionTitle";
 import { Callout } from "nextra-theme-docs";
 
 <div className="flex flex-col mt-5">
@@ -14,21 +14,17 @@ import { Callout } from "nextra-theme-docs";
 	</div>
 </div>
 
-Irys has two networks: mainnet and devnet.
+Use Irys' tooling to upload directly to the Arweave mainnet or start on Irys' devnet.
 
-## Mainnet
+## Arweave mainnet
 
-Uploads to Irys' mainnet are [stored permanently on Arweave](/learn/transaction-lifecycle). Your upload will remain accessible at all times, even if Irys is no longer available.
-
-Uploads of less than 100 KiB are free.
-
-Uploads can be paid for in any of the [many tokens we support](/overview/supported-tokens).
+Upload permanently to Arweave. Your data will be retrievable forever. Uploads can be paid for in any of the [many tokens we support](./supported-tokens).
 
 ## Devnet
 
-Uploads to Irys' [Devnet](/developer-docs/using-devnet) are kept for roughly 60 days. Devnet is for building and prototyping projects along with learning our SDK.
+Uploads to Irys' [Devnet](../irys-sdk/using-devnet) are kept for roughly 60 days. Devnet is for building and prototyping projects along with learning our SDK.
 
-Uploads can be paid for using [free tokens available from faucets](/overview/supported-tokens#devnet-tokens).
+Uploads can be paid for using [free tokens available from faucets](./supported-tokens#devnet-tokens).
 
 ## Node URLs
 
@@ -36,11 +32,3 @@ Most users will not need the direct node URLs as the SDK abstracts this away. If
 
 - `https://arweave.mainnet.irys.xyz`
 - `https://arweave.devnet.irys.xyz`
-
-## Chain integrations
-
-Irys is multichain, supporting both paying for uploads with [most popular tokens](/overview/supported-tokens) and signing the upload using that token’s cryptography. The signature type used to sign a transaction is tracked at the [transaction-level](/learn/bundles).
-
-## Connecting to Irys
-
-See our [SDK docs for code samples](/developer-docs/irys-sdk#connecting-to-irys) showing how to connect to our mainnet and devnet.

@@ -1,14 +1,7 @@
 {
-	"about": "About Irys",
-	"tools": "Tools",
+	"about": "Irys tools for Arweave",
 	"networks": "Networks",
-	"gateways": "Gateways",
-	"permanent-data": "Permanent data",
-	"ordering": "Ordering",
-	"querying-tagging": "Querying & tagging",
-	"fees": {
-		"display": "hidden"
-	},
+	"downloading": "Downloading data",
 	"cost-to-upload": "Cost to upload",
 	"supported-tokens": "Supported tokens"
 }
