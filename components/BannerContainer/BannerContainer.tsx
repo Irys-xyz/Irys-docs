@@ -44,7 +44,7 @@ const banners = [
 		backgroundPosition: "40% -20%",
 	},
 	{
-		href: "/irys-cli",
+		href: "/cli",
 		backgroundImage: "./img/data-exponential.webp",
 		title: "Irys CLI",
 		sub: "Permanent data from your CLI",

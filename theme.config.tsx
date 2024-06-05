@@ -35,14 +35,7 @@ export default {
 	footer: {
 		component: FooterWrapper,
 	},
-	banner: {
-		key: "dev-quest2",
-		text: (
-			<a href="/developer-docs/network-merge-guide" target="_blank">
-				Irys merged our mainnet nodes. Migration guide →
-			</a>
-		),
-	},
+	banner: {},
 	useNextSeoProps() {
 		const { asPath } = useRouter();
 		if (asPath !== "/") {

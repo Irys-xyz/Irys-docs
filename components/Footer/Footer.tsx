@@ -10,27 +10,26 @@ const Footer = ({ noPadding }: { noPadding?: boolean }) => {
 			options: [
 				{
 					name: "SDK",
-					href: "/developer-docs/irys-sdk",
+					href: "/irys-sdk",
 					newTab: false,
 				},
 				{
 					name: "Query package",
-					href: "/developer-docs/querying/query-package",
-					newTab: false,
-				},
-				{
-					name: "Provenance Toolkit",
-					href: "/developer-docs/provenance-toolkit",
+					href: "/querying/query-package",
 					newTab: false,
 				},
 				{
 					name: "CLI",
-					href: "/developer-docs/cli",
+					href: "/cli",
 					newTab: false,
 				},
 				{
 					name: "Tutorials",
-					href: "/hands-on/tutorials",
+					href: "/tutorials",
+				},
+				{
+					name: "Respositories",
+					href: "/repositories",
 				},
 			],
 			footer: (
