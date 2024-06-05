@@ -44,7 +44,7 @@ const FooterDesktop = ({
 								className="mb-auto flex h-full flex-col border-l border-timberwolf pt-[36px] pl-[30px]"
 							>
 								<p className="text-[16px] font-bold">{definition.title}</p>
-								<ul className="mt-[10px] flex flex-col gap-[10px]">
+								<ul className="mt-[50px] flex flex-col gap-[10px]">
 									{definition.options.map((option) => {
 										return (
 											<li key={option.name} className="self-start hover:underline">
@@ -73,6 +73,7 @@ const FooterDesktop = ({
 						);
 					})}
 				</section>
+
 				<section className="border-l border-timberwolf"></section>
 			</footer>
 		</>

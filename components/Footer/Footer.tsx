@@ -10,27 +10,29 @@ const Footer = ({ noPadding }: { noPadding?: boolean }) => {
 			options: [
 				{
 					name: "SDK",
-					href: "/irys-sdk",
+					href: "/developer-docs/irys-sdk",
 					newTab: false,
 				},
 				{
 					name: "Query package",
-					href: "/querying/query-package",
+					href: "/developer-docs/querying/query-package",
+					newTab: false,
+				},
+				{
+					name: "Provenance Toolkit",
+					href: "/developer-docs/provenance-toolkit",
 					newTab: false,
 				},
 				{
 					name: "CLI",
-					href: "/cli",
+					href: "/developer-docs/cli",
 					newTab: false,
 				},
 				{
 					name: "Tutorials",
-					href: "/tutorials",
+					href: "/hands-on/tutorials",
 				},
 			],
-		},
-		{
-			options: [],
 			footer: (
 				<div className="mt-auto flex items-center gap-[21px] pb-[40px]">
 					<a
