@@ -51,8 +51,9 @@ Ready to dive in?
 - Or grab the code snippets below and throw them in your project
 
 <div className="flex justify-center text-center mt-5 font-bold">
-	[Connecting to Irys](/onchainsummer#connecting-to-irys) | Irys in the browser | Uploading data | Uploading a file |
-	Uploading a folder | Guides * Tutorials
+	[Connecting to Irys](/onchainsummer#connecting-to-irys) | [Irys in the browser](/onchainsummer#irys-in-the-browser) |
+	[Uploading data](/onchainsummer#uploading-data) | [Uploading a file](/onchainsummer#uploading-a-file) | [Uploading a
+	folder](/onchainsummer#uploading-a-folder)
 </div>
 
 ### Connecting to Irys
@@ -73,6 +74,10 @@ const getIrys = async () => {
 	return irys;
 };
 ```
+
+### Irys in the browser
+
+Use with ethers5 or [any other supported provider](https://docs.irys.xyz/developer-docs/irys-sdk/irys-in-the-browser#supported-providers)
 
 ```ts
 const getWebIrys = async () => {
@@ -95,6 +100,8 @@ const getWebIrys = async () => {
 };
 ```
 
+## Uploading data
+
 ```ts
 const uploadData = async () => {
 	const irys = await getIrys();
@@ -107,6 +114,8 @@ const uploadData = async () => {
 	}
 };
 ```
+
+## Uploading a file
 
 ```ts
 const uploadFile = async () => {
@@ -124,6 +133,8 @@ const uploadFile = async () => {
 	}
 };
 ```
+
+## Uploading a folder
 
 ```ts
 const uploadFolder = async () => {
