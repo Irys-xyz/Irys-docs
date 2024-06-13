@@ -13,10 +13,8 @@
 			"layout": "raw"
 		}
 	},
-	"test": {
-		"display": "hidden"
-	},
-	"test2": {
+
+	"onchainsummer": {
 		"display": "hidden"
 	},
 	"overview": "OVERVIEW",

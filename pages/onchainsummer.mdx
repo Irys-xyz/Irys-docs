@@ -1,0 +1,146 @@
+---
+title: Irys + Base Onchain Summer II
+description: Irys developer resources for Base Onchain Summer Builders
+---
+
+import HomeWhyUseIrys from "../components/HomeWhyUseIrys";
+
+<div className="flex justify-center">
+	<img src="/img/onchainsummer/onchain-cover.jpg" />
+</div>
+
+<p className="text-5xl">hirys!</p>
+
+<p className="text-xl mt-4">
+	Irys is excited to offer 10 GB of permanent onchain data to all builders joining Onchain Summer II. If you haven't
+	already signed up, [fill out this form](https://TODO) and we'll get back to you within 24 hours.
+</p>
+
+<p className="text-xl mt-4">
+	Already signed up? Join our [private builders chat on TG](https://t.me/+6dp_r9BAHWBkNjM1) to network with other
+	builders, and [join our Discord](https://discord.irys.xyz) where you can ask our developers any questions you have.
+</p>
+
+<p className="mt-4"></p>
+
+Data on Irys is:
+
+- Onchain
+- Permanent
+- Censorship resistant
+
+Which makes it the perfect place for your:
+
+- NFTs
+- Farcaster Frames
+- DeSo projects
+
+Uploading data with is a three-step-process.
+
+1. Connect to our network
+2. Fund your account
+3. Upload data
+
+**But, you can skip #2 as we've whitelisted your account for 10 GB.**
+
+Ready to dive in?
+
+- [Learn how to make a dynamic NFT](https://docs.base.org/tutorials/dynamic-nfts/)
+- Check out our [tutorials](/hands-on/tutorials)
+- Our demo [repositories](/hands-on/repositories)
+- Or grab the code snippets below and throw them in your project
+
+<div className="flex justify-center text-center mt-5 font-bold">
+	[Connecting to Irys](/onchainsummer#connecting-to-irys) | Irys in the browser | Uploading data | Uploading a file |
+	Uploading a folder | Guides * Tutorials
+</div>
+
+### Connecting to Irys
+
+```ts
+const getIrys = async () => {
+	const network = "mainnet";
+	// Devnet RPC URLs change often, use a recent one from https://chainlist.org/
+	const providerUrl = "";
+	const token = "base-eth";
+
+	const irys = new Irys({
+		network, // "mainnet" or "devnet"
+		token, // Token used for payment
+		key: process.env.PRIVATE_KEY, // ETH or SOL private key
+		config: { providerUrl }, // Optional provider URL, only required when using Devnet
+	});
+	return irys;
+};
+```
+
+```ts
+const getWebIrys = async () => {
+	// Ethers5 provider
+	(await window.base) - eth.enable();
+	const provider = new providers.Web3Provider(window.base - eth);
+
+	const network = "mainnet";
+	const token = "base-eth";
+	// Devnet RPC URLs change often, use a recent one from https://chainlist.org
+	const rpcUrl = "";
+
+	// Create a wallet object
+	const wallet = { rpcUrl: rpcUrl, name: "ethersv5", provider: provider };
+	// Use the wallet object
+	const webIrys = new WebIrys({ network, token, wallet });
+	await webIrys.ready();
+
+	return webIrys;
+};
+```
+
+```ts
+const uploadData = async () => {
+	const irys = await getIrys();
+	const dataToUpload = "GM world.";
+	try {
+		const receipt = await irys.upload(dataToUpload);
+		console.log(`Data uploaded ==> https://gateway.irys.xyz/${receipt.id}`);
+	} catch (e) {
+		console.log("Error uploading data ", e);
+	}
+};
+```
+
+```ts
+const uploadFile = async () => {
+	const irys = await getIrys();
+	// Your file
+	const fileToUpload = "./myImage.png";
+
+	const tags = [{ name: "application-id", value: "MyNFTDrop" }];
+
+	try {
+		const receipt = await irys.uploadFile(fileToUpload, { tags: tags });
+		console.log(`File uploaded ==> https://gateway.irys.xyz/${receipt.id}`);
+	} catch (e) {
+		console.log("Error uploading file ", e);
+	}
+};
+```
+
+```ts
+const uploadFolder = async () => {
+	const irys = await getIrys();
+
+	// Upload an entire folder
+	const folderToUpload = "./my-images/"; // Path to folder
+	try {
+		const receipt = await irys.uploadFolder("./" + folderToUpload, {
+			indexFile: "", // optional index file (file the user will load when accessing the manifest)
+			batchSize: 50, //number of items to upload at once
+			keepDeleted: false, // whether to keep now deleted items from previous uploads
+		}); //returns the manifest ID
+
+		console.log(`Files uploaded. Manifest ID ${receipt.id}`);
+	} catch (e) {
+		console.log("Error uploading file ", e);
+	}
+};
+```
