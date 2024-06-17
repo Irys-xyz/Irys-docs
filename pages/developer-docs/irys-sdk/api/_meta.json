@@ -1,6 +1,7 @@
 {
 	"fund": "fund()",
 	"withdrawBalance": "withdrawBalance()",
+	"withdrawAll": "withdrawAll()",
 	"getLoadedBalance": "getLoadedBalance()",
 	"getPrice": "getPrice()",
 	"upload": "upload()",
