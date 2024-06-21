@@ -3,5 +3,6 @@
 	"networks": "Networks",
 	"downloading": "Downloading data",
 	"cost-to-upload": "Cost to upload",
-	"supported-tokens": "Supported tokens"
+	"supported-tokens": "Supported tokens",
+	"receipts": "Receipts"
 }
