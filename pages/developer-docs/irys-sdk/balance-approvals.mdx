@@ -35,7 +35,7 @@ const receipt = await irys.approval.createApproval({
 
 ## Upload using an approval
 
-If you have available approvals, Irys will pick them up and use them automatically. In cases where you've been approved by more than one account, you can pick the one to use with:
+If you have available approvals, Irys will use them automatically. In cases where you've been approved by more than one account, you can pick the one to use with:
 
 ```ts
 const receipt = await irys.upload("GM World", { upload: { paidBy: "<address>" } });
