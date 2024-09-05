@@ -33,7 +33,14 @@ export default {
   footer: {
     component: FooterWrapper,
   },
-  banner: {},
+  banner: {
+    key: 'L1 Docs',
+    text: (
+      <a href="https://migrating-to.irys.xyz/" target="_blank">
+        🎉 The Irys L1 testnet docs are live. Migrate your project in 5 minutes and take advantage of our latest features.  →
+      </a>
+    )
+  },
   useNextSeoProps() {
     const { asPath } = useRouter();
     if (asPath !== "/") {
