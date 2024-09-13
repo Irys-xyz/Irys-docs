@@ -38,7 +38,7 @@ function App() {
 		await window.ethereum.enable();
 		const provider = new providers.Web3Provider(window.ethereum);
 		const wallet = { name: "ethersv5", provider: provider };
-		const network = "mainnet"; // Or "devnet"
+		const network = "mainnet"; 
 		const token = "ethereum";
 		const webIrys = new WebIrys({ network, token, wallet });
 		await webIrys.ready();

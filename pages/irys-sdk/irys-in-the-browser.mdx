@@ -45,7 +45,7 @@ import { WebIrys } from "@irys/sdk";
 
 When instantiating a `WebIrys` object pass:
 
-- `network`: Either `"mainnet"` or `"devnet"`
+- `network`: Use `mainnet`.
 - `token`: Payment [token](/overview/supported-tokens)
 - `wallet`: A wallet object containing the end-user's injected provider and the name of the provider package your project uses
 
@@ -57,7 +57,7 @@ const getWebIrys = async () => {
 
 	const network = "mainnet";
 	const token = "ethereum";
-	// Devnet RPC URLs change often, use a recent one from https://chainlist.org
+	// Optional RPC URLs
 	const rpcUrl = "";
 
 	// Create a wallet object
@@ -89,7 +89,7 @@ WebIrys supports the following providers. When instantiating a new `WebIrys` obj
 const aptosWallet = useWallet();
 
 const getWebIrys = async () => {
-	const network = "devnet";
+	const network = "mainnet";
 	const token = "aptos";
 	const rpcUrl = "testnet"; // "mainnet" || "testnet"
 	const wallet = { rpcUrl: rpcUrl, name: "aptos", provider: aptosWallet };
@@ -109,8 +109,7 @@ import { ConnectionProvider, WalletProvider } from "@solana/wallet-adapter-react
 import { WalletModalProvider } from "@solana/wallet-adapter-react-ui";
 import { PhantomWalletAdapter } from "@solana/wallet-adapter-wallets";
 
-// Devnet or Mainnet
-const network = WalletAdapterNetwork.Devnet;
+const network = WalletAdapterNetwork.Mainnet;
 const endpoint = useMemo(() => clusterApiUrl(network), [network]);
 
 const wallets = useMemo(() => [new PhantomWalletAdapter()], [network]);
@@ -131,7 +130,7 @@ import { useWallet } from "@solana/wallet-adapter-react";
 const wallet = useWallet();
 
 const getIrys = async (): Promise<WebIrys> => {
-	// Devnet RPC URLs change often, use a recent one from https://chainlist.org
+	// Optional RPC URL
 	const rpcUrl = "";
 
 	const wallet = { rpcUrl: rpcUrl, name: "solana", provider: wallet };
@@ -217,7 +216,7 @@ const w = wallets.at(0);
 
 // Then create a WebIrys object
 const getWebIrys = async () => {
-	const network = "devnet";
+	const network = "mainnet";
 	const token = "ethereum";
 
 	const provider = await w?.getEthersProvider();

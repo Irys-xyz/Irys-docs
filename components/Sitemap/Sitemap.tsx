@@ -10,7 +10,6 @@ const Sitemap = (props: Props) => {
         "developer-docs": {
             sdk: "SDK",
             cli: "CLI",
-            "using-devnet": "Using Devnet",
             tags: "Tags",
             "querying-data": "Querying Data",
             recipes: "Cut & Paste Code Recipes",

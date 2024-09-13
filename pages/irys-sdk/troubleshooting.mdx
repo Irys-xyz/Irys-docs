@@ -9,7 +9,6 @@ Troubleshooting common errors during installation and use.
 Errors:
 
 - [bigint: Failed to load bindings, pure JS will be used (try npm run rebuild?)](/irys-sdk/troubleshooting#bigint)
-- [Error: Using Irys devnet requires a dev/testnet RPC to be configured](/irys-sdk/troubleshooting#devnet-rpc)
 - [Error: Not enough balance for transaction](/irys-sdk/troubleshooting#insufficient-balance)
 - [Error: Transaction simulation failed: Blockhash not found](/irys-sdk/troubleshooting#blockhash-not-found)
 
@@ -46,53 +45,11 @@ Most UNIX distributions come with Python installed. To install C++ build tools, 
 sudo apt-get install build-essential
 ```
 
-## Devnet RPC
-
-**Error message**: Error: Using Irys devnet requires a dev/testnet RPC to be configured
-
-When using our [devnet](./using-devnet), you must provide the URL to a Denvet RPC for the chain you're using.
-
-For example, this will throw an error:
-
-```js
-const getIrys = async () => {
-	const token = "ethereum";
-
-	const irys = new Irys({
-		network: "devnet",
-		token, // Token used for payment
-		key: process.env.PRIVATE_KEY, // EVM private key
-	});
-	return irys;
-};
-```
-
-But this will not:
-
-```js
-const getIrys = async () => {
-	const token = "ethereum";
-	const providerUrl = "https://rpc.sepolia.dev";
-
-	const irys = new Irys({
-		network: "devnet",
-		token, // Token used for payment
-		key: process.env.EVM_PRIVATE_KEY, // EVM private key
-		config: { providerUrl }, // Optional provider URL, only required when using Devnet
-	});
-	return irys;
-};
-```
-
-As RPC URLs change frequently, users should always choose an up-to-date one from [https://chainlist.org/](https://chainlist.org/)
-
 ## Insufficient balance
 
 **Error message**: Error: Not enough balance for transaction
 
-This error occurs when you try to upload to a node without first funding it. This applies to both Nodes 1 and 2 where you can pay using any our supported [mainnet tokens](/overview/supported-tokens#mainnet-tokens) and our devnet node where you can pay using any of our supported [devnet tokens](/overview/supported-tokens#devnet-tokens).
-
-Devnet tokens can be obtained for free from common faucets like the ones for [Solana](https://faucet.solana.com/) and [Sepolia](https://sepoliafaucet.com/).
+This error occurs when you try to upload to a bundler without first funding it. 
 
 ## Blockhash not found
 

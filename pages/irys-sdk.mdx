@@ -37,7 +37,7 @@ import Irys from "@irys/sdk";
 
 ## Connecting to Irys
 
-Connect [to any our mainnet or devnet](/overview/networks), using a serialized JWK file when using an Arweave wallet:
+Connect to our bundler using a serialized JWK file when using an Arweave wallet:
 
 ```js
 const getIrysArweave = async () => {
@@ -46,7 +46,7 @@ const getIrysArweave = async () => {
 	const key = JSON.parse(fs.readFileSync("arweaveWallet.json").toString());
 
 	const irys = new Irys({
-		network, // "mainnet" or "devnet"
+		network, // "mainnet" 
 		token, // Token used for payment and signing
 		key, // Arweave wallet
 	});
@@ -59,15 +59,13 @@ Or a private key when using an EVM or Solana wallet:
 ```js
 const getIrys = async () => {
 	const network = "mainnet";
-	// Devnet RPC URLs change often, use a recent one from https://chainlist.org/
-	const providerUrl = "";
 	const token = "ethereum";
 
 	const irys = new Irys({
-		network, // "mainnet" or "devnet"
+		network, // "mainnet" 
 		token, // Token used for payment
 		key: process.env.PRIVATE_KEY, // ETH or SOL private key
-		config: { providerUrl }, // Optional provider URL, only required when using Devnet
+		config: { providerUrl }, // Optional provider URL
 	});
 	return irys;
 };
@@ -77,9 +75,6 @@ const getIrys = async () => {
 
 Use the `providerUrl` parameter to specify an RPC provider.
 
-- When working with Nodes 1 and 2, this value is optional and will default to the main public RPC provider for the chosen chain.
-- When working with Devnet, this parameter is required.
-- When working with Aptos, use one of "mainnet" | "testnet" | "devnet" instead of a URL.
 
 ## Funding a node
 
@@ -185,7 +180,7 @@ const response = await webIrys.uploadFolder(taggedFiles);
 
 ## Querying
 
-In addition to using the [query package](/querying/query-package) to search Irys and Arweave, you can also search directly from the Irys SDK. The following shows how to search for all transactions posted to [Irys mainnet](/overview/networks), paid for with Matic, and uploaded during a three day period.
+In addition to using the [query package](/querying/query-package) to search Irys and Arweave, you can also search directly from the Irys SDK. The following shows how to search for all transactions posted to Irys, paid for with Matic, and uploaded during a three day period.
 
 For more details on all search functions, see [query package documentation](/querying/query-package).
 

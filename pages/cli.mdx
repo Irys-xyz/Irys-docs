@@ -55,28 +55,6 @@ When using Arweave, the private key is typically stored in a file (commonly name
 irys fund 1000000000000000 -t arweave -w wallet.json -n mainnet
 ```
 
-## Networks
-
-Fund the [network](/overview/networks) you plan to upload to.
-
-```console
-# Mainnet
-irys -n mainnet
-
-# Devnet
-irys -n devnet
-```
-
-When connecting to Devnet, you must supply the additional `--provider-url` parameter.
-
-```console
-irys -n devnet --provider-url https://rpc.sepolia.dev
-```
-
-<Callout type="info" emoji="ℹ️">
-	Devnet RPC URLs change often, use a recent one from https://chainlist.org/
-</Callout>
-
 ## Funding
 
 Use the `fund` command to fund a node.

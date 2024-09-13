@@ -53,13 +53,12 @@ import Irys from "@irys/sdk";
 async function serverInit(): Promise<Buffer> {
 	const key = process.env.PRIVATE_KEY_SOL;
 	const token = "solana";
-	// Change if deploying on mainnet
-	const providerUrl = "https://api.devnet.solana.com";
+	const providerUrl = ""; // Optional provider URL
 	const serverIrys = new Irys({
-		network: "devnet", // Irys network "mainnet" || "devnet"
+		network: "mainnet", 
 		token, // Token used for payment and signing
 		key,
-		config: { providerUrl }, // Only required when using Devnet
+		config: { providerUrl }, // Optional
 	});
 	const publicKey = serverIrys.tokenConfig.getSigner().publicKey;
 	return publicKey;
@@ -111,15 +110,14 @@ import SolanaSigner from "arbundles/build/web/esm/src/signing/chains/SolanaSigne
 async function signDataOnServer(signatureData: Buffer): Promise<Buffer> {
 	const key = process.env.PRIVATE_KEY_SOL;
 	const token = "solana";
-	const network = process.env.NEXT_PUBLIC_NETWORK || "devnet";
-	// Change if deploying on mainnet
-	const providerUrl = "https://api.devnet.solana.com";
+	const network = "mainnet";
+	const providerUrl = ""; // Optional provider URL
 
 	const serverIrys = new Irys({
-		network, // "mainnet" || "devnet"
+		network, // "mainnet" 
 		token, // Token used for payment and signing
 		key: key,
-		config: { providerUrl }, // Only required when using Devnet
+		config: { providerUrl }, // Optional
 	});
 
 	const encodedMessage = Buffer.from(signatureData);
@@ -230,14 +228,13 @@ async function lazyFund(filesize: string): Promise<string> {
 	const key = process.env.PRIVATE_KEY_SOL;
 	const token = "solana";
 	const url = process.env.NEXT_PUBLIC_NODE || "";
-	// Change if deploying on Mainnet
-	const providerUrl = "https://api.devnet.solana.com";
+	const providerUrl = ""; // Optional provider URL
 
 	const serverIrys = new Irys({
 		url, // URL of the node you want to connect to
 		token, // Token used for payment and signing
 		key: key,
-		config: { providerUrl }, // Only required when using Devnet
+		config: { providerUrl }, // Optional
 	});
 
 	const price = await serverIrys.getPrice(parseInt(filesize));
@@ -303,10 +300,10 @@ async function lazyFund(filesize: string): Promise<string> {
 	const providerUrl = getRpcUrl(token || "");
 
 	const serverIrys = new Irys({
-		network: "mainnet", // "mainnet" || "devnet"
+		network: "mainnet", 
 		token, // Token used for payment and signing
 		key: key,
-		config: { providerUrl }, // Only required when using Devnet
+		config: { providerUrl }, // Optional RPC URL
 	});
 	console.log(
 		"serverIrysPubKey",
@@ -418,7 +415,7 @@ const gaslessFundAndUploadEVM = async (selectedFile: File, tags: Tag[]): Promise
 
 	const wallet = { name: "ethersv5", provider: provider };
 	const irys = new WebIrys({
-		network: "mainnet", // "mainnet" || "devnet"
+		network: "mainnet", 
 		token,
 		wallet,
 	});
@@ -471,9 +468,9 @@ const gaslessFundAndUploadSOL = async (selectedFile: File, tags: Tag[]): Promise
 
 	// Create a new WebIrys object using the provider created with server info.
 	const url = process.env.NEXT_PUBLIC_NODE || "";
-	const wallet = { rpcUrl: "https://api.devnet.solana.com", name: "solana", provider: provider };
+	const wallet = { name: "solana", provider: provider };
 	const irys = new WebIrys({
-		network: "mainnet", // "mainnet" || "devnet"
+		network: "mainnet", // "mainnet" 
 		token: "solana",
 		wallet,
 	});

@@ -56,9 +56,9 @@ const results = await myQuery
 	.limit(20);
 ```
 
-## Query location (mainnet, devnet, arweave)
+## Query location (mainnet, arweave)
 
-The `Query` class defaults to querying Irys' mainnet. To search Irys' devnet or Arweave, use the `network` parameter.
+The `Query` class defaults to querying Irys' mainnet. 
 
 ### Irys mainnet
 
@@ -66,12 +66,6 @@ The `Query` class defaults to querying Irys' mainnet. To search Irys' devnet or 
 // Either will work
 const myQuery = new Query();
 const myQuery = new Query({ network: "mainnet" });
-```
-
-### Irys devnet
-
-```js
-const myQuery = new Query({ network: "devnet" });
 ```
 
 ### Arweave
